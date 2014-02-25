@@ -1,3 +1,6 @@
+JPMML-Model [![Build Status](https://travis-ci.org/jpmml/jpmml-model.png?branch=master)](https://travis-ci.org/jpmml/jpmml-model)
+===========
+
 Java class model API for Predictive Model Markup Language (PMML).
 
 # Features #
@@ -41,6 +44,44 @@ All class model classes descend from class `org.dmg.pmml.PMMLObject`. Additional
 
 There is not much documentation accompanying class model classes. The application developer should consult with the [PMML specification] (http://www.dmg.org/v4-1/GeneralStructure.html) about individual PMML elements and attributes.
 
+### Unmarshalling ###
+
+Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
+
+```java
+InputStream is = ...
+
+InputSource source = new InputSource(is);
+
+// Apply simple SAX filter to performing XML element name and namespace substitution
+Source transformedSource = SchemaUtil.createImportSource(source);
+
+PMML pmml = JAXBUtil.unmarshalPMML(transformedSource);
+```
+
+### Applying visitors ###
+
+Deleting SAX Locator information from the class model:
+```java
+PMML pmml = ...
+
+pmml.apply(new SourceLocationNullifier());
+```
+
+### Marshalling ###
+
+Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.1 document:
+
+```java
+PMML pmml = ...
+
+OutputStream os = ...
+
+StreamResult result = new StreamResult(os);
+
+JAXBUtil.marshalPMML(pmml, result);
+```
+
 # Contact and Support #
 
-Please use the e-mail displayed at [GitHub profile page] (https://github.com/jpmml)
+Please get in touch: info@openscoring.io
