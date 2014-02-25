@@ -21,6 +21,15 @@ public class ExtensionUtil {
 
 	static
 	public <E extends PMMLObject> E getExtension(Extension extension, Class<? extends E> clazz) throws JAXBException {
+		JAXBContext context = JAXBUtil.getContext();
+
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+
+		return getExtension(extension, clazz, unmarshaller);
+	}
+
+	static
+	public <E extends PMMLObject> E getExtension(Extension extension, Class<? extends E> clazz, Unmarshaller unmarshaller) throws JAXBException {
 		XmlRootElement rootElement = clazz.getAnnotation(XmlRootElement.class);
 		if(rootElement == null){
 			throw new IllegalArgumentException();
@@ -37,7 +46,7 @@ public class ExtensionUtil {
 				if((name).equals(node.getLocalName())){
 					Source source = new DOMSource(node);
 
-					return clazz.cast(IOUtil.unmarshal(source));
+					return clazz.cast(JAXBUtil.unmarshal(unmarshaller, source));
 				}
 			}
 		}
