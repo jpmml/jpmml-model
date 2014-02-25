@@ -18,9 +18,15 @@ public class JAXBUtilTest {
 
 	@Test
 	public void copy() throws Exception {
-		InputStream is = getEmptyDocumentAsStream();
+		PMML pmml;
 
-		PMML pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
+		InputStream is = PMMLUtil.getResourceAsStream(Version.PMML_4_1);
+
+		try {
+			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
+		} finally {
+			is.close();
+		}
 
 		assertEquals(PMML.class, pmml.getClass());
 
@@ -33,14 +39,20 @@ public class JAXBUtilTest {
 
 	@Test
 	public void copyCustom() throws Exception {
-		InputStream is = getEmptyDocumentAsStream();
+		PMML pmml;
 
 		JAXBContext context = JAXBContext.newInstance(CustomObjectFactory.class);
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		unmarshaller.setProperty("com.sun.xml.bind.ObjectFactory", new CustomObjectFactory());
 
-		PMML pmml = JAXBUtil.unmarshalPMML(unmarshaller, new StreamSource(is));
+		InputStream is = PMMLUtil.getResourceAsStream(Version.PMML_4_1);
+
+		try {
+			pmml = JAXBUtil.unmarshalPMML(unmarshaller, new StreamSource(is));
+		} finally {
+			is.close();
+		}
 
 		assertEquals(CustomPMML.class, pmml.getClass());
 
@@ -51,10 +63,5 @@ public class JAXBUtilTest {
 		JAXBUtil.marshalPMML(marshaller, pmml, new StreamResult(os));
 
 		assertTrue(os.size() > 0);
-	}
-
-	static
-	private InputStream getEmptyDocumentAsStream(){
-		return JAXBUtilTest.class.getResourceAsStream("/pmml/empty.pmml");
 	}
 }
