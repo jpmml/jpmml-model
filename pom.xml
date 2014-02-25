@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
+
+	<groupId>org.jpmml</groupId>
+	<artifactId>jpmml-model</artifactId>
+	<version>1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>JPMML-Model</name>
+	<description>Java class model API for Predictive Model Markup Language (PMML)</description>
+	<url>http://www.jpmml.org</url>
+
+	<organization>
+		<name>University of Tartu</name>
+		<url>http://www.ut.ee/en</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>BSD 3-Clause License</name>
+			<url>http://opensource.org/licenses/BSD-3-Clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>villu.ruusmann</id>
+			<name>Villu Ruusmann</name>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>pmml-model</module>
+		<module>pmml-schema</module>
+		<module>xjc</module>
+	</modules>
+
+	<scm>
+		<connection>scm:git:git@github.com:jpmml/jpmml-model.git</connection>
+		<developerConnection>scm:git:git@github.com:jpmml/jpmml-model.git</developerConnection>
+		<url>git://github.com/jpmml/jpmml-model.git</url>
+		<tag>HEAD</tag>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/jpmml/jpmml-model/issues</url>
+	</issueManagement>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.4</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<localCheckout>true</localCheckout>
+					<pushChanges>false</pushChanges>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

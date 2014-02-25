@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jpmml</groupId>
+		<artifactId>jpmml-model</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.jpmml</groupId>
+	<artifactId>pmml-model</artifactId>
+	<packaging>jar</packaging>
+
+	<name>JPMML class model</name>
+	<description>JPMML class model</description>
+
+	<licenses>
+		<license>
+			<name>BSD 3-Clause License</name>
+			<url>http://opensource.org/licenses/BSD-3-Clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-schema</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>xjc</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>xml-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<transformationSets>
+						<transformationSet>
+							<dir>src/main/schema</dir>
+							<outputDir>target/transformed-schema</outputDir>
+							<stylesheet>src/main/xsl/pmml.xsl</stylesheet>
+						</transformationSet>
+					</transformationSets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.8.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<args>
+						<arg>-no-header</arg>
+						<arg>-Xannotate</arg>
+						<arg>-Xannotate-defaultFieldTarget=field</arg>
+						<arg>-Xfluent-api</arg>
+						<arg>-Xlocator</arg>
+						<arg>-Xpmml</arg>
+						<arg>-XsuperClass</arg>
+						<arg>-XsuperClass-defaultName=org.dmg.pmml.PMMLObject</arg>
+						<arg>-XunsupportedProperty</arg>
+						<arg>-XvalueConstructor</arg>
+						<arg>-Xvisitor</arg>
+					</args>
+					<episode>false</episode>
+					<extension>true</extension>
+					<schemaDirectory>target/transformed-schema</schemaDirectory>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.jpmml</groupId>
+						<artifactId>pmml-schema</artifactId>
+						<version>1.1-SNAPSHOT</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.jpmml</groupId>
+						<artifactId>xjc</artifactId>
+						<version>1.1-SNAPSHOT</version>
+					</dependency>
+
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-basics-annotate</artifactId>
+						<version>0.6.5</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jvnet.jaxb2_commons</groupId>
+						<artifactId>jaxb2-fluent-api</artifactId>
+						<version>3.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.14.1</version>
+			</plugin>
+		</plugins>
+	</build>
+</project>
