@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012 University of Tartu
  */
-package org.dmg.pmml;
+package org.jpmml.model;
 
 import java.io.*;
 
@@ -9,6 +9,8 @@ import javax.xml.bind.*;
 import javax.xml.transform.*;
 import javax.xml.transform.sax.*;
 import javax.xml.transform.stream.*;
+
+import org.dmg.pmml.*;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;

@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml;
 
+import org.jpmml.model.*;
+
 import org.junit.*;
 
 import static org.junit.Assert.*;

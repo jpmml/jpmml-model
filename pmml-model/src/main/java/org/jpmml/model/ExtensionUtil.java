@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 KNIME.com AG, Zurich, Switzerland
  */
-package org.dmg.pmml;
+package org.jpmml.model;
 
 import java.util.*;
 
@@ -9,6 +9,8 @@ import javax.xml.bind.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
+
+import org.dmg.pmml.*;
 
 import org.w3c.dom.Node;
 

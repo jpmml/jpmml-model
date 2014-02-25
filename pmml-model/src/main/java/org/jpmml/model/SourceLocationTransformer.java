@@ -1,9 +1,11 @@
 /*
  * Copyright (c) 2013 Villu Ruusmann
  */
-package org.dmg.pmml;
+package org.jpmml.model;
 
 import java.io.*;
+
+import org.dmg.pmml.*;
 
 import com.sun.org.apache.xml.internal.utils.*;
 

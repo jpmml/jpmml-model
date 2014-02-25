@@ -1,7 +1,9 @@
 /*
  * Copyright (c) 2013 Villu Ruusmann
  */
-package org.dmg.pmml;
+package org.jpmml.model;
+
+import org.dmg.pmml.*;
 
 public class SourceLocationNullifier extends AbstractSimpleVisitor {
 
