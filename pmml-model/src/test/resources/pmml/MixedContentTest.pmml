@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_1" version="4.1">
+    <Header>
+        <Annotation>First text value<Extension>First extension</Extension>Second text value<Extension>Second extension</Extension>Third text value</Annotation>
+    </Header>
+    <DataDictionary/>
+</PMML>
