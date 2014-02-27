@@ -53,8 +53,8 @@ InputStream is = ...
 
 InputSource source = new InputSource(is);
 
-// Apply simple SAX filter to performing XML element name and namespace substitution
-Source transformedSource = SchemaUtil.createImportSource(source);
+// Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.1 document
+SAXSource transformedSource = ImportFilter.apply(source);
 
 PMML pmml = JAXBUtil.unmarshalPMML(transformedSource);
 ```
