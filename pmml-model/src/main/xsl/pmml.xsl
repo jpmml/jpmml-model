@@ -13,7 +13,6 @@ Copyright (c) 2009 University of Tartu
 	<xsl:template match="xsd:schema">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
-			<xsl:call-template name="TargetValueStats"/>
 		</xsl:copy>
 	</xsl:template>
 
@@ -88,36 +87,5 @@ Copyright (c) 2009 University of Tartu
 				<xsl:apply-templates select="@*|node()"/>
 			</xsd:sequence>
 		</xsl:copy>
-	</xsl:template>
-
-	<!--
-	Extending the Naive Bayes Model Element in PMML: Adding Support for Continuous Input Variables (http://kdd13pmml.files.wordpress.com/2013/07/guazzelli_et_al.pdf)
-	-->
-	<xsl:template match="xsd:element[@name='BayesInput']/xsd:complexType/xsd:sequence">
-		<xsl:copy>
-			<xsl:apply-templates select="xsd:element[@ref='Extension' or @ref='DerivedField']"/>
-			<xsd:element ref="TargetValueStats" minOccurs="0" maxOccurs="1"/>
-			<xsl:apply-templates select="xsd:element[@ref='PairCounts']"/>
-		</xsl:copy>
-	</xsl:template>
-
-	<xsl:template name="TargetValueStats">
-		<xsd:element name="TargetValueStats">
-			<xsd:complexType>
-				<xsd:sequence>
-					<xsd:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:element ref="TargetValueStat" maxOccurs="unbounded" />
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:element>
-		<xsd:element name="TargetValueStat">
-			<xsd:complexType>
-				<xsd:sequence>
-					<xsd:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/>
-					<xsd:group ref="CONTINUOUS-DISTRIBUTION-TYPES" minOccurs="1"/>
-				</xsd:sequence>
-				<xsd:attribute use="required" type="xs:string" name="value"/>
-			</xsd:complexType>
-		</xsd:element>
 	</xsl:template>
 </xsl:stylesheet>

@@ -11,7 +11,7 @@ import org.xml.sax.*;
 import org.xml.sax.helpers.*;
 
 /**
- * SAX filter for translating PMML schema version 4.1 documents to PMML schema version 3.X and 4.X documents.
+ * SAX filter for translating PMML schema version 4.2 documents to PMML schema version 3.X and 4.X documents.
  */
 public class ExportFilter extends PMMLFilter {
 
@@ -43,7 +43,7 @@ public class ExportFilter extends PMMLFilter {
 	}
 
 	/**
-	 * @param source An {@link InputSource} that contains PMML schema version 4.1 document.
+	 * @param source An {@link InputSource} that contains PMML schema version 4.2 document.
 	 * @param version The target PMML schema version.
 	 *
 	 * @return A {@link SAXSource} containing the target PMML schema version document.

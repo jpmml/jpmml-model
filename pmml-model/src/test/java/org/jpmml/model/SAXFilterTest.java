@@ -54,7 +54,7 @@ public class SAXFilterTest {
 
 			JAXBUtil.marshalPMML(pmml, new StreamResult(latest));
 
-			assertTrue(checkVersion(latest, Version.PMML_4_1));
+			assertTrue(checkVersion(latest, Version.PMML_4_2));
 
 			ByteArrayOutputStream latestToOriginal = new ByteArrayOutputStream();
 

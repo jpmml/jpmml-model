@@ -15,5 +15,5 @@ public @interface Schema {
 
 	Version min() default Version.PMML_3_0;
 
-	Version max() default Version.PMML_4_1;
+	Version max() default Version.PMML_4_2;
 }

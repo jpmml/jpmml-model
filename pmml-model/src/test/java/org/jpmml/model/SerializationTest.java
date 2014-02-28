@@ -13,7 +13,7 @@ public class SerializationTest {
 
 	@Test
 	public void nullifyAndClone() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_1);
+		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_2);
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -29,7 +29,7 @@ public class SerializationTest {
 
 	@Test
 	public void transformAndClone() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_1);
+		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_2);
 
 		try {
 			SerializationUtil.clone(pmml);

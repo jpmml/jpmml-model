@@ -5,7 +5,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Features #
 
-* Full support for PMML 3.0, 3.1, 3.2, 4.0 and 4.1 schemas:
+* Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1 and 4.2 schemas:
   * Class hierarchy.
   * Schema version annotations.
 * Fluent API:
@@ -53,7 +53,7 @@ InputStream is = ...
 
 InputSource source = new InputSource(is);
 
-// Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.1 document
+// Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
 SAXSource transformedSource = ImportFilter.apply(source);
 
 PMML pmml = JAXBUtil.unmarshalPMML(transformedSource);
@@ -70,7 +70,7 @@ pmml.apply(new SourceLocationNullifier());
 
 ### Marshalling ###
 
-Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.1 document:
+Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.2 document:
 
 ```java
 PMML pmml = ...

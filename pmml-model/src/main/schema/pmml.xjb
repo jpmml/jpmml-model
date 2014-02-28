@@ -281,6 +281,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ComplexPartialScore']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Schema" min="PMML_4_2"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='CompoundPredicate']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Predicate"
@@ -1038,6 +1044,21 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.dmg.pmml.Schema" min="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType">
+			<java:superClass
+				name="org.dmg.pmml.Expression"
+			/>
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Schema" min="PMML_4_2"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Schema" min="PMML_4_2"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
