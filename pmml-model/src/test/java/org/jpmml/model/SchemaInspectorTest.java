@@ -11,53 +11,87 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings (
+	value = {"deprecation"}
+)
 public class SchemaInspectorTest {
 
 	@Test
-	public void inspect(){
+	public void inspectTypeAnnotations(){
 		PMML pmml = new PMML(new Header(), new DataDictionary(), "4.2");
 
 		List<Model> models = pmml.getModels();
 
+		assertEquals(0, models.size());
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+
+		pmml.withModels(new AssociationModel(),
+			new ClusteringModel(),
+			new GeneralRegressionModel(),
+			new MiningModel(),
+			new NaiveBayesModel(),
+			new NeuralNetwork(),
+			new RegressionModel(),
+			new RuleSetModel(),
+			new SequenceModel(),
+			new SupportVectorMachineModel(),
+			new TextModel(),
+			new TreeModel());
+
+		assertEquals(12, models.size());
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+
+		pmml.withModels(new TimeSeriesModel());
+
+		assertEquals(13, models.size());
+
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+
+		pmml.withModels(new BaselineModel(),
+			new Scorecard(),
+			new NearestNeighborModel());
+
+		assertEquals(16, models.size());
+
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+	}
+
+	@Test
+	public void inspectFieldAnnotations(){
+		PMML pmml = new PMML(new Header(), new DataDictionary(), "4.2");
+
+		AssociationModel model = new AssociationModel();
+
+		pmml.withModels(model);
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+
+		model.withOutput(new Output());
+
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+
+		model.setScorable(Boolean.FALSE);
+
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+
+		model.setScorable(null);
+
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+
+		model.setOutput(null);
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+	}
+
+	static
+	private void assertVersionRange(PMMLObject object, Version minimum, Version maximum){
 		SchemaInspector inspector = new SchemaInspector();
 
-		pmml.accept(inspector);
+		object.accept(inspector);
 
-		assertEquals(Version.PMML_3_0, inspector.getMinimum());
-		assertEquals(Version.PMML_4_2, inspector.getMaximum());
-
-		models.add(new AssociationModel());
-		models.add(new ClusteringModel());
-		models.add(new GeneralRegressionModel());
-		models.add(new MiningModel());
-		models.add(new NaiveBayesModel());
-		models.add(new NeuralNetwork());
-		models.add(new RegressionModel());
-		models.add(new RuleSetModel());
-		models.add(new SequenceModel());
-		models.add(new SupportVectorMachineModel());
-		models.add(new TextModel());
-		models.add(new TreeModel());
-
-		pmml.accept(inspector);
-
-		assertEquals(Version.PMML_3_0, inspector.getMinimum());
-		assertEquals(Version.PMML_4_2, inspector.getMaximum());
-
-		models.add(new TimeSeriesModel());
-
-		pmml.accept(inspector);
-
-		assertEquals(Version.PMML_4_0, inspector.getMinimum());
-		assertEquals(Version.PMML_4_2, inspector.getMaximum());
-
-		models.add(new BaselineModel());
-		models.add(new Scorecard());
-		models.add(new NearestNeighborModel());
-
-		pmml.accept(inspector);
-
-		assertEquals(Version.PMML_4_1, inspector.getMinimum());
-		assertEquals(Version.PMML_4_2, inspector.getMaximum());
+		assertEquals(minimum, inspector.getMinimum());
+		assertEquals(maximum, inspector.getMaximum());
 	}
 }

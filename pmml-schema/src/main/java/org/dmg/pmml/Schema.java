@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 	value = RetentionPolicy.RUNTIME
 )
 @Target (
-	value = {ElementType.TYPE}
+	value = {ElementType.TYPE, ElementType.FIELD}
 )
 public @interface Schema {
 

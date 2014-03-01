@@ -5,6 +5,8 @@ package org.jpmml.model;
 
 import org.dmg.pmml.*;
 
+import java.lang.reflect.Field;
+
 public class SchemaInspector extends AbstractSimpleVisitor {
 
 	private Version minimum = Version.PMML_3_0;
@@ -16,9 +18,34 @@ public class SchemaInspector extends AbstractSimpleVisitor {
 	public VisitorAction visit(PMMLObject object){
 		Class<?> clazz = object.getClass();
 
-		Schema schema = clazz.getAnnotation(Schema.class);
-		if(schema != null){
-			update(schema);
+		Schema typeSchema = clazz.getAnnotation(Schema.class);
+		if(typeSchema != null){
+			update(typeSchema);
+		}
+
+		Field[] fields = clazz.getDeclaredFields();
+		for(Field field : fields){
+
+			if(!field.isAccessible()){
+				field.setAccessible(true);
+			}
+
+			Object value;
+
+			try {
+				value = field.get(object);
+			} catch(IllegalAccessException iae){
+				throw new IllegalStateException(iae);
+			}
+
+			if(value == null){
+				continue;
+			}
+
+			Schema fieldSchema = field.getAnnotation(Schema.class);
+			if(fieldSchema != null){
+				update(fieldSchema);
+			}
 		}
 
 		return VisitorAction.CONTINUE;
