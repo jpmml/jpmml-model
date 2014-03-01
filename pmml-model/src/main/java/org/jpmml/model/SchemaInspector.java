@@ -3,9 +3,9 @@
  */
 package org.jpmml.model;
 
-import org.dmg.pmml.*;
-
 import java.lang.reflect.Field;
+
+import org.dmg.pmml.*;
 
 public class SchemaInspector extends AbstractSimpleVisitor {
 

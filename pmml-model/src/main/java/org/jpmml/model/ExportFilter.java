@@ -27,17 +27,22 @@ public class ExportFilter extends PMMLFilter {
 	public String filterNamespaceURI(String namespaceURI){
 
 		if(("").equals(namespaceURI)){
-			return namespaceURI;
+			return "";
 		}
-
-		forNamespaceURI(namespaceURI, null);
 
 		return getNamespaceURI();
 	}
 
 	@Override
 	public String filterLocalName(String namespaceURI, String localName){
-		forNamespaceURI(namespaceURI, null);
+		Version version = getVersion();
+
+		if("Trend_ExpoSmooth".equals(localName)){
+
+			if((Version.PMML_4_0).equals(version)){
+				return "Trend";
+			}
+		}
 
 		return localName;
 	}

@@ -3,7 +3,7 @@
  */
 package org.jpmml.model;
 
-import org.dmg.pmml.Version;
+import org.dmg.pmml.*;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
@@ -49,12 +49,22 @@ public class PMMLFilter extends XMLFilterImpl {
 
 	@Override
 	public void startElement(String namespaceURI, String localName, String qualifiedName, Attributes attributes) throws SAXException {
-		super.startElement(filterNamespaceURI(namespaceURI), filterLocalName(namespaceURI, localName), qualifiedName, attributes);
+		String filteredNamespaceURI = filterNamespaceURI(namespaceURI);
+		String filteredLocalName = filterLocalName(namespaceURI, localName);
+
+		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
+
+		super.startElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName, attributes);
 	}
 
 	@Override
 	public void endElement(String namespaceURI, String localName, String qualifiedName) throws SAXException {
-		super.endElement(filterNamespaceURI(namespaceURI), filterLocalName(namespaceURI, localName), qualifiedName);
+		String filteredNamespaceURI = filterNamespaceURI(namespaceURI);
+		String filteredLocalName = filterLocalName(namespaceURI, localName);
+
+		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
+
+		super.endElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName);
 	}
 
 	public String getNamespaceURI(){
@@ -72,12 +82,16 @@ public class PMMLFilter extends XMLFilterImpl {
 	}
 
 	static
-	protected Version forNamespaceURI(String namespaceURI, Version version){
+	private String formatQualifiedName(String template, String namespaceURI, String localName){
 
-		if(("").equals(namespaceURI)){
-			return version;
+		if(("").equals(template)){
+			return "";
+		} // End if
+
+		if(template.indexOf(':') > -1){
+			return (namespaceURI + ":" + localName);
 		}
 
-		return Version.forNamespaceURI(namespaceURI);
+		return localName;
 	}
 }

@@ -25,30 +25,22 @@ public class ImportFilter extends PMMLFilter {
 
 	@Override
 	public String filterNamespaceURI(String namespaceURI){
-		Version version = forNamespaceURI(namespaceURI, getVersion());
+		Version version = forNamespaceURI(namespaceURI);
 
-		switch(version){
-			case PMML_3_0:
-			case PMML_3_1:
-			case PMML_3_2:
-			case PMML_4_0:
-			case PMML_4_1:
-			case PMML_4_2:
-				return getNamespaceURI();
-			default:
-				break;
+		if(version == null){
+			return "";
 		}
 
-		return namespaceURI;
+		return getNamespaceURI();
 	}
 
 	@Override
 	public String filterLocalName(String namespaceURI, String localName){
-		Version version = forNamespaceURI(namespaceURI, getVersion());
+		Version version = forNamespaceURI(namespaceURI);
 
-		if((Version.PMML_4_0).equals(version)){
+		if(("Trend").equals(localName)){
 
-			if(("Trend").equals(localName)){
+			if(version == null || (Version.PMML_4_0).equals(version)){
 				return "Trend_ExpoSmooth";
 			}
 		}
@@ -68,5 +60,15 @@ public class ImportFilter extends PMMLFilter {
 		ImportFilter filter = new ImportFilter(reader);
 
 		return new SAXSource(filter, source);
+	}
+
+	static
+	private Version forNamespaceURI(String namespaceURI){
+
+		if(("").equals(namespaceURI)){
+			return null;
+		}
+
+		return Version.forNamespaceURI(namespaceURI);
 	}
 }
