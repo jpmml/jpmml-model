@@ -10,7 +10,7 @@
 
 	<groupId>org.jpmml</groupId>
 	<artifactId>jpmml-model</artifactId>
-	<version>1.1.1</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>JPMML-Model</name>
@@ -46,7 +46,7 @@
 		<connection>scm:git:git@github.com:jpmml/jpmml-model.git</connection>
 		<developerConnection>scm:git:git@github.com:jpmml/jpmml-model.git</developerConnection>
 		<url>git://github.com/jpmml/jpmml-model.git</url>
-		<tag>1.1.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
