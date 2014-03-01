@@ -25,19 +25,19 @@ public class SchemaInspector extends AbstractSimpleVisitor {
 
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field field : fields){
-
-			if(!field.isAccessible()){
-				field.setAccessible(true);
-			}
-
 			Object value;
 
 			try {
+				if(!field.isAccessible()){
+					field.setAccessible(true);
+				}
+
 				value = field.get(object);
 			} catch(IllegalAccessException iae){
-				throw new IllegalStateException(iae);
+				throw new RuntimeException(iae);
 			}
 
+			// The field is not set
 			if(value == null){
 				continue;
 			}
@@ -45,6 +45,26 @@ public class SchemaInspector extends AbstractSimpleVisitor {
 			Schema fieldSchema = field.getAnnotation(Schema.class);
 			if(fieldSchema != null){
 				update(fieldSchema);
+			} // End if
+
+			// The field is set to an enum constant
+			if(value instanceof Enum){
+				Enum<?> enumValue = (Enum<?>)value;
+
+				Field enumField;
+
+				try {
+					Class<?> enumClazz = enumValue.getClass();
+
+					enumField = enumClazz.getField(enumValue.name());
+				} catch(NoSuchFieldException nsfe){
+					throw new RuntimeException(nsfe);
+				}
+
+				Schema enumConstantSchema = enumField.getAnnotation(Schema.class);
+				if(enumConstantSchema != null){
+					update(enumConstantSchema);
+				}
 			}
 		}
 

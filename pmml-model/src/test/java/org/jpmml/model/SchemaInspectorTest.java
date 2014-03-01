@@ -68,7 +68,8 @@ public class SchemaInspectorTest {
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
 
-		model.withOutput(new Output());
+		Output output = new Output();
+		model.withOutput(output);
 
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
 
@@ -79,6 +80,13 @@ public class SchemaInspectorTest {
 		model.setScorable(null);
 
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+
+		OutputField outputField = new OutputField()
+			.withRuleFeature(RuleFeatureType.AFFINITY);
+
+		output.withOutputFields(outputField);
+
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
 
 		model.setOutput(null);
 
