@@ -15,36 +15,25 @@ import org.xml.sax.helpers.*;
  */
 public class ExportFilter extends PMMLFilter {
 
-	public ExportFilter(Version version){
-		super(version);
+	public ExportFilter(Version target){
+		super(target);
 	}
 
-	public ExportFilter(XMLReader reader, Version version){
-		super(reader, version);
-	}
-
-	@Override
-	public String filterNamespaceURI(String namespaceURI){
-
-		if(("").equals(namespaceURI)){
-			return "";
-		}
-
-		return getNamespaceURI();
+	public ExportFilter(XMLReader reader, Version target){
+		super(reader, target);
 	}
 
 	@Override
-	public String filterLocalName(String namespaceURI, String localName){
-		Version version = getVersion();
+	public String filterLocalName(String name){
 
-		if("Trend_ExpoSmooth".equals(localName)){
+		if("Trend_ExpoSmooth".equals(name)){
 
-			if((Version.PMML_4_0).equals(version)){
+			if(compare(getTarget(), Version.PMML_4_0) == 0){
 				return "Trend";
 			}
 		}
 
-		return localName;
+		return super.filterLocalName(name);
 	}
 
 	/**

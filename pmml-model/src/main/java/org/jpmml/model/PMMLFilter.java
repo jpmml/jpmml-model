@@ -11,29 +11,31 @@ import org.xml.sax.helpers.*;
 abstract
 public class PMMLFilter extends XMLFilterImpl {
 
-	private Version version = null;
+	private Version source = null;
+
+	private Version target = null;
 
 
-	public PMMLFilter(Version version){
-		setVersion(version);
+	public PMMLFilter(Version target){
+		setTarget(target);
 	}
 
-	public PMMLFilter(XMLReader reader, Version version){
+	public PMMLFilter(XMLReader reader, Version target){
 		super(reader);
 
-		setVersion(version);
+		setTarget(target);
 	}
 
-	abstract
-	public String filterNamespaceURI(String namespaceURI);
-
-	abstract
-	public String filterLocalName(String namespaceURI, String localName);
+	public String filterLocalName(String name){
+		return name;
+	}
 
 	@Override
 	public void startPrefixMapping(String prefix, String namespaceURI) throws SAXException {
 
 		if(("").equals(prefix)){
+			updateSource(namespaceURI);
+
 			super.startPrefixMapping("", getNamespaceURI());
 
 			return;
@@ -49,8 +51,10 @@ public class PMMLFilter extends XMLFilterImpl {
 
 	@Override
 	public void startElement(String namespaceURI, String localName, String qualifiedName, Attributes attributes) throws SAXException {
-		String filteredNamespaceURI = filterNamespaceURI(namespaceURI);
-		String filteredLocalName = filterLocalName(namespaceURI, localName);
+		updateSource(namespaceURI);
+
+		String filteredNamespaceURI = getNamespaceURI();
+		String filteredLocalName = filterLocalName(localName);
 
 		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
 
@@ -59,26 +63,60 @@ public class PMMLFilter extends XMLFilterImpl {
 
 	@Override
 	public void endElement(String namespaceURI, String localName, String qualifiedName) throws SAXException {
-		String filteredNamespaceURI = filterNamespaceURI(namespaceURI);
-		String filteredLocalName = filterLocalName(namespaceURI, localName);
+		String filteredNamespaceURI = getNamespaceURI();
+		String filteredLocalName = filterLocalName(localName);
 
 		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
 
 		super.endElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName);
 	}
 
-	public String getNamespaceURI(){
-		Version version = getVersion();
+	private String getNamespaceURI(){
+		Version target = getTarget();
 
-		return version.getNamespaceURI();
+		return target.getNamespaceURI();
 	}
 
-	public Version getVersion(){
-		return this.version;
+	private void updateSource(String namespaceURI){
+
+		if(("").equals(namespaceURI)){
+			return;
+		}
+
+		Version version = Version.forNamespaceURI(namespaceURI);
+
+		Version source = getSource();
+		if(source != null && !(source).equals(version)){
+			throw new IllegalStateException();
+		}
+
+		setSource(version);
 	}
 
-	private void setVersion(Version version){
-		this.version = version;
+	public Version getSource(){
+		return this.source;
+	}
+
+	private void setSource(Version source){
+		this.source = source;
+	}
+
+	public Version getTarget(){
+		return this.target;
+	}
+
+	private void setTarget(Version target){
+		this.target = target;
+	}
+
+	static
+	protected int compare(Version left, Version right){
+
+		if(left == null || right == null){
+			throw new IllegalStateException();
+		}
+
+		return (left).compareTo(right);
 	}
 
 	static
