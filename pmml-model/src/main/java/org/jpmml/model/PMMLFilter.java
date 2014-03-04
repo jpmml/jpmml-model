@@ -26,13 +26,11 @@ public class PMMLFilter extends XMLFilterImpl {
 		setTarget(target);
 	}
 
-	public String filterLocalName(String localName){
-		return localName;
-	}
+	abstract
+	public String filterLocalName(String localName);
 
-	public Attributes filterAttributes(String localName, Attributes attributes){
-		return attributes;
-	}
+	abstract
+	public Attributes filterAttributes(String localName, Attributes attributes);
 
 	@Override
 	public void startPrefixMapping(String prefix, String namespaceURI) throws SAXException {

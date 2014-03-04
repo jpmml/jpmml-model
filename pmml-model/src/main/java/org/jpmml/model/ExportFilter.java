@@ -33,7 +33,7 @@ public class ExportFilter extends PMMLFilter {
 			}
 		}
 
-		return super.filterLocalName(localName);
+		return localName;
 	}
 
 	@Override
@@ -49,9 +49,16 @@ public class ExportFilter extends PMMLFilter {
 
 				return renameAttribute(attributes, "defaultValue", "mapMissingTo");
 			}
+		} else
+
+		if(("TargetValue").equals(localName)){
+
+			if(compare(getTarget(), Version.PMML_3_1) <= 0 && hasAttribute(attributes, "displayValue")){
+				return renameAttribute(attributes, "displayValue", "rawDataValue");
+			}
 		}
 
-		return super.filterAttributes(localName, attributes);
+		return attributes;
 	}
 
 	/**

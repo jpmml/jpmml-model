@@ -30,7 +30,7 @@ public class ImportFilter extends PMMLFilter {
 			return "Trend_ExpoSmooth";
 		}
 
-		return super.filterLocalName(localName);
+		return localName;
 	}
 
 	@Override
@@ -38,9 +38,13 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("Apply").equals(localName) && compare(getSource(), Version.PMML_4_1) == 0){
 			return renameAttribute(attributes, "mapMissingTo", "defaultValue");
+		} else
+
+		if(("TargetValue").equals(localName) && compare(getSource(), Version.PMML_3_1) <= 0){
+			return renameAttribute(attributes, "rawDataValue", "displayValue");
 		}
 
-		return super.filterAttributes(localName, attributes);
+		return attributes;
 	}
 
 	/**
