@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_1" version="4.1">
+    <Header/>
+    <DataDictionary>
+        <DataField name="text" dataType="string"/>
+    </DataDictionary>
+    <TransformationDictionary>
+        <DerivedField name="text-text" dataType="string">
+            <Apply function="concat" mapMissingTo="">
+                <FieldRef field="text"/>
+                <Constant>-</Constant>
+                <FieldRef field="text"/>
+            </Apply>
+        </DerivedField>
+    </TransformationDictionary>
+</PMML>

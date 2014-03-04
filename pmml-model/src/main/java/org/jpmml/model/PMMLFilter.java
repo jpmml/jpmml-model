@@ -26,8 +26,12 @@ public class PMMLFilter extends XMLFilterImpl {
 		setTarget(target);
 	}
 
-	public String filterLocalName(String name){
-		return name;
+	public String filterLocalName(String localName){
+		return localName;
+	}
+
+	public Attributes filterAttributes(String localName, Attributes attributes){
+		return attributes;
 	}
 
 	@Override
@@ -58,7 +62,9 @@ public class PMMLFilter extends XMLFilterImpl {
 
 		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
 
-		super.startElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName, attributes);
+		Attributes filteredAttributes = filterAttributes(localName, attributes);
+
+		super.startElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName, filteredAttributes);
 	}
 
 	@Override
@@ -131,5 +137,26 @@ public class PMMLFilter extends XMLFilterImpl {
 		}
 
 		return localName;
+	}
+
+	static
+	protected boolean hasAttribute(Attributes attributes, String localName){
+		int index = attributes.getIndex("", localName);
+
+		return (index > -1);
+	}
+
+	static
+	protected Attributes renameAttribute(Attributes attributes, String oldLocalName, String localName){
+		int index = attributes.getIndex("", oldLocalName);
+		if(index < 0){
+			return attributes;
+		}
+
+		AttributesImpl result = new AttributesImpl(attributes);
+		result.setLocalName(index, localName);
+		result.setQName(index, localName); // XXX
+
+		return result;
 	}
 }

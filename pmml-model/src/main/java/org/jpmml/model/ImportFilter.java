@@ -24,13 +24,23 @@ public class ImportFilter extends PMMLFilter {
 	}
 
 	@Override
-	public String filterLocalName(String name){
+	public String filterLocalName(String localName){
 
-		if(("Trend").equals(name) && compare(getSource(), Version.PMML_4_0) == 0){
+		if(("Trend").equals(localName) && compare(getSource(), Version.PMML_4_0) == 0){
 			return "Trend_ExpoSmooth";
 		}
 
-		return super.filterLocalName(name);
+		return super.filterLocalName(localName);
+	}
+
+	@Override
+	public Attributes filterAttributes(String localName, Attributes attributes){
+
+		if(("Apply").equals(localName) && compare(getSource(), Version.PMML_4_1) == 0){
+			return renameAttribute(attributes, "mapMissingTo", "defaultValue");
+		}
+
+		return super.filterAttributes(localName, attributes);
 	}
 
 	/**

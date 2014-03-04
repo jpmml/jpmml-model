@@ -16,13 +16,13 @@ import org.xml.sax.*;
 
 import static org.junit.Assert.*;
 
-public class TrendExpoSmoothTest {
+public class ApplyTest {
 
 	@Test
 	public void copy() throws Exception {
-		byte[] original = PMMLUtil.getResourceAsByteArray(TrendExpoSmoothTest.class);
+		byte[] original = PMMLUtil.getResourceAsByteArray(ApplyTest.class);
 
-		assertTrue(checkElement(original, "Trend"));
+		assertTrue(checkAttribute(original, "mapMissingTo"));
 
 		Source source = ImportFilter.apply(new InputSource(new ByteArrayInputStream(original)));
 
@@ -34,18 +34,17 @@ public class TrendExpoSmoothTest {
 
 		byte[] latest = buffer.toByteArray();
 
-		assertTrue(checkElement(latest, "Trend_ExpoSmooth"));
-		assertFalse(checkElement(latest, "Trend"));
+		assertTrue(checkAttribute(latest, "defaultValue"));
 
-		byte[] latestToOriginal = PMMLUtil.transform(latest, Version.PMML_4_0);
+		byte[] latestToOriginal = PMMLUtil.transform(latest, Version.PMML_4_1);
 
-		assertTrue(checkElement(latestToOriginal, "Trend"));
+		assertTrue(checkAttribute(latestToOriginal, "mapMissingTo"));
 	}
 
 	static
-	private boolean checkElement(byte[] bytes, String tag) throws IOException {
+	private boolean checkAttribute(byte[] bytes, String name) throws IOException {
 		String string = new String(bytes, "UTF-8");
 
-		return string.contains("<" + tag + "/>");
+		return string.contains("<Apply function=\"concat\" " + name + "=\"\">");
 	}
 }
