@@ -1595,6 +1595,9 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segment']/xsd:complexType">
+			<java:superClass
+				name="org.dmg.pmml.Entity"
+			/>
 			<annox:annotate>
 				<annox:annotate annox:class="org.dmg.pmml.Schema" min="PMML_4_0"/>
 			</annox:annotate>

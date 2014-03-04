@@ -56,9 +56,16 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
-	The type of Field name needs to be restricted from xsd:string to FIELD-NAME. Here, an XSL transformation feels more elegant than a property-level JAXB customization.
+	Restrict xsd:string to FIELD-NAME where appropriate
 	-->
 	<xsl:template match="xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='name']/@type">
+		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xsd:element[@name='BayesInput']/xsd:complexType/xsd:attribute[@name='fieldName']/@type">
+		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	</xsl:template>
+	<xsl:template match="xsd:element[@name='BayesOutput']/xsd:complexType/xsd:attribute[@name='fieldName']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
 
