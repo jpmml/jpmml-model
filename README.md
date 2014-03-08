@@ -84,14 +84,14 @@ JAXBUtil.marshalPMML(pmml, result);
 
 # Example applications #
 
-Module `pmml-model-example` exemplifies JPMML-Model library usage.
+Module `pmml-model-example` exemplifies the use of JPMML-Model library.
 
 This module can be built using [Apache Maven] (http://maven.apache.org/):
 ```
 mvn clean install
 ```
 
-The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains several useful command-line applications:
+The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains the following command-line applications:
 * `org.jpmml.model.TransformationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TransformationExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
 * `org.jpmml.model.TreeModelProductionExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TreeModelProductionExample.java). Produces a TreeModel for the "golfing" exercise.
 
