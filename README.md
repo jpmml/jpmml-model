@@ -95,7 +95,7 @@ The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains several u
 * `org.jpmml.model.TransformationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TransformationExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
 * `org.jpmml.model.TreeModelProductionExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TreeModelProductionExample.java). Produces a TreeModel for the "golfing" exercise.
 
-For example, transforming `input.pmml` to 'output.pmml':
+For example, transforming `input.pmml` to `output.pmml`:
 ```
 java -cp target/example-1.1-SNAPSHOT.jar org.jpmml.model.TransformationExample --input input.pmml --output output.pmml
 ```
