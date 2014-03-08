@@ -17,7 +17,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Installation #
 
-JPMML library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
+JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
 
 The current version is **1.1.2** (4 March, 2014).
 
@@ -26,13 +26,13 @@ The current version is **1.1.2** (4 March, 2014).
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>${jpmml.version}</version>
+	<version>1.1.2</version>
 </dependency>
 <!-- Class model annotations -->
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-schema</artifactId>
-	<version>${jpmml.version}</version>
+	<version>1.1.2</version>
 </dependency>
 ```
 
@@ -82,6 +82,10 @@ StreamResult result = new StreamResult(os);
 JAXBUtil.marshalPMML(pmml, result);
 ```
 
-# Contact and Support #
+# License #
 
-Get in touch: [info@openscoring.io] (mailto:info@openscoring.io)
+JPMML-Model is licensed under the [BSD 3-Clause License] (http://opensource.org/licenses/BSD-3-Clause).
+
+# Additional information #
+
+Please contact [info@openscoring.io] (mailto:info@openscoring.io)
