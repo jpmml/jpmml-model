@@ -82,6 +82,24 @@ StreamResult result = new StreamResult(os);
 JAXBUtil.marshalPMML(pmml, result);
 ```
 
+# Example applications #
+
+Module `pmml-model-example` exemplifies JPMML-Model library usage.
+
+This module can be built using [Apache Maven] (http://maven.apache.org/):
+```
+mvn clean install
+```
+
+The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains several useful command-line applications:
+* `org.jpmml.model.TransformationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TransformationExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.TreeModelProductionExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TreeModelProductionExample.java). Produces a TreeModel for the "golfing" exercise.
+
+For example, transforming `input.pmml` to 'output.pmml':
+```
+java -cp target/example-1.1-SNAPSHOT.jar org.jpmml.model.TransformationExample --input input.pmml --output output.pmml
+```
+
 # License #
 
 JPMML-Model is licensed under the [BSD 3-Clause License] (http://opensource.org/licenses/BSD-3-Clause).

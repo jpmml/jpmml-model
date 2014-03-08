@@ -38,6 +38,7 @@
 
 	<modules>
 		<module>pmml-model</module>
+		<module>pmml-model-example</module>
 		<module>pmml-schema</module>
 		<module>xjc</module>
 	</modules>
