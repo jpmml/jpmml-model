@@ -31,12 +31,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jpmml</groupId>
-			<artifactId>xjc</artifactId>
-			<version>1.1-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.2.6</version>
