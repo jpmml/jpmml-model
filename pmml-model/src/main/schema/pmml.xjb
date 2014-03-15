@@ -232,6 +232,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='CenterFields']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_3_2"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Characteristic']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.dmg.pmml.Added" value="PMML_4_1"/>
@@ -336,6 +342,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="ModelClass"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='CenterFields']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_3_2"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
@@ -847,6 +859,18 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Level']/xsd:complexType/xsd:attribute[@name='cubicSmoothedValue']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Level']/xsd:complexType/xsd:attribute[@name='quadraticSmoothedValue']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='LiftData']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.dmg.pmml.Added" value="PMML_4_0"/>
@@ -1108,6 +1132,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="Method"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='thermometer']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_3_2"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NumericPredictor']/xsd:complexType">
@@ -1594,6 +1624,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:sequence/xsd:element[@ref='LocalTransformations']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Sequence']/xsd:complexType/xsd:sequence/xsd:element[@ref='Time']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.dmg.pmml.Added" value="PMML_3_1"/>
@@ -1708,6 +1744,12 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.Model"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='alternateBinaryTargetCategory']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_4_0"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='classificationMethod']">
@@ -1893,6 +1935,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:sequence/xsd:element[@ref='TimeException']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Model"
@@ -1991,6 +2039,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="Trend"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='trend']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='double_exponential']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_4_1"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='trend']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='polynomial_exponential']">
@@ -2232,6 +2286,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 			<annox:annotate>
 				<annox:annotate annox:class="org.dmg.pmml.Added" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='cauchit']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.dmg.pmml.Removed" value="PMML_3_2"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
