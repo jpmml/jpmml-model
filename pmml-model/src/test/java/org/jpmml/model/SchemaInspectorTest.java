@@ -5,6 +5,8 @@ package org.jpmml.model;
 
 import java.util.*;
 
+import org.jpmml.schema.*;
+
 import org.dmg.pmml.*;
 
 import org.junit.*;

@@ -8,6 +8,8 @@ import java.io.*;
 import javax.xml.bind.*;
 import javax.xml.transform.stream.*;
 
+import org.jpmml.schema.*;
+
 import org.dmg.pmml.*;
 
 import org.junit.*;

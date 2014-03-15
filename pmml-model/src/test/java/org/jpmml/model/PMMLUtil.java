@@ -10,6 +10,8 @@ import javax.xml.transform.*;
 import javax.xml.transform.sax.*;
 import javax.xml.transform.stream.*;
 
+import org.jpmml.schema.*;
+
 import org.dmg.pmml.*;
 
 import org.xml.sax.*;

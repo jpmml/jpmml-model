@@ -5,7 +5,7 @@ package org.jpmml.model;
 
 import java.lang.reflect.*;
 
-import org.dmg.pmml.*;
+import org.jpmml.schema.*;
 
 public class SchemaInspector extends AnnotationInspector {
 

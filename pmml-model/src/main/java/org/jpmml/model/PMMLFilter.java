@@ -3,7 +3,7 @@
  */
 package org.jpmml.model;
 
-import org.dmg.pmml.*;
+import org.jpmml.schema.*;
 
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
