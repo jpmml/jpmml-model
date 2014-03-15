@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.*;
 )
 public class CustomPMML extends PMML {
 
-	@Deprecated
 	public CustomPMML(){
 		super();
 	}

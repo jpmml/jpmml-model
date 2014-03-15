@@ -11,9 +11,6 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-@SuppressWarnings (
-	value = {"deprecation"}
-)
 public class SchemaInspectorTest {
 
 	@Test

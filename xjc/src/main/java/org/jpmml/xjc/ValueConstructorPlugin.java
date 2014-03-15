@@ -46,7 +46,6 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 
 			if(superClassFields.size() > 0 || classFields.size() > 0){
 				JMethod defaultConstructor = (clazz.implClass).constructor(JMod.PUBLIC);
-				defaultConstructor.annotate(Deprecated.class);
 				JInvocation defaultSuperInvocation = defaultConstructor.body().invoke("super");
 
 				JMethod valueConstructor = (clazz.implClass).constructor(JMod.PUBLIC);
