@@ -26,13 +26,13 @@ The current version is **1.1.3** (15 March, 2014).
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.1.2</version>
+	<version>1.1.3</version>
 </dependency>
 <!-- Class model annotations -->
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-schema</artifactId>
-	<version>1.1.2</version>
+	<version>1.1.3</version>
 </dependency>
 ```
 
