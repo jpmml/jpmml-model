@@ -15,7 +15,7 @@ public class SegmentationOutputExample extends TransformationExample {
 	}
 
 	@Override
-	public void transform(PMML pmml){
+	public PMML transform(PMML pmml){
 		List<Model> models = pmml.getModels();
 
 		for(Model model : models){
@@ -26,6 +26,8 @@ public class SegmentationOutputExample extends TransformationExample {
 				transform(miningModel);
 			}
 		}
+
+		return pmml;
 	}
 
 	private void transform(MiningModel model){

@@ -92,13 +92,13 @@ mvn clean install
 ```
 
 The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.TransformationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TransformationExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
 * `org.jpmml.model.SegmentationOutputExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/SegmentationOutputExample.java). Extends the Output element of a segmentation model with OutputField elements that expose the predicted values of individual segments.
-* `org.jpmml.model.TreeModelProductionExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TreeModelProductionExample.java). Produces a TreeModel for the "golfing" exercise.
+* `org.jpmml.model.GolfingTreeModelExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/GolfingTreeModelExample.java). Produces a TreeModel for the "golfing" exercise.
 
 For example, transforming `input.pmml` to `output.pmml`:
 ```
-java -cp target/example-1.1-SNAPSHOT.jar org.jpmml.model.TransformationExample --input input.pmml --output output.pmml
+java -cp target/example-1.1-SNAPSHOT.jar org.jpmml.model.CopyExample --input input.pmml --output output.pmml
 ```
 
 # License #

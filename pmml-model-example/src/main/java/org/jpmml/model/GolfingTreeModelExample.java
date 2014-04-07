@@ -3,51 +3,21 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
 import java.util.*;
 
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
-
 import org.dmg.pmml.*;
+import org.dmg.pmml.CompoundPredicate.BooleanOperator;
+import org.dmg.pmml.SimplePredicate.Operator;
 
-import com.beust.jcommander.Parameter;
-
-import static org.dmg.pmml.SimplePredicate.*;
-import static org.dmg.pmml.CompoundPredicate.*;
-
-public class TreeModelProductionExample extends Example {
-
-	@Parameter (
-		names = {"--output"},
-		description = "Output PMML file",
-		required = true
-	)
-	private File output = null;
-
+public class GolfingTreeModelExample extends ProductionExample {
 
 	static
 	public void main(String... args) throws Exception {
-		execute(TreeModelProductionExample.class, args);
+		execute(GolfingTreeModelExample.class, args);
 	}
 
 	@Override
-	public void execute() throws Exception {
-		PMML pmml = produce();
-
-		OutputStream os = new FileOutputStream(this.output);
-
-		try {
-			Result result = new StreamResult(os);
-
-			JAXBUtil.marshalPMML(pmml, result);
-		} finally {
-			os.close();
-		}
-	}
-
-	static
-	private PMML produce(){
+	public PMML produce(){
 		FieldName temperature = FieldName.create("temperature");
 		FieldName humidity = FieldName.create("humidity");
 		FieldName windy = FieldName.create("windy");

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 University of Tartu
+ * Copyright (c) 2014 Villu Ruusmann
  */
 package org.jpmml.model;
 
@@ -12,17 +12,8 @@ import org.dmg.pmml.*;
 
 import com.beust.jcommander.Parameter;
 
-import org.xml.sax.*;
-
 abstract
-public class TransformationExample extends Example {
-
-	@Parameter (
-		names = {"--input"},
-		description = "Input PMML file",
-		required = true
-	)
-	private File input = null;
+public class ProductionExample extends Example {
 
 	@Parameter (
 		names = {"--output"},
@@ -33,23 +24,11 @@ public class TransformationExample extends Example {
 
 
 	abstract
-	public PMML transform(PMML pmml);
+	public PMML produce();
 
 	@Override
 	public void execute() throws Exception {
-		PMML pmml;
-
-		InputStream is = new FileInputStream(this.input);
-
-		try {
-			Source source = ImportFilter.apply(new InputSource(is));
-
-			pmml = JAXBUtil.unmarshalPMML(source);
-		} finally {
-			is.close();
-		}
-
-		pmml = transform(pmml);
+		PMML pmml = produce();
 
 		OutputStream os = new FileOutputStream(this.output);
 
