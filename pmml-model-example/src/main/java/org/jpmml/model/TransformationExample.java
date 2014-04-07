@@ -50,6 +50,8 @@ public class TransformationExample extends Example {
 			is.close();
 		}
 
+		transform(pmml);
+
 		OutputStream os = new FileOutputStream(this.output);
 
 		try {
@@ -59,5 +61,8 @@ public class TransformationExample extends Example {
 		} finally {
 			os.close();
 		}
+	}
+
+	public void transform(PMML pmml){
 	}
 }
