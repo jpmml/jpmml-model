@@ -27,6 +27,12 @@ public enum Version {
 		this.namespaceUri = namespaceUri;
 	}
 
+	public String getVersion(){
+		String namespaceURI = getNamespaceURI();
+
+		return (namespaceURI.substring("http://www.dmg.org/PMML-".length())).replace('_', '.');
+	}
+
 	static
 	public Version forNamespaceURI(String namespaceURI){
 		Version[] versions = Version.values();

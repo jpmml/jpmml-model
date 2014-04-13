@@ -51,6 +51,6 @@ public class SAXFilterTest {
 	private boolean checkVersion(byte[] bytes, Version version) throws IOException {
 		String string = new String(bytes, "UTF-8");
 
-		return string.contains("PMML xmlns=\"" + version.getNamespaceURI() + "\"");
+		return string.contains("<PMML xmlns=\"" + version.getNamespaceURI() + "\" version=\"" + version.getVersion() + "\">");
 	}
 }

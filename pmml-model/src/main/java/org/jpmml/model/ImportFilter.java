@@ -40,6 +40,12 @@ public class ImportFilter extends PMMLFilter {
 			return renameAttribute(attributes, "mapMissingTo", "defaultValue");
 		} else
 
+		if(("PMML").equals(localName)){
+			Version target = getTarget();
+
+			return setAttribute(attributes, "version", target.getVersion());
+		} else
+
 		if(("TargetValue").equals(localName) && compare(getSource(), Version.PMML_3_1) <= 0){
 			return renameAttribute(attributes, "rawDataValue", "displayValue");
 		}

@@ -145,6 +145,23 @@ public class PMMLFilter extends XMLFilterImpl {
 	}
 
 	static
+	protected Attributes setAttribute(Attributes attributes, String localName, String value){
+		int index = attributes.getIndex("", localName);
+
+		AttributesImpl result = new AttributesImpl(attributes);
+
+		if(index < 0){
+			result.addAttribute("", localName, "", "CDATA", value); // XXX
+		} else
+
+		{
+			result.setValue(index, value);
+		}
+
+		return result;
+	}
+
+	static
 	protected Attributes renameAttribute(Attributes attributes, String oldLocalName, String localName){
 		int index = attributes.getIndex("", oldLocalName);
 		if(index < 0){
