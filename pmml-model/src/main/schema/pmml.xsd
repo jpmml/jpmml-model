@@ -1943,7 +1943,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="isCaseSensitive" type="xs:string" default="false"/>
+      <xs:attribute name="isCaseSensitive" type="xs:boolean" default="false"/>
       <xs:attribute name="maxLevenshteinDistance" type="xs:integer" default="0"/>
       <xs:attribute name="countHits" default="allHits">
         <xs:simpleType>
@@ -1953,7 +1953,8 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="wordSeparatorCharacterRE" type="xs:string"/>
+      <xs:attribute name="wordSeparatorCharacterRE" type="xs:string" default="\s"/>
+      <xs:attribute name="tokenize" type="xs:boolean" default="true"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="TextIndexNormalization">
@@ -1969,9 +1970,10 @@
       <xs:attribute name="outField" type="xs:string" default="stem"/>
       <xs:attribute name="regexField" type="xs:string" default="regex"/>
       <xs:attribute name="recursive" type="xs:boolean" default="false"/>
-      <xs:attribute name="isCaseSensitive" type="xs:string"/>
+      <xs:attribute name="isCaseSensitive" type="xs:boolean"/>
       <xs:attribute name="maxLevenshteinDistance" type="xs:integer"/>
       <xs:attribute name="wordSeparatorCharacterRE" type="xs:string"/>
+      <xs:attribute name="tokenize" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="Aggregate">
