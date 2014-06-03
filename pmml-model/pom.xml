@@ -95,6 +95,7 @@
 					<episode>false</episode>
 					<extension>true</extension>
 					<schemaDirectory>target/transformed-schema</schemaDirectory>
+					<specVersion>2.1</specVersion>
 				</configuration>
 				<dependencies>
 					<dependency>
