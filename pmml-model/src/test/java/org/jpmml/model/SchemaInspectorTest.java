@@ -3,15 +3,36 @@
  */
 package org.jpmml.model;
 
-import java.util.*;
+import java.util.List;
 
-import org.jpmml.schema.*;
+import org.dmg.pmml.AssociationModel;
+import org.dmg.pmml.BaselineModel;
+import org.dmg.pmml.ClusteringModel;
+import org.dmg.pmml.DataDictionary;
+import org.dmg.pmml.GeneralRegressionModel;
+import org.dmg.pmml.Header;
+import org.dmg.pmml.MiningModel;
+import org.dmg.pmml.Model;
+import org.dmg.pmml.NaiveBayesModel;
+import org.dmg.pmml.NearestNeighborModel;
+import org.dmg.pmml.NeuralNetwork;
+import org.dmg.pmml.Output;
+import org.dmg.pmml.OutputField;
+import org.dmg.pmml.PMML;
+import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.RegressionModel;
+import org.dmg.pmml.RuleFeatureType;
+import org.dmg.pmml.RuleSetModel;
+import org.dmg.pmml.Scorecard;
+import org.dmg.pmml.SequenceModel;
+import org.dmg.pmml.SupportVectorMachineModel;
+import org.dmg.pmml.TextModel;
+import org.dmg.pmml.TimeSeriesModel;
+import org.dmg.pmml.TreeModel;
+import org.jpmml.schema.Version;
+import org.junit.Test;
 
-import org.dmg.pmml.*;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SchemaInspectorTest {
 

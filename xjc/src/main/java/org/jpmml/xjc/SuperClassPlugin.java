@@ -3,16 +3,20 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-import com.sun.tools.xjc.*;
-import com.sun.tools.xjc.model.*;
-import com.sun.tools.xjc.outline.*;
-import com.sun.tools.xjc.reader.xmlschema.bindinfo.*;
-
-import org.jvnet.jaxb2_commons.plugin.*;
-
-import org.xml.sax.*;
+import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.model.CClassInfo;
+import com.sun.tools.xjc.model.CClassRef;
+import com.sun.tools.xjc.model.CPluginCustomization;
+import com.sun.tools.xjc.model.Model;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.Outline;
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIClass;
+import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
+import org.xml.sax.ErrorHandler;
 
 public class SuperClassPlugin extends AbstractParameterizablePlugin {
 

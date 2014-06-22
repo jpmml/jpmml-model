@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml;
 
-import java.util.*;
+import java.util.List;
 
 public interface HasExtensions {
 

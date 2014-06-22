@@ -3,11 +3,14 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.List;
 
-import com.sun.codemodel.*;
-import com.sun.tools.xjc.model.*;
-import com.sun.tools.xjc.outline.*;
+import com.sun.codemodel.JClass;
+import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JType;
+import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.FieldOutline;
 
 public class CodeModelUtil {
 

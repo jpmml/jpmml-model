@@ -3,13 +3,13 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
+import java.io.Serializable;
 
-import org.dmg.pmml.*;
-
-import com.sun.org.apache.xml.internal.utils.*;
-
-import org.xml.sax.*;
+import com.sun.org.apache.xml.internal.utils.SerializableLocatorImpl;
+import org.dmg.pmml.AbstractSimpleVisitor;
+import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.VisitorAction;
+import org.xml.sax.Locator;
 
 public class SourceLocationTransformer extends AbstractSimpleVisitor {
 

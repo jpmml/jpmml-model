@@ -3,17 +3,23 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-import com.sun.codemodel.*;
-import com.sun.tools.xjc.*;
-import com.sun.tools.xjc.model.*;
-import com.sun.tools.xjc.outline.*;
-import com.sun.xml.bind.api.impl.*;
-
-import org.w3c.dom.*;
-
-import org.xml.sax.*;
+import com.sun.codemodel.JClass;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
+import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CPluginCustomization;
+import com.sun.tools.xjc.model.Model;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.Outline;
+import com.sun.xml.bind.api.impl.NameConverter;
+import org.w3c.dom.Element;
+import org.xml.sax.ErrorHandler;
 
 public class UnsupportedPropertyPlugin extends Plugin {
 

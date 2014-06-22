@@ -3,20 +3,19 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamResult;
 
-import org.jpmml.schema.*;
+import org.dmg.pmml.PMML;
+import org.jpmml.schema.Version;
+import org.junit.Test;
+import org.xml.sax.InputSource;
 
-import org.dmg.pmml.*;
-
-import org.junit.*;
-
-import org.xml.sax.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class SAXFilterTest {
 

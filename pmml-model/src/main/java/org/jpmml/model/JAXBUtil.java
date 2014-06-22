@@ -3,10 +3,14 @@
  */
 package org.jpmml.model;
 
-import javax.xml.bind.*;
-import javax.xml.transform.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
 
-import org.dmg.pmml.*;
+import org.dmg.pmml.PMML;
 
 public class JAXBUtil {
 

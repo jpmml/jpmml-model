@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml;
 
-import javax.xml.bind.annotation.adapters.*;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 public class FieldNameAdapter extends XmlAdapter<String, FieldName> {
 

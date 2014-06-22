@@ -3,12 +3,14 @@
  */
 package org.jpmml.model;
 
-import javax.xml.transform.sax.*;
+import javax.xml.transform.sax.SAXSource;
 
-import org.jpmml.schema.*;
-
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
+import org.jpmml.schema.Version;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * SAX filter for translating PMML schema version 4.2 documents to PMML schema version 3.X and 4.X documents.

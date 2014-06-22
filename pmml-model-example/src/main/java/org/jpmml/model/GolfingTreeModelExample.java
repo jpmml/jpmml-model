@@ -3,11 +3,29 @@
  */
 package org.jpmml.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.dmg.pmml.*;
+import org.dmg.pmml.CompoundPredicate;
 import org.dmg.pmml.CompoundPredicate.BooleanOperator;
+import org.dmg.pmml.DataDictionary;
+import org.dmg.pmml.DataField;
+import org.dmg.pmml.DataType;
+import org.dmg.pmml.FieldName;
+import org.dmg.pmml.FieldUsageType;
+import org.dmg.pmml.Header;
+import org.dmg.pmml.MiningField;
+import org.dmg.pmml.MiningFunctionType;
+import org.dmg.pmml.MiningSchema;
+import org.dmg.pmml.Node;
+import org.dmg.pmml.OpType;
+import org.dmg.pmml.PMML;
+import org.dmg.pmml.Predicate;
+import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimplePredicate.Operator;
+import org.dmg.pmml.TreeModel;
+import org.dmg.pmml.True;
+import org.dmg.pmml.Value;
 
 public class GolfingTreeModelExample extends ProductionExample {
 

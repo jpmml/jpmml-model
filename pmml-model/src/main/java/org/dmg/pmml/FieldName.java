@@ -3,9 +3,10 @@
  */
 package org.dmg.pmml;
 
-import java.io.*;
-import java.lang.ref.*;
-import java.util.*;
+import java.io.Serializable;
+import java.lang.ref.WeakReference;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 final
 public class FieldName implements Serializable {

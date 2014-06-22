@@ -3,9 +3,11 @@
  */
 package org.jpmml.model;
 
-import java.lang.reflect.*;
+import java.lang.reflect.AnnotatedElement;
 
-import org.jpmml.schema.*;
+import org.jpmml.schema.Added;
+import org.jpmml.schema.Removed;
+import org.jpmml.schema.Version;
 
 public class SchemaInspector extends AnnotationInspector {
 

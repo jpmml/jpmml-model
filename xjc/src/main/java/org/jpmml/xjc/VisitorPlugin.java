@@ -3,16 +3,35 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import com.sun.codemodel.*;
-import com.sun.tools.xjc.*;
-import com.sun.tools.xjc.model.*;
-import com.sun.tools.xjc.outline.*;
-import com.sun.tools.xjc.util.*;
-import com.sun.xml.bind.api.impl.*;
-
-import org.xml.sax.*;
+import com.sun.codemodel.ClassType;
+import com.sun.codemodel.JBlock;
+import com.sun.codemodel.JClass;
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JEnumConstant;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JExpression;
+import com.sun.codemodel.JFieldRef;
+import com.sun.codemodel.JForLoop;
+import com.sun.codemodel.JJavaName;
+import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
+import com.sun.codemodel.JPackage;
+import com.sun.codemodel.JType;
+import com.sun.codemodel.JVar;
+import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.FieldOutline;
+import com.sun.tools.xjc.outline.Outline;
+import com.sun.tools.xjc.util.CodeModelClassFactory;
+import com.sun.xml.bind.api.impl.NameConverter;
+import org.xml.sax.ErrorHandler;
 
 public class VisitorPlugin extends Plugin {
 

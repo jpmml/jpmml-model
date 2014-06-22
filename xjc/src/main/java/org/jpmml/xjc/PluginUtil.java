@@ -3,12 +3,14 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import com.sun.tools.xjc.*;
-import com.sun.tools.xjc.model.*;
-
-import org.w3c.dom.*;
+import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CCustomizable;
+import com.sun.tools.xjc.model.CPluginCustomization;
+import org.w3c.dom.Element;
 
 public class PluginUtil {
 

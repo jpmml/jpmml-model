@@ -3,7 +3,7 @@
  */
 package org.jpmml.model;
 
-import org.dmg.pmml.*;
+import org.dmg.pmml.PMML;
 
 public class CopyExample extends TransformationExample {
 

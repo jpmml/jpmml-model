@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement (
 	name = "PMML"

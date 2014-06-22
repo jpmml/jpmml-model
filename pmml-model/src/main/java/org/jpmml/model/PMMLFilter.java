@@ -3,10 +3,12 @@
  */
 package org.jpmml.model;
 
-import org.jpmml.schema.*;
-
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
+import org.jpmml.schema.Version;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.AttributesImpl;
+import org.xml.sax.helpers.XMLFilterImpl;
 
 abstract
 public class PMMLFilter extends XMLFilterImpl {

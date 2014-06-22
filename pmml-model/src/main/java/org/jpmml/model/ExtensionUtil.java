@@ -3,15 +3,17 @@
  */
 package org.jpmml.model;
 
-import java.util.*;
+import java.util.List;
 
-import javax.xml.bind.*;
-import javax.xml.bind.annotation.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
 
-import org.dmg.pmml.*;
-
+import org.dmg.pmml.Extension;
+import org.dmg.pmml.PMMLObject;
 import org.w3c.dom.Node;
 
 public class ExtensionUtil {

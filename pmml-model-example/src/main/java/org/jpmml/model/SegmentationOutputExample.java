@@ -3,9 +3,17 @@
  */
 package org.jpmml.model;
 
-import java.util.*;
+import java.util.List;
 
-import org.dmg.pmml.*;
+import org.dmg.pmml.FieldName;
+import org.dmg.pmml.MiningModel;
+import org.dmg.pmml.Model;
+import org.dmg.pmml.Output;
+import org.dmg.pmml.OutputField;
+import org.dmg.pmml.PMML;
+import org.dmg.pmml.ResultFeatureType;
+import org.dmg.pmml.Segment;
+import org.dmg.pmml.Segmentation;
 
 public class SegmentationOutputExample extends TransformationExample {
 

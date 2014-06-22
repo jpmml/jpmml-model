@@ -3,13 +3,12 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
+import java.io.NotSerializableException;
 
-import org.jpmml.schema.*;
-
-import org.dmg.pmml.*;
-
-import org.junit.*;
+import org.dmg.pmml.PMML;
+import org.jpmml.schema.Version;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class SerializationTest {
 

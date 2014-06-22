@@ -3,11 +3,12 @@
  */
 package org.dmg.pmml;
 
-import org.jpmml.model.*;
+import org.jpmml.model.SerializationUtil;
+import org.junit.Test;
 
-import org.junit.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
 public class FieldNameTest {
 

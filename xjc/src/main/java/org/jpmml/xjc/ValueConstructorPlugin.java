@@ -3,16 +3,26 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import com.sun.codemodel.*;
-import com.sun.tools.xjc.*;
-import com.sun.tools.xjc.model.*;
-import com.sun.tools.xjc.outline.*;
-
-import org.jvnet.jaxb2_commons.plugin.*;
-
-import org.xml.sax.*;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JInvocation;
+import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
+import com.sun.codemodel.JVar;
+import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.model.CAttributePropertyInfo;
+import com.sun.tools.xjc.model.CElementPropertyInfo;
+import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.model.CValuePropertyInfo;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.FieldOutline;
+import com.sun.tools.xjc.outline.Outline;
+import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
+import org.xml.sax.ErrorHandler;
 
 public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 

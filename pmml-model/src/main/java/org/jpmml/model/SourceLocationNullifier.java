@@ -3,7 +3,9 @@
  */
 package org.jpmml.model;
 
-import org.dmg.pmml.*;
+import org.dmg.pmml.AbstractSimpleVisitor;
+import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.VisitorAction;
 
 public class SourceLocationNullifier extends AbstractSimpleVisitor {
 

@@ -3,13 +3,12 @@
  */
 package org.dmg.pmml;
 
-import java.io.*;
+import java.io.Serializable;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlTransient;
 
-import com.sun.xml.bind.*;
-
-import org.xml.sax.*;
+import com.sun.xml.bind.Locatable;
+import org.xml.sax.Locator;
 
 @XmlTransient
 abstract

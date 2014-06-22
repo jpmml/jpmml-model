@@ -3,7 +3,8 @@
  */
 package org.jpmml.model;
 
-import com.beust.jcommander.*;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.ParameterException;
 
 abstract
 public class Example {

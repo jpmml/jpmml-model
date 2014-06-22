@@ -3,19 +3,23 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
-import javax.xml.bind.*;
-import javax.xml.transform.*;
-import javax.xml.transform.sax.*;
-import javax.xml.transform.stream.*;
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
-import org.jpmml.schema.*;
-
-import org.dmg.pmml.*;
-
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
+import org.dmg.pmml.PMML;
+import org.jpmml.schema.Version;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 public class PMMLUtil {
 

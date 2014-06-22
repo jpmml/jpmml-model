@@ -3,14 +3,26 @@
  */
 package org.jpmml.xjc;
 
-import java.util.*;
+import java.util.Collection;
 
-import com.sun.codemodel.*;
-import com.sun.tools.xjc.*;
-import com.sun.tools.xjc.model.*;
-import com.sun.tools.xjc.outline.*;
-
-import org.xml.sax.*;
+import com.sun.codemodel.JClass;
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JJavaName;
+import com.sun.codemodel.JMethod;
+import com.sun.codemodel.JMod;
+import com.sun.codemodel.JType;
+import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CClassInfo;
+import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.model.Model;
+import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.FieldOutline;
+import com.sun.tools.xjc.outline.Outline;
+import org.xml.sax.ErrorHandler;
 
 public class PMMLPlugin extends Plugin {
 

@@ -3,18 +3,23 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
-import javax.xml.bind.*;
-import javax.xml.transform.stream.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
-import org.jpmml.schema.*;
+import org.dmg.pmml.CustomObjectFactory;
+import org.dmg.pmml.CustomPMML;
+import org.dmg.pmml.PMML;
+import org.jpmml.schema.Version;
+import org.junit.Test;
 
-import org.dmg.pmml.*;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class JAXBUtilTest {
 

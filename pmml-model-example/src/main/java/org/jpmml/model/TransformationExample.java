@@ -3,16 +3,19 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-import javax.xml.transform.*;
-import javax.xml.transform.stream.*;
-
-import org.dmg.pmml.*;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamResult;
 
 import com.beust.jcommander.Parameter;
-
-import org.xml.sax.*;
+import org.dmg.pmml.PMML;
+import org.xml.sax.InputSource;
 
 abstract
 public class TransformationExample extends Example {

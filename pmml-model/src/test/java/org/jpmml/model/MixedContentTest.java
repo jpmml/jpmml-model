@@ -3,14 +3,18 @@
  */
 package org.jpmml.model;
 
-import java.io.*;
-import java.util.*;
+import java.io.NotSerializableException;
+import java.util.Arrays;
+import java.util.List;
 
-import org.dmg.pmml.*;
+import org.dmg.pmml.Annotation;
+import org.dmg.pmml.Extension;
+import org.dmg.pmml.Header;
+import org.dmg.pmml.PMML;
+import org.junit.Assert;
+import org.junit.Test;
 
-import org.junit.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MixedContentTest {
 
