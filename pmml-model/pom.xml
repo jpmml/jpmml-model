@@ -81,6 +81,7 @@
 				<configuration>
 					<args>
 						<arg>-no-header</arg>
+						<arg>-npa</arg>
 						<arg>-Xannotate</arg>
 						<arg>-Xannotate-defaultFieldTarget=field</arg>
 						<arg>-Xfluent-api</arg>
