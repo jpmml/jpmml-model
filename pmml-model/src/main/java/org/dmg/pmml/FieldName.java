@@ -30,13 +30,17 @@ public class FieldName implements Serializable {
 	@Override
 	public boolean equals(Object object){
 
+		if(object == this){
+			return true;
+		} // End if
+
 		if(object instanceof FieldName){
 			FieldName that = (FieldName)object;
 
 			return (this.getValue()).equals(that.getValue());
 		}
 
-		return super.equals(object);
+		return false;
 	}
 
 	@Override
