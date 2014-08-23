@@ -12,6 +12,14 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:schemaBindings>
 
+		<jaxb:globalBindings>
+			<xjc:javaType
+				name="java.lang.Double"
+				xmlType="xs:float"
+				adapter="org.dmg.pmml.FloatAdapter"
+			/>
+		</jaxb:globalBindings>
+
 		<jaxb:bindings node="//xsd:complexType[@name='COUNT-TABLE-TYPE']">
 			<jaxb:class
 				name="CountTable"
