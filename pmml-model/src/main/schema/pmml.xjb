@@ -18,6 +18,21 @@ Copyright (c) 2009 University of Tartu
 				xmlType="xs:float"
 				adapter="org.dmg.pmml.FloatAdapter"
 			/>
+			<xjc:javaType
+				name="java.lang.Integer"
+				xmlType="xs:integer"
+				adapter="org.dmg.pmml.IntegerAdapter"
+			/>
+			<xjc:javaType
+				name="java.lang.Integer"
+				xmlType="xs:nonNegativeInteger"
+				adapter="org.dmg.pmml.IntegerAdapter"
+			/>
+			<xjc:javaType
+				name="java.lang.Double"
+				xmlType="xs:decimal"
+				adapter="org.dmg.pmml.DecimalAdapter"
+			/>
 		</jaxb:globalBindings>
 
 		<jaxb:bindings node="//xsd:complexType[@name='COUNT-TABLE-TYPE']">

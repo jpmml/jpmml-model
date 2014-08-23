@@ -52,19 +52,6 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
-	Replace arbitrary-precision numeric data types with limited-precision ones
-	-->
-	<xsl:template match="xsd:attribute[@type='xs:integer' or @type='xs:nonNegativeInteger']/@type">
-		<xsl:attribute name="type">xs:int</xsl:attribute>
-	</xsl:template>
-	<xsl:template match="xsd:restriction[@base='xs:integer']/@base">
-		<xsl:attribute name="base">xs:int</xsl:attribute>
-	</xsl:template>
-	<xsl:template match="xsd:restriction[@base='xs:decimal']/@base">
-		<xsl:attribute name="base">xs:double</xsl:attribute>
-	</xsl:template>
-
-	<!--
 	Restrict xsd:string to FIELD-NAME where appropriate
 	-->
 	<xsl:template match="xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='name']/@type">
