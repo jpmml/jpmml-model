@@ -28,7 +28,7 @@ public class DecimalAdapter extends XmlAdapter<String, Double> {
 			return null;
 		}
 
-		return DatatypeConverter.printDouble(value.doubleValue());
+		return DatatypeConverter.printDecimal(BigDecimal.valueOf(value.doubleValue()));
 	}
 
 	protected static final BigDecimal MIN_VALUE = BigDecimal.valueOf(-Double.MAX_VALUE);

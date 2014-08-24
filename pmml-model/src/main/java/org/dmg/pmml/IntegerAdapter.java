@@ -28,7 +28,7 @@ public class IntegerAdapter extends XmlAdapter<String, Integer> {
 			return null;
 		}
 
-		return DatatypeConverter.printInt(value.intValue());
+		return DatatypeConverter.printInteger(BigInteger.valueOf(value.intValue()));
 	}
 
 	protected static final BigInteger MIN_VALUE = BigInteger.valueOf(Integer.MIN_VALUE);
