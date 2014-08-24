@@ -14,7 +14,7 @@ public class IntegerAdapter extends XmlAdapter<String, Integer> {
 	public Integer unmarshal(String value){
 		BigInteger integer = DatatypeConverter.parseInteger(value);
 
-		if(!ValueUtil.checkRange(integer, IntegerAdapter.MIN, IntegerAdapter.MAX)){
+		if(!ValueUtil.checkRange(integer, IntegerAdapter.MIN_VALUE, IntegerAdapter.MAX_VALUE)){
 			throw new IllegalArgumentException(value);
 		}
 
@@ -31,6 +31,6 @@ public class IntegerAdapter extends XmlAdapter<String, Integer> {
 		return DatatypeConverter.printInt(value.intValue());
 	}
 
-	private static final BigInteger MIN = BigInteger.valueOf(Integer.MIN_VALUE);
-	private static final BigInteger MAX = BigInteger.valueOf(Integer.MAX_VALUE);
+	protected static final BigInteger MIN_VALUE = BigInteger.valueOf(Integer.MIN_VALUE);
+	protected static final BigInteger MAX_VALUE = BigInteger.valueOf(Integer.MAX_VALUE);
 }

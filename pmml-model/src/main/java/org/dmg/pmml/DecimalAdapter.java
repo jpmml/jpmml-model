@@ -14,7 +14,7 @@ public class DecimalAdapter extends XmlAdapter<String, Double> {
 	public Double unmarshal(String value){
 		BigDecimal decimal = DatatypeConverter.parseDecimal(value);
 
-		if(!ValueUtil.checkRange(decimal, DecimalAdapter.MIN, DecimalAdapter.MAX)){
+		if(!ValueUtil.checkRange(decimal, DecimalAdapter.MIN_VALUE, DecimalAdapter.MAX_VALUE)){
 			throw new IllegalArgumentException(value);
 		}
 
@@ -31,6 +31,6 @@ public class DecimalAdapter extends XmlAdapter<String, Double> {
 		return DatatypeConverter.printDouble(value.doubleValue());
 	}
 
-	private static final BigDecimal MIN = BigDecimal.valueOf(Double.MIN_VALUE);
-	private static final BigDecimal MAX = BigDecimal.valueOf(Double.MAX_VALUE);
+	protected static final BigDecimal MIN_VALUE = BigDecimal.valueOf(-Double.MAX_VALUE);
+	protected static final BigDecimal MAX_VALUE = BigDecimal.valueOf(Double.MAX_VALUE);
 }
