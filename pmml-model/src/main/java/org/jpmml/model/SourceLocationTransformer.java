@@ -5,7 +5,6 @@ package org.jpmml.model;
 
 import java.io.Serializable;
 
-import com.sun.org.apache.xml.internal.utils.SerializableLocatorImpl;
 import org.dmg.pmml.AbstractSimpleVisitor;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
@@ -26,6 +25,6 @@ public class SourceLocationTransformer extends AbstractSimpleVisitor {
 			return locator;
 		}
 
-		return new SerializableLocatorImpl(locator);
+		return new SimpleLocator(locator);
 	}
 }

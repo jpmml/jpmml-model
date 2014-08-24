@@ -10,11 +10,16 @@ import org.jpmml.schema.Version;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 public class SerializationTest {
 
 	@Test
 	public void nullifyAndClone() throws Exception {
 		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_2);
+
+		assertNotNull(pmml.sourceLocation());
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -25,12 +30,16 @@ public class SerializationTest {
 
 		pmml.accept(new SourceLocationNullifier());
 
+		assertNull(pmml.sourceLocation());
+
 		SerializationUtil.clone(pmml);
 	}
 
 	@Test
 	public void transformAndClone() throws Exception {
 		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_2);
+
+		assertNotNull(pmml.sourceLocation());
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -40,6 +49,8 @@ public class SerializationTest {
 		}
 
 		pmml.accept(new SourceLocationTransformer());
+
+		assertNotNull(pmml.sourceLocation());
 
 		SerializationUtil.clone(pmml);
 	}
