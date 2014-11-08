@@ -59,14 +59,12 @@ public class PMMLFilter extends XMLFilterImpl {
 		if(isFilterable(namespaceURI)){
 			updateSource(namespaceURI);
 
-			String filteredNamespaceURI = getNamespaceURI();
 			String filteredLocalName = filterLocalName(localName);
-
-			String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
+			String filteredQualifiedName = (("").equals(qualifiedName) ? "" : filteredLocalName);
 
 			Attributes filteredAttributes = filterAttributes(localName, attributes);
 
-			super.startElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName, filteredAttributes);
+			super.startElement(getNamespaceURI(), filteredLocalName, filteredQualifiedName, filteredAttributes);
 
 			return;
 		}
@@ -78,12 +76,10 @@ public class PMMLFilter extends XMLFilterImpl {
 	public void endElement(String namespaceURI, String localName, String qualifiedName) throws SAXException {
 
 		if(isFilterable(namespaceURI)){
-			String filteredNamespaceURI = getNamespaceURI();
 			String filteredLocalName = filterLocalName(localName);
+			String filteredQualifiedName = (("").equals(qualifiedName) ? "" : filteredLocalName);
 
-			String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
-
-			super.endElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName);
+			super.endElement(getNamespaceURI(), filteredLocalName, filteredQualifiedName);
 
 			return;
 		}
@@ -146,20 +142,6 @@ public class PMMLFilter extends XMLFilterImpl {
 		}
 
 		return (left).compareTo(right);
-	}
-
-	static
-	private String formatQualifiedName(String template, String namespaceURI, String localName){
-
-		if(("").equals(template)){
-			return "";
-		} // End if
-
-		if(template.indexOf(':') > -1){
-			return (namespaceURI + ":" + localName);
-		}
-
-		return localName;
 	}
 
 	static
