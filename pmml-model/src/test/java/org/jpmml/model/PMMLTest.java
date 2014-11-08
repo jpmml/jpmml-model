@@ -17,7 +17,7 @@ import org.xml.sax.InputSource;
 
 import static org.junit.Assert.assertEquals;
 
-public class SAXFilterTest {
+public class PMMLTest {
 
 	@Test
 	public void copy() throws Exception {
