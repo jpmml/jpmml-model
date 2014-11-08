@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.transform.Source;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
@@ -86,7 +87,26 @@ public class PMMLUtil {
 	}
 
 	static
-	public byte[] transform(byte[] bytes, Version version) throws IOException, TransformerConfigurationException, SAXException {
+	public byte[] upgradeToLatest(byte[] bytes) throws IOException, JAXBException, SAXException {
+		ByteArrayOutputStream result = new ByteArrayOutputStream();
+
+		InputStream is = new ByteArrayInputStream(bytes);
+
+		try {
+			Source source = ImportFilter.apply(new InputSource(is));
+
+			PMML pmml = JAXBUtil.unmarshalPMML(source);
+
+			JAXBUtil.marshalPMML(pmml, new StreamResult(result));
+		} finally {
+			is.close();
+		}
+
+		return result.toByteArray();
+	}
+
+	static
+	public byte[] downgrade(byte[] bytes, Version version) throws IOException, TransformerConfigurationException, SAXException {
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 
 		SAXTransformerFactory transformerFactory = (SAXTransformerFactory)SAXTransformerFactory.newInstance();

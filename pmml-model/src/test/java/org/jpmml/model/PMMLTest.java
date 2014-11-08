@@ -3,24 +3,16 @@
  */
 package org.jpmml.model;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamResult;
-
-import org.dmg.pmml.PMML;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
 
 import static org.junit.Assert.assertEquals;
 
 public class PMMLTest {
 
 	@Test
-	public void copy() throws Exception {
+	public void transform() throws Exception {
 		Version[] versions = Version.values();
 
 		for(Version version : versions){
@@ -28,19 +20,11 @@ public class PMMLTest {
 
 			checkPMML(original, version);
 
-			Source source = ImportFilter.apply(new InputSource(new ByteArrayInputStream(original)));
-
-			PMML pmml = JAXBUtil.unmarshalPMML(source);
-
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-			JAXBUtil.marshalPMML(pmml, new StreamResult(buffer));
-
-			byte[] latest = buffer.toByteArray();
+			byte[] latest = PMMLUtil.upgradeToLatest(original);
 
 			checkPMML(latest, Version.PMML_4_2);
 
-			byte[] latestToOriginal = PMMLUtil.transform(latest, version);
+			byte[] latestToOriginal = PMMLUtil.downgrade(latest, version);
 
 			checkPMML(latestToOriginal, version);
 		}
