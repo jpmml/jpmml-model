@@ -7,11 +7,11 @@ import java.io.NotSerializableException;
 
 import org.dmg.pmml.PMML;
 import org.jpmml.schema.Version;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 public class SerializationTest {
 
@@ -24,7 +24,7 @@ public class SerializationTest {
 		try {
 			SerializationUtil.clone(pmml);
 
-			Assert.fail();
+			fail();
 		} catch(NotSerializableException nse){
 		}
 
@@ -44,7 +44,7 @@ public class SerializationTest {
 		try {
 			SerializationUtil.clone(pmml);
 
-			Assert.fail();
+			fail();
 		} catch(NotSerializableException nse){
 		}
 

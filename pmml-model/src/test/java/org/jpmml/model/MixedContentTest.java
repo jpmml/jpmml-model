@@ -11,10 +11,10 @@ import org.dmg.pmml.Annotation;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class MixedContentTest {
 
@@ -41,7 +41,7 @@ public class MixedContentTest {
 		try {
 			SerializationUtil.clone(pmml);
 
-			Assert.fail();
+			fail();
 		} catch(NotSerializableException nse){
 		}
 
