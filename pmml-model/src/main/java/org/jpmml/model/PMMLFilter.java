@@ -55,26 +55,49 @@ public class PMMLFilter extends XMLFilterImpl {
 
 	@Override
 	public void startElement(String namespaceURI, String localName, String qualifiedName, Attributes attributes) throws SAXException {
-		updateSource(namespaceURI);
 
-		String filteredNamespaceURI = getNamespaceURI();
-		String filteredLocalName = filterLocalName(localName);
+		if(isFilterable(namespaceURI)){
+			updateSource(namespaceURI);
 
-		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
+			String filteredNamespaceURI = getNamespaceURI();
+			String filteredLocalName = filterLocalName(localName);
 
-		Attributes filteredAttributes = filterAttributes(localName, attributes);
+			String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
 
-		super.startElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName, filteredAttributes);
+			Attributes filteredAttributes = filterAttributes(localName, attributes);
+
+			super.startElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName, filteredAttributes);
+
+			return;
+		}
+
+		super.startElement(namespaceURI, localName, qualifiedName, attributes);
 	}
 
 	@Override
 	public void endElement(String namespaceURI, String localName, String qualifiedName) throws SAXException {
-		String filteredNamespaceURI = getNamespaceURI();
-		String filteredLocalName = filterLocalName(localName);
 
-		String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
+		if(isFilterable(namespaceURI)){
+			String filteredNamespaceURI = getNamespaceURI();
+			String filteredLocalName = filterLocalName(localName);
 
-		super.endElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName);
+			String filteredQualifiedName = formatQualifiedName(qualifiedName, filteredNamespaceURI, filteredLocalName);
+
+			super.endElement(filteredNamespaceURI, filteredLocalName, filteredQualifiedName);
+
+			return;
+		}
+
+		super.endElement(namespaceURI, localName, qualifiedName);
+	}
+
+	private boolean isFilterable(String namespaceURI){
+
+		if(("").equals(namespaceURI)){
+			return true;
+		}
+
+		return namespaceURI.startsWith("http://www.dmg.org/PMML-");
 	}
 
 	private String getNamespaceURI(){

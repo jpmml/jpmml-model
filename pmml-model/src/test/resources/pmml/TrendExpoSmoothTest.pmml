@@ -3,6 +3,10 @@
     <Header/>
     <DataDictionary/>
     <TimeSeriesModel>
+        <Extension>
+            <test:Trend xmlns:test="http://www.dmg.org/TEST">
+            </test:Trend>
+        </Extension>
         <ExponentialSmoothing>
             <Trend/>
         </ExponentialSmoothing>

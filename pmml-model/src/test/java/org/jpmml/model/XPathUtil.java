@@ -89,6 +89,11 @@ public class XPathUtil {
 
 			if((XMLConstants.DEFAULT_NS_PREFIX).equals(prefix)){
 				return document.lookupNamespaceURI(null);
+			} // End if
+
+			// XXX
+			if(("test").equals(prefix)){
+				return "http://www.dmg.org/TEST";
 			}
 
 			return document.lookupNamespaceURI(prefix);
