@@ -5,7 +5,6 @@ package org.jpmml.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
@@ -15,16 +14,20 @@ import org.jpmml.schema.Version;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class TrendExpoSmoothTest {
 
 	@Test
 	public void copy() throws Exception {
+		String trendExpression = "/:PMML/:TimeSeriesModel/:ExponentialSmoothing/:Trend";
+		String trendExpoSmoothExpression = "/:PMML/:TimeSeriesModel/:ExponentialSmoothing/:Trend_ExpoSmooth";
+
 		byte[] original = PMMLUtil.getResourceAsByteArray(TrendExpoSmoothTest.class);
 
-		assertTrue(checkElement(original, "Trend"));
+		assertNotNull(XPathUtil.selectNode(original, trendExpression));
+		assertNull(XPathUtil.selectNode(original, trendExpoSmoothExpression));
 
 		Source source = ImportFilter.apply(new InputSource(new ByteArrayInputStream(original)));
 
@@ -36,18 +39,12 @@ public class TrendExpoSmoothTest {
 
 		byte[] latest = buffer.toByteArray();
 
-		assertTrue(checkElement(latest, "Trend_ExpoSmooth"));
-		assertFalse(checkElement(latest, "Trend"));
+		assertNull(XPathUtil.selectNode(latest, trendExpression));
+		assertNotNull(XPathUtil.selectNode(latest, trendExpoSmoothExpression));
 
 		byte[] latestToOriginal = PMMLUtil.transform(latest, Version.PMML_4_0);
 
-		assertTrue(checkElement(latestToOriginal, "Trend"));
-	}
-
-	static
-	private boolean checkElement(byte[] bytes, String tag) throws IOException {
-		String string = new String(bytes, "UTF-8");
-
-		return string.contains("<" + tag + "/>");
+		assertNotNull(XPathUtil.selectNode(latestToOriginal, trendExpression));
+		assertNull(XPathUtil.selectNode(latestToOriginal, trendExpoSmoothExpression));
 	}
 }

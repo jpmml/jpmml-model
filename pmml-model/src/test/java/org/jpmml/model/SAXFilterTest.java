@@ -5,7 +5,6 @@ package org.jpmml.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
@@ -13,9 +12,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.dmg.pmml.PMML;
 import org.jpmml.schema.Version;
 import org.junit.Test;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class SAXFilterTest {
 
@@ -26,7 +26,7 @@ public class SAXFilterTest {
 		for(Version version : versions){
 			byte[] original = PMMLUtil.getResourceAsByteArray(version);
 
-			assertTrue(checkVersion(original, version));
+			checkPMML(original, version);
 
 			Source source = ImportFilter.apply(new InputSource(new ByteArrayInputStream(original)));
 
@@ -38,18 +38,20 @@ public class SAXFilterTest {
 
 			byte[] latest = buffer.toByteArray();
 
-			assertTrue(checkVersion(latest, Version.PMML_4_2));
+			checkPMML(latest, Version.PMML_4_2);
 
 			byte[] latestToOriginal = PMMLUtil.transform(latest, version);
 
-			assertTrue(checkVersion(latestToOriginal, version));
+			checkPMML(latestToOriginal, version);
 		}
 	}
 
 	static
-	private boolean checkVersion(byte[] bytes, Version version) throws IOException {
-		String string = new String(bytes, "UTF-8");
+	private void checkPMML(byte[] bytes, Version version) throws Exception {
+		Node node = XPathUtil.selectNode(bytes, "/:PMML");
 
-		return string.contains("<PMML xmlns=\"" + version.getNamespaceURI() + "\" version=\"" + version.getVersion() + "\">");
+		assertEquals(version.getNamespaceURI(), node.getNamespaceURI());
+
+		assertEquals(version.getVersion(), DOMUtil.getAttributeValue(node, "version"));
 	}
 }

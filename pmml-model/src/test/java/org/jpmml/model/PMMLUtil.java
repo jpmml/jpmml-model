@@ -79,8 +79,8 @@ public class PMMLUtil {
 
 	static
 	public InputStream getResourceAsStream(Version version){
-		String name = version.getNamespaceURI();
-		name = name.substring(name.lastIndexOf('/') + 1);
+		String namespaceUri = version.getNamespaceURI();
+		String name = namespaceUri.substring(namespaceUri.lastIndexOf('/') + 1);
 
 		return PMMLUtil.class.getResourceAsStream("/pmml/" + name.toLowerCase() + ".pmml");
 	}

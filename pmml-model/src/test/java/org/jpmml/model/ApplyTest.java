@@ -5,7 +5,6 @@ package org.jpmml.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
@@ -13,9 +12,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.dmg.pmml.PMML;
 import org.jpmml.schema.Version;
 import org.junit.Test;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class ApplyTest {
 
@@ -23,7 +23,7 @@ public class ApplyTest {
 	public void copy() throws Exception {
 		byte[] original = PMMLUtil.getResourceAsByteArray(ApplyTest.class);
 
-		assertTrue(checkAttribute(original, "mapMissingTo"));
+		checkApply(original, "", null);
 
 		Source source = ImportFilter.apply(new InputSource(new ByteArrayInputStream(original)));
 
@@ -35,17 +35,18 @@ public class ApplyTest {
 
 		byte[] latest = buffer.toByteArray();
 
-		assertTrue(checkAttribute(latest, "defaultValue"));
+		checkApply(latest, null, "");
 
 		byte[] latestToOriginal = PMMLUtil.transform(latest, Version.PMML_4_1);
 
-		assertTrue(checkAttribute(latestToOriginal, "mapMissingTo"));
+		checkApply(latestToOriginal, "", null);
 	}
 
 	static
-	private boolean checkAttribute(byte[] bytes, String name) throws IOException {
-		String string = new String(bytes, "UTF-8");
+	private void checkApply(byte[] bytes, String mapMissingTo, String defaultValue) throws Exception {
+		Node node = XPathUtil.selectNode(bytes, "/:PMML/:TransformationDictionary/:DerivedField/:Apply");
 
-		return string.contains("<Apply function=\"concat\" " + name + "=\"\">");
+		assertEquals(mapMissingTo, DOMUtil.getAttributeValue(node, "mapMissingTo"));
+		assertEquals(defaultValue, DOMUtil.getAttributeValue(node, "defaultValue"));
 	}
 }
