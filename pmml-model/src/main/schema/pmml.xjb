@@ -121,6 +121,10 @@ Copyright (c) 2009 University of Tartu
 				name="org.dmg.pmml.Model"
 			/>
 			<java:unsupportedProperty
+				property="modelExplanation"
+				name="org.dmg.pmml.ModelExplanation"
+			/>
+			<java:unsupportedProperty
 				property="targets"
 				name="org.dmg.pmml.Targets"
 			/>
@@ -1695,6 +1699,14 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Model"
+			/>
+			<java:unsupportedProperty
+				property="modelExplanation"
+				name="org.dmg.pmml.ModelExplanation"
+			/>
+			<java:unsupportedProperty
+				property="modelVerification"
+				name="org.dmg.pmml.ModelVerification"
 			/>
 			<java:unsupportedProperty
 				property="output"

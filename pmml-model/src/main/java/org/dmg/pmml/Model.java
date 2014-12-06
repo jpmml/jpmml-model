@@ -62,4 +62,16 @@ public class Model extends PMMLObject {
 
 	abstract
 	public void setModelStats(ModelStats modelStats);
+
+	abstract
+	public ModelExplanation getModelExplanation();
+
+	abstract
+	public void setModelExplanation(ModelExplanation modelExplanation);
+
+	abstract
+	public ModelVerification getModelVerification();
+
+	abstract
+	public void setModelVerification(ModelVerification modelVerification);
 }
