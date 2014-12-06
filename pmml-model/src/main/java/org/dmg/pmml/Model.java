@@ -22,6 +22,12 @@ public class Model extends PMMLObject {
 	public void setFunctionName(MiningFunctionType functionName);
 
 	abstract
+	public String getAlgorithmName();
+
+	abstract
+	public void setAlgorithmName(String algorithmName);
+
+	abstract
 	public boolean isScorable();
 
 	abstract
