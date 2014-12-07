@@ -62,19 +62,21 @@ public class VisitorPlugin extends Plugin {
 		JClass dequeClazz = codeModel.ref(Deque.class);
 		JClass dequeImplementationClazz = codeModel.ref(ArrayDeque.class);
 
-		JPackage modelPackage = pmmlObjectClazz._package();
+		JPackage pmmlPackage = pmmlObjectClazz._package();
 
-		JDefinedClass visitorActionClazz = clazzFactory.createClass(modelPackage, JMod.PUBLIC, "VisitorAction", null, ClassType.ENUM);
+		JDefinedClass visitorActionClazz = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "VisitorAction", null, ClassType.ENUM);
 		JEnumConstant continueAction = visitorActionClazz.enumConstant("CONTINUE");
 		JEnumConstant skipAction = visitorActionClazz.enumConstant("SKIP");
 		JEnumConstant terminateAction = visitorActionClazz.enumConstant("TERMINATE");
 
-		JDefinedClass visitorInterface = clazzFactory.createClass(modelPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
+		JDefinedClass visitorInterface = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
 
 		JMethod visitorPushParent = visitorInterface.method(JMod.PUBLIC, void.class, "pushParent");
 		visitorPushParent.param(pmmlObjectClazz, "object");
 
 		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, void.class, "popParent");
+
+		JPackage modelPackage = codeModel._package("org.jpmml.model");
 
 		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(modelPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
 		createPathMethods(abstractVisitorClazz, dequeClazz, dequeImplementationClazz, pmmlObjectClazz);

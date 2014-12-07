@@ -6,7 +6,6 @@ package org.jpmml.model;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 
-import org.dmg.pmml.AbstractSimpleVisitor;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
 

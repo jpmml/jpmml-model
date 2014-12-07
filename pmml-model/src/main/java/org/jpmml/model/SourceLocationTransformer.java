@@ -5,7 +5,6 @@ package org.jpmml.model;
 
 import java.io.Serializable;
 
-import org.dmg.pmml.AbstractSimpleVisitor;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
 import org.xml.sax.Locator;
