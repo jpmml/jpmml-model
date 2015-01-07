@@ -14,25 +14,19 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
+* GWT compatible
 
 # Installation #
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
 
-The current version is **1.1.9** (7 December, 2014).
+The current version is **1.1.10** (8 January, 2015).
 
 ```xml
-<!-- Class model classes -->
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.1.9</version>
-</dependency>
-<!-- Class model annotations -->
-<dependency>
-	<groupId>org.jpmml</groupId>
-	<artifactId>pmml-schema</artifactId>
-	<version>1.1.9</version>
+	<version>1.1.10</version>
 </dependency>
 ```
 
@@ -91,14 +85,14 @@ This module can be built using [Apache Maven] (http://maven.apache.org/):
 mvn clean install
 ```
 
-The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains the following command-line applications:
+The resulting uber-JAR file `target/example-1.2-SNAPSHOT.jar` contains the following command-line applications:
 * `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
 * `org.jpmml.model.SegmentationOutputExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/SegmentationOutputExample.java). Extends the Output element of a segmentation model with OutputField elements that expose the predicted values of individual segments.
 * `org.jpmml.model.GolfingTreeModelExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/GolfingTreeModelExample.java). Produces a TreeModel for the "golfing" exercise.
 
 For example, transforming `input.pmml` to `output.pmml`:
 ```
-java -cp target/example-1.1-SNAPSHOT.jar org.jpmml.model.CopyExample --input input.pmml --output output.pmml
+java -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.CopyExample --input input.pmml --output output.pmml
 ```
 
 # License #
