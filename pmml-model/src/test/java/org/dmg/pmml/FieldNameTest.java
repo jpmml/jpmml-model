@@ -6,8 +6,6 @@ package org.dmg.pmml;
 import org.jpmml.model.SerializationUtil;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 
 public class FieldNameTest {
@@ -22,16 +20,5 @@ public class FieldNameTest {
 		FieldName name = FieldName.create("x");
 
 		assertSame(name, SerializationUtil.clone(name));
-	}
-
-	@Test
-	public void unmarshal(){
-		assertNotNull(FieldName.unmarshal("x"));
-	}
-
-	@Test
-	public void marshal(){
-		assertEquals("x", FieldName.marshal(FieldName.create("x")));
-		assertEquals(null, FieldName.marshal(null));
 	}
 }

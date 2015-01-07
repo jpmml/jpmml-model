@@ -67,11 +67,11 @@ public class FieldName implements Serializable {
 
 	static
 	public FieldName create(String value){
-		return unmarshal(value);
-	}
 
-	static
-	FieldName unmarshal(String value){
+		if(value == null || ("").equals(value)){
+			throw new IllegalArgumentException();
+		}
+
 		FieldName name = new FieldName(value);
 
 		WeakReference<FieldName> reference = FieldName.cache.get(name);
@@ -85,17 +85,6 @@ public class FieldName implements Serializable {
 		FieldName.cache.put(name, new WeakReference<FieldName>(name));
 
 		return name;
-	}
-
-	static
-	String marshal(FieldName name){
-
-		// FieldName corresponds to a simple type in PMML XML Schema. Hence, it is possible to encounter a null instance.
-		if(name == null){
-			return null;
-		}
-
-		return name.getValue();
 	}
 
 	private static final Map<FieldName, WeakReference<FieldName>> cache = new WeakHashMap<FieldName, WeakReference<FieldName>>();

@@ -16,22 +16,22 @@ Copyright (c) 2009 University of Tartu
 			<xjc:javaType
 				name="java.lang.Double"
 				xmlType="xs:float"
-				adapter="org.dmg.pmml.FloatAdapter"
+				adapter="org.dmg.pmml.adapters.FloatAdapter"
 			/>
 			<xjc:javaType
 				name="java.lang.Integer"
 				xmlType="xs:integer"
-				adapter="org.dmg.pmml.IntegerAdapter"
+				adapter="org.dmg.pmml.adapters.IntegerAdapter"
 			/>
 			<xjc:javaType
 				name="java.lang.Integer"
 				xmlType="xs:nonNegativeInteger"
-				adapter="org.dmg.pmml.IntegerAdapter"
+				adapter="org.dmg.pmml.adapters.IntegerAdapter"
 			/>
 			<xjc:javaType
 				name="java.lang.Double"
 				xmlType="xs:decimal"
-				adapter="org.dmg.pmml.DecimalAdapter"
+				adapter="org.dmg.pmml.adapters.DecimalAdapter"
 			/>
 		</jaxb:globalBindings>
 
@@ -2304,7 +2304,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='FIELD-NAME']">
 			<xjc:javaType
 				name="org.dmg.pmml.FieldName"
-				adapter="org.dmg.pmml.FieldNameAdapter"
+				adapter="org.dmg.pmml.adapters.FieldNameAdapter"
 			/>
 		</jaxb:bindings>
 

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.dmg.pmml;
+package org.dmg.pmml.adapters;
 
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;

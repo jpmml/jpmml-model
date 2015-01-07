@@ -57,7 +57,7 @@
 				<configuration>
 					<classifier>sources</classifier>
 					<includes>org/dmg/pmml/**</includes>
-					<excludes>org/jpmml/model/**,META-INF/MANIFEST.MF</excludes>
+					<excludes>org/dmg/pmml/adapters/**,org/jpmml/model/**,META-INF/MANIFEST.MF</excludes>
 					<excludeTransitive>true</excludeTransitive>
 					<outputDirectory>${project.build.directory}/pmml-model-sources</outputDirectory>
 					<type>java-source</type>
