@@ -26,6 +26,7 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
+import com.sun.istack.build.NameConverter;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CPropertyInfo;
@@ -33,7 +34,6 @@ import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import com.sun.tools.xjc.util.CodeModelClassFactory;
-import com.sun.xml.bind.api.impl.NameConverter;
 import org.xml.sax.ErrorHandler;
 
 public class VisitorPlugin extends Plugin {
