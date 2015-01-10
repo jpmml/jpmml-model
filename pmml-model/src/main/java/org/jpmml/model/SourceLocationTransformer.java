@@ -13,7 +13,7 @@ public class SourceLocationTransformer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		object.setSourceLocation(transform(object.sourceLocation()));
+		object.setLocator(transform(object.getLocator()));
 
 		return VisitorAction.CONTINUE;
 	}

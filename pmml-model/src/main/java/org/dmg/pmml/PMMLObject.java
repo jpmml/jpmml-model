@@ -7,17 +7,25 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.sun.xml.bind.Locatable;
+import com.sun.xml.bind.annotation.XmlLocation;
 import org.xml.sax.Locator;
 
 @XmlTransient
 abstract
-public class PMMLObject implements Locatable, Serializable, Visitable {
+public class PMMLObject implements HasLocator, Serializable, Visitable {
+
+	@XmlLocation
+	@XmlTransient
+	protected Locator locator = null;
+
 
 	@Override
-	abstract
-	public Locator sourceLocation();
+	public Locator getLocator(){
+		return this.locator;
+	}
 
-	abstract
-	public void setSourceLocation(Locator locator);
+	@Override
+	public void setLocator(Locator locator){
+		this.locator = locator;
+	}
 }

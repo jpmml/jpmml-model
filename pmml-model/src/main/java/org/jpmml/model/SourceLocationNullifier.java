@@ -10,7 +10,7 @@ public class SourceLocationNullifier extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		object.setSourceLocation(null);
+		object.setLocator(null);
 
 		return VisitorAction.CONTINUE;
 	}
