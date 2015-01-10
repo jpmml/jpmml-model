@@ -7,15 +7,15 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.sun.xml.bind.annotation.XmlLocation;
 import org.xml.sax.Locator;
 
 @XmlTransient
 abstract
 public class PMMLObject implements HasLocator, Serializable, Visitable {
 
-	@XmlLocation
 	@XmlTransient
+	@com.sun.xml.bind.annotation.XmlLocation
+	@org.eclipse.persistence.oxm.annotations.XmlLocation
 	protected Locator locator = null;
 
 
