@@ -14,25 +14,19 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
+* GWT compatible
 
 # Installation #
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
 
-The current version is **1.1.9** (7 December, 2014).
+The current version is **1.1.10** (8 January, 2015).
 
 ```xml
-<!-- Class model classes -->
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.1.9</version>
-</dependency>
-<!-- Class model annotations -->
-<dependency>
-	<groupId>org.jpmml</groupId>
-	<artifactId>pmml-schema</artifactId>
-	<version>1.1.9</version>
+	<version>1.1.10</version>
 </dependency>
 ```
 
