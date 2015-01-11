@@ -37,6 +37,7 @@
 	</developers>
 
 	<modules>
+		<module>pmml-agent</module>
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
 		<module>pmml-model-gwt</module>
@@ -58,6 +59,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-agent</artifactId>
+				<version>1.1-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model</artifactId>
@@ -98,6 +104,12 @@
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb-xjc</artifactId>
 				<version>2.2.7</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.19.0-GA</version>
 			</dependency>
 
 			<dependency>
