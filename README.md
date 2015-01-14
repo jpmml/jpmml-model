@@ -36,7 +36,7 @@ The class model consists of two types of classes. There is a small number of man
 
 All class model classes descend from class `org.dmg.pmml.PMMLObject`. Additional class hierarchy levels, if any, represent common behaviour and/or features. For example, all model classes descend from class `org.dmg.pmml.Model`.
 
-There is not much documentation accompanying class model classes. The application developer should consult with the [PMML specification] (http://www.dmg.org/v4-1/GeneralStructure.html) about individual PMML elements and attributes.
+The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification] (http://www.dmg.org/v4-2-1/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
 
 ### Unmarshalling ###
 

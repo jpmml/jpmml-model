@@ -37,6 +37,7 @@
 	</developers>
 
 	<modules>
+		<module>pmml-agent</module>
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
 		<module>pmml-model-gwt</module>
@@ -58,6 +59,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-agent</artifactId>
+				<version>1.2-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model</artifactId>
@@ -115,6 +121,18 @@
 				<groupId>org.jvnet.jaxb2_commons</groupId>
 				<artifactId>jaxb2-basics</artifactId>
 				<version>0.9.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.19.0-GA</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.eclipse.persistence</groupId>
+				<artifactId>org.eclipse.persistence.moxy</artifactId>
+				<version>2.5.2</version>
 			</dependency>
 
 			<dependency>

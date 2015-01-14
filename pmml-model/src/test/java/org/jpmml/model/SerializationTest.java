@@ -19,7 +19,7 @@ public class SerializationTest {
 	public void nullifyAndClone() throws Exception {
 		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_2);
 
-		assertNotNull(pmml.sourceLocation());
+		assertNotNull(pmml.getLocator());
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -30,7 +30,7 @@ public class SerializationTest {
 
 		pmml.accept(new SourceLocationNullifier());
 
-		assertNull(pmml.sourceLocation());
+		assertNull(pmml.getLocator());
 
 		SerializationUtil.clone(pmml);
 	}
@@ -39,7 +39,7 @@ public class SerializationTest {
 	public void transformAndClone() throws Exception {
 		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_2);
 
-		assertNotNull(pmml.sourceLocation());
+		assertNotNull(pmml.getLocator());
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -50,7 +50,7 @@ public class SerializationTest {
 
 		pmml.accept(new SourceLocationTransformer());
 
-		assertNotNull(pmml.sourceLocation());
+		assertNotNull(pmml.getLocator());
 
 		SerializationUtil.clone(pmml);
 	}
