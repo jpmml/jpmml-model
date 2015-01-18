@@ -16,7 +16,7 @@ import org.jpmml.schema.Added;
 import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
 
-public class SchemaInspector extends AbstractSimpleVisitor {
+public class VersionInspector extends AbstractSimpleVisitor {
 
 	private Version minimum = Version.PMML_3_0;
 
@@ -90,7 +90,7 @@ public class SchemaInspector extends AbstractSimpleVisitor {
 	}
 
 	private void inspect(String function){
-		Version version = SchemaInspector.functionVersions.get(function);
+		Version version = VersionInspector.functionVersions.get(function);
 		if(version != null){
 			updateMinimum(version);
 		}
@@ -148,7 +148,7 @@ public class SchemaInspector extends AbstractSimpleVisitor {
 	private void declareFunctions(Version version, String... functions){
 
 		for(String function : functions){
-			SchemaInspector.functionVersions.put(function, version);
+			VersionInspector.functionVersions.put(function, version);
 		}
 	}
 }

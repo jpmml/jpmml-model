@@ -40,7 +40,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class SchemaInspectorTest {
+public class VersionInspectorTest {
 
 	@Test
 	public void inspectTypeAnnotations(){
@@ -146,7 +146,7 @@ public class SchemaInspectorTest {
 
 	static
 	private void assertVersionRange(PMMLObject object, Version minimum, Version maximum){
-		SchemaInspector inspector = new SchemaInspector();
+		VersionInspector inspector = new VersionInspector();
 
 		object.accept(inspector);
 
