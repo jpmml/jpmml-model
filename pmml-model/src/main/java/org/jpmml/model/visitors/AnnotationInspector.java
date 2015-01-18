@@ -1,13 +1,14 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.visitors;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.AbstractSimpleVisitor;
 
 abstract
 public class AnnotationInspector extends AbstractSimpleVisitor {

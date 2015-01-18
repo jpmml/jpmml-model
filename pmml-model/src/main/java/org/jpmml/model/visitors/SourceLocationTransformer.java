@@ -1,12 +1,13 @@
 /*
  * Copyright (c) 2013 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.visitors;
 
 import java.io.Serializable;
 
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.AbstractSimpleVisitor;
 import org.xml.sax.Locator;
 
 public class SourceLocationTransformer extends AbstractSimpleVisitor {
