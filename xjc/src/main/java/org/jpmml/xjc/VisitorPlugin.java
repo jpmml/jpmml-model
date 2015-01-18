@@ -70,6 +70,7 @@ public class VisitorPlugin extends Plugin {
 		JEnumConstant terminateAction = visitorActionClazz.enumConstant("TERMINATE");
 
 		JDefinedClass visitorInterface = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
+		visitorInterface.javadoc().append("@see PMMLObject#accept(Visitor)");
 
 		JMethod visitorPushParent = visitorInterface.method(JMod.PUBLIC, void.class, "pushParent");
 		visitorPushParent.param(pmmlObjectClazz, "object");
