@@ -77,12 +77,12 @@ public class VisitorPlugin extends Plugin {
 
 		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, void.class, "popParent");
 
-		JPackage modelPackage = codeModel._package("org.jpmml.model");
+		JPackage visitorPackage = codeModel._package("org.jpmml.model.visitors");
 
-		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(modelPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
+		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
 		createPathMethods(abstractVisitorClazz, dequeClazz, dequeImplementationClazz, pmmlObjectClazz);
 
-		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(modelPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._implements(visitorInterface);
+		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._implements(visitorInterface);
 		createPathMethods(abstractSimpleVisitorClazz, dequeClazz, dequeImplementationClazz, pmmlObjectClazz);
 
 		JMethod defaultMethod = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");

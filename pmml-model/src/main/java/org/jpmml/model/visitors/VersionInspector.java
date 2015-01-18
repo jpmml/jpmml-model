@@ -11,7 +11,6 @@ import java.util.Map;
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.AbstractSimpleVisitor;
 import org.jpmml.schema.Added;
 import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
