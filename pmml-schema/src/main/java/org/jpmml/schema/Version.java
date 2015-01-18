@@ -34,6 +34,20 @@ public enum Version {
 	}
 
 	static
+	public Version getMinimum(){
+		Version[] versions = Version.values();
+
+		return versions[0];
+	}
+
+	static
+	public Version getMaximum(){
+		Version[] versions = Version.values();
+
+		return versions[versions.length - 1];
+	}
+
+	static
 	public Version forNamespaceURI(String namespaceURI){
 		Version[] versions = Version.values();
 

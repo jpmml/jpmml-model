@@ -23,9 +23,9 @@ import org.jpmml.schema.Version;
  */
 public class VersionInspector extends AbstractSimpleVisitor {
 
-	private Version minimum = Version.PMML_3_0;
+	private Version minimum = Version.getMinimum();
 
-	private Version maximum = Version.PMML_4_2;
+	private Version maximum = Version.getMaximum();
 
 
 	@Override
@@ -102,7 +102,9 @@ public class VersionInspector extends AbstractSimpleVisitor {
 	}
 
 	/**
-	 * The minimum (ie. earliest) supported PMML schema version.
+	 * The minimum (ie. earliest) PMML schema version that can fully represent this class model object.
+	 *
+	 * @see Version#getMinimum()
 	 */
 	public Version getMinimum(){
 		return this.minimum;
@@ -116,7 +118,9 @@ public class VersionInspector extends AbstractSimpleVisitor {
 	}
 
 	/**
-	 * The maximum (ie. latest) supported PMML schema version.
+	 * The maximum (ie. latest) PMML schema version that can fully represent this class model object.
+	 *
+	 * @see Version#getMaximum()
 	 */
 	public Version getMaximum(){
 		return this.maximum;
