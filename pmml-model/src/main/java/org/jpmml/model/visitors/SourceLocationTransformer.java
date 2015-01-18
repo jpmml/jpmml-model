@@ -19,6 +19,7 @@ public class SourceLocationTransformer extends AbstractSimpleVisitor {
 		return VisitorAction.CONTINUE;
 	}
 
+	static
 	private Locator transform(Locator locator){
 
 		if((locator == null) || (locator instanceof Serializable)){

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import org.xml.sax.Locator;
 
-public class SimpleLocator implements Locator, Serializable {
+class SimpleLocator implements Locator, Serializable {
 
 	private String publicId = null;
 
