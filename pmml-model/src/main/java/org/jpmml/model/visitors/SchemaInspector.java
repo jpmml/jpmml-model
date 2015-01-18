@@ -4,17 +4,19 @@
 package org.jpmml.model.visitors;
 
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.AbstractSimpleVisitor;
 import org.jpmml.schema.Added;
 import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
 
-public class SchemaInspector extends AnnotationInspector {
+public class SchemaInspector extends AbstractSimpleVisitor {
 
 	private Version minimum = Version.PMML_3_0;
 
@@ -23,19 +25,59 @@ public class SchemaInspector extends AnnotationInspector {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		VisitorAction result = super.visit(object);
+		Class<?> clazz = object.getClass();
+		inspect(clazz);
 
-		if(object instanceof Apply){
-			Apply apply = (Apply)object;
+		Field[] fields = clazz.getDeclaredFields();
+		for(Field field : fields){
+			Object value;
 
-			inspect(apply.getFunction());
+			try {
+				if(!field.isAccessible()){
+					field.setAccessible(true);
+				}
+
+				value = field.get(object);
+			} catch(IllegalAccessException iae){
+				throw new RuntimeException(iae);
+			}
+
+			// The field is not set
+			if(value == null){
+				continue;
+			}
+
+			inspect(field);
+
+			// The field is set to an enum constant
+			if(value instanceof Enum){
+				Enum<?> enumValue = (Enum<?>)value;
+
+				Field enumField;
+
+				try {
+					Class<?> enumClazz = enumValue.getClass();
+
+					enumField = enumClazz.getField(enumValue.name());
+				} catch(NoSuchFieldException nsfe){
+					throw new RuntimeException(nsfe);
+				}
+
+				inspect(enumField);
+			}
 		}
 
-		return result;
+		return VisitorAction.CONTINUE;
 	}
 
 	@Override
-	public void inspect(AnnotatedElement element){
+	public VisitorAction visit(Apply apply){
+		inspect(apply.getFunction());
+
+		return super.visit(apply);
+	}
+
+	private void inspect(AnnotatedElement element){
 		Added added = element.getAnnotation(Added.class);
 		if(added != null){
 			updateMinimum(added.value());
