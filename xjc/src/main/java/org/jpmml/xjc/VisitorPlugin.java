@@ -105,8 +105,8 @@ public class VisitorPlugin extends Plugin {
 
 		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._extends(abstractVisitorClazz);
 
-		JMethod defaultMethod = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
-		defaultMethod.param(pmmlObjectClazz, "object");
+		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
+		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
 
 		Set<JType> traversableTypes = new LinkedHashSet<JType>();
 
@@ -140,7 +140,7 @@ public class VisitorPlugin extends Plugin {
 			JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
 			abstractSimpleVisitorVisit.annotate(Override.class);
 			abstractSimpleVisitorVisit.param(beanClazz, parameterName);
-			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(defaultMethod).arg(JExpr.cast(beanSuperClass, JExpr.ref(parameterName))));
+			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(beanSuperClass, JExpr.ref(parameterName))));
 
 			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
 			beanAccept.annotate(Override.class);
