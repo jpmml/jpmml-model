@@ -70,7 +70,10 @@ public class VisitorPlugin extends Plugin {
 		JEnumConstant terminateAction = visitorActionClazz.enumConstant("TERMINATE");
 
 		JDefinedClass visitorInterface = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
-		visitorInterface.javadoc().append("@see PMMLObject#accept(Visitor)");
+
+		JMethod visitorApplyTo = visitorInterface.method(JMod.PUBLIC, void.class, "applyTo");
+		visitorApplyTo.javadoc().append("@see Visitable#accept(Visitor)");
+		visitorApplyTo.param(visitableInterface, "visitable");
 
 		JMethod visitorPushParent = visitorInterface.method(JMod.PUBLIC, void.class, "pushParent");
 		visitorPushParent.param(pmmlObjectClazz, "object");
@@ -82,6 +85,11 @@ public class VisitorPlugin extends Plugin {
 		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
 
 		JFieldVar abstractVisitorParents = abstractVisitorClazz.field(JMod.PRIVATE, dequeClazz.narrow(pmmlObjectClazz), "parents", JExpr._new(dequeImplementationClazz.narrow(pmmlObjectClazz)));
+
+		JMethod abstractVisitorApplyTo = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "applyTo");
+		abstractVisitorApplyTo.annotate(Override.class);
+		JVar visitable = abstractVisitorApplyTo.param(visitableInterface, "visitable");
+		abstractVisitorApplyTo.body().add(JExpr.invoke(visitable, "accept").arg(JExpr._this()));
 
 		JMethod abstractVisitorPushParent = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "pushParent");
 		abstractVisitorPushParent.annotate(Override.class);
