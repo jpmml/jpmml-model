@@ -6,6 +6,8 @@ package org.jpmml.model;
 import java.io.NotSerializableException;
 
 import org.dmg.pmml.PMML;
+import org.jpmml.model.visitors.SourceLocationNullifier;
+import org.jpmml.model.visitors.SourceLocationTransformer;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 
@@ -26,6 +28,7 @@ public class SerializationTest {
 
 			fail();
 		} catch(NotSerializableException nse){
+			// Ignored
 		}
 
 		pmml.accept(new SourceLocationNullifier());
@@ -46,6 +49,7 @@ public class SerializationTest {
 
 			fail();
 		} catch(NotSerializableException nse){
+			// Ignored
 		}
 
 		pmml.accept(new SourceLocationTransformer());

@@ -9,6 +9,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
@@ -129,6 +130,18 @@ public class PMMLPlugin extends Plugin {
 
 				JMethod iteratorMethod = definedClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
 				iteratorMethod.body()._return(JExpr.invoke("get" + propertyInfo.getName(true)).invoke("iterator"));
+			}
+
+			FieldOutline[] fields = clazz.getDeclaredFields();
+			for(FieldOutline field : fields){
+				CPropertyInfo propertyInfo = field.getPropertyInfo();
+
+				if(propertyInfo.isCollection()){
+					JFieldRef fieldRef = JExpr.refthis(propertyInfo.getName(false));
+
+					JMethod hasElementsMethod = definedClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
+					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
+				}
 			}
 		}
 

@@ -1,13 +1,13 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.visitors;
 
 import java.io.Serializable;
 
 import org.xml.sax.Locator;
 
-public class SimpleLocator implements Locator, Serializable {
+class SimpleLocator implements Locator, Serializable {
 
 	private String publicId = null;
 

@@ -19,6 +19,7 @@ import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.True;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.visitors.AbstractVisitor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

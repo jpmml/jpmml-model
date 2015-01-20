@@ -71,22 +71,44 @@ public class VisitorPlugin extends Plugin {
 
 		JDefinedClass visitorInterface = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
 
+		JMethod visitorApplyTo = visitorInterface.method(JMod.PUBLIC, void.class, "applyTo");
+		visitorApplyTo.javadoc().append("@see Visitable#accept(Visitor)");
+		visitorApplyTo.param(visitableInterface, "visitable");
+
 		JMethod visitorPushParent = visitorInterface.method(JMod.PUBLIC, void.class, "pushParent");
 		visitorPushParent.param(pmmlObjectClazz, "object");
 
 		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, void.class, "popParent");
 
-		JPackage modelPackage = codeModel._package("org.jpmml.model");
+		JPackage visitorPackage = codeModel._package("org.jpmml.model.visitors");
 
-		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(modelPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
-		createPathMethods(abstractVisitorClazz, dequeClazz, dequeImplementationClazz, pmmlObjectClazz);
+		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
 
-		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(modelPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._implements(visitorInterface);
-		createPathMethods(abstractSimpleVisitorClazz, dequeClazz, dequeImplementationClazz, pmmlObjectClazz);
+		JFieldVar abstractVisitorParents = abstractVisitorClazz.field(JMod.PRIVATE, dequeClazz.narrow(pmmlObjectClazz), "parents", JExpr._new(dequeImplementationClazz.narrow(pmmlObjectClazz)));
 
-		JMethod defaultMethod = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
-		defaultMethod.param(pmmlObjectClazz, "object");
-		defaultMethod.body()._return(continueAction);
+		JFieldRef abstractVisitorParentsRef = JExpr.refthis(abstractVisitorParents.name());
+
+		JMethod abstractVisitorApplyTo = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "applyTo");
+		abstractVisitorApplyTo.annotate(Override.class);
+		JVar visitable = abstractVisitorApplyTo.param(visitableInterface, "visitable");
+		abstractVisitorApplyTo.body().add(JExpr.invoke(visitable, "accept").arg(JExpr._this()));
+
+		JMethod abstractVisitorPushParent = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "pushParent");
+		abstractVisitorPushParent.annotate(Override.class);
+		JVar parent = abstractVisitorPushParent.param(pmmlObjectClazz, "parent");
+		abstractVisitorPushParent.body().add(abstractVisitorParentsRef.invoke("addFirst").arg(parent));
+
+		JMethod abstractVisitorPopParent = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "popParent");
+		abstractVisitorPopParent.annotate(Override.class);
+		abstractVisitorPopParent.body().add(abstractVisitorParentsRef.invoke("removeFirst"));
+
+		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
+		abstractVisitorGetParents.body()._return(abstractVisitorParentsRef);
+
+		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._extends(abstractVisitorClazz);
+
+		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
+		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
 
 		Set<JType> traversableTypes = new LinkedHashSet<JType>();
 
@@ -120,7 +142,7 @@ public class VisitorPlugin extends Plugin {
 			JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
 			abstractSimpleVisitorVisit.annotate(Override.class);
 			abstractSimpleVisitorVisit.param(beanClazz, parameterName);
-			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(defaultMethod).arg(JExpr.cast(beanSuperClass, JExpr.ref(parameterName))));
+			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(beanSuperClass, JExpr.ref(parameterName))));
 
 			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
 			beanAccept.annotate(Override.class);
@@ -185,22 +207,5 @@ public class VisitorPlugin extends Plugin {
 		}
 
 		return true;
-	}
-
-	static
-	private void createPathMethods(JDefinedClass visitorClazz, JClass dequeClazz, JClass dequeImplementationClazz, JClass pmmlObjectClazz){
-		JFieldVar parents = visitorClazz.field(JMod.PRIVATE, dequeClazz.narrow(pmmlObjectClazz), "parents", JExpr._new(dequeImplementationClazz.narrow(pmmlObjectClazz)));
-
-		JMethod pushParent = visitorClazz.method(JMod.PUBLIC, void.class, "pushParent");
-		pushParent.annotate(Override.class);
-		JVar parent = pushParent.param(pmmlObjectClazz, "parent");
-		pushParent.body().add(parents.invoke("addFirst").arg(parent));
-
-		JMethod popParent = visitorClazz.method(JMod.PUBLIC, void.class, "popParent");
-		popParent.annotate(Override.class);
-		popParent.body().add(parents.invoke("removeFirst"));
-
-		JMethod getParents = visitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
-		getParents.body()._return(parents);
 	}
 }

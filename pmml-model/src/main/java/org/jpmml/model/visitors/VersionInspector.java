@@ -1,9 +1,10 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.visitors;
 
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -14,28 +15,74 @@ import org.jpmml.schema.Added;
 import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
 
-public class SchemaInspector extends AnnotationInspector {
+/**
+ * A visitor that determines the range of valid PMML schema versions for a class model object.
+ *
+ * @see Added
+ * @see Removed
+ */
+public class VersionInspector extends AbstractSimpleVisitor {
 
-	private Version minimum = Version.PMML_3_0;
+	private Version minimum = Version.getMinimum();
 
-	private Version maximum = Version.PMML_4_2;
+	private Version maximum = Version.getMaximum();
 
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		VisitorAction result = super.visit(object);
+		Class<?> clazz = object.getClass();
+		inspect(clazz);
 
-		if(object instanceof Apply){
-			Apply apply = (Apply)object;
+		Field[] fields = clazz.getDeclaredFields();
+		for(Field field : fields){
+			Object value;
 
-			inspect(apply.getFunction());
+			try {
+				if(!field.isAccessible()){
+					field.setAccessible(true);
+				}
+
+				value = field.get(object);
+			} catch(IllegalAccessException iae){
+				throw new RuntimeException(iae);
+			}
+
+			// The field is not set
+			if(value == null){
+				continue;
+			}
+
+			inspect(field);
+
+			// The field is set to an enum constant
+			if(value instanceof Enum){
+				Enum<?> enumValue = (Enum<?>)value;
+
+				Field enumField;
+
+				try {
+					Class<?> enumClazz = enumValue.getClass();
+
+					enumField = enumClazz.getField(enumValue.name());
+				} catch(NoSuchFieldException nsfe){
+					throw new RuntimeException(nsfe);
+				}
+
+				inspect(enumField);
+			}
 		}
 
-		return result;
+		return VisitorAction.CONTINUE;
 	}
 
 	@Override
-	public void inspect(AnnotatedElement element){
+	public VisitorAction visit(Apply apply){
+		inspect(apply.getFunction());
+
+		return super.visit(apply);
+	}
+
+	private void inspect(AnnotatedElement element){
 		Added added = element.getAnnotation(Added.class);
 		if(added != null){
 			updateMinimum(added.value());
@@ -48,12 +95,17 @@ public class SchemaInspector extends AnnotationInspector {
 	}
 
 	private void inspect(String function){
-		Version version = SchemaInspector.functionVersions.get(function);
+		Version version = VersionInspector.functionVersions.get(function);
 		if(version != null){
 			updateMinimum(version);
 		}
 	}
 
+	/**
+	 * The minimum (ie. earliest) PMML schema version that can fully represent this class model object.
+	 *
+	 * @see Version#getMinimum()
+	 */
 	public Version getMinimum(){
 		return this.minimum;
 	}
@@ -65,6 +117,11 @@ public class SchemaInspector extends AnnotationInspector {
 		}
 	}
 
+	/**
+	 * The maximum (ie. latest) PMML schema version that can fully represent this class model object.
+	 *
+	 * @see Version#getMaximum()
+	 */
 	public Version getMaximum(){
 		return this.maximum;
 	}
@@ -106,7 +163,7 @@ public class SchemaInspector extends AnnotationInspector {
 	private void declareFunctions(Version version, String... functions){
 
 		for(String function : functions){
-			SchemaInspector.functionVersions.put(function, version);
+			VersionInspector.functionVersions.put(function, version);
 		}
 	}
 }
