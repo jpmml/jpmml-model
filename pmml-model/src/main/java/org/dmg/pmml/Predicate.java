@@ -7,5 +7,5 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Predicate extends PMMLObject {
+public class Predicate extends PMMLObject implements HasExtensions {
 }

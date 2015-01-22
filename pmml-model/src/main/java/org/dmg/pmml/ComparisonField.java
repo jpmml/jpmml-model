@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class ComparisonField extends PMMLObject {
+public class ComparisonField extends PMMLObject implements HasExtensions {
 
 	abstract
 	public FieldName getField();
