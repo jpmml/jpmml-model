@@ -15,7 +15,7 @@ import org.xml.sax.Locator;
  * @see PMMLObject#getLocator()
  * @see PMMLObject#setLocator(Locator)
  */
-public class SourceLocationTransformer extends AbstractSimpleVisitor {
+public class LocatorTransformer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){

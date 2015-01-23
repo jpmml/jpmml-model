@@ -11,7 +11,7 @@ import org.dmg.pmml.Annotation;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
-import org.jpmml.model.visitors.SourceLocationTransformer;
+import org.jpmml.model.visitors.LocatorTransformer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -47,7 +47,7 @@ public class MixedContentTest {
 			// Ignored
 		}
 
-		pmml.accept(new SourceLocationTransformer());
+		pmml.accept(new LocatorTransformer());
 
 		SerializationUtil.clone(pmml);
 	}
