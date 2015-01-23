@@ -35,13 +35,14 @@ public class VersionInspector extends AbstractSimpleVisitor {
 
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field field : fields){
+
+			if(!field.isAccessible()){
+				field.setAccessible(true);
+			}
+
 			Object value;
 
 			try {
-				if(!field.isAccessible()){
-					field.setAccessible(true);
-				}
-
 				value = field.get(object);
 			} catch(IllegalAccessException iae){
 				throw new RuntimeException(iae);
