@@ -24,22 +24,14 @@ public class StringInterner extends AbstractSimpleVisitor {
 				field.setAccessible(true);
 			}
 
-			Object value;
-
 			try {
-				value = field.get(object);
-			} catch(IllegalAccessException iae){
-				throw new RuntimeException(iae);
-			}
+				Object value = field.get(object);
 
-			if(!(value instanceof String)){
-				continue;
-			}
+				if(value instanceof String){
+					String string = (String)value;
 
-			value = intern((String)value);
-
-			try {
-				field.set(object, value);
+					field.set(object, intern(string));
+				}
 			} catch(IllegalAccessException iae){
 				throw new RuntimeException(iae);
 			}
