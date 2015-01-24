@@ -5,9 +5,11 @@ package org.jpmml.model.visitors;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.ReflectionUtil;
 
 /**
  * A Visitor that optimizes the size of element lists.
@@ -16,25 +18,15 @@ public class ArrayListOptimizer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		Class<?> clazz = object.getClass();
+		List<Field> fields = ReflectionUtil.getAllFields(object);
 
-		Field[] fields = clazz.getDeclaredFields();
 		for(Field field : fields){
+			Object value = ReflectionUtil.getFieldValue(field, object);
 
-			if(!field.isAccessible()){
-				field.setAccessible(true);
-			}
+			if(value instanceof ArrayList){
+				ArrayList<?> list = (ArrayList<?>)value;
 
-			try {
-				Object value = field.get(object);
-
-				if(value instanceof ArrayList){
-					ArrayList<?> list = (ArrayList<?>)value;
-
-					list.trimToSize();
-				}
-			} catch(IllegalAccessException iae){
-				throw new RuntimeException(iae);
+				list.trimToSize();
 			}
 		}
 

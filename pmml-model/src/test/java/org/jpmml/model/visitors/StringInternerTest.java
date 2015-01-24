@@ -4,6 +4,7 @@
 package org.jpmml.model.visitors;
 
 import org.dmg.pmml.CompoundPredicate;
+import org.dmg.pmml.CustomSimplePredicate;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.SimplePredicate;
 import org.junit.Test;
@@ -15,11 +16,9 @@ public class StringInternerTest {
 
 	@Test
 	public void intern(){
-		SimplePredicate left = new SimplePredicate(new FieldName("x"), SimplePredicate.Operator.LESS_THAN)
-			.withValue(new String("0"));
+		SimplePredicate left = new CustomSimplePredicate(new FieldName("x"), SimplePredicate.Operator.LESS_THAN, new String("0"));
 
-		SimplePredicate right = new SimplePredicate(new FieldName("y"), SimplePredicate.Operator.LESS_THAN)
-			.withValue(new String("0"));
+		SimplePredicate right = new CustomSimplePredicate(new FieldName("y"), SimplePredicate.Operator.LESS_THAN, new String("0"));
 
 		assertNotSame(left.getValue(), right.getValue());
 

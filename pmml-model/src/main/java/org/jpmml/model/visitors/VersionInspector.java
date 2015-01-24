@@ -6,11 +6,13 @@ package org.jpmml.model.visitors;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.ReflectionUtil;
 import org.jpmml.schema.Added;
 import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
@@ -30,23 +32,14 @@ public class VersionInspector extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		Class<?> clazz = object.getClass();
-		inspect(clazz);
 
-		Field[] fields = clazz.getDeclaredFields();
+		for(Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()){
+			inspect(clazz);
+		}
+
+		List<Field> fields = ReflectionUtil.getAllFields(object);
 		for(Field field : fields){
-
-			if(!field.isAccessible()){
-				field.setAccessible(true);
-			}
-
-			Object value;
-
-			try {
-				value = field.get(object);
-			} catch(IllegalAccessException iae){
-				throw new RuntimeException(iae);
-			}
+			Object value = ReflectionUtil.getFieldValue(field, object);
 
 			// The field is not set
 			if(value == null){

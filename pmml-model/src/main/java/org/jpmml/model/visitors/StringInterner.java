@@ -4,9 +4,11 @@
 package org.jpmml.model.visitors;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.ReflectionUtil;
 
 /**
  * A Visitor that interns String attribute values.
@@ -15,25 +17,15 @@ public class StringInterner extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		Class<?> clazz = object.getClass();
+		List<Field> fields = ReflectionUtil.getAllFields(object);
 
-		Field[] fields = clazz.getDeclaredFields();
 		for(Field field : fields){
+			Object value = ReflectionUtil.getFieldValue(field, object);
 
-			if(!field.isAccessible()){
-				field.setAccessible(true);
-			}
+			if(value instanceof String){
+				String string = (String)value;
 
-			try {
-				Object value = field.get(object);
-
-				if(value instanceof String){
-					String string = (String)value;
-
-					field.set(object, intern(string));
-				}
-			} catch(IllegalAccessException iae){
-				throw new RuntimeException(iae);
+				ReflectionUtil.setFieldValue(field, object, intern(string));
 			}
 		}
 

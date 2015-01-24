@@ -147,8 +147,7 @@ public class VersionInspectorTest {
 	static
 	private void assertVersionRange(PMMLObject object, Version minimum, Version maximum){
 		VersionInspector inspector = new VersionInspector();
-
-		object.accept(inspector);
+		inspector.applyTo(object);
 
 		assertEquals(minimum, inspector.getMinimum());
 		assertEquals(maximum, inspector.getMaximum());
