@@ -10,6 +10,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
@@ -115,6 +116,12 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 
 			if(ReflectionUtil.isEnum(object)){
 				return false;
+			} // End if
+
+			if(object instanceof FieldName){
+				FieldName name = (FieldName)object;
+
+				return !name.isInterned();
 			}
 
 			return !(object instanceof Visitable);
