@@ -5,7 +5,6 @@ package org.jpmml.model.visitors;
 
 import java.lang.instrument.Instrumentation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -74,15 +73,10 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 			return;
 		}
 
-		List<Field> fields = ReflectionUtil.getAllFields(object);
+		List<Field> fields = ReflectionUtil.getAllInstanceFields(object);
 		for(Field field : fields){
-			int modifiers = field.getModifiers();
-
-			if(Modifier.isStatic(modifiers)){
-				continue;
-			}
-
 			Class<?> type = field.getType();
+
 			if(type.isPrimitive()){
 				continue;
 			}
