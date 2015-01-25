@@ -12,4 +12,9 @@ public class CustomObjectFactory extends ObjectFactory {
 	public CustomPMML createPMML(){
 		return new CustomPMML();
 	}
+
+	@Override
+	public CustomSimplePredicate createSimplePredicate(){
+		return new CustomSimplePredicate();
+	}
 }

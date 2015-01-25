@@ -6,8 +6,8 @@ package org.jpmml.model;
 import java.io.NotSerializableException;
 
 import org.dmg.pmml.PMML;
-import org.jpmml.model.visitors.SourceLocationNullifier;
-import org.jpmml.model.visitors.SourceLocationTransformer;
+import org.jpmml.model.visitors.LocatorNullifier;
+import org.jpmml.model.visitors.LocatorTransformer;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ public class SerializationTest {
 			// Ignored
 		}
 
-		pmml.accept(new SourceLocationNullifier());
+		pmml.accept(new LocatorNullifier());
 
 		assertNull(pmml.getLocator());
 
@@ -52,7 +52,7 @@ public class SerializationTest {
 			// Ignored
 		}
 
-		pmml.accept(new SourceLocationTransformer());
+		pmml.accept(new LocatorTransformer());
 
 		assertNotNull(pmml.getLocator());
 

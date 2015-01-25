@@ -18,6 +18,20 @@ public class FieldName implements Serializable {
 		setValue(value);
 	}
 
+	public boolean isInterned(){
+		WeakReference<FieldName> reference = FieldName.cache.get(this);
+
+		if(reference != null){
+			FieldName cachedName = reference.get();
+
+			if(cachedName != null){
+				return (cachedName == this);
+			}
+		}
+
+		return false;
+	}
+
 	public FieldName intern(){
 		return create(getValue());
 	}
@@ -77,6 +91,7 @@ public class FieldName implements Serializable {
 		WeakReference<FieldName> reference = FieldName.cache.get(name);
 		if(reference != null){
 			FieldName cachedName = reference.get();
+
 			if(cachedName != null){
 				return cachedName;
 			}

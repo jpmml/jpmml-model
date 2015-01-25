@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class ParameterCell extends PMMLObject {
+public class ParameterCell extends PMMLObject implements HasExtensions {
 
 	abstract
 	public String getParameterName();

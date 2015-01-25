@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Term extends PMMLObject implements HasName {
+public class Term extends PMMLObject implements HasName, HasExtensions {
 
 	@Override
 	abstract

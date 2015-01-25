@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class PredictorList extends PMMLObject {
+public class PredictorList extends PMMLObject implements HasExtensions {
 
 	abstract
 	public List<Predictor> getPredictors();
