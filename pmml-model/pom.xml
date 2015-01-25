@@ -27,6 +27,12 @@
 		<dependency>
 			<groupId>org.jpmml</groupId>
 			<artifactId>pmml-agent</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.jpmml</groupId>

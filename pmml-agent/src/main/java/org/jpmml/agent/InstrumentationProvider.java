@@ -12,6 +12,11 @@ public class InstrumentationProvider {
 
 	static
 	public Instrumentation getInstrumentation(){
+
+		if(InstrumentationProvider.instrumentation == null){
+			throw new IllegalStateException("JPMML agent is not available");
+		}
+
 		return InstrumentationProvider.instrumentation;
 	}
 

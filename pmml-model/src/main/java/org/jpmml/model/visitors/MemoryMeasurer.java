@@ -38,11 +38,6 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 	}
 
 	public void reset(){
-
-		if(this.instrumentation == null){
-			throw new IllegalStateException("JPMML agent is not available");
-		}
-
 		this.objectSizes.clear();
 	}
 
