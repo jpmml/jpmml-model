@@ -7,7 +7,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -84,5 +86,21 @@ public class ReflectionUtil {
 		}
 	}
 
+	static
+	public boolean isPrimitiveWrapper(Object object){
+		Class<?> clazz = object.getClass();
+
+		return ReflectionUtil.primitiveWrapperClasses.contains(clazz);
+	}
+
+	static
+	public boolean isEnum(Object object){
+		Class<?> clazz = object.getClass();
+
+		return clazz.isEnum();
+	}
+
 	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<Class<?>, List<Field>>();
+
+	private static final Set<Class<?>> primitiveWrapperClasses = new HashSet<Class<?>>(Arrays.<Class<?>>asList(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class, Boolean.class, Character.class));
 }

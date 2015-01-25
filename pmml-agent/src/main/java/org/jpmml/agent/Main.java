@@ -32,5 +32,7 @@ public class Main {
 		if(("true").equalsIgnoreCase(optimize)){
 			instrumentation.addTransformer(new PMMLObjectTransformer());
 		}
+
+		InstrumentationProvider.setInstrumentation(instrumentation);
 	}
 }
