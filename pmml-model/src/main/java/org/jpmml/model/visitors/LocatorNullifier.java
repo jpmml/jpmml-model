@@ -8,7 +8,7 @@ import org.dmg.pmml.VisitorAction;
 import org.xml.sax.Locator;
 
 /**
- * A visitors that clears the SAX Locator information of a class model object by setting it to <code>null</code>.
+ * A Visitor that clears the SAX Locator information of a class model object by setting it to <code>null</code>.
  *
  * @see PMMLObject#getLocator()
  * @see PMMLObject#setLocator(Locator)
