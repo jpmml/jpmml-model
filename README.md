@@ -43,23 +43,25 @@ The class model should be self-explanatory. The application developer is advised
 Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
 
 ```java
-InputStream is = ...
+public PMML loadPMML(InputStream is) throws Exception {
+  InputSource source = new InputSource(is);
 
-InputSource source = new InputSource(is);
+  // Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
+  SAXSource transformedSource = ImportFilter.apply(source);
 
-// Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
-SAXSource transformedSource = ImportFilter.apply(source);
-
-PMML pmml = JAXBUtil.unmarshalPMML(transformedSource);
+  return JAXBUtil.unmarshalPMML(transformedSource);
+}
 ```
 
 ### Applying visitors ###
 
-Deleting SAX Locator information from the class model:
-```java
-PMML pmml = ...
+Delete SAX Locator information from the class model:
 
-pmml.apply(new SourceLocationNullifier());
+```java
+public void optimize(PMML pmml){
+  LocatorNullifier nullifier = new LocatorNullifier();
+  nullifier.applyTo(pmml);
+}
 ```
 
 ### Marshalling ###
@@ -67,13 +69,11 @@ pmml.apply(new SourceLocationNullifier());
 Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.2 document:
 
 ```java
-PMML pmml = ...
+public void store(PMML pmml, OutputStream os) throws Exception {
+  StreamResult result = new StreamResult(os);
 
-OutputStream os = ...
-
-StreamResult result = new StreamResult(os);
-
-JAXBUtil.marshalPMML(pmml, result);
+  JAXBUtil.marshalPMML(pmml, result);
+}
 ```
 
 # Example applications #
