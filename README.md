@@ -10,11 +10,16 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Schema version annotations.
 * Fluent API:
   * Value constructors.
-* SAX Locator information
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
+* Memory efficient:
+  * Optional SAX Locator information
 * GWT compatible
+
+# Prerequisites #
+
+* Java 1.6 or newer
 
 # Installation #
 
@@ -52,6 +57,8 @@ public PMML loadPMML(InputStream is) throws Exception {
   return JAXBUtil.unmarshalPMML(transformedSource);
 }
 ```
+
+**Important**: It is the responsibility of the application developer to ensure that the XML document does not contain malicious content (eg. XEE and XXE attacks).
 
 ### Applying visitors ###
 
