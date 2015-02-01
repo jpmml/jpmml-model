@@ -53,6 +53,8 @@ public class XXEAttackTest {
 			JAXBUtil.unmarshalPMML(new SAXSource(reader, new InputSource(is)));
 
 			fail();
+		} catch(NullPointerException npe){
+			return;
 		} catch(UnmarshalException ue){
 			// Ignored
 		} finally {
