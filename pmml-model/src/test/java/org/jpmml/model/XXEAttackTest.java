@@ -30,7 +30,11 @@ public class XXEAttackTest {
 		InputStream is = PMMLUtil.getResourceAsStream(XXEAttackTest.class);
 
 		try {
+			System.setProperty("javax.xml.accessExternalDTD", "file");
+
 			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
+
+			System.clearProperty("javax.xml.accessExternalDTD");
 		} finally {
 			is.close();
 		}
