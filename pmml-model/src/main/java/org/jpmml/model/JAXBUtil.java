@@ -17,15 +17,6 @@ public class JAXBUtil {
 	private JAXBUtil(){
 	}
 
-	static
-	public PMML unmarshalPMML(Source source) throws JAXBException {
-		JAXBContext context = getContext();
-
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-
-		return unmarshalPMML(unmarshaller, source);
-	}
-
 	/**
 	 * Unmarshals a {@link PMML} class model object.
 	 *
@@ -34,8 +25,8 @@ public class JAXBUtil {
 	 * @see ImportFilter
 	 */
 	static
-	public PMML unmarshalPMML(Unmarshaller unmarshaller, Source source) throws JAXBException {
-		return (PMML)unmarshal(unmarshaller, source);
+	public PMML unmarshalPMML(Source source) throws JAXBException {
+		return (PMML)unmarshal(source);
 	}
 
 	/**
@@ -44,18 +35,10 @@ public class JAXBUtil {
 	 * @param source Input source containing a complete PMML schema version 4.2 document or any fragment of it.
 	 */
 	static
-	public Object unmarshal(Unmarshaller unmarshaller, Source source) throws JAXBException {
+	public Object unmarshal(Source source) throws JAXBException {
+		Unmarshaller unmarshaller = createUnmarshaller();
+
 		return unmarshaller.unmarshal(source);
-	}
-
-	static
-	public void marshalPMML(PMML pmml, Result result) throws JAXBException {
-		JAXBContext context = getContext();
-
-		Marshaller marshaller = context.createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-
-		marshalPMML(marshaller, pmml, result);
 	}
 
 	/**
@@ -64,15 +47,17 @@ public class JAXBUtil {
 	 * @see ExportFilter
 	 */
 	static
-	public void marshalPMML(Marshaller marshaller, PMML pmml, Result result) throws JAXBException {
-		marshal(marshaller, pmml, result);
+	public void marshalPMML(PMML pmml, Result result) throws JAXBException {
+		marshal(pmml, result);
 	}
 
 	/**
 	 * Marshals any class model object.
 	 */
 	static
-	public void marshal(Marshaller marshaller, Object object, Result result) throws JAXBException {
+	public void marshal(Object object, Result result) throws JAXBException {
+		Marshaller marshaller = createMarshaller();
+
 		marshaller.marshal(object, result);
 	}
 
@@ -84,6 +69,25 @@ public class JAXBUtil {
 		}
 
 		return JAXBUtil.instance;
+	}
+
+	static
+	public Marshaller createMarshaller() throws JAXBException {
+		JAXBContext context = getContext();
+
+		Marshaller marshaller = context.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+		return marshaller;
+	}
+
+	static
+	public Unmarshaller createUnmarshaller() throws JAXBException {
+		JAXBContext context = getContext();
+
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+
+		return unmarshaller;
 	}
 
 	private static JAXBContext instance = null;

@@ -56,7 +56,7 @@ public class JAXBUtilTest {
 		InputStream is = PMMLUtil.getResourceAsStream(Version.PMML_4_2);
 
 		try {
-			pmml = JAXBUtil.unmarshalPMML(unmarshaller, new StreamSource(is));
+			pmml = (PMML)unmarshaller.unmarshal(new StreamSource(is));
 		} finally {
 			is.close();
 		}
@@ -67,7 +67,7 @@ public class JAXBUtilTest {
 
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 
-		JAXBUtil.marshalPMML(marshaller, pmml, new StreamResult(os));
+		marshaller.marshal(pmml, new StreamResult(os));
 
 		assertTrue(os.size() > 0);
 	}
