@@ -522,6 +522,12 @@ Copyright (c) 2009 University of Tartu
 			</jaxb:typesafeEnumClass>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Decision']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -585,9 +591,21 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.TypeDefinitionField"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
 			/>
 		</jaxb:bindings>
 
@@ -1002,6 +1020,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='outliers']">
 			<jaxb:property
 				name="outlierTreatment"
@@ -1221,6 +1245,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankBasis']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -1310,6 +1340,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType/xsd:attribute[@name='weighted']">
@@ -1585,6 +1621,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Field"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
 			/>
 		</jaxb:bindings>
 
@@ -1878,6 +1920,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='optype']">
+			<jaxb:property
+				name="opType"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='rescaleConstant']">
