@@ -108,6 +108,20 @@ public class PMMLPlugin extends Plugin {
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass definedClazz = clazz.implClass;
 
+			String fullName = definedClazz.fullName();
+
+			if(("org.dmg.pmml.IntSparseArray").equals(fullName)){
+				JClass superClazz = definedClazz._extends();
+
+				definedClazz._extends(superClazz.narrow(Integer.class));
+			} else
+
+			if(("org.dmg.pmml.RealSparseArray").equals(fullName)){
+				JClass superClazz = definedClazz._extends();
+
+				definedClazz._extends(superClazz.narrow(Double.class));
+			}
+
 			FieldOutline idField = getIdField(clazz);
 			if(idField != null){
 				definedClazz._implements(hasIdInterface);
