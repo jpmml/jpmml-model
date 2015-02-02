@@ -128,7 +128,7 @@ public class VersionInspectorTest {
 		Apply apply = new Apply();
 		apply.setFunction("lowercase");
 
-		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL)
+		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, null)
 			.withParameterFields(new ParameterField(new FieldName("string")))
 			.withExpression(apply);
 

@@ -101,18 +101,14 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 
 		FieldOutline[] fields = clazz.getDeclaredFields();
 		for(FieldOutline field : fields){
-			CPropertyInfo propertyInfo = field.getPropertyInfo();
-
-			if(propertyInfo.isCollection()){
-				continue;
-			}
-
 			JFieldVar fieldVar = CodeModelUtil.getFieldVar(field);
 
 			int modifiers = (fieldVar.mods()).getValue();
 			if((modifiers & JMod.STATIC) == JMod.STATIC){
 				continue;
-			} // End if
+			}
+
+			CPropertyInfo propertyInfo = field.getPropertyInfo();
 
 			if(propertyInfo instanceof CAttributePropertyInfo && !getIgnoreAttributes()){
 				CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
