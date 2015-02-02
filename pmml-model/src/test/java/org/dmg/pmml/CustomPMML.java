@@ -14,7 +14,7 @@ public class CustomPMML extends PMML {
 		super();
 	}
 
-	public CustomPMML(Header header, DataDictionary dataDictionary, String version){
-		super(header, dataDictionary, version);
+	public CustomPMML(String version, Header header, DataDictionary dataDictionary){
+		super(version, header, dataDictionary);
 	}
 }

@@ -4,6 +4,9 @@
 package org.jpmml.xjc;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
@@ -17,6 +20,7 @@ import com.sun.codemodel.JMod;
 import com.sun.codemodel.JType;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CClassInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.Model;
@@ -41,10 +45,30 @@ public class PMMLPlugin extends Plugin {
 	public void postProcessModel(Model model, ErrorHandler errorHandler){
 		super.postProcessModel(model, errorHandler);
 
+		Comparator<CPropertyInfo> comparator = new Comparator<CPropertyInfo>(){
+
+			@Override
+			public int compare(CPropertyInfo left, CPropertyInfo right){
+				boolean leftAttribute = (left instanceof CAttributePropertyInfo);
+				boolean rightAttribute = (right instanceof CAttributePropertyInfo);
+
+				if(leftAttribute && !rightAttribute){
+					return -1;
+				} else
+
+				if(!leftAttribute && rightAttribute){
+					return 1;
+				}
+
+				return 0;
+			}
+		};
+
 		Collection<CClassInfo> classInfos = (model.beans()).values();
 		for(CClassInfo classInfo : classInfos){
+			List<CPropertyInfo> propertyInfos = classInfo.getProperties();
+			Collections.sort(propertyInfos, comparator);
 
-			Collection<CPropertyInfo> propertyInfos = classInfo.getProperties();
 			for(CPropertyInfo propertyInfo : propertyInfos){
 				String publicName = propertyInfo.getName(true);
 				String privateName = propertyInfo.getName(false);

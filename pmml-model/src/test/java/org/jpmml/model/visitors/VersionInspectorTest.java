@@ -44,7 +44,7 @@ public class VersionInspectorTest {
 
 	@Test
 	public void inspectTypeAnnotations(){
-		PMML pmml = new PMML(new Header(), new DataDictionary(), "4.2");
+		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
 
 		List<Model> models = pmml.getModels();
 
@@ -86,7 +86,7 @@ public class VersionInspectorTest {
 
 	@Test
 	public void inspectFieldAnnotations(){
-		PMML pmml = new PMML(new Header(), new DataDictionary(), "4.2");
+		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
 
 		AssociationModel model = new AssociationModel();
 
@@ -121,7 +121,7 @@ public class VersionInspectorTest {
 
 	@Test
 	public void inspectFunctions(){
-		PMML pmml = new PMML(new Header(), new DataDictionary(), "4.2");
+		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
 
