@@ -27,9 +27,9 @@ public class Main {
 			}
 		}
 
-		String optimize = properties.getProperty("optimize");
+		String transform = properties.getProperty("transform");
 
-		if(("true").equalsIgnoreCase(optimize)){
+		if(("true").equalsIgnoreCase(transform)){
 			instrumentation.addTransformer(new PMMLObjectTransformer());
 		}
 

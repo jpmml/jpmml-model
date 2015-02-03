@@ -17,6 +17,13 @@ import org.dmg.pmml.VisitorAction;
 import org.jpmml.agent.InstrumentationProvider;
 import org.jpmml.model.ReflectionUtil;
 
+/**
+ * <p>
+ * A Visitor that measures the deep size of a class model object.
+ * </p>
+ *
+ * The object size is measured using {@link Instrumentation#getObjectSize(Object)} method.
+ */
 public class MemoryMeasurer extends AbstractSimpleVisitor {
 
 	private Instrumentation instrumentation = InstrumentationProvider.getInstrumentation();
@@ -25,6 +32,12 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 
 	private Set<Object> objects = Collections.newSetFromMap(new IdentityHashMap<Object, Boolean>());
 
+
+	/**
+	 * @throws IllegalStateException If the JPMML agent is not available.
+	 */
+	public MemoryMeasurer(){
+	}
 
 	@Override
 	public VisitorAction visit(PMMLObject object){

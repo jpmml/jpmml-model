@@ -10,23 +10,28 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Schema version annotations.
 * Fluent API:
   * Value constructors.
-* SAX Locator information
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
+* Memory efficient:
+  * Optional SAX Locator information
 * GWT compatible
+
+# Prerequisites #
+
+* Java 1.7 or newer
 
 # Installation #
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
 
-The current version is **1.1.12** (20 January, 2015).
+The current version is **1.1.13** (26 January, 2015).
 
 ```xml
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.1.12</version>
+	<version>1.1.13</version>
 </dependency>
 ```
 
@@ -43,23 +48,27 @@ The class model should be self-explanatory. The application developer is advised
 Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
 
 ```java
-InputStream is = ...
+public PMML loadPMML(InputStream is) throws Exception {
+  InputSource source = new InputSource(is);
 
-InputSource source = new InputSource(is);
+  // Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
+  SAXSource transformedSource = ImportFilter.apply(source);
 
-// Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
-SAXSource transformedSource = ImportFilter.apply(source);
-
-PMML pmml = JAXBUtil.unmarshalPMML(transformedSource);
+  return JAXBUtil.unmarshalPMML(transformedSource);
+}
 ```
+
+**Important**: It is the responsibility of the application developer to ensure that the XML document does not contain malicious content (eg. XEE and XXE attacks).
 
 ### Applying visitors ###
 
-Deleting SAX Locator information from the class model:
-```java
-PMML pmml = ...
+Delete SAX Locator information from the class model:
 
-pmml.apply(new SourceLocationNullifier());
+```java
+public void optimize(PMML pmml){
+  LocatorNullifier nullifier = new LocatorNullifier();
+  nullifier.applyTo(pmml);
+}
 ```
 
 ### Marshalling ###
@@ -67,13 +76,11 @@ pmml.apply(new SourceLocationNullifier());
 Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.2 document:
 
 ```java
-PMML pmml = ...
+public void store(PMML pmml, OutputStream os) throws Exception {
+  StreamResult result = new StreamResult(os);
 
-OutputStream os = ...
-
-StreamResult result = new StreamResult(os);
-
-JAXBUtil.marshalPMML(pmml, result);
+  JAXBUtil.marshalPMML(pmml, result);
+}
 ```
 
 # Example applications #

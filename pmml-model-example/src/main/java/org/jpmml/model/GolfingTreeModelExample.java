@@ -59,7 +59,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 			);
 		dataDictionary.withNumberOfFields((dataDictionary.getDataFields()).size());
 
-		PMML pmml = new PMML(header, dataDictionary, "4.2");
+		PMML pmml = new PMML("4.2", header, dataDictionary);
 
 		MiningSchema miningSchema = new MiningSchema()
 			.withMiningFields(
@@ -118,7 +118,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 				)
 		);
 
-		TreeModel treeModel = new TreeModel(miningSchema, root, MiningFunctionType.CLASSIFICATION)
+		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, miningSchema, root)
 			.withModelName("golfing");
 
 		pmml.withModels(treeModel);

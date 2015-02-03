@@ -24,10 +24,10 @@ public class Field extends PMMLObject implements HasName {
 	public void setDisplayName(String displayName);
 
 	abstract
-	public OpType getOptype();
+	public OpType getOpType();
 
 	abstract
-	public void setOptype(OpType opType);
+	public void setOpType(OpType opType);
 
 	abstract
 	public DataType getDataType();

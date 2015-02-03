@@ -28,7 +28,7 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		PMML pmml = new PMML(new Header(), new DataDictionary(), "4.2");
+		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
 
 		Node root = new Node()
 			.withPredicate(new True());
@@ -43,7 +43,7 @@ public class VisitorTest {
 
 		root = root.withNodes(leftChild, rightChild);
 
-		TreeModel treeModel = new TreeModel(new MiningSchema(), root, MiningFunctionType.CLASSIFICATION);
+		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, new MiningSchema(), root);
 
 		pmml = pmml.withModels(treeModel);
 

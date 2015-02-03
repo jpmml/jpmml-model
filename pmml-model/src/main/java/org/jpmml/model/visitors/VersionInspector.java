@@ -18,7 +18,7 @@ import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
 
 /**
- * A visitor that determines the range of valid PMML schema versions for a class model object.
+ * A Visitor that determines the range of valid PMML schema versions for a class model object.
  *
  * @see Added
  * @see Removed
