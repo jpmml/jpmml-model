@@ -19,7 +19,7 @@ public class FieldName implements Serializable {
 	}
 
 	public boolean isInterned(){
-		WeakReference<FieldName> reference = FieldName.cache.get(this);
+		WeakReference<FieldName> reference = FieldName.cache.get(getValue());
 
 		if(reference != null){
 			FieldName cachedName = reference.get();
@@ -38,7 +38,7 @@ public class FieldName implements Serializable {
 
 	@Override
 	public int hashCode(){
-		return getValue().hashCode();
+		return (this.getValue()).hashCode();
 	}
 
 	@Override
@@ -86,9 +86,7 @@ public class FieldName implements Serializable {
 			throw new IllegalArgumentException();
 		}
 
-		FieldName name = new FieldName(value);
-
-		WeakReference<FieldName> reference = FieldName.cache.get(name);
+		WeakReference<FieldName> reference = FieldName.cache.get(value);
 		if(reference != null){
 			FieldName cachedName = reference.get();
 
@@ -97,10 +95,12 @@ public class FieldName implements Serializable {
 			}
 		}
 
-		FieldName.cache.put(name, new WeakReference<FieldName>(name));
+		FieldName name = new FieldName(value);
+
+		FieldName.cache.put(value, new WeakReference<FieldName>(name));
 
 		return name;
 	}
 
-	private static final Map<FieldName, WeakReference<FieldName>> cache = new WeakHashMap<FieldName, WeakReference<FieldName>>();
+	private static final Map<String, WeakReference<FieldName>> cache = new WeakHashMap<String, WeakReference<FieldName>>();
 }
