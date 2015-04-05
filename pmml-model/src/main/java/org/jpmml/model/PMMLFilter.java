@@ -13,6 +13,8 @@ import org.xml.sax.helpers.XMLFilterImpl;
 abstract
 public class PMMLFilter extends XMLFilterImpl {
 
+	private String sourceNamespaceURI = null;
+
 	private Version source = null;
 
 	private Version target = null;
@@ -91,6 +93,10 @@ public class PMMLFilter extends XMLFilterImpl {
 
 		if(("").equals(namespaceURI)){
 			return true;
+		} // End if
+
+		if(this.sourceNamespaceURI != null && (this.sourceNamespaceURI).equals(namespaceURI)){
+			return true;
 		}
 
 		return namespaceURI.startsWith("http://www.dmg.org/PMML-");
@@ -106,6 +112,10 @@ public class PMMLFilter extends XMLFilterImpl {
 
 		if(("").equals(namespaceURI)){
 			return;
+		} // End if
+
+		if(this.sourceNamespaceURI != null && (this.sourceNamespaceURI).equals(namespaceURI)){
+			return;
 		}
 
 		Version version = Version.forNamespaceURI(namespaceURI);
@@ -114,6 +124,11 @@ public class PMMLFilter extends XMLFilterImpl {
 		if(source != null && !(source).equals(version)){
 			throw new IllegalStateException();
 		}
+
+		// Keep the String reference of the namespaceURI argument, as opposed to getting one using Version#getNamespaceURI().
+		// If the same String instance is reused, which is typical,
+		// then String#equals(String) will be able to return quickly by performing an identity comparison
+		this.sourceNamespaceURI = namespaceURI;
 
 		setSource(version);
 	}

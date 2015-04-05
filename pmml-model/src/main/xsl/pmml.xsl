@@ -38,17 +38,15 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<xsl:template match="xsd:complexType[@name='ArrayType']">
-		<xsl:element name="xsd:element">
-			<xsl:attribute name="name">Array</xsl:attribute>
-			<xsl:element name="xsd:complexType">
-				<xsl:element name="xsd:simpleContent">
-					<xsl:element name="xsd:extension">
-						<xsl:attribute name="base">xsd:string</xsl:attribute>
+		<xsd:element name="Array">
+			<xsd:complexType>
+				<xsd:simpleContent>
+					<xsd:extension base="xsd:string">
 						<xsl:copy-of select="*"/>
-					</xsl:element>
-				</xsl:element>
-			</xsl:element>
-		</xsl:element>
+					</xsd:extension>
+				</xsd:simpleContent>
+			</xsd:complexType>
+		</xsd:element>
 	</xsl:template>
 
 	<!--
@@ -58,10 +56,7 @@ Copyright (c) 2009 University of Tartu
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='BayesInput']/xsd:complexType/xsd:attribute[@name='fieldName']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
-	</xsl:template>
-	<xsl:template match="xsd:element[@name='BayesOutput']/xsd:complexType/xsd:attribute[@name='fieldName']/@type">
+	<xsl:template match="xsd:element[@name='BayesInput' or @name='BayesOutput']/xsd:complexType/xsd:attribute[@name='fieldName']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
 
@@ -74,7 +69,7 @@ Copyright (c) 2009 University of Tartu
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='Alternate']/xsd:complexType">
+	<xsl:template match="xsd:element[@name='Alternate' or @name='Baseline']/xsd:complexType">
 		<xsl:copy>
 			<xsd:sequence>
 				<xsl:call-template name="extension"/>
@@ -83,12 +78,14 @@ Copyright (c) 2009 University of Tartu
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='Baseline']/xsd:complexType">
+	<!--
+	Declare dummy timeseries algorithm types
+	-->
+	<xsl:template match="xsd:element[@name='ARIMA' or @name='SeasonalTrendDecomposition' or @name='SpectralAnalysis']">
 		<xsl:copy>
-			<xsd:sequence>
-				<xsl:call-template name="extension"/>
-				<xsl:apply-templates select="@*|node()"/>
-			</xsd:sequence>
+			<xsl:apply-templates select="@*|node()"/>
+			<xsd:complexType>
+			</xsd:complexType>
 		</xsl:copy>
 	</xsl:template>
 </xsl:stylesheet>

@@ -69,7 +69,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<xsl:copy>
 			<xsl:apply-templates select="xsd:sequence"/>
 			<xsl:apply-templates select="xsd:attribute[position() &lt;= $index]"/>
-			<xsd:attribute name="alternateBinaryTargetCategory" type="xs:string" use="optional"/>
+			<xsd:attribute name="alternateBinaryTargetCategory" type="xsd:string" use="optional"/>
 			<xsl:apply-templates select="xsd:attribute[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
@@ -121,5 +121,4 @@ Copyright (c) 2014 Villu Ruusmann
 			</xsd:complexType>
 		</xsd:element>
 	</xsl:template>
-
 </xsl:stylesheet>
