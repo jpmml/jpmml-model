@@ -6,11 +6,7 @@ package org.jpmml.xjc;
 import java.util.List;
 
 import com.sun.codemodel.JClass;
-import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JType;
-import com.sun.tools.xjc.model.CPropertyInfo;
-import com.sun.tools.xjc.outline.ClassOutline;
-import com.sun.tools.xjc.outline.FieldOutline;
 
 public class CodeModelUtil {
 
@@ -18,19 +14,13 @@ public class CodeModelUtil {
 	}
 
 	static
-	public JFieldVar getFieldVar(FieldOutline field){
-		ClassOutline clazz = field.parent();
-
-		CPropertyInfo propertyInfo = field.getPropertyInfo();
-
-		return (clazz.implClass.fields()).get(propertyInfo.getName(false));
-	}
-
-	static
 	public JType getElementType(JType collectionType){
 		JClass collectionClazz = (JClass)collectionType;
 
 		List<JClass> elementTypes = collectionClazz.getTypeParameters();
+		if(elementTypes.size() != 1){
+			throw new IllegalArgumentException();
+		}
 
 		return elementTypes.get(0);
 	}

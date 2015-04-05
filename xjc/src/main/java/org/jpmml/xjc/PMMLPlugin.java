@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
@@ -131,43 +132,45 @@ public class PMMLPlugin extends Plugin {
 
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
-			JDefinedClass definedClazz = clazz.implClass;
+			JDefinedClass beanClazz = clazz.implClass;
 
-			String fullName = definedClazz.fullName();
+			Map<String, JFieldVar> fieldVars = beanClazz.fields();
+
+			String fullName = beanClazz.fullName();
 
 			if(("org.dmg.pmml.IntSparseArray").equals(fullName)){
-				JClass superClazz = definedClazz._extends();
+				JClass superClazz = beanClazz._extends();
 
-				definedClazz._extends(superClazz.narrow(Integer.class));
+				beanClazz._extends(superClazz.narrow(Integer.class));
 			} else
 
 			if(("org.dmg.pmml.RealSparseArray").equals(fullName)){
-				JClass superClazz = definedClazz._extends();
+				JClass superClazz = beanClazz._extends();
 
-				definedClazz._extends(superClazz.narrow(Double.class));
+				beanClazz._extends(superClazz.narrow(Double.class));
 			}
 
 			FieldOutline idField = getIdField(clazz);
 			if(idField != null){
-				definedClazz._implements(hasIdInterface);
+				beanClazz._implements(hasIdInterface);
 			}
 
 			FieldOutline extensionsField = getExtensionsField(clazz);
 			if(extensionsField != null){
-				definedClazz._implements(hasExtensionsInterface);
+				beanClazz._implements(hasExtensionsInterface);
 			}
 
 			FieldOutline contentField = getContentField(clazz);
 			if(contentField != null){
 				CPropertyInfo propertyInfo = contentField.getPropertyInfo();
 
-				JFieldVar fieldVar = CodeModelUtil.getFieldVar(contentField);
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
 				JType elementType = CodeModelUtil.getElementType(fieldVar.type());
 
-				definedClazz._implements(iterableInterface.narrow(elementType));
+				beanClazz._implements(iterableInterface.narrow(elementType));
 
-				JMethod iteratorMethod = definedClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
+				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
 				iteratorMethod.body()._return(JExpr.invoke("get" + propertyInfo.getName(true)).invoke("iterator"));
 			}
 
@@ -175,7 +178,7 @@ public class PMMLPlugin extends Plugin {
 			for(FieldOutline field : fields){
 				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
-				JFieldVar fieldVar = CodeModelUtil.getFieldVar(field);
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
 				JMods modifiers = fieldVar.mods();
 				if((modifiers.getValue() & JMod.PRIVATE) != JMod.PRIVATE){
@@ -185,7 +188,7 @@ public class PMMLPlugin extends Plugin {
 				if(propertyInfo.isCollection()){
 					JFieldRef fieldRef = JExpr.refthis(propertyInfo.getName(false));
 
-					JMethod hasElementsMethod = definedClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
+					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
 					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
 				}
 			}
@@ -196,17 +199,71 @@ public class PMMLPlugin extends Plugin {
 
 	static
 	private FieldOutline getIdField(ClassOutline clazz){
-		String name = "id";
+		FieldFilter filter = new FieldFilter(){
 
+			@Override
+			public boolean accept(CPropertyInfo propertyInfo, JType type){
+				return ("id").equals(propertyInfo.getName(false)) && ("java.lang.String").equals(type.fullName());
+			}
+		};
+
+		return find(clazz, filter);
+	}
+
+	static
+	private FieldOutline getExtensionsField(ClassOutline clazz){
+		FieldFilter filter = new FieldFilter(){
+
+			@Override
+			public boolean accept(CPropertyInfo propertyInfo, JType type){
+
+				if(("extensions").equals(propertyInfo.getName(false)) && propertyInfo.isCollection()){
+					JType elementType = CodeModelUtil.getElementType(type);
+
+					return ("org.dmg.pmml.Extension").equals(elementType.fullName());
+				}
+
+				return false;
+			}
+		};
+
+		return find(clazz, filter);
+	}
+
+	static
+	private FieldOutline getContentField(final ClassOutline clazz){
+		FieldFilter filter = new FieldFilter(){
+
+			private String name = clazz.implClass.name();
+
+
+			@Override
+			public boolean accept(CPropertyInfo propertyInfo, JType type){
+
+				if(propertyInfo.isCollection()){
+					JType elementType = CodeModelUtil.getElementType(type);
+
+					String name = elementType.name();
+
+					return ((this.name).equals(name + "s") || (this.name).equals(JJavaName.getPluralForm(name)));
+				}
+
+				return false;
+			}
+		};
+
+		return find(clazz, filter);
+	}
+
+	static
+	private FieldOutline find(ClassOutline clazz, FieldFilter filter){
 		FieldOutline[] fields = clazz.getDeclaredFields();
+
 		for(FieldOutline field : fields){
 			CPropertyInfo propertyInfo = field.getPropertyInfo();
+			JType type = field.getRawType();
 
-			String privateName = propertyInfo.getName(false);
-
-			JType fieldType = field.getRawType();
-
-			if((name).equals(privateName) && ("java.lang.String").equals(fieldType.fullName())){
+			if(filter.accept(propertyInfo, type)){
 				return field;
 			}
 		}
@@ -215,50 +272,8 @@ public class PMMLPlugin extends Plugin {
 	}
 
 	static
-	private FieldOutline getExtensionsField(ClassOutline clazz){
-		String name = "extensions";
+	private interface FieldFilter {
 
-		FieldOutline[] fields = clazz.getDeclaredFields();
-		for(FieldOutline field : fields){
-			CPropertyInfo propertyInfo = field.getPropertyInfo();
-
-			String privateName = propertyInfo.getName(false);
-
-			JType fieldType = field.getRawType();
-
-			if((name).equals(privateName) && propertyInfo.isCollection()){
-				JType elementType = CodeModelUtil.getElementType(fieldType);
-
-				if(("org.dmg.pmml.Extension").equals(elementType.fullName())){
-					return field;
-				}
-			}
-		}
-
-		return null;
-	}
-
-	static
-	private FieldOutline getContentField(ClassOutline clazz){
-		String name = clazz.implClass.name();
-
-		FieldOutline[] fields = clazz.getDeclaredFields();
-		for(FieldOutline field : fields){
-			CPropertyInfo propertyInfo = field.getPropertyInfo();
-
-			JType fieldType = field.getRawType();
-
-			if(propertyInfo.isCollection()){
-				JType elementType = CodeModelUtil.getElementType(fieldType);
-
-				String elementName = elementType.name();
-
-				if((name).equals(elementName + "s") || (name).equals(JJavaName.getPluralForm(elementName))){
-					return field;
-				}
-			}
-		}
-
-		return null;
+		boolean accept(CPropertyInfo propertyInfo, JType type);
 	}
 }

@@ -6,12 +6,15 @@ package org.jpmml.xjc;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
+import com.sun.codemodel.JMods;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
@@ -51,18 +54,24 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 
 		for(ClassOutline clazz : clazzes){
+			JDefinedClass beanClazz = clazz.implClass;
+
+			Map<String, JFieldVar> fieldVars = beanClazz.fields();
+
 			List<FieldOutline> superClassFields = getSuperClassFields(clazz);
 			List<FieldOutline> classFields = getClassFields(clazz);
 
 			if(superClassFields.size() > 0 || classFields.size() > 0){
-				JMethod defaultConstructor = (clazz.implClass).constructor(JMod.PUBLIC);
+				JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
 				JInvocation defaultSuperInvocation = defaultConstructor.body().invoke("super");
 
-				JMethod valueConstructor = (clazz.implClass).constructor(JMod.PUBLIC);
+				JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
 				JInvocation valueSuperInvocation = valueConstructor.body().invoke("super");
 
 				for(FieldOutline superClassField : superClassFields){
-					JFieldVar superClassFieldVar = CodeModelUtil.getFieldVar(superClassField);
+					CPropertyInfo propertyInfo = superClassField.getPropertyInfo();
+
+					JFieldVar superClassFieldVar = fieldVars.get(propertyInfo.getName(false));
 
 					JVar param = valueConstructor.param(JMod.FINAL, superClassFieldVar.type(), superClassFieldVar.name());
 
@@ -70,7 +79,9 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				}
 
 				for(FieldOutline classField : classFields){
-					JFieldVar classFieldVar = CodeModelUtil.getFieldVar(classField);
+					CPropertyInfo propertyInfo = classField.getPropertyInfo();
+
+					JFieldVar classFieldVar = fieldVars.get(propertyInfo.getName(false));
 
 					JVar param = valueConstructor.param(JMod.FINAL, classFieldVar.type(), classFieldVar.name());
 
@@ -99,16 +110,20 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 	private List<FieldOutline> getValueFields(ClassOutline clazz){
 		List<FieldOutline> result = new ArrayList<FieldOutline>();
 
+		JDefinedClass beanClazz = clazz.implClass;
+
+		Map<String, JFieldVar> fieldVars = beanClazz.fields();
+
 		FieldOutline[] fields = clazz.getDeclaredFields();
 		for(FieldOutline field : fields){
-			JFieldVar fieldVar = CodeModelUtil.getFieldVar(field);
-
-			int modifiers = (fieldVar.mods()).getValue();
-			if((modifiers & JMod.STATIC) == JMod.STATIC){
-				continue;
-			}
-
 			CPropertyInfo propertyInfo = field.getPropertyInfo();
+
+			JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+
+			JMods modifiers = fieldVar.mods();
+			if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
+				continue;
+			} // End if
 
 			if(propertyInfo instanceof CAttributePropertyInfo && !getIgnoreAttributes()){
 				CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;

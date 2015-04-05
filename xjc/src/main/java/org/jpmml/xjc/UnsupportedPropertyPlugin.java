@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
@@ -47,13 +49,16 @@ public class UnsupportedPropertyPlugin extends Plugin {
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
 		Model model = outline.getModel();
 
+		JCodeModel codeModel = model.codeModel;
+
 		// XXX
-		JClass exceptionClazz = (model.codeModel).ref(UnsupportedOperationException.class);
+		JClass exceptionClazz = codeModel.ref(UnsupportedOperationException.class);
 
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
-			List<CPluginCustomization> customizations = PluginUtil.getAllCustomizations(clazz.target, this);
+			JDefinedClass beanClazz = clazz.implClass;
 
+			List<CPluginCustomization> customizations = PluginUtil.getAllCustomizations(clazz.target, this);
 			for(CPluginCustomization customization : customizations){
 				Element element = customization.element;
 
@@ -69,14 +74,14 @@ public class UnsupportedPropertyPlugin extends Plugin {
 					throw new IllegalArgumentException();
 				}
 
-				JClass nameClazz = (clazz.implClass).owner().ref(name);
+				JClass nameClazz = codeModel.ref(name);
 
-				JMethod getter = (clazz.implClass).method(JMod.PUBLIC, nameClazz, "get" + propertyName);
+				JMethod getter = beanClazz.method(JMod.PUBLIC, nameClazz, "get" + propertyName);
 				getter.javadoc().append("Gets the value of the " + property + " property.").addThrows(exceptionClazz).append("Always.");
 				getter.annotate(Override.class);
 				getter.body()._throw(JExpr._new(exceptionClazz));
 
-				JMethod setter = (clazz.implClass).method(JMod.PUBLIC, void.class, "set" + propertyName);
+				JMethod setter = beanClazz.method(JMod.PUBLIC, void.class, "set" + propertyName);
 				setter.javadoc().append("Sets the value of the " + property + " property.").addThrows(exceptionClazz).append("Always.");
 				setter.annotate(Override.class);
 				setter.param(nameClazz, property);
