@@ -77,4 +77,15 @@ Copyright (c) 2009 University of Tartu
 			</xsd:sequence>
 		</xsl:copy>
 	</xsl:template>
+
+	<!--
+	Declare dummy timeseries algorithm types
+	-->
+	<xsl:template match="xsd:element[@name='ARIMA' or @name='SeasonalTrendDecomposition' or @name='SpectralAnalysis']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+			<xsd:complexType>
+			</xsd:complexType>
+		</xsl:copy>
+	</xsl:template>
 </xsl:stylesheet>

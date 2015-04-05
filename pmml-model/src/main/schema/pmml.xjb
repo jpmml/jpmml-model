@@ -110,6 +110,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType">
+			<java:superClass
+				name="org.dmg.pmml.TimeSeriesAlgorithm"
+			/>
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Array']/xsd:complexType/xsd:simpleContent/xsd:extension/xsd:attribute[@name='type']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Type"
@@ -634,6 +643,9 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType">
+			<java:superClass
+				name="org.dmg.pmml.TimeSeriesAlgorithm"
+			/>
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
@@ -1711,6 +1723,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SeasonalTrendDecomposition']/xsd:complexType">
+			<java:superClass
+				name="org.dmg.pmml.TimeSeriesAlgorithm"
+			/>
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Segment']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Entity"
@@ -1836,6 +1857,15 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.Measure"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SpectralAnalysis']/xsd:complexType">
+			<java:superClass
+				name="org.dmg.pmml.TimeSeriesAlgorithm"
+			/>
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='alternateTargetCategory']">
