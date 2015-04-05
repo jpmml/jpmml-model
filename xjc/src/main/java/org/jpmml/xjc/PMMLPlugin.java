@@ -17,6 +17,7 @@ import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
+import com.sun.codemodel.JMods;
 import com.sun.codemodel.JType;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
@@ -173,6 +174,13 @@ public class PMMLPlugin extends Plugin {
 			FieldOutline[] fields = clazz.getDeclaredFields();
 			for(FieldOutline field : fields){
 				CPropertyInfo propertyInfo = field.getPropertyInfo();
+
+				JFieldVar fieldVar = CodeModelUtil.getFieldVar(field);
+
+				JMods modifiers = fieldVar.mods();
+				if((modifiers.getValue() & JMod.PRIVATE) != JMod.PRIVATE){
+					modifiers.setPrivate();
+				} // End if
 
 				if(propertyInfo.isCollection()){
 					JFieldRef fieldRef = JExpr.refthis(propertyInfo.getName(false));
