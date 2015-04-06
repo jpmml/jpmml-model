@@ -43,46 +43,47 @@ public class GolfingTreeModelExample extends ProductionExample {
 		FieldName whatIdo = FieldName.create("whatIDo");
 
 		Header header = new Header()
-			.withCopyright("www.dmg.org")
-			.withDescription("A very small binary tree model to show structure.");
+			.setCopyright("www.dmg.org")
+			.setDescription("A very small binary tree model to show structure.");
 
 		DataDictionary dataDictionary = new DataDictionary()
-			.withDataFields(
+			.addDataFields(
 				new DataField(temperature, OpType.CONTINUOUS, DataType.DOUBLE),
 				new DataField(humidity, OpType.CONTINUOUS, DataType.DOUBLE),
 				new DataField(windy, OpType.CATEGORICAL, DataType.STRING)
-					.withValues(createValues("true", "false")),
+					.addValues(createValues("true", "false")),
 				new DataField(outlook, OpType.CATEGORICAL, DataType.STRING)
-					.withValues(createValues("sunny", "overcast", "rain")),
+					.addValues(createValues("sunny", "overcast", "rain")),
 				new DataField(whatIdo, OpType.CATEGORICAL, DataType.STRING)
-					.withValues(createValues("will play", "may play", "no play"))
+					.addValues(createValues("will play", "may play", "no play"))
 			);
-		dataDictionary.withNumberOfFields((dataDictionary.getDataFields()).size());
+
+		dataDictionary.setNumberOfFields((dataDictionary.getDataFields()).size());
 
 		PMML pmml = new PMML("4.2", header, dataDictionary);
 
 		MiningSchema miningSchema = new MiningSchema()
-			.withMiningFields(
+			.addMiningFields(
 				new MiningField(temperature),
 				new MiningField(humidity),
 				new MiningField(windy),
 				new MiningField(outlook),
 				new MiningField(whatIdo)
-					.withUsageType(FieldUsageType.TARGET)
+					.setUsageType(FieldUsageType.TARGET)
 			);
 
 		Node root = createNode("will play", new True());
 
 		// Upper half of the tree
-		root.withNodes(
+		root.addNodes(
 			createNode("will play", createSimplePredicate(outlook, Operator.EQUAL, "sunny"))
-				.withNodes(
+				.addNodes(
 					createNode("will play",
 						createCompoundPredicate(BooleanOperator.AND,
 							createSimplePredicate(temperature, Operator.LESS_THAN, "90"),
 							createSimplePredicate(temperature, Operator.GREATER_THAN, "50"))
 						)
-						.withNodes(
+						.addNodes(
 							createNode("will play", createSimplePredicate(humidity, Operator.LESS_THAN, "80")),
 							createNode("no play", createSimplePredicate(humidity, Operator.GREATER_OR_EQUAL, "80"))
 						),
@@ -95,13 +96,13 @@ public class GolfingTreeModelExample extends ProductionExample {
 		);
 
 		// Lower half of the tree
-		root.withNodes(
+		root.addNodes(
 			createNode("may play",
 				createCompoundPredicate(BooleanOperator.OR,
 					createSimplePredicate(outlook, Operator.EQUAL, "overcast"),
 					createSimplePredicate(outlook, Operator.EQUAL, "rain"))
 				)
-				.withNodes(
+				.addNodes(
 					createNode("may play",
 						createCompoundPredicate(BooleanOperator.AND,
 							createSimplePredicate(temperature, Operator.GREATER_THAN, "60"),
@@ -119,40 +120,40 @@ public class GolfingTreeModelExample extends ProductionExample {
 		);
 
 		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, miningSchema, root)
-			.withModelName("golfing");
+			.setModelName("golfing");
 
-		pmml.withModels(treeModel);
+		pmml.addModels(treeModel);
 
 		return pmml;
 	}
 
 	static
-	private List<Value> createValues(String... values){
+	private Value[] createValues(String... values){
 		List<Value> result = new ArrayList<Value>();
 
 		for(String value : values){
 			result.add(new Value(value));
 		}
 
-		return result;
+		return result.toArray(new Value[result.size()]);
 	}
 
 	static
 	private Node createNode(String score, Predicate predicate){
 		return new Node()
-			.withScore(score)
-			.withPredicate(predicate);
+			.setScore(score)
+			.setPredicate(predicate);
 	}
 
 	static
 	private SimplePredicate createSimplePredicate(FieldName name, SimplePredicate.Operator operator, String value){
 		return new SimplePredicate(name, operator)
-			.withValue(value);
+			.setValue(value);
 	}
 
 	static
 	private CompoundPredicate createCompoundPredicate(CompoundPredicate.BooleanOperator booleanOperator, Predicate... predicates){
 		return new CompoundPredicate(booleanOperator)
-			.withPredicates(predicates);
+			.addPredicates(predicates);
 	}
 }

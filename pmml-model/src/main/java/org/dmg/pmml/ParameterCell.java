@@ -13,11 +13,11 @@ public class ParameterCell extends PMMLObject implements HasExtensions {
 	public String getParameterName();
 
 	abstract
-	public void setParameterName(String parameterName);
+	public ParameterCell setParameterName(String parameterName);
 
 	abstract
 	public String getTargetCategory();
 
 	abstract
-	public void setTargetCategory(String targetCategory);
+	public ParameterCell setTargetCategory(String targetCategory);
 }

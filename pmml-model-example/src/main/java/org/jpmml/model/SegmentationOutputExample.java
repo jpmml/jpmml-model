@@ -50,7 +50,7 @@ public class SegmentationOutputExample extends TransformationExample {
 		if(output == null){
 			output = new Output();
 
-			model.withOutput(output);
+			model.setOutput(output);
 		}
 
 		List<Segment> segments = segmentation.getSegments();
@@ -65,11 +65,11 @@ public class SegmentationOutputExample extends TransformationExample {
 			}
 
 			OutputField outputField = new OutputField()
-				.withName(new FieldName("segment_" + id))
-				.withFeature(ResultFeatureType.PREDICTED_VALUE)
-				.withSegmentId(id);
+				.setName(new FieldName("segment_" + id))
+				.setFeature(ResultFeatureType.PREDICTED_VALUE)
+				.setSegmentId(id);
 
-			output.withOutputFields(outputField);
+			output.addOutputFields(outputField);
 		}
 	}
 }

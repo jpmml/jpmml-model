@@ -7,5 +7,5 @@ public interface HasName {
 
 	FieldName getName();
 
-	void setName(FieldName name);
+	HasName setName(FieldName name);
 }

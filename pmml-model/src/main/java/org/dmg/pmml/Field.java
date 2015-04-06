@@ -15,23 +15,23 @@ public class Field extends PMMLObject implements HasName {
 
 	@Override
 	abstract
-	public void setName(FieldName name);
+	public Field setName(FieldName name);
 
 	abstract
 	public String getDisplayName();
 
 	abstract
-	public void setDisplayName(String displayName);
+	public Field setDisplayName(String displayName);
 
 	abstract
 	public OpType getOpType();
 
 	abstract
-	public void setOpType(OpType opType);
+	public Field setOpType(OpType opType);
 
 	abstract
 	public DataType getDataType();
 
 	abstract
-	public void setDataType(DataType dataType);
+	public Field setDataType(DataType dataType);
 }

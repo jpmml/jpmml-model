@@ -13,23 +13,23 @@ public class ComparisonField extends PMMLObject implements HasExtensions {
 	public FieldName getField();
 
 	abstract
-	public void setField(FieldName field);
+	public ComparisonField setField(FieldName field);
 
 	abstract
 	public double getFieldWeight();
 
 	abstract
-	public void setFieldWeight(Double fieldWeight);
+	public ComparisonField setFieldWeight(Double fieldWeight);
 
 	abstract
 	public CompareFunctionType getCompareFunction();
 
 	abstract
-	public void setCompareFunction(CompareFunctionType compareFunction);
+	public ComparisonField setCompareFunction(CompareFunctionType compareFunction);
 
 	abstract
 	public Double getSimilarityScale();
 
 	abstract
-	public void setSimilarityScale(Double similarityScale);
+	public ComparisonField setSimilarityScale(Double similarityScale);
 }

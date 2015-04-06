@@ -81,11 +81,11 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				for(FieldOutline classField : classFields){
 					CPropertyInfo propertyInfo = classField.getPropertyInfo();
 
-					JFieldVar classFieldVar = fieldVars.get(propertyInfo.getName(false));
+					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
-					JVar param = valueConstructor.param(JMod.FINAL, classFieldVar.type(), classFieldVar.name());
+					JVar param = valueConstructor.param(JMod.FINAL, fieldVar.type(), fieldVar.name());
 
-					valueConstructor.body().assign(JExpr.refthis(param.name()), param);
+					valueConstructor.body().assign(JExpr.refthis(fieldVar.name()), param);
 				}
 			}
 		}

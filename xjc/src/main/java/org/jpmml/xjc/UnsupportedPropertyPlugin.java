@@ -76,16 +76,16 @@ public class UnsupportedPropertyPlugin extends Plugin {
 
 				JClass nameClazz = codeModel.ref(name);
 
-				JMethod getter = beanClazz.method(JMod.PUBLIC, nameClazz, "get" + propertyName);
-				getter.javadoc().append("Gets the value of the " + property + " property.").addThrows(exceptionClazz).append("Always.");
-				getter.annotate(Override.class);
-				getter.body()._throw(JExpr._new(exceptionClazz));
+				JMethod getterMethod = beanClazz.method(JMod.PUBLIC, nameClazz, "get" + propertyName);
+				getterMethod.javadoc().append("Gets the value of the " + property + " property.").addThrows(exceptionClazz).append("Always.");
+				getterMethod.annotate(Override.class);
+				getterMethod.body()._throw(JExpr._new(exceptionClazz));
 
-				JMethod setter = beanClazz.method(JMod.PUBLIC, void.class, "set" + propertyName);
-				setter.javadoc().append("Sets the value of the " + property + " property.").addThrows(exceptionClazz).append("Always.");
-				setter.annotate(Override.class);
-				setter.param(nameClazz, property);
-				setter.body()._throw(JExpr._new(exceptionClazz));
+				JMethod setterMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "set" + propertyName);
+				setterMethod.javadoc().append("Sets the value of the " + property + " property.").addThrows(exceptionClazz).append("Always.");
+				setterMethod.annotate(Override.class);
+				setterMethod.param(nameClazz, property);
+				setterMethod.body()._throw(JExpr._new(exceptionClazz));
 
 				customization.markAsAcknowledged();
 			}

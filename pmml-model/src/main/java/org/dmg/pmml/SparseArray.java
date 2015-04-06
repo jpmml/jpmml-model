@@ -15,7 +15,7 @@ public class SparseArray<E extends Number> extends PMMLObject {
 	public Integer getN();
 
 	abstract
-	public void setN(Integer n);
+	public SparseArray<E> setN(Integer n);
 
 	abstract
 	public List<Integer> getIndices();

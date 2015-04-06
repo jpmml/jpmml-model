@@ -15,5 +15,5 @@ public class Term extends PMMLObject implements HasName, HasExtensions {
 
 	@Override
 	abstract
-	public void setName(FieldName name);
+	public Term setName(FieldName name);
 }

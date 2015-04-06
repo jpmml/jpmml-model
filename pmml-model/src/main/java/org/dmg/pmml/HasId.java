@@ -7,5 +7,5 @@ public interface HasId {
 
 	String getId();
 
-	void setId(String id);
+	HasId setId(String id);
 }

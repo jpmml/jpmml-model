@@ -127,7 +127,6 @@
 						<arg>-npa</arg>
 						<arg>-Xannotate</arg>
 						<arg>-Xannotate-defaultFieldTarget=field</arg>
-						<arg>-Xfluent-api</arg>
 						<arg>-Xpmml</arg>
 						<arg>-XsuperClass</arg>
 						<arg>-XsuperClass-defaultName=org.dmg.pmml.PMMLObject</arg>
@@ -162,11 +161,6 @@
 						<groupId>org.jvnet.jaxb2_commons</groupId>
 						<artifactId>jaxb2-basics-tools</artifactId>
 						<version>0.9.2</version>
-					</dependency>
-					<dependency>
-						<groupId>org.jvnet.jaxb2_commons</groupId>
-						<artifactId>jaxb2-fluent-api</artifactId>
-						<version>3.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>

@@ -22,7 +22,7 @@ public class MemoryMeasurerTest {
 
 		assertEquals(getSize(left), getSize(right));
 
-		right = right.withName(new FieldName("x"));
+		right.setName(new FieldName("x"));
 
 		assertNotEquals(getSize(left), getSize(right));
 	}

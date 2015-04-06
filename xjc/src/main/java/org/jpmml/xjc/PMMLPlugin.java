@@ -20,6 +20,7 @@ import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
 import com.sun.codemodel.JType;
+import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
@@ -130,6 +131,8 @@ public class PMMLPlugin extends Plugin {
 		JClass iterableInterface = codeModel.ref("java.lang.Iterable");
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
 
+		JClass arraysClass = codeModel.ref("java.util.Arrays");
+
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
@@ -183,13 +186,34 @@ public class PMMLPlugin extends Plugin {
 				JMods modifiers = fieldVar.mods();
 				if((modifiers.getValue() & JMod.PRIVATE) != JMod.PRIVATE){
 					modifiers.setPrivate();
+				}
+
+				JType type = fieldVar.type();
+
+				JMethod getterMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
+				JMethod setterMethod = beanClazz.getMethod("set" + propertyInfo.getName(true), new JType[]{type});
+
+				if(setterMethod != null){
+					setterMethod.type(beanClazz);
+
+					JVar param = (setterMethod.params()).get(0);
+					param.name(fieldVar.name());
+
+					setterMethod.body()._return(JExpr._this());
 				} // End if
 
 				if(propertyInfo.isCollection()){
-					JFieldRef fieldRef = JExpr.refthis(propertyInfo.getName(false));
+					JType elementType = CodeModelUtil.getElementType(type);
+
+					JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
 
 					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
 					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
+
+					JMethod addElementsMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "add" + propertyInfo.getName(true));
+					JVar param = addElementsMethod.varParam(elementType, fieldVar.name());
+					addElementsMethod.body().add(JExpr.invoke(getterMethod).invoke("addAll").arg(arraysClass.staticInvoke("asList").arg(param)));
+					addElementsMethod.body()._return(JExpr._this());
 				}
 			}
 		}

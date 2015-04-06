@@ -13,65 +13,65 @@ public class Model extends PMMLObject implements HasExtensions {
 	public String getModelName();
 
 	abstract
-	public void setModelName(String modelName);
+	public Model setModelName(String modelName);
 
 	abstract
 	public MiningFunctionType getFunctionName();
 
 	abstract
-	public void setFunctionName(MiningFunctionType functionName);
+	public Model setFunctionName(MiningFunctionType functionName);
 
 	abstract
 	public String getAlgorithmName();
 
 	abstract
-	public void setAlgorithmName(String algorithmName);
+	public Model setAlgorithmName(String algorithmName);
 
 	abstract
 	public boolean isScorable();
 
 	abstract
-	public void setScorable(Boolean scorable);
+	public Model setScorable(Boolean scorable);
 
 	abstract
 	public MiningSchema getMiningSchema();
 
 	abstract
-	public void setMiningSchema(MiningSchema miningSchema);
+	public Model setMiningSchema(MiningSchema miningSchema);
 
 	abstract
 	public LocalTransformations getLocalTransformations();
 
 	abstract
-	public void setLocalTransformations(LocalTransformations localTransformations);
+	public Model setLocalTransformations(LocalTransformations localTransformations);
 
 	abstract
 	public Targets getTargets();
 
 	abstract
-	public void setTargets(Targets targets);
+	public Model setTargets(Targets targets);
 
 	abstract
 	public Output getOutput();
 
 	abstract
-	public void setOutput(Output output);
+	public Model setOutput(Output output);
 
 	abstract
 	public ModelStats getModelStats();
 
 	abstract
-	public void setModelStats(ModelStats modelStats);
+	public Model setModelStats(ModelStats modelStats);
 
 	abstract
 	public ModelExplanation getModelExplanation();
 
 	abstract
-	public void setModelExplanation(ModelExplanation modelExplanation);
+	public Model setModelExplanation(ModelExplanation modelExplanation);
 
 	abstract
 	public ModelVerification getModelVerification();
 
 	abstract
-	public void setModelVerification(ModelVerification modelVerification);
+	public Model setModelVerification(ModelVerification modelVerification);
 }

@@ -31,21 +31,21 @@ public class VisitorTest {
 		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
 
 		Node root = new Node()
-			.withPredicate(new True());
+			.setPredicate(new True());
 
 		final
 		Node leftChild = new Node()
-			.withPredicate(new SimplePredicate());
+			.setPredicate(new SimplePredicate());
 
 		final
 		Node rightChild = new Node()
-			.withPredicate(new SimpleSetPredicate());
+			.setPredicate(new SimpleSetPredicate());
 
-		root = root.withNodes(leftChild, rightChild);
+		root.addNodes(leftChild, rightChild);
 
 		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, new MiningSchema(), root);
 
-		pmml = pmml.withModels(treeModel);
+		pmml.addModels(treeModel);
 
 		Visitor skipVisitor = new AbstractVisitor(){
 

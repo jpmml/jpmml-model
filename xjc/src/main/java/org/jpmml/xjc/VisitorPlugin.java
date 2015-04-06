@@ -161,9 +161,7 @@ public class VisitorPlugin extends Plugin {
 			for(FieldOutline field : fields){
 				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
-				String fieldName = propertyInfo.getName(false);
-
-				JFieldRef fieldRef = JExpr.refthis(fieldName);
+				JFieldRef fieldRef = JExpr.refthis(propertyInfo.getName(false));
 
 				JType fieldType = field.getRawType();
 

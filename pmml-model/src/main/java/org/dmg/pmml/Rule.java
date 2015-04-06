@@ -13,5 +13,5 @@ public class Rule extends Entity {
 	public Predicate getPredicate();
 
 	abstract
-	public void setPredicate(Predicate predicate);
+	public Rule setPredicate(Predicate predicate);
 }

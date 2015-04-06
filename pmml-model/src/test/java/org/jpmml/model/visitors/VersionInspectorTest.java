@@ -52,7 +52,7 @@ public class VersionInspectorTest {
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
 
-		pmml.withModels(new AssociationModel(),
+		pmml.addModels(new AssociationModel(),
 			new ClusteringModel(),
 			new GeneralRegressionModel(),
 			new MiningModel(),
@@ -69,13 +69,13 @@ public class VersionInspectorTest {
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
 
-		pmml.withModels(new TimeSeriesModel());
+		pmml.addModels(new TimeSeriesModel());
 
 		assertEquals(13, models.size());
 
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
 
-		pmml.withModels(new BaselineModel(),
+		pmml.addModels(new BaselineModel(),
 			new Scorecard(),
 			new NearestNeighborModel());
 
@@ -90,12 +90,13 @@ public class VersionInspectorTest {
 
 		AssociationModel model = new AssociationModel();
 
-		pmml.withModels(model);
+		pmml.addModels(model);
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
 
 		Output output = new Output();
-		model.withOutput(output);
+
+		model.setOutput(output);
 
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
 
@@ -108,9 +109,9 @@ public class VersionInspectorTest {
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
 
 		OutputField outputField = new OutputField()
-			.withRuleFeature(RuleFeatureType.AFFINITY);
+			.setRuleFeature(RuleFeatureType.AFFINITY);
 
-		output.withOutputFields(outputField);
+		output.addOutputFields(outputField);
 
 		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
 
@@ -129,13 +130,13 @@ public class VersionInspectorTest {
 		apply.setFunction("lowercase");
 
 		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, null)
-			.withParameterFields(new ParameterField(new FieldName("string")))
-			.withExpression(apply);
+			.addParameterFields(new ParameterField(new FieldName("string")))
+			.setExpression(apply);
 
 		TransformationDictionary transformationDictionary = new TransformationDictionary()
-			.withDefineFunctions(defineFunction);
+			.addDefineFunctions(defineFunction);
 
-		pmml.withTransformationDictionary(transformationDictionary);
+		pmml.setTransformationDictionary(transformationDictionary);
 
 		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
 

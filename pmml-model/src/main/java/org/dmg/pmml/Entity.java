@@ -15,5 +15,5 @@ public class Entity extends PMMLObject implements HasId {
 
 	@Override
 	abstract
-	public void setId(String id);
+	public Entity setId(String id);
 }
