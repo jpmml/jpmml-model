@@ -97,10 +97,10 @@ public class FieldName implements Serializable {
 
 		FieldName name = new FieldName(value);
 
-		FieldName.cache.put(value, new WeakReference<FieldName>(name));
+		FieldName.cache.put(value, new WeakReference<>(name));
 
 		return name;
 	}
 
-	private static final Map<String, WeakReference<FieldName>> cache = new WeakHashMap<String, WeakReference<FieldName>>();
+	private static final Map<String, WeakReference<FieldName>> cache = new WeakHashMap<>();
 }

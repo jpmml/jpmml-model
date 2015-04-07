@@ -129,7 +129,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 	static
 	private Value[] createValues(String... values){
-		List<Value> result = new ArrayList<Value>();
+		List<Value> result = new ArrayList<>();
 
 		for(String value : values){
 			result.add(new Value(value));

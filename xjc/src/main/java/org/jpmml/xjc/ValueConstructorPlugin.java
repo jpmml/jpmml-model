@@ -94,7 +94,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 	}
 
 	private List<FieldOutline> getSuperClassFields(ClassOutline clazz){
-		List<FieldOutline> result = new ArrayList<FieldOutline>();
+		List<FieldOutline> result = new ArrayList<>();
 
 		for(ClassOutline superClazz = clazz.getSuperClass(); superClazz != null; superClazz = superClazz.getSuperClass()){
 			result.addAll(0, getValueFields(superClazz));
@@ -108,7 +108,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 	}
 
 	private List<FieldOutline> getValueFields(ClassOutline clazz){
-		List<FieldOutline> result = new ArrayList<FieldOutline>();
+		List<FieldOutline> result = new ArrayList<>();
 
 		JDefinedClass beanClazz = clazz.implClass;
 

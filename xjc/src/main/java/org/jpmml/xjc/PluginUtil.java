@@ -34,7 +34,7 @@ public class PluginUtil {
 
 	static
 	public List<CPluginCustomization> getAllCustomizations(CCustomizable customizable, Plugin plugin){
-		List<CPluginCustomization> result = new ArrayList<CPluginCustomization>();
+		List<CPluginCustomization> result = new ArrayList<>();
 
 		Iterator<CPluginCustomization> it = (customizable.getCustomizations()).iterator();
 		while(it.hasNext()){

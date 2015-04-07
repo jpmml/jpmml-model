@@ -29,7 +29,7 @@ public class ReflectionUtilTest {
 		List<Field> fields = ReflectionUtil.getAllFields(new PMML());
 		List<Field> customFields = ReflectionUtil.getAllFields(new CustomPMML());
 
-		assertEquals(new HashSet<Field>(fields), new HashSet<Field>(customFields));
+		assertEquals(new HashSet<>(fields), new HashSet<>(customFields));
 	}
 
 	@Test

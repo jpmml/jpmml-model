@@ -128,7 +128,7 @@ public class ReflectionUtil {
 
 	static
 	private List<Field> loadFields(Class<?> clazz, FieldFilter filter){
-		List<Field> result = new ArrayList<Field>();
+		List<Field> result = new ArrayList<>();
 
 		while(clazz != null){
 			Field[] fields = clazz.getDeclaredFields();
@@ -152,9 +152,9 @@ public class ReflectionUtil {
 		boolean accept(Field field);
 	}
 
-	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<Class<?>, List<Field>>();
+	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<>();
 
-	private static final ConcurrentMap<Class<?>, List<Field>> classInstanceFields = new ConcurrentHashMap<Class<?>, List<Field>>();
+	private static final ConcurrentMap<Class<?>, List<Field>> classInstanceFields = new ConcurrentHashMap<>();
 
-	private static final Set<Class<?>> primitiveWrapperClasses = new HashSet<Class<?>>(Arrays.<Class<?>>asList(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class, Boolean.class, Character.class));
+	private static final Set<Class<?>> primitiveWrapperClasses = new HashSet<>(Arrays.<Class<?>>asList(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class, Boolean.class, Character.class));
 }

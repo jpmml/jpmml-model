@@ -108,7 +108,7 @@ public class VisitorPlugin extends Plugin {
 		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
 		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
 
-		Set<JType> traversableTypes = new LinkedHashSet<JType>();
+		Set<JType> traversableTypes = new LinkedHashSet<>();
 
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){

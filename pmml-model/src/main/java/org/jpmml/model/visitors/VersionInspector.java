@@ -127,7 +127,7 @@ public class VersionInspector extends AbstractSimpleVisitor {
 		}
 	}
 
-	private static Map<String, Version> functionVersions = new LinkedHashMap<String, Version>();
+	private static Map<String, Version> functionVersions = new LinkedHashMap<>();
 
 	static {
 		declareFunctions(Version.PMML_3_0,
