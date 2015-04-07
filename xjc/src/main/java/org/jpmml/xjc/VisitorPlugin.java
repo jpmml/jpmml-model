@@ -16,10 +16,8 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JEnumConstant;
 import com.sun.codemodel.JExpr;
-import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
-import com.sun.codemodel.JForLoop;
 import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
@@ -161,36 +159,27 @@ public class VisitorPlugin extends Plugin {
 			for(FieldOutline field : fields){
 				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
-				JFieldRef fieldRef = JExpr.refthis(propertyInfo.getName(false));
-
 				JType fieldType = field.getRawType();
+
+				JMethod getterMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
 
 				// Collection of values
 				if(propertyInfo.isCollection()){
 					JType fieldElementType = CodeModelUtil.getElementType(fieldType);
 
 					if(traversableTypes.contains(fieldElementType) || objectClazz.equals(fieldElementType)){
-						JForLoop forLoop = body._for();
-						JVar var = forLoop.init(codeModel.INT, "i", JExpr.lit(0));
-						forLoop.test((status.eq(continueAction)).cand(fieldRef.ne(JExpr._null())).cand(var.lt(fieldRef.invoke("size"))));
-						forLoop.update(var.incr());
+						JMethod hasElementsMethod = beanClazz.getMethod("has" + propertyInfo.getName(true), new JType[0]);
 
-						JExpression getElement = (JExpr.invoke(fieldRef, "get")).arg(var);
-
-						if(traversableTypes.contains(fieldElementType)){
-							forLoop.body().assign(status, getElement.invoke("accept").arg(visitorParameter));
-						} else
-
-						if(objectClazz.equals(fieldElementType)){
-							forLoop.body()._if(getElement._instanceof(visitableInterface))._then().assign(status, ((JExpression)JExpr.cast(visitableInterface, getElement)).invoke("accept").arg(visitorParameter));
-						}
+						body._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
 					}
 				} else
 
 				// Simple value
 				{
 					if(traversableTypes.contains(fieldType)){
-						body._if((status.eq(continueAction)).cand(fieldRef.ne(JExpr._null())))._then().assign(status, JExpr.invoke(fieldRef, "accept").arg(visitorParameter));
+						JVar variable = body.decl(getterMethod.type(), propertyInfo.getName(false), JExpr.invoke(getterMethod));
+
+						body._if((status.eq(continueAction)).cand(variable.ne(JExpr._null())))._then().assign(status, JExpr.invoke(variable, "accept").arg(visitorParameter));
 					}
 				}
 			}
