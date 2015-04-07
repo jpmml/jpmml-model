@@ -950,8 +950,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='LinearKernelType']/xsd:complexType">
+			<jaxb:class
+				name="LinearKernel"
+			/>
 			<java:superClass
-				name="org.dmg.pmml.KernelType"
+				name="org.dmg.pmml.Kernel"
 			/>
 		</jaxb:bindings>
 
@@ -1421,8 +1424,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PolynomialKernelType']/xsd:complexType">
+			<jaxb:class
+				name="PolynomialKernel"
+			/>
 			<java:superClass
-				name="org.dmg.pmml.KernelType"
+				name="org.dmg.pmml.Kernel"
 			/>
 		</jaxb:bindings>
 
@@ -1541,8 +1547,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RadialBasisKernelType']/xsd:complexType">
+			<jaxb:class
+				name="RadialBasisKernel"
+			/>
 			<java:superClass
-				name="org.dmg.pmml.KernelType"
+				name="org.dmg.pmml.Kernel"
 			/>
 		</jaxb:bindings>
 
@@ -1812,8 +1821,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SigmoidKernelType']/xsd:complexType">
+			<jaxb:class
+				name="SigmoidKernel"
+			/>
 			<java:superClass
-				name="org.dmg.pmml.KernelType"
+				name="org.dmg.pmml.Kernel"
 			/>
 		</jaxb:bindings>
 
@@ -1918,7 +1930,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:choice">
 			<jaxb:property
-				name="kernelType"
+				name="kernel"
 			/>
 		</jaxb:bindings>
 

@@ -7,5 +7,5 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class KernelType extends PMMLObject implements HasExtensions {
+public class Kernel extends PMMLObject implements HasExtensions {
 }
