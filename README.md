@@ -6,10 +6,11 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 # Features #
 
 * Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1 and 4.2 schemas:
-  * Class hierarchy.
   * Schema version annotations.
-* Fluent API:
+* Enhanced API:
+  * Class hierarchy.
   * Value constructors.
+  * Method chaining.
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
@@ -25,13 +26,13 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
 
-The current version is **1.1.14** (3 February, 2015).
+The current version is **1.2.0** (7 April, 2015).
 
 ```xml
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.1.14</version>
+	<version>1.2.0</version>
 </dependency>
 ```
 
