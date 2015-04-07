@@ -9,7 +9,7 @@
 	</parent>
 
 	<groupId>org.jpmml</groupId>
-	<artifactId>xjc</artifactId>
+	<artifactId>pmml-xjc</artifactId>
 	<packaging>jar</packaging>
 
 	<name>JPMML XJC support</name>

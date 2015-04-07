@@ -43,7 +43,7 @@
 		<module>pmml-model-gwt</module>
 		<module>pmml-schema</module>
 		<module>pmml-schema-gwt</module>
-		<module>xjc</module>
+		<module>pmml-xjc</module>
 	</modules>
 
 	<scm>
@@ -91,7 +91,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
-				<artifactId>xjc</artifactId>
+				<artifactId>pmml-xjc</artifactId>
 				<version>1.2-SNAPSHOT</version>
 			</dependency>
 

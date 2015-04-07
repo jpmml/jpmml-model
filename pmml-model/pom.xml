@@ -148,7 +148,7 @@
 
 					<dependency>
 						<groupId>org.jpmml</groupId>
-						<artifactId>xjc</artifactId>
+						<artifactId>pmml-xjc</artifactId>
 						<version>1.2-SNAPSHOT</version>
 					</dependency>
 
