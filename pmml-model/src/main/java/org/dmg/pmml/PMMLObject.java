@@ -4,6 +4,7 @@
 package org.dmg.pmml;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -31,10 +32,19 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
+	VisitorAction traverse(Visitor visitor, Visitable... objects){
+		return traverse(visitor, Arrays.asList(objects));
+	}
+
+	static
 	VisitorAction traverse(Visitor visitor, List<? extends Visitable> objects){
 
 		for(int i = 0; i < objects.size(); i++){
 			Visitable visitable = objects.get(i);
+
+			if(visitable == null){
+				continue;
+			}
 
 			VisitorAction status = visitable.accept(visitor);
 			if(status != VisitorAction.CONTINUE){
@@ -51,13 +61,15 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 		for(int i = 0; i < objects.size(); i++){
 			Object object = objects.get(i);
 
-			if(object instanceof Visitable){
-				Visitable visitable = (Visitable)object;
+			if(!(object instanceof Visitable)){
+				continue;
+			}
 
-				VisitorAction status = visitable.accept(visitor);
-				if(status != VisitorAction.CONTINUE){
-					return status;
-				}
+			Visitable visitable = (Visitable)object;
+
+			VisitorAction status = visitable.accept(visitor);
+			if(status != VisitorAction.CONTINUE){
+				return status;
 			}
 		}
 

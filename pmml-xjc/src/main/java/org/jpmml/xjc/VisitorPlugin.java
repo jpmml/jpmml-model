@@ -18,6 +18,7 @@ import com.sun.codemodel.JEnumConstant;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
@@ -156,6 +157,8 @@ public class VisitorPlugin extends Plugin {
 				body.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
 			}
 
+			JInvocation traverseVarargs = null;
+
 			for(FieldOutline field : fields){
 				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
@@ -171,15 +174,22 @@ public class VisitorPlugin extends Plugin {
 						JMethod hasElementsMethod = beanClazz.getMethod("has" + propertyInfo.getName(true), new JType[0]);
 
 						body._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
+
+						traverseVarargs = null;
 					}
 				} else
 
 				// Simple value
 				{
 					if(traversableTypes.contains(fieldType)){
-						JVar variable = body.decl(getterMethod.type(), propertyInfo.getName(false), JExpr.invoke(getterMethod));
 
-						body._if((status.eq(continueAction)).cand(variable.ne(JExpr._null())))._then().assign(status, JExpr.invoke(variable, "accept").arg(visitorParameter));
+						if(traverseVarargs == null){
+							traverseVarargs = pmmlObjectClazz.staticInvoke("traverse").arg(visitorParameter);
+
+							body._if(status.eq(continueAction))._then().assign(status, traverseVarargs);
+						}
+
+						traverseVarargs.arg(JExpr.invoke(getterMethod));
 					}
 				}
 			}
