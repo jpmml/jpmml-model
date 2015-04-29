@@ -16,7 +16,7 @@ public class Main {
 		Properties properties = new Properties();
 
 		if(options != null){
-			options = options.replace(',', '\n');
+			options = options.replace(';', '\n');
 
 			Reader reader = new StringReader(options);
 
