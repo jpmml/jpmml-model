@@ -11,12 +11,11 @@ import javassist.ByteArrayClassPath;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
-import javassist.CtConstructor;
 import javassist.CtField;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 
-public class PMMLObjectTransformer implements ClassFileTransformer {
+public class LocatorRemover implements ClassFileTransformer {
 
 	private ClassPool classPool = ClassPool.getDefault();
 
@@ -43,22 +42,19 @@ public class PMMLObjectTransformer implements ClassFileTransformer {
 		return null;
 	}
 
-	private CtClass transform(CtClass pmmlObjectClass) throws CannotCompileException, NotFoundException {
-		CtField locatorField = pmmlObjectClass.getDeclaredField("locator");
+	private CtClass transform(CtClass ctClass) throws CannotCompileException, NotFoundException {
+		CtField locatorField = ctClass.getDeclaredField("locator", "Lorg/xml/sax/Locator;");
 
-		pmmlObjectClass.removeField(locatorField);
-
-		CtConstructor defaultConstructor = pmmlObjectClass.getDeclaredConstructor(new CtClass[]{});
-		defaultConstructor.setBody(null);
+		ctClass.removeField(locatorField);
 
 		CtClass locatorClass = this.classPool.get("org.xml.sax.Locator");
 
-		CtMethod getLocatorMethod = pmmlObjectClass.getDeclaredMethod("getLocator");
+		CtMethod getLocatorMethod = ctClass.getDeclaredMethod("getLocator");
 		getLocatorMethod.setBody(null);
 
-		CtMethod setLocatorMethod = pmmlObjectClass.getDeclaredMethod("setLocator", new CtClass[]{locatorClass});
+		CtMethod setLocatorMethod = ctClass.getDeclaredMethod("setLocator", new CtClass[]{locatorClass});
 		setLocatorMethod.setBody(null);
 
-		return pmmlObjectClass;
+		return ctClass;
 	}
 }

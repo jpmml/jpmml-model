@@ -18,7 +18,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	@XmlTransient
 	@com.sun.xml.bind.annotation.XmlLocation
 	@org.eclipse.persistence.oxm.annotations.XmlLocation
-	private Locator locator = null;
+	private Locator locator;
 
 
 	@Override

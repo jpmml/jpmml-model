@@ -27,10 +27,10 @@ public class Main {
 			}
 		}
 
-		String transform = properties.getProperty("transform");
+		String locator = properties.getProperty("locator");
 
-		if(("true").equalsIgnoreCase(transform)){
-			instrumentation.addTransformer(new PMMLObjectTransformer());
+		if(locator != null && !("true").equalsIgnoreCase(locator)){
+			instrumentation.addTransformer(new LocatorRemover(), true);
 		}
 
 		InstrumentationProvider.setInstrumentation(instrumentation);
