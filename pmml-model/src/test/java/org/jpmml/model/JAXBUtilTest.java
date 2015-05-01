@@ -11,6 +11,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
 
 import org.dmg.pmml.CustomObjectFactory;
 import org.dmg.pmml.CustomPMML;
@@ -19,9 +20,17 @@ import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class JAXBUtilTest {
+
+	@Test
+	public void hasSchema() throws Exception {
+		Schema schema = JAXBUtil.getSchema();
+
+		assertNotNull(schema);
+	}
 
 	@Test
 	public void copy() throws Exception {

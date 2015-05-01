@@ -2,7 +2,11 @@
 <!--
 Copyright (c) 2009 University of Tartu
 -->
-<xsl:stylesheet version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xalan="http://xml.apache.org/xslt" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:output method="xml" encoding="UTF-8" indent="yes" xalan:indent-amount="2"/>
+
+	<xsl:strip-space elements="*"/>
 
 	<xsl:include href="pmml-compatibility.xsl"/>
 

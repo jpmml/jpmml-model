@@ -3,14 +3,23 @@
  */
 package org.jpmml.model;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
+import org.dmg.pmml.ObjectFactory;
 import org.dmg.pmml.PMML;
+import org.xml.sax.SAXException;
 
 public class JAXBUtil {
 
@@ -62,13 +71,30 @@ public class JAXBUtil {
 	}
 
 	static
-	public JAXBContext getContext() throws JAXBException {
+	public Schema getSchema() throws IOException, SAXException {
 
-		if(JAXBUtil.instance == null){
-			JAXBUtil.instance = JAXBContext.newInstance(PMML.class);
+		if(JAXBUtil.schema == null){
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+			URL url = ObjectFactory.class.getResource("/pmml.xsd");
+			if(url == null){
+				throw new FileNotFoundException();
+			}
+
+			JAXBUtil.schema = schemaFactory.newSchema(url);
 		}
 
-		return JAXBUtil.instance;
+		return JAXBUtil.schema;
+	}
+
+	static
+	public JAXBContext getContext() throws JAXBException {
+
+		if(JAXBUtil.context == null){
+			JAXBUtil.context = JAXBContext.newInstance(ObjectFactory.class);
+		}
+
+		return JAXBUtil.context;
 	}
 
 	static
@@ -90,5 +116,7 @@ public class JAXBUtil {
 		return unmarshaller;
 	}
 
-	private static JAXBContext instance = null;
+	private static Schema schema = null;
+
+	private static JAXBContext context = null;
 }
