@@ -33,6 +33,12 @@ public class Main {
 			instrumentation.addTransformer(new LocatorRemover(), true);
 		}
 
+		String extensions = properties.getProperty("extensions");
+
+		if(extensions != null && !("true").equalsIgnoreCase(extensions)){
+			instrumentation.addTransformer(new ExtensionListRemover(), true);
+		}
+
 		InstrumentationProvider.setInstrumentation(instrumentation);
 	}
 }
