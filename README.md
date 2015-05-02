@@ -49,7 +49,7 @@ The class model should be self-explanatory. The application developer is advised
 Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
 
 ```java
-public PMML loadPMML(InputStream is) throws Exception {
+public PMML load(InputStream is) throws Exception {
   InputSource source = new InputSource(is);
 
   // Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
@@ -95,12 +95,13 @@ mvn clean install
 
 The resulting uber-JAR file `target/example-1.2-SNAPSHOT.jar` contains the following command-line applications:
 * `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.ValidationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML schema version 3.X or 4.X document against the built-in XML Schema Definition (XSD) resource.
 * `org.jpmml.model.SegmentationOutputExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/SegmentationOutputExample.java). Extends the Output element of a segmentation model with OutputField elements that expose the predicted values of individual segments.
 * `org.jpmml.model.GolfingTreeModelExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/GolfingTreeModelExample.java). Produces a TreeModel for the "golfing" exercise.
 
-For example, transforming `input.pmml` to `output.pmml`:
+For example, checking the validity of `model.pmml`:
 ```
-java -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.CopyExample --input input.pmml --output output.pmml
+java -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.ValidationExample --input model.pmml
 ```
 
 # License #
