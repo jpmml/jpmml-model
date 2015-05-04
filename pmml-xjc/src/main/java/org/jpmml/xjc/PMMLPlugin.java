@@ -3,6 +3,7 @@
  */
 package org.jpmml.xjc;
 
+import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,7 +12,9 @@ import java.util.Map;
 
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JCommentPart;
 import com.sun.codemodel.JDefinedClass;
+import com.sun.codemodel.JDocComment;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
@@ -197,7 +200,28 @@ public class PMMLPlugin extends Plugin {
 					setterMethod.type(beanClazz);
 
 					JVar param = (setterMethod.params()).get(0);
+
+					String paramName = param.name();
+
 					param.name(fieldVar.name());
+
+					JDocComment javadoc = setterMethod.javadoc();
+
+					try {
+						Field atParamsField = JDocComment.class.getDeclaredField("atParams");
+						if(!atParamsField.isAccessible()){
+							atParamsField.setAccessible(true);
+						}
+
+						Map<String, JCommentPart> atParams = (Map)atParamsField.get(javadoc);
+
+						JCommentPart paramComment = atParams.remove(paramName);
+						if(paramComment != null){
+							atParams.put(fieldVar.name(), paramComment);
+						}
+					} catch(ReflectiveOperationException roe){
+						throw new RuntimeException(roe);
+					}
 
 					setterMethod.body()._return(JExpr._this());
 				} // End if
