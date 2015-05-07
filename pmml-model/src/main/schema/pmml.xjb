@@ -729,6 +729,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distribution']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distribution']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Distribution"
@@ -1185,6 +1191,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:attribute[@name='defaultChild']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:sequence/xsd:choice/xsd:sequence/xsd:element[@ref='Partition']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
@@ -2451,7 +2463,7 @@ Copyright (c) 2009 University of Tartu
 				name="CumulativeLinkFunctionType"
 			/>
 			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
@@ -2532,48 +2544,6 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="LinkFunctionType"
 			/>
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='cauchit']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_2"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='identity']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='log']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='logc']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='negbin']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='oddspower']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
-			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction/xsd:enumeration[@value='power']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
 			</annox:annotate>

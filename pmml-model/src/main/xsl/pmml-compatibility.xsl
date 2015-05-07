@@ -133,17 +133,4 @@ Copyright (c) 2014 Villu Ruusmann
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
-
-	<xsl:template match="xsd:simpleType[@name='LINK-FUNCTION']/xsd:restriction">
-		<xsl:variable
-			name="index"
-			select="count(xsd:enumeration[@value='loglog']/preceding-sibling::*) + 1"
-		/>
-		<xsl:copy>
-			<xsl:apply-templates select="@*"/>
-			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:enumeration value="cauchit"/>
-			<xsl:apply-templates select="node()[position() &gt; $index]"/>
-		</xsl:copy>
-	</xsl:template>
 </xsl:stylesheet>
