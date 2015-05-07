@@ -127,6 +127,28 @@ public class ReflectionUtil {
 	}
 
 	static
+	public boolean isDefaultValue(Object value){
+
+		if(value instanceof Boolean){
+			return (Boolean.FALSE).equals(value);
+		} else
+
+		if(value instanceof Character){
+			Character character = (Character)value;
+
+			return Character.compare(character.charValue(), '\u0000') == 0;
+		} else
+
+		if(value instanceof Number){
+			Number number = (Number)value;
+
+			return Double.compare(number.doubleValue(), 0d) == 0;
+		}
+
+		return false;
+	}
+
+	static
 	private List<Field> loadFields(Class<?> clazz, FieldFilter filter){
 		List<Field> result = new ArrayList<Field>();
 

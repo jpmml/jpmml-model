@@ -26,6 +26,18 @@ Copyright (c) 2014 Villu Ruusmann
 		</xsl:copy>
 	</xsl:template>
 
+	<xsl:template match="xsd:element[@name='DerivedField']/xsd:complexType/xsd:sequence">
+		<xsl:variable
+			name="index"
+			select="count(xsd:group[@ref='EXPRESSION']/preceding-sibling::*) + 1"
+		/>
+		<xsl:copy>
+			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
+			<xsd:element ref="Interval" minOccurs="0" maxOccurs="unbounded"/>
+			<xsl:apply-templates select="node()[position() &gt; $index]"/>
+		</xsl:copy>
+	</xsl:template>
+
 	<xsl:template match="xsd:element[@name='Level']/xsd:complexType">
 		<xsl:variable
 			name="index"
@@ -60,6 +72,27 @@ Copyright (c) 2014 Villu Ruusmann
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
 			<xsd:element ref="LocalTransformations" minOccurs="0"/>
+			<xsl:apply-templates select="node()[position() &gt; $index]"/>
+		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="xsd:element[@name='SequenceModel']/xsd:complexType">
+		<xsl:variable
+			name="index"
+			select="count(xsd:attribute[@name='avgNumberOfTAsPerTAGroup']/preceding-sibling::*) + 1"
+		/>
+		<xsl:copy>
+			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
+			<xsd:attribute name="minimumSupport" type="REAL-NUMBER" use="required"/>
+			<xsd:attribute name="minimumConfidence" type="REAL-NUMBER" use="required"/>
+			<xsd:attribute name="lengthLimit" type="INT-NUMBER"/>
+			<xsd:attribute name="numberOfItems" type="INT-NUMBER" use="required"/>
+			<xsd:attribute name="numberOfSets" type="INT-NUMBER" use="required"/>
+			<xsd:attribute name="numberOfSequences" type="INT-NUMBER" use="required"/>
+			<xsd:attribute name="numberOfRules" type="INT-NUMBER" use="required"/>
+			<xsd:attribute name="timeWindowWidth" type="INT-NUMBER"/>
+			<xsd:attribute name="minimumTime" type="INT-NUMBER"/>
+			<xsd:attribute name="maximumTime" type="INT-NUMBER"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>

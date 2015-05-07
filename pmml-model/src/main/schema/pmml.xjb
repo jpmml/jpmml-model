@@ -618,6 +618,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:sequence/xsd:element[@ref='Interval']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Expression"
@@ -1781,9 +1787,87 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='avgNumberOfTAsPerTAGroup']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='lengthLimit']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='maximumTime']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='maxNumberOfTAsPerTAGroup']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='minimumConfidence']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='minimumSupport']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='minimumTime']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfItems']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfRules']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfSequences']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfSets']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfTransactionGroups']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='timeWindowWidth']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_1"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
@@ -1894,6 +1978,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='alternateBinaryTargetCategory']">
 			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
 				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_4_0"/>
 			</annox:annotate>
 		</jaxb:bindings>

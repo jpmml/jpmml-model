@@ -46,6 +46,13 @@ public class VersionInspector extends AbstractSimpleVisitor {
 				continue;
 			}
 
+			Class<?> type = field.getType();
+
+			// The field is set, but the value represents a default value
+			if(type.isPrimitive() && ReflectionUtil.isDefaultValue(value)){
+				continue;
+			}
+
 			inspect(field);
 
 			// The field is set to an enum constant
