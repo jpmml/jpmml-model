@@ -24,6 +24,13 @@ Copyright (c) 2009 University of Tartu
 		<xsl:comment> &lt;xs:element ref=&quot;Extension&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt; </xsl:comment>
 	</xsl:template>
 
+	<xsl:template match="xsd:schema">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+			<xsl:call-template name="compatibility-content"/>
+		</xsl:copy>
+	</xsl:template>
+
 	<!-- 
 	Model types have one Extension list in the beginning and another Extension list in the end, which is too complex for the XJC to handle.
 	-->
