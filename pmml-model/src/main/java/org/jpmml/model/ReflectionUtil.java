@@ -136,7 +136,7 @@ public class ReflectionUtil {
 		if(value instanceof Character){
 			Character character = (Character)value;
 
-			return Character.compare(character.charValue(), '\u0000') == 0;
+			return character.charValue() == '\u0000';
 		} else
 
 		if(value instanceof Number){
