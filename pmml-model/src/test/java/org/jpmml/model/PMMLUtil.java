@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.Source;
@@ -16,15 +17,29 @@ import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.dmg.pmml.Extension;
 import org.dmg.pmml.PMML;
 import org.jpmml.schema.Version;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import static org.junit.Assert.assertEquals;
+
 public class PMMLUtil {
 
 	private PMMLUtil(){
+	}
+
+	static
+	public List<?> getExtension(PMML pmml){
+		List<Extension> extensions = pmml.getExtensions();
+
+		assertEquals(1, extensions.size());
+
+		Extension extension = extensions.get(0);
+
+		return extension.getContent();
 	}
 
 	static
