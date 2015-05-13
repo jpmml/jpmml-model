@@ -3,30 +3,18 @@
  */
 package org.jpmml.model;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.ValidationEventHandler;
-import javax.xml.transform.Source;
 import javax.xml.validation.Schema;
 
-import com.beust.jcommander.Parameter;
-import org.xml.sax.InputSource;
+import org.dmg.pmml.PMML;
 
-public class ValidationExample extends Example {
-
-	@Parameter (
-		names = {"--input"},
-		description = "Input PMML file",
-		required = true
-	)
-	private File input = null;
-
+public class ValidationExample extends ConsumptionExample {
 
 	static
 	public void main(String... args) throws Exception {
@@ -34,22 +22,25 @@ public class ValidationExample extends Example {
 	}
 
 	@Override
-	public void execute() throws Exception {
-		Schema schema = JAXBUtil.getSchema();
+	protected Unmarshaller createUnmarshaller() throws JAXBException {
+		Schema schema;
 
-		Unmarshaller unmarshaller = JAXBUtil.createUnmarshaller();
+		try {
+			schema = JAXBUtil.getSchema();
+		} catch(Exception e){
+			throw new RuntimeException(e);
+		}
+
+		Unmarshaller unmarshaller = super.createUnmarshaller();
+
 		unmarshaller.setSchema(schema);
 		unmarshaller.setEventHandler(new SimpleValidationEventHandler());
 
-		InputStream is = new FileInputStream(this.input);
+		return unmarshaller;
+	}
 
-		try {
-			Source source = ImportFilter.apply(new InputSource(is));
-
-			unmarshaller.unmarshal(source);
-		} finally {
-			is.close();
-		}
+	@Override
+	public void consume(PMML pmml){
 	}
 
 	public class SimpleValidationEventHandler implements ValidationEventHandler {

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import javax.xml.bind.Marshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 
@@ -29,6 +30,8 @@ public class ProductionExample extends Example {
 
 	@Override
 	public void execute() throws Exception {
+		Marshaller marshaller = createMarshaller();
+
 		PMML pmml = produce();
 
 		OutputStream os = new FileOutputStream(this.output);
@@ -36,7 +39,7 @@ public class ProductionExample extends Example {
 		try {
 			Result result = new StreamResult(os);
 
-			JAXBUtil.marshalPMML(pmml, result);
+			marshaller.marshal(pmml, result);
 		} finally {
 			os.close();
 		}
