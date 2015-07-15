@@ -17,9 +17,15 @@ public class Field extends PMMLObject implements HasName {
 	abstract
 	public Field setName(FieldName name);
 
+	/**
+	 * @throws UnsupportedOperationException If the <code>displayName</code> attribute is not supported.
+	 */
 	abstract
 	public String getDisplayName();
 
+	/**
+	 * @throws UnsupportedOperationException If the <code>displayName</code> attribute is not supported.
+	 */
 	abstract
 	public Field setDisplayName(String displayName);
 

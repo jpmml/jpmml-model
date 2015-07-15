@@ -45,15 +45,28 @@ public class Model extends PMMLObject implements HasExtensions {
 	abstract
 	public Model setLocalTransformations(LocalTransformations localTransformations);
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link Targets} child element is not supported.
+	 * This is typically the case with unsupervised learning models.
+	 */
 	abstract
 	public Targets getTargets();
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link Targets} child element is not supported.
+	 */
 	abstract
 	public Model setTargets(Targets targets);
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link Output} child element is not supported.
+	 */
 	abstract
 	public Output getOutput();
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link Output} child element is not supported.
+	 */
 	abstract
 	public Model setOutput(Output output);
 
@@ -63,15 +76,27 @@ public class Model extends PMMLObject implements HasExtensions {
 	abstract
 	public Model setModelStats(ModelStats modelStats);
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link ModelExplanation} child element is not supported.
+	 */
 	abstract
 	public ModelExplanation getModelExplanation();
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link ModelExplanation} child element is not supported.
+	 */
 	abstract
 	public Model setModelExplanation(ModelExplanation modelExplanation);
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link ModelVerification} child element is not supported.
+	 */
 	abstract
 	public ModelVerification getModelVerification();
 
+	/**
+	 * @throws UnsupportedOperationException If the {@link ModelVerification} child element is not supported.
+	 */
 	abstract
 	public Model setModelVerification(ModelVerification modelVerification);
 }
