@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Field extends PMMLObject implements HasName {
+public class Field extends PMMLObject implements HasName, Indexable<FieldName> {
 
 	@Override
 	abstract
@@ -40,4 +40,9 @@ public class Field extends PMMLObject implements HasName {
 
 	abstract
 	public Field setDataType(DataType dataType);
+
+	@Override
+	public FieldName getKey(){
+		return getName();
+	}
 }

@@ -131,8 +131,12 @@ public class PMMLPlugin extends Plugin {
 		JClass hasIdInterface = codeModel.ref("org.dmg.pmml.HasId");
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
 
+		JClass indexableInterface = codeModel.ref("org.dmg.pmml.Indexable");
+
 		JClass iterableInterface = codeModel.ref("java.lang.Iterable");
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
+
+		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
 
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
@@ -142,18 +146,32 @@ public class PMMLPlugin extends Plugin {
 
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-			String fullName = beanClazz.fullName();
-
-			if(("org.dmg.pmml.IntSparseArray").equals(fullName)){
+			if(checkType(beanClazz, "org.dmg.pmml.IntSparseArray")){
 				JClass superClazz = beanClazz._extends();
 
 				beanClazz._extends(superClazz.narrow(Integer.class));
 			} else
 
-			if(("org.dmg.pmml.RealSparseArray").equals(fullName)){
+			if(checkType(beanClazz, "org.dmg.pmml.RealSparseArray")){
 				JClass superClazz = beanClazz._extends();
 
 				beanClazz._extends(superClazz.narrow(Double.class));
+			} // End if
+
+			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction")){
+				beanClazz._implements(indexableInterface.narrow(String.class));
+
+				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
+				keyMethod.annotate(Override.class);
+				keyMethod.body()._return(JExpr.invoke("getName"));
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
+				beanClazz._implements(indexableInterface.narrow(fieldNameClass));
+
+				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
+				keyMethod.annotate(Override.class);
+				keyMethod.body()._return(JExpr.invoke("getName"));
 			}
 
 			FieldOutline idField = getIdField(clazz);
@@ -251,11 +269,11 @@ public class PMMLPlugin extends Plugin {
 
 			@Override
 			public boolean accept(CPropertyInfo propertyInfo, JType type){
-				return ("id").equals(propertyInfo.getName(false)) && ("java.lang.String").equals(type.fullName());
+				return ("id").equals(propertyInfo.getName(false)) && checkType(type, "java.lang.String");
 			}
 		};
 
-		return find(clazz, filter);
+		return findField(clazz, filter);
 	}
 
 	static
@@ -268,14 +286,14 @@ public class PMMLPlugin extends Plugin {
 				if(("extensions").equals(propertyInfo.getName(false)) && propertyInfo.isCollection()){
 					JType elementType = CodeModelUtil.getElementType(type);
 
-					return ("org.dmg.pmml.Extension").equals(elementType.fullName());
+					return checkType(elementType, "org.dmg.pmml.Extension");
 				}
 
 				return false;
 			}
 		};
 
-		return find(clazz, filter);
+		return findField(clazz, filter);
 	}
 
 	static
@@ -300,11 +318,11 @@ public class PMMLPlugin extends Plugin {
 			}
 		};
 
-		return find(clazz, filter);
+		return findField(clazz, filter);
 	}
 
 	static
-	private FieldOutline find(ClassOutline clazz, FieldFilter filter){
+	private FieldOutline findField(ClassOutline clazz, FieldFilter filter){
 		FieldOutline[] fields = clazz.getDeclaredFields();
 
 		for(FieldOutline field : fields){
@@ -317,6 +335,11 @@ public class PMMLPlugin extends Plugin {
 		}
 
 		return null;
+	}
+
+	static
+	private boolean checkType(JType type, String fullName){
+		return (type.fullName()).equals(fullName);
 	}
 
 	static
