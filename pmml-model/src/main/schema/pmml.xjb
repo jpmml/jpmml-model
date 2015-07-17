@@ -16,11 +16,6 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:globalBindings>
 			<xjc:javaType
-				name="java.lang.Double"
-				xmlType="xs:float"
-				adapter="org.dmg.pmml.adapters.FloatAdapter"
-			/>
-			<xjc:javaType
 				name="java.lang.Integer"
 				xmlType="xs:integer"
 				adapter="org.dmg.pmml.adapters.IntegerAdapter"

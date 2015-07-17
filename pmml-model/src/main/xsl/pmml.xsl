@@ -106,4 +106,11 @@ Copyright (c) 2009 University of Tartu
 	<xsl:template match="xsd:attribute[@type='xs:integer' or @type='xs:nonNegativeInteger']/@type">
 		<xsl:attribute name="type">INT-NUMBER</xsl:attribute>
 	</xsl:template>
+
+	<!-- 
+	Replace xsd:float and xsd:double with NUMBER
+	-->
+	<xsl:template match="xsd:attribute[@type='xs:float' or @type='xs:double']/@type">
+		<xsl:attribute name="type">NUMBER</xsl:attribute>
+	</xsl:template>
 </xsl:stylesheet>
