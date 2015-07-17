@@ -99,4 +99,11 @@ Copyright (c) 2009 University of Tartu
 			</xsd:complexType>
 		</xsl:copy>
 	</xsl:template>
+
+	<!--
+	Replace xsd:integer and xsd:nonNegativeInteger with INT-NUMBER
+	-->
+	<xsl:template match="xsd:attribute[@type='xs:integer' or @type='xs:nonNegativeInteger']/@type">
+		<xsl:attribute name="type">INT-NUMBER</xsl:attribute>
+	</xsl:template>
 </xsl:stylesheet>
