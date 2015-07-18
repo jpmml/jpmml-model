@@ -27,9 +27,14 @@ public class ComparisonField extends PMMLObject implements HasExtensions {
 	abstract
 	public ComparisonField setCompareFunction(CompareFunctionType compareFunction);
 
-	abstract
-	public Double getSimilarityScale();
+	public Double getSimilarityScale(){
+		return null;
+	}
 
-	abstract
-	public ComparisonField setSimilarityScale(Double similarityScale);
+	/**
+	 * @throws UnsupportedOperationException If the <code>similarityScale</code> attribute is not supported.
+	 */
+	public ComparisonField setSimilarityScale(Double similarityScale){
+		throw new UnsupportedOperationException();
+	}
 }

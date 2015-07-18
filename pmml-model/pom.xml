@@ -151,7 +151,6 @@
 						<arg>-Xpmml</arg>
 						<arg>-XsuperClass</arg>
 						<arg>-XsuperClass-defaultName=org.dmg.pmml.PMMLObject</arg>
-						<arg>-XunsupportedProperty</arg>
 						<arg>-XvalueConstructor</arg>
 						<arg>-Xvisitor</arg>
 						<arg>-Xwildcard</arg>

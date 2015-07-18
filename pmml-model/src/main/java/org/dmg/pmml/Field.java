@@ -17,17 +17,16 @@ public class Field extends PMMLObject implements HasName, Indexable<FieldName> {
 	abstract
 	public Field setName(FieldName name);
 
-	/**
-	 * @throws UnsupportedOperationException If the <code>displayName</code> attribute is not supported.
-	 */
-	abstract
-	public String getDisplayName();
+	public String getDisplayName(){
+		return null;
+	}
 
 	/**
 	 * @throws UnsupportedOperationException If the <code>displayName</code> attribute is not supported.
 	 */
-	abstract
-	public Field setDisplayName(String displayName);
+	public Field setDisplayName(String displayName){
+		throw new UnsupportedOperationException();
+	}
 
 	abstract
 	public OpType getOpType();

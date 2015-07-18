@@ -13,15 +13,17 @@ public class Rule extends Entity {
 	 * @throws UnsupportedOperationException If the <code>id</code> attribute is not supported.
 	 */
 	@Override
-	abstract
-	public String getId();
+	public String getId(){
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * @throws UnsupportedOperationException If the <code>id</code> attribute is not supported.
 	 */
 	@Override
-	abstract
-	public Rule setId(String id);
+	public Rule setId(String id){
+		throw new UnsupportedOperationException();
+	}
 
 	abstract
 	public Predicate getPredicate();

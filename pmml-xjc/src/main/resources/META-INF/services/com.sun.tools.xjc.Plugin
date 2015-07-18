@@ -1,5 +1,4 @@
 org.jpmml.xjc.PMMLPlugin
 org.jpmml.xjc.SuperClassPlugin
-org.jpmml.xjc.UnsupportedPropertyPlugin
 org.jpmml.xjc.ValueConstructorPlugin
 org.jpmml.xjc.VisitorPlugin

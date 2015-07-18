@@ -126,14 +126,6 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.Model"
 			/>
-			<java:unsupportedProperty
-				property="modelExplanation"
-				name="org.dmg.pmml.ModelExplanation"
-			/>
-			<java:unsupportedProperty
-				property="targets"
-				name="org.dmg.pmml.Targets"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -359,10 +351,6 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.Model"
 			/>
-			<java:unsupportedProperty
-				property="targets"
-				name="org.dmg.pmml.Targets"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -434,10 +422,6 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='CompoundRule']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Rule"
-			/>
-			<java:unsupportedProperty
-				property="id"
-				name="java.lang.String"
 			/>
 		</jaxb:bindings>
 
@@ -916,10 +900,6 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.ComparisonField"
 			/>
-			<java:unsupportedProperty
-				property="similarityScale"
-				name="java.lang.Double"
-			/>
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
@@ -1349,10 +1329,6 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.Field"
 			/>
-			<java:unsupportedProperty
-				property="displayName"
-				name="java.lang.String"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -1776,22 +1752,6 @@ Copyright (c) 2009 University of Tartu
 			<java:superClass
 				name="org.dmg.pmml.Model"
 			/>
-			<java:unsupportedProperty
-				property="modelExplanation"
-				name="org.dmg.pmml.ModelExplanation"
-			/>
-			<java:unsupportedProperty
-				property="modelVerification"
-				name="org.dmg.pmml.ModelVerification"
-			/>
-			<java:unsupportedProperty
-				property="output"
-				name="org.dmg.pmml.Output"
-			/>
-			<java:unsupportedProperty
-				property="targets"
-				name="org.dmg.pmml.Targets"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='avgNumberOfTAsPerTAGroup']">
@@ -2194,10 +2154,6 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType">
 			<java:superClass
 				name="org.dmg.pmml.Model"
-			/>
-			<java:unsupportedProperty
-				property="targets"
-				name="org.dmg.pmml.Targets"
 			/>
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
