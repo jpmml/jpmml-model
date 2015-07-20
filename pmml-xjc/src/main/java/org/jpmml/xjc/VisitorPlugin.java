@@ -79,6 +79,8 @@ public class VisitorPlugin extends Plugin {
 
 		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, void.class, "popParent");
 
+		JMethod visitorGetParents = visitorInterface.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
+
 		JPackage visitorPackage = codeModel._package("org.jpmml.model.visitors");
 
 		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
@@ -102,6 +104,7 @@ public class VisitorPlugin extends Plugin {
 		abstractVisitorPopParent.body().add(abstractVisitorParentsRef.invoke("removeFirst"));
 
 		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
+		abstractVisitorGetParents.annotate(Override.class);
 		abstractVisitorGetParents.body()._return(abstractVisitorParentsRef);
 
 		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._extends(abstractVisitorClazz);
