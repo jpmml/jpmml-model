@@ -172,6 +172,14 @@ public class PMMLPlugin extends Plugin {
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getName"));
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.Target")){
+				beanClazz._implements(indexableInterface.narrow(fieldNameClass));
+
+				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
+				keyMethod.annotate(Override.class);
+				keyMethod.body()._return(JExpr.invoke("getField"));
 			}
 
 			FieldOutline idField = getIdField(clazz);
