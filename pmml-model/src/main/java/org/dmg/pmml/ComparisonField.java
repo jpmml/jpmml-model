@@ -16,7 +16,7 @@ public class ComparisonField extends PMMLObject implements HasExtensions {
 	public ComparisonField setField(FieldName field);
 
 	abstract
-	public double getFieldWeight();
+	public Double getFieldWeight();
 
 	abstract
 	public ComparisonField setFieldWeight(Double fieldWeight);

@@ -222,6 +222,18 @@ public class PMMLPlugin extends Plugin {
 				JMethod getterMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
 				JMethod setterMethod = beanClazz.getMethod("set" + propertyInfo.getName(true), new JType[]{type});
 
+				if(getterMethod != null){
+					JType returnType = getterMethod.type();
+
+					if(returnType.isPrimitive() && !type.isPrimitive()){
+						JType boxifiedReturnType = returnType.boxify();
+
+						if((boxifiedReturnType).equals(type)){
+							getterMethod.type(boxifiedReturnType);
+						}
+					}
+				} // End if
+
 				if(setterMethod != null){
 					setterMethod.type(beanClazz);
 
