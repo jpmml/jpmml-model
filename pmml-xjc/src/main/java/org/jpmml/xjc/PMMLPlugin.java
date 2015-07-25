@@ -158,7 +158,7 @@ public class PMMLPlugin extends Plugin {
 				beanClazz._extends(superClazz.narrow(Double.class));
 			} // End if
 
-			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction")){
+			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.Parameter")){
 				beanClazz._implements(indexableInterface.narrow(String.class));
 
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
