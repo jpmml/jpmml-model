@@ -180,6 +180,14 @@ public class PMMLPlugin extends Plugin {
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getField"));
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.Item") || checkType(beanClazz, "org.dmg.pmml.Itemset") || checkType(beanClazz, "org.dmg.pmml.Sequence") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
+				beanClazz._implements(indexableInterface.narrow(String.class));
+
+				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
+				keyMethod.annotate(Override.class);
+				keyMethod.body()._return(JExpr.invoke("getId"));
 			}
 
 			FieldOutline idField = getIdField(clazz);
