@@ -18,6 +18,12 @@ public class SparseArray<E extends Number> extends PMMLObject {
 	public SparseArray<E> setN(Integer n);
 
 	abstract
+	public E getDefaultValue();
+
+	abstract
+	public SparseArray<E> setDefaultValue(E defaultValue);
+
+	abstract
 	public List<Integer> getIndices();
 
 	abstract
