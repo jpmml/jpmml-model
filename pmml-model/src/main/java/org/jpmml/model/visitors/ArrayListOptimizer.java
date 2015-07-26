@@ -12,7 +12,9 @@ import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 
 /**
+ * <p>
  * A Visitor that optimizes the size of element lists.
+ * </p>
  */
 public class ArrayListOptimizer extends AbstractSimpleVisitor {
 

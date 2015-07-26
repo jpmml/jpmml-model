@@ -5,6 +5,11 @@ package org.dmg.pmml;
 
 import java.util.List;
 
+/**
+ * <p>
+ * A marker interface for PMML elements that specify {@link Extension} child elements.
+ * </p>
+ */
 public interface HasExtensions {
 
 	boolean hasExtensions();

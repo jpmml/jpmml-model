@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.XmlTransient;
 abstract
 public class Entity extends PMMLObject implements HasId {
 
+	/**
+	 * @return The explicit entity identifier. Could be <code>null</code>.
+	 */
 	@Override
 	abstract
 	public String getId();

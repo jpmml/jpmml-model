@@ -18,7 +18,9 @@ import org.jpmml.schema.Removed;
 import org.jpmml.schema.Version;
 
 /**
+ * <p>
  * A Visitor that determines the range of valid PMML schema versions for a class model object.
+ * </p>
  *
  * @see Added
  * @see Removed
@@ -103,7 +105,9 @@ public class VersionInspector extends AbstractSimpleVisitor {
 	}
 
 	/**
+	 * <p>
 	 * The minimum (ie. earliest) PMML schema version that can fully represent this class model object.
+	 * </p>
 	 *
 	 * @see Version#getMinimum()
 	 */
@@ -119,7 +123,9 @@ public class VersionInspector extends AbstractSimpleVisitor {
 	}
 
 	/**
+	 * <p>
 	 * The maximum (ie. latest) PMML schema version that can fully represent this class model object.
+	 * </p>
 	 *
 	 * @see Version#getMaximum()
 	 */

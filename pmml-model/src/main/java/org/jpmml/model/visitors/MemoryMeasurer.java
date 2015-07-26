@@ -22,7 +22,9 @@ import org.jpmml.model.ReflectionUtil;
  * A Visitor that measures the deep size of a class model object.
  * </p>
  *
+ * <p>
  * The object size is measured using {@link Instrumentation#getObjectSize(Object)} method.
+ * </p>
  */
 public class MemoryMeasurer extends AbstractSimpleVisitor {
 

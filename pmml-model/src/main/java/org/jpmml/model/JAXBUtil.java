@@ -27,7 +27,9 @@ public class JAXBUtil {
 	}
 
 	/**
+	 * <p>
 	 * Unmarshals a {@link PMML} class model object.
+	 * </p>
 	 *
 	 * @param source Input source containing a complete PMML schema version 4.2 document.
 	 *
@@ -39,7 +41,9 @@ public class JAXBUtil {
 	}
 
 	/**
+	 * <p>
 	 * Unmarshals any class model object.
+	 * </p>
 	 *
 	 * @param source Input source containing a complete PMML schema version 4.2 document or any fragment of it.
 	 */
@@ -51,7 +55,9 @@ public class JAXBUtil {
 	}
 
 	/**
+	 * <p>
 	 * Marshals a {@link PMML} class model object.
+	 * </p>
 	 *
 	 * @see ExportFilter
 	 */
@@ -61,7 +67,9 @@ public class JAXBUtil {
 	}
 
 	/**
+	 * <p>
 	 * Marshals any class model object.
+	 * </p>
 	 */
 	static
 	public void marshal(Object object, Result result) throws JAXBException {

@@ -4,12 +4,14 @@
 package org.dmg.pmml;
 
 /**
+ * <p>
  * A marker interface for PMML elements that specify a primary key-like attribute.
+ * </p>
  */
 public interface Indexable<K> {
 
 	/**
-	 * Gets the value of the primary key-like attribute.
+	 * @return The value of the primary key-like attribute. Never <code>null</code>.
 	 */
 	K getKey();
 }

@@ -10,7 +10,9 @@ import org.dmg.pmml.VisitorAction;
 import org.xml.sax.Locator;
 
 /**
+ * <p>
  * A Visitor that transforms the SAX Locator information of a class model object to {@link Serializable} form.
+ * </p>
  *
  * @see PMMLObject#getLocator()
  * @see PMMLObject#setLocator(Locator)
