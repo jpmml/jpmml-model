@@ -2601,7 +2601,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']">
 			<jaxb:typesafeEnumClass
-				name="ResultFeatureType"
+				name="FeatureType"
 			/>
 		</jaxb:bindings>
 
