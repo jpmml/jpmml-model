@@ -12,5 +12,8 @@ abstract
 public class PredictorList extends PMMLObject implements HasExtensions {
 
 	abstract
+	public boolean hasPredictors();
+
+	abstract
 	public List<Predictor> getPredictors();
 }

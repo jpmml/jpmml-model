@@ -12,5 +12,8 @@ abstract
 public class TypeDefinitionField extends Field implements HasExtensions {
 
 	abstract
+	public boolean hasValues();
+
+	abstract
 	public List<Value> getValues();
 }
