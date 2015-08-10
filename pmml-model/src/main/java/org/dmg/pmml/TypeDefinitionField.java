@@ -16,4 +16,10 @@ public class TypeDefinitionField extends Field implements HasExtensions {
 
 	abstract
 	public List<Value> getValues();
+
+	abstract
+	public boolean hasIntervals();
+
+	abstract
+	public List<Interval> getIntervals();
 }
