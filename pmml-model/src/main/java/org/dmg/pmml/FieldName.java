@@ -74,6 +74,12 @@ public class FieldName implements Serializable {
 		this.value = value;
 	}
 
+	/**
+	 * Replaces this newly deserialized {@link FieldName} instance with the singleton one.
+	 *
+	 * @see Serializable
+	 */
+	final
 	Object readResolve(){
 		return intern();
 	}

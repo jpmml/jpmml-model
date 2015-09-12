@@ -22,7 +22,7 @@ public class FieldNameTest {
 	}
 
 	@Test
-	public void serialization() throws Exception {
+	public void readResolve() throws Exception {
 		FieldName name = FieldName.create("x");
 		assertTrue(name.isInterned());
 
