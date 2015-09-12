@@ -5,8 +5,7 @@ package org.dmg.pmml;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 final
 public class FieldName implements Serializable {
@@ -102,5 +101,26 @@ public class FieldName implements Serializable {
 		return name;
 	}
 
-	private static final Map<String, WeakReference<FieldName>> cache = new WeakHashMap<>();
+	static
+	public void compact(){
+		FieldName.cache.compact();
+	}
+
+	private static final Cache<String, FieldName> cache = new Cache<String, FieldName>(){
+
+		private AtomicLong counter = new AtomicLong();
+
+
+		@Override
+		public WeakReference<FieldName> put(String key, WeakReference<FieldName> value){
+			WeakReference<FieldName> result = super.put(key, value);
+
+			// Perform cache compaction after every 100 put operations
+			if((this.counter.incrementAndGet() % 100L) == 0L){
+				compact();
+			}
+
+			return result;
+		}
+	};
 }
