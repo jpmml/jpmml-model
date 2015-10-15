@@ -128,8 +128,9 @@ public class PMMLPlugin extends Plugin {
 
 		JCodeModel codeModel = model.codeModel;
 
-		JClass hasIdInterface = codeModel.ref("org.dmg.pmml.HasId");
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
+		JClass hasIdInterface = codeModel.ref("org.dmg.pmml.HasId");
+		JClass hasPredicateInterface = codeModel.ref("org.dmg.pmml.HasPredicate");
 
 		JClass indexableInterface = codeModel.ref("org.dmg.pmml.Indexable");
 
@@ -198,14 +199,19 @@ public class PMMLPlugin extends Plugin {
 				keyMethod.body()._return(JExpr.invoke("getValue"));
 			}
 
+			FieldOutline extensionsField = getExtensionsField(clazz);
+			if(extensionsField != null){
+				beanClazz._implements(hasExtensionsInterface);
+			}
+
 			FieldOutline idField = getIdField(clazz);
 			if(idField != null){
 				beanClazz._implements(hasIdInterface);
 			}
 
-			FieldOutline extensionsField = getExtensionsField(clazz);
-			if(extensionsField != null){
-				beanClazz._implements(hasExtensionsInterface);
+			FieldOutline predicateField = getPredicateField(clazz);
+			if(predicateField != null){
+				beanClazz._implements(hasPredicateInterface);
 			}
 
 			FieldOutline contentField = getContentField(clazz);
@@ -300,19 +306,6 @@ public class PMMLPlugin extends Plugin {
 	}
 
 	static
-	private FieldOutline getIdField(ClassOutline clazz){
-		FieldFilter filter = new FieldFilter(){
-
-			@Override
-			public boolean accept(CPropertyInfo propertyInfo, JType type){
-				return ("id").equals(propertyInfo.getName(false)) && checkType(type, "java.lang.String");
-			}
-		};
-
-		return findField(clazz, filter);
-	}
-
-	static
 	private FieldOutline getExtensionsField(ClassOutline clazz){
 		FieldFilter filter = new FieldFilter(){
 
@@ -326,6 +319,32 @@ public class PMMLPlugin extends Plugin {
 				}
 
 				return false;
+			}
+		};
+
+		return findField(clazz, filter);
+	}
+
+	static
+	private FieldOutline getIdField(ClassOutline clazz){
+		FieldFilter filter = new FieldFilter(){
+
+			@Override
+			public boolean accept(CPropertyInfo propertyInfo, JType type){
+				return ("id").equals(propertyInfo.getName(false)) && checkType(type, "java.lang.String");
+			}
+		};
+
+		return findField(clazz, filter);
+	}
+
+	static
+	private FieldOutline getPredicateField(ClassOutline clazz){
+		FieldFilter filter = new FieldFilter(){
+
+			@Override
+			public boolean accept(CPropertyInfo propertyInfo, JType type){
+				return ("predicate").equals(propertyInfo.getName(false)) && checkType(type, "org.dmg.pmml.Predicate");
 			}
 		};
 
