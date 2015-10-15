@@ -128,6 +128,7 @@ public class PMMLPlugin extends Plugin {
 
 		JCodeModel codeModel = model.codeModel;
 
+		JClass hasExpressionInterface = codeModel.ref("org.dmg.pmml.HasExpression");
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
 		JClass hasIdInterface = codeModel.ref("org.dmg.pmml.HasId");
 		JClass hasPredicateInterface = codeModel.ref("org.dmg.pmml.HasPredicate");
@@ -197,6 +198,11 @@ public class PMMLPlugin extends Plugin {
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getValue"));
+			}
+
+			FieldOutline expressionField = getExpressionField(clazz);
+			if(expressionField != null){
+				beanClazz._implements(hasExpressionInterface);
 			}
 
 			FieldOutline extensionsField = getExtensionsField(clazz);
@@ -303,6 +309,19 @@ public class PMMLPlugin extends Plugin {
 		}
 
 		return true;
+	}
+
+	static
+	private FieldOutline getExpressionField(ClassOutline clazz){
+		FieldFilter filter = new FieldFilter(){
+
+			@Override
+			public boolean accept(CPropertyInfo propertyInfo, JType type){
+				return ("expression").equals(propertyInfo.getName(false)) && checkType(type, "org.dmg.pmml.Expression");
+			}
+		};
+
+		return findField(clazz, filter);
 	}
 
 	static
