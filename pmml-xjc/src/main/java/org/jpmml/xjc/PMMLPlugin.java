@@ -133,6 +133,7 @@ public class PMMLPlugin extends Plugin {
 		JClass hasIdInterface = codeModel.ref("org.dmg.pmml.HasId");
 		JClass hasPredicateInterface = codeModel.ref("org.dmg.pmml.HasPredicate");
 		JClass hasValueInterface = codeModel.ref("org.dmg.pmml.HasValue");
+		JClass hasValueSetInterface = codeModel.ref("org.dmg.pmml.HasValueSet");
 		JClass indexableInterface = codeModel.ref("org.dmg.pmml.Indexable");
 
 		JClass iterableInterface = codeModel.ref("java.lang.Iterable");
@@ -198,6 +199,10 @@ public class PMMLPlugin extends Plugin {
 				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				fieldMethod.annotate(Override.class);
 				fieldMethod.body()._return(JExpr.invoke("getPredictorName"));
+			} // End if
+
+			if(checkType(beanClazz, "org.dmg.pmml.SetPredicate") || checkType(beanClazz, "org.dmg.pmml.SimpleSetPredicate")){
+				beanClazz._implements(hasValueSetInterface);
 			} // End if
 
 			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.Parameter")){
