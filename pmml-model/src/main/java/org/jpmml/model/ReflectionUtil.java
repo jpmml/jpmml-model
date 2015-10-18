@@ -14,10 +14,27 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.dmg.pmml.PMMLObject;
 
 public class ReflectionUtil {
 
 	private ReflectionUtil(){
+	}
+
+	static
+	public <E extends PMMLObject> void copyState(E from, E to){
+
+		// Allow copying to the same class or to a subclass, but not to a superclass
+		if(!(from.getClass()).isAssignableFrom(to.getClass())){
+			throw new IllegalArgumentException();
+		}
+
+		List<Field> fields = getAllInstanceFields(from);
+		for(Field field : fields){
+			Object value = getFieldValue(field, from);
+
+			setFieldValue(field, to, value);
+		}
 	}
 
 	static
