@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
@@ -51,8 +52,9 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 		value = {"unused"}
 	)
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
-		Collection<? extends ClassOutline> clazzes = outline.getClasses();
+		JCodeModel codeModel = outline.getCodeModel();
 
+		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
 

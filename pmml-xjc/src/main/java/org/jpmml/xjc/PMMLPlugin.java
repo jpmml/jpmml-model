@@ -112,7 +112,6 @@ public class PMMLPlugin extends Plugin {
 
 				// Simple value
 				{
-					// This attribute is common to all Model subclasses. Here, programmatic customization is better than manual customization
 					if((privateName).equals("isScorable")){
 						propertyInfo.setName(true, "Scorable");
 						propertyInfo.setName(false, "scorable");
@@ -128,122 +127,64 @@ public class PMMLPlugin extends Plugin {
 
 		JCodeModel codeModel = model.codeModel;
 
-		JClass hasExpressionInterface = codeModel.ref("org.dmg.pmml.HasExpression");
-		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
-		JClass hasIdInterface = codeModel.ref("org.dmg.pmml.HasId");
-		JClass hasPredicateInterface = codeModel.ref("org.dmg.pmml.HasPredicate");
-		JClass hasValueInterface = codeModel.ref("org.dmg.pmml.HasValue");
-		JClass hasValueSetInterface = codeModel.ref("org.dmg.pmml.HasValueSet");
-		JClass indexableInterface = codeModel.ref("org.dmg.pmml.Indexable");
-
 		JClass iterableInterface = codeModel.ref("java.lang.Iterable");
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
 
-		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
+		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
 
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
+
+		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
 
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
 
-			Map<String, JFieldVar> fieldVars = beanClazz.fields();
-
-			if(checkType(beanClazz, "org.dmg.pmml.IntSparseArray")){
-				JClass superClazz = beanClazz._extends();
-
-				beanClazz._extends(superClazz.narrow(Integer.class));
-			} else
-
-			if(checkType(beanClazz, "org.dmg.pmml.RealSparseArray")){
-				JClass superClazz = beanClazz._extends();
-
-				beanClazz._extends(superClazz.narrow(Double.class));
-			}
-
-			FieldOutline expressionField = getExpressionField(clazz);
-			if(expressionField != null){
-				beanClazz._implements(hasExpressionInterface);
-			}
-
-			FieldOutline extensionsField = getExtensionsField(clazz);
-			if(extensionsField != null){
-				beanClazz._implements(hasExtensionsInterface);
-			}
-
-			FieldOutline idField = getIdField(clazz);
-			if(idField != null){
-				beanClazz._implements(hasIdInterface);
-			}
-
-			FieldOutline predicateField = getPredicateField(clazz);
-			if(predicateField != null){
-				beanClazz._implements(hasPredicateInterface);
-			}
-
-			if(checkType(beanClazz, "org.dmg.pmml.FieldValue") || checkType(beanClazz, "org.dmg.pmml.FieldValueCount") || checkType(beanClazz, "org.dmg.pmml.NormDiscrete") || checkType(beanClazz, "org.dmg.pmml.SimplePredicate")){
-				beanClazz._implements(hasValueInterface);
-			} else
-
+			// Implementations of org.dmg.pmml.HasValue
 			if(checkType(beanClazz, "org.dmg.pmml.CategoricalPredictor")){
-				beanClazz._implements(hasValueInterface);
-
 				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				fieldMethod.annotate(Override.class);
 				fieldMethod.body()._return(JExpr.invoke("getName"));
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.PPCell")){
-				beanClazz._implements(hasValueInterface);
-
 				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				fieldMethod.annotate(Override.class);
 				fieldMethod.body()._return(JExpr.invoke("getPredictorName"));
 			} // End if
 
-			if(checkType(beanClazz, "org.dmg.pmml.SetPredicate") || checkType(beanClazz, "org.dmg.pmml.SimpleSetPredicate")){
-				beanClazz._implements(hasValueSetInterface);
-			} // End if
-
+			// Implementations of org.dmg.pmml.Indexable
 			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.Parameter")){
-				beanClazz._implements(indexableInterface.narrow(String.class));
-
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getName"));
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
-				beanClazz._implements(indexableInterface.narrow(fieldNameClass));
-
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getName"));
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Target")){
-				beanClazz._implements(indexableInterface.narrow(fieldNameClass));
-
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getField"));
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.Item") || checkType(beanClazz, "org.dmg.pmml.Itemset") || checkType(beanClazz, "org.dmg.pmml.Sequence") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
-				beanClazz._implements(indexableInterface.narrow(String.class));
-
+			if(checkType(beanClazz, "org.dmg.pmml.Item") || checkType(beanClazz, "org.dmg.pmml.Itemset") || checkType(beanClazz, "org.dmg.pmml.Sequence") || checkType(beanClazz, "org.dmg.pmml.TextDocument") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getId"));
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Value")){
-				beanClazz._implements(indexableInterface.narrow(String.class));
-
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getValue"));
 			}
+
+			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
 			FieldOutline contentField = getContentField(clazz);
 			if(contentField != null){
@@ -257,6 +198,11 @@ public class PMMLPlugin extends Plugin {
 
 				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
 				iteratorMethod.body()._return(JExpr.invoke("get" + propertyInfo.getName(true)).invoke("iterator"));
+			}
+
+			FieldOutline extensionsField = getExtensionsField(clazz);
+			if(extensionsField != null){
+				beanClazz._implements(hasExtensionsInterface);
 			}
 
 			FieldOutline[] fields = clazz.getDeclaredFields();
@@ -337,19 +283,6 @@ public class PMMLPlugin extends Plugin {
 	}
 
 	static
-	private FieldOutline getExpressionField(ClassOutline clazz){
-		FieldFilter filter = new FieldFilter(){
-
-			@Override
-			public boolean accept(CPropertyInfo propertyInfo, JType type){
-				return ("expression").equals(propertyInfo.getName(false)) && checkType(type, "org.dmg.pmml.Expression");
-			}
-		};
-
-		return findField(clazz, filter);
-	}
-
-	static
 	private FieldOutline getExtensionsField(ClassOutline clazz){
 		FieldFilter filter = new FieldFilter(){
 
@@ -363,32 +296,6 @@ public class PMMLPlugin extends Plugin {
 				}
 
 				return false;
-			}
-		};
-
-		return findField(clazz, filter);
-	}
-
-	static
-	private FieldOutline getIdField(ClassOutline clazz){
-		FieldFilter filter = new FieldFilter(){
-
-			@Override
-			public boolean accept(CPropertyInfo propertyInfo, JType type){
-				return ("id").equals(propertyInfo.getName(false)) && checkType(type, "java.lang.String");
-			}
-		};
-
-		return findField(clazz, filter);
-	}
-
-	static
-	private FieldOutline getPredicateField(ClassOutline clazz){
-		FieldFilter filter = new FieldFilter(){
-
-			@Override
-			public boolean accept(CPropertyInfo propertyInfo, JType type){
-				return ("predicate").equals(propertyInfo.getName(false)) && checkType(type, "org.dmg.pmml.Predicate");
 			}
 		};
 

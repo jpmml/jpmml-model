@@ -112,15 +112,15 @@ public class VisitorPlugin extends Plugin {
 		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
 		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
 
-		Set<JType> traversableTypes = new LinkedHashSet<>();
+		Set<String> traversableTypes = new LinkedHashSet<>();
 
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
-			traversableTypes.add(beanClazz);
+			traversableTypes.add(beanClazz.name());
 
 			JClass beanSuperClazz = beanClazz._extends();
-			traversableTypes.add(beanSuperClazz);
+			traversableTypes.add(beanSuperClazz.name());
 		} // End for
 
 		for(ClassOutline clazz : clazzes){
@@ -139,12 +139,12 @@ public class VisitorPlugin extends Plugin {
 			abstractVisitorVisit.param(beanClazz, parameterName);
 			abstractVisitorVisit.body()._return(continueAction);
 
-			JClass beanSuperClass = beanClazz._extends();
+			JClass beanSuperClazz = beanClazz._extends();
 
 			JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
 			abstractSimpleVisitorVisit.annotate(Override.class);
 			abstractSimpleVisitorVisit.param(beanClazz, parameterName);
-			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(beanSuperClass, JExpr.ref(parameterName))));
+			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(beanSuperClazz, JExpr.ref(parameterName))));
 
 			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
 			beanAccept.annotate(Override.class);
@@ -173,10 +173,10 @@ public class VisitorPlugin extends Plugin {
 				if(propertyInfo.isCollection()){
 					JType fieldElementType = CodeModelUtil.getElementType(fieldType);
 
-					if(traversableTypes.contains(fieldElementType) || objectClazz.equals(fieldElementType)){
+					if(traversableTypes.contains(fieldElementType.name()) || objectClazz.equals(fieldElementType)){
 						JMethod hasElementsMethod = beanClazz.getMethod("has" + propertyInfo.getName(true), new JType[0]);
 
-						body._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
+						body._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType.name()) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
 
 						traverseVarargs = null;
 					}
@@ -184,7 +184,7 @@ public class VisitorPlugin extends Plugin {
 
 				// Simple value
 				{
-					if(traversableTypes.contains(fieldType)){
+					if(traversableTypes.contains(fieldType.name())){
 
 						if(traverseVarargs == null){
 							traverseVarargs = pmmlObjectClazz.staticInvoke("traverse").arg(visitorParameter);

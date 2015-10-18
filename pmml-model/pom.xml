@@ -148,9 +148,8 @@
 						<arg>-npa</arg>
 						<arg>-Xannotate</arg>
 						<arg>-Xannotate-defaultFieldTarget=field</arg>
+						<arg>-Xinheritance</arg>
 						<arg>-Xpmml</arg>
-						<arg>-XsuperClass</arg>
-						<arg>-XsuperClass-defaultName=org.dmg.pmml.PMMLObject</arg>
 						<arg>-XvalueConstructor</arg>
 						<arg>-Xvisitor</arg>
 						<arg>-Xwildcard</arg>
