@@ -49,12 +49,8 @@ public class WildcardTest {
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
-		InputStream is = PMMLUtil.getResourceAsStream(getClass());
-
-		try {
+		try(InputStream is = PMMLUtil.getResourceAsStream(getClass())){
 			pmml = (PMML)unmarshaller.unmarshal(new StreamSource(is));
-		} finally {
-			is.close();
 		}
 
 		return PMMLUtil.getExtension(pmml);

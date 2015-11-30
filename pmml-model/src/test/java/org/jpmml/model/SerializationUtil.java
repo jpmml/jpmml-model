@@ -23,37 +23,26 @@ public class SerializationUtil {
 
 	static
 	public byte[] serializeObject(Object object) throws Exception {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
 
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(os);
+		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
 
-			try {
+			try(ObjectOutputStream oos = new ObjectOutputStream(os)){
 				oos.writeObject(object);
-			} finally {
-				oos.close();
-			}
-		} finally {
-			os.close();
-		}
+				oos.flush();
 
-		return os.toByteArray();
+				return os.toByteArray();
+			}
+		}
 	}
 
 	static
 	public Object deserializeObject(byte[] bytes) throws Exception {
-		ByteArrayInputStream is = new ByteArrayInputStream(bytes);
 
-		try {
-			ObjectInputStream ois = new ObjectInputStream(is);
+		try(ByteArrayInputStream is = new ByteArrayInputStream(bytes)){
 
-			try {
+			try(ObjectInputStream ois = new ObjectInputStream(is)){
 				return ois.readObject();
-			} finally {
-				ois.close();
 			}
-		} finally {
-			is.close();
 		}
 	}
 }

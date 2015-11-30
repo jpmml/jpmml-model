@@ -54,12 +54,8 @@ public class XPathUtil {
 
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
-		InputStream is = new ByteArrayInputStream(bytes);
-
-		try {
+		try(InputStream is = new ByteArrayInputStream(bytes)){
 			return documentBuilder.parse(is);
-		} finally {
-			is.close();
 		}
 	}
 

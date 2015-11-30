@@ -34,14 +34,10 @@ public class ConsumptionExample extends Example {
 
 		PMML pmml;
 
-		InputStream is = new FileInputStream(this.input);
-
-		try {
+		try(InputStream is = new FileInputStream(this.input)){
 			Source source = ImportFilter.apply(new InputSource(is));
 
 			pmml = (PMML)unmarshaller.unmarshal(source);
-		} finally {
-			is.close();
 		}
 
 		consume(pmml);

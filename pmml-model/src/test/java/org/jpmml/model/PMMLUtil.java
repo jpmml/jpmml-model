@@ -44,23 +44,17 @@ public class PMMLUtil {
 
 	static
 	public PMML loadResource(Class<?> clazz) throws IOException, JAXBException {
-		InputStream is = getResourceAsStream(clazz);
 
-		try {
+		try(InputStream is = getResourceAsStream(clazz)){
 			return JAXBUtil.unmarshalPMML(new StreamSource(is));
-		} finally {
-			is.close();
 		}
 	}
 
 	static
 	public byte[] getResourceAsByteArray(Class<?> clazz) throws IOException {
-		InputStream is = getResourceAsStream(clazz);
 
-		try {
+		try(InputStream is = getResourceAsStream(clazz)){
 			return toByteArray(is);
-		} finally {
-			is.close();
 		}
 	}
 
@@ -73,23 +67,17 @@ public class PMMLUtil {
 
 	static
 	public PMML loadResource(Version version) throws IOException, JAXBException {
-		InputStream is = getResourceAsStream(version);
 
-		try {
+		try(InputStream is = getResourceAsStream(version)){
 			return JAXBUtil.unmarshalPMML(new StreamSource(is));
-		} finally {
-			is.close();
 		}
 	}
 
 	static
 	public byte[] getResourceAsByteArray(Version version) throws IOException {
-		InputStream is = getResourceAsStream(version);
 
-		try {
+		try(InputStream is = getResourceAsStream(version)){
 			return toByteArray(is);
-		} finally {
-			is.close();
 		}
 	}
 
@@ -105,16 +93,12 @@ public class PMMLUtil {
 	public byte[] upgradeToLatest(byte[] bytes) throws IOException, JAXBException, SAXException {
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 
-		InputStream is = new ByteArrayInputStream(bytes);
-
-		try {
+		try(InputStream is = new ByteArrayInputStream(bytes)){
 			Source source = ImportFilter.apply(new InputSource(is));
 
 			PMML pmml = JAXBUtil.unmarshalPMML(source);
 
 			JAXBUtil.marshalPMML(pmml, new StreamResult(result));
-		} finally {
-			is.close();
 		}
 
 		return result.toByteArray();
@@ -132,12 +116,8 @@ public class PMMLUtil {
 		ExportFilter exportFilter = new ExportFilter(XMLReaderFactory.createXMLReader(), version);
 		exportFilter.setContentHandler(transformer);
 
-		InputStream is = new ByteArrayInputStream(bytes);
-
-		try {
+		try(InputStream is = new ByteArrayInputStream(bytes)){
 			exportFilter.parse(new InputSource(is));
-		} finally {
-			is.close();
 		}
 
 		return result.toByteArray();

@@ -16,16 +16,13 @@ public class XEEAttackTest {
 
 	@Test
 	public void unmarshal() throws Exception {
-		InputStream is = PMMLUtil.getResourceAsStream(XEEAttackTest.class);
 
-		try {
+		try(InputStream is = PMMLUtil.getResourceAsStream(XEEAttackTest.class)){
 			JAXBUtil.unmarshalPMML(new StreamSource(is));
 
 			fail();
 		} catch(UnmarshalException ue){
 			// Ignored
-		} finally {
-			is.close();
 		}
 	}
 }

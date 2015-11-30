@@ -47,26 +47,18 @@ public class TransformationExample extends Example {
 
 		PMML pmml;
 
-		InputStream is = new FileInputStream(this.input);
-
-		try {
+		try(InputStream is = new FileInputStream(this.input)){
 			Source source = ImportFilter.apply(new InputSource(is));
 
 			pmml = (PMML)unmarshaller.unmarshal(source);
-		} finally {
-			is.close();
 		}
 
 		pmml = transform(pmml);
 
-		OutputStream os = new FileOutputStream(this.output);
-
-		try {
+		try(OutputStream os = new FileOutputStream(this.output)){
 			Result result = new StreamResult(os);
 
 			marshaller.marshal(pmml, result);
-		} finally {
-			os.close();
 		}
 	}
 }

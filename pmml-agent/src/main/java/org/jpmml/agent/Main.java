@@ -18,12 +18,8 @@ public class Main {
 		if(options != null){
 			options = options.replace(';', '\n');
 
-			Reader reader = new StringReader(options);
-
-			try {
+			try(Reader reader = new StringReader(options)){
 				properties.load(reader);
-			} finally {
-				reader.close();
 			}
 		}
 

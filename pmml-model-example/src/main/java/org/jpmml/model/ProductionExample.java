@@ -34,14 +34,10 @@ public class ProductionExample extends Example {
 
 		PMML pmml = produce();
 
-		OutputStream os = new FileOutputStream(this.output);
-
-		try {
+		try(OutputStream os = new FileOutputStream(this.output)){
 			Result result = new StreamResult(os);
 
 			marshaller.marshal(pmml, result);
-		} finally {
-			os.close();
 		}
 	}
 }

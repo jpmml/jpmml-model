@@ -27,16 +27,12 @@ public class XXEAttackTest {
 	public void unmarshal() throws Exception {
 		PMML pmml;
 
-		InputStream is = PMMLUtil.getResourceAsStream(XXEAttackTest.class);
-
 		System.setProperty("javax.xml.accessExternalDTD", "file");
 
-		try {
+		try(InputStream is = PMMLUtil.getResourceAsStream(XXEAttackTest.class);){
 			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
 		} finally {
 			System.clearProperty("javax.xml.accessExternalDTD");
-
-			is.close();
 		}
 
 		List<Extension> extensions = pmml.getExtensions();
@@ -48,9 +44,8 @@ public class XXEAttackTest {
 
 	@Test
 	public void unmarshalSecurely() throws Exception {
-		InputStream is = PMMLUtil.getResourceAsStream(XXEAttackTest.class);
 
-		try {
+		try(InputStream is = PMMLUtil.getResourceAsStream(XXEAttackTest.class)){
 			XMLReader reader = XMLReaderFactory.createXMLReader();
 			reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
@@ -59,8 +54,6 @@ public class XXEAttackTest {
 			fail();
 		} catch(UnmarshalException ue){
 			// Ignored
-		} finally {
-			is.close();
 		}
 	}
 }
