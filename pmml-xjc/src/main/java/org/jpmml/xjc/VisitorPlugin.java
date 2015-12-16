@@ -155,13 +155,11 @@ public class VisitorPlugin extends Plugin {
 
 			JVar status = body.decl(visitorActionClazz, "status", JExpr.invoke(visitorParameter, "visit").arg(JExpr._this()));
 
-			FieldOutline[] fields = clazz.getDeclaredFields();
-			if(fields.length > 0){
-				body.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
-			}
+			int pushPos = body.pos();
 
 			JInvocation traverseVarargs = null;
 
+			FieldOutline[] fields = clazz.getDeclaredFields();
 			for(FieldOutline field : fields){
 				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
@@ -197,13 +195,19 @@ public class VisitorPlugin extends Plugin {
 				}
 			}
 
-			if(fields.length > 0){
-				body.add(JExpr.invoke(visitorParameter, visitorPopParent));
-			}
+			int popPos = body.pos();
 
 			body._if(status.eq(terminateAction))._then()._return(terminateAction);
 
 			body._return(continueAction);
+
+			if(pushPos < popPos){
+				body.pos(popPos);
+				body.add(JExpr.invoke(visitorParameter, visitorPopParent));
+
+				body.pos(pushPos);
+				body.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
+			}
 		}
 
 		return true;
