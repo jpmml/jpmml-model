@@ -2224,6 +2224,12 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='VectorInstance']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='REAL-SparseArray']">
+			<jaxb:property
+				name="realSparseArray"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='XCoordinates']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
