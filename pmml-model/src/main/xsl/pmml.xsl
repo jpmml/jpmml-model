@@ -63,11 +63,20 @@ Copyright (c) 2009 University of Tartu
 	<!--
 	Restrict xsd:string to FIELD-NAME where appropriate
 	-->
+
 	<xsl:template match="xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='name']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
 
 	<xsl:template match="xsd:element[@name='BayesInput' or @name='BayesOutput']/xsd:complexType/xsd:attribute[@name='fieldName']/@type">
+		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xsd:element[@name='InstanceField' or @name='VerificationField']/xsd:complexType/xsd:attribute[@name='field']/@type">
+		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='instanceIdVariable']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
 
