@@ -77,7 +77,7 @@ public class VisitorPlugin extends Plugin {
 		JMethod visitorPushParent = visitorInterface.method(JMod.PUBLIC, void.class, "pushParent");
 		visitorPushParent.param(pmmlObjectClazz, "object");
 
-		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, void.class, "popParent");
+		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, pmmlObjectClazz, "popParent");
 
 		JMethod visitorGetParents = visitorInterface.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
 
@@ -99,9 +99,9 @@ public class VisitorPlugin extends Plugin {
 		JVar parent = abstractVisitorPushParent.param(pmmlObjectClazz, "parent");
 		abstractVisitorPushParent.body().add(abstractVisitorParentsRef.invoke("addFirst").arg(parent));
 
-		JMethod abstractVisitorPopParent = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "popParent");
+		JMethod abstractVisitorPopParent = abstractVisitorClazz.method(JMod.PUBLIC, pmmlObjectClazz, "popParent");
 		abstractVisitorPopParent.annotate(Override.class);
-		abstractVisitorPopParent.body().add(abstractVisitorParentsRef.invoke("removeFirst"));
+		abstractVisitorPopParent.body()._return(abstractVisitorParentsRef.invoke("removeFirst"));
 
 		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
 		abstractVisitorGetParents.annotate(Override.class);
