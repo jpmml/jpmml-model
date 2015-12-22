@@ -813,6 +813,7 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='InstanceFields']/xsd:complexType">
@@ -2228,6 +2229,10 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:property
 				name="realSparseArray"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='VerificationField']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='XCoordinates']/xsd:complexType">

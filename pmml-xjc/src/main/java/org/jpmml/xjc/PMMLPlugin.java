@@ -166,7 +166,7 @@ public class PMMLPlugin extends Plugin {
 				keyMethod.body()._return(JExpr.invoke("getName"));
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.Target")){
+			if(checkType(beanClazz, "org.dmg.pmml.InstanceField") || checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getField"));
