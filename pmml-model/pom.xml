@@ -175,12 +175,12 @@
 					<dependency>
 						<groupId>org.jvnet.jaxb2_commons</groupId>
 						<artifactId>jaxb2-basics-annotate</artifactId>
-						<version>1.0.1</version>
+						<version>1.0.2</version>
 					</dependency>
 					<dependency>
 						<groupId>org.jvnet.jaxb2_commons</groupId>
 						<artifactId>jaxb2-basics-tools</artifactId>
-						<version>0.9.5</version>
+						<version>0.10.0</version>
 					</dependency>
 				</dependencies>
 			</plugin>
