@@ -38,7 +38,7 @@ public class TransformationExample extends Example {
 
 
 	abstract
-	public PMML transform(PMML pmml);
+	public PMML transform(PMML pmml) throws Exception;
 
 	@Override
 	public void execute() throws Exception {

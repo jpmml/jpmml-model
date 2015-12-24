@@ -94,10 +94,9 @@ mvn clean install
 ```
 
 The resulting uber-JAR file `target/example-1.2-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.ObfuscationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
 * `org.jpmml.model.ValidationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML schema version 3.X or 4.X document against the built-in XML Schema Definition (XSD) resource.
-* `org.jpmml.model.SegmentationOutputExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/SegmentationOutputExample.java). Extends the Output element of a segmentation model with OutputField elements that expose the predicted values of individual segments.
-* `org.jpmml.model.GolfingTreeModelExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/GolfingTreeModelExample.java). Produces a TreeModel for the "golfing" exercise.
 
 For example, checking the validity of `model.pmml`:
 ```
