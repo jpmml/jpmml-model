@@ -12,11 +12,10 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
-import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.visitors.AbstractSimpleVisitor;
+import org.jpmml.model.visitors.AbstractFieldVisitor;
 
-class FieldHasher extends AbstractSimpleVisitor {
+class FieldHasher extends AbstractFieldVisitor {
 
 	private MessageDigest messageDigest = null;
 
@@ -28,13 +27,10 @@ class FieldHasher extends AbstractSimpleVisitor {
 	}
 
 	@Override
-	public VisitorAction visit(PMMLObject object){
+	public VisitorAction visit(Field field){
+		FieldName name = field.getName();
 
-		if(object instanceof Field){
-			Field field = (Field)object;
-
-			this.mappings.put(field.getName(), hash(field.getName()));
-		}
+		this.mappings.put(name, hash(name));
 
 		return VisitorAction.CONTINUE;
 	}

@@ -139,12 +139,10 @@ public class VisitorPlugin extends Plugin {
 			abstractVisitorVisit.param(beanClazz, parameterName);
 			abstractVisitorVisit.body()._return(continueAction);
 
-			JClass beanSuperClazz = beanClazz._extends();
-
 			JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
 			abstractSimpleVisitorVisit.annotate(Override.class);
 			abstractSimpleVisitorVisit.param(beanClazz, parameterName);
-			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(beanSuperClazz, JExpr.ref(parameterName))));
+			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(pmmlObjectClazz, JExpr.ref(parameterName))));
 
 			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
 			beanAccept.annotate(Override.class);
