@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_2" version="4.2">
+    <Header/>
+    <DataDictionary>
+		<DataField name="y" optype="continuous" dataType="double"/>
+		<DataField name="x1" optype="continuous" dataType="double"/>
+		<DataField name="x2" optype="continuous" dataType="double"/>
+		<DataField name="x3" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<MiningModel functionName="regression">
+		<MiningSchema>
+			<MiningField name="y" usageType="target"/>
+			<MiningField name="x1"/>
+			<MiningField name="x2"/>
+			<MiningField name="x3"/>
+		</MiningSchema>
+		<Segmentation multipleModelMethod="modelChain">
+			<Segment id="first">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema>
+						<MiningField name="x1"/>
+					</MiningSchema>
+					<RegressionTable>
+						<NumericPredictor name="x1_squared" coefficient="1"/>
+					</RegressionTable>
+					<Output>
+						<OutputField name="first_output" feature="predictedValue"/>
+					</Output>
+				</RegressionModel>
+			</Segment>
+			<Segment id="second">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema>
+						<MiningField name="x2"/>
+					</MiningSchema>
+					<RegressionTable>
+						<NumericPredictor name="x2_squared" coefficient="1"/>
+					</RegressionTable>
+					<Output>
+						<OutputField name="second_output" feature="predictedValue"/>
+					</Output>
+					<LocalTransformations>
+						<DerivedField name="x2_squared" optype="continuous" dataType="double">
+							<Apply function="square">
+								<FieldRef field="x2"/>
+							</Apply>
+						</DerivedField>
+						<DerivedField name="x2_cubed" optype="continuous" dataType="double">
+							<Apply function="cube">
+								<FieldRef field="x2"/>
+							</Apply>
+						</DerivedField>
+					</LocalTransformations>
+				</RegressionModel>
+			</Segment>
+			<Segment id="third">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema>
+						<MiningField name="x3"/>
+					</MiningSchema>
+					<RegressionTable>
+						<NumericPredictor name="x3" coefficient="1" exponent="2"/>
+					</RegressionTable>
+					<Output>
+						<OutputField name="third_output" feature="predictedValue"/>
+					</Output>
+				</RegressionModel>
+			</Segment>
+			<Segment id="sum">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema>
+						<MiningField name="y" usageType="predicted"/>
+						<MiningField name="first_output"/>
+						<MiningField name="second_output"/>
+						<MiningField name="third_output"/>
+					</MiningSchema>
+					<RegressionTable>
+						<NumericPredictor name="first_output" coefficient="1"/>
+						<NumericPredictor name="second_output" coefficient="1"/>
+						<NumericPredictor name="third_output" coefficient="1"/>
+					</RegressionTable>
+				</RegressionModel>
+			</Segment>
+		</Segmentation>
+	</MiningModel>
+	<TransformationDictionary>
+		<DerivedField name="x1_squared" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="x1"/>
+				<FieldRef field="x1"/>
+			</Apply>
+		</DerivedField>
+		<DerivedField name="x1_cubed" optype="continuous" dataType="double">
+			<Apply function="*">
+				<FieldRef field="x1_squared"/>
+				<FieldRef field="x1"/>
+			</Apply>
+		</DerivedField>
+		<DefineFunction name="square" optype="continuous" dataType="double">
+			<ParameterField name="x"/>
+			<Apply function="pow">
+				<FieldRef field="x"/>
+				<Constant>2</Constant>
+			</Apply>
+		</DefineFunction>
+		<DefineFunction name="cube" optype="continuous" dataType="double">
+			<ParameterField name="x"/>
+			<Apply function="pow">
+				<FieldRef field="x"/>
+				<Constant>3</Constant>
+			</Apply>
+		</DefineFunction>
+	</TransformationDictionary>
+</PMML>

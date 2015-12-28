@@ -42,17 +42,17 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 	}
 
 	@Override
-	public VisitorAction visit(PMMLObject object){
-		measure(object);
-
-		return VisitorAction.CONTINUE;
-	}
-
-	@Override
 	public void applyTo(Visitable visitable){
 		reset();
 
 		super.applyTo(visitable);
+	}
+
+	@Override
+	public VisitorAction visit(PMMLObject object){
+		measure(object);
+
+		return VisitorAction.CONTINUE;
 	}
 
 	public void reset(){
