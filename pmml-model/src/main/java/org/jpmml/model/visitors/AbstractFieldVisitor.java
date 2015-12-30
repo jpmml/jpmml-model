@@ -7,6 +7,7 @@ import org.dmg.pmml.DataField;
 import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.OutputField;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ParameterField;
 import org.dmg.pmml.ResultField;
 import org.dmg.pmml.VisitorAction;
@@ -24,7 +25,13 @@ public class AbstractFieldVisitor extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(DerivedField derivedField){
-		return visit((Field)derivedField);
+		PMMLObject parent = VisitorUtil.getParent(this);
+
+		if(VisitorUtil.isDictionary(parent)){
+			return visit((Field)derivedField);
+		}
+
+		return super.visit(derivedField);
 	}
 
 	@Override

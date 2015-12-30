@@ -54,11 +54,13 @@ public class FieldDependencyResolver extends FieldResolver {
 	public VisitorAction visit(DerivedField derivedField){
 		PMMLObject parent = VisitorUtil.getParent(this);
 
-		if((parent instanceof TransformationDictionary) || (parent instanceof LocalTransformations)){
+		if(VisitorUtil.isDictionary(parent)){
 			process(derivedField);
+
+			return VisitorAction.SKIP;
 		}
 
-		return VisitorAction.SKIP;
+		return super.visit(derivedField);
 	}
 
 	@Override

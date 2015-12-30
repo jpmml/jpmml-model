@@ -6,12 +6,24 @@ package org.jpmml.model.visitors;
 import java.util.Deque;
 import java.util.Iterator;
 
+import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.Visitor;
 
 public class VisitorUtil {
 
 	private VisitorUtil(){
+	}
+
+	static
+	public boolean isDictionary(PMMLObject parent){
+
+		if((parent instanceof TransformationDictionary) || (parent instanceof LocalTransformations)){
+			return true;
+		}
+
+		return false;
 	}
 
 	static
@@ -23,12 +35,11 @@ public class VisitorUtil {
 
 	static
 	public PMMLObject getParent(Visitor visitor, int index){
+		Deque<PMMLObject> parents = visitor.getParents();
 
 		if(index < 0){
 			throw new IllegalArgumentException();
-		}
-
-		Deque<PMMLObject> parents = visitor.getParents();
+		} else
 
 		if(index == 0){
 			return parents.getFirst();
