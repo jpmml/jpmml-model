@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -150,9 +151,23 @@ public class FieldResolver extends AbstractModelVisitor {
 	}
 
 	public Set<Field> getFields(){
-		Set<Field> result = new LinkedHashSet<>();
-
 		Deque<PMMLObject> parents = getParents();
+
+		return getFields(parents);
+	}
+
+	public Set<Field> getFields(PMMLObject... virtualParents){
+		Deque<PMMLObject> parents = new ArrayDeque<>(getParents());
+
+		for(PMMLObject virtualParent : virtualParents){
+			parents.push(virtualParent);
+		}
+
+		return getFields(parents);
+	}
+
+	private Set<Field> getFields(Deque<PMMLObject> parents){
+		Set<Field> result = new LinkedHashSet<>();
 
 		PMMLObject prevParent = null;
 
@@ -171,7 +186,7 @@ public class FieldResolver extends AbstractModelVisitor {
 				break;
 			} // End if
 
-			if((parent instanceof Segmentation) && (prevParent instanceof Segment)){
+			if((parent instanceof Segmentation) && ((prevParent == null) || (prevParent instanceof Segment))){
 				List<Output> outputs = getEarlierOutputs((Segmentation)parent, (Segment)prevParent);
 
 				for(Output output : outputs){
@@ -222,12 +237,11 @@ public class FieldResolver extends AbstractModelVisitor {
 
 		List<Segment> segments = segmentation.getSegments();
 		for(Segment segment : segments){
+			Model model = segment.getModel();
 
-			if((segment).equals(targetSegment)){
+			if(targetSegment != null && (targetSegment).equals(segment)){
 				break;
 			}
-
-			Model model = segment.getModel();
 
 			Output output = model.getOutput();
 			if(output != null){

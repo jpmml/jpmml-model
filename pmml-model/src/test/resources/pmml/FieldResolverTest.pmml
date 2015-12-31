@@ -16,10 +16,12 @@
 		</MiningSchema>
 		<Segmentation multipleModelMethod="modelChain">
 			<Segment id="first">
-				<True/>
+				<SimplePredicate field="x1" operator="isNotMissing"/>
 				<RegressionModel functionName="regression">
 					<MiningSchema>
 						<MiningField name="x1"/>
+						<MiningField name="x2"/>
+						<MiningField name="x3"/>
 					</MiningSchema>
 					<RegressionTable>
 						<NumericPredictor name="x1_squared" coefficient="1"/>
@@ -30,10 +32,12 @@
 				</RegressionModel>
 			</Segment>
 			<Segment id="second">
-				<True/>
+				<SimplePredicate field="x2" operator="isNotMissing"/>
 				<RegressionModel functionName="regression">
 					<MiningSchema>
+						<MiningField name="x1"/>
 						<MiningField name="x2"/>
+						<MiningField name="x3"/>
 					</MiningSchema>
 					<RegressionTable>
 						<NumericPredictor name="x2_squared" coefficient="1"/>
@@ -56,9 +60,11 @@
 				</RegressionModel>
 			</Segment>
 			<Segment id="third">
-				<True/>
+				<SimplePredicate field="x3" operator="isNotMissing"/>
 				<RegressionModel functionName="regression">
 					<MiningSchema>
+						<MiningField name="x1"/>
+						<MiningField name="x2"/>
 						<MiningField name="x3"/>
 					</MiningSchema>
 					<RegressionTable>
@@ -74,6 +80,9 @@
 				<RegressionModel functionName="regression">
 					<MiningSchema>
 						<MiningField name="y" usageType="predicted"/>
+						<MiningField name="x1"/>
+						<MiningField name="x2"/>
+						<MiningField name="x3"/>
 						<MiningField name="first_output"/>
 						<MiningField name="second_output"/>
 						<MiningField name="third_output"/>

@@ -33,7 +33,7 @@ public class FieldUtil {
 
 			Field previousField = result.put(name, field);
 			if(previousField != null){
-				throw new IllegalArgumentException("Fields " + field + " and " + previousField + " have the same name " + name.getValue());
+				throw new IllegalArgumentException("Fields " + field + " and " + previousField + " have the same name " + name);
 			}
 		}
 
@@ -45,7 +45,10 @@ public class FieldUtil {
 		Map<FieldName, Field> result = nameMap(fields);
 
 		if(!(result.keySet()).containsAll(names)){
-			throw new IllegalArgumentException();
+			Set<FieldName> unmatchedNames = new LinkedHashSet<>(names);
+			unmatchedNames.removeAll(result.keySet());
+
+			throw new IllegalArgumentException("Empty selection for names " + unmatchedNames);
 		}
 
 		(result.keySet()).retainAll(names);

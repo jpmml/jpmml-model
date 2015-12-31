@@ -16,6 +16,7 @@ import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.RegressionTable;
 import org.dmg.pmml.Segment;
+import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
@@ -128,6 +129,40 @@ public class FieldResolverTest {
 		regressionTableResolver.applyTo(pmml);
 
 		assertEquals(Collections.emptySet(), regressionTableResolver.getFields());
+
+		FieldResolver predicateResolver = new FieldResolver(){
+
+			@Override
+			public VisitorAction visit(SimplePredicate simplePredicate){
+				Set<Field> fields = getFields();
+
+				Segment segment = (Segment)VisitorUtil.getParent(this);
+
+				String id = segment.getId();
+
+				if("first".equals(id)){
+					checkFields(pmmlNames, fields);
+				} else
+
+				if("second".equals(id)){
+					checkFields(FieldNameUtil.create(pmmlNames, "first_output"), fields);
+				} else
+
+				if("third".equals(id)){
+					checkFields(FieldNameUtil.create(pmmlNames, "first_output", "second_output"), fields);
+				} else
+
+				{
+					throw new AssertionError();
+				}
+
+				return super.visit(simplePredicate);
+			}
+		};
+
+		predicateResolver.applyTo(pmml);
+
+		assertEquals(Collections.emptySet(), predicateResolver.getFields());
 	}
 
 	static
