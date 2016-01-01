@@ -98,7 +98,12 @@ The resulting uber-JAR file `target/example-1.2-SNAPSHOT.jar` contains the follo
 * `org.jpmml.model.ObfuscationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
 * `org.jpmml.model.ValidationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML schema version 3.X or 4.X document against the built-in XML Schema Definition (XSD) resource.
 
-For example, checking the validity of `model.pmml`:
+Copying `input.pmml` to `output.pmml`; the class model is transformed by applying a list of visitors to it:
+```
+java -javaagent:../pmml-agent/target/pmml-agent-1.2-SNAPSHOT.jar -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.CopyExample --visitor-classes org.jpmml.model.visitors.MiningSchemaCleaner --summary true --input input.pmml --output output.pmml
+```
+
+Checking the validity of `model.pmml`:
 ```
 java -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.ValidationExample --input model.pmml
 ```

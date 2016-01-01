@@ -25,8 +25,8 @@ public class Example {
 	}
 
 	static
-	public <E extends Example> void execute(Class<? extends E> clazz, String... args) throws Exception {
-		E example = clazz.newInstance();
+	public void execute(Class<? extends Example> clazz, String... args) throws Exception {
+		Example example = clazz.newInstance();
 
 		JCommander commander = new JCommander(example);
 		commander.setProgramName(clazz.getName());
