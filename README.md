@@ -100,7 +100,7 @@ The resulting uber-JAR file `target/example-1.2-SNAPSHOT.jar` contains the follo
 
 Copying `input.pmml` to `output.pmml`; the class model is transformed by applying a list of visitors to it:
 ```
-java -javaagent:../pmml-agent/target/pmml-agent-1.2-SNAPSHOT.jar -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.CopyExample --visitor-classes org.jpmml.model.visitors.MiningSchemaCleaner --summary true --input input.pmml --output output.pmml
+java -javaagent:../pmml-agent/target/pmml-agent-1.2-SNAPSHOT.jar -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.CopyExample --visitor-classes org.jpmml.model.visitors.DictionaryCleaner,org.jpmml.model.visitors.MiningSchemaCleaner --summary true --input input.pmml --output output.pmml
 ```
 
 Checking the validity of `model.pmml`:

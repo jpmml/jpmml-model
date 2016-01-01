@@ -19,21 +19,21 @@ public class FieldUtil {
 
 	static
 	public Set<FieldName> nameSet(Collection<? extends Field> fields){
-		Map<FieldName, Field> result = nameMap(fields);
+		Map<FieldName, ? extends Field> result = nameMap(fields);
 
 		return result.keySet();
 	}
 
 	static
-	public Map<FieldName, Field> nameMap(Collection<? extends Field> fields){
-		Map<FieldName, Field> result = new LinkedHashMap<>();
+	public <F extends Field> Map<FieldName, F> nameMap(Collection<? extends F> fields){
+		Map<FieldName, F> result = new LinkedHashMap<>();
 
-		for(Field field : fields){
+		for(F field : fields){
 			FieldName name = field.getName();
 
-			Field previousField = result.put(name, field);
+			F previousField = result.put(name, field);
 			if(previousField != null){
-				throw new IllegalArgumentException("Fields " + field + " and " + previousField + " have the same name " + name);
+				throw new IllegalArgumentException("Fields " + format(field) + " and " + format(previousField) + " have the same name " + name);
 			}
 		}
 
@@ -41,10 +41,15 @@ public class FieldUtil {
 	}
 
 	static
-	public Set<Field> selectAll(Collection<? extends Field> fields, Set<FieldName> names){
-		Map<FieldName, Field> result = nameMap(fields);
+	public <F extends Field> Set<F> selectAll(Collection<? extends F> fields, Set<FieldName> names){
+		return selectAll(fields, names, false);
+	}
 
-		if(!(result.keySet()).containsAll(names)){
+	static
+	public <F extends Field> Set<F> selectAll(Collection<? extends F> fields, Set<FieldName> names, boolean allowPartialSelection){
+		Map<FieldName, F> result = nameMap(fields);
+
+		if(!allowPartialSelection && !(result.keySet()).containsAll(names)){
 			Set<FieldName> unmatchedNames = new LinkedHashSet<>(names);
 			unmatchedNames.removeAll(result.keySet());
 
@@ -54,5 +59,10 @@ public class FieldUtil {
 		(result.keySet()).retainAll(names);
 
 		return new LinkedHashSet<>(result.values());
+	}
+
+	static
+	private String format(Field field){
+		return String.valueOf(field);
 	}
 }

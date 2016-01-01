@@ -8,7 +8,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldUsageType;
@@ -55,7 +54,7 @@ public class MiningSchemaCleaner extends FieldResolver {
 
 			Set<FieldName> activeFieldNames = processMiningModel(miningModel);
 
-			filter(miningModel, activeFieldNames);
+			clean(miningModel, activeFieldNames);
 		} else
 
 		if(parent instanceof Model){
@@ -63,7 +62,7 @@ public class MiningSchemaCleaner extends FieldResolver {
 
 			Set<FieldName> activeFieldNames = processModel(model);
 
-			filter(model, activeFieldNames);
+			clean(model, activeFieldNames);
 		}
 
 		return parent;
@@ -144,6 +143,7 @@ public class MiningSchemaCleaner extends FieldResolver {
 
 	private Set<FieldName> processModel(Model model, Set<Field> activeFields){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
+		fieldDependencyResolver.expand(activeFields);
 
 		LocalTransformations localTransformations = model.getLocalTransformations();
 		if(localTransformations != null && localTransformations.hasDerivedFields()){
@@ -155,62 +155,29 @@ public class MiningSchemaCleaner extends FieldResolver {
 			activeFields.removeAll(output.getOutputFields());
 		}
 
-		Set<DerivedField> globalDerivedFields = new LinkedHashSet<>();
-
-		// Express global DerivedField elements in terms of DataField elements
-		for(int i = 0; true; i++){
-
-			if(i > 1000){
-				throw new IllegalStateException();
-			}
-
-			globalDerivedFields.clear();
-
-			for(Field activeField : activeFields){
-
-				if(activeField instanceof DerivedField){
-					DerivedField derivedField = (DerivedField)activeField;
-
-					if(fieldDependencyResolver.isGlobal(derivedField)){
-						globalDerivedFields.add(derivedField);
-					}
-				}
-			}
-
-			if(globalDerivedFields.isEmpty()){
-				break;
-			}
-
-			for(DerivedField globalDerivedField : globalDerivedFields){
-				activeFields.addAll(fieldDependencyResolver.getDependencies(globalDerivedField));
-			}
-
-			activeFields.removeAll(globalDerivedFields);
-		}
-
 		return FieldUtil.nameSet(activeFields);
 	}
 
-	private void filter(Model model, Set<FieldName> activeFieldNames){
+	private void clean(Model model, Set<FieldName> activeFieldNames){
 		MiningSchema miningSchema = model.getMiningSchema();
-		if(miningSchema == null){
-			throw new IllegalArgumentException();
-		}
 
-		List<MiningField> miningFields = miningSchema.getMiningFields();
+		if(miningSchema.hasMiningFields()){
+			clean(miningSchema.getMiningFields(), activeFieldNames);
+		}
+	}
+
+	private void clean(List<MiningField> miningFields, Set<FieldName> activeFieldNames){
 
 		for(Iterator<MiningField> it = miningFields.iterator(); it.hasNext(); ){
 			MiningField miningField = it.next();
 
+			FieldName name = miningField.getName();
+
 			FieldUsageType fieldUsage = miningField.getUsageType();
 			switch(fieldUsage){
 				case ACTIVE:
-					{
-						FieldName name = miningField.getName();
-
-						if(!(activeFieldNames).contains(name)){
-							it.remove();
-						}
+					if(!(activeFieldNames).contains(name)){
+						it.remove();
 					}
 					break;
 				default:

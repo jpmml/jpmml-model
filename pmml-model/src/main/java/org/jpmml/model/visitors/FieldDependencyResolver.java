@@ -5,6 +5,7 @@ package org.jpmml.model.visitors;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -90,14 +91,6 @@ public class FieldDependencyResolver extends FieldResolver {
 		return super.visit(transformationDictionary);
 	}
 
-	public boolean isGlobal(DerivedField derivedField){
-		return this.globalDerivedFields.contains(derivedField);
-	}
-
-	public boolean isLocal(DerivedField derivedField){
-		return this.localDerivedFields.contains(derivedField);
-	}
-
 	public Set<Field> getDependencies(Field field){
 		Map<Field, Set<Field>> dependencies = getDependencies();
 
@@ -115,6 +108,45 @@ public class FieldDependencyResolver extends FieldResolver {
 	 */
 	public Map<Field, Set<Field>> getDependencies(){
 		return this.dependencies;
+	}
+
+	/**
+	 * <p>
+	 * Expresses global DerivedField elements in terms of DataField elements.
+	 * </p>
+	 */
+	public void expand(Set<Field> fields){
+		expand(fields, this.globalDerivedFields);
+	}
+
+	public void expand(Set<Field> fields, Set<? extends Field> expandableFields){
+		Set<Field> removableFields = new LinkedHashSet<>();
+
+		for(int i = 0; true; i++){
+
+			if(i > 1000){
+				throw new IllegalStateException();
+			}
+
+			removableFields.clear();
+
+			for(Field field : fields){
+
+				if(expandableFields.contains(field)){
+					removableFields.add(field);
+				}
+			}
+
+			if(removableFields.isEmpty()){
+				break;
+			}
+
+			for(Field removableField : removableFields){
+				fields.addAll(getDependencies(removableField));
+			}
+
+			fields.removeAll(removableFields);
+		}
 	}
 
 	private void process(Field field){
