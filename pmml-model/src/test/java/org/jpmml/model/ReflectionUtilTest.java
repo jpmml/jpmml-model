@@ -68,6 +68,8 @@ public class ReflectionUtilTest {
 		List<Field> fields = ReflectionUtil.getAllFields(new PMML());
 		List<Field> customFields = ReflectionUtil.getAllFields(new CustomPMML());
 
+		assertEquals(1 /*PMMLObject*/ + 7 /*PMML*/, fields.size());
+
 		assertEquals(new HashSet<>(fields), new HashSet<>(customFields));
 	}
 

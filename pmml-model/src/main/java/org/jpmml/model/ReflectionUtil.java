@@ -62,7 +62,7 @@ public class ReflectionUtil {
 
 				@Override
 				public boolean accept(Field field){
-					return true;
+					return isRegularField(field);
 				}
 			};
 
@@ -86,7 +86,11 @@ public class ReflectionUtil {
 				public boolean accept(Field field){
 					int modifiers = field.getModifiers();
 
-					return !Modifier.isStatic(modifiers);
+					if(Modifier.isStatic(modifiers)){
+						return false;
+					}
+
+					return isRegularField(field);
 				}
 			};
 
@@ -160,6 +164,17 @@ public class ReflectionUtil {
 			Number number = (Number)value;
 
 			return Double.compare(number.doubleValue(), 0d) == 0;
+		}
+
+		return false;
+	}
+
+	static
+	private boolean isRegularField(Field field){
+		String name = field.getName();
+
+		if(name.length() > 0){
+			return Character.isLetterOrDigit(name.charAt(0));
 		}
 
 		return false;
