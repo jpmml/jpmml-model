@@ -157,7 +157,7 @@
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb22-plugin</artifactId>
-				<version>0.12.3</version>
+				<version>0.13.1</version>
 				<executions>
 					<execution>
 						<goals>
@@ -180,7 +180,7 @@
 					<episode>false</episode>
 					<extension>true</extension>
 					<schemaDirectory>target/transformed-schema</schemaDirectory>
-					<specVersion>2.1</specVersion>
+					<specVersion>2.2</specVersion>
 				</configuration>
 				<dependencies>
 					<dependency>
