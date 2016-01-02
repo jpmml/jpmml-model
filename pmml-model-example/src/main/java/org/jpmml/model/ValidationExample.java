@@ -22,7 +22,9 @@ public class ValidationExample extends ConsumptionExample {
 	}
 
 	@Override
-	protected Unmarshaller createUnmarshaller() throws JAXBException {
+	public Unmarshaller createUnmarshaller() throws JAXBException {
+		Unmarshaller unmarshaller = super.createUnmarshaller();
+
 		Schema schema;
 
 		try {
@@ -30,8 +32,6 @@ public class ValidationExample extends ConsumptionExample {
 		} catch(Exception e){
 			throw new RuntimeException(e);
 		}
-
-		Unmarshaller unmarshaller = super.createUnmarshaller();
 
 		unmarshaller.setSchema(schema);
 		unmarshaller.setEventHandler(new SimpleValidationEventHandler());
