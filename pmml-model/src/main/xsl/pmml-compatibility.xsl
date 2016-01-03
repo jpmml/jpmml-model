@@ -2,134 +2,134 @@
 <!-- 
 Copyright (c) 2014 Villu Ruusmann
 -->
-<xsl:stylesheet version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:template name="compatibility-content">
-		<xsd:element name="CenterFields">
-			<xsd:complexType>
-				<xsd:sequence>
-					<xsd:element ref="DerivedField" maxOccurs="unbounded"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:element>
+		<xs:element name="CenterFields">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element ref="DerivedField" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence">
+	<xsl:template match="xs:element[@name='ClusteringModel']/xs:complexType/xs:sequence">
 		<xsl:variable
 			name="index"
-			select="count(xsd:element[@ref='ClusteringField']/preceding-sibling::*) + 1"
+			select="count(xs:element[@ref='ClusteringField']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:element ref="CenterFields" minOccurs="0"/>
+			<xs:element ref="CenterFields" minOccurs="0"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='DerivedField']/xsd:complexType/xsd:sequence">
+	<xsl:template match="xs:element[@name='DerivedField']/xs:complexType/xs:sequence">
 		<xsl:variable
 			name="index"
-			select="count(xsd:group[@ref='EXPRESSION']/preceding-sibling::*) + 1"
+			select="count(xs:group[@ref='EXPRESSION']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:element ref="Interval" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Interval" minOccurs="0" maxOccurs="unbounded"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='Level']/xsd:complexType">
+	<xsl:template match="xs:element[@name='Level']/xs:complexType">
 		<xsl:variable
 			name="index"
-			select="count(xsd:attribute[@ref='smoothedValue']/preceding-sibling::*) + 1"
+			select="count(xs:attribute[@ref='smoothedValue']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:attribute name="quadraticSmoothedValue" type="REAL-NUMBER"/>
-			<xsd:attribute name="cubicSmoothedValue" type="REAL-NUMBER"/>
+			<xs:attribute name="quadraticSmoothedValue" type="REAL-NUMBER"/>
+			<xs:attribute name="cubicSmoothedValue" type="REAL-NUMBER"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType/xsd:restriction">
+	<xsl:template match="xs:element[@name='NormDiscrete']/xs:complexType/xs:attribute[@name='method']/xs:simpleType/xs:restriction">
 		<xsl:variable
 			name="index"
-			select="count(xsd:enumeration[@value='indicator']/preceding-sibling::*) + 1"
+			select="count(xs:enumeration[@value='indicator']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="@*"/>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:enumeration value="thermometer"/>
+			<xs:enumeration value="thermometer"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='Segmentation']/xsd:complexType/xsd:sequence">
+	<xsl:template match="xs:element[@name='Segmentation']/xs:complexType/xs:sequence">
 		<xsl:variable
 			name="index"
-			select="count(xsd:element[@ref='Extension']/preceding-sibling::*) + 1"
+			select="count(xs:element[@ref='Extension']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:element ref="LocalTransformations" minOccurs="0"/>
+			<xs:element ref="LocalTransformations" minOccurs="0"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='SequenceModel']/xsd:complexType">
+	<xsl:template match="xs:element[@name='SequenceModel']/xs:complexType">
 		<xsl:variable
 			name="index"
-			select="count(xsd:attribute[@name='avgNumberOfTAsPerTAGroup']/preceding-sibling::*) + 1"
+			select="count(xs:attribute[@name='avgNumberOfTAsPerTAGroup']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:attribute name="minimumSupport" type="REAL-NUMBER" use="required"/>
-			<xsd:attribute name="minimumConfidence" type="REAL-NUMBER" use="required"/>
-			<xsd:attribute name="lengthLimit" type="INT-NUMBER"/>
-			<xsd:attribute name="numberOfItems" type="INT-NUMBER" use="required"/>
-			<xsd:attribute name="numberOfSets" type="INT-NUMBER" use="required"/>
-			<xsd:attribute name="numberOfSequences" type="INT-NUMBER" use="required"/>
-			<xsd:attribute name="numberOfRules" type="INT-NUMBER" use="required"/>
-			<xsd:attribute name="timeWindowWidth" type="INT-NUMBER"/>
-			<xsd:attribute name="minimumTime" type="INT-NUMBER"/>
-			<xsd:attribute name="maximumTime" type="INT-NUMBER"/>
+			<xs:attribute name="minimumSupport" type="REAL-NUMBER" use="required"/>
+			<xs:attribute name="minimumConfidence" type="REAL-NUMBER" use="required"/>
+			<xs:attribute name="lengthLimit" type="INT-NUMBER"/>
+			<xs:attribute name="numberOfItems" type="INT-NUMBER" use="required"/>
+			<xs:attribute name="numberOfSets" type="INT-NUMBER" use="required"/>
+			<xs:attribute name="numberOfSequences" type="INT-NUMBER" use="required"/>
+			<xs:attribute name="numberOfRules" type="INT-NUMBER" use="required"/>
+			<xs:attribute name="timeWindowWidth" type="INT-NUMBER"/>
+			<xs:attribute name="minimumTime" type="INT-NUMBER"/>
+			<xs:attribute name="maximumTime" type="INT-NUMBER"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='SupportVectorMachineModel']/xsd:complexType">
+	<xsl:template match="xs:element[@name='SupportVectorMachineModel']/xs:complexType">
 		<xsl:variable
 			name="index"
-			select="count(xsd:attribute[@name='svmRepresentation']/preceding-sibling::*) + 1"
+			select="count(xs:attribute[@name='svmRepresentation']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:attribute name="alternateBinaryTargetCategory" type="xsd:string" use="optional"/>
+			<xs:attribute name="alternateBinaryTargetCategory" type="xs:string" use="optional"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='TimeSeries']/xsd:complexType/xsd:sequence">
+	<xsl:template match="xs:element[@name='TimeSeries']/xs:complexType/xs:sequence">
 		<xsl:variable
 			name="index"
-			select="count(xsd:element[@ref='TimeAnchor']/preceding-sibling::*) + 1"
+			select="count(xs:element[@ref='TimeAnchor']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:element ref="TimeException" minOccurs="0" maxOccurs="2"/>
+			<xs:element ref="TimeException" minOccurs="0" maxOccurs="2"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='trend']/xsd:simpleType/xsd:restriction">
+	<xsl:template match="xs:element[@name='Trend_ExpoSmooth']/xs:complexType/xs:attribute[@name='trend']/xs:simpleType/xs:restriction">
 		<xsl:variable
 			name="index"
-			select="count(xsd:enumeration[@value='damped_multiplicative']/preceding-sibling::*) + 1"
+			select="count(xs:enumeration[@value='damped_multiplicative']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="@*"/>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xsd:enumeration value="double_exponential"/>
+			<xs:enumeration value="double_exponential"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
