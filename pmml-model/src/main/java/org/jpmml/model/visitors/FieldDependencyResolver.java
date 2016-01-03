@@ -48,7 +48,7 @@ public class FieldDependencyResolver extends FieldResolver {
 	public VisitorAction visit(DataField dataField){
 		process(dataField);
 
-		return VisitorAction.SKIP;
+		return super.visit(dataField);
 	}
 
 	@Override
@@ -57,8 +57,6 @@ public class FieldDependencyResolver extends FieldResolver {
 
 		if(VisitorUtil.isDictionary(parent)){
 			process(derivedField);
-
-			return VisitorAction.SKIP;
 		}
 
 		return super.visit(derivedField);
@@ -78,7 +76,7 @@ public class FieldDependencyResolver extends FieldResolver {
 	public VisitorAction visit(OutputField outputField){
 		process(outputField);
 
-		return VisitorAction.SKIP;
+		return super.visit(outputField);
 	}
 
 	@Override

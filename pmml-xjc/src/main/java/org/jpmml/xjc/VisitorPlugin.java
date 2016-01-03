@@ -153,7 +153,9 @@ public class VisitorPlugin extends Plugin {
 
 			JVar status = body.decl(visitorActionClazz, "status", JExpr.invoke(visitorParameter, "visit").arg(JExpr._this()));
 
-			body.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
+			JBlock ifBody = body._if(status.eq(continueAction))._then();
+
+			ifBody.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
 
 			JInvocation traverseVarargs = null;
 
@@ -172,7 +174,7 @@ public class VisitorPlugin extends Plugin {
 					if(traversableTypes.contains(fieldElementType.name()) || objectClazz.equals(fieldElementType)){
 						JMethod hasElementsMethod = beanClazz.getMethod("has" + propertyInfo.getName(true), new JType[0]);
 
-						body._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType.name()) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
+						ifBody._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType.name()) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
 
 						traverseVarargs = null;
 					}
@@ -185,7 +187,7 @@ public class VisitorPlugin extends Plugin {
 						if(traverseVarargs == null){
 							traverseVarargs = pmmlObjectClazz.staticInvoke("traverse").arg(visitorParameter);
 
-							body._if(status.eq(continueAction))._then().assign(status, traverseVarargs);
+							ifBody._if(status.eq(continueAction))._then().assign(status, traverseVarargs);
 						}
 
 						traverseVarargs.arg(JExpr.invoke(getterMethod));
@@ -193,7 +195,7 @@ public class VisitorPlugin extends Plugin {
 				}
 			}
 
-			body.add(JExpr.invoke(visitorParameter, visitorPopParent));
+			ifBody.add(JExpr.invoke(visitorParameter, visitorPopParent));
 
 			body._if(status.eq(terminateAction))._then()._return(terminateAction);
 
