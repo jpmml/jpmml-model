@@ -31,13 +31,33 @@ Copyright (c) 2009 University of Tartu
 		</xsl:copy>
 	</xsl:template>
 
-	<!-- 
-	Model types have one Extension list in the beginning and another Extension list in the end, which is too complex for the XJC to handle.
+	<!--
+	Ensure that the Extension list is on the first position
+	-->
+	<xsl:template match="xs:sequence">
+		<xsl:copy>
+			<xsl:choose>
+				<xsl:when test="count(xs:element[@ref='Extension']) = 1">
+					<xsl:apply-templates select="node()[@ref='Extension']"/>
+					<xsl:apply-templates select="@*|node()[not(@ref='Extension')]"/>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates select="@*|node()"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</xsl:copy>
+	</xsl:template>
+
+	<!--
+	Simplify Model type definitions by keeping the leading Extension list and commenting out the trailing Extension list
 	-->
 	<xsl:template match="xs:element[@ref='Extension'][position() &gt; 1 and position() = last()]">
 		<xsl:call-template name="extension-comment"/>
 	</xsl:template>
 
+	<!--
+	Simplify EmbeddedModel group definition from XSD sequence to XSD choice by commenting out the Extension list
+	-->
 	<xsl:template match="xs:group[@name='EmbeddedModel']/xs:sequence/xs:element[@ref='Extension']">
 		<xsl:call-template name="extension-comment"/>
 	</xsl:template>
@@ -81,7 +101,7 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
-	Simplify CONTINUOUS-DISTRIBUTION-TYPE group definition from XSD sequence to XSD choice by relocating the Extension element.
+	Simplify CONTINUOUS-DISTRIBUTION-TYPE group definition from XSD sequence to XSD choice by relocating the Extension list
 	-->
 	<xsl:template match="xs:group[@name='CONTINUOUS-DISTRIBUTION-TYPES']">
 		<xsl:copy>
