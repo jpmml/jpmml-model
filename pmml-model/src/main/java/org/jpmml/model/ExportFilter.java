@@ -14,7 +14,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * <p>
- * A SAX filter for translating PMML schema version 4.2 documents to PMML schema version 3.X and 4.X documents.
+ * A SAX filter that translates PMML schema version 4.2 documents to PMML schema version 3.X and 4.X documents.
  * </p>
  */
 public class ExportFilter extends PMMLFilter {

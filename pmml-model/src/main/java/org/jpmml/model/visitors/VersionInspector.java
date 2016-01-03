@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.schema.Added;
@@ -31,6 +32,14 @@ public class VersionInspector extends AbstractSimpleVisitor {
 
 	private Version maximum = Version.getMaximum();
 
+
+	@Override
+	public void applyTo(Visitable visitable){
+		this.minimum = Version.getMinimum();
+		this.maximum = Version.getMaximum();
+
+		super.applyTo(visitable);
+	}
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
