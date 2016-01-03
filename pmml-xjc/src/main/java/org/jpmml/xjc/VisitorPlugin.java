@@ -153,7 +153,7 @@ public class VisitorPlugin extends Plugin {
 
 			JVar status = body.decl(visitorActionClazz, "status", JExpr.invoke(visitorParameter, "visit").arg(JExpr._this()));
 
-			int pushPos = body.pos();
+			body.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
 
 			JInvocation traverseVarargs = null;
 
@@ -193,19 +193,11 @@ public class VisitorPlugin extends Plugin {
 				}
 			}
 
-			int popPos = body.pos();
+			body.add(JExpr.invoke(visitorParameter, visitorPopParent));
 
 			body._if(status.eq(terminateAction))._then()._return(terminateAction);
 
 			body._return(continueAction);
-
-			if(pushPos < popPos){
-				body.pos(popPos);
-				body.add(JExpr.invoke(visitorParameter, visitorPopParent));
-
-				body.pos(pushPos);
-				body.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
-			}
 		}
 
 		return true;
