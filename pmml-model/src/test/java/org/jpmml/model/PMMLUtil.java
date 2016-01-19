@@ -60,9 +60,7 @@ public class PMMLUtil {
 
 	static
 	public InputStream getResourceAsStream(Class<?> clazz){
-		String name = clazz.getSimpleName();
-
-		return PMMLUtil.class.getResourceAsStream("/pmml/" + name + ".pmml");
+		return getResourceAsStream(clazz.getSimpleName());
 	}
 
 	static
@@ -86,7 +84,12 @@ public class PMMLUtil {
 		String namespaceUri = version.getNamespaceURI();
 		String name = namespaceUri.substring(namespaceUri.lastIndexOf('/') + 1);
 
-		return PMMLUtil.class.getResourceAsStream("/pmml/" + name.toLowerCase() + ".pmml");
+		return getResourceAsStream(name.toLowerCase());
+	}
+
+	static
+	public InputStream getResourceAsStream(String name){
+		return PMMLUtil.class.getResourceAsStream("/pmml/" + name + ".pmml");
 	}
 
 	static

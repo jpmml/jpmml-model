@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -147,6 +148,8 @@ public class MiningSchemaCleaner extends FieldResolver {
 
 		LocalTransformations localTransformations = model.getLocalTransformations();
 		if(localTransformations != null && localTransformations.hasDerivedFields()){
+			fieldDependencyResolver.expand(activeFields, new HashSet<>(localTransformations.getDerivedFields()));
+
 			activeFields.removeAll(localTransformations.getDerivedFields());
 		}
 
@@ -161,12 +164,9 @@ public class MiningSchemaCleaner extends FieldResolver {
 	private void clean(Model model, Set<FieldName> activeFieldNames){
 		MiningSchema miningSchema = model.getMiningSchema();
 
-		if(miningSchema.hasMiningFields()){
-			clean(miningSchema.getMiningFields(), activeFieldNames);
-		}
-	}
+		activeFieldNames = new LinkedHashSet<>(activeFieldNames);
 
-	private void clean(List<MiningField> miningFields, Set<FieldName> activeFieldNames){
+		List<MiningField> miningFields = miningSchema.getMiningFields();
 
 		for(Iterator<MiningField> it = miningFields.iterator(); it.hasNext(); ){
 			MiningField miningField = it.next();
@@ -183,6 +183,14 @@ public class MiningSchemaCleaner extends FieldResolver {
 				default:
 					break;
 			}
+
+			activeFieldNames.remove(name);
+		}
+
+		for(FieldName activeFieldName : activeFieldNames){
+			MiningField miningField = new MiningField(activeFieldName);
+
+			miningSchema.addMiningFields(miningField);
 		}
 	}
 

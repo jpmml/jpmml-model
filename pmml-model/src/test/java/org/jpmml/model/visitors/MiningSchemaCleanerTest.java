@@ -3,15 +3,13 @@
  */
 package org.jpmml.model.visitors;
 
-import java.io.InputStream;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.transform.stream.StreamSource;
-
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.MiningField;
+import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.RegressionModel;
@@ -19,7 +17,6 @@ import org.dmg.pmml.Segment;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldNameUtil;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.PMMLUtil;
 import org.junit.Test;
 
@@ -28,12 +25,8 @@ import static org.junit.Assert.assertEquals;
 public class MiningSchemaCleanerTest {
 
 	@Test
-	public void clean() throws Exception {
-		PMML pmml;
-
-		try(InputStream is = PMMLUtil.getResourceAsStream(FieldResolverTest.class)){
-			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
-		}
+	public void cleanChained() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
 
 		MiningSchemaCleaner cleaner = new MiningSchemaCleaner();
 		cleaner.applyTo(pmml);
@@ -75,17 +68,80 @@ public class MiningSchemaCleanerTest {
 		visitor.applyTo(pmml);
 	}
 
+	@Test
+	public void cleanNested() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+
+		MiningSchemaCleaner cleaner = new MiningSchemaCleaner();
+		cleaner.applyTo(pmml);
+
+		Visitor miningModelVisitor = new AbstractVisitor(){
+
+			@Override
+			public VisitorAction visit(MiningModel miningModel){
+				MiningSchema miningSchema = miningModel.getMiningSchema();
+
+				String id;
+
+				try {
+					Segment segment = (Segment)VisitorUtil.getParent(this);
+
+					id = segment.getId();
+				} catch(ClassCastException cce){
+					id = null;
+				}
+
+				if(id == null){
+					checkMiningSchema(FieldNameUtil.create("x1", "x2", "x3"), miningSchema);
+				} else
+
+				if("first".equals(id)){
+					checkMiningSchema(FieldNameUtil.create("x12", "x3"), miningSchema);
+				} else
+
+				if("second".equals(id)){
+					checkMiningSchema(FieldNameUtil.create("x123"), miningSchema);
+				} else
+
+				{
+					throw new AssertionError();
+				}
+
+				return super.visit(miningModel);
+			}
+		};
+
+		miningModelVisitor.applyTo(pmml);
+
+		Visitor regressionModelVisitor = new AbstractVisitor(){
+
+			@Override
+			public VisitorAction visit(RegressionModel regressionModel){
+				MiningSchema miningSchema = regressionModel.getMiningSchema();
+
+				checkMiningSchema(FieldNameUtil.create("x123"), miningSchema);
+
+				return super.visit(regressionModel);
+			}
+		};
+
+		regressionModelVisitor.applyTo(pmml);
+	}
+
 	static
 	private void checkMiningSchema(Set<FieldName> names, MiningSchema miningSchema){
-		Set<FieldName> fieldNames = new LinkedHashSet<>();
+		assertEquals(names, getFieldNames(miningSchema));
+	}
+
+	static
+	private Set<FieldName> getFieldNames(MiningSchema miningSchema){
+		Set<FieldName> result = new LinkedHashSet<>();
 
 		List<MiningField> miningFields = miningSchema.getMiningFields();
 		for(MiningField miningField : miningFields){
-			FieldName name = miningField.getName();
-
-			fieldNames.add(name);
+			result.add(miningField.getName());
 		}
 
-		assertEquals(names, fieldNames);
+		return result;
 	}
 }

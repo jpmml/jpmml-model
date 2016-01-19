@@ -3,12 +3,9 @@
  */
 package org.jpmml.model.visitors;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-
-import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DerivedField;
@@ -20,7 +17,6 @@ import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.PMMLUtil;
 import org.junit.Test;
 
@@ -29,12 +25,8 @@ import static org.junit.Assert.assertEquals;
 public class FieldDependencyResolverTest {
 
 	@Test
-	public void resolve() throws Exception {
-		PMML pmml;
-
-		try(InputStream is = PMMLUtil.getResourceAsStream(FieldResolverTest.class)){
-			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
-		}
+	public void resolveChained() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
 
 		FieldDependencyResolver resolver = new FieldDependencyResolver();
 		resolver.applyTo(pmml);
@@ -81,6 +73,43 @@ public class FieldDependencyResolverTest {
 				checkFields(Collections.<FieldName>emptySet(), dependencies.get(outputField));
 
 				return super.visit(outputField);
+			}
+		};
+
+		visitor.applyTo(pmml);
+	}
+
+	@Test
+	public void resolveNested() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+
+		FieldDependencyResolver resolver = new FieldDependencyResolver();
+		resolver.applyTo(pmml);
+
+		final
+		Map<Field, Set<Field>> dependencies = resolver.getDependencies();
+
+		Visitor visitor = new AbstractVisitor(){
+
+			@Override
+			public VisitorAction visit(DerivedField derivedField){
+				Set<Field> fields = dependencies.get(derivedField);
+
+				FieldName name = derivedField.getName();
+
+				if("x12".equals(name.getValue())){
+					checkFields(FieldNameUtil.create("x1", "x2"), fields);
+				} else
+
+				if("x123".equals(name.getValue())){
+					checkFields(FieldNameUtil.create("x12", "x3"), fields);
+				} else
+
+				{
+					throw new AssertionError();
+				}
+
+				return super.visit(derivedField);
 			}
 		};
 

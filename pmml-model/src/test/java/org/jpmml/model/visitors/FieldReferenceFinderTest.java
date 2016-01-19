@@ -3,10 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
-import java.io.InputStream;
 import java.util.Set;
-
-import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Model;
@@ -15,7 +12,6 @@ import org.dmg.pmml.Segment;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldNameUtil;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.PMMLUtil;
 import org.junit.Test;
 
@@ -24,12 +20,8 @@ import static org.junit.Assert.assertEquals;
 public class FieldReferenceFinderTest {
 
 	@Test
-	public void find() throws Exception {
-		PMML pmml;
-
-		try(InputStream is = PMMLUtil.getResourceAsStream(FieldResolverTest.class)){
-			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
-		}
+	public void findChained() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
 
 		Visitor visitor = new AbstractVisitor(){
 

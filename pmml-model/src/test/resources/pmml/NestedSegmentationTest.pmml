@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_2" version="4.2">
+    <Header/>
+    <DataDictionary>
+		<DataField name="x1" optype="continuous" dataType="double"/>
+		<DataField name="x2" optype="continuous" dataType="double"/>
+		<DataField name="x3" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<MiningModel functionName="regression">
+		<MiningSchema/>
+		<LocalTransformations>
+			<DerivedField name="x12" dataType="double" optype="continuous">
+				<Apply function="product">
+					<FieldRef field="x1"/>
+					<FieldRef field="x2"/>
+				</Apply>
+			</DerivedField>
+		</LocalTransformations>
+		<Segmentation multipleModelMethod="modelChain">
+			<Segment id="first">
+				<True/>
+				<MiningModel functionName="regression">
+					<MiningSchema/>
+					<LocalTransformations>
+						<DerivedField name="x123" dataType="double" optype="continuous">
+							<Apply function="product">
+								<FieldRef field="x12"/>
+								<FieldRef field="x3"/>
+							</Apply>
+						</DerivedField>
+					</LocalTransformations>
+					<Segmentation multipleModelMethod="modelChain">
+						<Segment id="second">
+							<True/>
+							<MiningModel functionName="regression">
+								<MiningSchema/>
+								<Segmentation multipleModelMethod="modelChain">
+									<Segment>
+										<True/>
+										<RegressionModel functionName="regression">
+											<MiningSchema/>
+											<RegressionTable>
+												<NumericPredictor name="x123" coefficient="1"/>
+											</RegressionTable>
+										</RegressionModel>
+									</Segment>
+								</Segmentation>
+							</MiningModel>
+						</Segment>
+					</Segmentation>
+				</MiningModel>
+			</Segment>
+		</Segmentation>
+	</MiningModel>
+</PMML>

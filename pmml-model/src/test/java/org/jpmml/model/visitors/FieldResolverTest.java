@@ -3,11 +3,8 @@
  */
 package org.jpmml.model.visitors;
 
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.Set;
-
-import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.DerivedField;
@@ -20,7 +17,6 @@ import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.PMMLUtil;
 import org.junit.Test;
 
@@ -29,12 +25,8 @@ import static org.junit.Assert.assertEquals;
 public class FieldResolverTest {
 
 	@Test
-	public void resolve() throws Exception {
-		PMML pmml;
-
-		try(InputStream is = PMMLUtil.getResourceAsStream(FieldResolverTest.class)){
-			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
-		}
+	public void resolveChained() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
 
 		final
 		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2", "x3");
@@ -163,6 +155,56 @@ public class FieldResolverTest {
 		predicateResolver.applyTo(pmml);
 
 		assertEquals(Collections.emptySet(), predicateResolver.getFields());
+	}
+
+	@Test
+	public void resolveNested() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+
+		final
+		Set<FieldName> dataFieldNames = FieldNameUtil.create("x1", "x2", "x3");
+
+		FieldResolver applyResolver = new FieldResolver(){
+
+			@Override
+			public VisitorAction visit(Apply apply){
+				Set<Field> fields = getFields();
+
+				DerivedField derivedField = (DerivedField)VisitorUtil.getParent(this);
+
+				FieldName name = derivedField.getName();
+
+				if("x12".equals(name.getValue())){
+					checkFields(dataFieldNames, fields);
+				} else
+
+				if("x123".equals(name.getValue())){
+					checkFields(FieldNameUtil.create(dataFieldNames, "x12"), fields);
+				} else
+
+				{
+					throw new AssertionError();
+				}
+
+				return super.visit(apply);
+			}
+		};
+
+		applyResolver.applyTo(pmml);
+
+		FieldResolver regressionTableResolver = new FieldResolver(){
+
+			@Override
+			public VisitorAction visit(RegressionTable regressionTable){
+				Set<Field> fields = getFields();
+
+				checkFields(FieldNameUtil.create(dataFieldNames, "x12", "x123"), fields);
+
+				return super.visit(regressionTable);
+			}
+		};
+
+		regressionTableResolver.applyTo(pmml);
 	}
 
 	static
