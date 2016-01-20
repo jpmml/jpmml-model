@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The PMML schema version of exclusion.
+ * Marks a feature that was removed in the specified PMML schema version.
  *
  * @see Added
  */

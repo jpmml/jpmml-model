@@ -8,6 +8,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Marks a feature that was deprecated in the specified PMML schema version.
+ */
 @Retention (
 	value = RetentionPolicy.RUNTIME
 )

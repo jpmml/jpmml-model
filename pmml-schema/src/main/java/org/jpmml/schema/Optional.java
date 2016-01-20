@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Villu Ruusmann
+ * Copyright (c) 2016 Villu Ruusmann
  */
 package org.jpmml.schema;
 
@@ -9,9 +9,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marks a feature that was added in the specified PMML schema version.
+ * Marks a feature that was changed from required to optional in the specified PMML schema version.
  *
- * @see Removed
+ * @see Required
  */
 @Retention (
 	value = RetentionPolicy.RUNTIME
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Target (
 	value = {ElementType.TYPE, ElementType.FIELD}
 )
-public @interface Added {
+public @interface Optional {
 
 	Version value();
 }
