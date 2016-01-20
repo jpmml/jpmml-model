@@ -21,5 +21,5 @@ import java.lang.annotation.Target;
 )
 public @interface Added {
 
-	Version value() default Version.PMML_3_0;
+	Version value();
 }
