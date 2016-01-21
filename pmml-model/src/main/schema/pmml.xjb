@@ -429,6 +429,12 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Constant']/xsd:complexType/xsd:simpleContent/xsd:extension/xsd:attribute[@name='dataType']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Constraints']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
