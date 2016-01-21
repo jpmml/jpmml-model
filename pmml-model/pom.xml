@@ -188,7 +188,6 @@
 						<artifactId>pmml-schema</artifactId>
 						<version>1.2-SNAPSHOT</version>
 					</dependency>
-
 					<dependency>
 						<groupId>org.jpmml</groupId>
 						<artifactId>pmml-xjc</artifactId>

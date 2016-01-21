@@ -10,6 +10,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlValue;
+
+import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JCommentPart;
@@ -33,6 +36,7 @@ import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
+import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
 import org.xml.sax.ErrorHandler;
 
 public class PMMLPlugin extends Plugin {
@@ -276,6 +280,12 @@ public class PMMLPlugin extends Plugin {
 					addElementsMethod.body().add(JExpr.invoke(getterMethod).invoke("addAll").arg(arraysClass.staticInvoke("asList").arg(param)));
 					addElementsMethod.body()._return(JExpr._this());
 				}
+
+				Collection<JAnnotationUse> annotations = fieldVar.annotations();
+
+				if(hasAnnotation(annotations, XmlValue.class)){
+					fieldVar.annotate(XmlValueExtension.class);
+				}
 			}
 		}
 
@@ -337,6 +347,28 @@ public class PMMLPlugin extends Plugin {
 
 			if(filter.accept(propertyInfo, type)){
 				return field;
+			}
+		}
+
+		return null;
+	}
+
+	static
+	private boolean hasAnnotation(Collection<JAnnotationUse> annotations, Class<?> clazz){
+		JAnnotationUse annotation = findAnnotation(annotations, clazz);
+
+		return (annotation != null);
+	}
+
+	static
+	private JAnnotationUse findAnnotation(Collection<JAnnotationUse> annotations, Class<?> clazz){
+		String fullName = clazz.getName();
+
+		for(JAnnotationUse annotation : annotations){
+			JClass type = annotation.getAnnotationClass();
+
+			if(checkType(type, fullName)){
+				return annotation;
 			}
 		}
 
