@@ -11,12 +11,15 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Class hierarchy.
   * Value constructors.
   * Method chaining.
+* GWT compatible
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
 * Memory efficient:
   * Optional SAX Locator information
-* GWT compatible
+* Full support for most popular JAXB runtimes:
+  * [Glassfish Metro] (https://metro.java.net)
+  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink)
 
 # Prerequisites #
 
@@ -106,6 +109,13 @@ java -javaagent:../pmml-agent/target/pmml-agent-1.2-SNAPSHOT.jar -cp target/exam
 Checking the validity of `model.pmml`:
 ```
 java -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.ValidationExample --input model.pmml
+```
+
+It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `javax.xml.bind.context.factory` system property. Use `com.sun.xml.bind.v2.ContextFactory` for activating a Glassfish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
+
+For example:
+```
+java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/example-1.2-SNAPSHOT.jar ...
 ```
 
 # License #
