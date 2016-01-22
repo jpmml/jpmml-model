@@ -18,7 +18,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 * Memory efficient:
   * Optional SAX Locator information
 * Full support for most popular JAXB runtimes:
-  * [Glassfish Metro] (https://metro.java.net)
+  * [GlassFish Metro] (https://metro.java.net)
   * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink)
 
 # Prerequisites #
@@ -111,7 +111,7 @@ Checking the validity of `model.pmml`:
 java -cp target/example-1.2-SNAPSHOT.jar org.jpmml.model.ValidationExample --input model.pmml
 ```
 
-It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `javax.xml.bind.context.factory` system property. Use `com.sun.xml.bind.v2.ContextFactory` for activating a Glassfish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
+It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `javax.xml.bind.context.factory` system property. Use `com.sun.xml.bind.v2.ContextFactory` for activating a GlassFish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
 
 For example:
 ```

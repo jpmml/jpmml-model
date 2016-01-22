@@ -25,17 +25,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jpmml</groupId>
-			<artifactId>pmml-model</artifactId>
+			<artifactId>pmml-model-metro</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>org.eclipse.persistence</groupId>
-			<artifactId>org.eclipse.persistence.moxy</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-model-moxy</artifactId>
 		</dependency>
 
 		<dependency>

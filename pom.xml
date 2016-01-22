@@ -41,6 +41,8 @@
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
 		<module>pmml-model-gwt</module>
+		<module>pmml-model-metro</module>
+		<module>pmml-model-moxy</module>
 		<module>pmml-schema</module>
 		<module>pmml-schema-gwt</module>
 		<module>pmml-xjc</module>
@@ -77,6 +79,16 @@
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-gwt</artifactId>
+				<version>1.2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-model-metro</artifactId>
+				<version>1.2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-model-moxy</artifactId>
 				<version>1.2-SNAPSHOT</version>
 			</dependency>
 			<dependency>

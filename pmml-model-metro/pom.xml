@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jpmml</groupId>
+		<artifactId>jpmml-model</artifactId>
+		<version>1.2-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.jpmml</groupId>
+	<artifactId>pmml-model-metro</artifactId>
+	<packaging>jar</packaging>
+
+	<name>JPMML GlassFish Metro runtime</name>
+	<description>JPMML class model with GlassFish Metro runtime</description>
+
+	<licenses>
+		<license>
+			<name>BSD 3-Clause License</name>
+			<url>http://opensource.org/licenses/BSD-3-Clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-model</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+	</dependencies>
+</project>
