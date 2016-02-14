@@ -19,18 +19,21 @@ import com.sun.codemodel.JCommentPart;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JDocComment;
 import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
+import com.sun.codemodel.JStringLiteral;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CClassInfo;
+import com.sun.tools.xjc.model.CDefaultValue;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.outline.ClassOutline;
@@ -119,6 +122,11 @@ public class PMMLPlugin extends Plugin {
 					if((privateName).equals("isScorable")){
 						propertyInfo.setName(true, "Scorable");
 						propertyInfo.setName(false, "scorable");
+					}
+
+					CDefaultValue defaultValue = propertyInfo.defaultValue;
+					if(defaultValue != null){
+						propertyInfo.defaultValue = new CShareableDefaultValue(propertyInfo, propertyInfo.defaultValue);
 					}
 				}
 			}
@@ -221,6 +229,14 @@ public class PMMLPlugin extends Plugin {
 				}
 
 				JType type = fieldVar.type();
+
+				CShareableDefaultValue defaultValue = (CShareableDefaultValue)propertyInfo.defaultValue;
+				if(defaultValue != null){
+
+					if(defaultValue.isShared()){
+						beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, fieldVar.type(), defaultValue.getField(), defaultValue.computeInit(outline));
+					}
+				}
 
 				JMethod getterMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
 				JMethod setterMethod = beanClazz.getMethod("set" + propertyInfo.getName(true), new JType[]{type});
@@ -384,5 +400,78 @@ public class PMMLPlugin extends Plugin {
 	private interface FieldFilter {
 
 		boolean accept(CPropertyInfo propertyInfo, JType type);
+	}
+
+	static
+	private class CShareableDefaultValue extends CDefaultValue {
+
+		private CDefaultValue parent = null;
+
+		private String field = null;
+
+
+		private CShareableDefaultValue(CPropertyInfo propertyInfo, CDefaultValue parent){
+			setParent(parent);
+			setField(formatField(propertyInfo.getName(false)));
+		}
+
+		@Override
+		public JExpression compute(Outline outline){
+			JExpression expression = computeInit(outline);
+
+			if((expression instanceof JFieldRef) || (expression instanceof JStringLiteral)){
+				setField(null);
+
+				return expression;
+			}
+
+			return JExpr.ref(getField());
+		}
+
+		public JExpression computeInit(Outline outline){
+			CDefaultValue parent = getParent();
+
+			return parent.compute(outline);
+		}
+
+		public boolean isShared(){
+			String field = getField();
+
+			return (field != null);
+		}
+
+		public CDefaultValue getParent(){
+			return this.parent;
+		}
+
+		private void setParent(CDefaultValue parent){
+			this.parent = parent;
+		}
+
+		public String getField(){
+			return this.field;
+		}
+
+		private void setField(String field){
+			this.field = field;
+		}
+
+		static
+		private String formatField(String string){
+			StringBuilder sb = new StringBuilder();
+			sb.append("DEFAULT_");
+
+			for(int i = 0; i < string.length(); i++){
+				char c = string.charAt(i);
+
+				if(Character.isUpperCase(c)){
+					sb.append('_');
+				}
+
+				sb.append(Character.toUpperCase(c));
+			}
+
+			return sb.toString();
+		}
 	}
 }
