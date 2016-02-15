@@ -70,6 +70,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='AnovaRow']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Type"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='AnyDistribution']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -635,6 +641,12 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.TimeSeriesAlgorithm</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType/xsd:attribute[@name='transformation']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Transformation"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FactorList']/xsd:complexType">
@@ -1459,6 +1471,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='dataUsage']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="DataUsage"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='degreesOfFreedom']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -1707,6 +1725,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Seasonality_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Type"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SeasonalTrendDecomposition']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -1855,6 +1879,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet</inheritance:implements>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SetPredicate']/xsd:complexType/xsd:attribute[@name='operator']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Operator"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SigmoidKernelType']/xsd:complexType">
@@ -2062,6 +2092,18 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression</inheritance:implements>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='localTermWeights']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="LocalTermWeights"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='countHits']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="CountHits"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType">

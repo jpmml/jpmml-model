@@ -84,10 +84,6 @@ Copyright (c) 2009 University of Tartu
 	Restrict xs:string to FIELD-NAME where appropriate
 	-->
 
-	<xsl:template match="xs:element[@name='ParameterField']/xs:complexType/xs:attribute[@name='name']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
-	</xsl:template>
-
 	<xsl:template match="xs:element[@name='BayesInput' or @name='BayesOutput']/xs:complexType/xs:attribute[@name='fieldName']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
@@ -97,6 +93,14 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='NearestNeighborModel']/xs:complexType/xs:attribute[@name='instanceIdVariable']/@type">
+		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='ParameterField']/xs:complexType/xs:attribute[@name='name']/@type">
+		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='PredictiveModelQuality']/xs:complexType/xs:attribute[@name='targetField']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
 
@@ -127,6 +131,19 @@ Copyright (c) 2009 University of Tartu
 			<xs:complexType>
 			</xs:complexType>
 		</xsl:copy>
+	</xsl:template>
+
+	<!--
+	Replace xs:string with enum
+	-->
+	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">
+		<xs:attribute name="operator" fixed="supersetOf">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="supersetOf"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xsl:template>
 
 	<!--
