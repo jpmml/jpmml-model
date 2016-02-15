@@ -23,13 +23,15 @@ public class ReflectionUtil {
 
 	static
 	public <E extends PMMLObject> void copyState(E from, E to){
+		Class<?> fromClazz = from.getClass();
+		Class<?> toClazz = to.getClass();
 
 		// Allow copying to the same class or to a subclass, but not to a superclass
-		if(!(from.getClass()).isAssignableFrom(to.getClass())){
+		if(!(fromClazz).isAssignableFrom(toClazz)){
 			throw new IllegalArgumentException();
 		}
 
-		List<Field> fields = getAllInstanceFields(from);
+		List<Field> fields = getInstanceFields(fromClazz);
 		for(Field field : fields){
 			Object value = getFieldValue(field, from);
 
@@ -38,35 +40,28 @@ public class ReflectionUtil {
 	}
 
 	static
-	public Field getField(Object object, String name){
+	public Field getField(Class<?> clazz, String name){
 
-		for(Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()){
+		while(clazz != null){
 
 			try {
 				return clazz.getDeclaredField(name);
 			} catch(NoSuchFieldException nsfe){
 				// Ignored
 			}
+
+			clazz = clazz.getSuperclass();
 		}
 
 		throw new RuntimeException(new NoSuchFieldException(name));
 	}
 
 	static
-	public List<Field> getAllFields(Object object){
-		Class<?> clazz = object.getClass();
-
+	public List<Field> getFields(Class<?> clazz){
 		List<Field> result = ReflectionUtil.classFields.get(clazz);
+
 		if(result == null){
-			FieldFilter filter = new FieldFilter(){
-
-				@Override
-				public boolean accept(Field field){
-					return isRegularField(field);
-				}
-			};
-
-			result = loadFields(clazz, filter);
+			result = loadFields(clazz, ReflectionUtil.FIELD_SELECTOR);
 
 			ReflectionUtil.classFields.putIfAbsent(clazz, result);
 		}
@@ -75,26 +70,11 @@ public class ReflectionUtil {
 	}
 
 	static
-	public List<Field> getAllInstanceFields(Object object){
-		Class<?> clazz = object.getClass();
-
+	public List<Field> getInstanceFields(Class<?> clazz){
 		List<Field> result = ReflectionUtil.classInstanceFields.get(clazz);
+
 		if(result == null){
-			FieldFilter filter = new FieldFilter(){
-
-				@Override
-				public boolean accept(Field field){
-					int modifiers = field.getModifiers();
-
-					if(Modifier.isStatic(modifiers)){
-						return false;
-					}
-
-					return isRegularField(field);
-				}
-			};
-
-			result = loadFields(clazz, filter);
+			result = loadFields(clazz, ReflectionUtil.INSTANCE_FIELD_SELECTOR);
 
 			ReflectionUtil.classInstanceFields.putIfAbsent(clazz, result);
 		}
@@ -134,17 +114,8 @@ public class ReflectionUtil {
 	}
 
 	static
-	public boolean isPrimitiveWrapper(Object object){
-		Class<?> clazz = object.getClass();
-
+	public boolean isPrimitiveWrapper(Class<?> clazz){
 		return ReflectionUtil.primitiveWrapperClasses.contains(clazz);
-	}
-
-	static
-	public boolean isEnum(Object object){
-		Class<?> clazz = object.getClass();
-
-		return clazz.isEnum();
 	}
 
 	static
@@ -164,17 +135,6 @@ public class ReflectionUtil {
 			Number number = (Number)value;
 
 			return Double.compare(number.doubleValue(), 0d) == 0;
-		}
-
-		return false;
-	}
-
-	static
-	private boolean isRegularField(Field field){
-		String name = field.getName();
-
-		if(name.length() > 0){
-			return Character.isLetterOrDigit(name.charAt(0));
 		}
 
 		return false;
@@ -205,6 +165,41 @@ public class ReflectionUtil {
 
 		boolean accept(Field field);
 	}
+
+	static
+	private final FieldFilter FIELD_SELECTOR = new FieldFilter(){
+
+		@Override
+		public boolean accept(Field field){
+			return hasValidName(field);
+		}
+
+		private boolean hasValidName(Field field){
+			String name = field.getName();
+
+			if(name.length() > 0){
+				return Character.isLetterOrDigit(name.charAt(0));
+			}
+
+			return false;
+		}
+	};
+
+	static
+	private final FieldFilter INSTANCE_FIELD_SELECTOR = new FieldFilter(){
+
+		@Override
+		public boolean accept(Field field){
+
+			if(ReflectionUtil.FIELD_SELECTOR.accept(field)){
+				int modifiers = field.getModifiers();
+
+				return !Modifier.isStatic(modifiers);
+			}
+
+			return false;
+		}
+	};
 
 	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<>();
 

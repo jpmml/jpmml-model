@@ -20,7 +20,7 @@ public class ArrayListOptimizer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		List<Field> fields = ReflectionUtil.getAllInstanceFields(object);
+		List<Field> fields = ReflectionUtil.getInstanceFields(object.getClass());
 
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);

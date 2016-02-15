@@ -78,12 +78,14 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 
 		this.size += this.instrumentation.getObjectSize(object);
 
+		Class<?> clazz = object.getClass();
+
 		// Wrapper objects for primitive values do not have Object-type instance fields
-		if(ReflectionUtil.isPrimitiveWrapper(object)){
+		if(ReflectionUtil.isPrimitiveWrapper(clazz)){
 			return;
 		}
 
-		List<Field> fields = ReflectionUtil.getAllInstanceFields(object);
+		List<Field> fields = ReflectionUtil.getInstanceFields(clazz);
 		for(Field field : fields){
 			Class<?> type = field.getType();
 
@@ -114,8 +116,9 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 	private boolean shouldMeasure(Object object){
 
 		if(object != null){
+			Class<?> clazz = object.getClass();
 
-			if(ReflectionUtil.isEnum(object)){
+			if(clazz.isEnum()){
 				return false;
 			} // End if
 

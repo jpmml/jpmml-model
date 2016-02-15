@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.DataDictionary;
-import org.dmg.pmml.DataType;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.RegressionModel;
@@ -59,14 +58,14 @@ public class ReflectionUtilTest {
 
 	@Test
 	public void getField(){
-		ReflectionUtil.getField(new PMML(), "version");
-		ReflectionUtil.getField(new CustomPMML(), "version");
+		ReflectionUtil.getField(PMML.class, "version");
+		ReflectionUtil.getField(CustomPMML.class, "version");
 	}
 
 	@Test
-	public void getAllFields(){
-		List<Field> fields = ReflectionUtil.getAllFields(new PMML());
-		List<Field> customFields = ReflectionUtil.getAllFields(new CustomPMML());
+	public void getFields(){
+		List<Field> fields = ReflectionUtil.getFields(PMML.class);
+		List<Field> customFields = ReflectionUtil.getFields(CustomPMML.class);
 
 		assertEquals(1 /*PMMLObject*/ + 7 /*PMML*/, fields.size());
 
@@ -75,15 +74,10 @@ public class ReflectionUtilTest {
 
 	@Test
 	public void isPrimitiveWrapper(){
-		assertTrue(ReflectionUtil.isPrimitiveWrapper(new Integer(0)));
-		assertTrue(ReflectionUtil.isPrimitiveWrapper(new Double(0d)));
-		assertTrue(ReflectionUtil.isPrimitiveWrapper(new Boolean(false)));
+		assertFalse(ReflectionUtil.isPrimitiveWrapper(String.class));
 
-		assertFalse(ReflectionUtil.isPrimitiveWrapper(new String("")));
-	}
-
-	@Test
-	public void isEnum(){
-		assertTrue(ReflectionUtil.isEnum(DataType.STRING));
+		assertTrue(ReflectionUtil.isPrimitiveWrapper(Integer.class));
+		assertTrue(ReflectionUtil.isPrimitiveWrapper(Double.class));
+		assertTrue(ReflectionUtil.isPrimitiveWrapper(Boolean.class));
 	}
 }
