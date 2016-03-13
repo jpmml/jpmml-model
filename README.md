@@ -11,23 +11,25 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Class hierarchy.
   * Value constructors.
   * Method chaining.
-* GWT compatible
+  * Optional SAX Locator information.
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
-* Memory efficient:
-  * Optional SAX Locator information
-* Full support for most popular JAXB runtimes:
-  * [GlassFish Metro] (https://metro.java.net)
-  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink)
+* Supported platforms:
+  * Java SE and EE.
+  * Android.
+  * Google Web Toolkit (GWT).
+* Supported JAXB runtimes:
+  * [GlassFish Metro] (https://metro.java.net).
+  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink).
 
 # Prerequisites #
 
-* Java 1.7 or newer
+* Java 1.7 or newer.
 
 # Installation #
 
-JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
+JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/).
 
 The current version is **1.2.11** (15 February, 2016).
 
