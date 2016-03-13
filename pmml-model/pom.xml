@@ -134,7 +134,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.5.201505241946</version>
+				<version>0.7.6.201602180812</version>
 				<executions>
 					<execution>
 						<id>pre-unit-test</id>
@@ -163,25 +163,25 @@
 						<goals>
 							<goal>generate</goal>
 						</goals>
+						<configuration>
+							<args>
+								<arg>-no-header</arg>
+								<arg>-npa</arg>
+								<arg>-Xannotate</arg>
+								<arg>-Xannotate-defaultFieldTarget=field</arg>
+								<arg>-Xinheritance</arg>
+								<arg>-Xpmml</arg>
+								<arg>-XvalueConstructor</arg>
+								<arg>-Xvisitor</arg>
+								<arg>-Xwildcard</arg>
+							</args>
+							<episode>false</episode>
+							<extension>true</extension>
+							<schemaDirectory>target/transformed-schema</schemaDirectory>
+							<specVersion>2.2</specVersion>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<args>
-						<arg>-no-header</arg>
-						<arg>-npa</arg>
-						<arg>-Xannotate</arg>
-						<arg>-Xannotate-defaultFieldTarget=field</arg>
-						<arg>-Xinheritance</arg>
-						<arg>-Xpmml</arg>
-						<arg>-XvalueConstructor</arg>
-						<arg>-Xvisitor</arg>
-						<arg>-Xwildcard</arg>
-					</args>
-					<episode>false</episode>
-					<extension>true</extension>
-					<schemaDirectory>target/transformed-schema</schemaDirectory>
-					<specVersion>2.2</specVersion>
-				</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.jpmml</groupId>

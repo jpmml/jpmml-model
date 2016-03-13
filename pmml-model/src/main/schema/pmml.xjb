@@ -14,24 +14,6 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:schemaBindings>
 
-		<jaxb:globalBindings>
-			<xjc:javaType
-				name="java.lang.Integer"
-				xmlType="xs:integer"
-				adapter="org.dmg.pmml.adapters.IntegerAdapter"
-			/>
-			<xjc:javaType
-				name="java.lang.Integer"
-				xmlType="xs:nonNegativeInteger"
-				adapter="org.dmg.pmml.adapters.IntegerAdapter"
-			/>
-			<xjc:javaType
-				name="java.lang.Double"
-				xmlType="xs:decimal"
-				adapter="org.dmg.pmml.adapters.DecimalAdapter"
-			/>
-		</jaxb:globalBindings>
-
 		<jaxb:bindings node="//xsd:complexType[@name='COUNT-TABLE-TYPE']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>

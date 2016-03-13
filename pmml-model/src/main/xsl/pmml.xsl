@@ -159,4 +159,18 @@ Copyright (c) 2009 University of Tartu
 	<xsl:template match="xs:attribute[@type='xs:float' or @type='xs:double']/@type">
 		<xsl:attribute name="type">NUMBER</xsl:attribute>
 	</xsl:template>
+
+	<!--
+	Replace xs:integer with xs:int
+	-->
+	<xsl:template match="xs:simpleType[@name='INT-NUMBER']/xs:restriction/@base">
+		<xsl:attribute name="base">xs:int</xsl:attribute>
+	</xsl:template>
+	
+	<!--
+	Replace xs:decimal with xs:double
+	-->
+	<xsl:template match="xs:simpleType[@name='PROB-NUMBER' or @name='PERCENTAGE-NUMBER']/xs:restriction/@base">
+		<xsl:attribute name="base">xs:double</xsl:attribute>
+	</xsl:template>
 </xsl:stylesheet>
