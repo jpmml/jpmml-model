@@ -20,8 +20,8 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Android.
   * Google Web Toolkit (GWT).
 * Supported JAXB runtimes:
-  * [GlassFish Metro] (https://metro.java.net).
-  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink).
+  * [GlassFish Metro] (https://metro.java.net)
+  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink)
 
 # Prerequisites #
 
@@ -31,13 +31,13 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/).
 
-The current version is **1.2.11** (15 February, 2016).
+The current version is **1.2.12** (13 March, 2016).
 
 ```xml
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.2.11</version>
+	<version>1.2.12</version>
 </dependency>
 ```
 
