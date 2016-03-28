@@ -1,0 +1,39 @@
+Using the SER plugin
+
+  Load <<<.pmml>>> files from the <<<src/main/pmml>>> directory,
+  apply Visitor class <<<org.jpmml.model.visitors.StringInterner>>>,
+  and store the results as <<<.ser>>> files to the <<<target/processed-pmml>>> directory:
+
++---
+<build>
+	<plugins>
+		<plugin>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-maven-plugin</artifactId>
+			<version>1.2-SNAPSHOT</version>
+			<executions>
+				<execution>
+					<phase>process-resources</phase>
+					<goals>
+						<goal>ser</goal>
+					</goals>
+					<configuration>
+						<modelSets>
+							<modelSet>
+								<dir>src/main/pmml</dir>
+								<outputDir>target/processed-pmml</outputDir>
+								<includes>
+									<include>*.pmml</include>
+								</includes>
+							</modelSet>
+						</modelSets>
+						<visitorClasses>
+							<visitorClass>org.jpmml.model.visitors.StringInterner</visitorClass>
+						</visitorClasses>
+					</configuration>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
++---

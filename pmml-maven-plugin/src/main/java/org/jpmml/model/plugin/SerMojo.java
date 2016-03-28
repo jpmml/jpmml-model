@@ -32,6 +32,13 @@ import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
 import org.xml.sax.InputSource;
 
+/**
+ * <p>
+ * A MOJO that loads a class model object from a PMML file, processes it, and stores the result to a SER file.
+ * </p>
+ *
+ * @see SerializationUtil
+ */
 @Mojo (
 	name = "ser"
 )
@@ -43,15 +50,45 @@ public class SerMojo extends AbstractMojo {
 	)
 	private MavenProject project;
 
+	/**
+	 * <p>
+	 * The default file name mapper.
+	 * A model set can override it by specifying its own file name mapper.
+	 * </p>
+	 *
+	 * <p>
+	 * The default file name mapper changes the file name extension to <code>ser</code>.
+	 * For example, <code>mymodel.pmml</code> would be mapped to <code>mymodel.ser</code>.
+	 * </p>
+	 *
+	 * @see FileExtensionMapper
+	 */
 	@Parameter
 	private FileMapper fileMapper = null;
 
-	@Parameter
+	/**
+	 * <p>
+	 * A list of one or more model sets.
+	 * </p>
+	 */
+	@Parameter (
+		required = true
+	)
 	private List<ModelSet> modelSets = null;
 
+	/**
+	 * <p>
+	 * A boolean indicating if the SAX Locator information, if available, should be transferred over to the SER file.
+	 * </p>
+	 */
 	@Parameter
 	private boolean keepLocator = false;
 
+	/**
+	 * <p>
+	 * A list of zero or more {@link Visitor} class names.
+	 * </p>
+	 */
 	@Parameter
 	private List<String> visitorClasses = null;
 

@@ -20,8 +20,8 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Android.
   * Google Web Toolkit (GWT).
 * Supported JAXB runtimes:
-  * [GlassFish Metro] (https://metro.java.net).
-  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink).
+  * [GlassFish Metro] (https://metro.java.net)
+  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink)
 
 # Prerequisites #
 
