@@ -19,6 +19,8 @@ import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.codehaus.plexus.components.io.filemappers.FileExtensionMapper;
+import org.codehaus.plexus.components.io.filemappers.FileMapper;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Visitor;
@@ -41,11 +43,21 @@ public class SerMojo extends AbstractMojo {
 	private MavenProject project;
 
 	@Parameter
+	private FileMapper fileMapper = null;
+
+	@Parameter
 	private List<ModelSet> modelSets = null;
 
 	@Parameter
 	private boolean keepLocator = false;
 
+
+	public SerMojo(){
+		FileExtensionMapper fileMapper = new FileExtensionMapper();
+		fileMapper.setTargetExtension("ser");
+
+		this.fileMapper = fileMapper;
+	}
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
@@ -65,6 +77,11 @@ public class SerMojo extends AbstractMojo {
 
 		log.info("Processing model set from " + modelSet.getDir() + " to " + modelSet.getOutputDir());
 
+		FileMapper fileMapper = modelSet.getFileMapper();
+		if(fileMapper == null){
+			fileMapper = getFileMapper();
+		}
+
 		File dir = resolveFile(modelSet.getDir());
 		File outputDir = resolveFile(modelSet.getOutputDir());
 
@@ -80,29 +97,22 @@ public class SerMojo extends AbstractMojo {
 			log.info("Processing model " + name);
 
 			try {
-				transform(name, dir, outputDir);
+				File pmmlFile = new File(dir, name);
+				File serFile = new File(outputDir, fileMapper.getMappedFileName(name));
+
+				File serDir = serFile.getParentFile();
+				if(serDir != null && !serDir.exists()){
+					serDir.mkdirs();
+				}
+
+				transform(pmmlFile, serFile);
 			} catch(Exception e){
 				throw new MojoExecutionException("Failed to process model " + name, e);
 			}
 		}
 	}
 
-	private void transform(String name, File dir, File outputDir) throws Exception {
-		boolean keepLocator = getKeepLocator();
-
-		int dot = name.indexOf('.');
-		if(dot <= 0){
-			throw new IllegalArgumentException(name);
-		}
-
-		File pmmlFile = new File(dir, name);
-		File serFile = new File(outputDir, name.substring(0, dot) + ".ser");
-
-		File outputParent = serFile.getParentFile();
-		if(!outputParent.exists()){
-			outputParent.mkdirs();
-		}
-
+	private void transform(File pmmlFile, File serFile) throws Exception {
 		PMML pmml;
 
 		try(InputStream is = new FileInputStream(pmmlFile)){
@@ -110,6 +120,8 @@ public class SerMojo extends AbstractMojo {
 
 			pmml = JAXBUtil.unmarshalPMML(source);
 		}
+
+		boolean keepLocator = getKeepLocator();
 
 		Visitor visitor = (keepLocator ? new LocatorTransformer() : new LocatorNullifier());
 		visitor.applyTo(pmml);
@@ -135,6 +147,14 @@ public class SerMojo extends AbstractMojo {
 
 	public void setProject(MavenProject project){
 		this.project = project;
+	}
+
+	public FileMapper getFileMapper(){
+		return this.fileMapper;
+	}
+
+	public void setFileMapper(FileMapper fileMapper){
+		this.fileMapper = fileMapper;
 	}
 
 	public List<ModelSet> getModelSets(){

@@ -5,6 +5,8 @@ package org.jpmml.model.plugin;
 
 import java.io.File;
 
+import org.codehaus.plexus.components.io.filemappers.FileMapper;
+
 public class ModelSet {
 
 	private File dir = null;
@@ -14,6 +16,8 @@ public class ModelSet {
 	private String[] includes = null;
 
 	private String[] excludes = null;
+
+	private FileMapper fileMapper = null;
 
 
 	public File getDir(){
@@ -46,5 +50,13 @@ public class ModelSet {
 
 	public void setExcludes(String[] excludes){
 		this.excludes = excludes;
+	}
+
+	public FileMapper getFileMapper(){
+		return this.fileMapper;
+	}
+
+	public void setFileMapper(FileMapper fileMapper){
+		this.fileMapper = fileMapper;
 	}
 }
