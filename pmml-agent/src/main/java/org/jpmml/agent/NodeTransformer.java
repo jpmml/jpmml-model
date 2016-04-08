@@ -16,6 +16,21 @@ import javassist.CtField;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 
+/**
+ * <p>
+ * A class file transformer that removes the selected field declarations from the {@link Node} class.
+ * </p>
+ *
+ * <p>
+ * Transformer commands:
+ * <ul>
+ *   <li><code>double-score</code> or <code>float-score</code> - Changes the type of the <code>score</code> field declaration from {@link String} to {@link Double} or {@link Float}.</li>
+ *   <li><code>simple</code> - Removes <code>partition</code> and <code>embeddedModel</code> field declarations.</li>
+ *   <li><code>anonymous</code> - Removes <code>id</code> and <code>defaultChild</code> field declarations.</li>
+ *   <li><code>regression</code> - Removes <code>recordCount</code> and <code>scoreDistributions</code> field declarations.</li>
+ * </ul>
+ * </p>
+ */
 public class NodeTransformer implements ClassFileTransformer {
 
 	private Set<String> commands = null;

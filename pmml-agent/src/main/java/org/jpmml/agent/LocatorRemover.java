@@ -15,6 +15,11 @@ import javassist.CtField;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 
+/**
+ * <p>
+ * A class file transformer that removes the <code>locator</code> field declaration from the {@link PMMLObject} class.
+ * </p>
+ */
 public class LocatorRemover implements ClassFileTransformer {
 
 	private ClassPool classPool = ClassPool.getDefault();
