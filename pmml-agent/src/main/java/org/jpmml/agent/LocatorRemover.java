@@ -43,17 +43,15 @@ public class LocatorRemover implements ClassFileTransformer {
 	}
 
 	private CtClass transform(CtClass ctClass) throws CannotCompileException, NotFoundException {
-		CtField locatorField = ctClass.getDeclaredField("locator", "Lorg/xml/sax/Locator;");
+		CtField field = ctClass.getDeclaredField("locator", "Lorg/xml/sax/Locator;");
 
-		ctClass.removeField(locatorField);
+		ctClass.removeField(field);
 
-		CtClass locatorClass = this.classPool.get("org.xml.sax.Locator");
+		CtMethod getterMethod = ctClass.getDeclaredMethod("getLocator");
+		getterMethod.setBody(null);
 
-		CtMethod getLocatorMethod = ctClass.getDeclaredMethod("getLocator");
-		getLocatorMethod.setBody(null);
-
-		CtMethod setLocatorMethod = ctClass.getDeclaredMethod("setLocator", new CtClass[]{locatorClass});
-		setLocatorMethod.setBody(null);
+		CtMethod setterMethod = ctClass.getDeclaredMethod("setLocator");
+		setterMethod.setBody(null);
 
 		return ctClass;
 	}
