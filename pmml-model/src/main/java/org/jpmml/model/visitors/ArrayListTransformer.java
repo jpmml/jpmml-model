@@ -14,7 +14,7 @@ import org.jpmml.model.ReflectionUtil;
 
 /**
  * <p>
- * A Visitor that transforms the {@link List} implementation class of empty and singleton element lists.
+ * A Visitor that transforms the {@link List} implementation class of element lists.
  * </p>
  */
 public class ArrayListTransformer extends AbstractSimpleVisitor {
@@ -29,24 +29,30 @@ public class ArrayListTransformer extends AbstractSimpleVisitor {
 			if(value instanceof ArrayList){
 				ArrayList<?> list = (ArrayList<?>)value;
 
-				List<?> transformedList;
-
-				if(list.size() == 0){
-					transformedList = Collections.emptyList();
-				} else
-
-				if(list.size() == 1){
-					transformedList = Collections.singletonList(list.get(0));
-				} else
-
-				{
-					continue;
+				List<?> transformedList = transform(list);
+				if(list != transformedList){
+					ReflectionUtil.setFieldValue(field, object, transformedList);
 				}
-
-				ReflectionUtil.setFieldValue(field, object, transformedList);
 			}
 		}
 
 		return VisitorAction.CONTINUE;
+	}
+
+	public List<?> transform(List<?> list){
+
+		if(list.size() == 0){
+			return Collections.emptyList();
+		} else
+
+		if(list.size() == 1){
+			return new SingletonList<>(list.get(0));
+		} else
+
+		if(list.size() == 2){
+			return new DoubletonList<>(list.get(0), list.get(1));
+		}
+
+		return list;
 	}
 }
