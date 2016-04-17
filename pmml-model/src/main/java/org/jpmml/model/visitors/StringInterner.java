@@ -12,7 +12,7 @@ import org.jpmml.model.ReflectionUtil;
 
 /**
  * <p>
- * A Visitor that interns String attribute values.
+ * A Visitor that interns {@link String} attribute values.
  * </p>
  *
  * <p>
