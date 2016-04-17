@@ -3,16 +3,12 @@
  */
 package org.jpmml.model.visitors;
 
-import java.lang.reflect.Field;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.dmg.pmml.IntSparseArray;
-import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.RealSparseArray;
 import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.ReflectionUtil;
 
 /**
  * <p>
@@ -22,29 +18,12 @@ import org.jpmml.model.ReflectionUtil;
 public class IntegerInterner extends NumberInterner<Integer> {
 
 	public IntegerInterner(){
-		super(IntegerInterner.cache);
+		super(Integer.class, IntegerInterner.cache);
 	}
 
 	@Override
 	public Integer canonicalize(Integer value){
 		return Integer.valueOf(value.intValue());
-	}
-
-	@Override
-	public VisitorAction visit(PMMLObject object){
-		List<Field> fields = ReflectionUtil.getInstanceFields(object.getClass());
-
-		for(Field field : fields){
-			Object value = ReflectionUtil.getFieldValue(field, object);
-
-			if(value instanceof Integer){
-				Integer number = (Integer)value;
-
-				ReflectionUtil.setFieldValue(field, object, intern(number));
-			}
-		}
-
-		return VisitorAction.CONTINUE;
 	}
 
 	@Override

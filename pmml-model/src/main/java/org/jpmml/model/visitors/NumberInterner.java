@@ -3,23 +3,24 @@
  */
 package org.jpmml.model.visitors;
 
-import java.util.List;
-import java.util.ListIterator;
 import java.util.concurrent.ConcurrentMap;
 
 abstract
-public class NumberInterner<V extends Number> extends AbstractSimpleVisitor {
+public class NumberInterner<V extends Number> extends Interner<V> {
 
 	private ConcurrentMap<V, V> cache = null;
 
 
-	protected NumberInterner(ConcurrentMap<V, V> cache){
+	protected NumberInterner(Class<? extends V> type, ConcurrentMap<V, V> cache){
+		super(type);
+
 		setCache(cache);
 	}
 
 	abstract
 	public V canonicalize(V value);
 
+	@Override
 	public V intern(V value){
 		ConcurrentMap<V, V> cache = getCache();
 
@@ -35,13 +36,6 @@ public class NumberInterner<V extends Number> extends AbstractSimpleVisitor {
 		}
 
 		return canonicalValue;
-	}
-
-	public void internAll(List<V> values){
-
-		for(ListIterator<V> it = values.listIterator(); it.hasNext(); ){
-			it.set(intern(it.next()));
-		}
 	}
 
 	public ConcurrentMap<V, V> getCache(){
