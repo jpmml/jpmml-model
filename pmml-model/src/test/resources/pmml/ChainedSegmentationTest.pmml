@@ -95,6 +95,7 @@
 				</RegressionModel>
 			</Segment>
 		</Segmentation>
+		<Output/>
 	</MiningModel>
 	<TransformationDictionary>
 		<DerivedField name="x1_squared" optype="continuous" dataType="double">

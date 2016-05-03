@@ -51,5 +51,6 @@
 				</MiningModel>
 			</Segment>
 		</Segmentation>
+		<Output/>
 	</MiningModel>
 </PMML>
