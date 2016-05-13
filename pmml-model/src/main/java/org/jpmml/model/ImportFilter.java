@@ -10,7 +10,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * <p>
@@ -64,10 +63,6 @@ public class ImportFilter extends PMMLFilter {
 	 */
 	static
 	public SAXSource apply(InputSource source) throws SAXException {
-		XMLReader reader = XMLReaderFactory.createXMLReader();
-
-		ImportFilter filter = new ImportFilter(reader);
-
-		return new SAXSource(filter, source);
+		return JAXBUtil.createFilteredSource(source, new ImportFilter());
 	}
 }

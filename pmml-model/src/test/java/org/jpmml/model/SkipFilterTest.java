@@ -3,25 +3,24 @@
  */
 package org.jpmml.model;
 
-import java.io.InputStream;
 import java.util.List;
-
-import javax.xml.transform.Source;
 
 import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.junit.Test;
-import org.xml.sax.InputSource;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class SkipFilterTest {
 
 	@Test
-	public void chainedSegmentationTest() throws Exception {
-		PMML pmml = loadFilteredResource(ChainedSegmentationTest.class);
+	public void filterChainedSegmentation() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class, new SkipFilter("Segmentation"));
 
 		assertNotNull(pmml.getDataDictionary());
 		assertNotNull(pmml.getTransformationDictionary());
@@ -37,8 +36,8 @@ public class SkipFilterTest {
 	}
 
 	@Test
-	public void nestedSegmentationTest() throws Exception {
-		PMML pmml = loadFilteredResource(NestedSegmentationTest.class);
+	public void filterNestedSegmentation() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class, new SkipFilter("Segmentation"));
 
 		assertNotNull(pmml.getDataDictionary());
 
@@ -53,13 +52,21 @@ public class SkipFilterTest {
 		assertNull(miningModel.getSegmentation());
 	}
 
-	static
-	private PMML loadFilteredResource(Class<?> clazz) throws Exception {
+	@Test
+	public void filterExtension() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(WildcardTest.class, new SkipFilter((String)null, "Extension"));
 
-		try(InputStream is = PMMLUtil.getResourceAsStream(clazz)){
-			Source source = SkipFilter.apply(new InputSource(is), "Segmentation");
+		assertFalse(pmml.hasExtensions());
+	}
 
-			return JAXBUtil.unmarshalPMML(source);
-		}
+	@Test
+	public void filterCustomExtension() throws Exception {
+		PMML pmml = PMMLUtil.loadResource(WildcardTest.class, new SkipFilter("http://localhost/test", "Extension"));
+
+		assertTrue(pmml.hasExtensions());
+
+		List<?> content = PMMLUtil.getExtension(pmml);
+
+		assertEquals("First textSecond text", content.get(0));
 	}
 }

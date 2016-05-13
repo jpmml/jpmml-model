@@ -5,12 +5,12 @@ package org.jpmml.model;
 
 import javax.xml.transform.sax.SAXSource;
 
+import org.jpmml.schema.Version;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * <p>
@@ -19,19 +19,31 @@ import org.xml.sax.helpers.XMLReaderFactory;
  */
 public class SkipFilter extends XMLFilterImpl {
 
-	private String name = null;
+	private String namespaceURI = null;
+
+	private String localName = null;
 
 	private int depth = 0;
 
 
-	public SkipFilter(String name){
-		setName(name);
+	public SkipFilter(String localName){
+		this((Version.PMML_4_2).getNamespaceURI(), localName);
 	}
 
-	public SkipFilter(XMLReader reader, String name){
+	public SkipFilter(String namespaceURI, String localName){
+		setNamespaceURI(namespaceURI);
+		setLocalName(localName);
+	}
+
+	public SkipFilter(XMLReader reader, String localName){
+		this(reader, (Version.PMML_4_2).getNamespaceURI(), localName);
+	}
+
+	public SkipFilter(XMLReader reader, String namespaceURI, String localName){
 		super(reader);
 
-		setName(name);
+		setNamespaceURI(namespaceURI);
+		setLocalName(localName);
 	}
 
 	@Override
@@ -77,29 +89,44 @@ public class SkipFilter extends XMLFilterImpl {
 	}
 
 	private boolean isSkipped(String namespaceURI, String localName){
-		String name = getName();
 
-		return (name != null) && (name).equals(localName);
+		if((this.localName).equals(localName)){
+
+			if(this.namespaceURI == null || (this.namespaceURI).equals(namespaceURI)){
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private boolean isSkipping(){
 		return (this.depth > 0);
 	}
 
-	public String getName(){
-		return this.name;
+	public String getNamespaceURI(){
+		return this.namespaceURI;
 	}
 
-	private void setName(String name){
-		this.name = name;
+	private void setNamespaceURI(String namespaceURI){
+		this.namespaceURI = namespaceURI;
+	}
+
+	public String getLocalName(){
+		return this.localName;
+	}
+
+	private void setLocalName(String localName){
+
+		if(localName == null){
+			throw new NullPointerException();
+		}
+
+		this.localName = localName;
 	}
 
 	static
 	public SAXSource apply(InputSource source, String name) throws SAXException {
-		XMLReader reader = XMLReaderFactory.createXMLReader();
-
-		SkipFilter filter = new SkipFilter(reader, name);
-
-		return new SAXSource(filter, source);
+		return JAXBUtil.createFilteredSource(source, new SkipFilter(name));
 	}
 }

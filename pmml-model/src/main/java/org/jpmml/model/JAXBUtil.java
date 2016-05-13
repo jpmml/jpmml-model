@@ -36,7 +36,7 @@ public class JAXBUtil {
 	 * @see SkipFilter
 	 */
 	static
-	public Source createFilteredSource(InputSource source, XMLFilter... filters) throws SAXException {
+	public SAXSource createFilteredSource(InputSource source, XMLFilter... filters) throws SAXException {
 		XMLReader reader = XMLReaderFactory.createXMLReader();
 
 		for(XMLFilter filter : filters){

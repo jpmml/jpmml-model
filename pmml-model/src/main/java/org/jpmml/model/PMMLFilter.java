@@ -146,6 +146,11 @@ public class PMMLFilter extends XMLFilterImpl {
 	}
 
 	private void setTarget(Version target){
+
+		if(target == null){
+			throw new NullPointerException();
+		}
+
 		this.target = target;
 	}
 
