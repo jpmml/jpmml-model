@@ -15,8 +15,10 @@ import org.dmg.pmml.RegressionTable;
 import org.dmg.pmml.Segment;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
+import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.PMMLUtil;
 import org.junit.Test;
 

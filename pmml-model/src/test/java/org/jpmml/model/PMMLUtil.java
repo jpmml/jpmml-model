@@ -22,6 +22,7 @@ import org.dmg.pmml.PMML;
 import org.jpmml.schema.Version;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.XMLFilter;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import static org.junit.Assert.assertEquals;
@@ -43,10 +44,12 @@ public class PMMLUtil {
 	}
 
 	static
-	public PMML loadResource(Class<?> clazz) throws IOException, JAXBException {
+	public PMML loadResource(Class<?> clazz, XMLFilter... filters) throws IOException, SAXException, JAXBException {
 
 		try(InputStream is = getResourceAsStream(clazz)){
-			return JAXBUtil.unmarshalPMML(new StreamSource(is));
+			Source source = JAXBUtil.createFilteredSource(new InputSource(is), filters);
+
+			return JAXBUtil.unmarshalPMML(source);
 		}
 	}
 
