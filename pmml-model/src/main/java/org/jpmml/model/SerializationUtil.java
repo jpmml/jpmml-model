@@ -25,7 +25,7 @@ public class SerializationUtil {
 	}
 
 	static
-	private Object deserialize(InputStream is) throws ClassNotFoundException, IOException {
+	public Object deserialize(InputStream is) throws ClassNotFoundException, IOException {
 		FilterInputStream safeIs = new FilterInputStream(is){
 
 			@Override
@@ -44,7 +44,7 @@ public class SerializationUtil {
 	}
 
 	static
-	private <S extends Serializable> void serialize(S object, OutputStream os) throws IOException {
+	public <S extends Serializable> void serialize(S object, OutputStream os) throws IOException {
 		FilterOutputStream safeOs = new FilterOutputStream(os){
 
 			@Override
