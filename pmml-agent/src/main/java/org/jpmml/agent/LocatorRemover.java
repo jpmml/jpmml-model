@@ -15,6 +15,11 @@ import javassist.CtField;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 
+/**
+ * <p>
+ * A class file transformer that removes the <code>locator</code> field declaration from the {@link PMMLObject} class.
+ * </p>
+ */
 public class LocatorRemover implements ClassFileTransformer {
 
 	private ClassPool classPool = ClassPool.getDefault();
@@ -43,17 +48,15 @@ public class LocatorRemover implements ClassFileTransformer {
 	}
 
 	private CtClass transform(CtClass ctClass) throws CannotCompileException, NotFoundException {
-		CtField locatorField = ctClass.getDeclaredField("locator", "Lorg/xml/sax/Locator;");
+		CtField field = ctClass.getDeclaredField("locator", "Lorg/xml/sax/Locator;");
 
-		ctClass.removeField(locatorField);
+		ctClass.removeField(field);
 
-		CtClass locatorClass = this.classPool.get("org.xml.sax.Locator");
+		CtMethod getterMethod = ctClass.getDeclaredMethod("getLocator");
+		getterMethod.setBody(null);
 
-		CtMethod getLocatorMethod = ctClass.getDeclaredMethod("getLocator");
-		getLocatorMethod.setBody(null);
-
-		CtMethod setLocatorMethod = ctClass.getDeclaredMethod("setLocator", new CtClass[]{locatorClass});
-		setLocatorMethod.setBody(null);
+		CtMethod setterMethod = ctClass.getDeclaredMethod("setLocator");
+		setterMethod.setBody(null);
 
 		return ctClass;
 	}

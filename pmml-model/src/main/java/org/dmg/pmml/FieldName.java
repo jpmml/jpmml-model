@@ -5,6 +5,9 @@ package org.dmg.pmml;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 final
@@ -23,9 +26,7 @@ public class FieldName implements Serializable {
 		if(reference != null){
 			FieldName cachedName = reference.get();
 
-			if(cachedName != null){
-				return (cachedName == this);
-			}
+			return (cachedName == this);
 		}
 
 		return false;
@@ -112,7 +113,10 @@ public class FieldName implements Serializable {
 		FieldName.cache.compact();
 	}
 
-	private static final Cache<String, FieldName> cache = new Cache<String, FieldName>(){
+	private static final Cache cache = new Cache();
+
+	static
+	private class Cache extends ConcurrentHashMap<String, WeakReference<FieldName>> {
 
 		private AtomicLong counter = new AtomicLong();
 
@@ -128,5 +132,18 @@ public class FieldName implements Serializable {
 
 			return result;
 		}
-	};
+
+		private void compact(){
+			Collection<WeakReference<FieldName>> references = values();
+
+			for(Iterator<WeakReference<FieldName>> it = references.iterator(); it.hasNext(); ){
+				WeakReference<FieldName> reference = it.next();
+
+				FieldName cachedName = reference.get();
+				if(cachedName == null){
+					it.remove();
+				}
+			}
+		}
+	}
 }

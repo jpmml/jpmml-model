@@ -3,16 +3,10 @@
  */
 package org.jpmml.model.visitors;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
-import org.dmg.pmml.PMMLObject;
-import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.ReflectionUtil;
 
 /**
  * <p>
- * A Visitor that interns String attribute values.
+ * A Visitor that interns {@link String} attribute values.
  * </p>
  *
  * <p>
@@ -21,25 +15,13 @@ import org.jpmml.model.ReflectionUtil;
  * For more information, see <a href="http://java-performance.info/string-intern-in-java-6-7-8/">String.intern in Java 6, 7 and 8 – string pooling</a>.
  * </p>
  */
-public class StringInterner extends AbstractSimpleVisitor {
+public class StringInterner extends Interner<String> {
 
-	@Override
-	public VisitorAction visit(PMMLObject object){
-		List<Field> fields = ReflectionUtil.getInstanceFields(object.getClass());
-
-		for(Field field : fields){
-			Object value = ReflectionUtil.getFieldValue(field, object);
-
-			if(value instanceof String){
-				String string = (String)value;
-
-				ReflectionUtil.setFieldValue(field, object, intern(string));
-			}
-		}
-
-		return VisitorAction.CONTINUE;
+	public StringInterner(){
+		super(String.class);
 	}
 
+	@Override
 	public String intern(String string){
 		return string.intern();
 	}
