@@ -5,6 +5,8 @@
 		<DataField name="x1" optype="continuous" dataType="double"/>
 		<DataField name="x2" optype="continuous" dataType="double"/>
 		<DataField name="x3" optype="continuous" dataType="double"/>
+		<DataField name="x4" optype="continuous" dataType="double"/>
+		<DataField name="x5" optype="continuous" dataType="double"/>
 	</DataDictionary>
 	<MiningModel functionName="regression">
 		<MiningSchema/>
@@ -28,6 +30,18 @@
 								<FieldRef field="x3"/>
 							</Apply>
 						</DerivedField>
+						<DerivedField name="x1234" dataType="double" optype="continuous">
+							<Apply function="product">
+								<FieldRef field="x123"/>
+								<FieldRef field="x4"/>
+							</Apply>
+						</DerivedField>
+						<DerivedField name="x12345" dataType="double" optype="continuous">
+							<Apply function="product">
+								<FieldRef field="x1234"/>
+								<FieldRef field="x5"/>
+							</Apply>
+						</DerivedField>
 					</LocalTransformations>
 					<Segmentation multipleModelMethod="modelChain">
 						<Segment id="second">
@@ -35,7 +49,7 @@
 							<MiningModel functionName="regression">
 								<MiningSchema/>
 								<Segmentation multipleModelMethod="modelChain">
-									<Segment>
+									<Segment id="third">
 										<True/>
 										<RegressionModel functionName="regression">
 											<MiningSchema/>
@@ -45,6 +59,11 @@
 										</RegressionModel>
 									</Segment>
 								</Segmentation>
+								<Output>
+									<OutputField name="product" feature="transformedValue">
+										<FieldRef field="x12345"/>
+									</OutputField>
+								</Output>
 							</MiningModel>
 						</Segment>
 					</Segmentation>

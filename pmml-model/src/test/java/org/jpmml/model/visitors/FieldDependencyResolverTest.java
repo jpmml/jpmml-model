@@ -107,6 +107,14 @@ public class FieldDependencyResolverTest {
 					checkFields(FieldNameUtil.create("x12", "x3"), fields);
 				} else
 
+				if("x1234".equals(name.getValue())){
+					checkFields(FieldNameUtil.create("x123", "x4"), fields);
+				} else
+
+				if("x12345".equals(name.getValue())){
+					checkFields(FieldNameUtil.create("x1234", "x5"), fields);
+				} else
+
 				{
 					throw new AssertionError();
 				}
