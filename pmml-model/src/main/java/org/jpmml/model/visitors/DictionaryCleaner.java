@@ -41,6 +41,24 @@ public class DictionaryCleaner extends DeepFieldResolver {
 			}
 		} else
 
+		if(parent instanceof Model){
+			Model model = (Model)parent;
+
+			LocalTransformations localTransformations = model.getLocalTransformations();
+			if(localTransformations != null && isEmpty(localTransformations)){
+				model.setLocalTransformations(null);
+			}
+		} else
+
+		if(parent instanceof PMML){
+			PMML pmml = (PMML)parent;
+
+			TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
+			if(transformationDictionary != null && isEmpty(transformationDictionary)){
+				pmml.setTransformationDictionary(null);
+			}
+		} else
+
 		if(parent instanceof TransformationDictionary){
 			TransformationDictionary transformationDictionary = (TransformationDictionary)parent;
 
@@ -52,6 +70,14 @@ public class DictionaryCleaner extends DeepFieldResolver {
 		}
 
 		return parent;
+	}
+
+	private boolean isEmpty(LocalTransformations localTransformations){
+		return !localTransformations.hasDerivedFields();
+	}
+
+	private boolean isEmpty(TransformationDictionary transformationDictionary){
+		return !transformationDictionary.hasDefineFunctions() && !transformationDictionary.hasDerivedFields();
 	}
 
 	private Set<FieldName> processLocalTransformations(final LocalTransformations localTransformations){

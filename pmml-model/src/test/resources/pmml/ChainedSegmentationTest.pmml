@@ -29,6 +29,7 @@
 					<Output>
 						<OutputField name="first_output" feature="predictedValue"/>
 					</Output>
+					<LocalTransformations/>
 				</RegressionModel>
 			</Segment>
 			<Segment id="second">
@@ -73,6 +74,7 @@
 					<Output>
 						<OutputField name="third_output" feature="predictedValue"/>
 					</Output>
+					<LocalTransformations/>
 				</RegressionModel>
 			</Segment>
 			<Segment id="sum">
