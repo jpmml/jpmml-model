@@ -23,7 +23,6 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Segment;
 import org.dmg.pmml.Segmentation;
-import org.dmg.pmml.Visitable;
 import org.jpmml.model.FieldUtil;
 
 /**
@@ -31,20 +30,7 @@ import org.jpmml.model.FieldUtil;
  * A Visitor that removes redundant {@link MiningField mining fields} from the {@link MiningSchema mining schema}.
  * </p>
  */
-public class MiningSchemaCleaner extends FieldResolver {
-
-	private FieldDependencyResolver fieldDependencyResolver = null;
-
-
-	@Override
-	public void applyTo(Visitable visitable){
-		FieldDependencyResolver fieldDependencyResolver = new FieldDependencyResolver();
-		fieldDependencyResolver.applyTo(visitable);
-
-		setFieldDependencyResolver(fieldDependencyResolver);
-
-		super.applyTo(visitable);
-	}
+public class MiningSchemaCleaner extends DeepFieldResolver {
 
 	@Override
 	public PMMLObject popParent(){
@@ -198,14 +184,6 @@ public class MiningSchemaCleaner extends FieldResolver {
 
 			miningSchema.addMiningFields(miningField);
 		}
-	}
-
-	private FieldDependencyResolver getFieldDependencyResolver(){
-		return this.fieldDependencyResolver;
-	}
-
-	private void setFieldDependencyResolver(FieldDependencyResolver fieldDependencyResolver){
-		this.fieldDependencyResolver = fieldDependencyResolver;
 	}
 
 	static

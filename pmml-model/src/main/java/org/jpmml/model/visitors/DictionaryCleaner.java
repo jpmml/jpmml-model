@@ -17,7 +17,6 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.TransformationDictionary;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldUtil;
 
@@ -26,20 +25,7 @@ import org.jpmml.model.FieldUtil;
  * A Visitor that removes redundant {@link DerivedField derived fields} from dictionaries.
  * </p>
  */
-public class DictionaryCleaner extends FieldResolver {
-
-	private FieldDependencyResolver fieldDependencyResolver = null;
-
-
-	@Override
-	public void applyTo(Visitable visitable){
-		FieldDependencyResolver fieldDependencyResolver = new FieldDependencyResolver();
-		fieldDependencyResolver.applyTo(visitable);
-
-		setFieldDependencyResolver(fieldDependencyResolver);
-
-		super.applyTo(visitable);
-	}
+public class DictionaryCleaner extends DeepFieldResolver {
 
 	@Override
 	public PMMLObject popParent(){
@@ -140,13 +126,5 @@ public class DictionaryCleaner extends FieldResolver {
 				it.remove();
 			}
 		}
-	}
-
-	private FieldDependencyResolver getFieldDependencyResolver(){
-		return this.fieldDependencyResolver;
-	}
-
-	private void setFieldDependencyResolver(FieldDependencyResolver fieldDependencyResolver){
-		this.fieldDependencyResolver = fieldDependencyResolver;
 	}
 }
