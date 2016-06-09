@@ -164,7 +164,7 @@ public class FieldResolverTest {
 		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
 
 		final
-		Set<FieldName> dataFieldNames = FieldNameUtil.create("x1", "x2", "x3");
+		Set<FieldName> dataFieldNames = FieldNameUtil.create("x1", "x2", "x3", "x4", "x5");
 
 		FieldResolver applyResolver = new FieldResolver(){
 
@@ -184,6 +184,14 @@ public class FieldResolverTest {
 					checkFields(FieldNameUtil.create(dataFieldNames, "x12"), fields);
 				} else
 
+				if("x1234".equals(name.getValue())){
+					checkFields(FieldNameUtil.create(dataFieldNames, "x12", "x123"), fields);
+				} else
+
+				if("x12345".equals(name.getValue())){
+					checkFields(FieldNameUtil.create(dataFieldNames, "x12", "x123", "x1234"), fields);
+				} else
+
 				{
 					throw new AssertionError();
 				}
@@ -200,7 +208,7 @@ public class FieldResolverTest {
 			public VisitorAction visit(RegressionTable regressionTable){
 				Set<Field> fields = getFields();
 
-				checkFields(FieldNameUtil.create(dataFieldNames, "x12", "x123"), fields);
+				checkFields(FieldNameUtil.create(dataFieldNames, "x12", "x123", "x1234", "x12345"), fields);
 
 				return super.visit(regressionTable);
 			}

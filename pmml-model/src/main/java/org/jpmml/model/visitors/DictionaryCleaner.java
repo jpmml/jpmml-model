@@ -17,7 +17,6 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.TransformationDictionary;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.FieldUtil;
 
@@ -26,20 +25,7 @@ import org.jpmml.model.FieldUtil;
  * A Visitor that removes redundant {@link DerivedField derived fields} from dictionaries.
  * </p>
  */
-public class DictionaryCleaner extends FieldResolver {
-
-	private FieldDependencyResolver fieldDependencyResolver = null;
-
-
-	@Override
-	public void applyTo(Visitable visitable){
-		FieldDependencyResolver fieldDependencyResolver = new FieldDependencyResolver();
-		fieldDependencyResolver.applyTo(visitable);
-
-		setFieldDependencyResolver(fieldDependencyResolver);
-
-		super.applyTo(visitable);
-	}
+public class DictionaryCleaner extends DeepFieldResolver {
 
 	@Override
 	public PMMLObject popParent(){
@@ -55,6 +41,24 @@ public class DictionaryCleaner extends FieldResolver {
 			}
 		} else
 
+		if(parent instanceof Model){
+			Model model = (Model)parent;
+
+			LocalTransformations localTransformations = model.getLocalTransformations();
+			if(localTransformations != null && isEmpty(localTransformations)){
+				model.setLocalTransformations(null);
+			}
+		} else
+
+		if(parent instanceof PMML){
+			PMML pmml = (PMML)parent;
+
+			TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
+			if(transformationDictionary != null && isEmpty(transformationDictionary)){
+				pmml.setTransformationDictionary(null);
+			}
+		} else
+
 		if(parent instanceof TransformationDictionary){
 			TransformationDictionary transformationDictionary = (TransformationDictionary)parent;
 
@@ -66,6 +70,14 @@ public class DictionaryCleaner extends FieldResolver {
 		}
 
 		return parent;
+	}
+
+	private boolean isEmpty(LocalTransformations localTransformations){
+		return !localTransformations.hasDerivedFields();
+	}
+
+	private boolean isEmpty(TransformationDictionary transformationDictionary){
+		return !transformationDictionary.hasDefineFunctions() && !transformationDictionary.hasDerivedFields();
 	}
 
 	private Set<FieldName> processLocalTransformations(final LocalTransformations localTransformations){
@@ -140,13 +152,5 @@ public class DictionaryCleaner extends FieldResolver {
 				it.remove();
 			}
 		}
-	}
-
-	private FieldDependencyResolver getFieldDependencyResolver(){
-		return this.fieldDependencyResolver;
-	}
-
-	private void setFieldDependencyResolver(FieldDependencyResolver fieldDependencyResolver){
-		this.fieldDependencyResolver = fieldDependencyResolver;
 	}
 }

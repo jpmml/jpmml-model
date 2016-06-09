@@ -23,7 +23,6 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Segment;
 import org.dmg.pmml.Segmentation;
-import org.dmg.pmml.Visitable;
 import org.jpmml.model.FieldUtil;
 
 /**
@@ -31,20 +30,7 @@ import org.jpmml.model.FieldUtil;
  * A Visitor that removes redundant {@link MiningField mining fields} from the {@link MiningSchema mining schema}.
  * </p>
  */
-public class MiningSchemaCleaner extends FieldResolver {
-
-	private FieldDependencyResolver fieldDependencyResolver = null;
-
-
-	@Override
-	public void applyTo(Visitable visitable){
-		FieldDependencyResolver fieldDependencyResolver = new FieldDependencyResolver();
-		fieldDependencyResolver.applyTo(visitable);
-
-		setFieldDependencyResolver(fieldDependencyResolver);
-
-		super.applyTo(visitable);
-	}
+public class MiningSchemaCleaner extends DeepFieldResolver {
 
 	@Override
 	public PMMLObject popParent(){
@@ -78,10 +64,7 @@ public class MiningSchemaCleaner extends FieldResolver {
 		for(Segment segment : segments){
 			Predicate predicate = segment.getPredicate();
 			if(predicate != null){
-				FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder();
-				fieldReferenceFinder.applyTo(predicate);
-
-				activeFieldNames.addAll(fieldReferenceFinder.getFieldNames());
+				activeFieldNames.addAll(getFieldNames(predicate));
 			}
 
 			Model model = segment.getModel();
@@ -104,15 +87,24 @@ public class MiningSchemaCleaner extends FieldResolver {
 			}
 		}
 
-		Set<Field> modelFields;
+		Output output = miningModel.getOutput();
+		if(output != null){
+			activeFieldNames.addAll(getFieldNames(output));
+		}
+
+		Set<Field> modelFields = getModelFields(miningModel);
 
 		MultipleModelMethodType multipleModelMethod = segmentation.getMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
-				modelFields = getFields(miningModel, segmentation);
+				Set<Field> segmentationFields = getFields(miningModel, segmentation);
+				segmentationFields.removeAll(modelFields);
+
+				if(segmentationFields.size() > 0){
+					activeFieldNames.removeAll(FieldUtil.nameSet(segmentationFields));
+				}
 				break;
 			default:
-				modelFields = getModelFields(miningModel);
 				break;
 		}
 
@@ -194,11 +186,11 @@ public class MiningSchemaCleaner extends FieldResolver {
 		}
 	}
 
-	private FieldDependencyResolver getFieldDependencyResolver(){
-		return this.fieldDependencyResolver;
-	}
+	static
+	private Set<FieldName> getFieldNames(PMMLObject object){
+		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder();
+		fieldReferenceFinder.applyTo(object);
 
-	private void setFieldDependencyResolver(FieldDependencyResolver fieldDependencyResolver){
-		this.fieldDependencyResolver = fieldDependencyResolver;
+		return fieldReferenceFinder.getFieldNames();
 	}
 }

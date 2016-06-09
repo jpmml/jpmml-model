@@ -36,6 +36,15 @@ public class MiningSchemaCleanerTest {
 		Visitor visitor = new AbstractVisitor(){
 
 			@Override
+			public VisitorAction visit(MiningModel miningModel){
+				MiningSchema miningSchema = miningModel.getMiningSchema();
+
+				checkMiningSchema(FieldNameUtil.create("y", "x1", "x2", "x3"), miningSchema);
+
+				return super.visit(miningModel);
+			}
+
+			@Override
 			public VisitorAction visit(RegressionModel regressionModel){
 				MiningSchema miningSchema = regressionModel.getMiningSchema();
 
@@ -94,15 +103,15 @@ public class MiningSchemaCleanerTest {
 				}
 
 				if(id == null){
-					checkMiningSchema(FieldNameUtil.create("x1", "x2", "x3"), miningSchema);
+					checkMiningSchema(FieldNameUtil.create("x1", "x2", "x3", "x4", "x5"), miningSchema);
 				} else
 
 				if("first".equals(id)){
-					checkMiningSchema(FieldNameUtil.create("x12", "x3"), miningSchema);
+					checkMiningSchema(FieldNameUtil.create("x12", "x3", "x4", "x5"), miningSchema);
 				} else
 
 				if("second".equals(id)){
-					checkMiningSchema(FieldNameUtil.create("x123"), miningSchema);
+					checkMiningSchema(FieldNameUtil.create("x123", "x12345"), miningSchema);
 				} else
 
 				{
