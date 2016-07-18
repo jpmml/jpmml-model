@@ -4,7 +4,6 @@
 package org.dmg.pmml;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -32,23 +31,63 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
+	VisitorAction traverse(Visitor visitor, Visitable first){
+
+		if(first != null){
+			return first.accept(visitor);
+		}
+
+		return VisitorAction.CONTINUE;
+	}
+
+	static
+	VisitorAction traverse(Visitor visitor, Visitable first, Visitable second){
+
+		if(first != null){
+			VisitorAction status = first.accept(visitor);
+
+			if(status != VisitorAction.CONTINUE){
+				return status;
+			}
+		} // End if
+
+		if(second != null){
+			return second.accept(visitor);
+		}
+
+		return VisitorAction.CONTINUE;
+	}
+
+	static
 	VisitorAction traverse(Visitor visitor, Visitable... objects){
-		return traverse(visitor, Arrays.asList(objects));
+
+		for(int i = 0, max = objects.length; i < max; i++){
+			Visitable visitable = objects[i];
+
+			if(visitable != null){
+				VisitorAction status = visitable.accept(visitor);
+
+				if(status != VisitorAction.CONTINUE){
+					return status;
+				}
+			}
+		}
+
+		return VisitorAction.CONTINUE;
 	}
 
 	static
 	VisitorAction traverse(Visitor visitor, List<? extends Visitable> objects){
 
-		for(int i = 0; i < objects.size(); i++){
+		for(int i = 0, max = objects.size(); i < max; i++){
 			Visitable visitable = objects.get(i);
 
-			if(visitable == null){
-				continue;
-			}
+			if(visitable != null){
+				VisitorAction status = visitable.accept(visitor);
 
-			VisitorAction status = visitable.accept(visitor);
-			if(status != VisitorAction.CONTINUE){
-				return status;
+				if(status != VisitorAction.CONTINUE){
+					return status;
+				}
 			}
 		}
 
@@ -58,18 +97,17 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	static
 	VisitorAction traverseMixed(Visitor visitor, List<?> objects){
 
-		for(int i = 0; i < objects.size(); i++){
+		for(int i = 0, max = objects.size(); i < max; i++){
 			Object object = objects.get(i);
 
-			if(!(object instanceof Visitable)){
-				continue;
-			}
+			if(object instanceof Visitable){
+				Visitable visitable = (Visitable)object;
 
-			Visitable visitable = (Visitable)object;
+				VisitorAction status = visitable.accept(visitor);
 
-			VisitorAction status = visitable.accept(visitor);
-			if(status != VisitorAction.CONTINUE){
-				return status;
+				if(status != VisitorAction.CONTINUE){
+					return status;
+				}
 			}
 		}
 
