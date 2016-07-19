@@ -24,13 +24,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class DictionaryCleanerTest {
+public class TransformationDictionaryCleanerTest {
 
 	@Test
 	public void cleanChained() throws Exception {
 		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
 
-		DictionaryCleaner cleaner = new DictionaryCleaner();
+		TransformationDictionaryCleaner cleaner = new TransformationDictionaryCleaner();
 		cleaner.applyTo(pmml);
 
 		Visitor visitor = new AbstractVisitor(){

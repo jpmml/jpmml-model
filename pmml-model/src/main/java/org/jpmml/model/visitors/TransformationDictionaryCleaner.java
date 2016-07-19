@@ -22,10 +22,10 @@ import org.jpmml.model.FieldUtil;
 
 /**
  * <p>
- * A Visitor that removes redundant {@link DerivedField derived fields} from dictionaries.
+ * A Visitor that removes redundant {@link DerivedField derived fields} from global and local transformation dictionaries.
  * </p>
  */
-public class DictionaryCleaner extends DeepFieldResolver {
+public class TransformationDictionaryCleaner extends DeepFieldResolver {
 
 	@Override
 	public PMMLObject popParent(){
