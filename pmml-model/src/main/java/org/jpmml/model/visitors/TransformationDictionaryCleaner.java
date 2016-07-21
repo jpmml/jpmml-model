@@ -4,9 +4,7 @@
 package org.jpmml.model.visitors;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.dmg.pmml.DerivedField;
@@ -37,7 +35,7 @@ public class TransformationDictionaryCleaner extends DeepFieldResolver {
 			if(localTransformations.hasDerivedFields()){
 				Set<FieldName> activeFieldNames = processLocalTransformations(localTransformations);
 
-				clean(localTransformations.getDerivedFields(), activeFieldNames);
+				FieldUtil.retainAll(localTransformations.getDerivedFields(), activeFieldNames);
 			}
 		} else
 
@@ -65,7 +63,7 @@ public class TransformationDictionaryCleaner extends DeepFieldResolver {
 			if(transformationDictionary.hasDerivedFields()){
 				Set<FieldName> activeFieldNames = processTransformationDictionary(transformationDictionary);
 
-				clean(transformationDictionary.getDerivedFields(), activeFieldNames);
+				FieldUtil.retainAll(transformationDictionary.getDerivedFields(), activeFieldNames);
 			}
 		}
 
@@ -139,18 +137,5 @@ public class TransformationDictionaryCleaner extends DeepFieldResolver {
 		}
 
 		return FieldUtil.nameSet(activeDerivedFields);
-	}
-
-	private void clean(List<DerivedField> derivedFields, Set<FieldName> activeFieldNames){
-
-		for(Iterator<DerivedField> it = derivedFields.iterator(); it.hasNext(); ){
-			DerivedField derivedField = it.next();
-
-			FieldName name = derivedField.getName();
-
-			if(!(activeFieldNames.contains(name))){
-				it.remove();
-			}
-		}
 	}
 }

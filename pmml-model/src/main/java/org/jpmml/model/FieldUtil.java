@@ -4,6 +4,7 @@
 package org.jpmml.model;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -59,6 +60,20 @@ public class FieldUtil {
 		(result.keySet()).retainAll(names);
 
 		return new LinkedHashSet<>(result.values());
+	}
+
+	static
+	public <F extends Field> void retainAll(Collection<? extends F> fields, Set<FieldName> names){
+
+		for(Iterator<? extends F> fieldIt = fields.iterator(); fieldIt.hasNext(); ){
+			F field = fieldIt.next();
+
+			FieldName name = field.getName();
+
+			if(!(names).contains(name)){
+				fieldIt.remove();
+			}
+		}
 	}
 
 	static

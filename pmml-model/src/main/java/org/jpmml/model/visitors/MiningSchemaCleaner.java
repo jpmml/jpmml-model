@@ -136,7 +136,7 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 
 	private Set<FieldName> processModel(Model model, Set<Field> activeFields){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
-		fieldDependencyResolver.expand(activeFields);
+		fieldDependencyResolver.expand(activeFields, fieldDependencyResolver.getGlobalDerivedFields());
 
 		LocalTransformations localTransformations = model.getLocalTransformations();
 		if(localTransformations != null && localTransformations.hasDerivedFields()){

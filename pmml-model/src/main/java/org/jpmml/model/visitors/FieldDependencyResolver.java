@@ -9,10 +9,12 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.LocalTransformations;
+import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.TransformationDictionary;
@@ -29,19 +31,35 @@ public class FieldDependencyResolver extends FieldResolver {
 
 	private Map<Field, Set<Field>> dependencies = new LinkedHashMap<>();
 
+	private Set<DataField> dataFields = new HashSet<>();
+
 	private Set<DerivedField> globalDerivedFields = new HashSet<>();
 
 	private Set<DerivedField> localDerivedFields = new HashSet<>();
+
+	private Set<OutputField> outputFields = new HashSet<>();
 
 
 	@Override
 	public void applyTo(Visitable visitable){
 		this.dependencies.clear();
 
+		this.dataFields.clear();
 		this.globalDerivedFields.clear();
 		this.localDerivedFields.clear();
+		this.outputFields.clear();
 
 		super.applyTo(visitable);
+	}
+
+	@Override
+	public VisitorAction visit(DataDictionary dataDictionary){
+
+		if(dataDictionary.hasDataFields()){
+			this.dataFields.addAll(dataDictionary.getDataFields());
+		}
+
+		return super.visit(dataDictionary);
 	}
 
 	@Override
@@ -70,6 +88,16 @@ public class FieldDependencyResolver extends FieldResolver {
 		}
 
 		return super.visit(localTransformations);
+	}
+
+	@Override
+	public VisitorAction visit(Output output){
+
+		if(output.hasOutputFields()){
+			this.outputFields.addAll(output.getOutputFields());
+		}
+
+		return super.visit(output);
 	}
 
 	@Override
@@ -108,13 +136,20 @@ public class FieldDependencyResolver extends FieldResolver {
 		return this.dependencies;
 	}
 
-	/**
-	 * <p>
-	 * Expresses global DerivedField elements in terms of DataField elements.
-	 * </p>
-	 */
-	public void expand(Set<Field> fields){
-		expand(fields, this.globalDerivedFields);
+	Set<DataField> getDataFields(){
+		return this.dataFields;
+	}
+
+	Set<DerivedField> getGlobalDerivedFields(){
+		return this.globalDerivedFields;
+	}
+
+	Set<DerivedField> getLocalDerivedFields(){
+		return this.localDerivedFields;
+	}
+
+	Set<OutputField> getOutputFields(){
+		return this.outputFields;
 	}
 
 	public void expand(Set<Field> fields, Set<? extends Field> expandableFields){
