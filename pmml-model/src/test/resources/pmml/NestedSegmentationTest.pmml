@@ -2,6 +2,7 @@
 <PMML xmlns="http://www.dmg.org/PMML-4_2" version="4.2">
     <Header/>
     <DataDictionary>
+		<DataField name="y" optype="continuous" dataType="double"/>
 		<DataField name="x1" optype="continuous" dataType="double"/>
 		<DataField name="x2" optype="continuous" dataType="double"/>
 		<DataField name="x3" optype="continuous" dataType="double"/>
@@ -48,11 +49,13 @@
 							<True/>
 							<MiningModel functionName="regression">
 								<MiningSchema/>
+								<LocalTransformations/>
 								<Segmentation multipleModelMethod="modelChain">
 									<Segment id="third">
 										<True/>
 										<RegressionModel functionName="regression">
 											<MiningSchema/>
+											<LocalTransformations/>
 											<RegressionTable>
 												<NumericPredictor name="x123" coefficient="1"/>
 											</RegressionTable>
@@ -72,4 +75,5 @@
 		</Segmentation>
 		<Output/>
 	</MiningModel>
+	<TransformationDictionary/>
 </PMML>

@@ -164,7 +164,7 @@ public class FieldResolverTest {
 		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
 
 		final
-		Set<FieldName> dataFieldNames = FieldNameUtil.create("x1", "x2", "x3", "x4", "x5");
+		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2", "x3", "x4", "x5");
 
 		FieldResolver applyResolver = new FieldResolver(){
 

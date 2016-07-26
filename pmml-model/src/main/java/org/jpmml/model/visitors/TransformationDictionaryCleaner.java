@@ -3,48 +3,40 @@
  */
 package org.jpmml.model.visitors;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.TransformationDictionary;
-import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.FieldUtil;
 
 /**
  * <p>
  * A Visitor that removes redundant {@link DerivedField derived fields} from global and local transformation dictionaries.
  * </p>
  */
-public class TransformationDictionaryCleaner extends DeepFieldResolver {
+public class TransformationDictionaryCleaner extends ModelCleaner {
 
 	@Override
 	public PMMLObject popParent(){
 		PMMLObject parent = super.popParent();
 
-		if(parent instanceof LocalTransformations){
-			LocalTransformations localTransformations = (LocalTransformations)parent;
-
-			if(localTransformations.hasDerivedFields()){
-				Set<FieldName> activeFieldNames = processLocalTransformations(localTransformations);
-
-				FieldUtil.retainAll(localTransformations.getDerivedFields(), activeFieldNames);
-			}
-		} else
-
 		if(parent instanceof Model){
 			Model model = (Model)parent;
 
 			LocalTransformations localTransformations = model.getLocalTransformations();
-			if(localTransformations != null && isEmpty(localTransformations)){
-				model.setLocalTransformations(null);
+			if(localTransformations != null){
+				processLocalTransformations(localTransformations);
+
+				if(!localTransformations.hasDerivedFields()){
+					model.setLocalTransformations(null);
+				}
 			}
 		} else
 
@@ -52,79 +44,54 @@ public class TransformationDictionaryCleaner extends DeepFieldResolver {
 			PMML pmml = (PMML)parent;
 
 			TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
-			if(transformationDictionary != null && isEmpty(transformationDictionary)){
-				pmml.setTransformationDictionary(null);
-			}
-		} else
+			if(transformationDictionary != null){
+				processTransformationDictionary(transformationDictionary);
 
-		if(parent instanceof TransformationDictionary){
-			TransformationDictionary transformationDictionary = (TransformationDictionary)parent;
-
-			if(transformationDictionary.hasDerivedFields()){
-				Set<FieldName> activeFieldNames = processTransformationDictionary(transformationDictionary);
-
-				FieldUtil.retainAll(transformationDictionary.getDerivedFields(), activeFieldNames);
+				if(!transformationDictionary.hasDefineFunctions() && !transformationDictionary.hasDerivedFields()){
+					pmml.setTransformationDictionary(null);
+				}
 			}
 		}
 
 		return parent;
 	}
 
-	private boolean isEmpty(LocalTransformations localTransformations){
-		return !localTransformations.hasDerivedFields();
+	private void processLocalTransformations(LocalTransformations localTransformations){
+
+		if(localTransformations.hasDerivedFields()){
+			List<DerivedField> derivedFields = localTransformations.getDerivedFields();
+
+			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(new HashSet<>(derivedFields));
+
+			derivedFields.retainAll(activeDerivedFields);
+		}
 	}
 
-	private boolean isEmpty(TransformationDictionary transformationDictionary){
-		return !transformationDictionary.hasDefineFunctions() && !transformationDictionary.hasDerivedFields();
+	private void processTransformationDictionary(TransformationDictionary transformationDictionary){
+
+		if(transformationDictionary.hasDerivedFields()){
+			List<DerivedField> derivedFields = transformationDictionary.getDerivedFields();
+
+			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(new HashSet<>(derivedFields));
+
+			derivedFields.retainAll(activeDerivedFields);
+		}
 	}
 
-	private Set<FieldName> processLocalTransformations(final LocalTransformations localTransformations){
-		Model model = (Model)VisitorUtil.getParent(this);
-
-		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder(){
-
-			private Set<LocalTransformations> ignoredLocalTransformations = Collections.singleton(localTransformations);
-
-
-			@Override
-			public VisitorAction visit(LocalTransformations localTransformations){
-
-				if(this.ignoredLocalTransformations.contains(localTransformations)){
-					return VisitorAction.SKIP;
-				}
-
-				return super.visit(localTransformations);
-			}
-		};
-		fieldReferenceFinder.applyTo(model);
-
-		return processDerivedFields(new LinkedHashSet<>(localTransformations.getDerivedFields()), fieldReferenceFinder.getFieldNames());
-	}
-
-	private Set<FieldName> processTransformationDictionary(TransformationDictionary transformationDictionary){
-		PMML pmml = (PMML)VisitorUtil.getParent(this);
-
-		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder(){
-
-			@Override
-			public VisitorAction visit(TransformationDictionary transformationDictionary){
-				return VisitorAction.SKIP;
-			}
-		};
-		fieldReferenceFinder.applyTo(pmml);
-
-		return processDerivedFields(new LinkedHashSet<>(transformationDictionary.getDerivedFields()), fieldReferenceFinder.getFieldNames());
-	}
-
-	private Set<FieldName> processDerivedFields(Set<DerivedField> derivedFields, Set<FieldName> activeFieldNames){
+	private Set<DerivedField> getActiveDerivedFields(Set<DerivedField> derivedFields){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
 
-		Set<DerivedField> activeDerivedFields = FieldUtil.selectAll(derivedFields, activeFieldNames, true);
+		Set<Field> activeFields = getActiveFields();
+
+		Set<DerivedField> activeDerivedFields = new HashSet<>(derivedFields);
+		activeDerivedFields.retainAll(activeFields);
 
 		while(true){
 			Set<Field> fields = new LinkedHashSet<Field>(activeDerivedFields);
 
 			fieldDependencyResolver.expand(fields, activeDerivedFields);
+
+			activeFields.addAll(fields);
 
 			// Removes all fields that are not derived fields
 			fields.retainAll(derivedFields);
@@ -136,6 +103,6 @@ public class TransformationDictionaryCleaner extends DeepFieldResolver {
 			activeDerivedFields.addAll((Set)fields);
 		}
 
-		return FieldUtil.nameSet(activeDerivedFields);
+		return activeDerivedFields;
 	}
 }
