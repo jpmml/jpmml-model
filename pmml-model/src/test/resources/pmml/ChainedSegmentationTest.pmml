@@ -6,6 +6,7 @@
 		<DataField name="x1" optype="continuous" dataType="double"/>
 		<DataField name="x2" optype="continuous" dataType="double"/>
 		<DataField name="x3" optype="continuous" dataType="double"/>
+		<DataField name="x4" optype="continuous" dataType="double"/>
 	</DataDictionary>
 	<MiningModel functionName="regression">
 		<MiningSchema>

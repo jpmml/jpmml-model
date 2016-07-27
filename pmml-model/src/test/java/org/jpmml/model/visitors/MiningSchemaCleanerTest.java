@@ -100,7 +100,7 @@ public class MiningSchemaCleanerTest {
 					id = segment.getId();
 				} catch(ClassCastException cce){
 					id = null;
-				}
+				} // End try
 
 				if(id == null){
 					checkMiningSchema(FieldNameUtil.create("x1", "x2", "x3", "x4", "x5"), miningSchema);
