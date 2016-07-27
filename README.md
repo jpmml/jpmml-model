@@ -31,13 +31,13 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/).
 
-The current version is **1.2.16** (10 June, 2016).
+The current version is **1.2.17** (27 July, 2016).
 
 ```xml
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.2.16</version>
+	<version>1.2.17</version>
 </dependency>
 ```
 
@@ -119,6 +119,17 @@ For example:
 ```
 java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/example-1.3-SNAPSHOT.jar ...
 ```
+
+# Support and Documentation #
+
+Limited public support is available via the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml).
+
+The [Openscoring.io blog] (http://openscoring.io/blog/) contains fully worked out examples about using JPMML-Model and JPMML-Evaluator libraries.
+
+Recommended reading:
+* [Extending PMML documents with custom XML content] (http://openscoring.io/blog/2015/05/15/jpmml_model_api_vendor_extensions/)
+* [Transforming and measuring the memory consumption of class model objects using the Java agent technology] (http://openscoring.io/blog/2015/02/06/jpmml_model_api_transform_measure/)
+* [Converting PMML documents between different schema versions] (http://openscoring.io/blog/2014/06/20/jpmml_model_api_import_export/)
 
 # License #
 
