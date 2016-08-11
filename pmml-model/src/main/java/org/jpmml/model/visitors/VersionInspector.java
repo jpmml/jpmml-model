@@ -5,6 +5,7 @@ package org.jpmml.model.visitors;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,9 @@ import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.schema.Added;
+import org.jpmml.schema.Optional;
 import org.jpmml.schema.Removed;
+import org.jpmml.schema.Required;
 import org.jpmml.schema.Version;
 
 /**
@@ -24,7 +27,9 @@ import org.jpmml.schema.Version;
  * </p>
  *
  * @see Added
+ * @see Optional
  * @see Removed
+ * @see Required
  */
 public class VersionInspector extends AbstractSimpleVisitor {
 
@@ -52,19 +57,7 @@ public class VersionInspector extends AbstractSimpleVisitor {
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);
 
-			// The field is not set
-			if(value == null){
-				continue;
-			}
-
-			Class<?> type = field.getType();
-
-			// The field is set, but the value represents a default value
-			if(type.isPrimitive() && ReflectionUtil.isDefaultValue(value)){
-				continue;
-			}
-
-			inspect(field);
+			inspect(field, value);
 
 			// The field is set to an enum constant
 			if(value instanceof Enum){
@@ -89,9 +82,43 @@ public class VersionInspector extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(Apply apply){
-		inspect(apply.getFunction());
+		String function = apply.getFunction();
+
+		Version version = VersionInspector.functionVersions.get(function);
+		if(version != null){
+			updateMinimum(version);
+		}
 
 		return super.visit(apply);
+	}
+
+	private void inspect(Field field, Object value){
+		Class<?> type = field.getType();
+
+		if(type.isPrimitive()){
+
+			if(ReflectionUtil.isDefaultValue(value)){
+				return;
+			}
+		} else
+
+		{
+			if(isNull(value)){
+				Optional optional = field.getAnnotation(Optional.class);
+				if(optional != null){
+					updateMinimum(optional.value());
+				}
+
+				Required required = field.getAnnotation(Required.class);
+				if(required != null){
+					updateMaximum(previous(required.value()));
+				}
+
+				return;
+			}
+		}
+
+		inspect(field);
 	}
 
 	private void inspect(AnnotatedElement element){
@@ -103,13 +130,6 @@ public class VersionInspector extends AbstractSimpleVisitor {
 		Removed removed = element.getAnnotation(Removed.class);
 		if(removed != null){
 			updateMaximum(removed.value());
-		}
-	}
-
-	private void inspect(String function){
-		Version version = VersionInspector.functionVersions.get(function);
-		if(version != null){
-			updateMinimum(version);
 		}
 	}
 
@@ -147,6 +167,25 @@ public class VersionInspector extends AbstractSimpleVisitor {
 		if(maximum != null && maximum.compareTo(this.maximum) < 0){
 			this.maximum = maximum;
 		}
+	}
+
+	static
+	private boolean isNull(Object value){
+
+		if(value instanceof Collection){
+			Collection<?> collection = (Collection<?>)value;
+
+			return collection.isEmpty();
+		}
+
+		return (value == null);
+	}
+
+	static
+	private Version previous(Version version){
+		Version[] values = Version.values();
+
+		return values[version.ordinal() - 1];
 	}
 
 	private static Map<String, Version> functionVersions = new LinkedHashMap<>();

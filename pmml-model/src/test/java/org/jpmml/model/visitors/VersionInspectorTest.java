@@ -3,21 +3,19 @@
  */
 package org.jpmml.model.visitors;
 
-import java.util.List;
+import java.util.Arrays;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.AssociationModel;
 import org.dmg.pmml.BaselineModel;
 import org.dmg.pmml.BayesianNetworkModel;
-import org.dmg.pmml.ClusteringModel;
 import org.dmg.pmml.DataDictionary;
+import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.GaussianProcessModel;
 import org.dmg.pmml.GeneralRegressionModel;
 import org.dmg.pmml.Header;
-import org.dmg.pmml.MiningModel;
-import org.dmg.pmml.Model;
 import org.dmg.pmml.NaiveBayesModel;
 import org.dmg.pmml.NearestNeighborModel;
 import org.dmg.pmml.NeuralNetwork;
@@ -26,13 +24,17 @@ import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.PPCell;
+import org.dmg.pmml.PPMatrix;
 import org.dmg.pmml.ParameterField;
 import org.dmg.pmml.RegressionModel;
 import org.dmg.pmml.RuleFeatureType;
 import org.dmg.pmml.RuleSetModel;
 import org.dmg.pmml.Scorecard;
 import org.dmg.pmml.SequenceModel;
-import org.dmg.pmml.SupportVectorMachineModel;
+import org.dmg.pmml.Target;
+import org.dmg.pmml.TargetValue;
+import org.dmg.pmml.Targets;
 import org.dmg.pmml.TextModel;
 import org.dmg.pmml.TimeSeriesModel;
 import org.dmg.pmml.TransformationDictionary;
@@ -46,42 +48,32 @@ public class VersionInspectorTest {
 
 	@Test
 	public void inspectTypeAnnotations(){
-		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
-
-		List<Model> models = pmml.getModels();
-
-		assertEquals(0, models.size());
+		PMML pmml = createPMML();
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
 		pmml.addModels(new AssociationModel(),
-			new ClusteringModel(),
-			new GeneralRegressionModel(),
-			new MiningModel(),
+			//new ClusteringModel(),
+			//new GeneralRegressionModel(),
+			//new MiningModel(),
 			new NaiveBayesModel(),
 			new NeuralNetwork(),
 			new RegressionModel(),
 			new RuleSetModel(),
 			new SequenceModel(),
-			new SupportVectorMachineModel(),
+			//new SupportVectorMachineModel(),
 			new TextModel(),
 			new TreeModel());
-
-		assertEquals(12, models.size());
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
 		pmml.addModels(new TimeSeriesModel());
-
-		assertEquals(13, models.size());
 
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
 
 		pmml.addModels(new BaselineModel(),
 			new Scorecard(),
 			new NearestNeighborModel());
-
-		assertEquals(16, models.size());
 
 		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
 
@@ -93,7 +85,7 @@ public class VersionInspectorTest {
 
 	@Test
 	public void inspectFieldAnnotations(){
-		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
+		PMML pmml = createPMML();
 
 		AssociationModel model = new AssociationModel();
 
@@ -120,6 +112,10 @@ public class VersionInspectorTest {
 
 		output.addOutputFields(outputField);
 
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+
+		outputField.setDataType(DataType.DOUBLE);
+
 		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
 
 		model.setOutput(null);
@@ -128,8 +124,40 @@ public class VersionInspectorTest {
 	}
 
 	@Test
+	public void inspectValueAnnotations(){
+		PMML pmml = createPMML();
+
+		FieldName name = FieldName.create("y");
+
+		Target target = new Target()
+			.setField(name)
+			.addTargetValues(createTargetValue("no event"), createTargetValue("event"));
+
+		Targets targets = new Targets()
+			.addTargets(target);
+
+		GeneralRegressionModel model = new GeneralRegressionModel()
+			.setTargets(targets);
+
+		pmml.addModels(model);
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_3_0);
+
+		PPMatrix ppMatrix = new PPMatrix()
+			.addPPCells(new PPCell(), new PPCell());
+
+		model.setPPMatrix(ppMatrix);
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+
+		target.setField(null);
+
+		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_3);
+	}
+
+	@Test
 	public void inspectFunctions(){
-		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
+		PMML pmml = createPMML();
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
@@ -150,6 +178,30 @@ public class VersionInspectorTest {
 		apply.setFunction("uppercase");
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+
+		apply.setFunction(null);
+
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_3_0);
+	}
+
+	static
+	private PMML createPMML(){
+		Header header = new Header()
+			.setCopyright("ACME Corporation");
+
+		DataDictionary dataDictionary = new DataDictionary();
+
+		PMML pmml = new PMML("4.3", header, dataDictionary);
+
+		return pmml;
+	}
+
+	static
+	private TargetValue createTargetValue(String value){
+		TargetValue targetValue = new TargetValue()
+			.setValue(value);
+
+		return targetValue;
 	}
 
 	static
@@ -157,7 +209,6 @@ public class VersionInspectorTest {
 		VersionInspector inspector = new VersionInspector();
 		inspector.applyTo(object);
 
-		assertEquals(minimum, inspector.getMinimum());
-		assertEquals(maximum, inspector.getMaximum());
+		assertEquals(Arrays.asList(minimum, maximum), Arrays.asList(inspector.getMinimum(), inspector.getMaximum()));
 	}
 }
