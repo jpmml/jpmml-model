@@ -13,17 +13,17 @@ import org.xml.sax.XMLReader;
 
 /**
  * <p>
- * A SAX filter that translates PMML schema version 3.X and 4.X documents to PMML schema version 4.2 documents.
+ * A SAX filter that translates PMML schema version 3.X and 4.X documents to PMML schema version 4.3 documents.
  * </p>
  */
 public class ImportFilter extends PMMLFilter {
 
 	public ImportFilter(){
-		super(Version.PMML_4_2);
+		super(Version.PMML_4_3);
 	}
 
 	public ImportFilter(XMLReader reader){
-		super(reader, Version.PMML_4_2);
+		super(reader, Version.PMML_4_3);
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class ImportFilter extends PMMLFilter {
 	/**
 	 * @param source An {@link InputSource} that contains PMML schema version 3.X or 4.X document.
 	 *
-	 * @return A {@link SAXSource} that contains PMML schema version 4.2 document.
+	 * @return A {@link SAXSource} that contains PMML schema version 4.3 document.
 	 */
 	static
 	public SAXSource apply(InputSource source) throws SAXException {

@@ -10,6 +10,7 @@ public enum Version {
 	PMML_4_0("http://www.dmg.org/PMML-4_0"),
 	PMML_4_1("http://www.dmg.org/PMML-4_1"),
 	PMML_4_2("http://www.dmg.org/PMML-4_2"),
+	PMML_4_3("http://www.dmg.org/PMML-4_3"),
 	;
 
 	private String namespaceUri = null;

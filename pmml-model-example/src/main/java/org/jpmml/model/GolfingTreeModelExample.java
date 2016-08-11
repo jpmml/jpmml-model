@@ -60,7 +60,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 		dataDictionary.setNumberOfFields((dataDictionary.getDataFields()).size());
 
-		PMML pmml = new PMML("4.2", header, dataDictionary);
+		PMML pmml = new PMML("4.3", header, dataDictionary);
 
 		MiningSchema miningSchema = new MiningSchema()
 			.addMiningFields(

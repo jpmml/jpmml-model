@@ -24,6 +24,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='AbsoluteExponentialKernel']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Aggregate']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
@@ -66,7 +72,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>>
+			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='defaultValue']">
@@ -90,6 +96,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='mapMissingTo']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ARDSquaredExponentialKernel']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
@@ -200,6 +212,19 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkNodes']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='TargetValueStats']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_2"/>
@@ -208,6 +233,12 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='binarySimilarity']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BlockIndicator']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValueMeans']/xsd:complexType">
@@ -429,6 +460,27 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ContinuousConditionalProbability']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ContinuousDistribution']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+			<jaxb:class
+				name="ContinuousDistributionForBN"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ContinuousNode']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='CorrelationFields']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -592,6 +644,18 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DiscreteConditionalProbability']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DiscreteNode']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
@@ -668,6 +732,19 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.ContinuousDistribution</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='GaussianProcessModel']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='GeneralizedExponentialKernel']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType">
@@ -854,6 +931,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Header']/xsd:complexType/xsd:attribute[@name='modelVersion']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='InstanceField']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -891,6 +974,18 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType/xsd:attribute[@name='category']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType/xsd:attribute[@name='field']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Itemset']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
@@ -910,6 +1005,19 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='KNNInputs']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Lambda']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
@@ -950,6 +1058,18 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='LognormalDistributionForBN']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Lower']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
@@ -976,6 +1096,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:property
 				name="array"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Mean']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType">
@@ -1162,6 +1288,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NormalDistributionForBN']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
@@ -1187,6 +1319,18 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="Method"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='indicator']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='thermometer']">
@@ -1223,6 +1367,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="Algorithm"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='dataType']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Required" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']">
@@ -1346,6 +1496,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='ParamMatrix']/xsd:complexType/xsd:sequence/xsd:element[@ref='PCell']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Optional" value="PMML_4_0"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ParentValue']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
 		</jaxb:bindings>
 
@@ -1535,10 +1691,16 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='RadialBasisKernel']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RadialBasisKernelType']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Kernel</inheritance:extends>
 			<jaxb:class
-				name="RadialBasisKernel"
+				name="RadialBasisFunctionKernel"
 			/>
 		</jaxb:bindings>
 
@@ -1959,6 +2121,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='maxWins']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='threshold']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -1995,6 +2163,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="CastInteger"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='field']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Optional" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='max']">
@@ -2295,6 +2469,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TriangularDistributionForBN']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='True']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Predicate</inheritance:extends>
 		</jaxb:bindings>
@@ -2304,6 +2484,12 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.ContinuousDistribution</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='UniformDistributionForBN']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType/xsd:attribute[@name='weighted']">
@@ -2336,6 +2522,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Upper']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Value']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
@@ -2344,6 +2536,18 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="Property"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ValueProbability']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Variance']/xsd:complexType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorFields']">
@@ -2431,6 +2635,12 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="ActivationFunctionType"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='ACTIVATION-FUNCTION']/xsd:restriction/xsd:enumeration[@value='rectifier']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='BASELINE-TEST-STATISTIC']">

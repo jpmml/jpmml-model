@@ -19,5 +19,5 @@ import java.lang.annotation.Target;
 )
 public @interface Deprecated {
 
-	Version value() default Version.PMML_4_2;
+	Version value();
 }

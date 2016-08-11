@@ -58,6 +58,10 @@ public class PMMLPlugin extends Plugin {
 	public void postProcessModel(Model model, ErrorHandler errorHandler){
 		super.postProcessModel(model, errorHandler);
 
+		JCodeModel codeModel = model.codeModel;
+
+		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
+
 		Comparator<CPropertyInfo> comparator = new Comparator<CPropertyInfo>(){
 
 			@Override
@@ -88,6 +92,10 @@ public class PMMLPlugin extends Plugin {
 
 				// Collection of values
 				if(propertyInfo.isCollection()){
+
+					if((classInfo.shortName).equals("VectorFields") && (privateName).equals("fieldRefOrCategoricalPredictor")){
+						propertyInfo.baseType = pmmlObjectClass;
+					} // End if
 
 					if((privateName).contains("And") || (privateName).contains("Or") || (privateName).equalsIgnoreCase("content")){
 						propertyInfo.setName(true, "Content");

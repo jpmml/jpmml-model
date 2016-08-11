@@ -16,9 +16,9 @@ public class StringInternerTest {
 
 	@Test
 	public void intern(){
-		SimplePredicate left = new CustomSimplePredicate(new FieldName("x"), SimplePredicate.Operator.LESS_THAN, new String("0"));
+		SimplePredicate left = new CustomSimplePredicate(FieldName.create("x"), SimplePredicate.Operator.LESS_THAN, new String("0"));
 
-		SimplePredicate right = new CustomSimplePredicate(new FieldName("y"), SimplePredicate.Operator.LESS_THAN, new String("0"));
+		SimplePredicate right = new CustomSimplePredicate(FieldName.create("y"), SimplePredicate.Operator.LESS_THAN, new String("0"));
 
 		assertNotSame(left.getValue(), right.getValue());
 

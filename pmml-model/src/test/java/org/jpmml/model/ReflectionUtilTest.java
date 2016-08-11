@@ -24,7 +24,7 @@ public class ReflectionUtilTest {
 
 	@Test
 	public void copyState(){
-		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
+		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
 
 		// Initialize the live list instance
 		pmml.getModels();

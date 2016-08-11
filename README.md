@@ -5,7 +5,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Features #
 
-* Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1 and 4.2 schemas:
+* Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1, 4.2 and 4.3 schemas:
   * Schema version annotations.
 * Enhanced API:
   * Class hierarchy.
@@ -57,7 +57,7 @@ Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` i
 public PMML load(InputStream is) throws Exception {
   InputSource source = new InputSource(is);
 
-  // Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.2 document
+  // Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.3 document
   SAXSource transformedSource = ImportFilter.apply(source);
 
   return JAXBUtil.unmarshalPMML(transformedSource);
@@ -79,7 +79,7 @@ public void optimize(PMML pmml){
 
 ### Marshalling ###
 
-Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.2 document:
+Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.3 document:
 
 ```java
 public void store(PMML pmml, OutputStream os) throws Exception {
@@ -99,7 +99,7 @@ mvn clean install
 ```
 
 The resulting uber-JAR file `target/example-1.3-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.3 document.
 * `org.jpmml.model.ObfuscationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
 * `org.jpmml.model.ValidationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML schema version 3.X or 4.X document against the built-in XML Schema Definition (XSD) resource.
 

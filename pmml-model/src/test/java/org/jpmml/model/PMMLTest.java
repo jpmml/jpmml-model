@@ -22,7 +22,7 @@ public class PMMLTest {
 
 			byte[] latest = PMMLUtil.upgradeToLatest(original);
 
-			checkPMML(latest, Version.PMML_4_2);
+			checkPMML(latest, Version.PMML_4_3);
 
 			byte[] latestToOriginal = PMMLUtil.downgrade(latest, version);
 

@@ -27,7 +27,7 @@ public class SkipFilter extends XMLFilterImpl {
 
 
 	public SkipFilter(String localName){
-		this((Version.PMML_4_2).getNamespaceURI(), localName);
+		this((Version.PMML_4_3).getNamespaceURI(), localName);
 	}
 
 	public SkipFilter(String namespaceURI, String localName){
@@ -36,7 +36,7 @@ public class SkipFilter extends XMLFilterImpl {
 	}
 
 	public SkipFilter(XMLReader reader, String localName){
-		this(reader, (Version.PMML_4_2).getNamespaceURI(), localName);
+		this(reader, (Version.PMML_4_3).getNamespaceURI(), localName);
 	}
 
 	public SkipFilter(XMLReader reader, String namespaceURI, String localName){

@@ -8,10 +8,12 @@ import java.util.List;
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.AssociationModel;
 import org.dmg.pmml.BaselineModel;
+import org.dmg.pmml.BayesianNetworkModel;
 import org.dmg.pmml.ClusteringModel;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.FieldName;
+import org.dmg.pmml.GaussianProcessModel;
 import org.dmg.pmml.GeneralRegressionModel;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.MiningModel;
@@ -44,13 +46,13 @@ public class VersionInspectorTest {
 
 	@Test
 	public void inspectTypeAnnotations(){
-		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
+		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
 
 		List<Model> models = pmml.getModels();
 
 		assertEquals(0, models.size());
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
 		pmml.addModels(new AssociationModel(),
 			new ClusteringModel(),
@@ -67,13 +69,13 @@ public class VersionInspectorTest {
 
 		assertEquals(12, models.size());
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
 		pmml.addModels(new TimeSeriesModel());
 
 		assertEquals(13, models.size());
 
-		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
 
 		pmml.addModels(new BaselineModel(),
 			new Scorecard(),
@@ -81,56 +83,61 @@ public class VersionInspectorTest {
 
 		assertEquals(16, models.size());
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
+
+		pmml.addModels(new BayesianNetworkModel(),
+			new GaussianProcessModel());
+
+		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_3);
 	}
 
 	@Test
 	public void inspectFieldAnnotations(){
-		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
+		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
 
 		AssociationModel model = new AssociationModel();
 
 		pmml.addModels(model);
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
 		Output output = new Output();
 
 		model.setOutput(output);
 
-		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
 
 		model.setScorable(Boolean.FALSE);
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
 
 		model.setScorable(null);
 
-		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
 
 		OutputField outputField = new OutputField()
 			.setRuleFeature(RuleFeatureType.AFFINITY);
 
 		output.addOutputFields(outputField);
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
 
 		model.setOutput(null);
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 	}
 
 	@Test
 	public void inspectFunctions(){
-		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
+		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
-		Apply apply = new Apply();
-		apply.setFunction("lowercase");
+		Apply apply = new Apply()
+			.setFunction("lowercase");
 
 		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, null)
-			.addParameterFields(new ParameterField(new FieldName("string")))
+			.addParameterFields(new ParameterField(FieldName.create("string")))
 			.setExpression(apply);
 
 		TransformationDictionary transformationDictionary = new TransformationDictionary()
@@ -138,11 +145,11 @@ public class VersionInspectorTest {
 
 		pmml.setTransformationDictionary(transformationDictionary);
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
 
 		apply.setFunction("uppercase");
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_2);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 	}
 
 	static

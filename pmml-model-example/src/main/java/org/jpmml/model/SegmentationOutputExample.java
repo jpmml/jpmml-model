@@ -65,7 +65,7 @@ public class SegmentationOutputExample extends TransformationExample {
 			}
 
 			OutputField outputField = new OutputField()
-				.setName(new FieldName("segment_" + id))
+				.setName(FieldName.create("segment_" + id))
 				.setFeature(FeatureType.PREDICTED_VALUE)
 				.setSegmentId(id);
 

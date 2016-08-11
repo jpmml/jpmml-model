@@ -55,7 +55,7 @@ public class JAXBUtil {
 	 * Unmarshals a {@link PMML} class model object.
 	 * </p>
 	 *
-	 * @param source Input source containing a complete PMML schema version 4.2 document.
+	 * @param source Input source containing a complete PMML schema version 4.3 document.
 	 *
 	 * @see ImportFilter
 	 */
@@ -69,7 +69,7 @@ public class JAXBUtil {
 	 * Unmarshals any class model object.
 	 * </p>
 	 *
-	 * @param source Input source containing a complete PMML schema version 4.2 document or any fragment of it.
+	 * @param source Input source containing a complete PMML schema version 4.3 document or any fragment of it.
 	 */
 	static
 	public Object unmarshal(Source source) throws JAXBException {

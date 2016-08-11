@@ -173,6 +173,8 @@ public class VersionInspector extends AbstractSimpleVisitor {
 			"lowercase");
 		declareFunctions(Version.PMML_4_2,
 			"concat", "replace", "matches");
+		declareFunctions(Version.PMML_4_3,
+			"normalCDF", "normalPDF", "stdNormalCDF", "stdNormalPDF", "erf", "normalIDF", "stdNormalIDF");
 	}
 
 	static

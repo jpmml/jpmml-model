@@ -28,7 +28,7 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		PMML pmml = new PMML("4.2", new Header(), new DataDictionary());
+		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
 
 		Node root = new Node()
 			.setPredicate(new True());

@@ -51,15 +51,21 @@ Copyright (c) 2014 Villu Ruusmann
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='NormDiscrete']/xs:complexType/xs:attribute[@name='method']/xs:simpleType/xs:restriction">
+	<xsl:template match="xs:element[@name='NormDiscrete']/xs:complexType">
 		<xsl:variable
 			name="index"
-			select="count(xs:enumeration[@value='indicator']/preceding-sibling::*) + 1"
+			select="count(xs:attribute[@name='field']/preceding-sibling::*) + 1"
 		/>
 		<xsl:copy>
-			<xsl:apply-templates select="@*"/>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xs:enumeration value="thermometer"/>
+			<xs:attribute name="method" fixed="indicator">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="indicator"/>
+						<xs:enumeration value="thermometer"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
