@@ -63,6 +63,7 @@ public class PMMLPlugin extends Plugin {
 		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 
 		JClass activationFunctionTypeEnum = codeModel.directClass("org.dmg.pmml.NeuralNetwork.ActivationFunctionType");
+		JClass normalizationMethodTypeEnum = codeModel.directClass("org.dmg.pmml.NeuralNetwork.NormalizationMethodType");
 
 		Comparator<CPropertyInfo> comparator = new Comparator<CPropertyInfo>(){
 
@@ -131,6 +132,10 @@ public class PMMLPlugin extends Plugin {
 				{
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("activationFunction")){
 						propertyInfo.baseType = activationFunctionTypeEnum;
+					} else
+
+					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("normalizationMethod")){
+						propertyInfo.baseType = normalizationMethodTypeEnum;
 					} // End if
 
 					if((privateName).equals("isScorable")){

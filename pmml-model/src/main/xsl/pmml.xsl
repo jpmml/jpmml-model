@@ -219,7 +219,13 @@ Copyright (c) 2009 University of Tartu
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='ACTIVATION-FUNCTION']">
+	<xsl:template match="xs:element[@name='NeuralNetwork' or @name='NeuralLayer']/xs:complexType/xs:attribute[@name='normalizationMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">NN-NORMALIZATION-METHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='ACTIVATION-FUNCTION' or @name='NN-NORMALIZATION-METHOD']">
 	</xsl:template>
 
 	<!--

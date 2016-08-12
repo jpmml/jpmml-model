@@ -1359,6 +1359,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="NormalizationMethodType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -2992,12 +2998,6 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='MISSING-VALUE-TREATMENT-METHOD']">
 			<jaxb:typesafeEnumClass
 				name="MissingValueTreatmentMethodType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='NN-NORMALIZATION-METHOD']">
-			<jaxb:typesafeEnumClass
-				name="NnNormalizationMethodType"
 			/>
 		</jaxb:bindings>
 
