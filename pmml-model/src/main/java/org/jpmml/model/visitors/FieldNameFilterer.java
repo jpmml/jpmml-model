@@ -6,10 +6,10 @@ package org.jpmml.model.visitors;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.dmg.pmml.FeatureType;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.ResultFeatureType;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 
@@ -44,9 +44,9 @@ public class FieldNameFilterer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(OutputField outputField){
-		FeatureType feature = outputField.getFeature();
+		ResultFeatureType resultFeature = outputField.getResultFeature();
 
-		switch(feature){
+		switch(resultFeature){
 			case TRANSFORMED_VALUE:
 			case DECISION:
 				{
