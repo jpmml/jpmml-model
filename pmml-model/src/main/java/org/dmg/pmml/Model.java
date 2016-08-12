@@ -16,10 +16,10 @@ public class Model extends PMMLObject implements HasExtensions {
 	public Model setModelName(String modelName);
 
 	abstract
-	public MiningFunctionType getFunctionName();
+	public MiningFunctionType getMiningFunction();
 
 	abstract
-	public Model setFunctionName(MiningFunctionType functionName);
+	public Model setMiningFunction(MiningFunctionType miningFunction);
 
 	public String getAlgorithmName(){
 		return null;

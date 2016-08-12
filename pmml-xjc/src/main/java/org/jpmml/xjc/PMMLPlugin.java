@@ -130,6 +130,11 @@ public class PMMLPlugin extends Plugin {
 					if((privateName).equals("isScorable")){
 						propertyInfo.setName(true, "Scorable");
 						propertyInfo.setName(false, "scorable");
+					} else
+
+					if((privateName).equals("functionName")){
+						propertyInfo.setName(true, "MiningFunction");
+						propertyInfo.setName(false, "miningFunction");
 					}
 
 					CDefaultValue defaultValue = propertyInfo.defaultValue;
