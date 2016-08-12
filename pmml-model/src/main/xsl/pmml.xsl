@@ -265,6 +265,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline TimeAnchor enum types
+	-->
+	<xsl:template match="xs:element[@name='TimeAnchor']/xs:complexType/xs:attribute[@name='type']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">TIME-ANCHOR</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='TIME-ANCHOR']">
+	</xsl:template>
+
+	<!--
 	Inline TimeSeries enum types
 	-->
 	<xsl:template match="xs:element[@name='TimeSeries']/xs:complexType/xs:attribute[@name='interpolationMethod']">
