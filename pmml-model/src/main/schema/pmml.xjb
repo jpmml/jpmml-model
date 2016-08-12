@@ -2518,6 +2518,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TimeException']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="Type"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -3053,15 +3062,6 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='TIME-EXCEPTION-TYPE']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="TimeExceptionType"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='TIMESERIES-ALGORITHM']">

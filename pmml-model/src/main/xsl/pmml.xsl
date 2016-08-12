@@ -277,6 +277,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline TimeException enum types
+	-->
+	<xsl:template match="xs:element[@name='TimeException']/xs:complexType/xs:attribute[@name='type']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">TIME-EXCEPTION-TYPE</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='TIME-EXCEPTION-TYPE']">
+	</xsl:template>
+
+	<!--
 	Inline TimeSeries enum types
 	-->
 	<xsl:template match="xs:element[@name='TimeSeries']/xs:complexType/xs:attribute[@name='interpolationMethod']">
