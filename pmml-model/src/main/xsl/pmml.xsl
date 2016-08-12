@@ -145,6 +145,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline Delimiter enum types
+	-->
+	<xsl:template match="xs:element[@name='Delimiter']/xs:complexType/xs:attribute[@name='delimiter']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">DELIMITER</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='DELIMITER']">
+	</xsl:template>
+
+	<!--
 	Inline GeneralRegressionModel enum types
 	-->
 	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='cumulativeLink']">

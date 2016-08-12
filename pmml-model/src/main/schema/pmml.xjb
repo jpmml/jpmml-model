@@ -624,6 +624,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Delimiter']/xsd:complexType/xsd:attribute[@name='delimiter']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="DelimiterType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.TypeDefinitionField</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression</inheritance:implements>
@@ -2802,12 +2808,6 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']">
 			<jaxb:typesafeEnumClass
 				name="DataType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='DELIMITER']">
-			<jaxb:typesafeEnumClass
-				name="DelimiterType"
 			/>
 		</jaxb:bindings>
 
