@@ -2378,6 +2378,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType/xsd:attribute[@name='testStatistic']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="TestStatisticType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TextDocument']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
@@ -2782,15 +2791,6 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='BASELINE-TEST-STATISTIC']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="BaselineTestStatisticType"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='COMPARE-FUNCTION']">
