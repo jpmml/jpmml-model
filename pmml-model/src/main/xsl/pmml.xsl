@@ -195,7 +195,13 @@ Copyright (c) 2009 University of Tartu
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='SVM-CLASSIFICATION-METHOD']">
+	<xsl:template match="xs:element[@name='SupportVectorMachineModel']/xs:complexType/xs:attribute[@name='svmRepresentation']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">SVM-REPRESENTATION</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='SVM-CLASSIFICATION-METHOD' or @name='SVM-REPRESENTATION']">
 	</xsl:template>
 
 	<!--
