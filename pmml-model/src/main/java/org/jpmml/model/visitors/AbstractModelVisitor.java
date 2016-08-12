@@ -5,7 +5,9 @@ package org.jpmml.model.visitors;
 
 import org.dmg.pmml.AssociationModel;
 import org.dmg.pmml.BaselineModel;
+import org.dmg.pmml.BayesianNetworkModel;
 import org.dmg.pmml.ClusteringModel;
+import org.dmg.pmml.GaussianProcessModel;
 import org.dmg.pmml.GeneralRegressionModel;
 import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
@@ -39,8 +41,18 @@ public class AbstractModelVisitor extends AbstractVisitor {
 	}
 
 	@Override
+	public VisitorAction visit(BayesianNetworkModel bayesianNetworkModel){
+		return visit((Model)bayesianNetworkModel);
+	}
+
+	@Override
 	public VisitorAction visit(ClusteringModel clusteringModel){
 		return visit((Model)clusteringModel);
+	}
+
+	@Override
+	public VisitorAction visit(GaussianProcessModel gaussianProcessModel){
+		return visit((Model)gaussianProcessModel);
 	}
 
 	@Override

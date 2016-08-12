@@ -21,11 +21,8 @@ public class Model extends PMMLObject implements HasExtensions {
 	abstract
 	public Model setFunctionName(MiningFunctionType functionName);
 
-	/**
-	 * @throws UnsupportedOperationException If the <code>algorithmName</code> attribute is not supported.
-	 */
 	public String getAlgorithmName(){
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	/**

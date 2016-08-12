@@ -147,9 +147,9 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
-	Replace xs:integer and xs:nonNegativeInteger with INT-NUMBER
+	Replace xs:integer, xs:positiveInteger and xs:nonNegativeInteger with INT-NUMBER
 	-->
-	<xsl:template match="xs:attribute[@type='xs:integer' or @type='xs:nonNegativeInteger']/@type">
+	<xsl:template match="xs:attribute[@type='xs:integer' or @type='xs:positiveInteger' or @type='xs:nonNegativeInteger']/@type">
 		<xsl:attribute name="type">INT-NUMBER</xsl:attribute>
 	</xsl:template>
 

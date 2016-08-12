@@ -8,8 +8,11 @@ import java.util.Set;
 
 import org.dmg.pmml.Aggregate;
 import org.dmg.pmml.BayesInput;
+import org.dmg.pmml.BlockIndicator;
 import org.dmg.pmml.CategoricalPredictor;
 import org.dmg.pmml.ClusteringField;
+import org.dmg.pmml.ContinuousNode;
+import org.dmg.pmml.DiscreteNode;
 import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
@@ -17,11 +20,14 @@ import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.FieldValue;
 import org.dmg.pmml.FieldValueCount;
 import org.dmg.pmml.GeneralRegressionModel;
+import org.dmg.pmml.Item;
 import org.dmg.pmml.KNNInput;
+import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.NumericPredictor;
 import org.dmg.pmml.PPCell;
+import org.dmg.pmml.ParentValue;
 import org.dmg.pmml.Predictor;
 import org.dmg.pmml.PredictorTerm;
 import org.dmg.pmml.SetPredicate;
@@ -65,6 +71,13 @@ public class FieldReferenceFinder extends AbstractVisitor {
 	}
 
 	@Override
+	public VisitorAction visit(BlockIndicator blockIndicator){
+		process(blockIndicator.getField());
+
+		return super.visit(blockIndicator);
+	}
+
+	@Override
 	public VisitorAction visit(CategoricalPredictor categoricalPredictor){
 		process(categoricalPredictor.getName());
 
@@ -76,6 +89,16 @@ public class FieldReferenceFinder extends AbstractVisitor {
 		process(clusteringField.getField());
 
 		return super.visit(clusteringField);
+	}
+
+	@Override
+	public VisitorAction visit(ContinuousNode continuousNode){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public VisitorAction visit(DiscreteNode discreteNode){
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -135,10 +158,24 @@ public class FieldReferenceFinder extends AbstractVisitor {
 	}
 
 	@Override
+	public VisitorAction visit(Item item){
+		process(item.getField());
+
+		return super.visit(item);
+	}
+
+	@Override
 	public VisitorAction visit(KNNInput knnInput){
 		process(knnInput.getField());
 
 		return super.visit(knnInput);
+	}
+
+	@Override
+	public VisitorAction visit(Lag lag){
+		process(lag.getField());
+
+		return super.visit(lag);
 	}
 
 	@Override
@@ -160,6 +197,11 @@ public class FieldReferenceFinder extends AbstractVisitor {
 		process(numericPredictor.getName());
 
 		return super.visit(numericPredictor);
+	}
+
+	@Override
+	public VisitorAction visit(ParentValue parentValue){
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
