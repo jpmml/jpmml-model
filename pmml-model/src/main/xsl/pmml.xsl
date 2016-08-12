@@ -307,6 +307,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline TimeSeriesModel enum types
+	-->
+	<xsl:template match="xs:element[@name='TimeSeriesModel']/xs:complexType/xs:attribute[@name='bestFit']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">TIMESERIES-ALGORITHM</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='TIMESERIES-ALGORITHM']">
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">

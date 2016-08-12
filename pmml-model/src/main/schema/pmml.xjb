@@ -2564,6 +2564,15 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='bestFit']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="AlgorithmType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -3062,15 +3071,6 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='TIMESERIES-ALGORITHM']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="TimeSeriesAlgorithmType"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='VALID-TIME-SPEC']">
