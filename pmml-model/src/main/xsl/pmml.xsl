@@ -265,6 +265,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline TimeSeries enum types
+	-->
+	<xsl:template match="xs:element[@name='TimeSeries']/xs:complexType/xs:attribute[@name='interpolationMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">INTERPOLATION-METHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='INTERPOLATION-METHOD']">
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">

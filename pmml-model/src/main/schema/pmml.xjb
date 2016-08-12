@@ -2515,6 +2515,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:attribute[@name='interpolationMethod']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="InterpolationMethodType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:sequence/xsd:element[@ref='TimeException']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_4_1"/>
@@ -2821,15 +2830,6 @@ Copyright (c) 2009 University of Tartu
 			<xjc:javaType
 				name="org.dmg.pmml.FieldName"
 				adapter="org.dmg.pmml.adapters.FieldNameAdapter"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='INTERPOLATION-METHOD']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="InterpolationMethodType"
 			/>
 		</jaxb:bindings>
 
