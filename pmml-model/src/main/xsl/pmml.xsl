@@ -277,6 +277,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline TimeCycle enum types
+	-->
+	<xsl:template match="xs:element[@name='TimeCycle']/xs:complexType/xs:attribute[@name='type']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">VALID-TIME-SPEC</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='VALID-TIME-SPEC']">
+	</xsl:template>
+
+	<!--
 	Inline TimeException enum types
 	-->
 	<xsl:template match="xs:element[@name='TimeException']/xs:complexType/xs:attribute[@name='type']">
