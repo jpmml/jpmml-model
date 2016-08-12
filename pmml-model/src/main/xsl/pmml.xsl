@@ -148,6 +148,21 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline OutputField enum types
+	-->
+	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='ruleFeature']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*[name() != 'type']"/>
+			<xs:simpleType>
+				<xsl:copy-of select="//xs:simpleType[@name='RULE-FEATURE']/node()"/>
+			</xs:simpleType>
+		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='RULE-FEATURE']">
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">

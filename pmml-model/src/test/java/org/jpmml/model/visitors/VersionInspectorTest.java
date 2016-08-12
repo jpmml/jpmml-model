@@ -28,7 +28,6 @@ import org.dmg.pmml.PPCell;
 import org.dmg.pmml.PPMatrix;
 import org.dmg.pmml.ParameterField;
 import org.dmg.pmml.RegressionModel;
-import org.dmg.pmml.RuleFeatureType;
 import org.dmg.pmml.RuleSetModel;
 import org.dmg.pmml.Scorecard;
 import org.dmg.pmml.SequenceModel;
@@ -108,7 +107,7 @@ public class VersionInspectorTest {
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
 
 		OutputField outputField = new OutputField()
-			.setRuleFeature(RuleFeatureType.AFFINITY);
+			.setRuleFeature(OutputField.RuleFeatureType.AFFINITY);
 
 		output.addOutputFields(outputField);
 
