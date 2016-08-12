@@ -630,6 +630,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Delimiter']/xsd:complexType/xsd:attribute[@name='gap']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="GapType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.TypeDefinitionField</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression</inheritance:implements>
@@ -2815,12 +2821,6 @@ Copyright (c) 2009 University of Tartu
 			<xjc:javaType
 				name="org.dmg.pmml.FieldName"
 				adapter="org.dmg.pmml.adapters.FieldNameAdapter"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='GAP']">
-			<jaxb:typesafeEnumClass
-				name="GapType"
 			/>
 		</jaxb:bindings>
 

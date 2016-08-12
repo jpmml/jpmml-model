@@ -153,7 +153,13 @@ Copyright (c) 2009 University of Tartu
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='DELIMITER']">
+	<xsl:template match="xs:element[@name='Delimiter']/xs:complexType/xs:attribute[@name='gap']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">GAP</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='DELIMITER' or @name='GAP']">
 	</xsl:template>
 
 	<!--
