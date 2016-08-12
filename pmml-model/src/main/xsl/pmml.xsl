@@ -144,7 +144,16 @@ Copyright (c) 2009 University of Tartu
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION']">
+	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='linkFunction']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*[name() != 'type']"/>
+			<xs:simpleType>
+				<xsl:copy-of select="//xs:simpleType[@name='LINK-FUNCTION']/node()"/>
+			</xs:simpleType>
+		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION' or @name='LINK-FUNCTION']">
 	</xsl:template>
 
 	<!--

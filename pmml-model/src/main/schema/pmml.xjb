@@ -820,6 +820,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="LinkFunctionType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkParameter']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
@@ -2794,15 +2803,6 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<jaxb:typesafeEnumClass
 				name="InvalidValueTreatmentMethodType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='LINK-FUNCTION']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="LinkFunctionType"
 			/>
 		</jaxb:bindings>
 
