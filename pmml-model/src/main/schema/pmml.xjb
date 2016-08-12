@@ -1277,6 +1277,15 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='categoricalScoringMethod']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="CategoricalScoringMethodType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -2772,15 +2781,6 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<jaxb:typesafeEnumClass
 				name="BaselineTestStatisticType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='CAT-SCORING-METHOD']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="CategoricalScoringMethodType"
 			/>
 		</jaxb:bindings>
 

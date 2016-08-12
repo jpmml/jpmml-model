@@ -175,6 +175,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline NearestNeighborModel enum types
+	-->
+	<xsl:template match="xs:element[@name='NearestNeighborModel']/xs:complexType/xs:attribute[@name='categoricalScoringMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">CAT-SCORING-METHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='CAT-SCORING-METHOD']">
+	</xsl:template>
+
+	<!--
 	Inline OutputField enum types
 	-->
 	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='ruleFeature']">
