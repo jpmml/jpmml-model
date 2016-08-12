@@ -133,6 +133,21 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline GeneralRegressionModel enum types
+	-->
+	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='cumulativeLink']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*[name() != 'type']"/>
+			<xs:simpleType>
+				<xsl:copy-of select="//xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION']/node()"/>
+			</xs:simpleType>
+		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION']">
+	</xsl:template>
+
+	<!--
 	Inline MiningField enum types
 	-->
 	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='usageType']">

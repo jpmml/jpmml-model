@@ -766,6 +766,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='cumulativeLink']//xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="CumulativeLinkFunctionType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distParameter']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
@@ -2742,15 +2751,6 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<jaxb:typesafeEnumClass
 				name="ContinuousScoringMethodType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='CUMULATIVE-LINK-FUNCTION']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="CumulativeLinkFunctionType"
 			/>
 		</jaxb:bindings>
 
