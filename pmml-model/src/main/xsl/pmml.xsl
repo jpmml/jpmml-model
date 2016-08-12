@@ -183,7 +183,13 @@ Copyright (c) 2009 University of Tartu
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='CAT-SCORING-METHOD']">
+	<xsl:template match="xs:element[@name='NearestNeighborModel']/xs:complexType/xs:attribute[@name='continuousScoringMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">CONT-SCORING-METHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='CAT-SCORING-METHOD' or @name='CONT-SCORING-METHOD']">
 	</xsl:template>
 
 	<!--
