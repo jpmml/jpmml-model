@@ -187,6 +187,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline SupportVectorMachineModel enum types
+	-->
+	<xsl:template match="xs:element[@name='SupportVectorMachineModel']/xs:complexType/xs:attribute[@name='classificationMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">SVM-CLASSIFICATION-METHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='SVM-CLASSIFICATION-METHOD']">
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">

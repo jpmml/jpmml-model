@@ -2202,6 +2202,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='classificationMethod']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="ClassificationMethodType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -3014,15 +3023,6 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='SVM-CLASSIFICATION-METHOD']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="SvmClassificationMethodType"
-			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='SVM-REPRESENTATION']">
