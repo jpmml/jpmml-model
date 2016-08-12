@@ -12,7 +12,6 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
-import org.dmg.pmml.FieldUsageType;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.Model;
@@ -71,7 +70,7 @@ public class DataDictionaryCleaner extends ModelCleaner {
 			for(MiningField miningField : miningFields){
 				FieldName name = miningField.getName();
 
-				FieldUsageType fieldUsage = miningField.getUsageType();
+				MiningField.FieldUsageType fieldUsage = miningField.getFieldUsage();
 				switch(fieldUsage){
 					case TARGET:
 					case PREDICTED:

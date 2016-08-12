@@ -12,7 +12,6 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.FieldName;
-import org.dmg.pmml.FieldUsageType;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningFunctionType;
@@ -69,7 +68,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 				new MiningField(windy),
 				new MiningField(outlook),
 				new MiningField(whatIdo)
-					.setUsageType(FieldUsageType.TARGET)
+					.setFieldUsage(MiningField.FieldUsageType.TARGET)
 			);
 
 		Node root = createNode("will play", new True());

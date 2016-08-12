@@ -83,7 +83,6 @@ Copyright (c) 2009 University of Tartu
 	<!--
 	Restrict xs:string to FIELD-NAME where appropriate
 	-->
-
 	<xsl:template match="xs:element[@name='BayesInput' or @name='BayesOutput']/xs:complexType/xs:attribute[@name='fieldName']/@type">
 		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
 	</xsl:template>
@@ -131,6 +130,21 @@ Copyright (c) 2009 University of Tartu
 			<xs:complexType>
 			</xs:complexType>
 		</xsl:copy>
+	</xsl:template>
+
+	<!--
+	Inline MiningField enum types
+	-->
+	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='usageType']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*[name() != 'type']"/>
+			<xs:simpleType>
+				<xsl:copy-of select="//xs:simpleType[@name='FIELD-USAGE-TYPE']/node()"/>
+			</xs:simpleType>
+		</xsl:copy>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='FIELD-USAGE-TYPE']">
 	</xsl:template>
 
 	<!--

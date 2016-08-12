@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
-import org.dmg.pmml.FieldUsageType;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningModel;
@@ -73,7 +72,7 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 			for(MiningField miningField : miningFields){
 				FieldName name = miningField.getName();
 
-				FieldUsageType fieldUsage = miningField.getUsageType();
+				MiningField.FieldUsageType fieldUsage = miningField.getFieldUsage();
 				switch(fieldUsage){
 					case ACTIVE:
 						activeFieldNames.add(name);
@@ -125,7 +124,7 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 
 			FieldName name = miningField.getName();
 
-			FieldUsageType fieldUsage = miningField.getUsageType();
+			MiningField.FieldUsageType fieldUsage = miningField.getFieldUsage();
 			switch(fieldUsage){
 				case ACTIVE:
 					if(!(activeFieldNames).contains(name)){
