@@ -339,7 +339,13 @@ Copyright (c) 2009 University of Tartu
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='MISSING-VALUE-STRATEGY']">
+	<xsl:template match="xs:element[@name='TreeModel' or @name='DecisionTree']/xs:complexType/xs:attribute[@name='noTrueChildStrategy']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">NO-TRUE-CHILD-STRATEGY</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='MISSING-VALUE-STRATEGY' or @name='NO-TRUE-CHILD-STRATEGY']">
 	</xsl:template>
 
 	<!--

@@ -604,6 +604,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='noTrueChildStrategy']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="NoTrueChildStrategyType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='splitCharacteristic']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="SplitCharacteristic"
@@ -2670,6 +2679,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='noTrueChildStrategy']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="NoTrueChildStrategyType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='splitCharacteristic']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="SplitCharacteristic"
@@ -2944,15 +2962,6 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='NN-NORMALIZATION-METHOD']">
 			<jaxb:typesafeEnumClass
 				name="NnNormalizationMethodType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='NO-TRUE-CHILD-STRATEGY']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="NoTrueChildStrategyType"
 			/>
 		</jaxb:bindings>
 
