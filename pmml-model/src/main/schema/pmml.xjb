@@ -2524,6 +2524,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:attribute[@name='usage']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="UsageType"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:sequence/xsd:element[@ref='TimeException']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_4_1"/>
@@ -3061,15 +3070,6 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<jaxb:typesafeEnumClass
 				name="TimeSeriesAlgorithmType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='TIMESERIES-USAGE']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="TimeSeriesUsageType"
 			/>
 		</jaxb:bindings>
 

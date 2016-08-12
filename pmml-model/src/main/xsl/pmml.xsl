@@ -273,7 +273,13 @@ Copyright (c) 2009 University of Tartu
 		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='INTERPOLATION-METHOD']">
+	<xsl:template match="xs:element[@name='TimeSeries']/xs:complexType/xs:attribute[@name='usage']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">TIMESERIES-USAGE</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='INTERPOLATION-METHOD' or @name='TIMESERIES-USAGE']">
 	</xsl:template>
 
 	<!--
