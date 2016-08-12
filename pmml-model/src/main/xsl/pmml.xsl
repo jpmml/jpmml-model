@@ -331,6 +331,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline TreeModel and DecisionTree shared enum types
+	-->
+	<xsl:template match="xs:element[@name='TreeModel' or @name='DecisionTree']/xs:complexType/xs:attribute[@name='missingValueStrategy']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">MISSING-VALUE-STRATEGY</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='MISSING-VALUE-STRATEGY']">
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">
