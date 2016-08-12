@@ -211,6 +211,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline NeuralNetwork and NeuralLayer shared enum types
+	-->
+	<xsl:template match="xs:element[@name='NeuralNetwork' or @name='NeuralLayer']/xs:complexType/xs:attribute[@name='activationFunction']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">ACTIVATION-FUNCTION</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='ACTIVATION-FUNCTION']">
+	</xsl:template>
+
+	<!--
 	Inline OutputField enum types
 	-->
 	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='ruleFeature']">

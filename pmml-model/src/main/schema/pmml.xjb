@@ -1341,6 +1341,18 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='activationFunction']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="ActivationFunctionType"
+			/>
+		</jaxb:bindings>
+		
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='activationFunction']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='rectifier']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='isScorable']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -2929,18 +2941,6 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:property
 				name="predicate"
 			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='ACTIVATION-FUNCTION']">
-			<jaxb:typesafeEnumClass
-				name="ActivationFunctionType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='ACTIVATION-FUNCTION']/xsd:restriction/xsd:enumeration[@value='rectifier']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
-			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='COMPARE-FUNCTION']">
