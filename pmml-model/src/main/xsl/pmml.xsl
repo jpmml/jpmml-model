@@ -24,6 +24,18 @@ Copyright (c) 2009 University of Tartu
 		<xsl:comment> &lt;xs:element ref=&quot;Extension&quot; minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;/&gt; </xsl:comment>
 	</xsl:template>
 
+	<xsl:template name="inline-enum">
+		<xsl:param
+			name="name"
+		/>
+		<xsl:copy>
+			<xsl:apply-templates select="@*[name() != 'type']"/>
+			<xs:simpleType>
+				<xsl:copy-of select="//xs:simpleType[@name=$name]/node()"/>
+			</xs:simpleType>
+		</xsl:copy>
+	</xsl:template>
+
 	<xsl:template match="xs:schema">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
@@ -136,21 +148,15 @@ Copyright (c) 2009 University of Tartu
 	Inline GeneralRegressionModel enum types
 	-->
 	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='cumulativeLink']">
-		<xsl:copy>
-			<xsl:apply-templates select="@*[name() != 'type']"/>
-			<xs:simpleType>
-				<xsl:copy-of select="//xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION']/node()"/>
-			</xs:simpleType>
-		</xsl:copy>
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">CUMULATIVE-LINK-FUNCTION</xsl:with-param>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='linkFunction']">
-		<xsl:copy>
-			<xsl:apply-templates select="@*[name() != 'type']"/>
-			<xs:simpleType>
-				<xsl:copy-of select="//xs:simpleType[@name='LINK-FUNCTION']/node()"/>
-			</xs:simpleType>
-		</xsl:copy>
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">LINK-FUNCTION</xsl:with-param>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template match="xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION' or @name='LINK-FUNCTION']">
@@ -160,12 +166,9 @@ Copyright (c) 2009 University of Tartu
 	Inline MiningField enum types
 	-->
 	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='usageType']">
-		<xsl:copy>
-			<xsl:apply-templates select="@*[name() != 'type']"/>
-			<xs:simpleType>
-				<xsl:copy-of select="//xs:simpleType[@name='FIELD-USAGE-TYPE']/node()"/>
-			</xs:simpleType>
-		</xsl:copy>
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">FIELD-USAGE-TYPE</xsl:with-param>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template match="xs:simpleType[@name='FIELD-USAGE-TYPE']">
@@ -175,12 +178,9 @@ Copyright (c) 2009 University of Tartu
 	Inline OutputField enum types
 	-->
 	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='ruleFeature']">
-		<xsl:copy>
-			<xsl:apply-templates select="@*[name() != 'type']"/>
-			<xs:simpleType>
-				<xsl:copy-of select="//xs:simpleType[@name='RULE-FEATURE']/node()"/>
-			</xs:simpleType>
-		</xsl:copy>
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">RULE-FEATURE</xsl:with-param>
+		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template match="xs:simpleType[@name='RULE-FEATURE']">
