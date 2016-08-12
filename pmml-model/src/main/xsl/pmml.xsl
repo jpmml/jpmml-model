@@ -223,6 +223,18 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline RegressionModel and Regression shared enum types
+	-->
+	<xsl:template match="xs:element[@name='RegressionModel' or @name='Regression']/xs:complexType/xs:attribute[@name='normalizationMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">REGRESSIONNORMALIZATIONMETHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='REGRESSIONNORMALIZATIONMETHOD']">
+	</xsl:template>
+
+	<!--
 	Inline Segmentation enum types
 	-->
 	<xsl:template match="xs:element[@name='Segmentation']/xs:complexType/xs:attribute[@name='multipleModelMethod']">
