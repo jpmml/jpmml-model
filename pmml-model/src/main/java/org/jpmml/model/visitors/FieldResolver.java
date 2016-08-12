@@ -22,7 +22,6 @@ import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Model;
-import org.dmg.pmml.MultipleModelMethodType;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
@@ -227,7 +226,7 @@ public class FieldResolver extends AbstractModelVisitor {
 	private List<Output> getEarlierOutputs(Segmentation segmentation, Segment targetSegment){
 		List<Output> result = new ArrayList<>();
 
-		MultipleModelMethodType multipleModelMethod = segmentation.getMultipleModelMethod();
+		Segmentation.MultipleModelMethodType multipleModelMethod = segmentation.getMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
 				break;

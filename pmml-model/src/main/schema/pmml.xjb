@@ -1983,6 +1983,21 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumClass
+				name="MultipleModelMethodType"
+			/>
+		</jaxb:bindings>
+		
+		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='modelChain']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
+			</annox:annotate>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:sequence/xsd:element[@ref='LocalTransformations']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_4_1"/>
@@ -2864,21 +2879,6 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="MissingValueTreatmentMethodType"
 			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='MULTIPLE-MODEL-METHOD']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
-			</annox:annotate>
-			<jaxb:typesafeEnumClass
-				name="MultipleModelMethodType"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:simpleType[@name='MULTIPLE-MODEL-METHOD']/xsd:restriction/xsd:enumeration[@value='modelChain']">
-			<annox:annotate>
-				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
-			</annox:annotate>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='NN-NORMALIZATION-METHOD']">

@@ -12,7 +12,6 @@ import org.dmg.pmml.FieldName;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
-import org.dmg.pmml.MultipleModelMethodType;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
@@ -60,7 +59,7 @@ public class DeepFieldResolverUtil {
 			activeFields.removeAll(output.getOutputFields());
 		}
 
-		MultipleModelMethodType multipleModelMethod = segmentation.getMultipleModelMethod();
+		Segmentation.MultipleModelMethodType multipleModelMethod = segmentation.getMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
 				Set<Field> segmentationFields = resolver.getFields(miningModel, segmentation);
