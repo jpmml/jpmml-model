@@ -10,7 +10,6 @@ import org.dmg.pmml.Aggregate;
 import org.dmg.pmml.BayesInput;
 import org.dmg.pmml.BlockIndicator;
 import org.dmg.pmml.CategoricalPredictor;
-import org.dmg.pmml.ClusteringField;
 import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
@@ -37,6 +36,7 @@ import org.dmg.pmml.baseline.TestDistributions;
 import org.dmg.pmml.bayesian_network.ContinuousNode;
 import org.dmg.pmml.bayesian_network.DiscreteNode;
 import org.dmg.pmml.bayesian_network.ParentValue;
+import org.dmg.pmml.clustering.ClusteringField;
 
 /**
  * <p>

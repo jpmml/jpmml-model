@@ -298,6 +298,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Removed" value="PMML_3_2"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Characteristic']/xsd:complexType">
@@ -346,6 +349,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType/xsd:attribute[@name='id']">
@@ -356,6 +362,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.ComparisonField</inheritance:extends>
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringField']/xsd:complexType/xsd:attribute[@name='isCenterField']">
@@ -378,6 +387,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -425,6 +437,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='ComparisonMeasure']/xsd:complexType/xsd:attribute[@name='kind']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Kind"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Comparisons']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="clustering"
 			/>
 		</jaxb:bindings>
 
@@ -542,6 +560,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Covariances']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CovariateList']/xsd:complexType">
@@ -1119,6 +1143,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='KohonenMap']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
@@ -1318,6 +1348,12 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='minkowski']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='MissingValueWeights']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="clustering"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ModelExplanation']/xsd:complexType">
