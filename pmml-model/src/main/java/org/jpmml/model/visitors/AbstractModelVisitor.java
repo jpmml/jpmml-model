@@ -5,7 +5,6 @@ package org.jpmml.model.visitors;
 
 import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
-import org.dmg.pmml.NaiveBayesModel;
 import org.dmg.pmml.NearestNeighborModel;
 import org.dmg.pmml.NeuralNetwork;
 import org.dmg.pmml.RegressionModel;
@@ -23,6 +22,7 @@ import org.dmg.pmml.bayesian_network.BayesianNetworkModel;
 import org.dmg.pmml.clustering.ClusteringModel;
 import org.dmg.pmml.gaussian_process.GaussianProcessModel;
 import org.dmg.pmml.general_regression.GeneralRegressionModel;
+import org.dmg.pmml.naive_bayes.NaiveBayesModel;
 
 abstract
 public class AbstractModelVisitor extends AbstractVisitor {

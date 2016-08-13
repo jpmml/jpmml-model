@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.dmg.pmml.Aggregate;
-import org.dmg.pmml.BayesInput;
 import org.dmg.pmml.BlockIndicator;
 import org.dmg.pmml.CategoricalPredictor;
 import org.dmg.pmml.Discretize;
@@ -37,6 +36,7 @@ import org.dmg.pmml.clustering.ClusteringField;
 import org.dmg.pmml.general_regression.GeneralRegressionModel;
 import org.dmg.pmml.general_regression.PPCell;
 import org.dmg.pmml.general_regression.Predictor;
+import org.dmg.pmml.naive_bayes.BayesInput;
 
 /**
  * <p>

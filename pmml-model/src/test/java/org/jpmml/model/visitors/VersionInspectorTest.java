@@ -11,7 +11,6 @@ import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
-import org.dmg.pmml.NaiveBayesModel;
 import org.dmg.pmml.NearestNeighborModel;
 import org.dmg.pmml.NeuralNetwork;
 import org.dmg.pmml.OpType;
@@ -38,6 +37,7 @@ import org.dmg.pmml.gaussian_process.GaussianProcessModel;
 import org.dmg.pmml.general_regression.GeneralRegressionModel;
 import org.dmg.pmml.general_regression.PPCell;
 import org.dmg.pmml.general_regression.PPMatrix;
+import org.dmg.pmml.naive_bayes.NaiveBayesModel;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 

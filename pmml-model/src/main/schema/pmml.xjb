@@ -264,10 +264,28 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='TargetValueStats']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_2"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BayesInputs']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BayesOutput']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='binarySimilarity']/xsd:complexType">
@@ -1436,6 +1454,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -1759,6 +1780,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='PairCounts']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Parameter']/xsd:complexType">
@@ -2648,16 +2675,34 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TargetValueCount']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TargetValueCounts']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TargetValueStat']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_2"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValueStats']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_2"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="naive_bayes"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType">
