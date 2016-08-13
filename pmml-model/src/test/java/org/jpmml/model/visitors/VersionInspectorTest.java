@@ -6,7 +6,6 @@ package org.jpmml.model.visitors;
 import java.util.Arrays;
 
 import org.dmg.pmml.Apply;
-import org.dmg.pmml.BayesianNetworkModel;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
@@ -38,6 +37,7 @@ import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.association.AssociationModel;
 import org.dmg.pmml.baseline.BaselineModel;
+import org.dmg.pmml.bayesian_network.BayesianNetworkModel;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 

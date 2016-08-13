@@ -235,12 +235,18 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkNodes']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='TargetValueStats']">
@@ -482,6 +488,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousDistribution']/xsd:complexType">
@@ -491,12 +500,18 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:class
 				name="ContinuousDistributionForBN"
 			/>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousNode']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CorrelationFields']/xsd:complexType">
@@ -702,12 +717,18 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DiscreteNode']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType">
@@ -1152,12 +1173,18 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Lower']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType">
@@ -1192,6 +1219,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType">
@@ -1454,6 +1484,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType">
@@ -1692,6 +1725,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType/xsd:attribute[@name='weighted']">
@@ -2830,6 +2866,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='True']/xsd:complexType">
@@ -2847,6 +2886,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType/xsd:attribute[@name='weighted']">
@@ -2883,6 +2925,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Value']/xsd:complexType">
@@ -2899,12 +2944,18 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Variance']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="bayesian_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorFields']">

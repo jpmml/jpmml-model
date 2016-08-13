@@ -11,8 +11,6 @@ import org.dmg.pmml.BayesInput;
 import org.dmg.pmml.BlockIndicator;
 import org.dmg.pmml.CategoricalPredictor;
 import org.dmg.pmml.ClusteringField;
-import org.dmg.pmml.ContinuousNode;
-import org.dmg.pmml.DiscreteNode;
 import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
@@ -24,7 +22,6 @@ import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.NumericPredictor;
 import org.dmg.pmml.PPCell;
-import org.dmg.pmml.ParentValue;
 import org.dmg.pmml.Predictor;
 import org.dmg.pmml.PredictorTerm;
 import org.dmg.pmml.SetPredicate;
@@ -37,6 +34,9 @@ import org.dmg.pmml.association.Item;
 import org.dmg.pmml.baseline.FieldValue;
 import org.dmg.pmml.baseline.FieldValueCount;
 import org.dmg.pmml.baseline.TestDistributions;
+import org.dmg.pmml.bayesian_network.ContinuousNode;
+import org.dmg.pmml.bayesian_network.DiscreteNode;
+import org.dmg.pmml.bayesian_network.ParentValue;
 
 /**
  * <p>
