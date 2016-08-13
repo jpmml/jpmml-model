@@ -75,8 +75,8 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 
-		JClass activationFunctionTypeEnum = codeModel.directClass("org.dmg.pmml.NeuralNetwork.ActivationFunctionType");
-		JClass normalizationMethodTypeEnum = codeModel.directClass("org.dmg.pmml.NeuralNetwork.NormalizationMethodType");
+		JClass activationFunctionTypeEnum = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.ActivationFunctionType");
+		JClass normalizationMethodTypeEnum = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.NormalizationMethodType");
 
 		Comparator<CPropertyInfo> comparator = new Comparator<CPropertyInfo>(){
 

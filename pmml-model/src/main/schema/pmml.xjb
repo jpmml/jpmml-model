@@ -517,6 +517,9 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:class
 				name="Connection"
 			/>
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ConfusionMatrix']/xsd:complexType">
@@ -1519,6 +1522,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='activationFunction']/xsd:simpleType">
@@ -1553,10 +1559,40 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralInput']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralInputs']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralOutput']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralOutputs']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Neuron']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Neuron']/xsd:complexType/xsd:sequence/xsd:element[@ref='Con']">
