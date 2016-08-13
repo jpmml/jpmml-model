@@ -11,7 +11,6 @@ import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
-import org.dmg.pmml.NearestNeighborModel;
 import org.dmg.pmml.NeuralNetwork;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.Output;
@@ -38,6 +37,7 @@ import org.dmg.pmml.general_regression.GeneralRegressionModel;
 import org.dmg.pmml.general_regression.PPCell;
 import org.dmg.pmml.general_regression.PPMatrix;
 import org.dmg.pmml.naive_bayes.NaiveBayesModel;
+import org.dmg.pmml.nearest_neighbor.NearestNeighborModel;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 

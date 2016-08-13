@@ -13,7 +13,6 @@ import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldRef;
-import org.dmg.pmml.KNNInput;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
@@ -37,6 +36,7 @@ import org.dmg.pmml.general_regression.GeneralRegressionModel;
 import org.dmg.pmml.general_regression.PPCell;
 import org.dmg.pmml.general_regression.Predictor;
 import org.dmg.pmml.naive_bayes.BayesInput;
+import org.dmg.pmml.nearest_neighbor.KNNInput;
 
 /**
  * <p>

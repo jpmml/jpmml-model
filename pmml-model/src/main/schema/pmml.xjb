@@ -1122,12 +1122,18 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="nearest_neighbor"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='InstanceFields']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="nearest_neighbor"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='INT-SparseArray']">
@@ -1192,12 +1198,18 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.ComparisonField</inheritance:extends>
+			<jpmml-model:subpackage
+				name="nearest_neighbor"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='KNNInputs']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="nearest_neighbor"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='KohonenMap']/xsd:complexType">
@@ -1476,6 +1488,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="nearest_neighbor"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='categoricalScoringMethod']/xsd:simpleType">
@@ -2928,6 +2943,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="nearest_neighbor"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TrainingInstances']/xsd:complexType/xsd:attribute[@name='isTransformed']">
