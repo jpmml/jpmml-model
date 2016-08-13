@@ -10,7 +10,6 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.FieldName;
-import org.dmg.pmml.GaussianProcessModel;
 import org.dmg.pmml.GeneralRegressionModel;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.NaiveBayesModel;
@@ -38,6 +37,7 @@ import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.association.AssociationModel;
 import org.dmg.pmml.baseline.BaselineModel;
 import org.dmg.pmml.bayesian_network.BayesianNetworkModel;
+import org.dmg.pmml.gaussian_process.GaussianProcessModel;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 
