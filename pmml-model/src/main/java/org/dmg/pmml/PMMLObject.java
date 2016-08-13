@@ -31,7 +31,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
-	VisitorAction traverse(Visitor visitor, Visitable first){
+	protected VisitorAction traverse(Visitor visitor, Visitable first){
 
 		if(first != null){
 			return first.accept(visitor);
@@ -41,7 +41,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
-	VisitorAction traverse(Visitor visitor, Visitable first, Visitable second){
+	protected VisitorAction traverse(Visitor visitor, Visitable first, Visitable second){
 
 		if(first != null){
 			VisitorAction status = first.accept(visitor);
@@ -59,7 +59,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
-	VisitorAction traverse(Visitor visitor, Visitable... objects){
+	protected VisitorAction traverse(Visitor visitor, Visitable... objects){
 
 		for(int i = 0, max = objects.length; i < max; i++){
 			Visitable visitable = objects[i];
@@ -77,7 +77,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
-	VisitorAction traverse(Visitor visitor, List<? extends Visitable> objects){
+	protected VisitorAction traverse(Visitor visitor, List<? extends Visitable> objects){
 
 		for(int i = 0, max = objects.size(); i < max; i++){
 			Visitable visitable = objects.get(i);
@@ -95,7 +95,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	}
 
 	static
-	VisitorAction traverseMixed(Visitor visitor, List<?> objects){
+	protected VisitorAction traverseMixed(Visitor visitor, List<?> objects){
 
 		for(int i = 0, max = objects.size(); i < max; i++){
 			Object object = objects.get(i);

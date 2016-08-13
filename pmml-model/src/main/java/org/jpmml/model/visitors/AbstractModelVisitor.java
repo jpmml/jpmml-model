@@ -3,7 +3,6 @@
  */
 package org.jpmml.model.visitors;
 
-import org.dmg.pmml.AssociationModel;
 import org.dmg.pmml.BaselineModel;
 import org.dmg.pmml.BayesianNetworkModel;
 import org.dmg.pmml.ClusteringModel;
@@ -23,6 +22,7 @@ import org.dmg.pmml.TextModel;
 import org.dmg.pmml.TimeSeriesModel;
 import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.association.AssociationModel;
 
 abstract
 public class AbstractModelVisitor extends AbstractVisitor {

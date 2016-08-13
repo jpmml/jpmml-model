@@ -4,6 +4,7 @@
 package org.jpmml.xjc;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.namespace.QName;
 
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
@@ -26,23 +28,29 @@ import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
+import com.sun.codemodel.JPackage;
 import com.sun.codemodel.JStringLiteral;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
-import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CClassInfo;
+import com.sun.tools.xjc.model.CClassInfoParent;
 import com.sun.tools.xjc.model.CDefaultValue;
+import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.Model;
+import com.sun.tools.xjc.model.nav.NClass;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
+import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
+import org.jvnet.jaxb2_commons.util.CustomizationUtils;
+import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 
-public class PMMLPlugin extends Plugin {
+public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 	@Override
 	public String getOptionName(){
@@ -52,6 +60,11 @@ public class PMMLPlugin extends Plugin {
 	@Override
 	public String getUsage(){
 		return null;
+	}
+
+	@Override
+	public Collection<QName> getCustomizationElementNames(){
+		return Arrays.asList(PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
 	}
 
 	@Override
@@ -84,8 +97,34 @@ public class PMMLPlugin extends Plugin {
 			}
 		};
 
-		Collection<CClassInfo> classInfos = (model.beans()).values();
+		Map<NClass, CClassInfo> beans = model.beans();
+
+		Collection<CClassInfo> classInfos = beans.values();
 		for(CClassInfo classInfo : classInfos){
+			CPluginCustomization subpackageCustomization = CustomizationUtils.findCustomization(classInfo, PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
+
+			if(subpackageCustomization != null){
+				CClassInfoParent.Package packageParent = (CClassInfoParent.Package)classInfo.parent();
+
+				Element element = subpackageCustomization.element;
+
+				String name = element.getAttribute("name");
+				if(name == null){
+					throw new RuntimeException();
+				}
+
+				try {
+					Field field = CClassInfoParent.Package.class.getDeclaredField("pkg");
+					field.setAccessible(true);
+
+					JPackage subPackage = packageParent.pkg.subPackage(name);
+
+					field.set(packageParent, subPackage);
+				} catch(ReflectiveOperationException roe){
+					throw new RuntimeException(roe);
+				}
+			}
+
 			List<CPropertyInfo> propertyInfos = classInfo.getProperties();
 			Collections.sort(propertyInfos, comparator);
 
@@ -208,7 +247,7 @@ public class PMMLPlugin extends Plugin {
 				keyMethod.body()._return(JExpr.invoke("getField"));
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.Item") || checkType(beanClazz, "org.dmg.pmml.Itemset") || checkType(beanClazz, "org.dmg.pmml.Sequence") || checkType(beanClazz, "org.dmg.pmml.TextDocument") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
+			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.Sequence") || checkType(beanClazz, "org.dmg.pmml.TextDocument") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getId"));
@@ -503,4 +542,6 @@ public class PMMLPlugin extends Plugin {
 			return sb.toString();
 		}
 	}
+
+	public static QName SUBPACKAGE_ELEMENT_NAME = new QName("http://jpmml.org/jpmml-model", "subpackage");
 }

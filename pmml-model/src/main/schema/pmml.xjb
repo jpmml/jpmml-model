@@ -2,7 +2,7 @@
 <!--
 Copyright (c) 2009 University of Tartu
 -->
-<jaxb:bindings targetNamespace="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wildcard="http://jaxb2-commons.dev.java.net/basic/wildcard" jaxb:extensionBindingPrefixes="annox inheritance xjc wildcard" jaxb:version="2.0">
+<jaxb:bindings targetNamespace="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:jpmml-model="http://jpmml.org/jpmml-model" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wildcard="http://jaxb2-commons.dev.java.net/basic/wildcard" jaxb:extensionBindingPrefixes="annox inheritance jpmml-model xjc wildcard" jaxb:version="2.0">
 
 	<jaxb:bindings schemaLocation="pmml.xsd" node="/xsd:schema">
 
@@ -120,6 +120,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="association"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -142,6 +145,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<jpmml-model:subpackage
+				name="association"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType/xsd:attribute[@name='affinity']">
@@ -1026,6 +1032,9 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="association"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType/xsd:attribute[@name='category']">
@@ -1040,9 +1049,18 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ItemRef']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="association"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Itemset']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="association"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='jaccard']/xsd:complexType">

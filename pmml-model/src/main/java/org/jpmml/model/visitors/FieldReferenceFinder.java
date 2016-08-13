@@ -20,7 +20,6 @@ import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.FieldValue;
 import org.dmg.pmml.FieldValueCount;
 import org.dmg.pmml.GeneralRegressionModel;
-import org.dmg.pmml.Item;
 import org.dmg.pmml.KNNInput;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
@@ -37,6 +36,7 @@ import org.dmg.pmml.TestDistributions;
 import org.dmg.pmml.TextIndex;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.association.Item;
 
 /**
  * <p>
