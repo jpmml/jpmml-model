@@ -14,14 +14,11 @@ import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldRef;
-import org.dmg.pmml.GeneralRegressionModel;
 import org.dmg.pmml.KNNInput;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.NumericPredictor;
-import org.dmg.pmml.PPCell;
-import org.dmg.pmml.Predictor;
 import org.dmg.pmml.PredictorTerm;
 import org.dmg.pmml.SetPredicate;
 import org.dmg.pmml.SimplePredicate;
@@ -37,6 +34,9 @@ import org.dmg.pmml.bayesian_network.ContinuousNode;
 import org.dmg.pmml.bayesian_network.DiscreteNode;
 import org.dmg.pmml.bayesian_network.ParentValue;
 import org.dmg.pmml.clustering.ClusteringField;
+import org.dmg.pmml.general_regression.GeneralRegressionModel;
+import org.dmg.pmml.general_regression.PPCell;
+import org.dmg.pmml.general_regression.Predictor;
 
 /**
  * <p>

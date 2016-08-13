@@ -222,14 +222,14 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				fieldMethod.body()._return(JExpr.invoke("getName"));
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.PPCell")){
+			if(checkType(beanClazz, "org.dmg.pmml.general_regression.PPCell")){
 				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				fieldMethod.annotate(Override.class);
 				fieldMethod.body()._return(JExpr.invoke("getPredictorName"));
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable
-			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.Parameter")){
+			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.general_regression.Parameter")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getName"));

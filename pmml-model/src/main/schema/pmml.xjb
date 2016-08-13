@@ -197,6 +197,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Baseline']/xsd:complexType">
@@ -212,6 +215,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType">
@@ -234,6 +240,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType">
@@ -287,6 +296,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CategoricalPredictor']/xsd:complexType">
@@ -298,6 +310,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CenterFields']/xsd:complexType">
@@ -575,7 +590,10 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CovariateList']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.PredictorList</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.general_regression.PredictorList</inheritance:extends>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType">
@@ -785,6 +803,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType">
@@ -801,7 +822,10 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FactorList']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.PredictorList</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.general_regression.PredictorList</inheritance:extends>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='False']/xsd:complexType">
@@ -866,6 +890,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='baselineStrataVariable']">
@@ -1736,6 +1763,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Parameter']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Parameter']/xsd:complexType/xsd:attribute[@name='referencePoint']">
@@ -1760,10 +1790,22 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ParameterList']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='ParameterList']/xsd:complexType/xsd:sequence/xsd:element[@ref='Parameter']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Optional" value="PMML_4_0"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ParamMatrix']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParamMatrix']/xsd:complexType/xsd:sequence/xsd:element[@ref='PCell']">
@@ -1806,7 +1848,22 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PCell']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.ParameterCell</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.general_regression.ParameterCell</inheritance:extends>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='PCovCell']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='PCovMatrix']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PCovMatrix']/xsd:complexType/xsd:attribute[@name='type']">
@@ -1845,8 +1902,17 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PPCell']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.ParameterCell</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.general_regression.ParameterCell</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasValue</inheritance:implements>
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='PPMatrix']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PPMatrix']/xsd:complexType/xsd:sequence/xsd:element[@ref='PPCell']">
@@ -1937,6 +2003,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="general_regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:attribute[@name='contrastMatrixType']">
