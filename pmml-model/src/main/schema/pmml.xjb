@@ -22,6 +22,9 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:class
 				name="CountTable"
 			/>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AbsoluteExponentialKernel']/xsd:complexType">
@@ -44,6 +47,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Anova']/xsd:complexType">
@@ -191,6 +197,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineCell']/xsd:complexType">
@@ -204,6 +213,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -760,6 +772,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:implements>org.dmg.pmml.HasValue</inheritance:implements>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FieldValueCount']/xsd:complexType">
@@ -767,6 +782,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:implements>org.dmg.pmml.HasValue</inheritance:implements>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GaussianDistribution']/xsd:complexType">
@@ -2484,6 +2502,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="baseline"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType/xsd:attribute[@name='testStatistic']/xsd:simpleType">
