@@ -3,7 +3,6 @@
  */
 package org.jpmml.model.visitors;
 
-import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.association.AssociationModel;
@@ -12,6 +11,7 @@ import org.dmg.pmml.bayesian_network.BayesianNetworkModel;
 import org.dmg.pmml.clustering.ClusteringModel;
 import org.dmg.pmml.gaussian_process.GaussianProcessModel;
 import org.dmg.pmml.general_regression.GeneralRegressionModel;
+import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.naive_bayes.NaiveBayesModel;
 import org.dmg.pmml.nearest_neighbor.NearestNeighborModel;
 import org.dmg.pmml.neural_network.NeuralNetwork;

@@ -1403,6 +1403,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="mining"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -2482,12 +2485,18 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasPredicate</inheritance:implements>
+			<jpmml-model:subpackage
+				name="mining"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="mining"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType">

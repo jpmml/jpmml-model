@@ -5,9 +5,9 @@ package org.jpmml.model;
 
 import java.util.List;
 
-import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.mining.MiningModel;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

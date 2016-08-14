@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.dmg.pmml.Field;
-import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Visitable;
+import org.dmg.pmml.mining.MiningModel;
 
 abstract
 class ModelCleaner extends DeepFieldResolver {

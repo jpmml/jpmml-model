@@ -9,12 +9,12 @@ import java.util.Set;
 
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.MiningField;
-import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.PMML;
-import org.dmg.pmml.Segment;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.mining.MiningModel;
+import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.regression.RegressionModel;
 import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
