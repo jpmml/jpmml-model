@@ -47,7 +47,7 @@ The class model consists of two types of classes. There is a small number of man
 
 All class model classes descend from class `org.dmg.pmml.PMMLObject`. Additional class hierarchy levels, if any, represent common behaviour and/or features. For example, all model classes descend from class `org.dmg.pmml.Model`.
 
-The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification] (http://www.dmg.org/v4-2-1/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
+The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification] (http://dmg.org/pmml/v4-3/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
 
 ### Unmarshalling ###
 
@@ -104,6 +104,11 @@ java -javaagent:../pmml-agent/target/pmml-agent-1.3-SNAPSHOT.jar -cp target/exam
 Checking the validity of `model.pmml`:
 ```
 java -cp target/example-1.3-SNAPSHOT.jar org.jpmml.model.ValidationExample --input model.pmml
+```
+
+Getting help:
+```
+java -cp target/example-1.3-SNAPSHOT.jar <application class name> --help
 ```
 
 It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `javax.xml.bind.context.factory` system property. Use `com.sun.xml.bind.v2.ContextFactory` for activating a GlassFish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
