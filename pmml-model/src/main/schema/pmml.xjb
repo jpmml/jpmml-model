@@ -485,6 +485,18 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Coefficient']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Coefficients']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='ComparisonMeasure']/xsd:complexType/xsd:sequence/xsd:choice">
 			<jaxb:property
 				name="measure"
@@ -1307,9 +1319,12 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='LinearKernelType']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Kernel</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.support_vector_machine.Kernel</inheritance:extends>
 			<jaxb:class
 				name="LinearKernel"
+			/>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
 			/>
 		</jaxb:bindings>
 
@@ -1766,7 +1781,7 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:property
 				name="resultFeature"
 				/>
-			</jaxb:bindings>
+		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']">
 			<annox:annotate>
@@ -2015,9 +2030,12 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PolynomialKernelType']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Kernel</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.support_vector_machine.Kernel</inheritance:extends>
 			<jaxb:class
 				name="PolynomialKernel"
+			/>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
 			/>
 		</jaxb:bindings>
 
@@ -2172,9 +2190,12 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RadialBasisKernelType']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Kernel</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.support_vector_machine.Kernel</inheritance:extends>
 			<jaxb:class
-				name="RadialBasisFunctionKernel"
+				name="RadialBasisKernel"
+			/>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
 			/>
 		</jaxb:bindings>
 
@@ -2317,8 +2338,8 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='optype']">
 			<jaxb:property
 				name="opType"
-				/>
-			</jaxb:bindings>
+			/>
+		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ROC']/xsd:complexType">
 			<annox:annotate>
@@ -2617,9 +2638,12 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SigmoidKernelType']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Kernel</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.support_vector_machine.Kernel</inheritance:extends>
 			<jaxb:class
 				name="SigmoidKernel"
+			/>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
 			/>
 		</jaxb:bindings>
 
@@ -2668,6 +2692,18 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.TimeSeriesAlgorithm</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SupportVector']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='alternateTargetCategory']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -2688,6 +2724,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='alternateBinaryTargetCategory']">
@@ -2758,6 +2797,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Required" value="PMML_3_1"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SupportVectors']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='tanimoto']/xsd:complexType">
@@ -3291,6 +3336,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorFields']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
@@ -3307,11 +3358,17 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorInstance']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="support_vector_machine"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorInstance']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='REAL-SparseArray']">
