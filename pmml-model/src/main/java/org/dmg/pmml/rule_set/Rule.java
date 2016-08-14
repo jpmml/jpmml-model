@@ -1,9 +1,12 @@
 /*
  * Copyright (c) 2009 University of Tartu
  */
-package org.dmg.pmml;
+package org.dmg.pmml.rule_set;
 
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.dmg.pmml.Entity;
+import org.dmg.pmml.Predicate;
 
 @XmlTransient
 abstract

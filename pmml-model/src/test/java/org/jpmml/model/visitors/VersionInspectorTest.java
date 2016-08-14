@@ -17,7 +17,6 @@ import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ParameterField;
-import org.dmg.pmml.RuleSetModel;
 import org.dmg.pmml.Scorecard;
 import org.dmg.pmml.SequenceModel;
 import org.dmg.pmml.Target;
@@ -38,6 +37,7 @@ import org.dmg.pmml.naive_bayes.NaiveBayesModel;
 import org.dmg.pmml.nearest_neighbor.NearestNeighborModel;
 import org.dmg.pmml.neural_network.NeuralNetwork;
 import org.dmg.pmml.regression.RegressionModel;
+import org.dmg.pmml.rule_set.RuleSetModel;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 

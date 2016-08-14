@@ -512,8 +512,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CompoundRule']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Rule</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.rule_set.Rule</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasPredicate</inheritance:implements>
+			<jpmml-model:subpackage
+				name="rule_set"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Con']">
@@ -2296,14 +2299,29 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='RuleSelectionMethod']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="rule_set"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RuleSelectionMethod']/xsd:complexType/xsd:attribute[@name='criterion']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Criterion"
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='RuleSet']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="rule_set"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="rule_set"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -2561,8 +2579,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleRule']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Rule</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.rule_set.Rule</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasPredicate</inheritance:implements>
+			<jpmml-model:subpackage
+				name="rule_set"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleSetPredicate']/xsd:complexType">
