@@ -606,7 +606,7 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
 			<jaxb:class
-				name="ContinuousDistributionForBN"
+				name="ContinuousDistribution"
 			/>
 			<jpmml-model:subpackage
 				name="bayesian_network"
@@ -1350,6 +1350,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jaxb:class
+				name="LognormalDistribution"
+			/>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -1712,6 +1715,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jaxb:class
+				name="NormalDistribution"
+			/>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -3337,6 +3343,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jaxb:class
+				name="TriangularDistribution"
+			/>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -3357,6 +3366,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
 			</annox:annotate>
+			<jaxb:class
+				name="UniformDistribution"
+			/>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
