@@ -867,6 +867,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DocumentTermMatrix']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="text"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='euclidean']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
 		</jaxb:bindings>
@@ -2921,9 +2927,24 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TextCorpus']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="text"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextDictionary']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="text"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TextDocument']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="text"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType">
@@ -2957,6 +2978,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Deprecated" value="PMML_4_2"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="text"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -2969,6 +2993,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextModelNormalization']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="text"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModelNormalization']/xsd:complexType/xsd:attribute[@name='documentNormalization']/xsd:simpleType">
@@ -2986,6 +3016,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='TextModelNormalization']/xsd:complexType/xsd:attribute[@name='localTermWeights']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="LocalTermWeights"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextModelSimiliarity']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="text"
 			/>
 		</jaxb:bindings>
 
