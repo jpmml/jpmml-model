@@ -216,16 +216,16 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			JDefinedClass beanClazz = clazz.implClass;
 
 			// Implementations of org.dmg.pmml.HasValue
-			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor")){
-				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
-				fieldMethod.annotate(Override.class);
-				fieldMethod.body()._return(JExpr.invoke("getName"));
-			} else
-
 			if(checkType(beanClazz, "org.dmg.pmml.general_regression.PPCell")){
 				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				fieldMethod.annotate(Override.class);
 				fieldMethod.body()._return(JExpr.invoke("getPredictorName"));
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor")){
+				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
+				fieldMethod.annotate(Override.class);
+				fieldMethod.body()._return(JExpr.invoke("getName"));
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable
@@ -241,22 +241,22 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				keyMethod.body()._return(JExpr.invoke("getName"));
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField") || checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField")){
+			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getField"));
-			} else
-
-			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance")){
-				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
-				keyMethod.annotate(Override.class);
-				keyMethod.body()._return(JExpr.invoke("getId"));
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Value")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getValue"));
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){
+				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
+				keyMethod.annotate(Override.class);
+				keyMethod.body()._return(JExpr.invoke("getId"));
 			} // End if
 
 			if(checkType(beanClazz, "org.dmg.pmml.tree.Node")){
