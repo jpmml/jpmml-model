@@ -15,7 +15,6 @@ import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
-import org.dmg.pmml.SetPredicate;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimpleSetPredicate;
 import org.dmg.pmml.TextIndex;
@@ -37,6 +36,7 @@ import org.dmg.pmml.nearest_neighbor.KNNInput;
 import org.dmg.pmml.regression.CategoricalPredictor;
 import org.dmg.pmml.regression.NumericPredictor;
 import org.dmg.pmml.regression.PredictorTerm;
+import org.dmg.pmml.sequence.SetPredicate;
 
 /**
  * <p>

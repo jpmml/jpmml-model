@@ -247,7 +247,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				keyMethod.body()._return(JExpr.invoke("getField"));
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.Sequence") || checkType(beanClazz, "org.dmg.pmml.TextDocument") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
+			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.TextDocument") || checkType(beanClazz, "org.dmg.pmml.VectorInstance")){
 				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
 				keyMethod.annotate(Override.class);
 				keyMethod.body()._return(JExpr.invoke("getId"));

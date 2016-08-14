@@ -73,6 +73,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='AntecedentSequence']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='AnyDistribution']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -546,6 +552,12 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ConsequentSequence']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Constant']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 		</jaxb:bindings>
@@ -560,6 +572,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousConditionalProbability']/xsd:complexType">
@@ -765,6 +780,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:attribute[@name='optype']">
 			<jaxb:property
 				name="opType"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Delimiter']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="sequence"
 			/>
 		</jaxb:bindings>
 
@@ -2445,6 +2466,9 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Sequence']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Sequence']/xsd:complexType/xsd:sequence/xsd:element[@ref='Time']">
@@ -2455,6 +2479,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='avgNumberOfTAsPerTAGroup']">
@@ -2547,8 +2574,17 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SequenceReference']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SequenceRule']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceRule']/xsd:complexType/xsd:attribute[@name='lift']">
@@ -2563,11 +2599,20 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<inheritance:implements>org.dmg.pmml.HasId</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet</inheritance:implements>
+			<jpmml-model:subpackage
+				name="sequence"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SetPredicate']/xsd:complexType/xsd:attribute[@name='operator']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Operator"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SetReference']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="sequence"
 			/>
 		</jaxb:bindings>
 
@@ -2902,6 +2947,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='TextModelSimiliarity']/xsd:complexType/xsd:attribute[@name='similarityType']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="SimilarityType"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Time']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="sequence"
 			/>
 		</jaxb:bindings>
 
