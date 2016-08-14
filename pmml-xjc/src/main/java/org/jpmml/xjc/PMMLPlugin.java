@@ -259,7 +259,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				keyMethod.body()._return(JExpr.invoke("getValue"));
 			} // End if
 
-			if(checkType(beanClazz, "org.dmg.pmml.Node")){
+			if(checkType(beanClazz, "org.dmg.pmml.tree.Node")){
 				JMethod hasScoreMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "hasScore");
 				hasScoreMethod.body()._return(JExpr.refthis("score").ne(JExpr._null()));
 			}

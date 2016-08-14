@@ -16,15 +16,15 @@ import org.dmg.pmml.Header;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningFunctionType;
 import org.dmg.pmml.MiningSchema;
-import org.dmg.pmml.Node;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimplePredicate.Operator;
-import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.True;
 import org.dmg.pmml.Value;
+import org.dmg.pmml.tree.Node;
+import org.dmg.pmml.tree.TreeModel;
 
 public class GolfingTreeModelExample extends ProductionExample {
 

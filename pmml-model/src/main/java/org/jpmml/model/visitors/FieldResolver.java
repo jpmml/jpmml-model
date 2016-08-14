@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.dmg.pmml.DataDictionary;
-import org.dmg.pmml.DecisionTree;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.LocalTransformations;
@@ -33,6 +32,7 @@ import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.regression.Regression;
+import org.dmg.pmml.tree.DecisionTree;
 
 /**
  * <p>
