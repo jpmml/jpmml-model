@@ -18,7 +18,6 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.dmg.pmml.ObjectFactory;
 import org.dmg.pmml.PMML;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -108,7 +107,7 @@ public class JAXBUtil {
 		if(JAXBUtil.schema == null){
 			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
-			URL url = ObjectFactory.class.getResource("/pmml.xsd");
+			URL url = org.dmg.pmml.ObjectFactory.class.getResource("/pmml.xsd");
 			if(url == null){
 				throw new FileNotFoundException();
 			}
@@ -123,7 +122,27 @@ public class JAXBUtil {
 	public JAXBContext getContext() throws JAXBException {
 
 		if(JAXBUtil.context == null){
-			JAXBUtil.context = JAXBContext.newInstance(ObjectFactory.class);
+			JAXBUtil.context = JAXBContext.newInstance(
+				org.dmg.pmml.ObjectFactory.class,
+				org.dmg.pmml.association.ObjectFactory.class,
+				org.dmg.pmml.baseline.ObjectFactory.class,
+				org.dmg.pmml.bayesian_network.ObjectFactory.class,
+				org.dmg.pmml.clustering.ObjectFactory.class,
+				org.dmg.pmml.gaussian_process.ObjectFactory.class,
+				org.dmg.pmml.general_regression.ObjectFactory.class,
+				org.dmg.pmml.mining.ObjectFactory.class,
+				org.dmg.pmml.naive_bayes.ObjectFactory.class,
+				org.dmg.pmml.nearest_neighbor.ObjectFactory.class,
+				org.dmg.pmml.neural_network.ObjectFactory.class,
+				org.dmg.pmml.regression.ObjectFactory.class,
+				org.dmg.pmml.rule_set.ObjectFactory.class,
+				org.dmg.pmml.scorecard.ObjectFactory.class,
+				org.dmg.pmml.sequence.ObjectFactory.class,
+				org.dmg.pmml.support_vector_machine.ObjectFactory.class,
+				org.dmg.pmml.text.ObjectFactory.class,
+				org.dmg.pmml.time_series.ObjectFactory.class,
+				org.dmg.pmml.tree.ObjectFactory.class
+			);
 		}
 
 		return JAXBUtil.context;
