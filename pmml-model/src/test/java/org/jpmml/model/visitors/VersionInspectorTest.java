@@ -20,7 +20,6 @@ import org.dmg.pmml.ParameterField;
 import org.dmg.pmml.Target;
 import org.dmg.pmml.TargetValue;
 import org.dmg.pmml.Targets;
-import org.dmg.pmml.TimeSeriesModel;
 import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.association.AssociationModel;
@@ -38,6 +37,7 @@ import org.dmg.pmml.rule_set.RuleSetModel;
 import org.dmg.pmml.scorecard.Scorecard;
 import org.dmg.pmml.sequence.SequenceModel;
 import org.dmg.pmml.text.TextModel;
+import org.dmg.pmml.time_series.TimeSeriesModel;
 import org.jpmml.schema.Version;
 import org.junit.Test;
 

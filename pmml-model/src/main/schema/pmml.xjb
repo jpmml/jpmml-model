@@ -127,7 +127,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
-			<inheritance:extends>org.dmg.pmml.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Array']/xsd:complexType/xsd:simpleContent/xsd:extension/xsd:attribute[@name='type']/xsd:simpleType">
@@ -890,7 +893,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
-			<inheritance:extends>org.dmg.pmml.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType/xsd:attribute[@name='transformation']/xsd:simpleType">
@@ -1298,6 +1304,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Level']/xsd:complexType/xsd:attribute[@name='cubicSmoothedValue']">
@@ -2440,6 +2449,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Seasonality_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
@@ -2452,7 +2464,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
-			<inheritance:extends>org.dmg.pmml.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segment']/xsd:complexType">
@@ -2695,7 +2710,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
-			<inheritance:extends>org.dmg.pmml.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVector']/xsd:complexType">
@@ -3059,6 +3077,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeAnchor']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
@@ -3074,6 +3095,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeCycle']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
@@ -3089,6 +3113,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeException']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
@@ -3104,6 +3131,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:attribute[@name='interpolationMethod']/xsd:simpleType">
@@ -3135,6 +3165,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='bestFit']/xsd:simpleType">
@@ -3162,6 +3195,9 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+			<jpmml-model:subpackage
+				name="time_series"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TrainingInstances']/xsd:complexType">
@@ -3249,6 +3285,9 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 			<jaxb:class
 				name="TrendExpoSmooth"
+			/>
+			<jpmml-model:subpackage
+				name="time_series"
 			/>
 		</jaxb:bindings>
 

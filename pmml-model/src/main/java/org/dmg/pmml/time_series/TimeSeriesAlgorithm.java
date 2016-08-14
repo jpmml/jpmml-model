@@ -1,9 +1,11 @@
 /*
  * Copyright (c) 2015 Villu Ruusmann
  */
-package org.dmg.pmml;
+package org.dmg.pmml.time_series;
 
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.dmg.pmml.PMMLObject;
 
 @XmlTransient
 abstract

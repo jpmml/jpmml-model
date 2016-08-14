@@ -5,7 +5,6 @@ package org.jpmml.model.visitors;
 
 import org.dmg.pmml.MiningModel;
 import org.dmg.pmml.Model;
-import org.dmg.pmml.TimeSeriesModel;
 import org.dmg.pmml.TreeModel;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.association.AssociationModel;
@@ -23,6 +22,7 @@ import org.dmg.pmml.scorecard.Scorecard;
 import org.dmg.pmml.sequence.SequenceModel;
 import org.dmg.pmml.support_vector_machine.SupportVectorMachineModel;
 import org.dmg.pmml.text.TextModel;
+import org.dmg.pmml.time_series.TimeSeriesModel;
 
 abstract
 public class AbstractModelVisitor extends AbstractVisitor {
