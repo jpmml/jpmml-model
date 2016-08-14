@@ -216,7 +216,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			JDefinedClass beanClazz = clazz.implClass;
 
 			// Implementations of org.dmg.pmml.HasValue
-			if(checkType(beanClazz, "org.dmg.pmml.CategoricalPredictor")){
+			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor")){
 				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				fieldMethod.annotate(Override.class);
 				fieldMethod.body()._return(JExpr.invoke("getName"));

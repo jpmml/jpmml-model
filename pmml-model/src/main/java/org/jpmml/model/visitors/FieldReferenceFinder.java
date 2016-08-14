@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.dmg.pmml.Aggregate;
 import org.dmg.pmml.BlockIndicator;
-import org.dmg.pmml.CategoricalPredictor;
 import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
@@ -16,8 +15,6 @@ import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
-import org.dmg.pmml.NumericPredictor;
-import org.dmg.pmml.PredictorTerm;
 import org.dmg.pmml.SetPredicate;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimpleSetPredicate;
@@ -37,6 +34,9 @@ import org.dmg.pmml.general_regression.PPCell;
 import org.dmg.pmml.general_regression.Predictor;
 import org.dmg.pmml.naive_bayes.BayesInput;
 import org.dmg.pmml.nearest_neighbor.KNNInput;
+import org.dmg.pmml.regression.CategoricalPredictor;
+import org.dmg.pmml.regression.NumericPredictor;
+import org.dmg.pmml.regression.PredictorTerm;
 
 /**
  * <p>

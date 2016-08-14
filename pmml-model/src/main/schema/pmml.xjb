@@ -320,8 +320,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CategoricalPredictor']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Term</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.regression.Term</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasValue</inheritance:implements>
+			<jpmml-model:subpackage
+				name="regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Category']/xsd:complexType">
@@ -1685,7 +1688,10 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NumericPredictor']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Term</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.regression.Term</inheritance:extends>
+			<jpmml-model:subpackage
+				name="regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OptimumLiftGraph']/xsd:complexType">
@@ -2108,7 +2114,10 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictorTerm']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Term</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.regression.Term</inheritance:extends>
+			<jpmml-model:subpackage
+				name="regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictorTerm']/xsd:complexType/xsd:attribute[@name='name']">
@@ -2157,6 +2166,9 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Deprecated" value="PMML_4_1"/>
 			</annox:annotate>
 			<inheritance:extends>org.dmg.pmml.EmbeddedModel</inheritance:extends>
+			<jpmml-model:subpackage
+				name="regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType">
@@ -2197,6 +2209,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<jpmml-model:subpackage
+				name="regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
@@ -2245,6 +2260,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="regression"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType">

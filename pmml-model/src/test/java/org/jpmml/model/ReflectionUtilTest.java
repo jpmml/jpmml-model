@@ -11,7 +11,7 @@ import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
-import org.dmg.pmml.RegressionModel;
+import org.dmg.pmml.regression.RegressionModel;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

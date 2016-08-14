@@ -26,13 +26,13 @@ import org.dmg.pmml.Output;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ParameterField;
-import org.dmg.pmml.Regression;
 import org.dmg.pmml.ResultField;
 import org.dmg.pmml.Segment;
 import org.dmg.pmml.Segmentation;
 import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.regression.Regression;
 
 /**
  * <p>
