@@ -18,21 +18,21 @@ public class TrendExpoSmoothTest {
 
 		String extensionExpression = "/:PMML/:TimeSeriesModel/:Extension/test:Trend";
 
-		byte[] original = PMMLUtil.getResourceAsByteArray(TrendExpoSmoothTest.class);
+		byte[] original = ResourceUtil.getByteArray(TrendExpoSmoothTest.class);
 
 		assertNotNull(XPathUtil.selectNode(original, trendExpression));
 		assertNull(XPathUtil.selectNode(original, trendExpoSmoothExpression));
 
 		assertNotNull(XPathUtil.selectNode(original, extensionExpression));
 
-		byte[] latest = PMMLUtil.upgradeToLatest(original);
+		byte[] latest = VersionUtil.upgradeToLatest(original);
 
 		assertNull(XPathUtil.selectNode(latest, trendExpression));
 		assertNotNull(XPathUtil.selectNode(latest, trendExpoSmoothExpression));
 
 		assertNotNull(XPathUtil.selectNode(latest, extensionExpression));
 
-		byte[] latestToOriginal = PMMLUtil.downgrade(latest, Version.PMML_4_0);
+		byte[] latestToOriginal = VersionUtil.downgrade(latest, Version.PMML_4_0);
 
 		assertNotNull(XPathUtil.selectNode(latestToOriginal, trendExpression));
 		assertNull(XPathUtil.selectNode(latestToOriginal, trendExpoSmoothExpression));

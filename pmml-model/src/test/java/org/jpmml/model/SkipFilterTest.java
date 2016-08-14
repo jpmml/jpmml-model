@@ -20,7 +20,7 @@ public class SkipFilterTest {
 
 	@Test
 	public void filterChainedSegmentation() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class, new SkipFilter("Segmentation"));
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class, new SkipFilter("Segmentation"));
 
 		assertNotNull(pmml.getDataDictionary());
 		assertNotNull(pmml.getTransformationDictionary());
@@ -37,7 +37,7 @@ public class SkipFilterTest {
 
 	@Test
 	public void filterNestedSegmentation() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class, new SkipFilter("Segmentation"));
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class, new SkipFilter("Segmentation"));
 
 		assertNotNull(pmml.getDataDictionary());
 
@@ -54,18 +54,18 @@ public class SkipFilterTest {
 
 	@Test
 	public void filterExtension() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(WildcardTest.class, new SkipFilter((String)null, "Extension"));
+		PMML pmml = ResourceUtil.unmarshal(WildcardTest.class, new SkipFilter((String)null, "Extension"));
 
 		assertFalse(pmml.hasExtensions());
 	}
 
 	@Test
 	public void filterCustomExtension() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(WildcardTest.class, new SkipFilter("http://localhost/test", "Extension"));
+		PMML pmml = ResourceUtil.unmarshal(WildcardTest.class, new SkipFilter("http://localhost/test", "Extension"));
 
 		assertTrue(pmml.hasExtensions());
 
-		List<?> content = PMMLUtil.getExtension(pmml);
+		List<?> content = ExtensionUtil.getContent(pmml);
 
 		assertEquals("First textSecond text", content.get(0));
 	}

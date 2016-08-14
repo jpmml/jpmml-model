@@ -17,7 +17,7 @@ import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
 import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.PMMLUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +26,7 @@ public class DataDictionaryCleanerTest {
 
 	@Test
 	public void cleanChained() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class);
 
 		DataDictionary dataDictionary = pmml.getDataDictionary();
 
@@ -47,7 +47,7 @@ public class DataDictionaryCleanerTest {
 
 	@Test
 	public void cleanNested() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class);
 
 		DataDictionary dataDictionary = pmml.getDataDictionary();
 

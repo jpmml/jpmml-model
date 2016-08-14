@@ -13,15 +13,15 @@ public class ApplyTest {
 
 	@Test
 	public void transform() throws Exception {
-		byte[] original = PMMLUtil.getResourceAsByteArray(ApplyTest.class);
+		byte[] original = ResourceUtil.getByteArray(ApplyTest.class);
 
 		checkApply(original, "", null);
 
-		byte[] latest = PMMLUtil.upgradeToLatest(original);
+		byte[] latest = VersionUtil.upgradeToLatest(original);
 
 		checkApply(latest, null, "");
 
-		byte[] latestToOriginal = PMMLUtil.downgrade(latest, Version.PMML_4_1);
+		byte[] latestToOriginal = VersionUtil.downgrade(latest, Version.PMML_4_1);
 
 		checkApply(latestToOriginal, "", null);
 	}

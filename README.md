@@ -54,13 +54,8 @@ The class model should be self-explanatory. The application developer is advised
 Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
 
 ```java
-public PMML load(InputStream is) throws Exception {
-  InputSource source = new InputSource(is);
-
-  // Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.3 document
-  SAXSource transformedSource = ImportFilter.apply(source);
-
-  return JAXBUtil.unmarshalPMML(transformedSource);
+public PMML load(InputStream is) throws SAXException, JAXBException {
+  return org.jpmml.model.PMMLUtil.unmarshal(is);
 }
 ```
 
@@ -82,10 +77,8 @@ public void optimize(PMML pmml){
 Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.3 document:
 
 ```java
-public void store(PMML pmml, OutputStream os) throws Exception {
-  StreamResult result = new StreamResult(os);
-
-  JAXBUtil.marshalPMML(pmml, result);
+public void store(PMML pmml, OutputStream os) throws JAXBException {
+  org.jpmml.model.PMMLUtil.marshal(pmml, os);
 }
 ```
 

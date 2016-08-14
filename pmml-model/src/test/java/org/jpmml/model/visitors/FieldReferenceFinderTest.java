@@ -13,7 +13,7 @@ import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.Segment;
 import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
-import org.jpmml.model.PMMLUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +22,7 @@ public class FieldReferenceFinderTest {
 
 	@Test
 	public void findChained() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class);
 
 		Visitor visitor = new AbstractVisitor(){
 

@@ -19,7 +19,7 @@ import org.dmg.pmml.regression.RegressionModel;
 import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.PMMLUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -28,7 +28,7 @@ public class MiningSchemaCleanerTest {
 
 	@Test
 	public void cleanChained() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class);
 
 		MiningSchemaCleaner cleaner = new MiningSchemaCleaner();
 		cleaner.applyTo(pmml);
@@ -81,7 +81,7 @@ public class MiningSchemaCleanerTest {
 
 	@Test
 	public void cleanNested() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class);
 
 		MiningSchemaCleaner cleaner = new MiningSchemaCleaner();
 		cleaner.applyTo(pmml);

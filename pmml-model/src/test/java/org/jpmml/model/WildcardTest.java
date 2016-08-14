@@ -26,7 +26,7 @@ public class WildcardTest {
 	public void domContent() throws Exception {
 		JAXBContext context = JAXBContext.newInstance(ObjectFactory.class);
 
-		List<?> content = getExtension(context);
+		List<?> content = getContent(context);
 
 		assertEquals("First text", content.get(0));
 		assertTrue(content.get(1) instanceof Element);
@@ -37,22 +37,22 @@ public class WildcardTest {
 	public void jaxbContent() throws Exception {
 		JAXBContext context = JAXBContext.newInstance(ObjectFactory.class, LocalExtension.class);
 
-		List<?> content = getExtension(context);
+		List<?> content = getContent(context);
 
 		assertEquals("First text", content.get(0));
 		assertTrue(content.get(1) instanceof LocalExtension);
 		assertEquals("Second text", content.get(2));
 	}
 
-	private List<?> getExtension(JAXBContext context) throws IOException, JAXBException {
+	private List<?> getContent(JAXBContext context) throws IOException, JAXBException {
 		PMML pmml;
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
-		try(InputStream is = PMMLUtil.getResourceAsStream(getClass())){
+		try(InputStream is = ResourceUtil.getStream(getClass())){
 			pmml = (PMML)unmarshaller.unmarshal(new StreamSource(is));
 		}
 
-		return PMMLUtil.getExtension(pmml);
+		return ExtensionUtil.getContent(pmml);
 	}
 }

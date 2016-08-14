@@ -16,15 +16,15 @@ public class PMMLTest {
 		Version[] versions = Version.values();
 
 		for(Version version : versions){
-			byte[] original = PMMLUtil.getResourceAsByteArray(version);
+			byte[] original = ResourceUtil.getByteArray(version);
 
 			checkPMML(original, version);
 
-			byte[] latest = PMMLUtil.upgradeToLatest(original);
+			byte[] latest = VersionUtil.upgradeToLatest(original);
 
 			checkPMML(latest, Version.PMML_4_3);
 
-			byte[] latestToOriginal = PMMLUtil.downgrade(latest, version);
+			byte[] latestToOriginal = VersionUtil.downgrade(latest, version);
 
 			checkPMML(latestToOriginal, version);
 		}

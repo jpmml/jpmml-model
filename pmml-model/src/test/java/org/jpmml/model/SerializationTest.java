@@ -25,7 +25,7 @@ public class SerializationTest {
 
 	@Test
 	public void nullifyAndClone() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_3);
+		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_3);
 
 		assertNotNull(pmml.getLocator());
 
@@ -46,7 +46,7 @@ public class SerializationTest {
 
 	@Test
 	public void transformAndClone() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_3);
+		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_3);
 
 		assertNotNull(pmml.getLocator());
 
@@ -67,7 +67,7 @@ public class SerializationTest {
 
 	@Test
 	public void compressedSequence() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(Version.PMML_4_3);
+		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_3);
 
 		pmml.accept(new LocatorNullifier());
 

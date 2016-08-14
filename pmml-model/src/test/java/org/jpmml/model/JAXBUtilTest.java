@@ -36,7 +36,7 @@ public class JAXBUtilTest {
 	public void copy() throws Exception {
 		PMML pmml;
 
-		try(InputStream is = PMMLUtil.getResourceAsStream(Version.PMML_4_3)){
+		try(InputStream is = ResourceUtil.getStream(Version.PMML_4_3)){
 			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
 		}
 
@@ -58,7 +58,7 @@ public class JAXBUtilTest {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		unmarshaller.setProperty("com.sun.xml.bind.ObjectFactory", new CustomObjectFactory());
 
-		try(InputStream is = PMMLUtil.getResourceAsStream(Version.PMML_4_3)){
+		try(InputStream is = ResourceUtil.getStream(Version.PMML_4_3)){
 			pmml = (PMML)unmarshaller.unmarshal(new StreamSource(is));
 		}
 

@@ -19,9 +19,9 @@ public class MixedContentTest {
 
 	@Test
 	public void mixedContent() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(getClass());
+		PMML pmml = ResourceUtil.unmarshal(getClass());
 
-		List<?> content = PMMLUtil.getExtension(pmml);
+		List<?> content = ExtensionUtil.getContent(pmml);
 
 		assertEquals(5, content.size());
 

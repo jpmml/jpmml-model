@@ -19,7 +19,7 @@ import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
 import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.PMMLUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -28,7 +28,7 @@ public class FieldResolverTest {
 
 	@Test
 	public void resolveChained() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class);
 
 		final
 		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2", "x3", "x4");
@@ -161,7 +161,7 @@ public class FieldResolverTest {
 
 	@Test
 	public void resolveNested() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class);
 
 		final
 		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2", "x3", "x4", "x5");

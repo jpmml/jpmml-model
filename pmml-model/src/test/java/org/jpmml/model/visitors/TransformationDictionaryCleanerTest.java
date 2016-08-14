@@ -22,7 +22,7 @@ import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.FieldUtil;
 import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.PMMLUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +35,7 @@ public class TransformationDictionaryCleanerTest {
 
 	@Test
 	public void cleanChained() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(ChainedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class);
 
 		TransformationDictionaryCleaner cleaner = new TransformationDictionaryCleaner();
 		cleaner.applyTo(pmml);
@@ -97,7 +97,7 @@ public class TransformationDictionaryCleanerTest {
 
 	@Test
 	public void cleanNested() throws Exception {
-		PMML pmml = PMMLUtil.loadResource(NestedSegmentationTest.class);
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class);
 
 		assertNotNull(pmml.getTransformationDictionary());
 
