@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
-import org.dmg.pmml.MiningFunctionType;
+import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
@@ -43,7 +43,7 @@ public class VisitorTest {
 
 		root.addNodes(leftChild, rightChild);
 
-		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, new MiningSchema(), root);
+		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), root);
 
 		pmml.addModels(treeModel);
 

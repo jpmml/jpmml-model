@@ -107,7 +107,7 @@ public class VersionInspectorTest {
 		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
 
 		OutputField outputField = new OutputField()
-			.setRuleFeature(OutputField.RuleFeatureType.AFFINITY);
+			.setRuleFeature(OutputField.RuleFeature.AFFINITY);
 
 		output.addOutputFields(outputField);
 

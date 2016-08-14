@@ -9,7 +9,7 @@ import java.util.List;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMMLObject;
-import org.dmg.pmml.ResultFeatureType;
+import org.dmg.pmml.ResultFeature;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 
@@ -44,7 +44,7 @@ public class FieldNameFilterer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(OutputField outputField){
-		ResultFeatureType resultFeature = outputField.getResultFeature();
+		ResultFeature resultFeature = outputField.getResultFeature();
 
 		switch(resultFeature){
 			case TRANSFORMED_VALUE:

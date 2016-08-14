@@ -14,7 +14,7 @@ import org.dmg.pmml.DataType;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.MiningField;
-import org.dmg.pmml.MiningFunctionType;
+import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.PMML;
@@ -68,7 +68,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 				new MiningField(windy),
 				new MiningField(outlook),
 				new MiningField(whatIdo)
-					.setFieldUsage(MiningField.FieldUsageType.TARGET)
+					.setFieldUsage(MiningField.FieldUsage.TARGET)
 			);
 
 		Node root = createNode("will play", new True());
@@ -118,7 +118,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 				)
 		);
 
-		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, miningSchema, root)
+		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, miningSchema, root)
 			.setModelName("golfing");
 
 		pmml.addModels(treeModel);

@@ -5,7 +5,7 @@ package org.jpmml.model.visitors;
 
 import java.util.ArrayList;
 
-import org.dmg.pmml.MiningFunctionType;
+import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
@@ -31,7 +31,7 @@ public class ArrayListTransformerTest {
 		assertTrue(node1a.getNodes() instanceof ArrayList);
 		assertTrue(node2a.getNodes() instanceof ArrayList);
 
-		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, new MiningSchema(), node1a);
+		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), node1a);
 
 		ArrayListTransformer transformer = new ArrayListTransformer();
 		transformer.applyTo(treeModel);

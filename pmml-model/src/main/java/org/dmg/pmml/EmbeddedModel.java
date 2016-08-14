@@ -16,10 +16,10 @@ public class EmbeddedModel extends PMMLObject implements HasExtensions {
 	public EmbeddedModel setModelName(String modelName);
 
 	abstract
-	public MiningFunctionType getMiningFunction();
+	public MiningFunction getMiningFunction();
 
 	abstract
-	public EmbeddedModel setMiningFunction(MiningFunctionType miningFunction);
+	public EmbeddedModel setMiningFunction(MiningFunction miningFunction);
 
 	abstract
 	public LocalTransformations getLocalTransformations();

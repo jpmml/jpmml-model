@@ -226,7 +226,7 @@ public class FieldResolver extends AbstractModelVisitor {
 	private List<Output> getEarlierOutputs(Segmentation segmentation, Segment targetSegment){
 		List<Output> result = new ArrayList<>();
 
-		Segmentation.MultipleModelMethodType multipleModelMethod = segmentation.getMultipleModelMethod();
+		Segmentation.MultipleModelMethod multipleModelMethod = segmentation.getMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
 				break;

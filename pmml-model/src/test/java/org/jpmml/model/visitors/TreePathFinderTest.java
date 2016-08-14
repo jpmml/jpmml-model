@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.dmg.pmml.MiningFunctionType;
+import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
@@ -37,7 +37,7 @@ public class TreePathFinderTest {
 
 		node3a.addNodes(node4a);
 
-		TreeModel treeModel = new TreeModel(MiningFunctionType.CLASSIFICATION, new MiningSchema(), node1a);
+		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), node1a);
 
 		TreePathFinder finder = new TreePathFinder();
 		finder.applyTo(treeModel);

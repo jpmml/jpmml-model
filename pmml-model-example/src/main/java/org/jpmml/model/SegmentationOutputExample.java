@@ -10,7 +10,7 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
-import org.dmg.pmml.ResultFeatureType;
+import org.dmg.pmml.ResultFeature;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.mining.Segmentation;
@@ -66,7 +66,7 @@ public class SegmentationOutputExample extends TransformationExample {
 
 			OutputField outputField = new OutputField()
 				.setName(FieldName.create("segment_" + id))
-				.setResultFeature(ResultFeatureType.PREDICTED_VALUE)
+				.setResultFeature(ResultFeature.PREDICTED_VALUE)
 				.setSegmentId(id);
 
 			output.addOutputFields(outputField);
