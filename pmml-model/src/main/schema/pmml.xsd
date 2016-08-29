@@ -806,6 +806,7 @@
     </xs:sequence>
     <xs:attribute name="modelName" type="xs:string" use="optional"/>
     <xs:attribute name="functionName" type="MINING-FUNCTION" use="required"/>
+    <xs:attribute name="algorithmName" type="xs:string"/>
     <xs:attribute name="optimizer" type="xs:string" use="optional"/>
     <xs:attribute name="isScorable" type="xs:boolean" default="true"/>
   </xs:complexType>
@@ -2211,6 +2212,7 @@
     </xs:attribute>
     <xs:attribute name="isMultiValued" default="0"/>
     <xs:attribute name="segmentId" type="xs:string"/>
+    <xs:attribute name="isFinalResult" type="xs:boolean" default="true"/>
   </xs:complexType>
 </xs:element>
 
