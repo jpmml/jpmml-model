@@ -70,8 +70,8 @@ public class DataDictionaryCleaner extends ModelCleaner {
 			for(MiningField miningField : miningFields){
 				FieldName name = miningField.getName();
 
-				MiningField.FieldUsage fieldUsage = miningField.getFieldUsage();
-				switch(fieldUsage){
+				MiningField.UsageType usageType = miningField.getUsageType();
+				switch(usageType){
 					case TARGET:
 					case PREDICTED:
 						targetFieldNames.add(name);

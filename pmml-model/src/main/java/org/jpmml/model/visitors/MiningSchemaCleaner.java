@@ -72,8 +72,8 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 			for(MiningField miningField : miningFields){
 				FieldName name = miningField.getName();
 
-				MiningField.FieldUsage fieldUsage = miningField.getFieldUsage();
-				switch(fieldUsage){
+				MiningField.UsageType usageType = miningField.getUsageType();
+				switch(usageType){
 					case ACTIVE:
 						activeFieldNames.add(name);
 						break;
@@ -124,8 +124,8 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 
 			FieldName name = miningField.getName();
 
-			MiningField.FieldUsage fieldUsage = miningField.getFieldUsage();
-			switch(fieldUsage){
+			MiningField.UsageType usageType = miningField.getUsageType();
+			switch(usageType){
 				case ACTIVE:
 					if(!(activeFieldNames).contains(name)){
 						it.remove();

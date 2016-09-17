@@ -68,7 +68,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 				new MiningField(windy),
 				new MiningField(outlook),
 				new MiningField(whatIdo)
-					.setFieldUsage(MiningField.FieldUsage.TARGET)
+					.setUsageType(MiningField.UsageType.TARGET)
 			);
 
 		Node root = createNode("will play", new True());

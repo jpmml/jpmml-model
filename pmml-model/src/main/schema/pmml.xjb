@@ -1463,15 +1463,9 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
-		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']">
-			<jaxb:property
-				name="fieldUsage"
-			/>
-		</jaxb:bindings>
-
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
-				name="FieldUsage"
+				name="UsageType"
 			/>
 		</jaxb:bindings>
 
