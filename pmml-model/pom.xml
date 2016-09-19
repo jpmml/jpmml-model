@@ -126,6 +126,11 @@
 									<outputDir>target/transformed-schema</outputDir>
 									<stylesheet>src/main/xsl/pmml.xsl</stylesheet>
 								</transformationSet>
+								<transformationSet>
+									<dir>src/main/schema</dir>
+									<outputDir>target/transformed-jaxb-schema</outputDir>
+									<stylesheet>src/main/xsl/pmml-jaxb.xsl</stylesheet>
+								</transformationSet>
 							</transformationSets>
 						</configuration>
 					</execution>
@@ -177,7 +182,7 @@
 							</args>
 							<episode>false</episode>
 							<extension>true</extension>
-							<schemaDirectory>target/transformed-schema</schemaDirectory>
+							<schemaDirectory>target/transformed-jaxb-schema</schemaDirectory>
 							<specVersion>2.2</specVersion>
 						</configuration>
 					</execution>

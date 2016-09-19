@@ -59,7 +59,7 @@ public class JAXBUtilTest {
 		unmarshaller.setProperty("com.sun.xml.bind.ObjectFactory", new CustomObjectFactory());
 
 		try(InputStream is = ResourceUtil.getStream(Version.PMML_4_3)){
-			pmml = (PMML)unmarshaller.unmarshal(new StreamSource(is));
+			pmml = (PMML)unmarshaller.unmarshal(is);
 		}
 
 		assertEquals(CustomPMML.class, pmml.getClass());
@@ -68,7 +68,7 @@ public class JAXBUtilTest {
 
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 
-		marshaller.marshal(pmml, new StreamResult(os));
+		marshaller.marshal(pmml, os);
 
 		assertTrue(os.size() > 0);
 	}

@@ -10,7 +10,6 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.ObjectFactory;
 import org.dmg.pmml.PMML;
@@ -50,7 +49,7 @@ public class WildcardTest {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
 		try(InputStream is = ResourceUtil.getStream(getClass())){
-			pmml = (PMML)unmarshaller.unmarshal(new StreamSource(is));
+			pmml = (PMML)unmarshaller.unmarshal(is);
 		}
 
 		return ExtensionUtil.getContent(pmml);

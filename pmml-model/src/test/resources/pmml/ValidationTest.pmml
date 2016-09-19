@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+	<Header/>
+	<DataDictionary>
+		<DataField name="y" dataType="double" optype="continuous"/>
+	</DataDictionary>
+	<RegressionModel functionName="regression">
+		<Extension name="position" value="first"/>
+		<MiningSchema>
+			<MiningField name="y" usageType="target"/>
+		</MiningSchema>
+		<RegressionTable intercept="0"/>
+		<Extension name="position" value="last"/>
+	</RegressionModel>
+</PMML>
