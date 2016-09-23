@@ -7,6 +7,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 * Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1, 4.2 and 4.3 schemas:
   * Schema version annotations.
+  * Extension elements, attributes, enum values.
 * Enhanced API:
   * Class hierarchy.
   * Value constructors.
