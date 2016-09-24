@@ -58,6 +58,8 @@ public class ExportFilter extends PMMLFilter {
 		if(("PMML").equals(localName)){
 			Version target = getTarget();
 
+			attributes = removeAttribute(attributes, "x-baseVersion");
+
 			return setAttribute(attributes, "version", target.getVersion());
 		} else
 

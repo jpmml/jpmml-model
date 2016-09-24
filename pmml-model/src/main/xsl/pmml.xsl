@@ -9,6 +9,7 @@ Copyright (c) 2009 University of Tartu
 	<xsl:strip-space elements="*"/>
 
 	<xsl:include href="compatibility.xsl"/>
+	<xsl:include href="extensions.xsl"/>
 
 	<xsl:template name="inline-enum">
 		<xsl:param
@@ -32,6 +33,7 @@ Copyright (c) 2009 University of Tartu
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
 			<xsl:call-template name="compatibility-content"/>
+			<xsl:call-template name="extensions-content"/>
 		</xsl:copy>
 	</xsl:template>
 

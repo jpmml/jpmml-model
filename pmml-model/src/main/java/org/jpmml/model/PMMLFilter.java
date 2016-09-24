@@ -191,6 +191,7 @@ public class PMMLFilter extends XMLFilterImpl {
 	static
 	protected Attributes renameAttribute(Attributes attributes, String oldLocalName, String localName){
 		int index = attributes.getIndex("", oldLocalName);
+
 		if(index < 0){
 			return attributes;
 		}
@@ -198,6 +199,20 @@ public class PMMLFilter extends XMLFilterImpl {
 		AttributesImpl result = new AttributesImpl(attributes);
 		result.setLocalName(index, localName);
 		result.setQName(index, localName); // XXX
+
+		return result;
+	}
+
+	static
+	protected Attributes removeAttribute(Attributes attributes, String localName){
+		int index = attributes.getIndex("", localName);
+
+		if(index < 0){
+			return attributes;
+		}
+
+		AttributesImpl result = new AttributesImpl(attributes);
+		result.removeAttribute(index);
 
 		return result;
 	}

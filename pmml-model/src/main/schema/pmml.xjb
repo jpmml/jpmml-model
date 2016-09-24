@@ -2055,6 +2055,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='PMML']/xsd:complexType/xsd:attribute[@name='x-baseVersion']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="baseVersion"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='PoissonDistribution']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>

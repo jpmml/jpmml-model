@@ -46,6 +46,8 @@ public class ImportFilter extends PMMLFilter {
 		if(("PMML").equals(localName)){
 			Version target = getTarget();
 
+			attributes = renameAttribute(attributes, "version", "x-baseVersion");
+
 			return setAttribute(attributes, "version", target.getVersion());
 		} else
 
