@@ -149,9 +149,7 @@ Copyright (c) 2009 University of Tartu
 	Inline Segmentation enum types
 	-->
 	<xsl:template match="xs:element[@name='Segmentation']/xs:complexType/xs:attribute[@name='multipleModelMethod']">
-		<xsl:call-template name="inline-enum">
-			<xsl:with-param name="name">MULTIPLE-MODEL-METHOD</xsl:with-param>
-		</xsl:call-template>
+		<xsl:call-template name="inline-multipleModelMethod"/>
 	</xsl:template>
 
 	<xsl:template match="xs:simpleType[@name='MULTIPLE-MODEL-METHOD']">
