@@ -35,7 +35,6 @@ import org.dmg.pmml.naive_bayes.BayesInput;
 import org.dmg.pmml.nearest_neighbor.KNNInput;
 import org.dmg.pmml.regression.CategoricalPredictor;
 import org.dmg.pmml.regression.NumericPredictor;
-import org.dmg.pmml.regression.PredictorTerm;
 import org.dmg.pmml.sequence.SetPredicate;
 
 /**
@@ -216,13 +215,6 @@ public class FieldReferenceFinder extends AbstractVisitor {
 		process(predictor.getName());
 
 		return super.visit(predictor);
-	}
-
-	@Override
-	public VisitorAction visit(PredictorTerm predictorTerm){
-		process(predictorTerm.getName());
-
-		return super.visit(predictorTerm);
 	}
 
 	@Override
