@@ -15,4 +15,6 @@ public interface HasExtensions {
 	boolean hasExtensions();
 
 	List<Extension> getExtensions();
+
+	HasExtensions addExtensions(Extension... extensions);
 }

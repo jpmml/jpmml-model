@@ -30,8 +30,14 @@ public class SparseArray<E extends Number> extends PMMLObject {
 	public List<Integer> getIndices();
 
 	abstract
+	public SparseArray<E> addIndices(Integer... indices);
+
+	abstract
 	public boolean hasEntries();
 
 	abstract
 	public List<E> getEntries();
+
+	abstract
+	public SparseArray<E> addEntries(E... entries);
 }

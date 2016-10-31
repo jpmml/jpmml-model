@@ -19,4 +19,7 @@ public class PredictorList extends PMMLObject implements HasExtensions {
 
 	abstract
 	public List<Predictor> getPredictors();
+
+	abstract
+	public PredictorList addPredictors(Predictor... predictors);
 }
