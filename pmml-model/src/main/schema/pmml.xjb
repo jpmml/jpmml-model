@@ -1060,6 +1060,24 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='x-inverse']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumMember
+				name="INVERSE"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='x-sqrt']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumMember
+				name="SQRT"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkParameter']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>

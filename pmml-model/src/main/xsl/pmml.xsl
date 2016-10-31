@@ -65,9 +65,7 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='linkFunction']">
-		<xsl:call-template name="inline-enum">
-			<xsl:with-param name="name">LINK-FUNCTION</xsl:with-param>
-		</xsl:call-template>
+		<xsl:call-template name="inline-linkFunction"/>
 	</xsl:template>
 
 	<xsl:template match="xs:simpleType[@name='CUMULATIVE-LINK-FUNCTION' or @name='LINK-FUNCTION']">

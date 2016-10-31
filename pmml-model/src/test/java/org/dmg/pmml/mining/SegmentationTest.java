@@ -11,6 +11,10 @@ public class SegmentationTest {
 
 	@Test
 	public void multipleModelMethod(){
+		Segmentation.MultipleModelMethod[] multipleModelMethods = Segmentation.MultipleModelMethod.values();
+
+		assertEquals(10 + 2, multipleModelMethods.length);
+
 		checkOrder(Segmentation.MultipleModelMethod.MAJORITY_VOTE, Segmentation.MultipleModelMethod.WEIGHTED_MAJORITY_VOTE);
 		checkOrder(Segmentation.MultipleModelMethod.AVERAGE, Segmentation.MultipleModelMethod.WEIGHTED_AVERAGE);
 		checkOrder(Segmentation.MultipleModelMethod.MEDIAN, Segmentation.MultipleModelMethod.WEIGHTED_MEDIAN);
