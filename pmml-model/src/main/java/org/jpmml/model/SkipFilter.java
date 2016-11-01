@@ -3,47 +3,45 @@
  */
 package org.jpmml.model;
 
-import javax.xml.transform.sax.SAXSource;
-
-import org.jpmml.schema.Version;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 
-/**
- * <p>
- * A SAX filter that skips a PMML element and its contents.
- * </p>
- */
+abstract
 public class SkipFilter extends XMLFilterImpl {
-
-	private String namespaceURI = null;
-
-	private String localName = null;
 
 	private int depth = 0;
 
 
-	public SkipFilter(String localName){
-		this((Version.PMML_4_3).getNamespaceURI(), localName);
+	public SkipFilter(){
 	}
 
-	public SkipFilter(String namespaceURI, String localName){
-		setNamespaceURI(namespaceURI);
-		setLocalName(localName);
-	}
-
-	public SkipFilter(XMLReader reader, String localName){
-		this(reader, (Version.PMML_4_3).getNamespaceURI(), localName);
-	}
-
-	public SkipFilter(XMLReader reader, String namespaceURI, String localName){
+	public SkipFilter(XMLReader reader){
 		super(reader);
+	}
 
-		setNamespaceURI(namespaceURI);
-		setLocalName(localName);
+	abstract
+	public boolean isSkipped(String namespaceURI, String localName);
+
+	@Override
+	public void startDocument() throws SAXException {
+
+		if(isSkipping()){
+			throw new SAXException();
+		}
+
+		super.startDocument();
+	}
+
+	@Override
+	public void endDocument() throws SAXException {
+
+		if(isSkipping()){
+			throw new SAXException();
+		}
+
+		super.endDocument();
 	}
 
 	@Override
@@ -88,45 +86,7 @@ public class SkipFilter extends XMLFilterImpl {
 		super.characters(buffer, index, length);
 	}
 
-	private boolean isSkipped(String namespaceURI, String localName){
-
-		if((this.localName).equals(localName)){
-
-			if(this.namespaceURI == null || (this.namespaceURI).equals(namespaceURI)){
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	private boolean isSkipping(){
 		return (this.depth > 0);
-	}
-
-	public String getNamespaceURI(){
-		return this.namespaceURI;
-	}
-
-	private void setNamespaceURI(String namespaceURI){
-		this.namespaceURI = namespaceURI;
-	}
-
-	public String getLocalName(){
-		return this.localName;
-	}
-
-	private void setLocalName(String localName){
-
-		if(localName == null){
-			throw new NullPointerException();
-		}
-
-		this.localName = localName;
-	}
-
-	static
-	public SAXSource apply(InputSource source, String name) throws SAXException {
-		return JAXBUtil.createFilteredSource(source, new SkipFilter(name));
 	}
 }

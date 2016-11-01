@@ -32,7 +32,7 @@ public class JAXBUtil {
 
 	/**
 	 * @see ImportFilter
-	 * @see SkipFilter
+	 * @see ElementFilter
 	 */
 	static
 	public SAXSource createFilteredSource(InputSource source, XMLFilter... filters) throws SAXException {
