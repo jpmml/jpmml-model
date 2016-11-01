@@ -3,6 +3,9 @@
  */
 package org.jpmml.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.dmg.pmml.PMMLObject;
 import org.jpmml.schema.Version;
 import org.xml.sax.XMLReader;
 
@@ -27,6 +30,13 @@ public class ElementFilter extends SkipFilter {
 		setLocalName(localName);
 	}
 
+	public ElementFilter(Class<? extends PMMLObject> clazz){
+		XmlRootElement element = getElement(clazz);
+
+		setNamespaceURI(element.namespace());
+		setLocalName(element.name());
+	}
+
 	public ElementFilter(XMLReader reader, String localName){
 		this(reader, (Version.PMML_4_3).getNamespaceURI(), localName);
 	}
@@ -36,6 +46,15 @@ public class ElementFilter extends SkipFilter {
 
 		setNamespaceURI(namespaceURI);
 		setLocalName(localName);
+	}
+
+	public ElementFilter(XMLReader reader, Class<? extends PMMLObject> clazz){
+		super(reader);
+
+		XmlRootElement element = getElement(clazz);
+
+		setNamespaceURI(element.namespace());
+		setLocalName(element.name());
 	}
 
 	@Override
@@ -70,5 +89,16 @@ public class ElementFilter extends SkipFilter {
 		}
 
 		this.localName = localName;
+	}
+
+	static
+	private XmlRootElement getElement(Class<? extends PMMLObject> clazz){
+		XmlRootElement result = clazz.getAnnotation(XmlRootElement.class);
+
+		if(result == null){
+			throw new IllegalArgumentException();
+		}
+
+		return result;
 	}
 }

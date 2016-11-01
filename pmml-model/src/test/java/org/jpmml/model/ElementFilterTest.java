@@ -8,6 +8,7 @@ import java.util.List;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.mining.MiningModel;
+import org.dmg.pmml.mining.Segmentation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -37,7 +38,7 @@ public class ElementFilterTest {
 
 	@Test
 	public void filterNestedSegmentation() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class, new ElementFilter("Segmentation"));
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class, new ElementFilter(Segmentation.class));
 
 		assertNotNull(pmml.getDataDictionary());
 
