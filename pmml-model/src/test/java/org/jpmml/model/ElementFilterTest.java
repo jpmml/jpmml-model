@@ -12,7 +12,6 @@ import org.dmg.pmml.mining.Segmentation;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -51,13 +50,6 @@ public class ElementFilterTest {
 		assertNotNull(miningModel.getOutput());
 
 		assertNull(miningModel.getSegmentation());
-	}
-
-	@Test
-	public void filterExtension() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(WildcardTest.class, new ElementFilter((String)null, "Extension"));
-
-		assertFalse(pmml.hasExtensions());
 	}
 
 	@Test

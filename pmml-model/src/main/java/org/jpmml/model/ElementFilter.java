@@ -11,7 +11,7 @@ import org.xml.sax.XMLReader;
 
 /**
  * <p>
- * A SAX filter that skips a PMML element and its contents.
+ * A SAX filter that skips an element.
  * </p>
  */
 public class ElementFilter extends SkipFilter {
@@ -59,15 +59,7 @@ public class ElementFilter extends SkipFilter {
 
 	@Override
 	public boolean isSkipped(String namespaceURI, String localName){
-
-		if((this.localName).equals(localName)){
-
-			if(this.namespaceURI == null || (this.namespaceURI).equals(namespaceURI)){
-				return true;
-			}
-		}
-
-		return false;
+		return (this.namespaceURI).equals(namespaceURI) && (this.localName).equals(localName);
 	}
 
 	public String getNamespaceURI(){
@@ -75,6 +67,11 @@ public class ElementFilter extends SkipFilter {
 	}
 
 	private void setNamespaceURI(String namespaceURI){
+
+		if(namespaceURI == null){
+			throw new NullPointerException();
+		}
+
 		this.namespaceURI = namespaceURI;
 	}
 

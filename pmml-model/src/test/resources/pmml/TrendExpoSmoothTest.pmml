@@ -4,7 +4,7 @@
     <DataDictionary/>
     <TimeSeriesModel>
         <Extension>
-            <test:Trend xmlns:test="http://www.dmg.org/TEST">
+            <test:Trend xmlns:test="http://localhost/test">
             </test:Trend>
         </Extension>
         <ExponentialSmoothing>

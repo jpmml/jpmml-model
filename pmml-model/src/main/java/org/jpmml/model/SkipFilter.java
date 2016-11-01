@@ -24,6 +24,10 @@ public class SkipFilter extends XMLFilterImpl {
 	abstract
 	public boolean isSkipped(String namespaceURI, String localName);
 
+	public Attributes filterAttributes(String namespaceURI, String localName, Attributes attributes){
+		return attributes;
+	}
+
 	@Override
 	public void startDocument() throws SAXException {
 
@@ -57,7 +61,9 @@ public class SkipFilter extends XMLFilterImpl {
 			return;
 		}
 
-		super.startElement(namespaceURI, localName, qualifiedName, attributes);
+		Attributes filteredAttributes = filterAttributes(namespaceURI, localName, attributes);
+
+		super.startElement(namespaceURI, localName, qualifiedName, filteredAttributes);
 	}
 
 	@Override

@@ -32,6 +32,7 @@ public class JAXBUtil {
 
 	/**
 	 * @see ImportFilter
+	 * @see ExtensionFilter
 	 * @see ElementFilter
 	 */
 	static

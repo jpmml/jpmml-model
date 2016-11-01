@@ -89,7 +89,7 @@ public class XPathUtil {
 
 			// XXX
 			if(("test").equals(prefix)){
-				return "http://www.dmg.org/TEST";
+				return "http://localhost/test";
 			}
 
 			return document.lookupNamespaceURI(prefix);

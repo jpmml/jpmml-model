@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_0" version="4.0">
+    <Extension><X-Parent><X-Child/></X-Parent><test:X-Test xmlns:test="http://localhost/test"/></Extension>
+</PMML>
