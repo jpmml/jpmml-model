@@ -44,6 +44,10 @@ public class ExtensionFilterTest {
 		assertEquals("http://localhost/test", testElement.getNamespaceURI());
 		assertEquals("X-Test", testElement.getLocalName());
 
+		pmml = ResourceUtil.unmarshal(ExtensionFilterTest.class, new ImportFilter(false));
+
+		assertEquals(null, pmml.getBaseVersion());
+
 		pmml = ResourceUtil.unmarshal(ExtensionFilterTest.class, new ImportFilter(), new ExtensionFilter());
 
 		assertEquals(null, pmml.getBaseVersion());

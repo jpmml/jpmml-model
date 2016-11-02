@@ -18,12 +18,27 @@ import org.xml.sax.XMLReader;
  */
 public class ImportFilter extends PMMLFilter {
 
+	private boolean extensions = true;
+
+
 	public ImportFilter(){
+		this(true);
+	}
+
+	public ImportFilter(boolean extensions){
 		super(Version.PMML_4_3);
+
+		setExtensions(extensions);
 	}
 
 	public ImportFilter(XMLReader reader){
+		this(reader, true);
+	}
+
+	public ImportFilter(XMLReader reader, boolean extensions){
 		super(reader, Version.PMML_4_3);
+
+		setExtensions(extensions);
 	}
 
 	@Override
@@ -46,7 +61,9 @@ public class ImportFilter extends PMMLFilter {
 		if(("PMML").equals(localName)){
 			Version target = getTarget();
 
-			attributes = renameAttribute(attributes, "version", "x-baseVersion");
+			if(this.extensions){
+				attributes = renameAttribute(attributes, "version", "x-baseVersion");
+			}
 
 			return setAttribute(attributes, "version", target.getVersion());
 		} else
@@ -56,6 +73,14 @@ public class ImportFilter extends PMMLFilter {
 		}
 
 		return attributes;
+	}
+
+	public boolean getExtensions(){
+		return this.extensions;
+	}
+
+	private void setExtensions(boolean extensions){
+		this.extensions = extensions;
 	}
 
 	/**
