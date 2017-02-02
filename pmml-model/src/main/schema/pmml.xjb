@@ -3029,15 +3029,21 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:implements>org.dmg.pmml.HasExpression</inheritance:implements>
 		</jaxb:bindings>
 
-		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='localTermWeights']/xsd:simpleType">
-			<jaxb:typesafeEnumClass
-				name="LocalTermWeights"
-			/>
-		</jaxb:bindings>
-
 		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='countHits']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="CountHits"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='isCaseSensitive']">
+			<jaxb:property
+				name="caseSensitive"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='localTermWeights']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="LocalTermWeights"
 			/>
 		</jaxb:bindings>
 
@@ -3046,6 +3052,12 @@ Copyright (c) 2009 University of Tartu
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_2"/>
 			</annox:annotate>
 			<inheritance:implements>org.dmg.pmml.HasTable</inheritance:implements>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType/xsd:attribute[@name='isCaseSensitive']">
+			<jaxb:property
+				name="caseSensitive"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType">
