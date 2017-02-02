@@ -7,20 +7,6 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template name="extensions-content">
 	</xsl:template>
 
-	<xsl:template name="inline-linkFunction">
-		<xsl:copy>
-			<xsl:apply-templates select="@*[name() != 'type']"/>
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xsl:copy-of select="//xs:simpleType[@name='LINK-FUNCTION']/xs:restriction/xs:enumeration[@value='cloglog' or @value='identity']"/>
-					<xs:enumeration value="x-inverse"/>
-					<xsl:copy-of select="//xs:simpleType[@name='LINK-FUNCTION']/xs:restriction/xs:enumeration[@value='log' or @value='logc' or @value='logit' or @value='loglog' or @value='negbin' or @value='oddspower' or @value='power' or @value='probit']"/>
-					<xs:enumeration value="x-sqrt"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xsl:copy>
-	</xsl:template>
-
 	<xsl:template name="inline-multipleModelMethod">
 		<xsl:copy>
 			<xsl:apply-templates select="@*[name() != 'type']"/>
