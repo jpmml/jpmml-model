@@ -379,6 +379,10 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ChildParent']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasTable</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='ChildParent']/xsd:complexType/xsd:attribute[@name='isRecursive']">
 			<jaxb:property
 				name="recursive"
@@ -1369,6 +1373,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasTable</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -3040,6 +3045,7 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_2"/>
 			</annox:annotate>
+			<inheritance:implements>org.dmg.pmml.HasTable</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType">
@@ -3255,6 +3261,7 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+			<inheritance:implements>org.dmg.pmml.HasTable</inheritance:implements>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
 			/>
