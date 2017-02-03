@@ -282,7 +282,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 			FieldOutline extensionsField = getExtensionsField(clazz);
 			if(extensionsField != null){
-				beanClazz._implements(hasExtensionsInterface);
+				beanClazz._implements(hasExtensionsInterface.narrow(beanClazz));
 			}
 
 			FieldOutline[] fields = clazz.getDeclaredFields();

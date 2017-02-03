@@ -7,12 +7,11 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.dmg.pmml.HasExtensions;
 import org.dmg.pmml.PMMLObject;
 
 @XmlTransient
 abstract
-public class PredictorList extends PMMLObject implements HasExtensions {
+public class PredictorList extends PMMLObject {
 
 	abstract
 	public boolean hasPredictors();

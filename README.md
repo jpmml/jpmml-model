@@ -10,8 +10,9 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Extension elements, attributes, enum values.
 * Enhanced API:
   * Class hierarchy.
+  * Marker interfaces for common traits.
   * Value constructors.
-  * Method chaining.
+  * Method chaining-friendly setter methods.
   * Optional SAX Locator information.
 * [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.

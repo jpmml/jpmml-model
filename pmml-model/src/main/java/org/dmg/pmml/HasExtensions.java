@@ -10,11 +10,11 @@ import java.util.List;
  * A marker interface for PMML elements that specify {@link Extension} child elements.
  * </p>
  */
-public interface HasExtensions {
+public interface HasExtensions<E extends PMMLObject & HasExtensions<E>> {
 
 	boolean hasExtensions();
 
 	List<Extension> getExtensions();
 
-	HasExtensions addExtensions(Extension... extensions);
+	E addExtensions(Extension... extensions);
 }

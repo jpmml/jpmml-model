@@ -117,10 +117,11 @@ public class VisitorPlugin extends Plugin {
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
-			traversableTypes.add(beanClazz.name());
+
+			traversableTypes.add(getTypeName(beanClazz));
 
 			JClass beanSuperClazz = beanClazz._extends();
-			traversableTypes.add(beanSuperClazz.name());
+			traversableTypes.add(getTypeName(beanSuperClazz));
 		} // End for
 
 		for(ClassOutline clazz : clazzes){
@@ -171,10 +172,10 @@ public class VisitorPlugin extends Plugin {
 				if(propertyInfo.isCollection()){
 					JType fieldElementType = CodeModelUtil.getElementType(fieldType);
 
-					if(traversableTypes.contains(fieldElementType.name()) || objectClazz.equals(fieldElementType)){
+					if(traversableTypes.contains(getTypeName(fieldElementType)) || objectClazz.equals(fieldElementType)){
 						JMethod hasElementsMethod = beanClazz.getMethod("has" + propertyInfo.getName(true), new JType[0]);
 
-						ifBody._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(fieldElementType.name()) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
+						ifBody._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(getTypeName(fieldElementType)) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
 
 						traverseVarargs = null;
 					}
@@ -182,7 +183,7 @@ public class VisitorPlugin extends Plugin {
 
 				// Simple value
 				{
-					if(traversableTypes.contains(fieldType.name())){
+					if(traversableTypes.contains(getTypeName(fieldType))){
 
 						if(traverseVarargs == null){
 							traverseVarargs = pmmlObjectClazz.staticInvoke("traverse").arg(visitorParameter);
@@ -203,5 +204,17 @@ public class VisitorPlugin extends Plugin {
 		}
 
 		return true;
+	}
+
+	static
+	private String getTypeName(JType type){
+		String name = type.name();
+
+		int lt = name.indexOf("<");
+		if(lt > -1){
+			name = name.substring(0, lt);
+		}
+
+		return name;
 	}
 }

@@ -3,13 +3,13 @@
  */
 package org.dmg.pmml;
 
-public interface HasTable {
+public interface HasTable<E extends PMMLObject & HasTable<E>> {
 
 	TableLocator getTableLocator();
 
-	HasTable setTableLocator(TableLocator tableLocator);
+	E setTableLocator(TableLocator tableLocator);
 
 	InlineTable getInlineTable();
 
-	HasTable setInlineTable(InlineTable inlineTable);
+	E setInlineTable(InlineTable inlineTable);
 }

@@ -8,7 +8,7 @@ package org.dmg.pmml;
  * A marker interface for PMML elements that represent a set of field values.
  * </p>
  */
-public interface HasValueSet {
+public interface HasValueSet<E extends PMMLObject & HasValueSet<E>> {
 
 	/**
 	 * @return The name of the field.
@@ -21,5 +21,5 @@ public interface HasValueSet {
 
 	Array getArray();
 
-	HasValueSet setArray(Array array);
+	E setArray(Array array);
 }

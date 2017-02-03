@@ -7,5 +7,5 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Distribution extends PMMLObject implements HasExtensions {
+public class Distribution extends PMMLObject {
 }

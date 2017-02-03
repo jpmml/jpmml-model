@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class TypeDefinitionField extends Field implements HasExtensions {
+public class TypeDefinitionField extends Field {
 
 	abstract
 	public boolean hasValues();

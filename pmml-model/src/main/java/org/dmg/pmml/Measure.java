@@ -7,5 +7,5 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Measure extends PMMLObject implements HasExtensions {
+public class Measure extends PMMLObject {
 }

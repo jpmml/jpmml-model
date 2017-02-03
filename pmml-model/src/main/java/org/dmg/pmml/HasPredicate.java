@@ -3,9 +3,9 @@
  */
 package org.dmg.pmml;
 
-public interface HasPredicate {
+public interface HasPredicate<E extends PMMLObject & HasPredicate<E>> {
 
 	Predicate getPredicate();
 
-	HasPredicate setPredicate(Predicate predicate);
+	E setPredicate(Predicate predicate);
 }

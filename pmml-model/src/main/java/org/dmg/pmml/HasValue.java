@@ -8,7 +8,7 @@ package org.dmg.pmml;
  * A marker interface for PMML elements that represent a field value.
  * </p>
  */
-public interface HasValue {
+public interface HasValue<E extends PMMLObject & HasValue<E>> {
 
 	/**
 	 * @return The name of the field.
@@ -21,5 +21,5 @@ public interface HasValue {
 
 	String getValue();
 
-	HasValue setValue(String value);
+	E setValue(String value);
 }

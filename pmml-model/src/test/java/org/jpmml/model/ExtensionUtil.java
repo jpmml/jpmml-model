@@ -16,7 +16,7 @@ public class ExtensionUtil {
 	}
 
 	static
-	public List<?> getContent(HasExtensions hasExtensions){
+	public List<?> getContent(HasExtensions<?> hasExtensions){
 		List<Extension> extensions = hasExtensions.getExtensions();
 
 		assertEquals(1, extensions.size());

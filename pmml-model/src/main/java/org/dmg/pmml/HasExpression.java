@@ -3,9 +3,9 @@
  */
 package org.dmg.pmml;
 
-public interface HasExpression {
+public interface HasExpression<E extends PMMLObject & HasExpression<E>> {
 
 	Expression getExpression();
 
-	HasExpression setExpression(Expression expression);
+	E setExpression(Expression expression);
 }
