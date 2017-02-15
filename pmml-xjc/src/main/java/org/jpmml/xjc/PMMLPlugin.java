@@ -64,7 +64,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 	@Override
 	public Collection<QName> getCustomizationElementNames(){
-		return Arrays.asList(PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
+		return Arrays.asList(PMMLPlugin.SERIALVERSIONUID_ELEMENT_NAME, PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
 	}
 
 	@Override
@@ -96,6 +96,26 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				return 0;
 			}
 		};
+
+		{
+			CPluginCustomization serialVersionUIDCustomization = CustomizationUtils.findCustomization(model, PMMLPlugin.SERIALVERSIONUID_ELEMENT_NAME);
+
+			if(serialVersionUIDCustomization != null){
+				Element element = serialVersionUIDCustomization.element;
+
+				if(model.serialVersionUID != null){
+					throw new RuntimeException();
+				}
+
+				int major = parseVersion(element.getAttribute("major"));
+				int minor = parseVersion(element.getAttribute("minor"));
+				int patch = parseVersion(element.getAttribute("patch"));
+
+				int implementation = parseVersion(element.getAttribute("implementation"));
+
+				model.serialVersionUID = (long)((major << 24) | (minor << 16) | (patch << 8) | implementation);
+			}
+		}
 
 		Map<NClass, CClassInfo> beans = model.beans();
 
@@ -371,6 +391,14 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 					fieldVar.annotate(XmlValueExtension.class);
 				}
 			}
+
+			if(model.serialVersionUID != null){
+				beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, long.class, "serialVersionUID", JExpr.lit(model.serialVersionUID));
+			}
+		}
+
+		if(model.serialVersionUID != null){
+			model.serialVersionUID = null;
 		}
 
 		return true;
@@ -465,6 +493,21 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 	}
 
 	static
+	private int parseVersion(String version){
+
+		if(version == null){
+			throw new RuntimeException();
+		}
+
+		int value = Integer.parseInt(version);
+		if(value < 0 || value > 255){
+			throw new RuntimeException();
+		}
+
+		return value;
+	}
+
+	static
 	private interface FieldFilter {
 
 		boolean accept(CPropertyInfo propertyInfo, JType type);
@@ -543,5 +586,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		}
 	}
 
-	public static QName SUBPACKAGE_ELEMENT_NAME = new QName("http://jpmml.org/jpmml-model", "subpackage");
+	public static final QName SERIALVERSIONUID_ELEMENT_NAME = new QName("http://jpmml.org/jpmml-model", "serialVersionUID");
+
+	public static final QName SUBPACKAGE_ELEMENT_NAME = new QName("http://jpmml.org/jpmml-model", "subpackage");
 }

@@ -6,6 +6,11 @@ Copyright (c) 2009 University of Tartu
 
 	<jaxb:bindings schemaLocation="pmml.xsd" node="/xsd:schema">
 
+		<jpmml-model:serialVersionUID
+			major="4" minor="3" patch="0"
+			implementation="1"
+		/>
+
 		<wildcard:lax/>
 
 		<jaxb:schemaBindings>
