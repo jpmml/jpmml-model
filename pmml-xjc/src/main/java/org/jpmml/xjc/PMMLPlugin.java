@@ -231,6 +231,8 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
 
+		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.Property");
+
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
@@ -349,6 +351,8 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 					String paramName = param.name();
 
 					param.name(fieldVar.name());
+
+					param.annotate(propertyAnnotation).param("value", fieldVar.name());
 
 					JDocComment javadoc = setterMethod.javadoc();
 

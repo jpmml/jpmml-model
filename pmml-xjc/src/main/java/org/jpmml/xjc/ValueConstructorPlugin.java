@@ -6,6 +6,7 @@ package org.jpmml.xjc;
 import java.util.Collection;
 import java.util.Map;
 
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
@@ -53,6 +54,8 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 	)
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
 		JCodeModel codeModel = outline.getCodeModel();
+
+		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.Property");
 
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
@@ -120,6 +123,8 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
 				JVar param = valueConstructor.param(fieldVar.type(), fieldVar.name());
+
+				param.annotate(propertyAnnotation).param("value", fieldVar.name());
 
 				valueConstructor.body().assign(JExpr.refthis(fieldVar.name()), param);
 			}
