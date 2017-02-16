@@ -3,16 +3,13 @@
  */
 package org.jpmml.xjc;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
-import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
@@ -58,97 +55,68 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
 
+			FieldOutline[] fields = clazz.getDeclaredFields();
+
+			final
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-			List<FieldOutline> superClassFields = getSuperClassFields(clazz);
-			List<FieldOutline> classFields = getClassFields(clazz);
+			FieldFilter filter = new FieldFilter(){
 
-			if(superClassFields.size() > 0 || classFields.size() > 0){
-				JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
-				JInvocation defaultSuperInvocation = defaultConstructor.body().invoke("super");
-
-				JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
-				JInvocation valueSuperInvocation = valueConstructor.body().invoke("super");
-
-				for(FieldOutline superClassField : superClassFields){
-					CPropertyInfo propertyInfo = superClassField.getPropertyInfo();
-
-					JFieldVar superClassFieldVar = fieldVars.get(propertyInfo.getName(false));
-
-					JVar param = valueConstructor.param(JMod.FINAL, superClassFieldVar.type(), superClassFieldVar.name());
-
-					valueSuperInvocation.arg(param);
-				}
-
-				for(FieldOutline classField : classFields){
-					CPropertyInfo propertyInfo = classField.getPropertyInfo();
+				@Override
+				public boolean accept(FieldOutline field){
+					CPropertyInfo propertyInfo = field.getPropertyInfo();
 
 					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
-					JVar param = valueConstructor.param(JMod.FINAL, fieldVar.type(), fieldVar.name());
+					JMods modifiers = fieldVar.mods();
+					if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
+						return false;
+					} // End if
 
-					valueConstructor.body().assign(JExpr.refthis(fieldVar.name()), param);
+					if(propertyInfo instanceof CAttributePropertyInfo){
+						CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
+
+						return !getIgnoreAttributes() && attributePropertyInfo.isRequired();
+					} else
+
+					if(propertyInfo instanceof CElementPropertyInfo && !getIgnoreElements()){
+						CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
+
+						return !getIgnoreElements() && elementPropertyInfo.isRequired();
+					} else
+
+					if(propertyInfo instanceof CValuePropertyInfo){
+						CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
+
+						return !getIgnoreValues();
+					} else
+
+					{
+						return false;
+					}
 				}
+			};
+
+			fields = CodeModelUtil.filterFields(fields, filter);
+			if(fields.length == 0){
+				continue;
+			}
+
+			JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+			JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
+
+			for(FieldOutline field : fields){
+				CPropertyInfo propertyInfo = field.getPropertyInfo();
+
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+
+				JVar param = valueConstructor.param(fieldVar.type(), fieldVar.name());
+
+				valueConstructor.body().assign(JExpr.refthis(fieldVar.name()), param);
 			}
 		}
 
 		return true;
-	}
-
-	private List<FieldOutline> getSuperClassFields(ClassOutline clazz){
-		List<FieldOutline> result = new ArrayList<>();
-
-		for(ClassOutline superClazz = clazz.getSuperClass(); superClazz != null; superClazz = superClazz.getSuperClass()){
-			result.addAll(0, getValueFields(superClazz));
-		}
-
-		return result;
-	}
-
-	private List<FieldOutline> getClassFields(ClassOutline clazz){
-		return getValueFields(clazz);
-	}
-
-	private List<FieldOutline> getValueFields(ClassOutline clazz){
-		List<FieldOutline> result = new ArrayList<>();
-
-		JDefinedClass beanClazz = clazz.implClass;
-
-		Map<String, JFieldVar> fieldVars = beanClazz.fields();
-
-		FieldOutline[] fields = clazz.getDeclaredFields();
-		for(FieldOutline field : fields){
-			CPropertyInfo propertyInfo = field.getPropertyInfo();
-
-			JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
-
-			JMods modifiers = fieldVar.mods();
-			if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
-				continue;
-			} // End if
-
-			if(propertyInfo instanceof CAttributePropertyInfo && !getIgnoreAttributes()){
-				CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
-
-				if(attributePropertyInfo.isRequired()){
-					result.add(field);
-				}
-			} // End if
-
-			if(propertyInfo instanceof CElementPropertyInfo && !getIgnoreElements()){
-				CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
-
-				if(elementPropertyInfo.isRequired()){
-					result.add(field);
-				}
-			} // End if
-
-			if(propertyInfo instanceof CValuePropertyInfo && !getIgnoreValues()){
-				result.add(field);
-			}
-		}
-
-		return result;
 	}
 
 	public boolean getIgnoreAttributes(){

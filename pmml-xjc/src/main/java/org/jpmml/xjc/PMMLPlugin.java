@@ -405,14 +405,15 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 	}
 
 	static
-	private FieldOutline getExtensionsField(ClassOutline clazz){
+	private FieldOutline getExtensionsField(final ClassOutline clazz){
 		FieldFilter filter = new FieldFilter(){
 
 			@Override
-			public boolean accept(CPropertyInfo propertyInfo, JType type){
+			public boolean accept(FieldOutline field){
+				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
 				if(("extensions").equals(propertyInfo.getName(false)) && propertyInfo.isCollection()){
-					JType elementType = CodeModelUtil.getElementType(type);
+					JType elementType = CodeModelUtil.getElementType(field.getRawType());
 
 					return checkType(elementType, "org.dmg.pmml.Extension");
 				}
@@ -421,7 +422,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return findField(clazz, filter);
+		return CodeModelUtil.findField(clazz.getDeclaredFields(), filter);
 	}
 
 	static
@@ -432,10 +433,11 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 
 			@Override
-			public boolean accept(CPropertyInfo propertyInfo, JType type){
+			public boolean accept(FieldOutline field){
+				CPropertyInfo propertyInfo = field.getPropertyInfo();
 
 				if(propertyInfo.isCollection()){
-					JType elementType = CodeModelUtil.getElementType(type);
+					JType elementType = CodeModelUtil.getElementType(field.getRawType());
 
 					String name = elementType.name();
 
@@ -446,23 +448,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return findField(clazz, filter);
-	}
-
-	static
-	private FieldOutline findField(ClassOutline clazz, FieldFilter filter){
-		FieldOutline[] fields = clazz.getDeclaredFields();
-
-		for(FieldOutline field : fields){
-			CPropertyInfo propertyInfo = field.getPropertyInfo();
-			JType type = field.getRawType();
-
-			if(filter.accept(propertyInfo, type)){
-				return field;
-			}
-		}
-
-		return null;
+		return CodeModelUtil.findField(clazz.getDeclaredFields(), filter);
 	}
 
 	static
@@ -505,12 +491,6 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		}
 
 		return value;
-	}
-
-	static
-	private interface FieldFilter {
-
-		boolean accept(CPropertyInfo propertyInfo, JType type);
 	}
 
 	static
