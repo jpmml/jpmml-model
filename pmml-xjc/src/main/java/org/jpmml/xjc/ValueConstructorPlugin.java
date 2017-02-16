@@ -18,6 +18,7 @@ import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.model.CReferencePropertyInfo;
 import com.sun.tools.xjc.model.CValuePropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
@@ -30,6 +31,8 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 	private boolean ignoreAttributes = false;
 
 	private boolean ignoreElements = false;
+
+	private boolean ignoreReferences = false;
 
 	private boolean ignoreValues = false;
 
@@ -85,6 +88,12 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 						return !getIgnoreElements() && elementPropertyInfo.isRequired();
 					} else
 
+					if(propertyInfo instanceof CReferencePropertyInfo){
+						CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
+
+						return !getIgnoreReferences() && referencePropertyInfo.isRequired();
+					} else
+
 					if(propertyInfo instanceof CValuePropertyInfo){
 						CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
 
@@ -92,7 +101,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 					} else
 
 					{
-						return false;
+						throw new IllegalArgumentException();
 					}
 				}
 			};
@@ -133,6 +142,14 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 
 	public void setIgnoreElements(boolean ignoreElements){
 		this.ignoreElements = ignoreElements;
+	}
+
+	public boolean getIgnoreReferences(){
+		return this.ignoreReferences;
+	}
+
+	public void setIgnoreReferences(boolean ignoreReferences){
+		this.ignoreReferences = ignoreReferences;
 	}
 
 	public boolean getIgnoreValues(){
