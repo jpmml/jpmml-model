@@ -15,23 +15,6 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
-	Ensure that the Extension list is on the first position
-	-->
-	<xsl:template match="xs:sequence">
-		<xsl:copy>
-			<xsl:choose>
-				<xsl:when test="count(xs:element[@ref='Extension']) = 1">
-					<xsl:apply-templates select="node()[@ref='Extension']"/>
-					<xsl:apply-templates select="@*|node()[not(@ref='Extension')]"/>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:apply-templates select="@*|node()"/>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:copy>
-	</xsl:template>
-
-	<!--
 	Simplify Model type definitions by keeping the leading Extension list and commenting out the trailing Extension list
 	-->
 	<xsl:template match="xs:element[@ref='Extension'][position() &gt; 1 and position() = last()]">
