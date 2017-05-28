@@ -1,4 +1,4 @@
-JPMML-Model [![Build Status](https://travis-ci.org/jpmml/jpmml-model.png?branch=master)](https://travis-ci.org/jpmml/jpmml-model)
+JPMML-Model [![Build Status](https://travis-ci.org/jpmml/jpmml-model.png?branch=1.1.X)](https://travis-ci.org/jpmml/jpmml-model)
 ===========
 
 Java Class Model API for Predictive Model Markup Language (PMML).
@@ -10,7 +10,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Schema version annotations.
 * Fluent API:
   * Value constructors.
-* [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
+* [Visitor pattern](http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
 * Memory efficient:
@@ -23,7 +23,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Installation #
 
-JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml) for release announcements.
+JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository](http://repo1.maven.org/maven2/org/jpmml/). Please join the [JPMML mailing list](https://groups.google.com/forum/#!forum/jpmml) for release announcements.
 
 The current version is **1.1.16** (7 May, 2015).
 
@@ -41,7 +41,7 @@ The class model consists of two types of classes. There is a small number of man
 
 All class model classes descend from class `org.dmg.pmml.PMMLObject`. Additional class hierarchy levels, if any, represent common behaviour and/or features. For example, all model classes descend from class `org.dmg.pmml.Model`.
 
-The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification] (http://www.dmg.org/v4-2-1/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
+The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification](http://www.dmg.org/v4-2-1/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
 
 ### Unmarshalling ###
 
@@ -87,15 +87,15 @@ public void store(PMML pmml, OutputStream os) throws Exception {
 
 Module `pmml-model-example` exemplifies the use of JPMML-Model library.
 
-This module can be built using [Apache Maven] (http://maven.apache.org/):
+This module can be built using [Apache Maven](http://maven.apache.org/):
 ```
 mvn clean install
 ```
 
 The resulting uber-JAR file `target/example-1.1-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
-* `org.jpmml.model.SegmentationOutputExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/SegmentationOutputExample.java). Extends the Output element of a segmentation model with OutputField elements that expose the predicted values of individual segments.
-* `org.jpmml.model.GolfingTreeModelExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/GolfingTreeModelExample.java). Produces a TreeModel for the "golfing" exercise.
+* `org.jpmml.model.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.2 document.
+* `org.jpmml.model.SegmentationOutputExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/SegmentationOutputExample.java). Extends the Output element of a segmentation model with OutputField elements that expose the predicted values of individual segments.
+* `org.jpmml.model.GolfingTreeModelExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/GolfingTreeModelExample.java). Produces a TreeModel for the "golfing" exercise.
 
 For example, transforming `input.pmml` to `output.pmml`:
 ```
@@ -104,8 +104,8 @@ java -cp target/example-1.1-SNAPSHOT.jar org.jpmml.model.CopyExample --input inp
 
 # License #
 
-JPMML-Model is licensed under the [BSD 3-Clause License] (http://opensource.org/licenses/BSD-3-Clause).
+JPMML-Model is licensed under the [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause).
 
 # Additional information #
 
-Please contact [info@openscoring.io] (mailto:info@openscoring.io)
+Please contact [info@openscoring.io](mailto:info@openscoring.io)
