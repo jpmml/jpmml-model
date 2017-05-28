@@ -5,6 +5,12 @@ Copyright (c) 2016 Villu Ruusmann
 <xsl:stylesheet version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:template name="extensions-content">
+		<xs:simpleType name="MATH-CONTEXT">
+			<xs:restriction base="xs:string">
+			<xs:enumeration value="float"/>
+			<xs:enumeration value="double"/>
+			</xs:restriction>
+		</xs:simpleType>
 	</xsl:template>
 
 	<xsl:template name="inline-multipleModelMethod">
@@ -25,5 +31,10 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template match="xs:element[@name='PMML']/xs:complexType/xs:attribute[@name='version']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-baseVersion" type="xs:string"/>
+	</xsl:template>
+
+	<xsl:template match="xs:attribute[@name='isScorable']">
+		<xsl:copy-of select="."/>
+		<xs:attribute name="x-mathContext" type="MATH-CONTEXT" default="double"/>
 	</xsl:template>
 </xsl:stylesheet>

@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="2"
+			implementation="3"
 		/>
 
 		<wildcard:lax/>
@@ -162,6 +162,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelVerification']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -261,6 +270,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='BaselineStratum']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -283,6 +301,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
 			<jaxb:property
 				name="scorable"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<jaxb:property
+				name="mathContext"
 			/>
 		</jaxb:bindings>
 
@@ -487,6 +511,15 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='modelClass']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="ModelClass"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
 			/>
 		</jaxb:bindings>
 
@@ -1001,6 +1034,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='GaussianProcessModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='GeneralizedExponentialKernel']/xsd:complexType">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_3"/>
@@ -1186,6 +1225,15 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_2"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='BaseCumHazardTables']">
@@ -1461,6 +1509,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:choice">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Deprecated" value="PMML_4_1"/>
@@ -1599,6 +1656,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -1642,6 +1708,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
@@ -1673,6 +1748,15 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="NormalizationMethod"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
 			/>
 		</jaxb:bindings>
 
@@ -2383,6 +2467,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='modelType']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="ModelType"
@@ -2487,6 +2580,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -2521,6 +2623,15 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='reasonCodeAlgorithm']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="ReasonCodeAlgorithm"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
 			/>
 		</jaxb:bindings>
 
@@ -2728,6 +2839,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Constraints']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_3_1"/>
@@ -2924,6 +3044,15 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:choice">
@@ -3144,6 +3273,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_0"/>
@@ -3325,6 +3463,15 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -3417,6 +3564,15 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='splitCharacteristic']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="SplitCharacteristic"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="mathContext"
 			/>
 		</jaxb:bindings>
 
@@ -3684,6 +3840,12 @@ Copyright (c) 2009 University of Tartu
 				name="InvalidValueTreatmentMethod"
 			/>
 		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='MATH-CONTEXT']">
+			<jaxb:typesafeEnumClass
+				name="MathContext"
+			/>
+			</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='MINING-FUNCTION']">
 			<jaxb:typesafeEnumClass

@@ -34,6 +34,12 @@ public class Model extends PMMLObject {
 	public Model setScorable(Boolean scorable);
 
 	abstract
+	public MathContext getMathContext();
+
+	abstract
+	public Model setMathContext(MathContext mathContext);
+
+	abstract
 	public MiningSchema getMiningSchema();
 
 	abstract
