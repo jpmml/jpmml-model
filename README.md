@@ -14,7 +14,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Value constructors.
   * Method chaining-friendly setter methods.
   * Optional SAX Locator information.
-* [Visitor pattern] (http://en.wikipedia.org/wiki/Visitor_pattern):
+* [Visitor pattern](http://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
 * Supported platforms:
@@ -22,8 +22,8 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Android.
   * Google Web Toolkit (GWT).
 * Supported JAXB runtimes:
-  * [GlassFish Metro] (https://metro.java.net)
-  * [EclipseLink MOXy] (https://www.eclipse.org/eclipselink)
+  * [GlassFish Metro](https://metro.java.net)
+  * [EclipseLink MOXy](https://www.eclipse.org/eclipselink)
 
 # Prerequisites #
 
@@ -31,7 +31,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Installation #
 
-JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository] (http://repo1.maven.org/maven2/org/jpmml/).
+JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository](http://repo1.maven.org/maven2/org/jpmml/).
 
 The current version is **1.3.7** (28 May, 2017).
 
@@ -49,7 +49,7 @@ The class model consists of two types of classes. There is a small number of man
 
 All class model classes descend from class `org.dmg.pmml.PMMLObject`. Additional class hierarchy levels, if any, represent common behaviour and/or features. For example, all model classes descend from class `org.dmg.pmml.Model`.
 
-The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification] (http://dmg.org/pmml/v4-3/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
+The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification](http://dmg.org/pmml/v4-3/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
 
 ### Unmarshalling ###
 
@@ -88,15 +88,15 @@ public void store(PMML pmml, OutputStream os) throws JAXBException {
 
 Module `pmml-model-example` exemplifies the use of JPMML-Model library.
 
-This module can be built using [Apache Maven] (http://maven.apache.org/):
+This module can be built using [Apache Maven](http://maven.apache.org/):
 ```
 mvn clean install
 ```
 
 The resulting uber-JAR file `target/example-1.3-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.CopyExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.3 document.
-* `org.jpmml.model.ObfuscationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
-* `org.jpmml.model.ValidationExample` [(source)] (https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML schema version 3.X or 4.X document against the built-in XML Schema Definition (XSD) resource.
+* `org.jpmml.model.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.3 document.
+* `org.jpmml.model.ObfuscationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
+* `org.jpmml.model.ValidationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML schema version 3.X or 4.X document against the built-in XML Schema Definition (XSD) resource.
 
 Copying `input.pmml` to `output.pmml`; the class model is transformed by applying a list of visitors to it:
 ```
@@ -122,19 +122,19 @@ java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFa
 
 # Support and Documentation #
 
-Limited public support is available via the [JPMML mailing list] (https://groups.google.com/forum/#!forum/jpmml).
+Limited public support is available via the [JPMML mailing list](https://groups.google.com/forum/#!forum/jpmml).
 
-The [Openscoring.io blog] (http://openscoring.io/blog/) contains fully worked out examples about using JPMML-Model and JPMML-Evaluator libraries.
+The [Openscoring.io blog](http://openscoring.io/blog/) contains fully worked out examples about using JPMML-Model and JPMML-Evaluator libraries.
 
 Recommended reading:
-* [Extending PMML documents with custom XML content] (http://openscoring.io/blog/2015/05/15/jpmml_model_api_vendor_extensions/)
-* [Transforming and measuring the memory consumption of class model objects using the Java agent technology] (http://openscoring.io/blog/2015/02/06/jpmml_model_api_transform_measure/)
-* [Converting PMML documents between different schema versions] (http://openscoring.io/blog/2014/06/20/jpmml_model_api_import_export/)
+* [Extending PMML documents with custom XML content](http://openscoring.io/blog/2015/05/15/jpmml_model_api_vendor_extensions/)
+* [Transforming and measuring the memory consumption of class model objects using the Java agent technology](http://openscoring.io/blog/2015/02/06/jpmml_model_api_transform_measure/)
+* [Converting PMML documents between different schema versions](http://openscoring.io/blog/2014/06/20/jpmml_model_api_import_export/)
 
 # License #
 
-JPMML-Model is licensed under the [BSD 3-Clause License] (http://opensource.org/licenses/BSD-3-Clause).
+JPMML-Model is licensed under the [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause).
 
 # Additional information #
 
-Please contact [info@openscoring.io] (mailto:info@openscoring.io)
+Please contact [info@openscoring.io](mailto:info@openscoring.io)
