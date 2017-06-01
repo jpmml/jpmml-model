@@ -12,6 +12,7 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.regression.RegressionModel;
+import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -24,7 +25,7 @@ public class ReflectionUtilTest {
 
 	@Test
 	public void copyState(){
-		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
+		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), new Header(), new DataDictionary());
 
 		// Initialize the live list instance
 		pmml.getModels();

@@ -25,6 +25,7 @@ import org.dmg.pmml.True;
 import org.dmg.pmml.Value;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
+import org.jpmml.schema.Version;
 
 public class GolfingTreeModelExample extends ProductionExample {
 
@@ -58,8 +59,6 @@ public class GolfingTreeModelExample extends ProductionExample {
 			);
 
 		dataDictionary.setNumberOfFields((dataDictionary.getDataFields()).size());
-
-		PMML pmml = new PMML("4.3", header, dataDictionary);
 
 		MiningSchema miningSchema = new MiningSchema()
 			.addMiningFields(
@@ -121,7 +120,8 @@ public class GolfingTreeModelExample extends ProductionExample {
 		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, miningSchema, root)
 			.setModelName("golfing");
 
-		pmml.addModels(treeModel);
+		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), header, dataDictionary)
+			.addModels(treeModel);
 
 		return pmml;
 	}

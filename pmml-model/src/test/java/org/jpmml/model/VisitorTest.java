@@ -20,6 +20,7 @@ import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.jpmml.model.visitors.AbstractVisitor;
+import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -28,11 +29,6 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
-
-		Node root = new Node()
-			.setPredicate(new True());
-
 		final
 		Node leftChild = new Node()
 			.setPredicate(new SimplePredicate());
@@ -41,11 +37,15 @@ public class VisitorTest {
 		Node rightChild = new Node()
 			.setPredicate(new SimpleSetPredicate());
 
-		root.addNodes(leftChild, rightChild);
+		Node root = new Node()
+			.setPredicate(new True())
+			.addNodes(leftChild, rightChild);
 
-		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), root);
+		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), root)
+			.setSplitCharacteristic(TreeModel.SplitCharacteristic.BINARY_SPLIT);
 
-		pmml.addModels(treeModel);
+		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), new Header(), new DataDictionary())
+			.addModels(treeModel);
 
 		Visitor skipVisitor = new AbstractVisitor(){
 

@@ -14,6 +14,7 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
+import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -22,12 +23,11 @@ public class MarshallerTest {
 
 	@Test
 	public void marshal() throws Exception {
-		PMML pmml = new PMML("4.3", new Header(), new DataDictionary());
-
 		RegressionModel regressionModel = new RegressionModel()
 			.addRegressionTables(new RegressionTable());
 
-		pmml.addModels(regressionModel);
+		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), new Header(), new DataDictionary())
+			.addModels(regressionModel);
 
 		JAXBContext context = JAXBContextFactory.createContext(new Class[]{org.dmg.pmml.ObjectFactory.class, org.dmg.pmml.regression.ObjectFactory.class}, null);
 

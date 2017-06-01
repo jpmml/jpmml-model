@@ -190,7 +190,7 @@ public class VersionInspectorTest {
 
 		DataDictionary dataDictionary = new DataDictionary();
 
-		PMML pmml = new PMML("4.3", header, dataDictionary);
+		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), header, dataDictionary);
 
 		return pmml;
 	}
