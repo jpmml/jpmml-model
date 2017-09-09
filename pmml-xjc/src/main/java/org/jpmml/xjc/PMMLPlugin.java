@@ -221,6 +221,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
 
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
+		JClass hasFieldInterface = codeModel.ref("org.dmg.pmml.HasField");
 
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
@@ -231,6 +232,22 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		Collection<? extends ClassOutline> clazzes = outline.getClasses();
 		for(ClassOutline clazz : clazzes){
 			JDefinedClass beanClazz = clazz.implClass;
+
+			// Implementations of org.dmg.pmml.HasField
+			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
+				beanClazz._implements(hasFieldInterface.narrow(beanClazz));
+
+				JMethod getterMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
+				getterMethod.annotate(Override.class);
+				getterMethod.body()._return(JExpr.invoke("getTextField"));
+
+				JMethod setterMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "setField");
+				setterMethod.annotate(Override.class);
+
+				JVar fieldParameter = setterMethod.param(fieldNameClass, "field");
+
+				setterMethod.body()._return(JExpr.invoke("setTextField").arg(fieldParameter));
+			} // End if
 
 			// Implementations of org.dmg.pmml.HasValue
 			if(checkType(beanClazz, "org.dmg.pmml.general_regression.PPCell")){
