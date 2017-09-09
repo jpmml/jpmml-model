@@ -7,8 +7,8 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template name="extensions-content">
 		<xs:simpleType name="MATH-CONTEXT">
 			<xs:restriction base="xs:string">
-			<xs:enumeration value="float"/>
-			<xs:enumeration value="double"/>
+				<xs:enumeration value="float"/>
+				<xs:enumeration value="double"/>
 			</xs:restriction>
 		</xs:simpleType>
 	</xsl:template>
@@ -28,6 +28,11 @@ Copyright (c) 2016 Villu Ruusmann
 		</xsl:copy>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='targetField']">
+		<xsl:copy-of select="."/>
+		<xs:attribute name="x-reportField" type="FIELD-NAME"/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='PMML']/xs:complexType/xs:attribute[@name='version']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-baseVersion" type="xs:string"/>
@@ -36,5 +41,13 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template match="xs:attribute[@name='isScorable']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-mathContext" type="MATH-CONTEXT" default="double"/>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='RESULT-FEATURE']/xs:restriction">
+		<xs:restriction>
+			<xsl:copy-of select="@*"/>
+			<xsl:copy-of select="node()"/>
+			<xs:enumeration value="x-report"/>
+		</xs:restriction>
 	</xsl:template>
 </xsl:stylesheet>

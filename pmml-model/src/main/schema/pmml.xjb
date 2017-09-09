@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="4"
+			implementation="5"
 		/>
 
 		<wildcard:lax/>
@@ -2056,6 +2056,15 @@ Copyright (c) 2009 University of Tartu
 			</annox:annotate>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='x-reportField']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="reportField"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:element[@ref='Decisions']">
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
@@ -3998,6 +4007,15 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotate>
 				<annox:annotate annox:class="org.jpmml.schema.Added" value="PMML_4_1"/>
 			</annox:annotate>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='x-report']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:typesafeEnumMember
+				name="REPORT"
+			/>
 		</jaxb:bindings>
 	</jaxb:bindings>
 </jaxb:bindings>
