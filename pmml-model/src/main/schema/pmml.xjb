@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="5"
+			implementation="6"
 		/>
 
 		<wildcard:lax/>
@@ -1559,6 +1559,15 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='outliers']">
 			<jaxb:property
 				name="outlierTreatment"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='x-invalidValueReplacement']">
+			<annox:annotate>
+				<annox:annotate annox:class="org.jpmml.schema.Extension"/>
+			</annox:annotate>
+			<jaxb:property
+				name="invalidValueReplacement"
 			/>
 		</jaxb:bindings>
 

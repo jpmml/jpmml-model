@@ -28,6 +28,11 @@ Copyright (c) 2016 Villu Ruusmann
 		</xsl:copy>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='invalidValueTreatment']">
+		<xs:attribute name="x-invalidValueReplacement" type="xs:string"/>
+		<xsl:copy-of select="."/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='targetField']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-reportField" type="FIELD-NAME"/>
