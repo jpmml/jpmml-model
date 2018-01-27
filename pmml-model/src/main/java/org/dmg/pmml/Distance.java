@@ -1,0 +1,11 @@
+/*
+ * Copyright (c) 2018 Villu Ruusmann
+ */
+package org.dmg.pmml;
+
+import javax.xml.bind.annotation.XmlTransient;
+
+@XmlTransient
+abstract
+public class Distance extends Measure {
+}

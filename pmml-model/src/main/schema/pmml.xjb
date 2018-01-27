@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="6"
+			implementation="7"
 		/>
 
 		<wildcard:lax/>
@@ -345,7 +345,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='binarySimilarity']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Similarity</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BlockIndicator']/xsd:complexType">
@@ -420,7 +420,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='chebychev']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ChildParent']/xsd:complexType">
@@ -446,7 +446,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='cityBlock']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClassLabels']/xsd:complexType">
@@ -943,7 +943,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='euclidean']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='EventValues']/xsd:complexType">
@@ -1348,7 +1348,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='jaccard']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Similarity</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='KNNInput']/xsd:complexType">
@@ -1608,7 +1608,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='minkowski']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MissingValueWeights']/xsd:complexType">
@@ -2931,7 +2931,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='simpleMatching']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Similarity</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SimplePredicate']/xsd:complexType">
@@ -2965,7 +2965,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='squaredEuclidean']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SpectralAnalysis']/xsd:complexType">
@@ -3104,7 +3104,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='tanimoto']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Measure</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Similarity</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType">

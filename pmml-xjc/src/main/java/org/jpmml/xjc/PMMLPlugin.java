@@ -73,6 +73,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JCodeModel codeModel = model.codeModel;
 
+		JClass measureClass = codeModel.ref("org.dmg.pmml.Measure");
 		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 
 		JClass activationFunctionEnum = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.ActivationFunction");
@@ -189,6 +190,11 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 				// Simple value
 				{
+
+					if((classInfo.shortName).equals("ComparisonMeasure") && (privateName).equals("measure")){
+						propertyInfo.baseType = measureClass;
+					} else
+
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("activationFunction")){
 						propertyInfo.baseType = activationFunctionEnum;
 					} else
