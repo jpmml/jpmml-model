@@ -635,6 +635,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Constant']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;Constant&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Constant']/xsd:complexType/xsd:simpleContent/xsd:extension/xsd:attribute[@name='dataType']">
@@ -727,6 +728,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.TypeDefinitionField</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;DataField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -851,6 +853,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
@@ -881,6 +884,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.TypeDefinitionField</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -919,6 +923,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;Discretize&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;Discretize&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasField&lt;Discretize&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Discretize,java.lang.String&gt;</inheritance:implements>
@@ -1459,6 +1464,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;MapValues&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;MapValues&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;MapValues,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasTable&lt;MapValues&gt;</inheritance:implements>
@@ -1931,6 +1937,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;OutputField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -2107,6 +2114,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;ParameterField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -2544,6 +2552,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasDataType&lt;ResultField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='feature']">
