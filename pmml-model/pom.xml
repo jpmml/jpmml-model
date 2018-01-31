@@ -191,12 +191,12 @@
 					<dependency>
 						<groupId>org.jpmml</groupId>
 						<artifactId>pmml-schema</artifactId>
-						<version>${parent.version}</version>
+						<version>${project.parent.version}</version>
 					</dependency>
 					<dependency>
 						<groupId>org.jpmml</groupId>
 						<artifactId>pmml-xjc</artifactId>
-						<version>${parent.version}</version>
+						<version>${project.parent.version}</version>
 					</dependency>
 
 					<dependency>
