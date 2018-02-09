@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.filters;
 
 import org.dmg.pmml.Version;
 import org.xml.sax.Attributes;

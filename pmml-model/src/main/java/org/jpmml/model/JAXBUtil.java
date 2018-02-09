@@ -19,6 +19,10 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.dmg.pmml.PMML;
+import org.jpmml.model.filters.ElementFilter;
+import org.jpmml.model.filters.ExportFilter;
+import org.jpmml.model.filters.ExtensionFilter;
+import org.jpmml.model.filters.ImportFilter;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;

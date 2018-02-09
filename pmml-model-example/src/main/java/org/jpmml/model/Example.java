@@ -20,6 +20,7 @@ import javax.xml.transform.stream.StreamResult;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import org.dmg.pmml.PMML;
+import org.jpmml.model.filters.ImportFilter;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 

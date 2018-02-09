@@ -1,12 +1,14 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.filters;
 
 import java.util.List;
 
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
+import org.jpmml.model.ExtensionUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

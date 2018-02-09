@@ -1,11 +1,12 @@
 /*
  * Copyright (c) 2009 University of Tartu
  */
-package org.jpmml.model;
+package org.jpmml.model.filters;
 
 import javax.xml.transform.sax.SAXSource;
 
 import org.dmg.pmml.Version;
+import org.jpmml.model.JAXBUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;

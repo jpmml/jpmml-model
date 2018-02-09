@@ -13,6 +13,7 @@ import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.dmg.pmml.PMML;
+import org.jpmml.model.filters.ImportFilter;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 

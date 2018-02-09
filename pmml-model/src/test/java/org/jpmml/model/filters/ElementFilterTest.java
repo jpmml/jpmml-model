@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.filters;
 
 import java.util.List;
 
@@ -9,6 +9,11 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segmentation;
+import org.jpmml.model.ChainedSegmentationTest;
+import org.jpmml.model.ExtensionUtil;
+import org.jpmml.model.NestedSegmentationTest;
+import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.WildcardTest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
