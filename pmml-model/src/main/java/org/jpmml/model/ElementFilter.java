@@ -6,7 +6,7 @@ package org.jpmml.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.dmg.pmml.PMMLObject;
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.xml.sax.XMLReader;
 
 /**

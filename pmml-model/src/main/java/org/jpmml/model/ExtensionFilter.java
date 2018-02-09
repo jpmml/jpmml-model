@@ -3,7 +3,7 @@
  */
 package org.jpmml.model;
 
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.xml.sax.Attributes;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;

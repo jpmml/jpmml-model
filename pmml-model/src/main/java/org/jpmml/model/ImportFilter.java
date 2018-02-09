@@ -5,7 +5,7 @@ package org.jpmml.model;
 
 import javax.xml.transform.sax.SAXSource;
 
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;

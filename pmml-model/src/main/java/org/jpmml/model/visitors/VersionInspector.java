@@ -12,14 +12,15 @@ import java.util.Map;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.Version;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.Added;
+import org.jpmml.model.Optional;
 import org.jpmml.model.ReflectionUtil;
-import org.jpmml.schema.Added;
-import org.jpmml.schema.Optional;
-import org.jpmml.schema.Removed;
-import org.jpmml.schema.Required;
-import org.jpmml.schema.Version;
+import org.jpmml.model.Removed;
+import org.jpmml.model.Required;
+
 
 /**
  * <p>

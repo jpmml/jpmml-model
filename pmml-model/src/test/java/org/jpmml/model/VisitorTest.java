@@ -15,12 +15,12 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimpleSetPredicate;
 import org.dmg.pmml.True;
+import org.dmg.pmml.Version;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.jpmml.model.visitors.AbstractVisitor;
-import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

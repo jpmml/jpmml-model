@@ -15,7 +15,7 @@ import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 
 import org.dmg.pmml.PMML;
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.XMLReaderFactory;

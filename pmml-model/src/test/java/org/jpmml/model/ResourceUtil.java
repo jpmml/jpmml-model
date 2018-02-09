@@ -12,7 +12,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.PMML;
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;

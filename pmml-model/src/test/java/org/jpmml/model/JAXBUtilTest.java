@@ -16,7 +16,7 @@ import javax.xml.validation.Schema;
 import org.dmg.pmml.CustomObjectFactory;
 import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.PMML;
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

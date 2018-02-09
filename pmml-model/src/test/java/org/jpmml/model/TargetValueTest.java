@@ -3,7 +3,7 @@
  */
 package org.jpmml.model;
 
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.junit.Test;
 import org.w3c.dom.Node;
 

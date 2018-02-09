@@ -6,7 +6,7 @@ package org.jpmml.model;
 import java.util.List;
 
 import org.dmg.pmml.PMML;
-import org.jpmml.schema.Version;
+import org.dmg.pmml.Version;
 import org.junit.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

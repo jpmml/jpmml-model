@@ -11,10 +11,10 @@ import javax.xml.bind.Marshaller;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.Version;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
 import org.eclipse.persistence.jaxb.JAXBContextFactory;
-import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

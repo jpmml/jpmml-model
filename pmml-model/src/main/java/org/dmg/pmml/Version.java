@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2012 University of Tartu
  */
-package org.jpmml.schema;
+package org.dmg.pmml;
 
 public enum Version {
 	PMML_3_0("http://www.dmg.org/PMML-3_0"),

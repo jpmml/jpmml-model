@@ -21,6 +21,7 @@ import org.dmg.pmml.Target;
 import org.dmg.pmml.TargetValue;
 import org.dmg.pmml.Targets;
 import org.dmg.pmml.TransformationDictionary;
+import org.dmg.pmml.Version;
 import org.dmg.pmml.association.AssociationModel;
 import org.dmg.pmml.baseline.BaselineModel;
 import org.dmg.pmml.bayesian_network.BayesianNetworkModel;
@@ -38,7 +39,6 @@ import org.dmg.pmml.sequence.SequenceModel;
 import org.dmg.pmml.text.TextModel;
 import org.dmg.pmml.time_series.TimeSeriesModel;
 import org.dmg.pmml.tree.TreeModel;
-import org.jpmml.schema.Version;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
