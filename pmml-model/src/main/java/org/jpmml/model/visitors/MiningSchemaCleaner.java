@@ -19,7 +19,6 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.mining.Segmentation;
-import org.jpmml.model.FieldUtil;
 
 /**
  * <p>

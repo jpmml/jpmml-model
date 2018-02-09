@@ -17,7 +17,6 @@ import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.regression.RegressionTable;
 import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
-import org.jpmml.model.FieldUtil;
 import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.ResourceUtil;
 import org.junit.Test;

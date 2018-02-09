@@ -18,7 +18,6 @@ import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.mining.Segmentation;
-import org.jpmml.model.FieldUtil;
 
 public class DeepFieldResolverUtil {
 

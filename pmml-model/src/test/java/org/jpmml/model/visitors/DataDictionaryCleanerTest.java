@@ -15,7 +15,6 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
-import org.jpmml.model.FieldUtil;
 import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.ResourceUtil;
 import org.junit.Test;

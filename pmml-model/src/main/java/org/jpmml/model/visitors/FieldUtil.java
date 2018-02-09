@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.visitors;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;

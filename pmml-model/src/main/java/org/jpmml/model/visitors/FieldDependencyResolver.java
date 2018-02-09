@@ -20,7 +20,6 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.FieldUtil;
 
 /**
  * <p>

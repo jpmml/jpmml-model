@@ -18,7 +18,6 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Visitable;
-import org.jpmml.model.FieldUtil;
 
 /**
  * <p>
