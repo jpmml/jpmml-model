@@ -56,7 +56,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
 		JCodeModel codeModel = outline.getCodeModel();
 
-		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.Property");
+		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){

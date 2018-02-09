@@ -15,12 +15,11 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
-import org.jpmml.model.Added;
-import org.jpmml.model.Optional;
 import org.jpmml.model.ReflectionUtil;
-import org.jpmml.model.Removed;
-import org.jpmml.model.Required;
-
+import org.jpmml.model.annotations.Added;
+import org.jpmml.model.annotations.Optional;
+import org.jpmml.model.annotations.Removed;
+import org.jpmml.model.annotations.Required;
 
 /**
  * <p>

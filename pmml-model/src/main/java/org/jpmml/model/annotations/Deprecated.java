@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2016 Villu Ruusmann
+ * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,9 +11,7 @@ import java.lang.annotation.Target;
 import org.dmg.pmml.Version;
 
 /**
- * Marks a feature that was changed from optional to required in the specified PMML schema version.
- *
- * @see Optional
+ * Marks a feature that was deprecated in the specified PMML schema version.
  */
 @Retention (
 	value = RetentionPolicy.RUNTIME
@@ -21,7 +19,7 @@ import org.dmg.pmml.Version;
 @Target (
 	value = {ElementType.TYPE, ElementType.FIELD}
 )
-public @interface Required {
+public @interface Deprecated {
 
 	Version value();
 }

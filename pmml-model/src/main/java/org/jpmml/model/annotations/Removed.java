@@ -1,15 +1,19 @@
 /*
- * Copyright (c) 2016 Villu Ruusmann
+ * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.dmg.pmml.Version;
+
 /**
- * Marks a feature that is not part of PMML schema.
+ * Marks a feature that was removed in the specified PMML schema version.
+ *
+ * @see Added
  */
 @Retention (
 	value = RetentionPolicy.RUNTIME
@@ -17,5 +21,7 @@ import java.lang.annotation.Target;
 @Target (
 	value = {ElementType.TYPE, ElementType.FIELD}
 )
-public @interface Extension {
+public @interface Removed {
+
+	Version value();
 }

@@ -234,7 +234,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
 
-		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.Property");
+		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
