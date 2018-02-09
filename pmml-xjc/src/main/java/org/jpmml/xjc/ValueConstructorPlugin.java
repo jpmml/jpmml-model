@@ -57,11 +57,11 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.Property");
 
-		Collection<? extends ClassOutline> clazzes = outline.getClasses();
-		for(ClassOutline clazz : clazzes){
-			JDefinedClass beanClazz = clazz.implClass;
+		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
+		for(ClassOutline classOutline : classOutlines){
+			JDefinedClass beanClazz = classOutline.implClass;
 
-			FieldOutline[] fields = clazz.getDeclaredFields();
+			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 
 			final
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
@@ -69,8 +69,8 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 			FieldFilter filter = new FieldFilter(){
 
 				@Override
-				public boolean accept(FieldOutline field){
-					CPropertyInfo propertyInfo = field.getPropertyInfo();
+				public boolean accept(FieldOutline fieldOutline){
+					CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
@@ -109,16 +109,16 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				}
 			};
 
-			fields = CodeModelUtil.filterFields(fields, filter);
-			if(fields.length == 0){
+			fieldOutlines = CodeModelUtil.filterFields(fieldOutlines, filter);
+			if(fieldOutlines.length == 0){
 				continue;
 			}
 
 			JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
 			JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
 
-			for(FieldOutline field : fields){
-				CPropertyInfo propertyInfo = field.getPropertyInfo();
+			for(FieldOutline fieldOutline : fieldOutlines){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 

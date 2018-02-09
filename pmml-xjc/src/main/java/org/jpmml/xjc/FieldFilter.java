@@ -7,5 +7,5 @@ import com.sun.tools.xjc.outline.FieldOutline;
 
 public interface FieldFilter {
 
-	boolean accept(FieldOutline field);
+	boolean accept(FieldOutline fieldOutline);
 }

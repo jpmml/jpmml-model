@@ -114,9 +114,9 @@ public class VisitorPlugin extends Plugin {
 
 		Set<String> traversableTypes = new LinkedHashSet<>();
 
-		Collection<? extends ClassOutline> clazzes = outline.getClasses();
-		for(ClassOutline clazz : clazzes){
-			JDefinedClass beanClazz = clazz.implClass;
+		Collection<? extends ClassOutline> classOulines = outline.getClasses();
+		for(ClassOutline classOutline : classOulines){
+			JDefinedClass beanClazz = classOutline.implClass;
 
 			traversableTypes.add(getTypeName(beanClazz));
 
@@ -124,8 +124,8 @@ public class VisitorPlugin extends Plugin {
 			traversableTypes.add(getTypeName(beanSuperClazz));
 		} // End for
 
-		for(ClassOutline clazz : clazzes){
-			JDefinedClass beanClazz = clazz.implClass;
+		for(ClassOutline classOutline : classOulines){
+			JDefinedClass beanClazz = classOutline.implClass;
 
 			String parameterName = NameConverter.standard.toVariableName(beanClazz.name());
 			if(!JJavaName.isJavaIdentifier(parameterName)){
@@ -160,11 +160,11 @@ public class VisitorPlugin extends Plugin {
 
 			JInvocation traverseVarargs = null;
 
-			FieldOutline[] fields = clazz.getDeclaredFields();
-			for(FieldOutline field : fields){
-				CPropertyInfo propertyInfo = field.getPropertyInfo();
+			FieldOutline[] fieldsOutlines = classOutline.getDeclaredFields();
+			for(FieldOutline fieldOutline : fieldsOutlines){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-				JType fieldType = field.getRawType();
+				JType fieldType = fieldOutline.getRawType();
 
 				JMethod getterMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
 

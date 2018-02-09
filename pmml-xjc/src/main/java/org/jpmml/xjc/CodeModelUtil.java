@@ -28,15 +28,15 @@ public class CodeModelUtil {
 	}
 
 	static
-	public FieldOutline findField(FieldOutline[] fields, FieldFilter filter){
-		FieldOutline[] acceptedFields = filterFields(fields, filter);
+	public FieldOutline findField(FieldOutline[] fieldOutlines, FieldFilter filter){
+		FieldOutline[] acceptedFieldOutlines = filterFields(fieldOutlines, filter);
 
-		if(acceptedFields.length == 0){
+		if(acceptedFieldOutlines.length == 0){
 			return null;
 		} else
 
-		if(acceptedFields.length == 1){
-			return acceptedFields[0];
+		if(acceptedFieldOutlines.length == 1){
+			return acceptedFieldOutlines[0];
 		} else
 
 		{
@@ -45,13 +45,13 @@ public class CodeModelUtil {
 	}
 
 	static
-	public FieldOutline[] filterFields(FieldOutline[] fields, FieldFilter filter){
+	public FieldOutline[] filterFields(FieldOutline[] fieldOutlines, FieldFilter filter){
 		List<FieldOutline> result = new ArrayList<>();
 
-		for(FieldOutline field : fields){
+		for(FieldOutline fieldOutline : fieldOutlines){
 
-			if(filter.accept(field)){
-				result.add(field);
+			if(filter.accept(fieldOutline)){
+				result.add(fieldOutline);
 			}
 		}
 

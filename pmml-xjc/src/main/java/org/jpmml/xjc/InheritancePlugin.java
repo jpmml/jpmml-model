@@ -84,11 +84,11 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 
 		Map<String, JClass> typeCache = new HashMap<>();
 
-		Collection<? extends ClassOutline> clazzes = outline.getClasses();
-		for(ClassOutline clazz : clazzes){
-			JDefinedClass beanClazz = clazz.implClass;
+		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
+		for(ClassOutline classOutline : classOutlines){
+			JDefinedClass beanClazz = classOutline.implClass;
 
-			CPluginCustomization extendsCustomization = CustomizationUtils.findCustomization(clazz, Customizations.EXTENDS_ELEMENT_NAME);
+			CPluginCustomization extendsCustomization = CustomizationUtils.findCustomization(classOutline, Customizations.EXTENDS_ELEMENT_NAME);
 			if(extendsCustomization != null){
 				ExtendsClass extendsClass = (ExtendsClass)CustomizationUtils.unmarshall(Customizations.getContext(), extendsCustomization);
 
@@ -97,7 +97,7 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 				beanClazz._extends(type);
 			}
 
-			List<CPluginCustomization> implementsCustomizations = CustomizationUtils.findCustomizations(clazz, Customizations.IMPLEMENTS_ELEMENT_NAME);
+			List<CPluginCustomization> implementsCustomizations = CustomizationUtils.findCustomizations(classOutline, Customizations.IMPLEMENTS_ELEMENT_NAME);
 			for(CPluginCustomization implementsCustomization : implementsCustomizations){
 				ImplementsInterface implementsInterface = (ImplementsInterface)CustomizationUtils.unmarshall(Customizations.getContext(), implementsCustomization);
 

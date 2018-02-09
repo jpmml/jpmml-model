@@ -235,9 +235,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.Property");
 
-		Collection<? extends ClassOutline> clazzes = outline.getClasses();
-		for(ClassOutline clazz : clazzes){
-			JDefinedClass beanClazz = clazz.implClass;
+		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
+		for(ClassOutline classOutline : classOutlines){
+			JDefinedClass beanClazz = classOutline.implClass;
 
 			// Implementations of org.dmg.pmml.HasField
 			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
@@ -306,9 +306,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-			FieldOutline contentField = getContentField(clazz);
-			if(contentField != null){
-				CPropertyInfo propertyInfo = contentField.getPropertyInfo();
+			FieldOutline contentFieldOutline = getContentField(classOutline);
+			if(contentFieldOutline != null){
+				CPropertyInfo propertyInfo = contentFieldOutline.getPropertyInfo();
 
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
@@ -320,14 +320,14 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				iteratorMethod.body()._return(JExpr.invoke("get" + propertyInfo.getName(true)).invoke("iterator"));
 			}
 
-			FieldOutline extensionsField = getExtensionsField(clazz);
-			if(extensionsField != null){
+			FieldOutline extensionsFieldOutline = getExtensionsField(classOutline);
+			if(extensionsFieldOutline != null){
 				beanClazz._implements(hasExtensionsInterface.narrow(beanClazz));
 			}
 
-			FieldOutline[] fields = clazz.getDeclaredFields();
-			for(FieldOutline field : fields){
-				CPropertyInfo propertyInfo = field.getPropertyInfo();
+			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
+			for(FieldOutline fieldOutline : fieldOutlines){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
@@ -427,15 +427,15 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 	}
 
 	static
-	private FieldOutline getExtensionsField(final ClassOutline clazz){
+	private FieldOutline getExtensionsField(final ClassOutline classOutline){
 		FieldFilter filter = new FieldFilter(){
 
 			@Override
-			public boolean accept(FieldOutline field){
-				CPropertyInfo propertyInfo = field.getPropertyInfo();
+			public boolean accept(FieldOutline fieldOutline){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 				if(("extensions").equals(propertyInfo.getName(false)) && propertyInfo.isCollection()){
-					JType elementType = CodeModelUtil.getElementType(field.getRawType());
+					JType elementType = CodeModelUtil.getElementType(fieldOutline.getRawType());
 
 					return checkType(elementType, "org.dmg.pmml.Extension");
 				}
@@ -444,22 +444,22 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return CodeModelUtil.findField(clazz.getDeclaredFields(), filter);
+		return CodeModelUtil.findField(classOutline.getDeclaredFields(), filter);
 	}
 
 	static
-	private FieldOutline getContentField(final ClassOutline clazz){
+	private FieldOutline getContentField(final ClassOutline classOutline){
 		FieldFilter filter = new FieldFilter(){
 
-			private String name = clazz.implClass.name();
+			private String name = classOutline.implClass.name();
 
 
 			@Override
-			public boolean accept(FieldOutline field){
-				CPropertyInfo propertyInfo = field.getPropertyInfo();
+			public boolean accept(FieldOutline fieldOutline){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 				if(propertyInfo.isCollection()){
-					JType elementType = CodeModelUtil.getElementType(field.getRawType());
+					JType elementType = CodeModelUtil.getElementType(fieldOutline.getRawType());
 
 					String name = elementType.name();
 
@@ -470,7 +470,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return CodeModelUtil.findField(clazz.getDeclaredFields(), filter);
+		return CodeModelUtil.findField(classOutline.getDeclaredFields(), filter);
 	}
 
 	static
