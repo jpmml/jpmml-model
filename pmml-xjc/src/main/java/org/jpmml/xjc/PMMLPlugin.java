@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
@@ -428,10 +429,10 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 	static
 	private FieldOutline getExtensionsField(final ClassOutline classOutline){
-		FieldFilter filter = new FieldFilter(){
+		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
 			@Override
-			public boolean accept(FieldOutline fieldOutline){
+			public boolean test(FieldOutline fieldOutline){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 				if(("extensions").equals(propertyInfo.getName(false)) && propertyInfo.isCollection()){
@@ -444,18 +445,18 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return CodeModelUtil.findField(classOutline.getDeclaredFields(), filter);
+		return CodeModelUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
 	}
 
 	static
 	private FieldOutline getContentField(final ClassOutline classOutline){
-		FieldFilter filter = new FieldFilter(){
+		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
 			private String name = classOutline.implClass.name();
 
 
 			@Override
-			public boolean accept(FieldOutline fieldOutline){
+			public boolean test(FieldOutline fieldOutline){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 				if(propertyInfo.isCollection()){
@@ -470,7 +471,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return CodeModelUtil.findField(classOutline.getDeclaredFields(), filter);
+		return CodeModelUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
 	}
 
 	static

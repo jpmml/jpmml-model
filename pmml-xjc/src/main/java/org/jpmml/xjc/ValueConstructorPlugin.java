@@ -5,6 +5,7 @@ package org.jpmml.xjc;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
@@ -66,10 +67,10 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 			final
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-			FieldFilter filter = new FieldFilter(){
+			Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
 				@Override
-				public boolean accept(FieldOutline fieldOutline){
+				public boolean test(FieldOutline fieldOutline){
 					CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
 					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
@@ -109,7 +110,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				}
 			};
 
-			fieldOutlines = CodeModelUtil.filterFields(fieldOutlines, filter);
+			fieldOutlines = CodeModelUtil.filterFields(fieldOutlines, predicate);
 			if(fieldOutlines.length == 0){
 				continue;
 			}

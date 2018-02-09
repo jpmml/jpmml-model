@@ -3,8 +3,9 @@
  */
 package org.jpmml.xjc;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JType;
@@ -28,8 +29,8 @@ public class CodeModelUtil {
 	}
 
 	static
-	public FieldOutline findField(FieldOutline[] fieldOutlines, FieldFilter filter){
-		FieldOutline[] acceptedFieldOutlines = filterFields(fieldOutlines, filter);
+	public FieldOutline findSingletonField(FieldOutline[] fieldOutlines, Predicate<FieldOutline> predicate){
+		FieldOutline[] acceptedFieldOutlines = filterFields(fieldOutlines, predicate);
 
 		if(acceptedFieldOutlines.length == 0){
 			return null;
@@ -45,16 +46,7 @@ public class CodeModelUtil {
 	}
 
 	static
-	public FieldOutline[] filterFields(FieldOutline[] fieldOutlines, FieldFilter filter){
-		List<FieldOutline> result = new ArrayList<>();
-
-		for(FieldOutline fieldOutline : fieldOutlines){
-
-			if(filter.accept(fieldOutline)){
-				result.add(fieldOutline);
-			}
-		}
-
-		return result.toArray(new FieldOutline[result.size()]);
+	public FieldOutline[] filterFields(FieldOutline[] fieldOutlines, Predicate<FieldOutline> predicate){
+		return Arrays.stream(fieldOutlines).filter(predicate).toArray(FieldOutline[]::new);
 	}
 }
