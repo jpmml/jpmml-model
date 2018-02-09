@@ -445,7 +445,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return CodeModelUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
+		return XJCUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
 	}
 
 	static
@@ -471,7 +471,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		};
 
-		return CodeModelUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
+		return XJCUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
 	}
 
 	static

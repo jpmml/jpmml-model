@@ -110,7 +110,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				}
 			};
 
-			fieldOutlines = CodeModelUtil.filterFields(fieldOutlines, predicate);
+			fieldOutlines = XJCUtil.filterFields(fieldOutlines, predicate);
 			if(fieldOutlines.length == 0){
 				continue;
 			}
