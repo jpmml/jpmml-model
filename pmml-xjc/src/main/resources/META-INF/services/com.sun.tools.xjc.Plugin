@@ -1,3 +1,4 @@
+org.jpmml.xjc.AnnotatePlugin
 org.jpmml.xjc.InheritancePlugin
 org.jpmml.xjc.PMMLPlugin
 org.jpmml.xjc.ValueConstructorPlugin

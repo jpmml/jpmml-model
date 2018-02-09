@@ -20,7 +20,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:schemaBindings>
 
 		<jaxb:bindings node="//xsd:complexType[@name='COUNT-TABLE-TYPE']">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.DiscreteDistribution</inheritance:extends>
 			<jaxb:class
 				name="CountTable"
@@ -31,7 +31,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AbsoluteExponentialKernel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="gaussian_process"
 			/>
@@ -49,18 +49,18 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Alternate']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="baseline"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Anova']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AnovaRow']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AnovaRow']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
@@ -76,7 +76,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AnyDistribution']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.ContinuousDistribution</inheritance:extends>
 		</jaxb:bindings>
 
@@ -87,30 +87,30 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='defaultValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='function']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='invalidValueTreatment']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='mapMissingTo']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ARDSquaredExponentialKernel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="gaussian_process"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
@@ -131,25 +131,25 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelVerification']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Output']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType">
@@ -160,15 +160,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType/xsd:attribute[@name='affinity']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType/xsd:attribute[@name='leverage']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasPredicate&lt;Attribute&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="scorecard"
@@ -176,36 +176,36 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType/xsd:attribute[@name='partialScore']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType/xsd:sequence/xsd:element[@ref='ComplexPartialScore']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaseCumHazardTables']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Baseline']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="baseline"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineCell']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="baseline"
@@ -213,28 +213,28 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineStratum']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="bayesian_network"
@@ -248,14 +248,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkNodes']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -268,7 +268,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='TargetValueStats']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesInputs']/xsd:complexType">
@@ -288,19 +288,19 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BlockIndicator']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValueMeans']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValues']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Categories']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
@@ -315,28 +315,28 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Category']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CenterFields']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Removed(Version.PMML_3_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_2)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="clustering"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Characteristic']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="scorecard"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Characteristics']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="scorecard"
 			/>
@@ -363,7 +363,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ChildParent']/xsd:complexType/xsd:sequence/xsd:element[@ref='FieldColumnPair']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='cityBlock']/xsd:complexType">
@@ -371,7 +371,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClassLabels']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType">
@@ -382,7 +382,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType/xsd:attribute[@name='id']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringField']/xsd:complexType">
@@ -393,14 +393,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringField']/xsd:complexType/xsd:attribute[@name='isCenterField']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 			<jaxb:property
 				name="centerField"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringField']/xsd:complexType/xsd:attribute[@name='isCenterField']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="CenterField"
 			/>
@@ -414,7 +414,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -427,26 +427,26 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='CenterFields']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ClusteringField']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModelQuality']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Coefficient']/xsd:complexType">
@@ -480,7 +480,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ComplexPartialScore']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;ComplexPartialScore&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="scorecard"
@@ -521,7 +521,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ConfusionMatrix']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ConsequentSequence']/xsd:complexType">
@@ -536,25 +536,25 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Constant']/xsd:complexType/xsd:simpleContent/xsd:extension/xsd:attribute[@name='dataType']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Constraints']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="sequence"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousConditionalProbability']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousDistribution']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jaxb:class
 				name="ContinuousDistribution"
 			/>
@@ -564,30 +564,30 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousNode']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CorrelationFields']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CorrelationMethods']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Correlations']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CorrelationValues']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Counts']/xsd:complexType/xsd:attribute[@name='cardinality']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Covariances']/xsd:complexType">
@@ -609,7 +609,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='dataType']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='isCyclic']">
@@ -640,15 +640,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Decision']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Decisions']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Deprecated(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.EmbeddedModel</inheritance:extends>
 			<jpmml-model:subpackage
 				name="tree"
@@ -656,30 +656,30 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='missingValuePenalty']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='missingValueStrategy']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='missingValueStrategy']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="MissingValueStrategy"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='missingValueStrategy']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='aggregateNodes']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='noTrueChildStrategy']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='noTrueChildStrategy']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="NoTrueChildStrategy"
 			/>
@@ -692,15 +692,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelStats']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:sequence/xsd:element[@ref='Output']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:sequence/xsd:element[@ref='Targets']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType">
@@ -740,25 +740,25 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='optype']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:property
 				name="opType"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:sequence/xsd:element[@ref='Interval']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DiscreteConditionalProbability']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DiscreteNode']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -773,11 +773,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType/xsd:attribute[@name='dataType']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType/xsd:sequence/xsd:element[@ref='DiscretizeBin']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DocumentTermMatrix']/xsd:complexType">
@@ -791,14 +791,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='EventValues']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
@@ -829,11 +829,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FieldRef']/xsd:complexType/xsd:attribute[@name='mapMissingTo']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FieldValue']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;FieldValue&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="baseline"
@@ -841,7 +841,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FieldValueCount']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;FieldValueCount&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="baseline"
@@ -849,12 +849,12 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GaussianDistribution']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.ContinuousDistribution</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GaussianProcessModel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="gaussian_process"
@@ -868,14 +868,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GaussianProcessModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralizedExponentialKernel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="gaussian_process"
 			/>
@@ -889,70 +889,70 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='baselineStrataVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='cumulativeLink']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:property
 				name="cumulativeLinkFunction"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='cumulativeLink']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="CumulativeLinkFunction"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distParameter']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distribution']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distribution']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Distribution"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='distribution']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='tweedie']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='endTimeVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="LinkFunction"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkParameter']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='modelDF']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='modelType']/xsd:simpleType">
@@ -962,86 +962,86 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='modelType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='CoxRegression']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='modelType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='ordinalMultinomial']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='modelType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='generalizedLinear']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='offsetValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='offsetVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='startTimeVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='statusVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='subjectIDVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='targetReferenceCategory']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='targetVariableName']">
-			<annox:annotateProperty>@org.jpmml.schema.Deprecated(Version.PMML_3_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_3_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='trialsValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='trialsVariable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='BaseCumHazardTables']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='EventValues']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='PPMatrix']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Header']/xsd:complexType/xsd:attribute[@name='copyright']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Header']/xsd:complexType/xsd:attribute[@name='modelVersion']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='InstanceField']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
@@ -1049,7 +1049,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='InstanceFields']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
 			/>
@@ -1083,11 +1083,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType/xsd:attribute[@name='category']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType/xsd:attribute[@name='field']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ItemRef']/xsd:complexType">
@@ -1109,7 +1109,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='KNNInput']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.ComparisonField</inheritance:extends>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
@@ -1117,7 +1117,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='KNNInputs']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
 			/>
@@ -1130,39 +1130,39 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasField&lt;Lag&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Lambda']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="gaussian_process"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Level']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Level']/xsd:complexType/xsd:attribute[@name='cubicSmoothedValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Level']/xsd:complexType/xsd:attribute[@name='quadraticSmoothedValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='LiftData']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='LiftGraph']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='LinearKernelType']/xsd:complexType">
@@ -1176,7 +1176,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='LognormalDistributionForBN']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jaxb:class
 				name="LognormalDistribution"
 			/>
@@ -1186,7 +1186,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Lower']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -1201,11 +1201,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType/xsd:attribute[@name='dataType']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType/xsd:sequence/xsd:element[@ref='FieldColumnPair']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Matrix']/xsd:complexType/xsd:attribute[@name='kind']/xsd:simpleType">
@@ -1221,7 +1221,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Mean']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -1235,33 +1235,33 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:choice">
-			<annox:annotateProperty>@org.jpmml.schema.Deprecated(Version.PMML_4_1)</annox:annotateProperty>
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:property
 				name="embeddedModels"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Segmentation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType">
@@ -1282,14 +1282,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='x-invalidValueReplacement']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="invalidValueReplacement"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='invalidValueTreatment']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']/xsd:simpleType">
@@ -1299,19 +1299,19 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='analysisWeight']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='frequencyWeight']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='predicted']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Deprecated(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='usageType']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='target']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='minkowski']/xsd:complexType">
@@ -1325,19 +1325,19 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ModelExplanation']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ModelLiftGraph']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ModelStats']/xsd:complexType/xsd:sequence/xsd:element[@ref='MultivariateStats']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStat']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStat']/xsd:complexType/xsd:attribute[@name='isIntercept']">
@@ -1347,7 +1347,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStats']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType">
@@ -1358,25 +1358,25 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
@@ -1384,28 +1384,28 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='categoricalScoringMethod']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="CategoricalScoringMethod"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='continuousScoringMethod']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="ContinuousScoringMethod"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1425,11 +1425,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='activationFunction']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='rectifier']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -1442,14 +1442,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralInput']/xsd:complexType">
@@ -1497,7 +1497,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Neuron']/xsd:complexType/xsd:attribute[@name='altitude']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType">
@@ -1509,19 +1509,19 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:attribute[@name='defaultChild']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:attribute[@name='score']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:sequence/xsd:choice/xsd:sequence/xsd:element[@ref='Partition']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormalDistributionForBN']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jaxb:class
 				name="NormalDistribution"
 			/>
@@ -1537,11 +1537,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType/xsd:attribute[@name='mapMissingTo']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType/xsd:attribute[@name='outliers']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType">
@@ -1558,15 +1558,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='indicator']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Removed(Version.PMML_4_3)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_3)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='thermometer']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Removed(Version.PMML_3_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NumericPredictor']/xsd:complexType">
@@ -1577,7 +1577,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OptimumLiftGraph']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType">
@@ -1587,18 +1587,18 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='algorithm']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='algorithm']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Algorithm"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='dataType']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='feature']">
@@ -1608,15 +1608,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isFinalResult']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 			<jaxb:property
 				name="finalResult"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
-			<annox:annotateProperty>@org.jpmml.schema.Deprecated(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -1626,76 +1626,76 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankBasis']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankBasis']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="RankBasis"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankBasis']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='affinity']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankBasis']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='leverage']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankOrder']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='rankOrder']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="RankOrder"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='ruleFeature']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
-			<annox:annotateProperty>@org.jpmml.schema.Deprecated(Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='ruleFeature']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="RuleFeature"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='ruleFeature']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='affinity']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='ruleFeature']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='leverage']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='segmentId']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='targetField']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='x-reportField']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="reportField"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:element[@ref='Decisions']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:group[@ref='EXPRESSION']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PairCounts']/xsd:complexType">
@@ -1712,7 +1712,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Parameter']/xsd:complexType/xsd:attribute[@name='referencePoint']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType">
@@ -1721,7 +1721,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='dataType']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -1737,7 +1737,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterList']/xsd:complexType/xsd:sequence/xsd:element[@ref='Parameter']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParamMatrix']/xsd:complexType">
@@ -1747,22 +1747,22 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParamMatrix']/xsd:complexType/xsd:sequence/xsd:element[@ref='PCell']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParentValue']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType/xsd:attribute[@name='weighted']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType/xsd:attribute[@name='weighted']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Weighted"
 			>
@@ -1797,11 +1797,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PCovMatrix']/xsd:complexType/xsd:attribute[@name='type']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PCovMatrix']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Type"
 			/>
@@ -1814,14 +1814,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PMML']/xsd:complexType/xsd:attribute[@name='x-baseVersion']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="baseVersion"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PoissonDistribution']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.ContinuousDistribution</inheritance:extends>
 		</jaxb:bindings>
 
@@ -1850,27 +1850,27 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PPMatrix']/xsd:complexType/xsd:sequence/xsd:element[@ref='PPCell']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='AIC']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='AICc']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='BIC']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='adj-r-squared']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='dataUsage']/xsd:simpleType">
@@ -1880,35 +1880,35 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='degreesOfFreedom']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='fStatistic']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='numOfPredictors']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='numOfRecords']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='numOfRecordsWeighted']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='rootMeanSquaredError']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='sumSquaredError']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='sumSquaredRegression']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType">
@@ -1918,15 +1918,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:attribute[@name='contrastMatrixType']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:sequence/xsd:element[@ref='Categories']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:sequence/xsd:element[@ref='Matrix']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictorTerm']/xsd:complexType">
@@ -1937,11 +1937,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictorTerm']/xsd:complexType/xsd:attribute[@name='name']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RadialBasisKernel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="gaussian_process"
 			/>
@@ -1958,7 +1958,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RandomLiftGraph']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='REAL-SparseArray']">
@@ -1975,7 +1975,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Deprecated(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.EmbeddedModel</inheritance:extends>
 			<jpmml-model:subpackage
 				name="regression"
@@ -1989,23 +1989,23 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='cauchit']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='loglog']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelStats']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:sequence/xsd:element[@ref='Output']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:sequence/xsd:element[@ref='Targets']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType">
@@ -2016,18 +2016,18 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='modelType']">
-			<annox:annotateProperty>@org.jpmml.schema.Deprecated(Version.PMML_3_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_3_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2046,19 +2046,19 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='cauchit']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='loglog']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='targetFieldName']">
-			<annox:annotateProperty>@org.jpmml.schema.Deprecated(Version.PMML_3_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_3_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType">
@@ -2085,11 +2085,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ROC']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ROCGraph']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSelectionMethod']/xsd:complexType">
@@ -2118,25 +2118,25 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="scorecard"
@@ -2150,7 +2150,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -2163,22 +2163,22 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ScoreDistribution']/xsd:complexType/xsd:attribute[@name='confidence']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ScoreDistribution']/xsd:complexType/xsd:attribute[@name='probability']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Seasonality_ExpoSmooth']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2191,7 +2191,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SeasonalTrendDecomposition']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
@@ -2199,7 +2199,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segment']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasPredicate&lt;Segment&gt;</inheritance:implements>
 			<jpmml-model:subpackage
@@ -2208,39 +2208,39 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="mining"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="MultipleModelMethod"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='modelChain']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='x-weightedMedian']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Extension</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="WEIGHTED_MEDIAN"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='x-weightedSum']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Extension</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="WEIGHTED_SUM"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:sequence/xsd:element[@ref='LocalTransformations']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Sequence']/xsd:complexType">
@@ -2252,7 +2252,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Sequence']/xsd:complexType/xsd:sequence/xsd:element[@ref='Time']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType">
@@ -2263,73 +2263,73 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='avgNumberOfTAsPerTAGroup']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='lengthLimit']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='maximumTime']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='maxNumberOfTAsPerTAGroup']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='minimumConfidence']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='minimumSupport']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='minimumTime']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfItems']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfRules']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfSequences']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfSets']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='numberOfTransactionGroups']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='timeWindowWidth']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Constraints']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceReference']/xsd:complexType">
@@ -2346,11 +2346,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceRule']/xsd:complexType/xsd:attribute[@name='lift']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SetPredicate']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Deprecated(Version.PMML_3_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_3_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasId&lt;SetPredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet&lt;SetPredicate&gt;</inheritance:implements>
 			<jpmml-model:subpackage
@@ -2419,7 +2419,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SpectralAnalysis']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
@@ -2439,15 +2439,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='alternateTargetCategory']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='targetCategory']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='threshold']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType">
@@ -2458,30 +2458,30 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='alternateBinaryTargetCategory']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='classificationMethod']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='classificationMethod']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="ClassificationMethod"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='maxWins']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='svmRepresentation']">
@@ -2497,11 +2497,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='threshold']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2514,11 +2514,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorDictionary']">
-			<annox:annotateProperty>@org.jpmml.schema.Required(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Required(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectors']/xsd:complexType">
@@ -2543,15 +2543,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='field']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_3)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='max']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='min']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -2561,23 +2561,23 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='rescaleConstant']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='rescaleFactor']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:sequence/xsd:element[@ref='TargetValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='displayValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:sequence/xsd:element[@ref='Partition']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValueCount']/xsd:complexType">
@@ -2593,28 +2593,28 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValueStat']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValueStats']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="baseline"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType/xsd:attribute[@name='testStatistic']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="TestStatistic"
 			/>
@@ -2641,7 +2641,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;TextIndex&gt;</inheritance:implements>
 		</jaxb:bindings>
@@ -2665,7 +2665,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasTable&lt;TextIndexNormalization&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -2676,7 +2676,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Deprecated(Version.PMML_4_2)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_2)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="text"
@@ -2684,21 +2684,21 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModelNormalization']/xsd:complexType">
@@ -2744,86 +2744,86 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Time']/xsd:complexType/xsd:attribute[@name='max']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Time']/xsd:complexType/xsd:attribute[@name='min']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Time']/xsd:complexType/xsd:attribute[@name='standardDeviation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeAnchor']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeAnchor']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Type"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeCycle']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeCycle']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Type"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeException']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeException']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Type"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:attribute[@name='interpolationMethod']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="InterpolationMethod"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:attribute[@name='usage']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Usage"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType/xsd:sequence/xsd:element[@ref='TimeException']">
-			<annox:annotateProperty>@org.jpmml.schema.Removed(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
@@ -2831,39 +2831,39 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='bestFit']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Algorithm"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeValue']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TrainingInstances']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasTable&lt;TrainingInstances&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
@@ -2884,37 +2884,37 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='missingValuePenalty']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='missingValueStrategy']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='missingValueStrategy']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="MissingValueStrategy"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='missingValueStrategy']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='aggregateNodes']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='noTrueChildStrategy']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='noTrueChildStrategy']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="NoTrueChildStrategy"
 			/>
@@ -2927,18 +2927,18 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>@org.jpmml.schema.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Extension</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 			<jaxb:class
 				name="TrendExpoSmooth"
 			/>
@@ -2948,7 +2948,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='smoothedValue']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='trend']/xsd:simpleType">
@@ -2958,15 +2958,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='trend']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='double_exponential']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Removed(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Removed(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType/xsd:attribute[@name='trend']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='polynomial_exponential']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TriangularDistributionForBN']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jaxb:class
 				name="TriangularDistribution"
 			/>
@@ -2980,12 +2980,12 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UniformDistribution']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.ContinuousDistribution</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UniformDistributionForBN']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jaxb:class
 				name="UniformDistribution"
 			/>
@@ -2995,11 +2995,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType/xsd:attribute[@name='weighted']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType/xsd:attribute[@name='weighted']/xsd:simpleType">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass
 				name="Weighted"
 			>
@@ -3015,11 +3015,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType/xsd:sequence/xsd:element[@ref='Anova']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Upper']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -3036,14 +3036,14 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ValueProbability']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Variance']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_3)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -3056,15 +3056,15 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorFields']">
-			<annox:annotateProperty>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorInstance']">
-			<annox:annotateProperty>@org.jpmml.schema.Optional(Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.schema.Optional(org.jpmml.schema.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorFields']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="support_vector_machine"
 			/>
@@ -3089,11 +3089,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='XCoordinates']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='YCoordinates']/xsd:complexType">
-			<annox:annotateClass>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:group[@name='CONTINUOUS-DISTRIBUTION-TYPES']">
@@ -3152,7 +3152,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='INVALID-VALUE-TREATMENT-METHOD']">
-			<annox:annotateEnum>@org.jpmml.schema.Added(Version.PMML_3_1)</annox:annotateEnum>
+			<annox:annotateEnum>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_1)</annox:annotateEnum>
 			<jaxb:typesafeEnumClass
 				name="InvalidValueTreatmentMethod"
 			/>
@@ -3171,11 +3171,11 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='MINING-FUNCTION']/xsd:restriction/xsd:enumeration[@value='mixed']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='MINING-FUNCTION']/xsd:restriction/xsd:enumeration[@value='timeSeries']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='MISSING-VALUE-TREATMENT-METHOD']">
@@ -3203,78 +3203,78 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='affinity']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='antecedent']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='clusterAffinity']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Deprecated(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='clusterId']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Deprecated(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='confidence']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='consequent']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='decision']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='entityAffinity']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateEnumConstant>
-			<annox:annotateEnumConstant>@org.jpmml.schema.Deprecated(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='entityId']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_3_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_3_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='leverage']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='lift']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='reasonCode']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='rule']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='ruleId']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
-			<annox:annotateEnumConstant>@org.jpmml.schema.Deprecated(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='ruleValue']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_0)</annox:annotateEnumConstant>
-			<annox:annotateEnumConstant>@org.jpmml.schema.Deprecated(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_0)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Deprecated(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='support']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_2)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='transformedValue']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Added(Version.PMML_4_1)</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Added(org.jpmml.schema.Version.PMML_4_1)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='x-report']">
-			<annox:annotateEnumConstant>@org.jpmml.schema.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.schema.Extension</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="REPORT"
 			/>

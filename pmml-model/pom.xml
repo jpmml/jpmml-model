@@ -173,7 +173,6 @@
 								<arg>-no-header</arg>
 								<arg>-npa</arg>
 								<arg>-Xannotate</arg>
-								<arg>-Xannotate-defaultFieldTarget=field</arg>
 								<arg>-Xinheritance</arg>
 								<arg>-Xpmml</arg>
 								<arg>-XvalueConstructor</arg>
@@ -199,11 +198,6 @@
 						<version>${project.parent.version}</version>
 					</dependency>
 
-					<dependency>
-						<groupId>org.jvnet.jaxb2_commons</groupId>
-						<artifactId>jaxb2-basics-annotate</artifactId>
-						<version>1.0.4</version>
-					</dependency>
 					<dependency>
 						<groupId>org.jvnet.jaxb2_commons</groupId>
 						<artifactId>jaxb2-basics-tools</artifactId>
