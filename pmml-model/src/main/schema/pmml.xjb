@@ -262,6 +262,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;BayesInput&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>
@@ -284,6 +285,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesOutput']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;BayesOutput&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>
@@ -301,6 +303,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='BlockIndicator']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;BlockIndicator&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValueMeans']/xsd:complexType">
@@ -320,6 +323,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='CategoricalPredictor']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.regression.Term</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;CategoricalPredictor&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;CategoricalPredictor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
@@ -404,7 +408,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringField']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.ComparisonField</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.ComparisonField&lt;ClusteringField&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="clustering"
 			/>
@@ -838,6 +842,10 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Predicate</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='FieldColumnPair']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;FieldColumnPair&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='FieldRef']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;FieldRef&gt;</inheritance:implements>
@@ -850,6 +858,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='FieldValue']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;FieldValue&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;FieldValue&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="baseline"
@@ -858,6 +867,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='FieldValueCount']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;FieldValueCount&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;FieldValueCount&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="baseline"
@@ -1058,6 +1068,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='InstanceField']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;InstanceField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
@@ -1091,6 +1102,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Item&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasId&lt;Item&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
@@ -1126,7 +1138,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='KNNInput']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.ComparisonField</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.ComparisonField&lt;KNNInput&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
 			/>
@@ -1587,6 +1599,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NumericPredictor']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.regression.Term</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;NumericPredictor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
 			/>
@@ -1777,6 +1790,10 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;PartitionFieldStats&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType/xsd:attribute[@name='weighted']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
@@ -1857,6 +1874,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='PPCell']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.general_regression.ParameterCell</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;PPCell&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;PPCell&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="general_regression"
@@ -1938,6 +1956,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Predictor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
@@ -2382,6 +2401,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SetPredicate']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_3_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;SetPredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasId&lt;SetPredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet&lt;SetPredicate&gt;</inheritance:implements>
 			<jpmml-model:subpackage
@@ -2417,6 +2437,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SimplePredicate']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Predicate</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;SimplePredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;SimplePredicate&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -2436,6 +2457,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleSetPredicate']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Predicate</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;SimpleSetPredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet&lt;SimpleSetPredicate&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -2563,6 +2585,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Target&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;Target&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
 		</jaxb:bindings>
@@ -2639,6 +2662,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;TestDistributions&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="baseline"
 			/>
@@ -3025,6 +3049,10 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;UnivariateStats&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType/xsd:attribute[@name='weighted']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
@@ -3116,6 +3144,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VerificationField']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;VerificationField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
 		</jaxb:bindings>
 

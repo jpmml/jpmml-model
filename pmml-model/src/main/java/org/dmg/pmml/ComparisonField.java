@@ -7,25 +7,19 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class ComparisonField extends PMMLObject {
-
-	abstract
-	public FieldName getField();
-
-	abstract
-	public ComparisonField setField(FieldName field);
+public class ComparisonField<E extends ComparisonField<E>> extends PMMLObject implements HasFieldReference<E> {
 
 	abstract
 	public Double getFieldWeight();
 
 	abstract
-	public ComparisonField setFieldWeight(Double fieldWeight);
+	public E setFieldWeight(Double fieldWeight);
 
 	abstract
 	public CompareFunction getCompareFunction();
 
 	abstract
-	public ComparisonField setCompareFunction(CompareFunction compareFunction);
+	public E setCompareFunction(CompareFunction compareFunction);
 
 	public Double getSimilarityScale(){
 		return null;
@@ -34,7 +28,7 @@ public class ComparisonField extends PMMLObject {
 	/**
 	 * @throws UnsupportedOperationException If the <code>similarityScale</code> attribute is not supported.
 	 */
-	public ComparisonField setSimilarityScale(Double similarityScale){
+	public E setSimilarityScale(Double similarityScale){
 		throw new UnsupportedOperationException();
 	}
 }
