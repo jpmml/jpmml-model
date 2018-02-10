@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="8"
+			implementation="9"
 		/>
 
 		<wildcard:lax/>
@@ -267,6 +267,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType/xsd:attribute[@name='fieldName']">
+			<jaxb:property
+				name="field"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='BayesInput']/xsd:complexType/xsd:sequence/xsd:choice/xsd:element[@ref='TargetValueStats']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
@@ -280,6 +286,12 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='BayesOutput']/xsd:complexType">
 			<jpmml-model:subpackage
 				name="naive_bayes"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BayesOutput']/xsd:complexType/xsd:attribute[@name='fieldName']">
+			<jaxb:property
+				name="field"
 			/>
 		</jaxb:bindings>
 
@@ -311,6 +323,12 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;CategoricalPredictor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='CategoricalPredictor']/xsd:complexType/xsd:attribute[@name='name']">
+			<jaxb:property
+				name="field"
 			/>
 		</jaxb:bindings>
 
@@ -1574,6 +1592,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NumericPredictor']/xsd:complexType/xsd:attribute[@name='name']">
+			<jaxb:property
+				name="field"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='OptimumLiftGraph']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
@@ -1839,6 +1863,12 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='PPCell']/xsd:complexType/xsd:attribute[@name='predictorName']">
+			<jaxb:property
+				name="field"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='PPMatrix']/xsd:complexType">
 			<jpmml-model:subpackage
 				name="general_regression"
@@ -1915,6 +1945,12 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:attribute[@name='contrastMatrixType']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:attribute[@name='name']">
+			<jaxb:property
+				name="field"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType/xsd:sequence/xsd:element[@ref='Categories']">

@@ -64,7 +64,7 @@ public class FieldReferenceFinder extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(BayesInput bayesInput){
-		process(bayesInput.getFieldName());
+		process(bayesInput.getField());
 
 		return super.visit(bayesInput);
 	}
@@ -78,7 +78,7 @@ public class FieldReferenceFinder extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(CategoricalPredictor categoricalPredictor){
-		process(categoricalPredictor.getName());
+		process(categoricalPredictor.getField());
 
 		return super.visit(categoricalPredictor);
 	}
@@ -193,7 +193,7 @@ public class FieldReferenceFinder extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(NumericPredictor numericPredictor){
-		process(numericPredictor.getName());
+		process(numericPredictor.getField());
 
 		return super.visit(numericPredictor);
 	}
@@ -205,14 +205,14 @@ public class FieldReferenceFinder extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PPCell ppCell){
-		process(ppCell.getPredictorName());
+		process(ppCell.getField());
 
 		return super.visit(ppCell);
 	}
 
 	@Override
 	public VisitorAction visit(Predictor predictor){
-		process(predictor.getName());
+		process(predictor.getField());
 
 		return super.visit(predictor);
 	}

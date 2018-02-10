@@ -256,17 +256,18 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				setterMethod.body()._return(JExpr.invoke("setTextField").arg(fieldParameter));
 			} // End if
 
-			// Implementations of org.dmg.pmml.HasValue
-			if(checkType(beanClazz, "org.dmg.pmml.general_regression.PPCell")){
-				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
-				fieldMethod.annotate(Override.class);
-				fieldMethod.body()._return(JExpr.invoke("getPredictorName"));
-			} else
+			// Implementations of org.dmg.pmml.HasName
+			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor") || checkType(beanClazz, "org.dmg.pmml.regression.NumericPredictor")){
+				JMethod getterMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getName");
+				getterMethod.annotate(Override.class);
+				getterMethod.body()._return(JExpr.invoke("getField"));
 
-			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor")){
-				JMethod fieldMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
-				fieldMethod.annotate(Override.class);
-				fieldMethod.body()._return(JExpr.invoke("getName"));
+				JMethod setterMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "setName");
+				setterMethod.annotate(Override.class);
+
+				JVar nameParameter = setterMethod.param(fieldNameClass, "name");
+
+				setterMethod.body()._return(JExpr.invoke("setField").arg(nameParameter));
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable
