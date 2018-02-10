@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Field extends PMMLObject implements HasName<Field>, Indexable<FieldName> {
+public class Field<E extends Field<E>> extends PMMLObject implements HasName<E>, HasType<E>, Indexable<FieldName> {
 
 	public String getDisplayName(){
 		return null;
@@ -16,21 +16,9 @@ public class Field extends PMMLObject implements HasName<Field>, Indexable<Field
 	/**
 	 * @throws UnsupportedOperationException If the <code>displayName</code> attribute is not supported.
 	 */
-	public Field setDisplayName(String displayName){
+	public E setDisplayName(String displayName){
 		throw new UnsupportedOperationException();
 	}
-
-	abstract
-	public OpType getOpType();
-
-	abstract
-	public Field setOpType(OpType opType);
-
-	abstract
-	public DataType getDataType();
-
-	abstract
-	public Field setDataType(DataType dataType);
 
 	@Override
 	public FieldName getKey(){

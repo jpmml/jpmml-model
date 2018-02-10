@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="7"
+			implementation="8"
 		/>
 
 		<wildcard:lax/>
@@ -604,8 +604,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.TypeDefinitionField</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasType&lt;DataField&gt;</inheritance:implements>
+			<inheritance:extends>org.dmg.pmml.Field&lt;DataField&gt;</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -734,9 +733,8 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.TypeDefinitionField</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Field&lt;DerivedField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasType&lt;DerivedField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -1581,9 +1579,8 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Field</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Field&lt;OutputField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;OutputField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasType&lt;OutputField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='algorithm']">
@@ -1716,8 +1713,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Field</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasType&lt;ParameterField&gt;</inheritance:implements>
+			<inheritance:extends>org.dmg.pmml.Field&lt;ParameterField&gt;</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -2068,8 +2064,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Field</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasType&lt;ResultField&gt;</inheritance:implements>
+			<inheritance:extends>org.dmg.pmml.Field&lt;ResultField&gt;</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='feature']">
