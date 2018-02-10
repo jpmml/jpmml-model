@@ -8,7 +8,7 @@ package org.dmg.pmml;
  * A marker interface for PMML expression elements that specify the <code>field</code> attribute.
  * </p>
  */
-public interface HasField<E extends Expression & HasField<E>> {
+public interface HasFieldReference<E extends Expression & HasFieldReference<E>> {
 
 	FieldName getField();
 

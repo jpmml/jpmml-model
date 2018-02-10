@@ -228,7 +228,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
 
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
-		JClass hasFieldInterface = codeModel.ref("org.dmg.pmml.HasField");
+		JClass hasFieldReferenceInterface = codeModel.ref("org.dmg.pmml.HasFieldReference");
 
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
@@ -242,7 +242,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 			// Implementations of org.dmg.pmml.HasField
 			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
-				beanClazz._implements(hasFieldInterface.narrow(beanClazz));
+				beanClazz._implements(hasFieldReferenceInterface.narrow(beanClazz));
 
 				JMethod getterMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
 				getterMethod.annotate(Override.class);

@@ -39,7 +39,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Aggregate']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasField&lt;Aggregate&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Aggregate&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Aggregate']/xsd:complexType/xsd:attribute[@name='function']/xsd:simpleType">
@@ -766,7 +766,7 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasDataType&lt;Discretize&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;Discretize&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasField&lt;Discretize&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Discretize&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Discretize,java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -822,7 +822,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='FieldRef']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasField&lt;FieldRef&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;FieldRef&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;FieldRef,java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -1130,7 +1130,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasField&lt;Lag&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Lag&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Lambda']/xsd:complexType">
@@ -1530,7 +1530,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasField&lt;NormContinuous&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;NormContinuous&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;NormContinuous,java.lang.Double&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -1544,7 +1544,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasField&lt;NormDiscrete&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;NormDiscrete&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;NormDiscrete,java.lang.Double&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;NormDiscrete&gt;</inheritance:implements>
 		</jaxb:bindings>
