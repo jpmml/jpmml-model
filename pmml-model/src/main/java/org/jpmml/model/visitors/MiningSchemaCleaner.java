@@ -51,7 +51,7 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 	}
 
 	private Set<FieldName> processMiningModel(MiningModel miningModel){
-		Set<Field> activeFields = DeepFieldResolverUtil.getActiveFields(this, miningModel);
+		Set<Field<?>> activeFields = DeepFieldResolverUtil.getActiveFields(this, miningModel);
 
 		Set<FieldName> activeFieldNames = new HashSet<>();
 
@@ -82,9 +82,9 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 			}
 		}
 
-		Set<Field> modelFields = getFields(miningModel);
+		Set<Field<?>> modelFields = getFields(miningModel);
 
-		Set<Field> activeModelFields = FieldUtil.selectAll(modelFields, activeFieldNames, true);
+		Set<Field<?>> activeModelFields = FieldUtil.selectAll(modelFields, activeFieldNames, true);
 		activeFields.addAll(activeModelFields);
 
 		expandDerivedFields(miningModel, activeFields);
@@ -93,14 +93,14 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 	}
 
 	private Set<FieldName> processModel(Model model){
-		Set<Field> activeFields = DeepFieldResolverUtil.getActiveFields(this, model);
+		Set<Field<?>> activeFields = DeepFieldResolverUtil.getActiveFields(this, model);
 
 		expandDerivedFields(model, activeFields);
 
 		return FieldUtil.nameSet(activeFields);
 	}
 
-	private void expandDerivedFields(Model model, Set<Field> fields){
+	private void expandDerivedFields(Model model, Set<Field<?>> fields){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
 
 		fieldDependencyResolver.expand(fields, fieldDependencyResolver.getGlobalDerivedFields());

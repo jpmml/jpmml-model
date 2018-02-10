@@ -26,7 +26,7 @@ import org.dmg.pmml.Visitable;
  */
 public class DataDictionaryCleaner extends ModelCleaner {
 
-	private Set<Field> targetFields = new HashSet<>();
+	private Set<Field<?>> targetFields = new HashSet<>();
 
 
 	@Override
@@ -59,7 +59,7 @@ public class DataDictionaryCleaner extends ModelCleaner {
 	}
 
 	private void processModel(Model model){
-		Set<Field> targetFields = getTargetFields();
+		Set<Field<?>> targetFields = getTargetFields();
 
 		MiningSchema miningSchema = model.getMiningSchema();
 		if(miningSchema != null && miningSchema.hasMiningFields()){
@@ -81,7 +81,7 @@ public class DataDictionaryCleaner extends ModelCleaner {
 			}
 
 			if(targetFieldNames.size() > 0){
-				Set<Field> modelFields = getFields(model);
+				Set<Field<?>> modelFields = getFields(model);
 
 				targetFields.addAll(FieldUtil.selectAll(modelFields, targetFieldNames));
 			}
@@ -102,7 +102,7 @@ public class DataDictionaryCleaner extends ModelCleaner {
 	private Set<DataField> getUsedDataFields(){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
 
-		Set<Field> usedFields = new HashSet<>(getActiveFields());
+		Set<Field<?>> usedFields = new HashSet<>(getActiveFields());
 		usedFields.addAll(getTargetFields());
 
 		fieldDependencyResolver.expand(usedFields, fieldDependencyResolver.getLocalDerivedFields());
@@ -111,7 +111,7 @@ public class DataDictionaryCleaner extends ModelCleaner {
 		return (Set)usedFields;
 	}
 
-	public Set<Field> getTargetFields(){
+	public Set<Field<?>> getTargetFields(){
 		return this.targetFields;
 	}
 }

@@ -28,7 +28,7 @@ import org.dmg.pmml.VisitorAction;
  */
 public class FieldDependencyResolver extends FieldResolver {
 
-	private Map<Field, Set<Field>> dependencies = new LinkedHashMap<>();
+	private Map<Field<?>, Set<Field<?>>> dependencies = new LinkedHashMap<>();
 
 	private Set<DataField> dataFields = new HashSet<>();
 
@@ -116,8 +116,8 @@ public class FieldDependencyResolver extends FieldResolver {
 		return super.visit(transformationDictionary);
 	}
 
-	public Set<Field> getDependencies(Field field){
-		Map<Field, Set<Field>> dependencies = getDependencies();
+	public Set<Field<?>> getDependencies(Field field){
+		Map<Field<?>, Set<Field<?>>> dependencies = getDependencies();
 
 		if(!dependencies.containsKey(field)){
 			throw new IllegalArgumentException();
@@ -131,7 +131,7 @@ public class FieldDependencyResolver extends FieldResolver {
 	 * Map keys are field elements.
 	 * Map values are {@link #getFields() field resolution results} at the location where the field element is declared.
 	 */
-	public Map<Field, Set<Field>> getDependencies(){
+	public Map<Field<?>, Set<Field<?>>> getDependencies(){
 		return this.dependencies;
 	}
 
@@ -151,8 +151,8 @@ public class FieldDependencyResolver extends FieldResolver {
 		return this.outputFields;
 	}
 
-	public void expand(Set<Field> fields, Set<? extends Field> expandableFields){
-		Set<Field> removableFields = new LinkedHashSet<>();
+	public void expand(Set<Field<?>> fields, Set<? extends Field<?>> expandableFields){
+		Set<Field<?>> removableFields = new LinkedHashSet<>();
 
 		for(int i = 0; true; i++){
 
@@ -162,7 +162,7 @@ public class FieldDependencyResolver extends FieldResolver {
 
 			removableFields.clear();
 
-			for(Field field : fields){
+			for(Field<?> field : fields){
 
 				if(expandableFields.contains(field)){
 					removableFields.add(field);
@@ -173,7 +173,7 @@ public class FieldDependencyResolver extends FieldResolver {
 				break;
 			}
 
-			for(Field removableField : removableFields){
+			for(Field<?> removableField : removableFields){
 				fields.addAll(getDependencies(removableField));
 			}
 
@@ -181,11 +181,11 @@ public class FieldDependencyResolver extends FieldResolver {
 		}
 	}
 
-	private void process(Field field){
+	private void process(Field<?> field){
 		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder();
 		fieldReferenceFinder.applyTo(field);
 
-		Set<Field> activeFields = FieldUtil.selectAll(getFields(), fieldReferenceFinder.getFieldNames());
+		Set<Field<?>> activeFields = FieldUtil.selectAll(getFields(), fieldReferenceFinder.getFieldNames());
 
 		this.dependencies.put(field, activeFields);
 	}

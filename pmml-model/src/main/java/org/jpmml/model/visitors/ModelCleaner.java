@@ -15,7 +15,7 @@ import org.dmg.pmml.mining.MiningModel;
 abstract
 class ModelCleaner extends DeepFieldResolver {
 
-	private Set<Field> activeFields = new HashSet<>();
+	private Set<Field<?>> activeFields = new HashSet<>();
 
 
 	@Override
@@ -45,18 +45,18 @@ class ModelCleaner extends DeepFieldResolver {
 	}
 
 	private void processMiningModel(MiningModel miningModel){
-		Set<Field> activeFields = getActiveFields();
+		Set<Field<?>> activeFields = getActiveFields();
 
 		activeFields.addAll(DeepFieldResolverUtil.getActiveFields(this, miningModel));
 	}
 
 	private void processModel(Model model){
-		Set<Field> activeFields = getActiveFields();
+		Set<Field<?>> activeFields = getActiveFields();
 
 		activeFields.addAll(DeepFieldResolverUtil.getActiveFields(this, model));
 	}
 
-	public Set<Field> getActiveFields(){
+	public Set<Field<?>> getActiveFields(){
 		return this.activeFields;
 	}
 }

@@ -25,10 +25,10 @@ public class DeepFieldResolverUtil {
 	}
 
 	static
-	public Set<Field> getActiveFields(DeepFieldResolver resolver, MiningModel miningModel){
-		Set<Field> modelFields = getModelFields(resolver, miningModel);
+	public Set<Field<?>> getActiveFields(DeepFieldResolver resolver, MiningModel miningModel){
+		Set<Field<?>> modelFields = getModelFields(resolver, miningModel);
 
-		Set<Field> activeFields = new HashSet<>();
+		Set<Field<?>> activeFields = new HashSet<>();
 
 		Segmentation segmentation = miningModel.getSegmentation();
 
@@ -40,7 +40,7 @@ public class DeepFieldResolverUtil {
 				Set<FieldName> names = getFieldNames(predicate);
 
 				if(names.size() > 0){
-					Set<Field> segmentFields = resolver.getFields(miningModel, segmentation, segment);
+					Set<Field<?>> segmentFields = resolver.getFields(miningModel, segmentation, segment);
 
 					activeFields.addAll(FieldUtil.selectAll(segmentFields, names));
 				}
@@ -61,7 +61,7 @@ public class DeepFieldResolverUtil {
 		Segmentation.MultipleModelMethod multipleModelMethod = segmentation.getMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
-				Set<Field> segmentationFields = resolver.getFields(miningModel, segmentation);
+				Set<Field<?>> segmentationFields = resolver.getFields(miningModel, segmentation);
 				segmentationFields.removeAll(modelFields);
 
 				activeFields.removeAll(segmentationFields);
@@ -74,8 +74,8 @@ public class DeepFieldResolverUtil {
 	}
 
 	static
-	public Set<Field> getActiveFields(DeepFieldResolver resolver, Model model){
-		Set<Field> modelFields = getModelFields(resolver, model);
+	public Set<Field<?>> getActiveFields(DeepFieldResolver resolver, Model model){
+		Set<Field<?>> modelFields = getModelFields(resolver, model);
 
 		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder(){
 
@@ -86,7 +86,7 @@ public class DeepFieldResolverUtil {
 		};
 		fieldReferenceFinder.applyTo(model);
 
-		Set<Field> activeFields = FieldUtil.selectAll(modelFields, fieldReferenceFinder.getFieldNames());
+		Set<Field<?>> activeFields = FieldUtil.selectAll(modelFields, fieldReferenceFinder.getFieldNames());
 
 		Output output = model.getOutput();
 		if(output != null){
@@ -97,7 +97,7 @@ public class DeepFieldResolverUtil {
 	}
 
 	static
-	private Set<Field> getModelFields(DeepFieldResolver resolver, Model model){
+	private Set<Field<?>> getModelFields(DeepFieldResolver resolver, Model model){
 		Output output = model.getOutput();
 
 		if(output != null && output.hasOutputFields()){

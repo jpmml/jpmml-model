@@ -33,7 +33,7 @@ public class FieldDependencyResolverTest {
 		resolver.applyTo(pmml);
 
 		final
-		Map<Field, Set<Field>> dependencies = resolver.getDependencies();
+		Map<Field<?>, Set<Field<?>>> dependencies = resolver.getDependencies();
 
 		Visitor visitor = new AbstractVisitor(){
 
@@ -46,7 +46,7 @@ public class FieldDependencyResolverTest {
 
 			@Override
 			public VisitorAction visit(DerivedField derivedField){
-				Set<Field> fields = dependencies.get(derivedField);
+				Set<Field<?>> fields = dependencies.get(derivedField);
 
 				FieldName name = derivedField.getName();
 
@@ -88,13 +88,13 @@ public class FieldDependencyResolverTest {
 		resolver.applyTo(pmml);
 
 		final
-		Map<Field, Set<Field>> dependencies = resolver.getDependencies();
+		Map<Field<?>, Set<Field<?>>> dependencies = resolver.getDependencies();
 
 		Visitor visitor = new AbstractVisitor(){
 
 			@Override
 			public VisitorAction visit(DerivedField derivedField){
-				Set<Field> fields = dependencies.get(derivedField);
+				Set<Field<?>> fields = dependencies.get(derivedField);
 
 				FieldName name = derivedField.getName();
 
@@ -126,7 +126,7 @@ public class FieldDependencyResolverTest {
 	}
 
 	static
-	private void checkFields(Set<FieldName> names, Set<Field> fields){
+	private void checkFields(Set<FieldName> names, Set<Field<?>> fields){
 		assertEquals(names, FieldUtil.nameSet(fields));
 	}
 }

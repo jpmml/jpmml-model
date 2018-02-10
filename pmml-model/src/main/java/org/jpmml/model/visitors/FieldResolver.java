@@ -39,13 +39,13 @@ import org.dmg.pmml.tree.DecisionTree;
  * A Visitor that determines which fields are visible and accessible (aka &quot;in scope&quot;) at the specified location of a class model object.
  * </p>
  *
- * @see <a href="http://dmg.org/pmml/v4-2-1/FieldScope.html">Scope of Fields</a>.
+ * @see <a href="http://dmg.org/pmml/v4-3/FieldScope.html">Scope of Fields</a>.
  */
 public class FieldResolver extends AbstractModelVisitor {
 
-	private Map<PMMLObject, Set<Field>> scopes = new LinkedHashMap<>();
+	private Map<PMMLObject, Set<Field<?>>> scopes = new LinkedHashMap<>();
 
-	private Set<Field> suppressedFields = new HashSet<>();
+	private Set<Field<?>> suppressedFields = new HashSet<>();
 
 
 	@Override
@@ -62,7 +62,7 @@ public class FieldResolver extends AbstractModelVisitor {
 		PMMLObject parent = super.popParent();
 
 		if(parent instanceof Field){
-			Field field = (Field)parent;
+			Field<?> field = (Field<?>)parent;
 
 			this.suppressedFields.remove(field);
 		}
@@ -149,13 +149,13 @@ public class FieldResolver extends AbstractModelVisitor {
 		return super.visit(transformationDictionary);
 	}
 
-	public Set<Field> getFields(){
+	public Set<Field<?>> getFields(){
 		Deque<PMMLObject> parents = getParents();
 
 		return getFields(parents);
 	}
 
-	public Set<Field> getFields(PMMLObject... virtualParents){
+	public Set<Field<?>> getFields(PMMLObject... virtualParents){
 		Deque<PMMLObject> parents = new ArrayDeque<>(getParents());
 
 		for(PMMLObject virtualParent : virtualParents){
@@ -165,8 +165,8 @@ public class FieldResolver extends AbstractModelVisitor {
 		return getFields(parents);
 	}
 
-	private Set<Field> getFields(Deque<PMMLObject> parents){
-		Set<Field> result = new LinkedHashSet<>();
+	private Set<Field<?>> getFields(Deque<PMMLObject> parents){
+		Set<Field<?>> result = new LinkedHashSet<>();
 
 		PMMLObject prevParent = null;
 
@@ -174,7 +174,7 @@ public class FieldResolver extends AbstractModelVisitor {
 			PMMLObject parent = it.next();
 
 			{
-				Set<Field> scope = this.scopes.get(parent);
+				Set<Field<?>> scope = this.scopes.get(parent);
 
 				if(scope != null){
 					result.addAll(scope);
@@ -189,7 +189,7 @@ public class FieldResolver extends AbstractModelVisitor {
 				List<Output> outputs = getEarlierOutputs((Segmentation)parent, (Segment)prevParent);
 
 				for(Output output : outputs){
-					Set<Field> scope = this.scopes.get(output);
+					Set<Field<?>> scope = this.scopes.get(output);
 
 					if(scope != null){
 						result.addAll(scope);
@@ -205,8 +205,8 @@ public class FieldResolver extends AbstractModelVisitor {
 		return result;
 	}
 
-	private void declare(PMMLObject object, Collection<? extends Field> fields){
-		Set<Field> scope = this.scopes.get(object);
+	private void declare(PMMLObject object, Collection<? extends Field<?>> fields){
+		Set<Field<?>> scope = this.scopes.get(object);
 
 		if(scope == null){
 			scope = new LinkedHashSet<>();
@@ -217,7 +217,7 @@ public class FieldResolver extends AbstractModelVisitor {
 		scope.addAll(fields);
 	}
 
-	private void suppress(Collection<? extends Field> fields){
+	private void suppress(Collection<? extends Field<?>> fields){
 		this.suppressedFields.clear();
 		this.suppressedFields.addAll(fields);
 	}

@@ -18,14 +18,14 @@ public class FieldUtil {
 	}
 
 	static
-	public Set<FieldName> nameSet(Collection<? extends Field> fields){
-		Map<FieldName, ? extends Field> result = nameMap(fields);
+	public Set<FieldName> nameSet(Collection<? extends Field<?>> fields){
+		Map<FieldName, ? extends Field<?>> result = nameMap(fields);
 
 		return result.keySet();
 	}
 
 	static
-	public <F extends Field> Map<FieldName, F> nameMap(Collection<? extends F> fields){
+	public <F extends Field<?>> Map<FieldName, F> nameMap(Collection<? extends F> fields){
 		Map<FieldName, F> result = new LinkedHashMap<>();
 
 		for(F field : fields){
@@ -41,12 +41,12 @@ public class FieldUtil {
 	}
 
 	static
-	public <F extends Field> Set<F> selectAll(Collection<? extends F> fields, Set<FieldName> names){
+	public <F extends Field<?>> Set<F> selectAll(Collection<? extends F> fields, Set<FieldName> names){
 		return selectAll(fields, names, false);
 	}
 
 	static
-	public <F extends Field> Set<F> selectAll(Collection<? extends F> fields, Set<FieldName> names, boolean allowPartialSelection){
+	public <F extends Field<?>> Set<F> selectAll(Collection<? extends F> fields, Set<FieldName> names, boolean allowPartialSelection){
 		Map<FieldName, F> result = nameMap(fields);
 
 		if(!allowPartialSelection && !(result.keySet()).containsAll(names)){
@@ -62,7 +62,7 @@ public class FieldUtil {
 	}
 
 	static
-	private String format(Field field){
+	private String format(Field<?> field){
 		return String.valueOf(field);
 	}
 }

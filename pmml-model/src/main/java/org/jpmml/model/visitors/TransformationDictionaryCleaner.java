@@ -81,13 +81,13 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 	private Set<DerivedField> getActiveDerivedFields(Set<DerivedField> derivedFields){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
 
-		Set<Field> activeFields = getActiveFields();
+		Set<Field<?>> activeFields = getActiveFields();
 
 		Set<DerivedField> activeDerivedFields = new HashSet<>(derivedFields);
 		activeDerivedFields.retainAll(activeFields);
 
 		while(true){
-			Set<Field> fields = new LinkedHashSet<Field>(activeDerivedFields);
+			Set<Field<?>> fields = new LinkedHashSet<>(activeDerivedFields);
 
 			fieldDependencyResolver.expand(fields, activeDerivedFields);
 

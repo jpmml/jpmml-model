@@ -16,11 +16,11 @@ abstract
 public class AbstractFieldVisitor extends AbstractVisitor {
 
 	abstract
-	public VisitorAction visit(Field field);
+	public VisitorAction visit(Field<?> field);
 
 	@Override
 	public VisitorAction visit(DataField dataField){
-		return visit((Field)dataField);
+		return visit((Field<?>)dataField);
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class AbstractFieldVisitor extends AbstractVisitor {
 		PMMLObject parent = VisitorUtil.getParent(this);
 
 		if(VisitorUtil.isDictionary(parent)){
-			return visit((Field)derivedField);
+			return visit((Field<?>)derivedField);
 		}
 
 		return super.visit(derivedField);
@@ -36,16 +36,16 @@ public class AbstractFieldVisitor extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(OutputField outputField){
-		return visit((Field)outputField);
+		return visit((Field<?>)outputField);
 	}
 
 	@Override
 	public VisitorAction visit(ParameterField parameterField){
-		return visit((Field)parameterField);
+		return visit((Field<?>)parameterField);
 	}
 
 	@Override
 	public VisitorAction visit(ResultField resultField){
-		return visit((Field)resultField);
+		return visit((Field<?>)resultField);
 	}
 }
