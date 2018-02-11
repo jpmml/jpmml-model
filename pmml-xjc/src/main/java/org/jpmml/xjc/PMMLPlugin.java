@@ -18,9 +18,7 @@ import javax.xml.namespace.QName;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
-import com.sun.codemodel.JCommentPart;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JDocComment;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldRef;
@@ -368,29 +366,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 					JVar param = (setterMethod.params()).get(0);
 
-					String paramName = param.name();
-
 					param.name(fieldVar.name());
 
 					param.annotate(propertyAnnotation).param("value", fieldVar.name());
-
-					JDocComment javadoc = setterMethod.javadoc();
-
-					try {
-						Field atParamsField = JDocComment.class.getDeclaredField("atParams");
-						if(!atParamsField.isAccessible()){
-							atParamsField.setAccessible(true);
-						}
-
-						Map<String, JCommentPart> atParams = (Map)atParamsField.get(javadoc);
-
-						JCommentPart paramComment = atParams.remove(paramName);
-						if(paramComment != null){
-							atParams.put(fieldVar.name(), paramComment);
-						}
-					} catch(ReflectiveOperationException roe){
-						throw new RuntimeException(roe);
-					}
 
 					setterMethod.body()._return(JExpr._this());
 				} // End if

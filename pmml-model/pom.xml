@@ -170,6 +170,7 @@
 								<arg>-npa</arg>
 								<arg>-Xannotate</arg>
 								<arg>-Xinheritance</arg>
+								<arg>-Xno-javadoc</arg>
 								<arg>-Xpmml</arg>
 								<arg>-XvalueConstructor</arg>
 								<arg>-Xvisitor</arg>
