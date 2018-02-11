@@ -17,7 +17,7 @@ import javassist.NotFoundException;
 
 /**
  * <p>
- * A class file transformer that removes the <code>locator</code> field declaration from the {@link PMMLObject} class.
+ * A class file transformer that removes the <code>locator</code> field declaration from the <code>org.dmg.pmml.PMMLObject</code> class.
  * </p>
  */
 public class LocatorRemover implements ClassFileTransformer {

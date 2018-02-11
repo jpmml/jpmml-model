@@ -15,7 +15,7 @@ import javassist.NotFoundException;
 
 /**
  * <p>
- * A class file transformer that removes the <code>extensions</code> field declaration from all {@link HasExtensions} implementation classes.
+ * A class file transformer that removes the <code>extensions</code> field declaration from all <code>org.dmg.pmml.HasExtensions</code> implementation classes.
  * </p>
  */
 public class ExtensionListRemover implements ClassFileTransformer {

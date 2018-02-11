@@ -18,10 +18,9 @@ import javassist.NotFoundException;
 
 /**
  * <p>
- * A class file transformer that removes the selected field declarations from the {@link Node} class.
+ * A class file transformer that removes the selected field declarations from the <code>org.dmg.pmml.tree.Node</code> class.
  * </p>
  *
- * <p>
  * Transformer commands:
  * <ul>
  *   <li><code>double-score</code> or <code>float-score</code> - Changes the type of the <code>score</code> field declaration from {@link String} to {@link Double} or {@link Float}.</li>
@@ -29,7 +28,6 @@ import javassist.NotFoundException;
  *   <li><code>anonymous</code> - Removes <code>id</code> and <code>defaultChild</code> field declarations.</li>
  *   <li><code>regression</code> - Removes <code>recordCount</code> and <code>scoreDistributions</code> field declarations.</li>
  * </ul>
- * </p>
  */
 public class NodeTransformer implements ClassFileTransformer {
 

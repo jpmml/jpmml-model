@@ -39,7 +39,7 @@ import org.dmg.pmml.tree.DecisionTree;
  * A Visitor that determines which fields are visible and accessible (aka &quot;in scope&quot;) at the specified location of a class model object.
  * </p>
  *
- * @see <a href="http://dmg.org/pmml/v4-3/FieldScope.html">Scope of Fields</a>.
+ * @see <a href="http://dmg.org/pmml/v4-3/FieldScope.html">Scope of Fields</a>
  */
 public class FieldResolver extends AbstractModelVisitor {
 
