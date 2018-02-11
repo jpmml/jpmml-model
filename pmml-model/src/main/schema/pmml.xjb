@@ -663,6 +663,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Decision']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasDisplayValue&lt;Decision&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Decisions']/xsd:complexType">
@@ -2630,6 +2631,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasDisplayValue&lt;TargetValue&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='displayValue']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
@@ -3091,6 +3096,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Value']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasDisplayValue&lt;Value&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
