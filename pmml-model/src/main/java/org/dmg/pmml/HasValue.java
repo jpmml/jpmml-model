@@ -4,20 +4,9 @@
 package org.dmg.pmml;
 
 /**
- * <p>
- * A marker interface for PMML elements that represent a field value.
- * </p>
+ * @see HasFieldReference
  */
 public interface HasValue<E extends PMMLObject & HasValue<E>> {
-
-	/**
-	 * @return The name of the field.
-	 *
-	 * @see DataField
-	 * @see DerivedField
-	 * @see OutputField
-	 */
-	FieldName getField();
 
 	String getValue();
 
