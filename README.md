@@ -124,13 +124,6 @@ java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFa
 
 Limited public support is available via the [JPMML mailing list](https://groups.google.com/forum/#!forum/jpmml).
 
-The [Openscoring.io blog](http://openscoring.io/blog/) contains fully worked out examples about using JPMML-Model and JPMML-Evaluator libraries.
-
-Recommended reading:
-* [Extending PMML documents with custom XML content](http://openscoring.io/blog/2015/05/15/jpmml_model_api_vendor_extensions/)
-* [Transforming and measuring the memory consumption of class model objects using the Java agent technology](http://openscoring.io/blog/2015/02/06/jpmml_model_api_transform_measure/)
-* [Converting PMML documents between different schema versions](http://openscoring.io/blog/2014/06/20/jpmml_model_api_import_export/)
-
 # License #
 
 JPMML-Model is licensed under the [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause).
