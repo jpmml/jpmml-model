@@ -9,6 +9,6 @@ public class ListFinalizerBattery extends VisitorBattery {
 
 	public ListFinalizerBattery(){
 		add(ArrayListTransformer.class);
-		add(ArrayListOptimizer.class);
+		add(ArrayListTrimmer.class);
 	}
 }

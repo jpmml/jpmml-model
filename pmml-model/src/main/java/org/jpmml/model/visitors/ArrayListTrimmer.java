@@ -13,10 +13,10 @@ import org.jpmml.model.ReflectionUtil;
 
 /**
  * <p>
- * A Visitor that optimizes the size of element lists.
+ * A Visitor that trims the size of element lists.
  * </p>
  */
-public class ArrayListOptimizer extends AbstractSimpleVisitor {
+public class ArrayListTrimmer extends AbstractSimpleVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
