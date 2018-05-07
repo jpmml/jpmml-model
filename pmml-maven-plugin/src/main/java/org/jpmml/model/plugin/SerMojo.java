@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.transform.Source;
@@ -27,6 +26,7 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.Visitor;
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.SerializationUtil;
+import org.jpmml.model.VisitorBattery;
 import org.jpmml.model.filters.ImportFilter;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
@@ -102,11 +102,11 @@ public class SerMojo extends AbstractMojo {
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
-		List<Class<? extends Visitor>> visitorClazzes = new ArrayList<>();
+		VisitorBattery visitorBattery = new VisitorBattery();
 
 		boolean keepLocator = getKeepLocator();
 
-		visitorClazzes.add(keepLocator ? LocatorTransformer.class : LocatorNullifier.class);
+		visitorBattery.add(keepLocator ? LocatorTransformer.class : LocatorNullifier.class);
 
 		List<String> visitorClasses = getVisitorClasses();
 		if(visitorClasses != null){
@@ -115,7 +115,7 @@ public class SerMojo extends AbstractMojo {
 				for(String visitorClass : visitorClasses){
 					Class<?> clazz = Class.forName(visitorClass);
 
-					visitorClazzes.add(clazz.asSubclass(Visitor.class));
+					visitorBattery.add(clazz.asSubclass(Visitor.class));
 				}
 			} catch(ClassNotFoundException | ClassCastException e){
 				throw new MojoFailureException("Invalid visitorClasses parameter", e);
@@ -129,11 +129,11 @@ public class SerMojo extends AbstractMojo {
 		}
 
 		for(ModelSet modelSet : modelSets){
-			transform(modelSet, visitorClazzes);
+			transform(modelSet, visitorBattery);
 		}
 	}
 
-	private void transform(ModelSet modelSet, List<Class<? extends Visitor>> visitorClazzes) throws MojoExecutionException {
+	private void transform(ModelSet modelSet, VisitorBattery visitorBattery) throws MojoExecutionException {
 		Log log = getLog();
 
 		log.info("Processing model set from " + modelSet.getDir() + " to " + modelSet.getOutputDir());
@@ -166,14 +166,14 @@ public class SerMojo extends AbstractMojo {
 					serDir.mkdirs();
 				}
 
-				transform(pmmlFile, serFile, visitorClazzes);
+				transform(pmmlFile, serFile, visitorBattery);
 			} catch(Exception e){
 				throw new MojoExecutionException("Failed to process model " + name, e);
 			}
 		}
 	}
 
-	private void transform(File pmmlFile, File serFile, List<Class<? extends Visitor>> visitorClazzes) throws Exception {
+	private void transform(File pmmlFile, File serFile, VisitorBattery visitorBattery) throws Exception {
 		PMML pmml;
 
 		try(InputStream is = new FileInputStream(pmmlFile)){
@@ -182,11 +182,7 @@ public class SerMojo extends AbstractMojo {
 			pmml = JAXBUtil.unmarshalPMML(source);
 		}
 
-		for(Class<? extends Visitor> visitorClazz : visitorClazzes){
-			Visitor visitor = visitorClazz.newInstance();
-
-			visitor.applyTo(pmml);
-		}
+		visitorBattery.applyTo(pmml);
 
 		try(OutputStream os = new FileOutputStream(serFile)){
 			SerializationUtil.serializePMML(pmml, os);
