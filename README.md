@@ -130,4 +130,6 @@ JPMML-Model is licensed under the [BSD 3-Clause License](http://opensource.org/l
 
 # Additional information #
 
-Please contact [info@openscoring.io](mailto:info@openscoring.io)
+JPMML-Model is developed and maintained by Openscoring Ltd, Estonia.
+
+Interested in using JPMML software in your application? Please contact [info@openscoring.io](mailto:info@openscoring.io)
