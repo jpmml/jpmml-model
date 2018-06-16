@@ -48,6 +48,14 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-mathContext" type="MATH-CONTEXT" default="double"/>
 	</xsl:template>
 
+	<xsl:template match="xs:simpleType[@name='MISSING-VALUE-TREATMENT-METHOD']/xs:restriction">
+		<xs:restriction>
+			<xsl:copy-of select="@*"/>
+			<xsl:copy-of select="node()"/>
+			<xs:enumeration value="x-returnInvalid"/>
+		</xs:restriction>
+	</xsl:template>
+
 	<xsl:template match="xs:simpleType[@name='RESULT-FEATURE']/xs:restriction">
 		<xs:restriction>
 			<xsl:copy-of select="@*"/>

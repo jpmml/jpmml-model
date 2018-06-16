@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="9"
+			implementation="10"
 		/>
 
 		<wildcard:lax/>
@@ -3257,6 +3257,13 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='MISSING-VALUE-TREATMENT-METHOD']">
 			<jaxb:typesafeEnumClass
 				name="MissingValueTreatmentMethod"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='MISSING-VALUE-TREATMENT-METHOD']/xsd:restriction/xsd:enumeration[@value='x-returnInvalid']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="RETURN_INVALID"
 			/>
 		</jaxb:bindings>
 
