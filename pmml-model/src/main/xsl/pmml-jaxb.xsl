@@ -89,6 +89,13 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Replace FIELD_NAME with xs:string where appropriate
+	-->
+	<xsl:template match="xs:element[@name='Characteristic']/xs:complexType/xs:attribute[@name='name']/@type">
+		<xsl:attribute name="type">xs:string</xsl:attribute>
+	</xsl:template>
+
+	<!--
 	Replace xs:string with FIELD-NAME where appropriate
 	-->
 	<xsl:template match="xs:element[@name='BayesInput' or @name='BayesOutput']/xs:complexType/xs:attribute[@name='fieldName']/@type">
