@@ -6,6 +6,10 @@
 		@XmlNs (
 			prefix = "",
 			namespaceURI = "http://www.dmg.org/PMML-4_3"
+		),
+		@XmlNs (
+			prefix = "data",
+			namespaceURI = "http://jpmml.org/jpmml-model/InlineTable"
 		)
 	},
 	namespace = "http://www.dmg.org/PMML-4_3",
