@@ -53,7 +53,7 @@ The class model should be self-explanatory. The application developer is advised
 
 ### Unmarshalling ###
 
-Load any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
+Loading any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
 
 ```java
 public PMML load(InputStream is) throws SAXException, JAXBException {
@@ -65,7 +65,7 @@ public PMML load(InputStream is) throws SAXException, JAXBException {
 
 ### Applying visitors ###
 
-Delete SAX Locator information from the class model:
+Deleting SAX Locator information from the class model:
 
 ```java
 public void optimize(PMML pmml){
@@ -76,7 +76,7 @@ public void optimize(PMML pmml){
 
 ### Marshalling ###
 
-Store live `org.dmg.pmml.PMML` instance into PMML schema version 4.3 document:
+Storing live `org.dmg.pmml.PMML` instance into PMML schema version 4.3 document:
 
 ```java
 public void store(PMML pmml, OutputStream os) throws JAXBException {
