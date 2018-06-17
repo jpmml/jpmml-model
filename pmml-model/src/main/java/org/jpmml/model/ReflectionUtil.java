@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Predicate;
 
 import org.dmg.pmml.PMMLObject;
 
@@ -141,7 +142,7 @@ public class ReflectionUtil {
 	}
 
 	static
-	private List<Field> loadFields(Class<?> clazz, FieldFilter filter){
+	private List<Field> loadFields(Class<?> clazz, Predicate<Field> predicate){
 		List<Field> result = new ArrayList<>();
 
 		while(clazz != null){
@@ -149,7 +150,7 @@ public class ReflectionUtil {
 
 			for(Field field : fields){
 
-				if(filter.accept(field)){
+				if(predicate.test(field)){
 					result.add(field);
 				}
 			}
@@ -161,16 +162,10 @@ public class ReflectionUtil {
 	}
 
 	static
-	private interface FieldFilter {
-
-		boolean accept(Field field);
-	}
-
-	static
-	private final FieldFilter FIELD_SELECTOR = new FieldFilter(){
+	private final Predicate<Field> FIELD_SELECTOR = new Predicate<Field>(){
 
 		@Override
-		public boolean accept(Field field){
+		public boolean test(Field field){
 			return hasValidName(field);
 		}
 
@@ -186,12 +181,12 @@ public class ReflectionUtil {
 	};
 
 	static
-	private final FieldFilter INSTANCE_FIELD_SELECTOR = new FieldFilter(){
+	private final Predicate<Field> INSTANCE_FIELD_SELECTOR = new Predicate<Field>(){
 
 		@Override
-		public boolean accept(Field field){
+		public boolean test(Field field){
 
-			if(ReflectionUtil.FIELD_SELECTOR.accept(field)){
+			if(ReflectionUtil.FIELD_SELECTOR.test(field)){
 				int modifiers = field.getModifiers();
 
 				return !Modifier.isStatic(modifiers);

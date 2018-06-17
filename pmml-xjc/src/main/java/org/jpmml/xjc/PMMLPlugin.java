@@ -407,7 +407,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 	}
 
 	static
-	private FieldOutline getExtensionsField(final ClassOutline classOutline){
+	private FieldOutline getExtensionsField(ClassOutline classOutline){
 		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
 			@Override
@@ -428,7 +428,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 	}
 
 	static
-	private FieldOutline getContentField(final ClassOutline classOutline){
+	private FieldOutline getContentField(ClassOutline classOutline){
 		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
 			private String name = classOutline.implClass.name();

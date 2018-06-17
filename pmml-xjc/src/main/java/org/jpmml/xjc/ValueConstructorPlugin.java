@@ -64,7 +64,6 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 
-			final
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
 			Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){

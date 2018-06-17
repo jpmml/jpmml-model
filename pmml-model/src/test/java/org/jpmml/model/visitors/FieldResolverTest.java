@@ -29,10 +29,8 @@ public class FieldResolverTest {
 	public void resolveChained() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class);
 
-		final
 		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2", "x3", "x4");
 
-		final
 		Set<FieldName> pmmlNames = FieldNameUtil.create(dataFieldNames, "x1_squared", "x1_cubed");
 
 		FieldResolver applyResolver = new FieldResolver(){
@@ -162,7 +160,6 @@ public class FieldResolverTest {
 	public void resolveNested() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class);
 
-		final
 		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2", "x3", "x4", "x5");
 
 		FieldResolver applyResolver = new FieldResolver(){

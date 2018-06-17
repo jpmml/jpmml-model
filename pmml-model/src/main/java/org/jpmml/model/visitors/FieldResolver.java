@@ -24,7 +24,6 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
-import org.dmg.pmml.ParameterField;
 import org.dmg.pmml.ResultField;
 import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.Visitable;
@@ -87,7 +86,7 @@ public class FieldResolver extends AbstractModelVisitor {
 
 	@Override
 	public VisitorAction visit(DefineFunction defineFunction){
-		declare(defineFunction, defineFunction.hasParameterFields() ? defineFunction.getParameterFields() : Collections.<ParameterField>emptyList());
+		declare(defineFunction, defineFunction.hasParameterFields() ? defineFunction.getParameterFields() : Collections.emptyList());
 
 		return super.visit(defineFunction);
 	}

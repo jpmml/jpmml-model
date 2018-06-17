@@ -16,7 +16,7 @@ public class FieldNameUtil {
 
 	static
 	public Set<FieldName> create(String... values){
-		return create(Collections.<FieldName>emptySet(), values);
+		return create(Collections.emptySet(), values);
 	}
 
 	static

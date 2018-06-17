@@ -32,14 +32,13 @@ public class FieldDependencyResolverTest {
 		FieldDependencyResolver resolver = new FieldDependencyResolver();
 		resolver.applyTo(pmml);
 
-		final
 		Map<Field<?>, Set<Field<?>>> dependencies = resolver.getDependencies();
 
 		Visitor visitor = new AbstractVisitor(){
 
 			@Override
 			public VisitorAction visit(DataField dataField){
-				checkFields(Collections.<FieldName>emptySet(), dependencies.get(dataField));
+				checkFields(Collections.emptySet(), dependencies.get(dataField));
 
 				return super.visit(dataField);
 			}
@@ -71,7 +70,7 @@ public class FieldDependencyResolverTest {
 
 			@Override
 			public VisitorAction visit(OutputField outputField){
-				checkFields(Collections.<FieldName>emptySet(), dependencies.get(outputField));
+				checkFields(Collections.emptySet(), dependencies.get(outputField));
 
 				return super.visit(outputField);
 			}
@@ -87,7 +86,6 @@ public class FieldDependencyResolverTest {
 		FieldDependencyResolver resolver = new FieldDependencyResolver();
 		resolver.applyTo(pmml);
 
-		final
 		Map<Field<?>, Set<Field<?>>> dependencies = resolver.getDependencies();
 
 		Visitor visitor = new AbstractVisitor(){

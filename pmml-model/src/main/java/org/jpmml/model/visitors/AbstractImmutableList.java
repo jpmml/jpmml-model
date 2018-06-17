@@ -25,7 +25,7 @@ class AbstractImmutableList<E> extends AbstractCollection<E> implements List<E> 
 	}
 
 	@Override
-	public ListIterator<E> listIterator(final int index){
+	public ListIterator<E> listIterator(int index){
 
 		if(index < 0 || index > size()){
 			throw new IndexOutOfBoundsException();

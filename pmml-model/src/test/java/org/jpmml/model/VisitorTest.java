@@ -29,11 +29,9 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		final
 		Node leftChild = new Node()
 			.setPredicate(new SimplePredicate());
 
-		final
 		Node rightChild = new Node()
 			.setPredicate(new SimpleSetPredicate());
 
