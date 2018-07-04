@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
-    <Extension>First text<test:Extension xmlns:test="http://localhost/test"/>Second text</Extension>
+	<Extension>First text<test:Extension xmlns:test="http://localhost/test"/>Second text</Extension>
 </PMML>

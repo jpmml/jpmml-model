@@ -2,7 +2,7 @@
 <!DOCTYPE lolz SYSTEM "${project.basedir}/src/test/resources/dtd/lolz.dtd" [
 ]>
 <PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
-    <Header/>
-    <DataDictionary/>
-    <Extension>&lol;</Extension>
+	<Header/>
+	<DataDictionary/>
+	<Extension>&lol;</Extension>
 </PMML> 
