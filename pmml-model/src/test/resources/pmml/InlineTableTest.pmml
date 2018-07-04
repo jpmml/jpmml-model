@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+	<Header/>
+	<DataDictionary>
+		<DataField name="x" dataType="integer" optype="categorical">
+			<Value value="0"/>
+		</DataField>
+	</DataDictionary>
+	<TransformationDictionary>
+		<DerivedField name="text(x)" dataType="string" optype="categorical">
+			<MapValues outputColumn="data:output">
+				<FieldColumnPair field="x" column="data:input"/>
+				<InlineTable>
+					<row><any/><data:input>0</data:input><data:output>zero</data:output><data:any/></row>
+				</InlineTable>
+			</MapValues>
+		</DerivedField>
+	</TransformationDictionary>
+</PMML> 

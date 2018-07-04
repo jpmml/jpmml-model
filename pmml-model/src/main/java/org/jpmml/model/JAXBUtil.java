@@ -146,7 +146,8 @@ public class JAXBUtil {
 				org.dmg.pmml.support_vector_machine.ObjectFactory.class,
 				org.dmg.pmml.text.ObjectFactory.class,
 				org.dmg.pmml.time_series.ObjectFactory.class,
-				org.dmg.pmml.tree.ObjectFactory.class
+				org.dmg.pmml.tree.ObjectFactory.class,
+				org.jpmml.model.inlinetable.ObjectFactory.class
 			);
 		}
 

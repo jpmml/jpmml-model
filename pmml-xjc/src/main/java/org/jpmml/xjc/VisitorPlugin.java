@@ -4,10 +4,13 @@
 package org.jpmml.xjc;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JBlock;
@@ -112,6 +115,32 @@ public class VisitorPlugin extends Plugin {
 		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
 		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
 
+		Function<JClass, List<JMethod>> methodGenerator = new Function<JClass, List<JMethod>>(){
+
+			@Override
+			public List<JMethod> apply(JClass clazz){
+				String parameterName = NameConverter.standard.toVariableName(clazz.name());
+				if(!JJavaName.isJavaIdentifier(parameterName)){
+					parameterName = ("_" + parameterName);
+				}
+
+				JMethod visitorVisit = visitorInterface.method(JMod.PUBLIC, visitorActionClazz, "visit");
+				visitorVisit.param(clazz, parameterName);
+
+				JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
+				abstractVisitorVisit.annotate(Override.class);
+				abstractVisitorVisit.param(clazz, parameterName);
+				abstractVisitorVisit.body()._return(continueAction);
+
+				JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
+				abstractSimpleVisitorVisit.annotate(Override.class);
+				abstractSimpleVisitorVisit.param(clazz, parameterName);
+				abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(pmmlObjectClazz, JExpr.ref(parameterName))));
+
+				return Arrays.asList(visitorVisit, abstractVisitorVisit, abstractSimpleVisitorVisit);
+			}
+		};
+
 		Set<String> traversableTypes = new LinkedHashSet<>();
 
 		Collection<? extends ClassOutline> classOulines = outline.getClasses();
@@ -127,23 +156,7 @@ public class VisitorPlugin extends Plugin {
 		for(ClassOutline classOutline : classOulines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			String parameterName = NameConverter.standard.toVariableName(beanClazz.name());
-			if(!JJavaName.isJavaIdentifier(parameterName)){
-				parameterName = ("_" + parameterName);
-			}
-
-			JMethod visitorVisit = visitorInterface.method(JMod.PUBLIC, visitorActionClazz, "visit");
-			visitorVisit.param(beanClazz, parameterName);
-
-			JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
-			abstractVisitorVisit.annotate(Override.class);
-			abstractVisitorVisit.param(beanClazz, parameterName);
-			abstractVisitorVisit.body()._return(continueAction);
-
-			JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
-			abstractSimpleVisitorVisit.annotate(Override.class);
-			abstractSimpleVisitorVisit.param(beanClazz, parameterName);
-			abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(pmmlObjectClazz, JExpr.ref(parameterName))));
+			methodGenerator.apply(beanClazz);
 
 			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
 			beanAccept.annotate(Override.class);
@@ -201,6 +214,13 @@ public class VisitorPlugin extends Plugin {
 			body._if(status.eq(terminateAction))._then()._return(terminateAction);
 
 			body._return(continueAction);
+		}
+
+		JClass cellClazz = codeModel.ref("org.dmg.pmml.Cell");
+
+		Collection<? extends JClass> beanClazzes = Arrays.asList(cellClazz);
+		for(JClass beanClazz : beanClazzes){
+			methodGenerator.apply(beanClazz);
 		}
 
 		return true;
