@@ -14,8 +14,10 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.filters.WhitespaceFilter;
 import org.jpmml.model.inlinetable.InputCell;
 import org.jpmml.model.inlinetable.OutputCell;
+import org.jpmml.model.visitors.MixedContentCleaner;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,22 +31,23 @@ public class InlineTableTest {
 	public void unmarshal() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(InlineTableTest.class);
 
-		TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
-
-		List<DerivedField> derivedFields = transformationDictionary.getDerivedFields();
-
-		DerivedField derivedField = derivedFields.get(0);
-
-		MapValues mapValues = (MapValues)derivedField.getExpression();
-
-		InlineTable inlineTable = mapValues.getInlineTable();
-
-		List<Row> rows = inlineTable.getRows();
-		assertEquals(1, rows.size());
-
-		Row row = rows.get(0);
+		Row row = getRow(pmml);
 
 		List<?> content = row.getContent();
+
+		assertEquals(9, content.size());
+
+		Visitor visitor = new MixedContentCleaner();
+		visitor.applyTo(pmml);
+
+		assertEquals(4, content.size());
+
+		pmml = ResourceUtil.unmarshal(InlineTableTest.class, new WhitespaceFilter());
+
+		row = getRow(pmml);
+
+		content = row.getContent();
+
 		assertEquals(4, content.size());
 
 		Object first = content.get(0);
@@ -99,6 +102,27 @@ public class InlineTableTest {
 			.addContent(inputElement, outputElement);
 
 		checkRow(row);
+	}
+
+	static
+	private Row getRow(PMML pmml){
+		TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
+
+		List<DerivedField> derivedFields = transformationDictionary.getDerivedFields();
+
+		assertEquals(1, derivedFields.size());
+
+		DerivedField derivedField = derivedFields.get(0);
+
+		MapValues mapValues = (MapValues)derivedField.getExpression();
+
+		InlineTable inlineTable = mapValues.getInlineTable();
+
+		List<Row> rows = inlineTable.getRows();
+
+		assertEquals(1, rows.size());
+
+		return rows.get(0);
 	}
 
 	static

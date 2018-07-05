@@ -11,7 +11,15 @@
 			<MapValues outputColumn="data:output">
 				<FieldColumnPair field="x" column="data:input"/>
 				<InlineTable>
-					<row><any/><data:input>0</data:input><data:output>zero</data:output><data:any/></row>
+					<row>
+						<!-- header -->
+						<any/>
+						<!-- body -->
+						<data:input>0</data:input>
+						<data:output>zero</data:output>
+						<!-- footer -->
+						<data:any/>
+					</row>
 				</InlineTable>
 			</MapValues>
 		</DerivedField>

@@ -8,6 +8,7 @@ import org.jpmml.model.VisitorBattery;
 public class ListFinalizerBattery extends VisitorBattery {
 
 	public ListFinalizerBattery(){
+		add(MixedContentCleaner.class);
 		add(ArrayListTransformer.class);
 		add(ArrayListTrimmer.class);
 	}
