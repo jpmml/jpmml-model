@@ -7,6 +7,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 
+/**
+ * <p>
+ * A SAX filter that removes whitespace strings.
+ * </p>
+ */
 public class WhitespaceFilter extends XMLFilterImpl {
 
 	public WhitespaceFilter(){
