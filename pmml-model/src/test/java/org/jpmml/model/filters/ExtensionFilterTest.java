@@ -25,6 +25,12 @@ public class ExtensionFilterTest {
 
 		List<?> content = ExtensionUtil.getContent(pmml);
 
+		assertEquals(5, content.size());
+
+		pmml = ResourceUtil.unmarshal(ExtensionFilterTest.class, new ImportFilter(), new WhitespaceFilter());
+
+		content = ExtensionUtil.getContent(pmml);
+
 		assertEquals(2, content.size());
 
 		Element parentElement = (Element)content.get(0);
@@ -53,6 +59,12 @@ public class ExtensionFilterTest {
 		pmml = ResourceUtil.unmarshal(ExtensionFilterTest.class, new ImportFilter(), new ExtensionFilter());
 
 		assertEquals(null, pmml.getBaseVersion());
+
+		content = ExtensionUtil.getContent(pmml);
+
+		assertEquals(3, content.size());
+
+		pmml = ResourceUtil.unmarshal(ExtensionFilterTest.class, new ImportFilter(), new ExtensionFilter(), new WhitespaceFilter());
 
 		content = ExtensionUtil.getContent(pmml);
 
