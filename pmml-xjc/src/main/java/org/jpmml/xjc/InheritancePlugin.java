@@ -20,8 +20,10 @@ import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CClassInfo;
 import com.sun.tools.xjc.model.CClassRef;
 import com.sun.tools.xjc.model.CPluginCustomization;
+import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIClass;
 import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
@@ -104,6 +106,15 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 				JClass type = parseType(typeCache, codeModel, getInterfaceName(implementsInterface));
 
 				beanClazz._implements(type);
+			}
+
+			// See https://github.com/highsource/jaxb2-basics/issues/70
+			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
+			for(FieldOutline fieldOutline : fieldOutlines){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				CustomizationUtils.findPropertyCustomizationsInProperty(propertyInfo, Customizations.EXTENDS_ELEMENT_NAME);
+				CustomizationUtils.findPropertyCustomizationsInProperty(propertyInfo, Customizations.IMPLEMENTS_ELEMENT_NAME);
 			}
 		}
 

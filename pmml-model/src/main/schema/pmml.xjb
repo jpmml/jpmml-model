@@ -55,6 +55,10 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Annotation']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasMixedContent&lt;Annotation&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Anova']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
@@ -836,6 +840,10 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="Transformation"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Extension']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasMixedContent&lt;Extension&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FactorList']/xsd:complexType">
@@ -2151,6 +2159,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='row']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasMixedContent&lt;Row&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RuleSelectionMethod']/xsd:complexType">
 			<jpmml-model:subpackage
 				name="rule_set"
@@ -2923,6 +2935,10 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Timestamp']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasMixedContent&lt;Timestamp&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeValue']/xsd:complexType">
