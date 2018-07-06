@@ -26,7 +26,7 @@ public class ResourceUtil {
 	public PMML unmarshal(Class<?> clazz, XMLFilter... filters) throws IOException, SAXException, JAXBException {
 
 		try(InputStream is = getStream(clazz)){
-			Source source = JAXBUtil.createFilteredSource(new InputSource(is), filters);
+			Source source = SAXUtil.createFilteredSource(new InputSource(is), filters);
 
 			return JAXBUtil.unmarshalPMML(source);
 		}

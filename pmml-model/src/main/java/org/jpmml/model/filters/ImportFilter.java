@@ -6,7 +6,7 @@ package org.jpmml.model.filters;
 import javax.xml.transform.sax.SAXSource;
 
 import org.dmg.pmml.Version;
-import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.SAXUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -91,6 +91,6 @@ public class ImportFilter extends PMMLFilter {
 	 */
 	static
 	public SAXSource apply(InputSource source) throws SAXException {
-		return JAXBUtil.createFilteredSource(source, new ImportFilter());
+		return SAXUtil.createFilteredSource(source, new ImportFilter());
 	}
 }

@@ -14,45 +14,17 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
-import javax.xml.transform.sax.SAXSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.dmg.pmml.PMML;
 import org.jpmml.model.filters.ExportFilter;
-import org.jpmml.model.filters.ExtensionFilter;
 import org.jpmml.model.filters.ImportFilter;
-import org.jpmml.model.filters.WhitespaceFilter;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLFilter;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 public class JAXBUtil {
 
 	private JAXBUtil(){
-	}
-
-	/**
-	 * @see ImportFilter
-	 * @see ElementReader
-	 * @see ExtensionFilter
-	 * @see WhitespaceFilter
-	 */
-	static
-	public SAXSource createFilteredSource(InputSource source, XMLFilter... filters) throws SAXException {
-		XMLReader reader = XMLReaderFactory.createXMLReader();
-
-		for(XMLFilter filter : filters){
-			filter.setParent(reader);
-
-			reader = filter;
-		}
-
-		SAXSource filteredSource = new SAXSource(reader, source);
-
-		return filteredSource;
 	}
 
 	/**
