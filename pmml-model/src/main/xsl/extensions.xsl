@@ -26,6 +26,15 @@ Copyright (c) 2016 Villu Ruusmann
 				</xs:restriction>
 			</xs:simpleType>
 		</xsl:copy>
+		<xs:attribute name="x-missingPredictionTreatment" default="continue">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="returnMissing"/>
+					<xs:enumeration value="skipSegment"/>
+					<xs:enumeration value="continue"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='invalidValueTreatment']">
