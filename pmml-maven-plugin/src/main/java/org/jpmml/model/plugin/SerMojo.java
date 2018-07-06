@@ -10,8 +10,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import javax.xml.transform.Source;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -24,13 +22,11 @@ import org.codehaus.plexus.components.io.filemappers.FileMapper;
 import org.codehaus.plexus.util.DirectoryScanner;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Visitor;
-import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.PMMLUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.VisitorBattery;
-import org.jpmml.model.filters.ImportFilter;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
-import org.xml.sax.InputSource;
 
 /**
  * <p>
@@ -177,9 +173,7 @@ public class SerMojo extends AbstractMojo {
 		PMML pmml;
 
 		try(InputStream is = new FileInputStream(pmmlFile)){
-			Source source = ImportFilter.apply(new InputSource(is));
-
-			pmml = JAXBUtil.unmarshalPMML(source);
+			pmml = PMMLUtil.unmarshal(is);
 		}
 
 		visitorBattery.applyTo(pmml);

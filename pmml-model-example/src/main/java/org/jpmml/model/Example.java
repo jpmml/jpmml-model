@@ -56,7 +56,7 @@ public class Example {
 		Unmarshaller unmarshaller = createUnmarshaller();
 
 		try(InputStream is = new FileInputStream(file)){
-			Source source = ImportFilter.apply(new InputSource(is));
+			Source source = SAXUtil.createFilteredSource(new InputSource(is), new ImportFilter());
 
 			return (PMML)unmarshaller.unmarshal(source);
 		}

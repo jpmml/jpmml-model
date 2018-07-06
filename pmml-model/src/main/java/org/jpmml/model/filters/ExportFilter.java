@@ -3,14 +3,9 @@
  */
 package org.jpmml.model.filters;
 
-import javax.xml.transform.sax.SAXSource;
-
 import org.dmg.pmml.Version;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * <p>
@@ -71,20 +66,5 @@ public class ExportFilter extends PMMLFilter {
 		}
 
 		return attributes;
-	}
-
-	/**
-	 * @param source An {@link InputSource} that contains PMML schema version 4.3 document.
-	 * @param version The target PMML schema version.
-	 *
-	 * @return A {@link SAXSource} containing the target PMML schema version document.
-	 */
-	static
-	public SAXSource apply(InputSource source, Version version) throws SAXException {
-		XMLReader reader = XMLReaderFactory.createXMLReader();
-
-		ExportFilter filter = new ExportFilter(reader, version);
-
-		return new SAXSource(filter, source);
 	}
 }

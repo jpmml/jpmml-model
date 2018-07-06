@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
-import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.dmg.pmml.PMML;
@@ -27,12 +26,9 @@ public class PMMLUtil {
 	 */
 	static
 	public PMML unmarshal(InputStream is) throws SAXException, JAXBException {
-		InputSource source = new InputSource(is);
+		Source source = SAXUtil.createFilteredSource(new InputSource(is), new ImportFilter());
 
-		// Use SAX filtering to transform PMML schema version 3.X and 4.X documents to PMML schema version 4.3 document
-		SAXSource transformedSource = ImportFilter.apply(source);
-
-		return JAXBUtil.unmarshalPMML(transformedSource);
+		return JAXBUtil.unmarshalPMML(source);
 	}
 
 	/**

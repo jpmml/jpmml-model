@@ -3,13 +3,8 @@
  */
 package org.jpmml.model.filters;
 
-import javax.xml.transform.sax.SAXSource;
-
 import org.dmg.pmml.Version;
-import org.jpmml.model.SAXUtil;
 import org.xml.sax.Attributes;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 /**
@@ -82,15 +77,5 @@ public class ImportFilter extends PMMLFilter {
 
 	private void setExtensions(boolean extensions){
 		this.extensions = extensions;
-	}
-
-	/**
-	 * @param source An {@link InputSource} that contains PMML schema version 3.X or 4.X document.
-	 *
-	 * @return A {@link SAXSource} that contains PMML schema version 4.3 document.
-	 */
-	static
-	public SAXSource apply(InputSource source) throws SAXException {
-		return SAXUtil.createFilteredSource(source, new ImportFilter());
 	}
 }
