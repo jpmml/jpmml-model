@@ -21,7 +21,6 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.filters.ImportFilter;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 abstract
@@ -56,7 +55,7 @@ public class Example {
 		Unmarshaller unmarshaller = createUnmarshaller();
 
 		try(InputStream is = new FileInputStream(file)){
-			Source source = SAXUtil.createFilteredSource(new InputSource(is), new ImportFilter());
+			Source source = SAXUtil.createFilteredSource(is, new ImportFilter());
 
 			return (PMML)unmarshaller.unmarshal(source);
 		}

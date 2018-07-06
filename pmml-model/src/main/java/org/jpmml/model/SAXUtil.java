@@ -3,6 +3,8 @@
  */
 package org.jpmml.model;
 
+import java.io.InputStream;
+
 import javax.xml.transform.sax.SAXSource;
 
 import org.jpmml.model.filters.ElementFilter;
@@ -27,7 +29,7 @@ public class SAXUtil {
 	 * @see WhitespaceFilter
 	 */
 	static
-	public SAXSource createFilteredSource(InputSource source, XMLFilter... filters) throws SAXException {
+	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws SAXException {
 		XMLReader reader = XMLReaderFactory.createXMLReader();
 
 		for(XMLFilter filter : filters){
@@ -36,6 +38,6 @@ public class SAXUtil {
 			reader = filter;
 		}
 
-		return new SAXSource(reader, source);
+		return new SAXSource(reader, new InputSource(is));
 	}
 }

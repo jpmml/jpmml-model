@@ -13,7 +13,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
 
@@ -26,7 +25,7 @@ public class ResourceUtil {
 	public PMML unmarshal(Class<?> clazz, XMLFilter... filters) throws IOException, SAXException, JAXBException {
 
 		try(InputStream is = getStream(clazz)){
-			Source source = SAXUtil.createFilteredSource(new InputSource(is), filters);
+			Source source = SAXUtil.createFilteredSource(is, filters);
 
 			return JAXBUtil.unmarshalPMML(source);
 		}

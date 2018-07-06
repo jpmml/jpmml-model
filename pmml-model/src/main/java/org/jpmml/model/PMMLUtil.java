@@ -13,7 +13,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.dmg.pmml.PMML;
 import org.jpmml.model.filters.ImportFilter;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class PMMLUtil {
@@ -26,7 +25,7 @@ public class PMMLUtil {
 	 */
 	static
 	public PMML unmarshal(InputStream is) throws SAXException, JAXBException {
-		Source source = SAXUtil.createFilteredSource(new InputSource(is), new ImportFilter());
+		Source source = SAXUtil.createFilteredSource(is, new ImportFilter());
 
 		return JAXBUtil.unmarshalPMML(source);
 	}
