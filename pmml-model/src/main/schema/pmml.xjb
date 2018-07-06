@@ -2299,6 +2299,13 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='x-missingThreshold']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<jaxb:property
+				name="missingThreshold"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Segmentation']/xsd:complexType/xsd:attribute[@name='multipleModelMethod']/xsd:simpleType">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 			<jaxb:typesafeEnumClass

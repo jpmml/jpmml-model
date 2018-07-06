@@ -35,6 +35,7 @@ Copyright (c) 2016 Villu Ruusmann
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
+		<xs:attribute name="x-missingThreshold" type="PROB-NUMBER" default="1"/>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='invalidValueTreatment']">
