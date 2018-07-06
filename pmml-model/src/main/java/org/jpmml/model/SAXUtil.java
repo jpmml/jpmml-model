@@ -31,13 +31,23 @@ public class SAXUtil {
 	static
 	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws SAXException {
 		XMLReader reader = XMLReaderFactory.createXMLReader();
+		reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 
-		for(XMLFilter filter : filters){
-			filter.setParent(reader);
-
-			reader = filter;
-		}
+		reader = createFilteredReader(reader, filters);
 
 		return new SAXSource(reader, new InputSource(is));
+	}
+
+	static
+	public XMLReader createFilteredReader(XMLReader reader, XMLFilter... filters){
+		XMLReader result = reader;
+
+		for(XMLFilter filter : filters){
+			filter.setParent(result);
+
+			result = filter;
+		}
+
+		return result;
 	}
 }

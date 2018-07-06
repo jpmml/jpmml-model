@@ -8,17 +8,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.UnmarshalException;
-import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
-import org.dmg.pmml.Extension;
 import org.dmg.pmml.PMML;
 import org.junit.Test;
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
+import org.xml.sax.SAXParseException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class XXEAttackTest {
@@ -30,30 +28,31 @@ public class XXEAttackTest {
 		System.setProperty("javax.xml.accessExternalDTD", "file");
 
 		try(InputStream is = ResourceUtil.getStream(XXEAttackTest.class);){
-			pmml = JAXBUtil.unmarshalPMML(new StreamSource(is));
+			Source source = new StreamSource(is);
+
+			pmml = JAXBUtil.unmarshalPMML(source);
 		} finally {
 			System.clearProperty("javax.xml.accessExternalDTD");
 		}
 
-		List<Extension> extensions = pmml.getExtensions();
-		assertEquals(1, extensions.size());
+		List<?> content = ExtensionUtil.getContent(pmml);
 
-		Extension extension = extensions.get(0);
-		assertEquals(Arrays.asList("lol"), extension.getContent());
+		assertEquals(Arrays.asList("lol"), content);
 	}
 
 	@Test
 	public void unmarshalSecurely() throws Exception {
 
 		try(InputStream is = ResourceUtil.getStream(XXEAttackTest.class)){
-			XMLReader reader = XMLReaderFactory.createXMLReader();
-			reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+			Source source = SAXUtil.createFilteredSource(is);
 
-			JAXBUtil.unmarshalPMML(new SAXSource(reader, new InputSource(is)));
+			JAXBUtil.unmarshalPMML(source);
 
 			fail();
 		} catch(UnmarshalException ue){
-			// Ignored
+			Throwable cause = ue.getCause();
+
+			assertTrue(cause instanceof SAXParseException);
 		}
 	}
 }
