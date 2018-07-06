@@ -21,6 +21,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.filters.ImportFilter;
+import org.jpmml.model.filters.WhitespaceFilter;
 import org.xml.sax.SAXException;
 
 abstract
@@ -55,7 +56,7 @@ public class Example {
 		Unmarshaller unmarshaller = createUnmarshaller();
 
 		try(InputStream is = new FileInputStream(file)){
-			Source source = SAXUtil.createFilteredSource(is, new ImportFilter());
+			Source source = SAXUtil.createFilteredSource(is, new ImportFilter(), new WhitespaceFilter());
 
 			return (PMML)unmarshaller.unmarshal(source);
 		}
