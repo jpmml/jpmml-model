@@ -48,6 +48,11 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-reportField" type="FIELD-NAME"/>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:sequence/xs:sequence/xs:group[@ref='EXPRESSION']">
+		<xsl:copy-of select="."/>
+		<xs:element ref="Value" minOccurs="0" maxOccurs="unbounded"/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='PMML']/xs:complexType/xs:attribute[@name='version']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-baseVersion" type="xs:string"/>
