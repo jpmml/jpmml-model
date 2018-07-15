@@ -4,8 +4,10 @@
 package org.jpmml.xjc;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -141,10 +143,20 @@ public class VisitorPlugin extends Plugin {
 			}
 		};
 
+		Comparator<ClassOutline> comparator = new Comparator<ClassOutline>(){
+
+			@Override
+			public int compare(ClassOutline left, ClassOutline right){
+				return (left.implClass.name()).compareToIgnoreCase(right.implClass.name());
+			}
+		};
+
+		List<ClassOutline> classOutlines = new ArrayList<>(outline.getClasses());
+		classOutlines.sort(comparator);
+
 		Set<String> traversableTypes = new LinkedHashSet<>();
 
-		Collection<? extends ClassOutline> classOulines = outline.getClasses();
-		for(ClassOutline classOutline : classOulines){
+		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
 			traversableTypes.add(getTypeName(beanClazz));
@@ -153,7 +165,7 @@ public class VisitorPlugin extends Plugin {
 			traversableTypes.add(getTypeName(beanSuperClazz));
 		} // End for
 
-		for(ClassOutline classOutline : classOulines){
+		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
 			methodGenerator.apply(beanClazz);
