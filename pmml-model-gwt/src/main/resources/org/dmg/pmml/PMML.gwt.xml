@@ -11,8 +11,4 @@
 	<super-source
 		path="jre"
 	/>
-
-	<inherits
-		name="org.jpmml.schema.Schema"
-	/>
 </module>
