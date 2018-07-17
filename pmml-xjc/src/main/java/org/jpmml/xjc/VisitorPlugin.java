@@ -6,13 +6,12 @@ package org.jpmml.xjc;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 import com.sun.codemodel.ClassType;
 import com.sun.codemodel.JBlock;
@@ -117,11 +116,11 @@ public class VisitorPlugin extends Plugin {
 		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
 		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
 
-		Function<JClass, List<JMethod>> methodGenerator = new Function<JClass, List<JMethod>>(){
+		BiFunction<JClass, JClass, List<JMethod>> methodGenerator = new BiFunction<JClass, JClass, List<JMethod>>(){
 
 			@Override
-			public List<JMethod> apply(JClass clazz){
-				String parameterName = NameConverter.standard.toVariableName(clazz.name());
+			public List<JMethod> apply(JClass clazz, JClass superClazz){
+				String parameterName = NameConverter.standard.toVariableName((clazz.erasure()).name());
 				if(!JJavaName.isJavaIdentifier(parameterName)){
 					parameterName = ("_" + parameterName);
 				}
@@ -137,7 +136,7 @@ public class VisitorPlugin extends Plugin {
 				JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
 				abstractSimpleVisitorVisit.annotate(Override.class);
 				abstractSimpleVisitorVisit.param(clazz, parameterName);
-				abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(pmmlObjectClazz, JExpr.ref(parameterName))));
+				abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(superClazz.erasure(), JExpr.ref(parameterName))));
 
 				return Arrays.asList(visitorVisit, abstractVisitorVisit, abstractSimpleVisitorVisit);
 			}
@@ -156,6 +155,46 @@ public class VisitorPlugin extends Plugin {
 
 		Set<String> traversableTypes = new LinkedHashSet<>();
 
+		String[][] abstractClasses = {
+			{"Cell"},
+			{"ComparisonField<?>"},
+			{"ContinuousDistribution", "Distribution"},
+			{"DiscreteDistribution", "Distribution"},
+			{"Distance", "Measure"},
+			{"Distribution"},
+			{"EmbeddedModel"},
+			{"Entity"},
+			{"Expression"},
+			{"Field<?>"},
+			{"support_vector_machine.Kernel"},
+			{"Measure"},
+			{"Model"},
+			{"general_regression.ParameterCell"},
+			// {"PMMLObject"},
+			{"Predicate"},
+			{"general_regression.PredictorList"},
+			{"rule_set.Rule", "Entity"},
+			{"Similarity", "Measure"},
+			{"SparseArray<?>"},
+			{"regression.Term"},
+			{"time_series.TimeSeriesAlgorithm"}
+		};
+
+		for(String[] abstractClass : abstractClasses){
+			JClass beanClazz = codeModel.ref(getTypeName("org.dmg.pmml." + abstractClass[0]));
+
+			if((abstractClass[0]).endsWith("<?>")){
+				beanClazz = beanClazz.narrow(codeModel.wildcard());
+			}
+
+			JClass beanSuperClazz = pmmlObjectClazz;
+			if(abstractClass.length > 1){
+				beanSuperClazz = codeModel.ref(getTypeName("org.dmg.pmml." + abstractClass[1]));
+			}
+
+			methodGenerator.apply(beanClazz, beanSuperClazz);
+		} // End for
+
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
@@ -168,7 +207,7 @@ public class VisitorPlugin extends Plugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			methodGenerator.apply(beanClazz);
+			methodGenerator.apply(beanClazz, beanClazz._extends());
 
 			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
 			beanAccept.annotate(Override.class);
@@ -228,21 +267,18 @@ public class VisitorPlugin extends Plugin {
 			body._return(continueAction);
 		}
 
-		JClass cellClazz = codeModel.ref("org.dmg.pmml.Cell");
-
-		Collection<? extends JClass> beanClazzes = Arrays.asList(cellClazz);
-		for(JClass beanClazz : beanClazzes){
-			methodGenerator.apply(beanClazz);
-		}
-
 		return true;
 	}
 
 	static
 	private String getTypeName(JType type){
-		String name = type.name();
+		return getTypeName(type.name());
+	}
 
+	static
+	private String getTypeName(String name){
 		int lt = name.indexOf("<");
+
 		if(lt > -1){
 			name = name.substring(0, lt);
 		}
