@@ -32,6 +32,9 @@ public class SAXUtil {
 	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws SAXException {
 		XMLReader reader = XMLReaderFactory.createXMLReader();
 		reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+		reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+		reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+		reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
 
 		reader = createFilteredReader(reader, filters);
 
