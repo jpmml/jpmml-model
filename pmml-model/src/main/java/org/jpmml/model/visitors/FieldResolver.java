@@ -40,7 +40,7 @@ import org.dmg.pmml.tree.DecisionTree;
  *
  * @see <a href="http://dmg.org/pmml/v4-3/FieldScope.html">Scope of Fields</a>
  */
-public class FieldResolver extends AbstractModelVisitor {
+public class FieldResolver extends AbstractSimpleVisitor {
 
 	private Map<PMMLObject, Set<Field<?>>> scopes = new LinkedHashMap<>();
 
@@ -70,13 +70,18 @@ public class FieldResolver extends AbstractModelVisitor {
 	}
 
 	@Override
+	public VisitorAction visit(PMMLObject object){
+		return VisitorAction.CONTINUE;
+	}
+
+	@Override
 	public VisitorAction visit(Model model){
 		LocalTransformations localTransformations = model.getLocalTransformations();
 		if(localTransformations != null && localTransformations.hasDerivedFields()){
 			declare(model, localTransformations.getDerivedFields());
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(model);
 	}
 
 	@Override
