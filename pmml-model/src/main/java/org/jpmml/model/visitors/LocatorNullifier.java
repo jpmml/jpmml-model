@@ -15,12 +15,12 @@ import org.xml.sax.Locator;
  * @see PMMLObject#getLocator()
  * @see PMMLObject#setLocator(Locator)
  */
-public class LocatorNullifier extends AbstractSimpleVisitor {
+public class LocatorNullifier extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
 		object.setLocator(null);
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 }

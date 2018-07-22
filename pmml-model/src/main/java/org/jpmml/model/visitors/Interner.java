@@ -12,7 +12,7 @@ import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 
 abstract
-public class Interner<V> extends AbstractSimpleVisitor {
+public class Interner<V> extends AbstractVisitor {
 
 	private Class<? extends V> type = null;
 
@@ -46,7 +46,7 @@ public class Interner<V> extends AbstractSimpleVisitor {
 			}
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	public Class<? extends V> getType(){

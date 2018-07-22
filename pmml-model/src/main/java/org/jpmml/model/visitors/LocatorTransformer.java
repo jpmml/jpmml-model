@@ -17,13 +17,13 @@ import org.xml.sax.Locator;
  * @see PMMLObject#getLocator()
  * @see PMMLObject#setLocator(Locator)
  */
-public class LocatorTransformer extends AbstractSimpleVisitor {
+public class LocatorTransformer extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
 		object.setLocator(transform(object.getLocator()));
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	static

@@ -6,41 +6,22 @@ package org.jpmml.model.visitors;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.dmg.pmml.Annotation;
-import org.dmg.pmml.Extension;
 import org.dmg.pmml.HasMixedContent;
-import org.dmg.pmml.Row;
-import org.dmg.pmml.Timestamp;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
 
 public class MixedContentCleaner extends AbstractVisitor {
 
 	@Override
-	public VisitorAction visit(Annotation annotation){
-		clean(annotation);
+	public VisitorAction visit(PMMLObject object){
 
-		return super.visit(annotation);
-	}
+		if(object instanceof HasMixedContent){
+			HasMixedContent<?> hasMixedContent = (HasMixedContent<?>)object;
 
-	@Override
-	public VisitorAction visit(Extension extension){
-		clean(extension);
+			clean(hasMixedContent);
+		}
 
-		return super.visit(extension);
-	}
-
-	@Override
-	public VisitorAction visit(Row row){
-		clean(row);
-
-		return super.visit(row);
-	}
-
-	@Override
-	public VisitorAction visit(Timestamp timestamp){
-		clean(timestamp);
-
-		return super.visit(timestamp);
+		return super.visit(object);
 	}
 
 	private void clean(HasMixedContent<?> hasMixedContent){

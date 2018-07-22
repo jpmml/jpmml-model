@@ -19,7 +19,7 @@ import org.jpmml.model.ReflectionUtil;
  * </p>
  */
 abstract
-public class FieldNameFilterer extends AbstractSimpleVisitor {
+public class FieldNameFilterer extends AbstractVisitor {
 
 	abstract
 	public FieldName filter(FieldName name);
@@ -39,7 +39,7 @@ public class FieldNameFilterer extends AbstractSimpleVisitor {
 			}
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	@Override

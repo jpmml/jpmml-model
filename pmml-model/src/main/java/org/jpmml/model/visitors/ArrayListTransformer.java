@@ -17,7 +17,7 @@ import org.jpmml.model.ReflectionUtil;
  * A Visitor that transforms the {@link List} implementation class of element lists.
  * </p>
  */
-public class ArrayListTransformer extends AbstractSimpleVisitor {
+public class ArrayListTransformer extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
@@ -36,7 +36,7 @@ public class ArrayListTransformer extends AbstractSimpleVisitor {
 			}
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	public List<?> transform(List<?> list){

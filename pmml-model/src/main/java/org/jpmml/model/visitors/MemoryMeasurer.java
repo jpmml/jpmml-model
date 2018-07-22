@@ -26,7 +26,7 @@ import org.jpmml.model.ReflectionUtil;
  * The object size is measured using {@link Instrumentation#getObjectSize(Object)} method.
  * </p>
  */
-public class MemoryMeasurer extends AbstractSimpleVisitor {
+public class MemoryMeasurer extends AbstractVisitor {
 
 	private Instrumentation instrumentation = InstrumentationProvider.getInstrumentation();
 
@@ -52,7 +52,7 @@ public class MemoryMeasurer extends AbstractSimpleVisitor {
 	public VisitorAction visit(PMMLObject object){
 		measure(object);
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	public void reset(){

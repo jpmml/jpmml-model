@@ -31,7 +31,7 @@ import org.jpmml.model.annotations.Required;
  * @see Removed
  * @see Required
  */
-public class VersionInspector extends AbstractSimpleVisitor {
+public class VersionInspector extends AbstractVisitor {
 
 	private Version minimum = Version.getMinimum();
 
@@ -77,7 +77,7 @@ public class VersionInspector extends AbstractSimpleVisitor {
 			}
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	@Override

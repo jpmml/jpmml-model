@@ -18,7 +18,7 @@ import org.dmg.pmml.VisitorAction;
  * </p>
  */
 abstract
-public class PredicateFilterer extends AbstractSimpleVisitor {
+public class PredicateFilterer extends AbstractVisitor {
 
 	abstract
 	public Predicate filter(Predicate predicate);
@@ -39,7 +39,7 @@ public class PredicateFilterer extends AbstractSimpleVisitor {
 			hasPredicate.setPredicate(filter(hasPredicate.getPredicate()));
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	@Override

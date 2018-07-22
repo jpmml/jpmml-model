@@ -111,10 +111,9 @@ public class VisitorPlugin extends Plugin {
 		abstractVisitorGetParents.annotate(Override.class);
 		abstractVisitorGetParents.body()._return(abstractVisitorParentsRef);
 
-		JDefinedClass abstractSimpleVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractSimpleVisitor", null, ClassType.CLASS)._extends(abstractVisitorClazz);
-
-		JMethod abstractSimpleVisitorDefaultVisit = abstractSimpleVisitorClazz.method(JMod.ABSTRACT | JMod.PUBLIC, visitorActionClazz, "visit");
-		abstractSimpleVisitorDefaultVisit.param(pmmlObjectClazz, "object");
+		JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
+		abstractVisitorVisit.param(pmmlObjectClazz, "object");
+		abstractVisitorVisit.body()._return(continueAction);
 
 		BiFunction<JClass, JClass, List<JMethod>> methodGenerator = new BiFunction<JClass, JClass, List<JMethod>>(){
 
@@ -131,14 +130,9 @@ public class VisitorPlugin extends Plugin {
 				JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
 				abstractVisitorVisit.annotate(Override.class);
 				abstractVisitorVisit.param(clazz, parameterName);
-				abstractVisitorVisit.body()._return(continueAction);
+				abstractVisitorVisit.body()._return(JExpr.invoke("visit").arg(JExpr.cast(superClazz.erasure(), JExpr.ref(parameterName))));
 
-				JMethod abstractSimpleVisitorVisit = abstractSimpleVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
-				abstractSimpleVisitorVisit.annotate(Override.class);
-				abstractSimpleVisitorVisit.param(clazz, parameterName);
-				abstractSimpleVisitorVisit.body()._return(JExpr.invoke(abstractSimpleVisitorDefaultVisit).arg(JExpr.cast(superClazz.erasure(), JExpr.ref(parameterName))));
-
-				return Arrays.asList(visitorVisit, abstractVisitorVisit, abstractSimpleVisitorVisit);
+				return Arrays.asList(visitorVisit, abstractVisitorVisit);
 			}
 		};
 

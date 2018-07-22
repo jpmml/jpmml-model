@@ -18,7 +18,7 @@ import org.dmg.pmml.VisitorAction;
  * </p>
  */
 abstract
-public class ExpressionFilterer extends AbstractSimpleVisitor {
+public class ExpressionFilterer extends AbstractVisitor {
 
 	abstract
 	public Expression filter(Expression expression);
@@ -39,7 +39,7 @@ public class ExpressionFilterer extends AbstractSimpleVisitor {
 			hasExpression.setExpression(filter(hasExpression.getExpression()));
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 
 	@Override

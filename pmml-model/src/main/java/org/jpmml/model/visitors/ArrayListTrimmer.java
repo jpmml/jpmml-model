@@ -16,7 +16,7 @@ import org.jpmml.model.ReflectionUtil;
  * A Visitor that trims the size of element lists.
  * </p>
  */
-public class ArrayListTrimmer extends AbstractSimpleVisitor {
+public class ArrayListTrimmer extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
@@ -32,6 +32,6 @@ public class ArrayListTrimmer extends AbstractSimpleVisitor {
 			}
 		}
 
-		return VisitorAction.CONTINUE;
+		return super.visit(object);
 	}
 }
