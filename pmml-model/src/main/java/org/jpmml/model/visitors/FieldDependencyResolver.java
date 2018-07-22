@@ -116,7 +116,7 @@ public class FieldDependencyResolver extends FieldResolver {
 		return super.visit(transformationDictionary);
 	}
 
-	public Set<Field<?>> getDependencies(Field field){
+	public Set<Field<?>> getDependencies(Field<?> field){
 		Map<Field<?>, Set<Field<?>>> dependencies = getDependencies();
 
 		if(!dependencies.containsKey(field)){

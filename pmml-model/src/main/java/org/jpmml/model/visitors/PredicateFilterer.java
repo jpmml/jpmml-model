@@ -34,7 +34,7 @@ public class PredicateFilterer extends AbstractVisitor {
 	public VisitorAction visit(PMMLObject object){
 
 		if(object instanceof HasPredicate){
-			HasPredicate hasPredicate = (HasPredicate)object;
+			HasPredicate<?> hasPredicate = (HasPredicate<?>)object;
 
 			hasPredicate.setPredicate(filter(hasPredicate.getPredicate()));
 		}

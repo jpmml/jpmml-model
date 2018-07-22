@@ -34,7 +34,7 @@ public class ExpressionFilterer extends AbstractVisitor {
 	public VisitorAction visit(PMMLObject object){
 
 		if(object instanceof HasExpression){
-			HasExpression hasExpression = (HasExpression)object;
+			HasExpression<?> hasExpression = (HasExpression<?>)object;
 
 			hasExpression.setExpression(filter(hasExpression.getExpression()));
 		}
