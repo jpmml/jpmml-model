@@ -70,9 +70,9 @@ public class FieldDependencyResolver extends FieldResolver {
 
 	@Override
 	public VisitorAction visit(DerivedField derivedField){
-		PMMLObject parent = VisitorUtil.getParent(this);
+		PMMLObject parent = getParent();
 
-		if(VisitorUtil.isDictionary(parent)){
+		if((parent instanceof TransformationDictionary) || (parent instanceof LocalTransformations)){
 			process(derivedField);
 		}
 

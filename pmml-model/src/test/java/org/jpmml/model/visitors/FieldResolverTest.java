@@ -42,7 +42,7 @@ public class FieldResolverTest {
 				String function = apply.getFunction();
 
 				if("*".equals(function)){
-					DerivedField derivedField = (DerivedField)VisitorUtil.getParent(this);
+					DerivedField derivedField = (DerivedField)getParent();
 
 					FieldName name = derivedField.getName();
 
@@ -89,7 +89,7 @@ public class FieldResolverTest {
 			public VisitorAction visit(RegressionTable regressionTable){
 				Set<Field<?>> fields = getFields();
 
-				Segment segment = (Segment)VisitorUtil.getParent(this, 1);
+				Segment segment = (Segment)getParent(1);
 
 				String id = segment.getId();
 
@@ -127,7 +127,7 @@ public class FieldResolverTest {
 			public VisitorAction visit(SimplePredicate simplePredicate){
 				Set<Field<?>> fields = getFields();
 
-				Segment segment = (Segment)VisitorUtil.getParent(this);
+				Segment segment = (Segment)getParent();
 
 				String id = segment.getId();
 
@@ -168,7 +168,7 @@ public class FieldResolverTest {
 			public VisitorAction visit(Apply apply){
 				Set<Field<?>> fields = getFields();
 
-				DerivedField derivedField = (DerivedField)VisitorUtil.getParent(this);
+				DerivedField derivedField = (DerivedField)getParent();
 
 				FieldName name = derivedField.getName();
 

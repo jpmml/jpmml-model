@@ -45,7 +45,7 @@ public class TransformationDictionaryCleanerTest {
 			public VisitorAction visit(RegressionModel regressionModel){
 				LocalTransformations localTransformations = regressionModel.getLocalTransformations();
 
-				Segment segment = (Segment)VisitorUtil.getParent(this);
+				Segment segment = (Segment)getParent();
 
 				String id = segment.getId();
 
@@ -114,7 +114,7 @@ public class TransformationDictionaryCleanerTest {
 				String id;
 
 				try {
-					Segment segment = (Segment)VisitorUtil.getParent(this);
+					Segment segment = (Segment)getParent();
 
 					id = segment.getId();
 				} catch(ClassCastException cce){

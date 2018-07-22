@@ -48,7 +48,7 @@ public class MiningSchemaCleanerTest {
 			public VisitorAction visit(RegressionModel regressionModel){
 				MiningSchema miningSchema = regressionModel.getMiningSchema();
 
-				Segment segment = (Segment)VisitorUtil.getParent(this);
+				Segment segment = (Segment)getParent();
 
 				String id = segment.getId();
 
@@ -95,7 +95,7 @@ public class MiningSchemaCleanerTest {
 				String id;
 
 				try {
-					Segment segment = (Segment)VisitorUtil.getParent(this);
+					Segment segment = (Segment)getParent();
 
 					id = segment.getId();
 				} catch(ClassCastException cce){
