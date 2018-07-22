@@ -18,7 +18,6 @@ import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
-import com.sun.codemodel.JEnumConstant;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
@@ -61,29 +60,24 @@ public class VisitorPlugin extends Plugin {
 
 		JClass pmmlObjectClazz = codeModel.ref("org.dmg.pmml.PMMLObject");
 		JClass visitableInterface = codeModel.ref("org.dmg.pmml.Visitable");
+		JClass visitContextInterface = codeModel.ref("org.dmg.pmml.VisitContext");
+		JClass visitorActionEnum = codeModel.ref("org.dmg.pmml.VisitorAction");
 
 		JClass dequeClazz = codeModel.ref(Deque.class);
 		JClass dequeImplementationClazz = codeModel.ref(ArrayDeque.class);
 
+		JFieldRef continueAction = visitorActionEnum.staticRef("CONTINUE");
+		JFieldRef skipAction = visitorActionEnum.staticRef("SKIP");
+		JFieldRef terminateAction = visitorActionEnum.staticRef("TERMINATE");
+
 		JPackage pmmlPackage = pmmlObjectClazz._package();
 
-		JDefinedClass visitorActionClazz = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "VisitorAction", null, ClassType.ENUM);
-		JEnumConstant continueAction = visitorActionClazz.enumConstant("CONTINUE");
-		JEnumConstant skipAction = visitorActionClazz.enumConstant("SKIP");
-		JEnumConstant terminateAction = visitorActionClazz.enumConstant("TERMINATE");
-
 		JDefinedClass visitorInterface = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
+		visitorInterface._implements(visitContextInterface);
 
 		JMethod visitorApplyTo = visitorInterface.method(JMod.PUBLIC, void.class, "applyTo");
 		visitorApplyTo.javadoc().append("@see Visitable#accept(Visitor)");
 		visitorApplyTo.param(visitableInterface, "visitable");
-
-		JMethod visitorPushParent = visitorInterface.method(JMod.PUBLIC, void.class, "pushParent");
-		visitorPushParent.param(pmmlObjectClazz, "object");
-
-		JMethod visitorPopParent = visitorInterface.method(JMod.PUBLIC, pmmlObjectClazz, "popParent");
-
-		JMethod visitorGetParents = visitorInterface.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
 
 		JPackage visitorPackage = codeModel._package("org.jpmml.model.visitors");
 
@@ -91,27 +85,16 @@ public class VisitorPlugin extends Plugin {
 
 		JFieldVar abstractVisitorParents = abstractVisitorClazz.field(JMod.PRIVATE, dequeClazz.narrow(pmmlObjectClazz), "parents", JExpr._new(dequeImplementationClazz.narrow(pmmlObjectClazz)));
 
-		JFieldRef abstractVisitorParentsRef = JExpr.refthis(abstractVisitorParents.name());
+		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
+		abstractVisitorGetParents.annotate(Override.class);
+		abstractVisitorGetParents.body()._return(JExpr.refthis(abstractVisitorParents.name()));
 
 		JMethod abstractVisitorApplyTo = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "applyTo");
 		abstractVisitorApplyTo.annotate(Override.class);
 		JVar visitable = abstractVisitorApplyTo.param(visitableInterface, "visitable");
 		abstractVisitorApplyTo.body().add(JExpr.invoke(visitable, "accept").arg(JExpr._this()));
 
-		JMethod abstractVisitorPushParent = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "pushParent");
-		abstractVisitorPushParent.annotate(Override.class);
-		JVar parent = abstractVisitorPushParent.param(pmmlObjectClazz, "parent");
-		abstractVisitorPushParent.body().add(abstractVisitorParentsRef.invoke("addFirst").arg(parent));
-
-		JMethod abstractVisitorPopParent = abstractVisitorClazz.method(JMod.PUBLIC, pmmlObjectClazz, "popParent");
-		abstractVisitorPopParent.annotate(Override.class);
-		abstractVisitorPopParent.body()._return(abstractVisitorParentsRef.invoke("removeFirst"));
-
-		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
-		abstractVisitorGetParents.annotate(Override.class);
-		abstractVisitorGetParents.body()._return(abstractVisitorParentsRef);
-
-		JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
+		JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionEnum, "visit");
 		abstractVisitorVisit.param(pmmlObjectClazz, "object");
 		abstractVisitorVisit.body()._return(continueAction);
 
@@ -124,10 +107,10 @@ public class VisitorPlugin extends Plugin {
 					parameterName = ("_" + parameterName);
 				}
 
-				JMethod visitorVisit = visitorInterface.method(JMod.PUBLIC, visitorActionClazz, "visit");
+				JMethod visitorVisit = visitorInterface.method(JMod.PUBLIC, visitorActionEnum, "visit");
 				visitorVisit.param(clazz, parameterName);
 
-				JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionClazz, "visit");
+				JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionEnum, "visit");
 				abstractVisitorVisit.annotate(Override.class);
 				abstractVisitorVisit.param(clazz, parameterName);
 				abstractVisitorVisit.body()._return(JExpr.invoke("visit").arg(JExpr.cast(superClazz.erasure(), JExpr.ref(parameterName))));
@@ -203,18 +186,18 @@ public class VisitorPlugin extends Plugin {
 
 			methodGenerator.apply(beanClazz, beanClazz._extends());
 
-			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionClazz, "accept");
+			JMethod beanAccept = beanClazz.method(JMod.PUBLIC, visitorActionEnum, "accept");
 			beanAccept.annotate(Override.class);
 
 			JVar visitorParameter = beanAccept.param(visitorInterface, "visitor");
 
 			JBlock body = beanAccept.body();
 
-			JVar status = body.decl(visitorActionClazz, "status", JExpr.invoke(visitorParameter, "visit").arg(JExpr._this()));
+			JVar status = body.decl(visitorActionEnum, "status", JExpr.invoke(visitorParameter, "visit").arg(JExpr._this()));
 
 			JBlock ifBody = body._if(status.eq(continueAction))._then();
 
-			ifBody.add(JExpr.invoke(visitorParameter, visitorPushParent).arg(JExpr._this()));
+			ifBody.add(JExpr.invoke(visitorParameter, "pushParent").arg(JExpr._this()));
 
 			JInvocation traverseVarargs = null;
 
@@ -254,7 +237,7 @@ public class VisitorPlugin extends Plugin {
 				}
 			}
 
-			ifBody.add(JExpr.invoke(visitorParameter, visitorPopParent));
+			ifBody.add(JExpr.invoke(visitorParameter, "popParent"));
 
 			body._if(status.eq(terminateAction))._then()._return(terminateAction);
 
