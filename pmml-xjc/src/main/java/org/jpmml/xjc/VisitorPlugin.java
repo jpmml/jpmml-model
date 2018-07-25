@@ -31,6 +31,7 @@ import com.sun.codemodel.JVar;
 import com.sun.istack.build.NameConverter;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
@@ -159,6 +160,7 @@ public class VisitorPlugin extends Plugin {
 
 		for(String[] abstractClass : abstractClasses){
 			JClass beanClazz = codeModel.ref(getTypeName("org.dmg.pmml." + abstractClass[0]));
+			traversableTypes.add(getTypeName(beanClazz));
 
 			if((abstractClass[0]).endsWith("<?>")){
 				beanClazz = beanClazz.narrow(codeModel.wildcard());
@@ -204,6 +206,10 @@ public class VisitorPlugin extends Plugin {
 			FieldOutline[] fieldsOutlines = classOutline.getDeclaredFields();
 			for(FieldOutline fieldOutline : fieldsOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				if(propertyInfo instanceof CAttributePropertyInfo){
+					continue;
+				}
 
 				JType fieldType = fieldOutline.getRawType();
 
