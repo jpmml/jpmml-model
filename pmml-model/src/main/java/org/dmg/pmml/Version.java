@@ -3,9 +3,6 @@
  */
 package org.dmg.pmml;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public enum Version {
 	PMML_3_0("http://www.dmg.org/PMML-3_0"),
 	PMML_3_1("http://www.dmg.org/PMML-3_1"),
@@ -64,13 +61,13 @@ public enum Version {
 			}
 		}
 
-		Matcher matcher = Version.PATTERN_XMLNS.matcher(namespaceURI);
-		if(!matcher.matches()){
-			throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " does not match \'" + Version.PATTERN_XMLNS.pattern() + "\' regex pattern");
+		boolean valid = (namespaceURI != null && namespaceURI.matches(Version.REGEX_XMLNS));
+		if(!valid){
+			throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " does not match \'" + Version.REGEX_XMLNS + "\' regex pattern");
 		}
 
 		throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " is not supported");
 	}
 
-	private static final Pattern PATTERN_XMLNS = Pattern.compile("http://www\\.dmg\\.org/PMML\\-\\d_\\d");
+	private static final String REGEX_XMLNS = "http://www\\.dmg\\.org/PMML\\-\\d_\\d";
 }
