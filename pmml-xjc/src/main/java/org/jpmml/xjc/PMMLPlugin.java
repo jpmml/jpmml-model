@@ -40,6 +40,7 @@ import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.model.nav.NClass;
 import com.sun.tools.xjc.outline.ClassOutline;
+import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
@@ -396,6 +397,15 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			if(model.serialVersionUID != null){
 				beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, long.class, "serialVersionUID", JExpr.lit(model.serialVersionUID));
 			}
+		}
+
+		Collection<? extends EnumOutline> enumOutlines = outline.getEnums();
+		for(EnumOutline enumOutline : enumOutlines){
+			JDefinedClass clazz = enumOutline.clazz;
+
+			JMethod toStringMethod = clazz.method(JMod.PUBLIC, String.class, "toString");
+			toStringMethod.annotate(Override.class);
+			toStringMethod.body()._return(JExpr.invoke("value"));
 		}
 
 		if(model.serialVersionUID != null){
