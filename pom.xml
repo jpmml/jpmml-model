@@ -42,6 +42,7 @@
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
 		<module>pmml-model-gwt</module>
+		<module>pmml-model-jackson</module>
 		<module>pmml-model-metro</module>
 		<module>pmml-model-moxy</module>
 		<module>pmml-xjc</module>
@@ -82,6 +83,11 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-model-jackson</artifactId>
+				<version>1.4-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-metro</artifactId>
 				<version>1.4-SNAPSHOT</version>
 			</dependency>
@@ -112,6 +118,17 @@
 				<groupId>com.beust</groupId>
 				<artifactId>jcommander</artifactId>
 				<version>1.72</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>[2.9.0, 2.9.6]</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.module</groupId>
+				<artifactId>jackson-module-jaxb-annotations</artifactId>
+				<version>[2.9.0, 2.9.6]</version>
 			</dependency>
 
 			<dependency>

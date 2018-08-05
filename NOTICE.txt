@@ -1,4 +1,5 @@
 JPMML-Model includes third-party dependencies that are released under the Apache License, Version 2.0:
+  * Jackson - https://github.com/FasterXML/jackson
   * Javassist - https://github.com/jboss-javassist/javassist
   * JCommander - http://jcommander.org
 
