@@ -36,6 +36,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.activation</groupId>
 			<artifactId>javax.activation-api</artifactId>
 			<scope>provided</scope>
@@ -184,6 +190,7 @@
 								<arg>-npa</arg>
 								<arg>-Xannotate</arg>
 								<arg>-Xinheritance</arg>
+								<arg>-Xjackson</arg>
 								<arg>-Xno-javadoc</arg>
 								<arg>-Xpmml</arg>
 								<arg>-XvalueConstructor</arg>

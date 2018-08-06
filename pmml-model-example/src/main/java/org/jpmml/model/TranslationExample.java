@@ -65,8 +65,6 @@ public class TranslationExample extends Example {
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, this.indent);
 
 		PMMLModule pmmlModule = new PMMLModule();
-		pmmlModule.setPriority(PMMLModule.Priority.PRIMARY);
-
 		mapper.registerModule(pmmlModule);
 
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);

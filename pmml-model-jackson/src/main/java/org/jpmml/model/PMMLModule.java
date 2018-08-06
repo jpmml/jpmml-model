@@ -8,6 +8,10 @@ import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
 
 public class PMMLModule extends JaxbAnnotationModule {
 
+	{
+		super._priority = Priority.SECONDARY;
+	}
+
 	public PMMLModule(){
 		super();
 	}
