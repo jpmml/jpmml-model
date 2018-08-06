@@ -5,6 +5,7 @@ package org.jpmml.xjc;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
@@ -38,14 +39,17 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
+			JAnnotationUse jsonInclude = beanClazz.annotate(JsonInclude.class)
+				.param("value", JsonInclude.Include.NON_EMPTY);
+
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 			if(fieldOutlines.length == 0){
 				continue;
 			}
 
-			JAnnotationUse propertyOrder = beanClazz.annotate(JsonPropertyOrder.class);
+			JAnnotationUse jsonPropertyOrder = beanClazz.annotate(JsonPropertyOrder.class);
 
-			JAnnotationArrayMember fieldNameArray = propertyOrder.paramArray("value");
+			JAnnotationArrayMember fieldNameArray = jsonPropertyOrder.paramArray("value");
 
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();

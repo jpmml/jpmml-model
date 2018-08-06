@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 import com.beust.jcommander.Parameter;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -66,8 +65,6 @@ public class TranslationExample extends Example {
 
 		PMMLModule pmmlModule = new PMMLModule();
 		mapper.registerModule(pmmlModule);
-
-		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 
 		try(OutputStream os = new FileOutputStream(this.output)){
 			mapper.writeValue(os, pmml);

@@ -114,10 +114,8 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 		if(matcher.matches()){
 			JClass annotationClass = codeModel.ref(matcher.group(1));
 
-			JAnnotationUse result = owner.annotate(annotationClass);
-			result.param("value", JExpr.direct(matcher.group(2)));
-
-			return result;
+			return owner.annotate(annotationClass)
+				.param("value", JExpr.direct(matcher.group(2)));
 		} else
 
 		{
