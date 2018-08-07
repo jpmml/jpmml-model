@@ -227,6 +227,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
 		JClass hasFieldReferenceInterface = codeModel.ref("org.dmg.pmml.HasFieldReference");
+		JClass stringValueInterface = codeModel.ref("org.dmg.pmml.StringValue");
 
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
@@ -402,6 +403,8 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		Collection<? extends EnumOutline> enumOutlines = outline.getEnums();
 		for(EnumOutline enumOutline : enumOutlines){
 			JDefinedClass clazz = enumOutline.clazz;
+
+			clazz._implements(stringValueInterface.narrow(clazz));
 
 			JMethod toStringMethod = clazz.method(JMod.PUBLIC, String.class, "toString");
 			toStringMethod.annotate(Override.class);
