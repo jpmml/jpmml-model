@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.xml.sax.Locator;
 
 @XmlTransient
@@ -17,6 +18,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	@XmlTransient
 	@com.sun.xml.bind.annotation.XmlLocation
 	@org.eclipse.persistence.oxm.annotations.XmlLocation
+	@JsonIgnore
 	private Locator locator;
 
 
