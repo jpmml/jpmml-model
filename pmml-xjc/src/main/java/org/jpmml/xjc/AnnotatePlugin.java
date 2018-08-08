@@ -80,11 +80,11 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 
 		Collection<? extends EnumOutline> enumOutlines = outline.getEnums();
 		for(EnumOutline enumOutline : enumOutlines){
-			JDefinedClass beanClazz = enumOutline.clazz;
+			JDefinedClass clazz = enumOutline.clazz;
 
 			CPluginCustomization enumCustomization = CustomizationUtils.findCustomization(enumOutline, AnnotatePlugin.ANNOTATE_ENUM_QNAME);
 			if(enumCustomization != null){
-				annotate(codeModel, beanClazz, enumCustomization);
+				annotate(codeModel, clazz, enumCustomization);
 			}
 
 			List<EnumConstantOutline> enumConstantOutlines = enumOutline.constants;

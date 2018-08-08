@@ -42,9 +42,9 @@ public class NoJavadocPlugin extends Plugin {
 
 		Collection<? extends EnumOutline> enumOutlines = outline.getEnums();
 		for(EnumOutline enumOutline : enumOutlines){
-			JDefinedClass beanClazz = enumOutline.clazz;
+			JDefinedClass clazz = enumOutline.clazz;
 
-			nullifyJavadoc(beanClazz);
+			nullifyJavadoc(clazz);
 		}
 
 		return true;
