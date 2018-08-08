@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonAutoDetect (
 	fieldVisibility = JsonAutoDetect.Visibility.ANY,
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 final
 public class FieldName implements Serializable {
 
+	@JsonValue
 	private String value = null;
 
 
