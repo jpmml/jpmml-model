@@ -5,6 +5,7 @@ package org.jpmml.xjc;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.sun.codemodel.JAnnotationArrayMember;
@@ -38,6 +39,12 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
+
+			JAnnotationUse jsonAutoDetect = beanClazz.annotate(JsonAutoDetect.class)
+				.param("fieldVisibility", JsonAutoDetect.Visibility.ANY)
+				.param("getterVisibility", JsonAutoDetect.Visibility.NONE)
+				.param("isGetterVisibility", JsonAutoDetect.Visibility.NONE)
+				.param("setterVisibility", JsonAutoDetect.Visibility.NONE);
 
 			JAnnotationUse jsonInclude = beanClazz.annotate(JsonInclude.class)
 				.param("value", JsonInclude.Include.NON_EMPTY);
