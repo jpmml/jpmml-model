@@ -9,8 +9,10 @@ import java.io.OutputStream;
 
 import com.beust.jcommander.Parameter;
 import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.util.DefaultIndenter;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.dmg.pmml.PMML;
 
@@ -32,9 +34,9 @@ public class TranslationExample extends Example {
 
 	@Parameter (
 		names = {"--indent"},
-		description = "Indent output"
+		description = "Indent string"
 	)
-	private boolean indent = false;
+	private String indent = null;
 
 
 	static
@@ -60,14 +62,35 @@ public class TranslationExample extends Example {
 			jsonFactory = new YAMLFactory();
 		}
 
+		DefaultPrettyPrinter prettyPrinter = null;
+
+		if(this.indent != null){
+			DefaultPrettyPrinter.Indenter indenter = new DefaultIndenter(filterIndent(this.indent), "\n");
+
+			prettyPrinter = new DefaultPrettyPrinter();
+			prettyPrinter.indentObjectsWith(indenter);
+			prettyPrinter.indentArraysWith(indenter);
+		}
+
 		ObjectMapper mapper = new ObjectMapper(jsonFactory);
-		mapper.configure(SerializationFeature.INDENT_OUTPUT, this.indent);
 
 		PMMLModule pmmlModule = new PMMLModule();
 		mapper.registerModule(pmmlModule);
 
 		try(OutputStream os = new FileOutputStream(this.output)){
-			mapper.writeValue(os, pmml);
+			ObjectWriter writer = mapper.writer(prettyPrinter);
+
+			writer.writeValue(os, pmml);
 		}
+	}
+
+	static
+	private String filterIndent(String indent){
+
+		if(("\\t").equals(indent)){
+			return "\t";
+		}
+
+		return indent;
 	}
 }
