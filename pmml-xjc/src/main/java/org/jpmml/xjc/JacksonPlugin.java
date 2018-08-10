@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JCodeModel;
@@ -115,6 +116,10 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 
 						JAnnotationUse jsonProperty = fieldVar.annotate(JsonProperty.class)
 							.param("value", propertyName);
+
+						JAnnotationUse jsonTypeInfo = fieldVar.annotate(JsonTypeInfo.class)
+							.param("use", JsonTypeInfo.Id.NAME)
+							.param("include", JsonTypeInfo.As.WRAPPER_OBJECT);
 					} else
 
 					{
