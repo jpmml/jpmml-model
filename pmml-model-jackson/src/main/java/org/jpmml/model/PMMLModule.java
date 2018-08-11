@@ -3,25 +3,11 @@
  */
 package org.jpmml.model;
 
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationModule;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
-public class PMMLModule extends JaxbAnnotationModule {
-
-	{
-		super._priority = Priority.SECONDARY;
-	}
+public class PMMLModule extends SimpleModule {
 
 	public PMMLModule(){
-		super();
-	}
-
-	public PMMLModule(JaxbAnnotationIntrospector annotationIntrospector){
-		super(annotationIntrospector);
-	}
-
-	@Override
-	public void setupModule(SetupContext context){
-		super.setupModule(context);
+		super("PMML");
 	}
 }
