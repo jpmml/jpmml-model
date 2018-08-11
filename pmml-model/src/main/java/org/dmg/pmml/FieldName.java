@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonAutoDetect (
@@ -95,6 +96,7 @@ public class FieldName implements Serializable {
 		return intern();
 	}
 
+	@JsonCreator
 	static
 	public FieldName create(String value){
 

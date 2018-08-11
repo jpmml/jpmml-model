@@ -21,6 +21,7 @@ import org.dmg.pmml.tree.TreeModel;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 public class PMMLModuleTest {
 
@@ -38,6 +39,8 @@ public class PMMLModuleTest {
 
 		MiningSchema miningSchema = new MiningSchema()
 			.addMiningFields(miningField);
+
+		assertSame(dataField.getName(), miningField.getName());
 
 		SimplePredicate simplePredicate = new SimplePredicate(FieldName.create("x"), SimplePredicate.Operator.IS_NOT_MISSING);
 
@@ -74,11 +77,27 @@ public class PMMLModuleTest {
 
 		TreeModel jsonTreeModel = (TreeModel)jsonModels.get(0);
 
+		MiningSchema jsonMiningSchema = jsonTreeModel.getMiningSchema();
+
+		List<MiningField> jsonMiningFields = jsonMiningSchema.getMiningFields();
+
+		assertEquals(1, jsonMiningFields.size());
+
+		MiningField jsonMiningField = jsonMiningFields.get(0);
+
+		assertEquals(miningField.getName(), jsonMiningField.getName());
+		assertEquals(miningField.getUsageType(), jsonMiningField.getUsageType());
+
+		assertSame(jsonDataField.getName(), jsonMiningField.getName());
+
 		Node jsonNode = jsonTreeModel.getNode();
 
 		SimplePredicate jsonSimplePredicate = (SimplePredicate)jsonNode.getPredicate();
 
 		assertEquals(simplePredicate.getField(), jsonSimplePredicate.getField());
 		assertEquals(simplePredicate.getOperator(), jsonSimplePredicate.getOperator());
+
+		assertSame(jsonDataField.getName(), jsonSimplePredicate.getField());
+		assertSame(jsonMiningField.getName(), jsonSimplePredicate.getField());
 	}
 }
