@@ -13,16 +13,20 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
+import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JEnumConstant;
+import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.istack.build.NameConverter;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
+import com.sun.tools.xjc.model.CClassInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.CReferencePropertyInfo;
@@ -81,6 +85,8 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
+				fieldNameArray.param(fieldVar.name());
+
 				if(propertyInfo instanceof CAttributePropertyInfo){
 					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
 
@@ -118,8 +124,24 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 							.param("value", propertyName);
 
 						JAnnotationUse jsonTypeInfo = fieldVar.annotate(JsonTypeInfo.class)
-							.param("use", JsonTypeInfo.Id.NAME)
-							.param("include", JsonTypeInfo.As.WRAPPER_OBJECT);
+							.param("include", JsonTypeInfo.As.WRAPPER_OBJECT)
+							.param("use", JsonTypeInfo.Id.NAME);
+
+						JAnnotationUse jsonSubTypes = fieldVar.annotate(JsonSubTypes.class);
+
+						JAnnotationArrayMember valueArray = jsonSubTypes.paramArray("value");
+
+						for(CTypeRef type : types){
+							CClassInfo classInfo = (CClassInfo)type.getTarget();
+
+							JClass clazz = codeModel.ref(classInfo.fullName());
+
+							JAnnotationUse jsonSubTypesType = jsonSubTypes.annotate(JsonSubTypes.Type.class)
+								.param("name", clazz.name())
+								.param("value", JExpr.dotclass(clazz));
+
+							valueArray.param(jsonSubTypesType);
+						}
 					} else
 
 					{
@@ -144,8 +166,6 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 				{
 					throw new RuntimeException();
 				}
-
-				fieldNameArray.param(propertyInfo.getName(false));
 			}
 		}
 
