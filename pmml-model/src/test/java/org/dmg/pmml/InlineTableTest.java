@@ -16,7 +16,7 @@ import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.inlinetable.InputCell;
 import org.jpmml.model.inlinetable.OutputCell;
-import org.jpmml.model.visitors.MixedContentCleaner;
+import org.jpmml.model.visitors.RowCleaner;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -36,7 +36,7 @@ public class InlineTableTest {
 
 		assertEquals(9, content.size());
 
-		Visitor visitor = new MixedContentCleaner();
+		Visitor visitor = new RowCleaner();
 		visitor.applyTo(pmml);
 
 		assertEquals(4, content.size());
