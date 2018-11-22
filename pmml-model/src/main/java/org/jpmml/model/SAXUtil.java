@@ -10,7 +10,6 @@ import javax.xml.transform.sax.SAXSource;
 import org.jpmml.model.filters.ElementFilter;
 import org.jpmml.model.filters.ExtensionFilter;
 import org.jpmml.model.filters.ImportFilter;
-import org.jpmml.model.filters.WhitespaceFilter;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
@@ -26,7 +25,6 @@ public class SAXUtil {
 	 * @see ImportFilter
 	 * @see ElementFilter
 	 * @see ExtensionFilter
-	 * @see WhitespaceFilter
 	 */
 	static
 	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws SAXException {

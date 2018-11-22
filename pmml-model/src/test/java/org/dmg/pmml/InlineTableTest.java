@@ -14,7 +14,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
-import org.jpmml.model.filters.WhitespaceFilter;
 import org.jpmml.model.inlinetable.InputCell;
 import org.jpmml.model.inlinetable.OutputCell;
 import org.jpmml.model.visitors.MixedContentCleaner;
@@ -39,14 +38,6 @@ public class InlineTableTest {
 
 		Visitor visitor = new MixedContentCleaner();
 		visitor.applyTo(pmml);
-
-		assertEquals(4, content.size());
-
-		pmml = ResourceUtil.unmarshal(InlineTableTest.class, new WhitespaceFilter());
-
-		row = getRow(pmml);
-
-		content = row.getContent();
 
 		assertEquals(4, content.size());
 
