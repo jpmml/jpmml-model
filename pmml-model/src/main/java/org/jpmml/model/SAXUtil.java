@@ -8,6 +8,7 @@ import java.io.InputStream;
 import javax.xml.transform.sax.SAXSource;
 
 import org.jpmml.model.filters.CountFilter;
+import org.jpmml.model.filters.DepthFilter;
 import org.jpmml.model.filters.ExtensionFilter;
 import org.jpmml.model.filters.ImportFilter;
 import org.jpmml.model.filters.SkipFilter;
@@ -27,6 +28,7 @@ public class SAXUtil {
 	 * @see SkipFilter
 	 * @see ExtensionFilter
 	 * @see CountFilter
+	 * @see DepthFilter
 	 */
 	static
 	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws SAXException {
