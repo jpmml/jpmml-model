@@ -7,9 +7,9 @@ import java.io.InputStream;
 
 import javax.xml.transform.sax.SAXSource;
 
-import org.jpmml.model.filters.ElementFilter;
 import org.jpmml.model.filters.ExtensionFilter;
 import org.jpmml.model.filters.ImportFilter;
+import org.jpmml.model.filters.SkipFilter;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
@@ -23,7 +23,7 @@ public class SAXUtil {
 
 	/**
 	 * @see ImportFilter
-	 * @see ElementFilter
+	 * @see SkipFilter
 	 * @see ExtensionFilter
 	 */
 	static

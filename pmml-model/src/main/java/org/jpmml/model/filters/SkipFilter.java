@@ -3,26 +3,44 @@
  */
 package org.jpmml.model.filters;
 
+import org.dmg.pmml.PMMLObject;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLFilterImpl;
 
-abstract
-public class SkipFilter extends XMLFilterImpl {
+/**
+ * <p>
+ * A SAX filter that skips an element.
+ * </p>
+ */
+public class SkipFilter extends ElementFilter {
 
 	private int depth = 0;
 
 
-	public SkipFilter(){
+	public SkipFilter(String localName){
+		super(localName);
 	}
 
-	public SkipFilter(XMLReader reader){
-		super(reader);
+	public SkipFilter(String namespaceURI, String localName){
+		super(namespaceURI, localName);
 	}
 
-	abstract
-	public boolean isSkipped(String namespaceURI, String localName);
+	public SkipFilter(Class<? extends PMMLObject> clazz){
+		super(clazz);
+	}
+
+	public SkipFilter(XMLReader reader, String localName){
+		super(reader, localName);
+	}
+
+	public SkipFilter(XMLReader reader, String namespaceURI, String localName){
+		super(reader, namespaceURI, localName);
+	}
+
+	public SkipFilter(XMLReader reader, Class<? extends PMMLObject> clazz){
+		super(reader, clazz);
+	}
 
 	public Attributes filterAttributes(String namespaceURI, String localName, Attributes attributes){
 		return attributes;
@@ -51,7 +69,7 @@ public class SkipFilter extends XMLFilterImpl {
 	@Override
 	public void startElement(String namespaceURI, String localName, String qualifiedName, Attributes attributes) throws SAXException {
 
-		if(isSkipped(namespaceURI, localName)){
+		if(matches(namespaceURI, localName)){
 			this.depth++;
 
 			return;
@@ -69,7 +87,7 @@ public class SkipFilter extends XMLFilterImpl {
 	@Override
 	public void endElement(String namespaceURI, String localName, String qualifiedName) throws SAXException {
 
-		if(isSkipped(namespaceURI, localName)){
+		if(matches(namespaceURI, localName)){
 			this.depth--;
 
 			return;

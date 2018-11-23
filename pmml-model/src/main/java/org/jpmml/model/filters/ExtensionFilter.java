@@ -15,15 +15,12 @@ import org.xml.sax.helpers.AttributesImpl;
  */
 public class ExtensionFilter extends SkipFilter {
 
-	private String namespaceURI = null;
-
-
 	public ExtensionFilter(){
 		this((Version.PMML_4_3).getNamespaceURI());
 	}
 
 	public ExtensionFilter(String namespaceURI){
-		setNamespaceURI(namespaceURI);
+		super(namespaceURI, "*");
 	}
 
 	public ExtensionFilter(XMLReader reader){
@@ -31,14 +28,12 @@ public class ExtensionFilter extends SkipFilter {
 	}
 
 	public ExtensionFilter(XMLReader reader, String namespaceURI){
-		super(reader);
-
-		setNamespaceURI(namespaceURI);
+		super(reader, namespaceURI, "*");
 	}
 
 	@Override
-	public boolean isSkipped(String namespaceURI, String localName){
-		return (this.namespaceURI).equals(namespaceURI) && localName.startsWith("X-");
+	public boolean matches(String namespaceURI, String localName){
+		return super.matches(namespaceURI, localName) && localName.startsWith("X-");
 	}
 
 	@Override
@@ -63,18 +58,5 @@ public class ExtensionFilter extends SkipFilter {
 		}
 
 		return result;
-	}
-
-	public String getNamespaceURI(){
-		return this.namespaceURI;
-	}
-
-	private void setNamespaceURI(String namespaceURI){
-
-		if(namespaceURI == null){
-			throw new NullPointerException();
-		}
-
-		this.namespaceURI = namespaceURI;
 	}
 }

@@ -3,28 +3,37 @@
  */
 package org.jpmml.model.filters;
 
+import java.util.Objects;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLFilterImpl;
 
-/**
- * <p>
- * A SAX filter that skips an element.
- * </p>
- */
-public class ElementFilter extends SkipFilter {
+abstract
+public class ElementFilter extends XMLFilterImpl {
 
 	private String namespaceURI = null;
 
 	private String localName = null;
 
 
+	/**
+	 * @param localName The name of the element.
+	 * Use the asterisk symbol (\"*\") to match any name.
+	 */
 	public ElementFilter(String localName){
 		this((Version.PMML_4_3).getNamespaceURI(), localName);
 	}
 
+	/**
+	 * @param namespaceURI The namespace URI of the element.
+	 * Use the asterisk symbol (\"*\") to match any namespace URI.
+	 * @param localName The name of the element.
+	 * Use the asterisk symbol (\"*\") to match any name.
+	 */
 	public ElementFilter(String namespaceURI, String localName){
 		setNamespaceURI(namespaceURI);
 		setLocalName(localName);
@@ -57,9 +66,8 @@ public class ElementFilter extends SkipFilter {
 		setLocalName(element.name());
 	}
 
-	@Override
-	public boolean isSkipped(String namespaceURI, String localName){
-		return (this.namespaceURI).equals(namespaceURI) && (this.localName).equals(localName);
+	public boolean matches(String namespaceURI, String localName){
+		return equals(getNamespaceURI(), namespaceURI) && equals(getLocalName(), localName);
 	}
 
 	public String getNamespaceURI(){
@@ -97,5 +105,10 @@ public class ElementFilter extends SkipFilter {
 		}
 
 		return result;
+	}
+
+	static
+	private boolean equals(String left, String right){
+		return Objects.equals(left, right) || Objects.equals(left, "*");
 	}
 }

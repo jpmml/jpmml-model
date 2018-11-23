@@ -21,11 +21,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-public class ElementFilterTest {
+public class SkipFilterTest {
 
 	@Test
 	public void filterChainedSegmentation() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class, new ElementFilter("Segmentation"));
+		PMML pmml = ResourceUtil.unmarshal(ChainedSegmentationTest.class, new SkipFilter("Segmentation"));
 
 		assertNotNull(pmml.getDataDictionary());
 		assertNotNull(pmml.getTransformationDictionary());
@@ -42,7 +42,7 @@ public class ElementFilterTest {
 
 	@Test
 	public void filterNestedSegmentation() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class, new ElementFilter(Segmentation.class));
+		PMML pmml = ResourceUtil.unmarshal(NestedSegmentationTest.class, new SkipFilter(Segmentation.class));
 
 		assertNotNull(pmml.getDataDictionary());
 
@@ -59,7 +59,7 @@ public class ElementFilterTest {
 
 	@Test
 	public void filterCustomExtension() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(WildcardTest.class, new ElementFilter("http://localhost/test", "Extension"));
+		PMML pmml = ResourceUtil.unmarshal(WildcardTest.class, new SkipFilter("http://localhost/test", "Extension"));
 
 		assertTrue(pmml.hasExtensions());
 
