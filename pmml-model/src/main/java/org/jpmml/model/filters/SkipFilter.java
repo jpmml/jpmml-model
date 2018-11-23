@@ -47,26 +47,6 @@ public class SkipFilter extends ElementFilter {
 	}
 
 	@Override
-	public void startDocument() throws SAXException {
-
-		if(isSkipping()){
-			throw new SAXException();
-		}
-
-		super.startDocument();
-	}
-
-	@Override
-	public void endDocument() throws SAXException {
-
-		if(isSkipping()){
-			throw new SAXException();
-		}
-
-		super.endDocument();
-	}
-
-	@Override
 	public void startElement(String namespaceURI, String localName, String qualifiedName, Attributes attributes) throws SAXException {
 
 		if(matches(namespaceURI, localName)){

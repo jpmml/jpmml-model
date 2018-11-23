@@ -65,7 +65,7 @@ public class DepthFilter extends ElementFilter {
 			this.depth++;
 
 			if(this.depth > limit){
-				throw new SAXException();
+				throw new SAXException("Too deeply nested " + getQualifiedName() + " elements");
 			}
 		}
 

@@ -70,6 +70,20 @@ public class ElementFilter extends XMLFilterImpl {
 		return equals(getNamespaceURI(), namespaceURI) && equals(getLocalName(), localName);
 	}
 
+	public String getQualifiedName(){
+		String namespaceURI = getNamespaceURI();
+		String localName = getLocalName();
+
+		if(!("*").equals(namespaceURI)){
+
+			if(!("*").equals(localName)){
+				return namespaceURI + ":" + localName;
+			}
+		}
+
+		return localName;
+	}
+
 	public String getNamespaceURI(){
 		return this.namespaceURI;
 	}

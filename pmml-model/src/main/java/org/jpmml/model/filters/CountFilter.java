@@ -65,7 +65,7 @@ public class CountFilter extends ElementFilter {
 			this.count++;
 
 			if(this.count > limit){
-				throw new SAXException();
+				throw new SAXException("Too many " + getQualifiedName() + " elements");
 			}
 		}
 
