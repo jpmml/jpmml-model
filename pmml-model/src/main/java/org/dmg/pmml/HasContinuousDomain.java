@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface HasContinuousDomain<E extends Field<E> & HasContinuousDomain<E>> {
 
-	List<Interval> getIntervals();
-
 	boolean hasIntervals();
+
+	List<Interval> getIntervals();
 
 	E addIntervals(Interval... intervals);
 }

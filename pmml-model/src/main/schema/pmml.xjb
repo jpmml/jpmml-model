@@ -2775,6 +2775,7 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_2)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;TextIndex&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;TextIndex&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='countHits']/xsd:simpleType">

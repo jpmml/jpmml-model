@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface HasDiscreteDomain<E extends Field<E> & HasDiscreteDomain<E>> {
 
-	List<Value> getValues();
-
 	boolean hasValues();
+
+	List<Value> getValues();
 
 	E addValues(Value... values);
 }

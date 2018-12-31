@@ -226,9 +226,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
 
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
-		JClass hasFieldReferenceInterface = codeModel.ref("org.dmg.pmml.HasFieldReference");
 		JClass stringValueInterface = codeModel.ref("org.dmg.pmml.StringValue");
 
+		JClass stringClass = codeModel.ref("java.lang.String");
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
 		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
@@ -239,65 +239,37 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			// Implementations of org.dmg.pmml.HasField
+			// Implementations of org.dmg.pmml.HasFieldReference
 			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
-				beanClazz._implements(hasFieldReferenceInterface.narrow(beanClazz));
-
-				JMethod getterMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getField");
-				getterMethod.annotate(Override.class);
-				getterMethod.body()._return(JExpr.invoke("getTextField"));
-
-				JMethod setterMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "setField");
-				setterMethod.annotate(Override.class);
-
-				JVar fieldParameter = setterMethod.param(fieldNameClass, "field");
-
-				setterMethod.body()._return(JExpr.invoke("setTextField").arg(fieldParameter));
+				createGetterProxy(beanClazz, fieldNameClass, "getField", "getTextField");
+				createSetterProxy(beanClazz, fieldNameClass, "field", "setField", "setTextField");
 			} // End if
 
 			// Implementations of org.dmg.pmml.HasName
 			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor") || checkType(beanClazz, "org.dmg.pmml.regression.NumericPredictor")){
-				JMethod getterMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getName");
-				getterMethod.annotate(Override.class);
-				getterMethod.body()._return(JExpr.invoke("getField"));
-
-				JMethod setterMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "setName");
-				setterMethod.annotate(Override.class);
-
-				JVar nameParameter = setterMethod.param(fieldNameClass, "name");
-
-				setterMethod.body()._return(JExpr.invoke("setField").arg(nameParameter));
+				createGetterProxy(beanClazz, fieldNameClass, "getName", "getField");
+				createSetterProxy(beanClazz, fieldNameClass, "name", "setName", "setField");
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable
 			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.general_regression.Parameter")){
-				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
-				keyMethod.annotate(Override.class);
-				keyMethod.body()._return(JExpr.invoke("getName"));
+				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
-				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
-				keyMethod.annotate(Override.class);
-				keyMethod.body()._return(JExpr.invoke("getName"));
+				createGetterProxy(beanClazz, fieldNameClass, "getKey", "getName");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
-				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, fieldNameClass, "getKey");
-				keyMethod.annotate(Override.class);
-				keyMethod.body()._return(JExpr.invoke("getField"));
+				createGetterProxy(beanClazz, fieldNameClass, "getKey", "getField");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Value")){
-				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
-				keyMethod.annotate(Override.class);
-				keyMethod.body()._return(JExpr.invoke("getValue"));
+				createGetterProxy(beanClazz, stringClass, "getKey", "getValue");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){
-				JMethod keyMethod = beanClazz.method(JMod.PUBLIC, String.class, "getKey");
-				keyMethod.annotate(Override.class);
-				keyMethod.body()._return(JExpr.invoke("getId"));
+				createGetterProxy(beanClazz, stringClass, "getKey", "getId");
 			}
 
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
@@ -312,8 +284,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 				beanClazz._implements(iterableInterface.narrow(elementType));
 
+				JMethod getElementsMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
+
 				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
-				iteratorMethod.body()._return(JExpr.invoke("get" + propertyInfo.getName(true)).invoke("iterator"));
+				iteratorMethod.body()._return(JExpr.invoke(getElementsMethod).invoke("iterator"));
+
+				moveBefore(beanClazz, iteratorMethod, getElementsMethod);
 			}
 
 			FieldOutline extensionsFieldOutline = getExtensionsField(classOutline);
@@ -374,13 +350,19 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 					JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
 
+					JMethod getElementsMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
+
 					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
 					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
+
+					moveBefore(beanClazz, hasElementsMethod, getElementsMethod);
 
 					JMethod addElementsMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "add" + propertyInfo.getName(true));
 					JVar param = addElementsMethod.varParam(elementType, fieldVar.name());
 					addElementsMethod.body().add(JExpr.invoke(getterMethod).invoke("addAll").arg(arraysClass.staticInvoke("asList").arg(param)));
 					addElementsMethod.body()._return(JExpr._this());
+
+					moveAfter(beanClazz, addElementsMethod, getElementsMethod);
 				}
 
 				Collection<JAnnotationUse> annotations = fieldVar.annotations();
@@ -480,6 +462,57 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		}
 
 		return null;
+	}
+
+	static
+	private void createGetterProxy(JDefinedClass beanClazz, JType type, String name, String getterName){
+		JMethod getterMethod = beanClazz.getMethod(getterName, new JType[0]);
+
+		JMethod method = beanClazz.method(JMod.PUBLIC, type, name);
+		method.annotate(Override.class);
+		method.body()._return(JExpr.invoke(getterMethod));
+
+		moveBefore(beanClazz, method, getterMethod);
+	}
+
+	static
+	public void createSetterProxy(JDefinedClass beanClazz, JType type, String parameterName, String name, String setterName){
+		JMethod getterMethod = beanClazz.getMethod(setterName.replace("set", "get"), new JType[0]);
+
+		JMethod method = beanClazz.method(JMod.PUBLIC, beanClazz, name);
+		method.annotate(Override.class);
+
+		JVar nameParameter = method.param(type, parameterName);
+
+		method.body()._return(JExpr.invoke(setterName).arg(nameParameter));
+
+		moveBefore(beanClazz, method, getterMethod);
+	}
+
+	static
+	private void moveBefore(JDefinedClass beanClazz, JMethod method, JMethod referenceMethod){
+		List<JMethod> methods = (List<JMethod>)beanClazz.methods();
+
+		int index = methods.indexOf(referenceMethod);
+		if(index < 0){
+			throw new RuntimeException();
+		}
+
+		methods.remove(method);
+		methods.add(index, method);
+	}
+
+	static
+	private void moveAfter(JDefinedClass beanClazz, JMethod method, JMethod referenceMethod){
+		List<JMethod> methods = (List<JMethod>)beanClazz.methods();
+
+		int index = methods.indexOf(referenceMethod);
+		if(index < 0){
+			throw new RuntimeException();
+		}
+
+		methods.remove(method);
+		methods.add(index + 1, method);
 	}
 
 	static
