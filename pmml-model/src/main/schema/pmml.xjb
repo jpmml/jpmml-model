@@ -8,10 +8,18 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="12"
+			implementation="13"
 		/>
 
 		<wildcard:lax/>
+
+		<jaxb:globalBindings>
+			<xjc:javaType
+				name="java.lang.Object"
+				xmlType="xsd:anySimpleType"
+				adapter="org.dmg.pmml.adapters.ObjectAdapter"
+			/>
+		</jaxb:globalBindings>
 
 		<jaxb:schemaBindings>
 			<jaxb:package
