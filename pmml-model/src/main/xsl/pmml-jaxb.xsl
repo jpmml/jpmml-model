@@ -65,7 +65,28 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
-	Declare dummy timeseries algorithm types
+	Add missing XML type information
+	-->
+	<xsl:template match="xs:element[@name='FieldValue' or @name='FieldValueCount']/xs:complexType/xs:attribute[@name='value']">
+		<xs:attribute type="xs:string">
+			<xsl:copy-of select="@*"/>
+		</xs:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='isMultiValued']">
+		<xs:attribute type="xs:string">
+			<xsl:copy-of select="@*"/>
+		</xs:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='TimeAnchor' or @name='TimeCycle']/xs:complexType/xs:attribute[@name='displayName']">
+		<xs:attribute type="xs:string">
+			<xsl:copy-of select="@*"/>
+		</xs:attribute>
+	</xsl:template>
+
+	<!--
+	Add dummy timeseries algorithm types
 	-->
 	<xsl:template match="xs:element[@name='ARIMA' or @name='SeasonalTrendDecomposition' or @name='SpectralAnalysis']">
 		<xsl:copy>
