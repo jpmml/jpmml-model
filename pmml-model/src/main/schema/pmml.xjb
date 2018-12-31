@@ -71,6 +71,12 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Anova']/xsd:complexType/xsd:attribute[@name='target']">
+			<jaxb:property
+				name="targetField"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='AnovaRow']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 		</jaxb:bindings>
@@ -1048,6 +1054,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='targetVariableName']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_3_0)</annox:annotateProperty>
+			<jaxb:property
+				name="targetVariable"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='trialsValue']">
@@ -2138,6 +2147,9 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='targetFieldName']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_3_0)</annox:annotateProperty>
+			<jaxb:property
+				name="targetField"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
