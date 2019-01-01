@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -287,6 +288,8 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				JMethod getElementsMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
 
 				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
+				iteratorMethod.annotate(Override.class);
+
 				iteratorMethod.body()._return(JExpr.invoke(getElementsMethod).invoke("iterator"));
 
 				moveBefore(beanClazz, iteratorMethod, getElementsMethod);
@@ -353,12 +356,15 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 					JMethod getElementsMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
 
 					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
+
 					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
 
 					moveBefore(beanClazz, hasElementsMethod, getElementsMethod);
 
 					JMethod addElementsMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "add" + propertyInfo.getName(true));
+
 					JVar param = addElementsMethod.varParam(elementType, fieldVar.name());
+
 					addElementsMethod.body().add(JExpr.invoke(getterMethod).invoke("addAll").arg(arraysClass.staticInvoke("asList").arg(param)));
 					addElementsMethod.body()._return(JExpr._this());
 
@@ -375,6 +381,77 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			if(model.serialVersionUID != null){
 				beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, long.class, "serialVersionUID", JExpr.lit(model.serialVersionUID));
 			}
+
+			String[][] markerInterfaces = {
+				{"HasContinuousDomain", "hasIntervals", "getIntervals", "addIntervals"},
+				{"HasDataType", "getDataType", "setDataType"},
+				{"HasDefaultValue", "getDefaultValue", "setDefaultValue"},
+				{"HasDiscreteDomain", "hasValues", "getValues", "addValues"},
+				{"HasDisplayName", "getDisplayName", "setDisplayName"},
+				{"HasExpression", "getExpression", "setExpression"},
+				{"HasExtensions", "hasExtensions", "getExtensions", "addExtensions"},
+				{"HasFieldReference", "getField", "setField"},
+				{"HasId", "getId", "setId"},
+				{"HasLocator", "getLocator", "setLocator"},
+				{"HasMapMissingTo", "getMapMissingTo", "setMapMissingTo"},
+				{"HasMixedContent", "hasContext", "getContent", "addContent"},
+				{"HasName", "getName", "setName"},
+				{"HasOpType", "getOpType", "setOpType"},
+				{"HasPredicate", "getPredicate", "setPredicate"},
+				{"HasScore", "getScore", "setScore"},
+				{"HasTable", "getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"},
+				{"HasValue", "getValue", "setValue"},
+				{"HasValueSet", "getArray", "setArray"}
+			};
+
+			for(String[] markerInterface : markerInterfaces){
+				boolean matches = false;
+
+				for(Iterator<JClass> it = beanClazz._implements(); it.hasNext(); ){
+					JClass _interface = it.next();
+
+					_interface = _interface.erasure();
+
+					matches |= (_interface.name()).equals(markerInterface[0]);
+				}
+
+				if(!matches){
+					continue;
+				}
+
+				Collection<JMethod> methods = beanClazz.methods();
+
+				for(int i = 1; i < markerInterface.length; i++){
+
+					for(JMethod method : methods){
+						String name = method.name();
+
+						if(!(name).equals(markerInterface[i])){
+							continue;
+						} // End if
+
+						List<JVar> params = method.params();
+
+						if((name.startsWith("has") || name.startsWith("get")) && params.size() == 0){
+
+							if(!hasAnnotation(method.annotations(), Override.class)){
+								method.annotate(Override.class);
+							}
+						} else
+
+						if(name.startsWith("add") && params.size() == 0 && method.hasVarArgs()){
+							method.annotate(Override.class);
+						} else
+
+						if(name.startsWith("set") && params.size() == 1){
+
+							if(!hasAnnotation(method.annotations(), Override.class)){
+								method.annotate(Override.class);
+							}
+						}
+					}
+				}
+			}
 		}
 
 		Collection<? extends EnumOutline> enumOutlines = outline.getEnums();
@@ -383,9 +460,13 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 			clazz._implements(stringValueInterface.narrow(clazz));
 
+			JMethod valueMethod = clazz.getMethod("value", new JType[0]);
+			valueMethod.annotate(Override.class);
+
 			JMethod toStringMethod = clazz.method(JMod.PUBLIC, String.class, "toString");
 			toStringMethod.annotate(Override.class);
-			toStringMethod.body()._return(JExpr.invoke("value"));
+
+			toStringMethod.body()._return(JExpr.invoke(valueMethod));
 		}
 
 		if(model.serialVersionUID != null){
@@ -470,6 +551,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JMethod method = beanClazz.method(JMod.PUBLIC, type, name);
 		method.annotate(Override.class);
+
 		method.body()._return(JExpr.invoke(getterMethod));
 
 		moveBefore(beanClazz, method, getterMethod);

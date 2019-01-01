@@ -82,21 +82,26 @@ public class VisitorPlugin extends Plugin {
 
 		JPackage visitorPackage = codeModel._package("org.jpmml.model.visitors");
 
-		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS)._implements(visitorInterface);
+		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS);
+		abstractVisitorClazz._implements(visitorInterface);
 
 		JFieldVar abstractVisitorParents = abstractVisitorClazz.field(JMod.PRIVATE, dequeClazz.narrow(pmmlObjectClazz), "parents", JExpr._new(dequeImplementationClazz.narrow(pmmlObjectClazz)));
 
 		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
 		abstractVisitorGetParents.annotate(Override.class);
+
 		abstractVisitorGetParents.body()._return(JExpr.refthis(abstractVisitorParents.name()));
 
 		JMethod abstractVisitorApplyTo = abstractVisitorClazz.method(JMod.PUBLIC, void.class, "applyTo");
 		abstractVisitorApplyTo.annotate(Override.class);
+
 		JVar visitable = abstractVisitorApplyTo.param(visitableInterface, "visitable");
+
 		abstractVisitorApplyTo.body().add(JExpr.invoke(visitable, "accept").arg(JExpr._this()));
 
 		JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionEnum, "visit");
 		abstractVisitorVisit.param(pmmlObjectClazz, "object");
+
 		abstractVisitorVisit.body()._return(continueAction);
 
 		BiFunction<JClass, JClass, List<JMethod>> methodGenerator = new BiFunction<JClass, JClass, List<JMethod>>(){
@@ -114,6 +119,7 @@ public class VisitorPlugin extends Plugin {
 				JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionEnum, "visit");
 				abstractVisitorVisit.annotate(Override.class);
 				abstractVisitorVisit.param(clazz, parameterName);
+
 				abstractVisitorVisit.body()._return(JExpr.invoke("visit").arg(JExpr.cast(superClazz.erasure(), JExpr.ref(parameterName))));
 
 				return Arrays.asList(visitorVisit, abstractVisitorVisit);
