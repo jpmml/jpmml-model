@@ -153,6 +153,7 @@ public class VisitorPlugin extends Plugin {
 			{"support_vector_machine.Kernel"},
 			{"Measure"},
 			{"Model"},
+			{"tree.Node", "Entity"},
 			{"general_regression.ParameterCell"},
 			// {"PMMLObject"},
 			{"Predicate"},

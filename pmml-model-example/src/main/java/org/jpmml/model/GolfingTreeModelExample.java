@@ -24,6 +24,7 @@ import org.dmg.pmml.SimplePredicate.Operator;
 import org.dmg.pmml.True;
 import org.dmg.pmml.Value;
 import org.dmg.pmml.Version;
+import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 
@@ -139,7 +140,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 	static
 	private Node createNode(String score, Predicate predicate){
-		return new Node()
+		return new ComplexNode()
 			.setScore(score)
 			.setPredicate(predicate);
 	}

@@ -74,6 +74,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		JCodeModel codeModel = model.codeModel;
 
 		JClass measureClass = codeModel.ref("org.dmg.pmml.Measure");
+		JClass nodeClass = codeModel.ref("org.dmg.pmml.tree.Node");
 		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 
 		JClass activationFunctionEnum = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.ActivationFunction");
@@ -156,6 +157,10 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				// Collection of values
 				if(propertyInfo.isCollection()){
 
+					if((classInfo.shortName).equals("ComplexNode") && (privateName).equals("node")){
+						propertyInfo.baseType = nodeClass;
+					} else
+
 					if((classInfo.shortName).equals("VectorFields") && (privateName).equals("fieldRefOrCategoricalPredictor")){
 						propertyInfo.baseType = pmmlObjectClass;
 					} // End if
@@ -190,9 +195,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 				// Simple value
 				{
-
 					if((classInfo.shortName).equals("ComparisonMeasure") && (privateName).equals("measure")){
 						propertyInfo.baseType = measureClass;
+					} else
+
+					if((classInfo.shortName).equals("DecisionTree") && (privateName).equals("node")){
+						propertyInfo.baseType = nodeClass;
 					} else
 
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("activationFunction")){
@@ -201,6 +209,10 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("normalizationMethod")){
 						propertyInfo.baseType = normalizationMethodEnum;
+					} else
+
+					if((classInfo.shortName).equals("TreeModel") && (privateName).equals("node")){
+						propertyInfo.baseType = nodeClass;
 					} // End if
 
 					if((privateName).equals("functionName")){

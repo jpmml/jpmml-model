@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -60,6 +61,13 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
+			// XXX
+			if(("org.dmg.pmml.tree.ComplexNode").equals(beanClazz.fullName())){
+				JAnnotationUse xmlRootElement = beanClazz.annotate(XmlRootElement.class)
+					.param("name", "Node")
+					.param("namespace", "http://www.dmg.org/PMML-4_3");
+			}
+
 			JAnnotationUse jsonAutoDetect = beanClazz.annotate(JsonAutoDetect.class)
 				.param("fieldVisibility", JsonAutoDetect.Visibility.ANY)
 				.param("getterVisibility", JsonAutoDetect.Visibility.NONE)
@@ -85,7 +93,9 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
-				fieldNameArray.param(fieldVar.name());
+				String propertyName = fieldVar.name();
+
+				fieldNameArray.param(propertyName);
 
 				if(propertyInfo instanceof CAttributePropertyInfo){
 					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
@@ -100,6 +110,29 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
 
 					List<CTypeRef> types = elementPropertyInfo.getTypes();
+
+					// XXX
+					if(("node").equals(propertyName) || ("nodes").equals(propertyName)){
+						JAnnotationUse jsonProperty = fieldVar.annotate(JsonProperty.class)
+							.param("value", "Node");
+
+						JAnnotationUse jsonTypeInfo = fieldVar.annotate(JsonTypeInfo.class)
+							.param("include", JsonTypeInfo.As.WRAPPER_OBJECT)
+							.param("use", JsonTypeInfo.Id.NAME);
+
+						JAnnotationUse jsonSubTypes = fieldVar.annotate(JsonSubTypes.class);
+
+						JAnnotationArrayMember valueArray = jsonSubTypes.paramArray("value");
+
+						JClass complexNodeClass = codeModel.ref("org.dmg.pmml.tree.ComplexNode");
+
+						JAnnotationUse jsonSubTypesType = jsonSubTypes.annotate(JsonSubTypes.Type.class)
+							.param("name", "Node")
+							.param("value", JExpr.dotclass(complexNodeClass));
+
+						valueArray.param(jsonSubTypesType);
+					} else
+
 					if(types.size() == 1){
 						CTypeRef type = types.get(0);
 
@@ -110,7 +143,6 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 					} else
 
 					if(types.size() > 1){
-						String propertyName = fieldVar.name();
 
 						if(!(propertyName).equals("content")){
 							propertyName = NameConverter.standard.toPropertyName(propertyName);

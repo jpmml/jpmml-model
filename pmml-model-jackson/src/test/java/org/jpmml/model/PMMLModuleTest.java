@@ -16,6 +16,7 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.SimplePredicate;
+import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.junit.Test;
@@ -44,7 +45,7 @@ public class PMMLModuleTest {
 
 		SimplePredicate simplePredicate = new SimplePredicate(FieldName.create("x"), SimplePredicate.Operator.IS_NOT_MISSING);
 
-		Node node = new Node()
+		Node node = new ComplexNode()
 			.setPredicate(simplePredicate);
 
 		TreeModel treeModel = new TreeModel()

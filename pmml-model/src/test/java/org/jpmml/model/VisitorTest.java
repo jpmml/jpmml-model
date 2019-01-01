@@ -18,6 +18,7 @@ import org.dmg.pmml.True;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.jpmml.model.visitors.AbstractVisitor;
@@ -29,13 +30,13 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		Node leftChild = new Node()
+		Node leftChild = new ComplexNode()
 			.setPredicate(new SimplePredicate());
 
-		Node rightChild = new Node()
+		Node rightChild = new ComplexNode()
 			.setPredicate(new SimpleSetPredicate());
 
-		Node root = new Node()
+		Node root = new ComplexNode()
 			.setPredicate(new True())
 			.addNodes(leftChild, rightChild);
 
@@ -138,21 +139,21 @@ public class VisitorTest {
 
 			@Override
 			public VisitorAction visit(True _true){
-				checkParents(PMML.class, TreeModel.class, Node.class);
+				checkParents(PMML.class, TreeModel.class, ComplexNode.class);
 
 				return super.visit(_true);
 			}
 
 			@Override
 			public VisitorAction visit(SimplePredicate simplePredicate){
-				checkParents(PMML.class, TreeModel.class, Node.class, Node.class);
+				checkParents(PMML.class, TreeModel.class, ComplexNode.class, ComplexNode.class);
 
 				return super.visit(simplePredicate);
 			}
 
 			@Override
 			public VisitorAction visit(SimpleSetPredicate simpleSetPredicate){
-				checkParents(PMML.class, TreeModel.class, Node.class, Node.class);
+				checkParents(PMML.class, TreeModel.class, ComplexNode.class, ComplexNode.class);
 
 				return super.visit(simpleSetPredicate);
 			}

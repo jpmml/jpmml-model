@@ -12,6 +12,12 @@ import org.dmg.pmml.Predicate;
 abstract
 public class Rule extends Entity {
 
+	abstract
+	public Predicate getPredicate();
+
+	abstract
+	public Rule setPredicate(Predicate predicate);
+
 	/**
 	 * @throws UnsupportedOperationException If the <code>id</code> attribute is not supported.
 	 */
@@ -27,10 +33,4 @@ public class Rule extends Entity {
 	public Rule setId(String id){
 		throw new UnsupportedOperationException();
 	}
-
-	abstract
-	public Predicate getPredicate();
-
-	abstract
-	public Rule setPredicate(Predicate predicate);
 }
