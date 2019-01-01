@@ -102,6 +102,7 @@
 				<version>1.4-SNAPSHOT</version>
 			</dependency>
 
+			<!-- Inherited from javax.xml.bind:jaxb-api (javax.xml.bind:jaxb-api-parent) dependency -->
 			<dependency>
 				<groupId>javax.activation</groupId>
 				<artifactId>javax.activation-api</artifactId>
@@ -111,7 +112,7 @@
 			<dependency>
 				<groupId>javax.xml.bind</groupId>
 				<artifactId>jaxb-api</artifactId>
-				<version>2.3.0</version>
+				<version>2.3.1</version>
 			</dependency>
 
 			<dependency>
@@ -136,10 +137,11 @@
 				<version>[2.9.0, 2.9.6]</version>
 			</dependency>
 
+			<!-- Inherited from org.glassfish.jaxb:jaxb-runtime (org.glassfish.jaxb:jaxb-bom) dependency -->
 			<dependency>
 				<groupId>com.sun.istack</groupId>
 				<artifactId>istack-commons-buildtools</artifactId>
-				<version>3.0.5</version>
+				<version>3.0.7</version>
 			</dependency>
 
 			<dependency>
@@ -156,12 +158,12 @@
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-runtime</artifactId>
-				<version>2.3.0.1</version>
+				<version>2.3.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-xjc</artifactId>
-				<version>2.3.0.1</version>
+				<version>2.3.1</version>
 			</dependency>
 
 			<dependency>
