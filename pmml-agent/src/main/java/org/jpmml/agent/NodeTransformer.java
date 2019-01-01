@@ -40,7 +40,7 @@ public class NodeTransformer implements ClassFileTransformer {
 	@Override
 	public byte[] transform(ClassLoader classLoader, String className, Class<?> clazz, ProtectionDomain protectionDomain, byte[] buffer) throws IllegalClassFormatException {
 
-		if("org/dmg/pmml/tree/Node".equals(className)){
+		if("org/dmg/pmml/tree/ComplexNode".equals(className)){
 			className = className.replace('/', '.');
 
 			this.classPool.insertClassPath(new ByteArrayClassPath(className, buffer));

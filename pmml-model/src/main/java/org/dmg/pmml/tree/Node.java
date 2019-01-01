@@ -11,19 +11,14 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Entity;
 import org.dmg.pmml.Extension;
+import org.dmg.pmml.HasPredicate;
+import org.dmg.pmml.HasScore;
 import org.dmg.pmml.Partition;
-import org.dmg.pmml.Predicate;
 import org.dmg.pmml.ScoreDistribution;
 
 @XmlTransient
 abstract
-public class Node extends Entity {
-
-	abstract
-	public Predicate getPredicate();
-
-	abstract
-	public Node setPredicate(Predicate predicate);
+public class Node extends Entity implements HasPredicate<Node>, HasScore<Node> {
 
 	@Override
 	public String getId(){
@@ -32,14 +27,6 @@ public class Node extends Entity {
 
 	@Override
 	public Node setId(String id){
-		throw new UnsupportedOperationException();
-	}
-
-	public Object getScore(){
-		return null;
-	}
-
-	public Node setScore(Object score){
 		throw new UnsupportedOperationException();
 	}
 

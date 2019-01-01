@@ -545,7 +545,6 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='CompoundRule']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.rule_set.Rule</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasPredicate&lt;CompoundRule&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="rule_set"
 			/>
@@ -1562,8 +1561,6 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.tree.Node</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasPredicate&lt;ComplexNode&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasScore&lt;ComplexNode&gt;</inheritance:implements>
 			<jaxb:class
 				name="ComplexNode"
 			/>
@@ -2523,7 +2520,6 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleRule']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.rule_set.Rule</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasPredicate&lt;SimpleRule&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasScore&lt;SimpleRule&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="rule_set"

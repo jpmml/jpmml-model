@@ -6,17 +6,11 @@ package org.dmg.pmml.rule_set;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.dmg.pmml.Entity;
-import org.dmg.pmml.Predicate;
+import org.dmg.pmml.HasPredicate;
 
 @XmlTransient
 abstract
-public class Rule extends Entity {
-
-	abstract
-	public Predicate getPredicate();
-
-	abstract
-	public Rule setPredicate(Predicate predicate);
+public class Rule extends Entity implements HasPredicate<Rule> {
 
 	/**
 	 * @throws UnsupportedOperationException If the <code>id</code> attribute is not supported.
