@@ -112,12 +112,12 @@ Copyright (c) 2016 Villu Ruusmann
 	<!--
 	Replace xs:string with xs:anySimpleType where appropriate
 	-->
-	<xsl:template match="xs:element[@name='Node' or @name='SimpleRule']/xs:complexType/xs:attribute[@name='score']/@type">
+	<xsl:template match="xs:element[@name='Node']/xs:complexType/xs:attribute[@name='score']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
 	<!--
-	Replace FIELD_NAME with xs:string where appropriate
+	Replace FIELD-NAME with xs:string where appropriate
 	-->
 	<xsl:template match="xs:element[@name='Characteristic']/xs:complexType/xs:attribute[@name='name']/@type">
 		<xsl:attribute name="type">xs:string</xsl:attribute>
