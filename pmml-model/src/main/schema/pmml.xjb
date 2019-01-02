@@ -2520,7 +2520,6 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleRule']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.rule_set.Rule</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasScore&lt;SimpleRule&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="rule_set"
 			/>
