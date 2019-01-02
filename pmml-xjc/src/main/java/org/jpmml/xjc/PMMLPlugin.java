@@ -137,11 +137,27 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 				try {
 					Field field = CClassInfoParent.Package.class.getDeclaredField("pkg");
-					field.setAccessible(true);
+					if(!field.isAccessible()){
+						field.setAccessible(true);
+					}
 
 					JPackage subPackage = packageParent.pkg.subPackage(name);
 
 					field.set(packageParent, subPackage);
+				} catch(ReflectiveOperationException roe){
+					throw new RuntimeException(roe);
+				}
+			} // End if
+
+			if((classInfo.shortName).equals("ComplexNode")){
+
+				try {
+					Field field = CClassInfo.class.getDeclaredField("elementName");
+					if(!field.isAccessible()){
+						field.setAccessible(true);
+					}
+
+					field.set(classInfo, new QName("http://www.dmg.org/PMML-4_3", "Node"));
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}

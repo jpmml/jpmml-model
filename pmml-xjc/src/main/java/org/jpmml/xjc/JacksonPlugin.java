@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -60,13 +59,6 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
-
-			// XXX
-			if(("org.dmg.pmml.tree.ComplexNode").equals(beanClazz.fullName())){
-				JAnnotationUse xmlRootElement = beanClazz.annotate(XmlRootElement.class)
-					.param("name", "Node")
-					.param("namespace", "http://www.dmg.org/PMML-4_3");
-			}
 
 			JAnnotationUse jsonAutoDetect = beanClazz.annotate(JsonAutoDetect.class)
 				.param("fieldVisibility", JsonAutoDetect.Visibility.ANY)

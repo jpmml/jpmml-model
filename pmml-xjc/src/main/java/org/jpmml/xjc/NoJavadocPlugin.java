@@ -66,7 +66,6 @@ public class NoJavadocPlugin extends Plugin {
 
 		try {
 			Field jdocField = clazz.getDeclaredField("jdoc");
-
 			if(!jdocField.isAccessible()){
 				jdocField.setAccessible(true);
 			}
