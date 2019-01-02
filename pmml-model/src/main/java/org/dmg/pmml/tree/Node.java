@@ -29,6 +29,12 @@ public class Node extends Entity implements HasPredicate<Node> {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean hasScore(){
+		Object score = getScore();
+
+		return (score != null);
+	}
+
 	public Object getScore(){
 		return null;
 	}
