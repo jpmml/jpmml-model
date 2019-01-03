@@ -14,7 +14,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Value constructors.
   * Method chaining-friendly setter methods.
   * Optional SAX Locator information.
-* [Visitor pattern](http://en.wikipedia.org/wiki/Visitor_pattern):
+* [Visitor pattern](https://en.wikipedia.org/wiki/Visitor_pattern):
   * Validation agents.
   * Optimization and transformation agents.
 * Supported platforms:
@@ -33,7 +33,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Installation #
 
-JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository](http://repo1.maven.org/maven2/org/jpmml/).
+JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository](https://repo1.maven.org/maven2/org/jpmml/).
 
 The current version is **1.4.7** (23 November, 2018).
 
@@ -90,7 +90,7 @@ public void store(PMML pmml, OutputStream os) throws JAXBException {
 
 Module `pmml-model-example` exemplifies the use of JPMML-Model library.
 
-This module can be built using [Apache Maven](http://maven.apache.org/):
+This module can be built using [Apache Maven](https://maven.apache.org/):
 ```
 mvn clean install
 ```
@@ -129,7 +129,7 @@ Limited public support is available via the [JPMML mailing list](https://groups.
 
 # License #
 
-JPMML-Model is licensed under the [BSD 3-Clause License](http://opensource.org/licenses/BSD-3-Clause).
+JPMML-Model is licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
 
 # Additional information #
 
