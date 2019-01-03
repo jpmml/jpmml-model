@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
-import org.dmg.pmml.tree.ComplexNode;
+import org.dmg.pmml.tree.BranchNode;
+import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.junit.Test;
@@ -18,14 +19,14 @@ public class ArrayListTransformerTest {
 
 	@Test
 	public void transform(){
-		Node node1a = new ComplexNode();
+		Node node1a = new BranchNode();
 
-		Node node2a = new ComplexNode();
-		Node node2b = new ComplexNode();
+		Node node2a = new BranchNode();
+		Node node2b = new LeafNode();
 
 		node1a.addNodes(node2a, node2b);
 
-		Node node3a = new ComplexNode();
+		Node node3a = new LeafNode();
 
 		node2a.addNodes(node3a);
 

@@ -18,7 +18,8 @@ import org.dmg.pmml.True;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
-import org.dmg.pmml.tree.ComplexNode;
+import org.dmg.pmml.tree.BranchNode;
+import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.jpmml.model.visitors.AbstractVisitor;
@@ -30,15 +31,16 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		Node leftChild = new ComplexNode()
+		Node root = new BranchNode()
+			.setPredicate(new True());
+
+		Node leftChild = new LeafNode()
 			.setPredicate(new SimplePredicate());
 
-		Node rightChild = new ComplexNode()
+		Node rightChild = new LeafNode()
 			.setPredicate(new SimpleSetPredicate());
 
-		Node root = new ComplexNode()
-			.setPredicate(new True())
-			.addNodes(leftChild, rightChild);
+		root.addNodes(leftChild, rightChild);
 
 		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), root)
 			.setSplitCharacteristic(TreeModel.SplitCharacteristic.BINARY_SPLIT);
@@ -139,21 +141,21 @@ public class VisitorTest {
 
 			@Override
 			public VisitorAction visit(True _true){
-				checkParents(PMML.class, TreeModel.class, ComplexNode.class);
+				checkParents(PMML.class, TreeModel.class, BranchNode.class);
 
 				return super.visit(_true);
 			}
 
 			@Override
 			public VisitorAction visit(SimplePredicate simplePredicate){
-				checkParents(PMML.class, TreeModel.class, ComplexNode.class, ComplexNode.class);
+				checkParents(PMML.class, TreeModel.class, BranchNode.class, LeafNode.class);
 
 				return super.visit(simplePredicate);
 			}
 
 			@Override
 			public VisitorAction visit(SimpleSetPredicate simpleSetPredicate){
-				checkParents(PMML.class, TreeModel.class, ComplexNode.class, ComplexNode.class);
+				checkParents(PMML.class, TreeModel.class, BranchNode.class, LeafNode.class);
 
 				return super.visit(simpleSetPredicate);
 			}

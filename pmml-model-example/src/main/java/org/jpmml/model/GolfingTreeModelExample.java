@@ -24,7 +24,8 @@ import org.dmg.pmml.SimplePredicate.Operator;
 import org.dmg.pmml.True;
 import org.dmg.pmml.Value;
 import org.dmg.pmml.Version;
-import org.dmg.pmml.tree.ComplexNode;
+import org.dmg.pmml.tree.BranchNode;
+import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 
@@ -71,22 +72,22 @@ public class GolfingTreeModelExample extends ProductionExample {
 					.setUsageType(MiningField.UsageType.TARGET)
 			);
 
-		Node root = createNode("will play", new True());
+		Node root = createBranchNode("will play", new True());
 
 		// Upper half of the tree
 		root.addNodes(
-			createNode("will play", createSimplePredicate(outlook, Operator.EQUAL, "sunny"))
+			createBranchNode("will play", createSimplePredicate(outlook, Operator.EQUAL, "sunny"))
 				.addNodes(
-					createNode("will play",
+					createBranchNode("will play",
 						createCompoundPredicate(BooleanOperator.AND,
 							createSimplePredicate(temperature, Operator.LESS_THAN, "90"),
 							createSimplePredicate(temperature, Operator.GREATER_THAN, "50"))
 						)
 						.addNodes(
-							createNode("will play", createSimplePredicate(humidity, Operator.LESS_THAN, "80")),
-							createNode("no play", createSimplePredicate(humidity, Operator.GREATER_OR_EQUAL, "80"))
+							createLeafNode("will play", createSimplePredicate(humidity, Operator.LESS_THAN, "80")),
+							createLeafNode("no play", createSimplePredicate(humidity, Operator.GREATER_OR_EQUAL, "80"))
 						),
-					createNode("no play",
+					createLeafNode("no play",
 						createCompoundPredicate(BooleanOperator.OR,
 							createSimplePredicate(temperature, Operator.GREATER_OR_EQUAL, "90"),
 							createSimplePredicate(temperature, Operator.LESS_OR_EQUAL, "50"))
@@ -96,13 +97,13 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 		// Lower half of the tree
 		root.addNodes(
-			createNode("may play",
+			createBranchNode("may play",
 				createCompoundPredicate(BooleanOperator.OR,
 					createSimplePredicate(outlook, Operator.EQUAL, "overcast"),
 					createSimplePredicate(outlook, Operator.EQUAL, "rain"))
 				)
 				.addNodes(
-					createNode("may play",
+					createLeafNode("may play",
 						createCompoundPredicate(BooleanOperator.AND,
 							createSimplePredicate(temperature, Operator.GREATER_THAN, "60"),
 							createSimplePredicate(temperature, Operator.LESS_THAN, "100"),
@@ -110,7 +111,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 							createSimplePredicate(humidity, Operator.LESS_THAN, "70"),
 							createSimplePredicate(windy, Operator.EQUAL, "false"))
 						),
-					createNode("no play",
+					createLeafNode("no play",
 						createCompoundPredicate(BooleanOperator.AND,
 							createSimplePredicate(outlook, Operator.EQUAL, "rain"),
 							createSimplePredicate(humidity, Operator.LESS_THAN, "70"))
@@ -139,8 +140,15 @@ public class GolfingTreeModelExample extends ProductionExample {
 	}
 
 	static
-	private Node createNode(String score, Predicate predicate){
-		return new ComplexNode()
+	private Node createBranchNode(String score, Predicate predicate){
+		return new BranchNode()
+			.setScore(score)
+			.setPredicate(predicate);
+	}
+
+	static
+	private Node createLeafNode(String score, Predicate predicate){
+		return new LeafNode()
 			.setScore(score)
 			.setPredicate(predicate);
 	}

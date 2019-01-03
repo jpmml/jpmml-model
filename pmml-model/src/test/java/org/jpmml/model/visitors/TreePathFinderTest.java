@@ -9,7 +9,8 @@ import java.util.Map;
 
 import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
-import org.dmg.pmml.tree.ComplexNode;
+import org.dmg.pmml.tree.BranchNode;
+import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.junit.Test;
@@ -20,21 +21,21 @@ public class TreePathFinderTest {
 
 	@Test
 	public void find(){
-		Node node1a = new ComplexNode();
+		Node node1a = new BranchNode();
 
-		Node node2a = new ComplexNode();
-		Node node2b = new ComplexNode();
-		Node node2c = new ComplexNode();
+		Node node2a = new LeafNode();
+		Node node2b = new BranchNode();
+		Node node2c = new BranchNode();
 
 		node1a.addNodes(node2a, node2b, node2c);
 
-		Node node3a = new ComplexNode();
-		Node node3b = new ComplexNode();
+		Node node3a = new BranchNode();
+		Node node3b = new LeafNode();
 
 		node2b.addNodes(node3a);
 		node2c.addNodes(node3b);
 
-		Node node4a = new ComplexNode();
+		Node node4a = new LeafNode();
 
 		node3a.addNodes(node4a);
 
