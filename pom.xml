@@ -10,7 +10,7 @@
 
 	<groupId>org.jpmml</groupId>
 	<artifactId>jpmml-model</artifactId>
-	<version>1.4.8</version>
+	<version>1.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>JPMML-Model</name>
@@ -52,7 +52,7 @@
 		<connection>scm:git:git@github.com:jpmml/jpmml-model.git</connection>
 		<developerConnection>scm:git:git@github.com:jpmml/jpmml-model.git</developerConnection>
 		<url>git://github.com/jpmml/jpmml-model.git</url>
-		<tag>1.4.8</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
@@ -64,42 +64,42 @@
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-agent</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-example</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-gwt</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-jackson</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-metro</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-moxy</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-xjc</artifactId>
-				<version>1.4.8</version>
+				<version>1.4-SNAPSHOT</version>
 			</dependency>
 
 			<!-- Inherited from javax.xml.bind:jaxb-api (javax.xml.bind:jaxb-api-parent) dependency -->
