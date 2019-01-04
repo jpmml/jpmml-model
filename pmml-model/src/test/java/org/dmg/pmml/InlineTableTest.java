@@ -135,5 +135,5 @@ public class InlineTableTest {
 		assertTrue(string.contains("</row>"));
 	}
 
-	private static final String XLMNS_DATA = "http://jpmml.org/jpmml-model/InlineTable";;
+	private static final String XLMNS_DATA = "http://jpmml.org/jpmml-model/InlineTable";
 }
