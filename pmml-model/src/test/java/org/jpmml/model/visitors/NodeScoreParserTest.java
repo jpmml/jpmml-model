@@ -4,6 +4,7 @@
 package org.jpmml.model.visitors;
 
 import org.dmg.pmml.False;
+import org.dmg.pmml.MathContext;
 import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.True;
@@ -34,7 +35,7 @@ public class NodeScoreParserTest {
 			.setPredicate(new False());
 
 		Node node2c = new LeafNode()
-			.setScore(2.0d)
+			.setScore(2.0f)
 			.setPredicate(new True());
 
 		node1a.addNodes(node2a, node2b, node2c);
@@ -45,11 +46,12 @@ public class NodeScoreParserTest {
 
 		node2b.addNodes(node3a);
 
-		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), node1a);
+		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), node1a)
+			.setMathContext(MathContext.FLOAT);
 
 		VisitorBattery visitorBattery = new VisitorBattery();
 		visitorBattery.add(NodeScoreParser.class);
-		visitorBattery.add(DoubleInterner.class);
+		visitorBattery.add(FloatInterner.class);
 
 		visitorBattery.applyTo(treeModel);
 
@@ -57,7 +59,7 @@ public class NodeScoreParserTest {
 
 		assertEquals("2", node2a.getScore());
 		assertEquals("2.0", node2b.getScore());
-		assertEquals(2.0d, node2c.getScore());
+		assertEquals(2.0f, node2c.getScore());
 
 		assertEquals("error", node3a.getScore());
 
@@ -65,11 +67,11 @@ public class NodeScoreParserTest {
 
 		visitorBattery.applyTo(treeModel);
 
-		assertEquals(1.0d, node1a.getScore());
+		assertEquals(1.0f, node1a.getScore());
 
-		assertEquals(2.0d, node2a.getScore());
-		assertEquals(2.0d, node2b.getScore());
-		assertEquals(2.0d, node2c.getScore());
+		assertEquals(2.0f, node2a.getScore());
+		assertEquals(2.0f, node2b.getScore());
+		assertEquals(2.0f, node2c.getScore());
 
 		assertSame(node2a.getScore(), node2b.getScore());
 		assertSame(node2a.getScore(), node2c.getScore());

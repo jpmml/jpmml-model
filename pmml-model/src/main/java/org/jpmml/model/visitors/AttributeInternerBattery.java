@@ -10,6 +10,7 @@ public class AttributeInternerBattery extends VisitorBattery {
 	public AttributeInternerBattery(){
 		add(StringInterner.class);
 		add(IntegerInterner.class);
+		add(FloatInterner.class);
 		add(DoubleInterner.class);
 	}
 }
