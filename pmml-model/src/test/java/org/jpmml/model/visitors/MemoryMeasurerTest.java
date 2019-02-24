@@ -12,7 +12,6 @@ import org.dmg.pmml.Visitable;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class MemoryMeasurerTest {
 
@@ -29,10 +28,6 @@ public class MemoryMeasurerTest {
 			.addIntervals(interval);
 
 		assertEquals(getSize(left), getSize(right));
-
-		right.setName(new FieldName("x"));
-
-		assertNotEquals(getSize(left), getSize(right));
 	}
 
 	static

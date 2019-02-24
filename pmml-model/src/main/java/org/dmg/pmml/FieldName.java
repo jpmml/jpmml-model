@@ -27,7 +27,7 @@ public class FieldName implements Serializable {
 	private String value = null;
 
 
-	public FieldName(String value){
+	private FieldName(String value){
 		setValue(value);
 	}
 
