@@ -31,22 +31,6 @@ public class FieldName implements Serializable {
 		setValue(value);
 	}
 
-	public boolean isInterned(){
-		WeakReference<FieldName> reference = FieldName.cache.get(getValue());
-
-		if(reference != null){
-			FieldName cachedName = reference.get();
-
-			return (cachedName == this);
-		}
-
-		return false;
-	}
-
-	public FieldName intern(){
-		return create(getValue());
-	}
-
 	@Override
 	public int hashCode(){
 		return (this.getValue()).hashCode();
@@ -93,7 +77,7 @@ public class FieldName implements Serializable {
 	 */
 	final
 	Object readResolve(){
-		return intern();
+		return create(getValue());
 	}
 
 	@JsonCreator

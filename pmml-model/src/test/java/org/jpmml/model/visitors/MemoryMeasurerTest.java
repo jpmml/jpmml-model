@@ -21,7 +21,7 @@ public class MemoryMeasurerTest {
 			.setLeftMargin(0d)
 			.setRightMargin(1d);
 
-		DataField left = new DataField(null, null, null)
+		DataField left = new DataField(FieldName.create("x"), null, null)
 			.addIntervals(interval);
 
 		DataField right = new DataField(FieldName.create("x"), OpType.CONTINUOUS, DataType.DOUBLE)

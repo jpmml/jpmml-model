@@ -10,7 +10,6 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
@@ -32,7 +31,7 @@ public class MemoryMeasurer extends AbstractVisitor {
 
 	private long size = 0L;
 
-	private Set<Object> objects = Collections.newSetFromMap(new IdentityHashMap<Object, Boolean>());
+	private Set<Object> objects = Collections.newSetFromMap(new IdentityHashMap<>());
 
 
 	/**
@@ -119,12 +118,6 @@ public class MemoryMeasurer extends AbstractVisitor {
 
 			if(object instanceof Enum){
 				return false;
-			} // End if
-
-			if(object instanceof FieldName){
-				FieldName name = (FieldName)object;
-
-				return !name.isInterned();
 			} // End if
 
 			if(object instanceof PMMLObject){
