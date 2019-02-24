@@ -100,8 +100,12 @@ public class FieldName implements Serializable {
 	static
 	public FieldName create(String value){
 
-		if(value == null || ("").equals(value)){
-			throw new IllegalArgumentException();
+		if(value == null){
+			throw new NullPointerException();
+		} else
+
+		if(("").equals(value)){
+			throw new IllegalArgumentException("Name cannot be empty");
 		}
 
 		WeakReference<FieldName> reference = FieldName.cache.get(value);

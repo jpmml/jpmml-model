@@ -20,6 +20,14 @@ public class FieldNameAdapterTest {
 			adapter.unmarshal(null);
 
 			fail();
+		} catch(NullPointerException npe){
+			// Ignored
+		} // End try
+
+		try {
+			adapter.unmarshal("");
+
+			fail();
 		} catch(IllegalArgumentException iae){
 			// Ignored
 		}
