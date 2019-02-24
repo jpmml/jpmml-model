@@ -4,11 +4,8 @@
 package org.dmg.pmml;
 
 import java.io.Serializable;
-import java.lang.ref.WeakReference;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -92,58 +89,28 @@ public class FieldName implements Serializable {
 			throw new IllegalArgumentException("Name cannot be empty");
 		}
 
-		WeakReference<FieldName> reference = FieldName.cache.get(value);
-		if(reference != null){
-			FieldName cachedName = reference.get();
+		Map<String, FieldName> cache = FieldName.CACHE_PROVIDER.get();
 
-			if(cachedName != null){
-				return cachedName;
+		FieldName name = cache.get(value);
+		if(name == null){
+			name = new FieldName(value);
+
+			FieldName prevName = cache.putIfAbsent(value, name);
+			if(prevName != null){
+				return prevName;
 			}
 		}
-
-		FieldName name = new FieldName(value);
-
-		FieldName.cache.put(value, new WeakReference<>(name));
 
 		return name;
 	}
 
-	static
-	public void compact(){
-		FieldName.cache.compact();
-	}
+	public static final Map<String, FieldName> CACHE = new ConcurrentHashMap<>(2048);
 
-	private static final Cache cache = new Cache();
-
-	static
-	private class Cache extends ConcurrentHashMap<String, WeakReference<FieldName>> {
-
-		private AtomicLong counter = new AtomicLong();
-
+	public static final ThreadLocal<Map<String, FieldName>> CACHE_PROVIDER = new ThreadLocal<Map<String, FieldName>>(){
 
 		@Override
-		public WeakReference<FieldName> put(String key, WeakReference<FieldName> value){
-			WeakReference<FieldName> result = super.put(key, value);
-
-			// Perform cache compaction after every 100 put operations
-			if((this.counter.incrementAndGet() % 100L) == 0L){
-				compact();
-			}
-
-			return result;
+		protected Map<String, FieldName> initialValue(){
+			return FieldName.CACHE;
 		}
-
-		private void compact(){
-			Collection<WeakReference<FieldName>> references = values();
-
-			for(Iterator<WeakReference<FieldName>> it = references.iterator(); it.hasNext(); ){
-				WeakReference<FieldName> reference = it.next();
-
-				FieldName cachedName = reference.get();
-				if(cachedName == null){
-					it.remove();
-				}
-			}
-		}
-	}
+	};
 }
