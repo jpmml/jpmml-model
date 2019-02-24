@@ -116,9 +116,8 @@ public class MemoryMeasurer extends AbstractVisitor {
 	private boolean shouldMeasure(Object object){
 
 		if(object != null){
-			Class<?> clazz = object.getClass();
 
-			if(clazz.isEnum()){
+			if(object instanceof Enum){
 				return false;
 			} // End if
 
@@ -126,9 +125,13 @@ public class MemoryMeasurer extends AbstractVisitor {
 				FieldName name = (FieldName)object;
 
 				return !name.isInterned();
+			} // End if
+
+			if(object instanceof PMMLObject){
+				return false;
 			}
 
-			return !(object instanceof Visitable);
+			return true;
 		}
 
 		return false;
