@@ -161,7 +161,7 @@ public class FieldDependencyResolver extends FieldResolver {
 
 		for(int i = 0; true; i++){
 
-			if(i > 1000){
+			if(i > FieldDependencyResolver.MAX_STACK_HEIGHT){
 				throw new IllegalStateException();
 			}
 
@@ -212,4 +212,6 @@ public class FieldDependencyResolver extends FieldResolver {
 
 		this.dependencies.put(field, activeFields);
 	}
+
+	private static final int MAX_STACK_HEIGHT = 50;
 }
