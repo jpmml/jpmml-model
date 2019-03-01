@@ -8,13 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
-import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DefineFunction;
@@ -42,16 +39,16 @@ import org.dmg.pmml.tree.DecisionTree;
  */
 public class FieldResolver extends AbstractVisitor {
 
-	private Map<PMMLObject, Set<Field<?>>> scopes = new LinkedHashMap<>();
+	private Map<PMMLObject, List<Field<?>>> scopes = new IdentityHashMap<>();
 
-	private Set<Field<?>> suppressedFields = new HashSet<>();
+	private Map<PMMLObject, List<Field<?>>> customScopes = Collections.emptyMap();
 
 
 	@Override
 	public void applyTo(Visitable visitable){
 		this.scopes.clear();
 
-		this.suppressedFields.clear();
+		this.customScopes = Collections.emptyMap();
 
 		super.applyTo(visitable);
 	}
@@ -63,7 +60,35 @@ public class FieldResolver extends AbstractVisitor {
 		if(parent instanceof Field){
 			Field<?> field = (Field<?>)parent;
 
-			this.suppressedFields.remove(field);
+			parent = getParent();
+
+			List<Field<?>> customScope = this.customScopes.get(parent);
+			if(customScope != null){
+				customScope.add(field);
+			}
+		} else
+
+		if(parent instanceof TransformationDictionary){
+			PMML pmml = (PMML)getParent();
+
+			declareGlobalFields(pmml, true);
+
+			this.customScopes = Collections.emptyMap();
+		} else
+
+		if(parent instanceof LocalTransformations){
+			Model model = (Model)getParent();
+
+			declareLocalFields(model, true);
+
+			this.customScopes = Collections.emptyMap();
+		} else
+
+		{
+			List<Field<?>> customScope = this.customScopes.get(parent);
+			if(customScope != null){
+				this.customScopes = Collections.emptyMap();
+			}
 		}
 
 		return parent;
@@ -71,10 +96,7 @@ public class FieldResolver extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(Model model){
-		LocalTransformations localTransformations = model.getLocalTransformations();
-		if(localTransformations != null && localTransformations.hasDerivedFields()){
-			declare(model, localTransformations.getDerivedFields());
-		}
+		declareLocalFields(model, true);
 
 		return super.visit(model);
 	}
@@ -86,16 +108,19 @@ public class FieldResolver extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(DefineFunction defineFunction){
-		declare(defineFunction, defineFunction.hasParameterFields() ? defineFunction.getParameterFields() : Collections.emptyList());
+		declareFields(defineFunction, defineFunction.hasParameterFields() ? defineFunction.getParameterFields() : Collections.emptyList());
 
 		return super.visit(defineFunction);
 	}
 
 	@Override
 	public VisitorAction visit(LocalTransformations localTransformations){
+		Model model = (Model)getParent();
 
 		if(localTransformations.hasDerivedFields()){
-			suppress(localTransformations.getDerivedFields());
+			declareLocalFields(model, false);
+
+			suppressFields(localTransformations);
 		}
 
 		return super.visit(localTransformations);
@@ -105,9 +130,9 @@ public class FieldResolver extends AbstractVisitor {
 	public VisitorAction visit(Output output){
 
 		if(output.hasOutputFields()){
-			declare(output, output.getOutputFields());
+			declareFields(output, output.getOutputFields());
 
-			suppress(output.getOutputFields());
+			suppressFields(output);
 		}
 
 		return super.visit(output);
@@ -115,15 +140,7 @@ public class FieldResolver extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PMML pmml){
-		DataDictionary dataDictionary = pmml.getDataDictionary();
-		if(dataDictionary != null && dataDictionary.hasDataFields()){
-			declare(pmml, dataDictionary.getDataFields());
-		}
-
-		TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
-		if(transformationDictionary != null && transformationDictionary.hasDerivedFields()){
-			declare(pmml, transformationDictionary.getDerivedFields());
-		}
+		declareGlobalFields(pmml, true);
 
 		return super.visit(pmml);
 	}
@@ -140,21 +157,24 @@ public class FieldResolver extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(TransformationDictionary transformationDictionary){
+		PMML pmml = (PMML)getParent();
 
 		if(transformationDictionary.hasDerivedFields()){
-			suppress(transformationDictionary.getDerivedFields());
+			declareGlobalFields(pmml, false);
+
+			suppressFields(transformationDictionary);
 		}
 
 		return super.visit(transformationDictionary);
 	}
 
-	public Set<Field<?>> getFields(){
+	public Collection<Field<?>> getFields(){
 		Deque<PMMLObject> parents = getParents();
 
 		return getFields(parents);
 	}
 
-	public Set<Field<?>> getFields(PMMLObject... virtualParents){
+	public Collection<Field<?>> getFields(PMMLObject... virtualParents){
 		Deque<PMMLObject> parents = new ArrayDeque<>(getParents());
 
 		for(PMMLObject virtualParent : virtualParents){
@@ -164,8 +184,8 @@ public class FieldResolver extends AbstractVisitor {
 		return getFields(parents);
 	}
 
-	private Set<Field<?>> getFields(Deque<PMMLObject> parents){
-		Set<Field<?>> result = new LinkedHashSet<>();
+	private Collection<Field<?>> getFields(Deque<PMMLObject> parents){
+		List<Field<?>> result = new ArrayList<>();
 
 		PMMLObject prevParent = null;
 
@@ -173,9 +193,9 @@ public class FieldResolver extends AbstractVisitor {
 			PMMLObject parent = it.next();
 
 			{
-				Set<Field<?>> scope = this.scopes.get(parent);
+				Collection<Field<?>> scope = getScope(parent);
 
-				if(scope != null){
+				if(scope != null && scope.size() > 0){
 					result.addAll(scope);
 				}
 			}
@@ -188,9 +208,9 @@ public class FieldResolver extends AbstractVisitor {
 				List<Output> outputs = getEarlierOutputs((Segmentation)parent, (Segment)prevParent);
 
 				for(Output output : outputs){
-					Set<Field<?>> scope = this.scopes.get(output);
+					Collection<Field<?>> scope = getScope(output);
 
-					if(scope != null){
+					if(scope != null && scope.size() > 0){
 						result.addAll(scope);
 					}
 				}
@@ -199,16 +219,56 @@ public class FieldResolver extends AbstractVisitor {
 			prevParent = parent;
 		}
 
-		result.removeAll(this.suppressedFields);
-
 		return result;
 	}
 
-	private void declare(PMMLObject object, Collection<? extends Field<?>> fields){
-		Set<Field<?>> scope = this.scopes.get(object);
+	private Collection<Field<?>> getScope(PMMLObject object){
+
+		if(this.customScopes.size() > 0){
+			return this.customScopes.getOrDefault(object, this.scopes.get(object));
+		} else
+
+		{
+			return this.scopes.get(object);
+		}
+	}
+
+	private void declareGlobalFields(PMML pmml, boolean transformations){
+		List<Field<?>> scope = this.scopes.get(pmml);
+
+		if(scope != null){
+			scope.clear();
+		}
+
+		DataDictionary dataDictionary = pmml.getDataDictionary();
+		if(dataDictionary != null && dataDictionary.hasDataFields()){
+			declareFields(pmml, dataDictionary.getDataFields());
+		}
+
+		TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
+		if(transformations && (transformationDictionary != null && transformationDictionary.hasDerivedFields())){
+			declareFields(pmml, transformationDictionary.getDerivedFields());
+		}
+	}
+
+	private void declareLocalFields(Model model, boolean transformations){
+		List<Field<?>> scope = this.scopes.get(model);
+
+		if(scope != null){
+			scope.clear();
+		}
+
+		LocalTransformations localTransformations = model.getLocalTransformations();
+		if(transformations && (localTransformations != null && localTransformations.hasDerivedFields())){
+			declareFields(model, localTransformations.getDerivedFields());
+		}
+	}
+
+	private void declareFields(PMMLObject object, Collection<? extends Field<?>> fields){
+		List<Field<?>> scope = this.scopes.get(object);
 
 		if(scope == null){
-			scope = new LinkedHashSet<>();
+			scope = new ArrayList<>(fields.size());
 
 			this.scopes.put(object, scope);
 		}
@@ -216,9 +276,8 @@ public class FieldResolver extends AbstractVisitor {
 		scope.addAll(fields);
 	}
 
-	private void suppress(Collection<? extends Field<?>> fields){
-		this.suppressedFields.clear();
-		this.suppressedFields.addAll(fields);
+	private void suppressFields(PMMLObject object){
+		this.customScopes = Collections.singletonMap(object, new ArrayList<>());
 	}
 
 	static

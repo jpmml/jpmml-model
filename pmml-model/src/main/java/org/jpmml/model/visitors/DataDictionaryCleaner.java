@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -26,7 +27,7 @@ import org.dmg.pmml.Visitable;
  */
 public class DataDictionaryCleaner extends ModelCleaner {
 
-	private Set<Field<?>> targetFields = new HashSet<>();
+	private Set<Field<?>> targetFields = new LinkedHashSet<>();
 
 
 	@Override
@@ -81,7 +82,7 @@ public class DataDictionaryCleaner extends ModelCleaner {
 			}
 
 			if(targetFieldNames.size() > 0){
-				Set<Field<?>> modelFields = getFields(model);
+				Collection<Field<?>> modelFields = getFields(model);
 
 				targetFields.addAll(FieldUtil.selectAll(modelFields, targetFieldNames));
 			}

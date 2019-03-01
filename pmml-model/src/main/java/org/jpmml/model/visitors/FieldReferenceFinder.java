@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,12 +45,15 @@ import org.dmg.pmml.sequence.SetPredicate;
  */
 public class FieldReferenceFinder extends AbstractVisitor {
 
-	private Set<FieldName> names = new HashSet<>();
+	private Set<FieldName> names = null;
 
 
 	@Override
 	public void applyTo(Visitable visitable){
-		this.names.clear();
+
+		if(this.names != null){
+			this.names.clear();
+		}
 
 		super.applyTo(visitable);
 	}
@@ -254,6 +258,11 @@ public class FieldReferenceFinder extends AbstractVisitor {
 	}
 
 	public Set<FieldName> getFieldNames(){
+
+		if(this.names == null){
+			return Collections.emptySet();
+		}
+
 		return this.names;
 	}
 
@@ -261,6 +270,21 @@ public class FieldReferenceFinder extends AbstractVisitor {
 
 		if(name == null){
 			return;
+		} // End if
+
+		if(this.names == null){
+			this.names = Collections.singleton(name);
+
+			return;
+		} // End if
+
+		if(this.names.size() == 1){
+
+			if(this.names.contains(name)){
+				return;
+			}
+
+			this.names = new HashSet<>(this.names);
 		}
 
 		this.names.add(name);

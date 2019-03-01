@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class FieldResolverTest {
 
 			@Override
 			public VisitorAction visit(Apply apply){
-				Set<Field<?>> fields = getFields();
+				Collection<Field<?>> fields = getFields();
 
 				String function = apply.getFunction();
 
@@ -81,13 +82,13 @@ public class FieldResolverTest {
 
 		applyResolver.applyTo(pmml);
 
-		assertEquals(Collections.emptySet(), applyResolver.getFields());
+		checkFields(Collections.emptySet(), applyResolver.getFields());
 
 		FieldResolver regressionTableResolver = new FieldResolver(){
 
 			@Override
 			public VisitorAction visit(RegressionTable regressionTable){
-				Set<Field<?>> fields = getFields();
+				Collection<Field<?>> fields = getFields();
 
 				Segment segment = (Segment)getParent(1);
 
@@ -119,13 +120,13 @@ public class FieldResolverTest {
 
 		regressionTableResolver.applyTo(pmml);
 
-		assertEquals(Collections.emptySet(), regressionTableResolver.getFields());
+		checkFields(Collections.emptySet(), regressionTableResolver.getFields());
 
 		FieldResolver predicateResolver = new FieldResolver(){
 
 			@Override
 			public VisitorAction visit(SimplePredicate simplePredicate){
-				Set<Field<?>> fields = getFields();
+				Collection<Field<?>> fields = getFields();
 
 				Segment segment = (Segment)getParent();
 
@@ -153,7 +154,7 @@ public class FieldResolverTest {
 
 		predicateResolver.applyTo(pmml);
 
-		assertEquals(Collections.emptySet(), predicateResolver.getFields());
+		checkFields(Collections.emptySet(), predicateResolver.getFields());
 	}
 
 	@Test
@@ -166,7 +167,7 @@ public class FieldResolverTest {
 
 			@Override
 			public VisitorAction visit(Apply apply){
-				Set<Field<?>> fields = getFields();
+				Collection<Field<?>> fields = getFields();
 
 				DerivedField derivedField = (DerivedField)getParent();
 
@@ -202,7 +203,7 @@ public class FieldResolverTest {
 
 			@Override
 			public VisitorAction visit(RegressionTable regressionTable){
-				Set<Field<?>> fields = getFields();
+				Collection<Field<?>> fields = getFields();
 
 				checkFields(FieldNameUtil.create(dataFieldNames, "x12", "x123", "x1234", "x12345"), fields);
 
@@ -214,7 +215,7 @@ public class FieldResolverTest {
 	}
 
 	static
-	private void checkFields(Set<FieldName> names, Set<Field<?>> fields){
+	private void checkFields(Set<FieldName> names, Collection<Field<?>> fields){
 		assertEquals(names, FieldUtil.nameSet(fields));
 	}
 }

@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -82,10 +83,9 @@ public class MiningSchemaCleaner extends DeepFieldResolver {
 			}
 		}
 
-		Set<Field<?>> modelFields = getFields(miningModel);
+		Collection<Field<?>> modelFields = getFields(miningModel);
 
-		Set<Field<?>> activeModelFields = FieldUtil.selectAll(modelFields, activeFieldNames, true);
-		activeFields.addAll(activeModelFields);
+		activeFields.addAll(FieldUtil.selectAll(modelFields, activeFieldNames, true));
 
 		expandDerivedFields(miningModel, activeFields);
 

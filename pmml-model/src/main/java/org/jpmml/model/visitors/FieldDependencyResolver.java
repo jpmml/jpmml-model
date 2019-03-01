@@ -3,8 +3,10 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +14,10 @@ import java.util.Set;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DerivedField;
+import org.dmg.pmml.Expression;
 import org.dmg.pmml.Field;
+import org.dmg.pmml.FieldName;
+import org.dmg.pmml.HasExpression;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
@@ -28,7 +33,7 @@ import org.dmg.pmml.VisitorAction;
  */
 public class FieldDependencyResolver extends FieldResolver {
 
-	private Map<Field<?>, Set<Field<?>>> dependencies = new LinkedHashMap<>();
+	private Map<Field<?>, Set<Field<?>>> dependencies = new IdentityHashMap<>();
 
 	private Set<DataField> dataFields = new HashSet<>();
 
@@ -174,7 +179,9 @@ public class FieldDependencyResolver extends FieldResolver {
 			}
 
 			for(Field<?> removableField : removableFields){
-				fields.addAll(getDependencies(removableField));
+				Set<Field<?>> dependencies = getDependencies(removableField);
+
+				fields.addAll(dependencies);
 			}
 
 			fields.removeAll(removableFields);
@@ -182,10 +189,26 @@ public class FieldDependencyResolver extends FieldResolver {
 	}
 
 	private void process(Field<?> field){
-		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder();
-		fieldReferenceFinder.applyTo(field);
+		Set<Field<?>> activeFields = Collections.emptySet();
 
-		Set<Field<?>> activeFields = FieldUtil.selectAll(getFields(), fieldReferenceFinder.getFieldNames());
+		if(field instanceof HasExpression){
+			HasExpression<?> hasExpression = (HasExpression<?>)field;
+
+			Expression expression = hasExpression.getExpression();
+			if(expression != null){
+				FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder();
+				fieldReferenceFinder.applyTo(expression);
+
+				Set<FieldName> names = fieldReferenceFinder.getFieldNames();
+
+				if(names.size() > 0){
+					Collection<Field<?>> fields = getFields();
+
+					activeFields = new LinkedHashSet<>(2 * names.size());
+					activeFields.addAll(FieldUtil.selectAll(fields, names));
+				}
+			}
+		}
 
 		this.dependencies.put(field, activeFields);
 	}

@@ -3,8 +3,8 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -61,7 +61,7 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 		if(localTransformations.hasDerivedFields()){
 			List<DerivedField> derivedFields = localTransformations.getDerivedFields();
 
-			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(new HashSet<>(derivedFields));
+			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(derivedFields);
 
 			derivedFields.retainAll(activeDerivedFields);
 		}
@@ -72,13 +72,13 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 		if(transformationDictionary.hasDerivedFields()){
 			List<DerivedField> derivedFields = transformationDictionary.getDerivedFields();
 
-			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(new HashSet<>(derivedFields));
+			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(derivedFields);
 
 			derivedFields.retainAll(activeDerivedFields);
 		}
 	}
 
-	private Set<DerivedField> getActiveDerivedFields(Set<DerivedField> derivedFields){
+	private Set<DerivedField> getActiveDerivedFields(Collection<DerivedField> derivedFields){
 		FieldDependencyResolver fieldDependencyResolver = getFieldDependencyResolver();
 
 		Set<Field<?>> activeFields = getActiveFields();
@@ -87,7 +87,7 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 		activeDerivedFields.retainAll(activeFields);
 
 		while(true){
-			Set<Field<?>> fields = new LinkedHashSet<>(activeDerivedFields);
+			Set<Field<?>> fields = new HashSet<>(activeDerivedFields);
 
 			fieldDependencyResolver.expand(fields, activeDerivedFields);
 
