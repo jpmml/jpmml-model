@@ -20,7 +20,7 @@ import org.jpmml.model.annotations.Property;
 )
 @XmlTransient
 abstract
-public class Cell extends PMMLObject implements HasValue<Cell> {
+public class Cell extends PMMLObject {
 
 	@XmlValue
 	@XmlValueExtension
@@ -37,12 +37,10 @@ public class Cell extends PMMLObject implements HasValue<Cell> {
 	abstract
 	public QName getName();
 
-	@Override
 	public String getValue(){
 		return this.value;
 	}
 
-	@Override
 	public Cell setValue(@Property("value") String value){
 		this.value = value;
 
