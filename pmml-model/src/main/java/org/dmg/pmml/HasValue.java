@@ -8,6 +8,13 @@ package org.dmg.pmml;
  */
 public interface HasValue<E extends PMMLObject & HasValue<E>> {
 
+	default
+	boolean hasValue(){
+		Object value = getValue();
+
+		return (value != null);
+	}
+
 	Object getValue();
 
 	E setValue(Object value);
