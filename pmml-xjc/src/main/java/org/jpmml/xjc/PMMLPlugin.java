@@ -293,10 +293,6 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				createGetterProxy(beanClazz, fieldNameClass, "getKey", "getField");
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.Value")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getValue");
-			} else
-
 			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getId");
 			}
