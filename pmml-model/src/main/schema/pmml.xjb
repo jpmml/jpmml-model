@@ -1776,6 +1776,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PairCounts']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasValue&lt;PairCounts&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>
@@ -2711,6 +2712,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValueCount']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasValue&lt;TargetValueCount&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>

@@ -120,7 +120,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='NormDiscrete' or @name='PPCell' or @name='SimplePredicate' or @name='TargetValue' or @name='Value']/xs:complexType/xs:attribute[@name='value']/@type">
+	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='NormDiscrete' or @name='PairCounts' or @name='PPCell' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='Value']/xs:complexType/xs:attribute[@name='value']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
