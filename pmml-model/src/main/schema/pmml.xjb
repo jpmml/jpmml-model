@@ -246,6 +246,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineStratum']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasValue&lt;BaselineStratum&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
