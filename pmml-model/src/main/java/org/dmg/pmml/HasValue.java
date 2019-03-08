@@ -8,7 +8,7 @@ package org.dmg.pmml;
  */
 public interface HasValue<E extends PMMLObject & HasValue<E>> {
 
-	String getValue();
+	Object getValue();
 
-	E setValue(String value);
+	E setValue(Object value);
 }

@@ -112,8 +112,22 @@ Copyright (c) 2016 Villu Ruusmann
 	<!--
 	Replace xs:string with xs:anySimpleType where appropriate
 	-->
+	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='missingValueReplacement']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='Node']/xs:complexType/xs:attribute[@name='score']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='CategoricalPredictor' or @name='NormDiscrete' or @name='PPCell' or @name='SimplePredicate']/xs:complexType/xs:attribute[@name='value']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='FieldValue' or @name='FieldValueCount']/xs:complexType/xs:attribute[@name='value']">
+		<xs:attribute type="xs:anySimpleType">
+			<xsl:copy-of select="@*"/>
+		</xs:attribute>
 	</xsl:template>
 
 	<!--
