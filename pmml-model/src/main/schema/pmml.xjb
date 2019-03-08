@@ -2698,6 +2698,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasDisplayValue&lt;TargetValue&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasValue&lt;TargetValue&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='displayValue']">
@@ -3167,6 +3168,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Value']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasDisplayValue&lt;Value&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasValue&lt;Value&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Value']/xsd:complexType/xsd:attribute[@name='property']/xsd:simpleType">
