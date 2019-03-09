@@ -38,7 +38,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:element name="Array">
 			<xs:complexType>
 				<xs:simpleContent>
-					<xs:extension base="xs:string">
+					<xs:extension base="xs:anySimpleType">
 						<xsl:copy-of select="*"/>
 					</xs:extension>
 				</xs:simpleContent>
@@ -112,7 +112,7 @@ Copyright (c) 2016 Villu Ruusmann
 	<!--
 	Replace xs:string with xs:anySimpleType where appropriate
 	-->
-	<xsl:template match="xs:element[@name='Constant']/xs:complexType/xs:simpleContent/xs:extension/@base">
+	<xsl:template match="xs:element[@name='Constant' or @name='MatCell']/xs:complexType/xs:simpleContent/xs:extension/@base">
 		<xsl:attribute name="base">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 

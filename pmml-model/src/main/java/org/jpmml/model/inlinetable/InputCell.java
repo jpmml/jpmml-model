@@ -18,7 +18,7 @@ public class InputCell extends Cell {
 	public InputCell(){
 	}
 
-	public InputCell(@Property("value") String value){
+	public InputCell(@Property("value") Object value){
 		super(value);
 	}
 

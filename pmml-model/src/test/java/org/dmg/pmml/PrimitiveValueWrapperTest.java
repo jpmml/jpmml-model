@@ -40,14 +40,16 @@ public class PrimitiveValueWrapperTest {
 
 	static
 	private String toString(Object value) throws IOException, JAXBException {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-
 		Constant constant = new Constant()
 			.setValue(value);
 
-		JAXBUtil.marshal(constant, new StreamResult(os));
+		String string;
 
-		String string = os.toString("UTF-8");
+		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
+			JAXBUtil.marshal(constant, new StreamResult(os));
+
+			string = os.toString("UTF-8");
+		}
 
 		// XXX
 		string = string.trim();

@@ -5,11 +5,14 @@ package org.dmg.pmml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.namespace.QName;
 
+import org.dmg.pmml.adapters.ObjectAdapter;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
 import org.jpmml.model.annotations.Property;
 
@@ -23,25 +26,27 @@ abstract
 public class Cell extends PMMLObject {
 
 	@XmlValue
+	@XmlJavaTypeAdapter(ObjectAdapter.class)
+	@XmlSchemaType(name = "anySimpleType")
 	@XmlValueExtension
-	private String value = null;
+	private Object value = null;
 
 
 	public Cell(){
 	}
 
-	public Cell(@Property("value") String value){
+	public Cell(@Property("value") Object value){
 		this.value = value;
 	}
 
 	abstract
 	public QName getName();
 
-	public String getValue(){
+	public Object getValue(){
 		return this.value;
 	}
 
-	public Cell setValue(@Property("value") String value){
+	public Cell setValue(@Property("value") Object value){
 		this.value = value;
 
 		return this;

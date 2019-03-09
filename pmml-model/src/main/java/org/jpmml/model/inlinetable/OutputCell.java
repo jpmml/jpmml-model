@@ -18,7 +18,7 @@ public class OutputCell extends Cell {
 	public OutputCell(){
 	}
 
-	public OutputCell(@Property("value") String value){
+	public OutputCell(@Property("value") Object value){
 		super(value);
 	}
 

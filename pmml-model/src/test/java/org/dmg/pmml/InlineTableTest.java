@@ -57,8 +57,16 @@ public class InlineTableTest {
 
 	@Test
 	public void marshalCell() throws Exception {
+		PrimitiveValueWrapper stringWrapper = new PrimitiveValueWrapper(){
+
+			@Override
+			public Object unwrap(){
+				return "zero";
+			}
+		};
+
 		Row row = new Row()
-			.addContent(new InputCell("0"), new OutputCell("zero"));
+			.addContent(new InputCell(new Integer(0)), new OutputCell(stringWrapper));
 
 		checkRow(row);
 	}
