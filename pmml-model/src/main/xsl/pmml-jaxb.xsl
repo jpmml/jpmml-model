@@ -112,6 +112,10 @@ Copyright (c) 2016 Villu Ruusmann
 	<!--
 	Replace xs:string with xs:anySimpleType where appropriate
 	-->
+	<xsl:template match="xs:element[@name='Constant']/xs:complexType/xs:simpleContent/xs:extension/@base">
+		<xsl:attribute name="base">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='missingValueReplacement']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
