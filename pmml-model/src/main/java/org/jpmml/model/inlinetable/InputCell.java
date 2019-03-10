@@ -27,5 +27,5 @@ public class InputCell extends Cell {
 		return InputCell.QNAME;
 	}
 
-	private static final QName QNAME = new QName("http://jpmml.org/jpmml-model/InlineTable", "input", "data");
+	public static final QName QNAME = new QName("http://jpmml.org/jpmml-model/InlineTable", "input", "data");
 }
