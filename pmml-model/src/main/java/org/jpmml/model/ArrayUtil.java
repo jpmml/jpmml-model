@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dmg.pmml.Array;
-import org.dmg.pmml.ComplexValue;
 
 public class ArrayUtil {
 
@@ -118,14 +117,7 @@ public class ArrayUtil {
 		}
 
 		for(Object object : objects){
-
-			if(object instanceof ComplexValue){
-				ComplexValue complexValue = (ComplexValue)object;
-
-				object = complexValue.toSimpleValue();
-			}
-
-			String string = object.toString();
+			String string = ValueUtil.toString(object);
 
 			if(sb.length() > 0){
 				sb.append(' ');
