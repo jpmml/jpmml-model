@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dmg.pmml.Array;
-import org.dmg.pmml.PrimitiveValueWrapper;
+import org.dmg.pmml.ComplexValue;
 
 public class ArrayUtil {
 
@@ -119,10 +119,10 @@ public class ArrayUtil {
 
 		for(Object object : objects){
 
-			if(object instanceof PrimitiveValueWrapper){
-				PrimitiveValueWrapper primitiveValueWrapper = (PrimitiveValueWrapper)object;
+			if(object instanceof ComplexValue){
+				ComplexValue complexValue = (ComplexValue)object;
 
-				object = primitiveValueWrapper.unwrap();
+				object = complexValue.toSimpleValue();
 			}
 
 			String string = object.toString();

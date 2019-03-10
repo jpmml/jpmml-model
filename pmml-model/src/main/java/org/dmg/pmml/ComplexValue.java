@@ -11,11 +11,11 @@ package org.dmg.pmml;
  * @see HasValue
  * @see HasValueSet
  */
-public interface PrimitiveValueWrapper {
+public interface ComplexValue {
 
 	/**
 	 * @return A non-<code>null</code> value,
 	 * which can be converted to String representation via {@link Object#toString()}.
 	 */
-	Object unwrap();
+	Object toSimpleValue();
 }

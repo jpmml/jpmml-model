@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.dmg.pmml.Array;
-import org.dmg.pmml.PrimitiveValueWrapper;
+import org.dmg.pmml.ComplexValue;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -27,10 +27,10 @@ public class ArrayUtilTest {
 
 	@Test
 	public void formatNumberArray(){
-		PrimitiveValueWrapper integerTwoWrapper = new PrimitiveValueWrapper(){
+		ComplexValue integerTwoWrapper = new ComplexValue(){
 
 			@Override
-			public Object unwrap(){
+			public Object toSimpleValue(){
 				return 2;
 			}
 		};

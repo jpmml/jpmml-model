@@ -57,10 +57,10 @@ public class InlineTableTest {
 
 	@Test
 	public void marshalCell() throws Exception {
-		PrimitiveValueWrapper stringWrapper = new PrimitiveValueWrapper(){
+		ComplexValue stringWrapper = new ComplexValue(){
 
 			@Override
-			public Object unwrap(){
+			public Object toSimpleValue(){
 				return "zero";
 			}
 		};

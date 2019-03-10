@@ -5,7 +5,7 @@ package org.dmg.pmml.adapters;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.dmg.pmml.PrimitiveValueWrapper;
+import org.dmg.pmml.ComplexValue;
 
 public class ObjectAdapter extends XmlAdapter<String, Object> {
 
@@ -21,10 +21,10 @@ public class ObjectAdapter extends XmlAdapter<String, Object> {
 			return null;
 		} // End if
 
-		if(value instanceof PrimitiveValueWrapper){
-			PrimitiveValueWrapper primitiveValueWrapper = (PrimitiveValueWrapper)value;
+		if(value instanceof ComplexValue){
+			ComplexValue complexValue = (ComplexValue)value;
 
-			value = primitiveValueWrapper.unwrap();
+			value = complexValue.toSimpleValue();
 		}
 
 		return value.toString();
