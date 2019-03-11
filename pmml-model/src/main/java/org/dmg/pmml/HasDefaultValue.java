@@ -8,9 +8,9 @@ package org.dmg.pmml;
  * A marker interface for PMML expression elements that specify the <code>defaultValue</code> attribute.
  * </p>
  */
-public interface HasDefaultValue<E extends Expression & HasDefaultValue<E>> {
+public interface HasDefaultValue<E extends Expression & HasDefaultValue<E, V>, V> {
 
-	Object getDefaultValue();
+	V getDefaultValue();
 
-	E setDefaultValue(Object defaultValue);
+	E setDefaultValue(V defaultValue);
 }
