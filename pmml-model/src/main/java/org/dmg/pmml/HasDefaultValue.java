@@ -10,7 +10,7 @@ package org.dmg.pmml;
  */
 public interface HasDefaultValue<E extends Expression & HasDefaultValue<E>> {
 
-	String getDefaultValue();
+	Object getDefaultValue();
 
-	E setDefaultValue(String defaultValue);
+	E setDefaultValue(Object defaultValue);
 }
