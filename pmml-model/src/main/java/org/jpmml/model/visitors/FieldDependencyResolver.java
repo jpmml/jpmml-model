@@ -213,5 +213,5 @@ public class FieldDependencyResolver extends FieldResolver {
 		this.dependencies.put(field, activeFields);
 	}
 
-	private static final int MAX_STACK_HEIGHT = 50;
+	public static int MAX_STACK_HEIGHT = 50;
 }
