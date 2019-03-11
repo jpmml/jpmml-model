@@ -814,7 +814,7 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:implements>org.dmg.pmml.HasDataType&lt;Discretize&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;Discretize,java.lang.Object&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Discretize&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Discretize,java.lang.String&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Discretize,java.lang.Object&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -1256,7 +1256,7 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasDataType&lt;MapValues&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;MapValues,java.lang.Object&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;MapValues,java.lang.String&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;MapValues,java.lang.Object&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasTable&lt;MapValues&gt;</inheritance:implements>
 		</jaxb:bindings>
 
