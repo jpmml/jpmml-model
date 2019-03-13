@@ -18,7 +18,7 @@ public class FieldUtil {
 	}
 
 	static
-	public <F extends Field<?>> Set<FieldName> nameSet(Collection<? extends F> fields){
+	public <F extends Field<?>> Map<FieldName, F> nameMap(Collection<? extends F> fields){
 		Map<FieldName, F> fieldMap = new LinkedHashMap<>(2 * fields.size());
 
 		for(F field : fields){
@@ -29,6 +29,13 @@ public class FieldUtil {
 				throw new IllegalArgumentException("Fields " + format(field) + " and " + format(previousField) + " have the same name " + name);
 			}
 		}
+
+		return fieldMap;
+	}
+
+	static
+	public <F extends Field<?>> Set<FieldName> nameSet(Collection<? extends F> fields){
+		Map<FieldName, F> fieldMap = nameMap(fields);
 
 		return fieldMap.keySet();
 	}
