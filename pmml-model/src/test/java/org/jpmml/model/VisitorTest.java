@@ -4,7 +4,6 @@
 package org.jpmml.model;
 
 import java.util.Deque;
-import java.util.Iterator;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
@@ -167,10 +166,7 @@ public class VisitorTest {
 
 				int i = (clazzes.length - 1);
 
-				// Iterates from the nearest parent to the farthest parent
-				for(Iterator<PMMLObject> it = parents.iterator(); it.hasNext(); ){
-					PMMLObject parent = it.next();
-
+				for(PMMLObject parent : parents){
 					assertEquals(clazzes[i], parent.getClass());
 
 					i--;

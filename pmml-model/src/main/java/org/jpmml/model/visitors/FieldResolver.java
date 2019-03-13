@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.IdentityHashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -189,11 +188,10 @@ public class FieldResolver extends AbstractVisitor {
 
 		PMMLObject prevParent = null;
 
-		for(Iterator<PMMLObject> it = parents.iterator(); it.hasNext(); ){
-			PMMLObject parent = it.next();
+		for(PMMLObject parent : parents){
 
 			{
-				Collection<Field<?>> scope = getScope(parent);
+				List<Field<?>> scope = getScope(parent);
 
 				if(scope != null && scope.size() > 0){
 					result.addAll(scope);
@@ -208,7 +206,7 @@ public class FieldResolver extends AbstractVisitor {
 				List<Output> outputs = getEarlierOutputs((Segmentation)parent, (Segment)prevParent);
 
 				for(Output output : outputs){
-					Collection<Field<?>> scope = getScope(output);
+					List<Field<?>> scope = getScope(output);
 
 					if(scope != null && scope.size() > 0){
 						result.addAll(scope);
@@ -222,7 +220,7 @@ public class FieldResolver extends AbstractVisitor {
 		return result;
 	}
 
-	private Collection<Field<?>> getScope(PMMLObject object){
+	private List<Field<?>> getScope(PMMLObject object){
 
 		if(this.customScopes.size() > 0){
 			return this.customScopes.getOrDefault(object, this.scopes.get(object));
