@@ -16,7 +16,7 @@ import org.dmg.pmml.tree.TreeModel;
  * A Visitor that pre-parses the score attribute of regression-type tree models.
  * </p>
  */
-public class NodeScoreParser extends AbstractVisitor {
+public class NodeScoreOptimizer extends AbstractVisitor {
 
 	private MathContext mathContext = null;
 

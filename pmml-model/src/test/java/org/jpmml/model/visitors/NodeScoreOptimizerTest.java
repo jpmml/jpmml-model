@@ -18,7 +18,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
-public class NodeScoreParserTest {
+public class NodeScoreOptimizerTest {
 
 	@Test
 	public void parseAndIntern(){
@@ -50,7 +50,7 @@ public class NodeScoreParserTest {
 			.setMathContext(MathContext.FLOAT);
 
 		VisitorBattery visitorBattery = new VisitorBattery();
-		visitorBattery.add(NodeScoreParser.class);
+		visitorBattery.add(NodeScoreOptimizer.class);
 		visitorBattery.add(FloatInterner.class);
 
 		visitorBattery.applyTo(treeModel);
