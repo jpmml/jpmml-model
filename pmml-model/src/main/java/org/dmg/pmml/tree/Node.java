@@ -18,7 +18,7 @@ import org.dmg.pmml.ScoreDistribution;
 
 @XmlTransient
 abstract
-public class Node extends Entity implements HasPredicate<Node>, HasScore<Node> {
+public class Node extends Entity<String> implements HasPredicate<Node>, HasScore<Node> {
 
 	@Override
 	public String getId(){

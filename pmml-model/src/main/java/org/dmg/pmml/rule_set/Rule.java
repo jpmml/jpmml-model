@@ -10,7 +10,7 @@ import org.dmg.pmml.HasPredicate;
 
 @XmlTransient
 abstract
-public class Rule extends Entity implements HasPredicate<Rule> {
+public class Rule extends Entity<String> implements HasPredicate<Rule> {
 
 	/**
 	 * @throws UnsupportedOperationException If the <code>id</code> attribute is not supported.

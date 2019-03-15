@@ -171,7 +171,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="association"
 			/>
@@ -416,7 +416,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="clustering"
 			/>
@@ -1135,7 +1135,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Item']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Item&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasId&lt;Item&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasId&lt;Item,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="association"
@@ -1157,7 +1157,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Itemset']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasId&lt;Itemset&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasId&lt;Itemset,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="association"
@@ -1513,7 +1513,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralInput']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="neural_network"
 			/>
@@ -1544,7 +1544,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Neuron']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="neural_network"
 			/>
@@ -2302,7 +2302,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Segment']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasPredicate&lt;Segment&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="mining"
@@ -2367,7 +2367,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Sequence']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasId&lt;Sequence&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasId&lt;Sequence,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="sequence"
@@ -2462,7 +2462,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceRule']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
 			<jpmml-model:subpackage
 				name="sequence"
 			/>
@@ -2475,7 +2475,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='SetPredicate']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_3_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;SetPredicate&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasId&lt;SetPredicate&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasId&lt;SetPredicate,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet&lt;SetPredicate&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="sequence"
@@ -2767,7 +2767,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextDocument']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasId&lt;TextDocument&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasId&lt;TextDocument,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="text"
@@ -3217,7 +3217,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorInstance']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasId&lt;VectorInstance&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasId&lt;VectorInstance,java.lang.String&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="support_vector_machine"

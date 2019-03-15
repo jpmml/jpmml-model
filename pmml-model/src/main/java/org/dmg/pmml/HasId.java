@@ -15,12 +15,12 @@ package org.dmg.pmml;
  *
  * @see Indexable
  */
-public interface HasId<E extends PMMLObject & HasId<E>> {
+public interface HasId<E extends PMMLObject & HasId<E, V>, V> {
 
 	/**
 	 * @return The value of the <code>id</code> attribute. Could be <code>null</code>.
 	 */
-	String getId();
+	V getId();
 
-	E setId(String id);
+	E setId(V id);
 }

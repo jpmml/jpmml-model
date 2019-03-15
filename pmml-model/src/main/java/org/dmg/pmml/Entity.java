@@ -7,5 +7,5 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Entity extends PMMLObject implements HasId<Entity> {
+public class Entity<V> extends PMMLObject implements HasId<Entity<V>, V> {
 }
