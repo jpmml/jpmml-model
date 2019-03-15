@@ -26,7 +26,7 @@ public class ArrayListTransformer extends AbstractVisitor {
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);
 
-			if(value instanceof ArrayList){
+			if((value instanceof ArrayList) && (value.getClass()).equals(ArrayList.class)){
 				ArrayList<?> list = (ArrayList<?>)value;
 
 				List<?> transformedList = transform(list);

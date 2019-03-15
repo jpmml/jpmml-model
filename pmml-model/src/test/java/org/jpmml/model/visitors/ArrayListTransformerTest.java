@@ -4,9 +4,16 @@
 package org.jpmml.model.visitors;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import org.dmg.pmml.Array;
+import org.dmg.pmml.ComplexArray;
+import org.dmg.pmml.ComplexValue;
+import org.dmg.pmml.FieldName;
 import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
+import org.dmg.pmml.Predicate;
+import org.dmg.pmml.SimpleSetPredicate;
 import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
@@ -26,12 +33,24 @@ public class ArrayListTransformerTest {
 
 		node1a.addNodes(node2a, node2b);
 
-		Node node3a = new LeafNode();
+		Array array = new ComplexArray()
+			.setType(Array.Type.INT)
+			.setValue(Arrays.asList(-1, 1));
+
+		Predicate predicate = new SimpleSetPredicate(FieldName.create("x"), SimpleSetPredicate.BooleanOperator.IS_IN, array);
+
+		Node node3a = new LeafNode()
+			.setPredicate(predicate);
 
 		node2a.addNodes(node3a);
 
 		assertTrue(node1a.getNodes() instanceof ArrayList);
 		assertTrue(node2a.getNodes() instanceof ArrayList);
+
+		Object value = array.getValue();
+
+		assertTrue(value instanceof ArrayList);
+		assertTrue(value instanceof ComplexValue);
 
 		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, new MiningSchema(), node1a);
 
@@ -40,5 +59,10 @@ public class ArrayListTransformerTest {
 
 		assertTrue(node1a.getNodes() instanceof DoubletonList);
 		assertTrue(node2a.getNodes() instanceof SingletonList);
+
+		value = array.getValue();
+
+		assertTrue(value instanceof ArrayList);
+		assertTrue(value instanceof ComplexValue);
 	}
 }
