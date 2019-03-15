@@ -5,6 +5,13 @@ package org.dmg.pmml;
 
 public interface HasScore<E extends Entity<String> & HasScore<E>> {
 
+	default
+	boolean hasScore(){
+		Object score = getScore();
+
+		return (score != null);
+	}
+
 	Object getScore();
 
 	E setScore(Object score);

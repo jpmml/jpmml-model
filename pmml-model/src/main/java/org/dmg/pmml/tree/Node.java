@@ -30,12 +30,6 @@ public class Node extends Entity<String> implements HasPredicate<Node>, HasScore
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean hasScore(){
-		Object score = getScore();
-
-		return (score != null);
-	}
-
 	@Override
 	public Object getScore(){
 		return null;
