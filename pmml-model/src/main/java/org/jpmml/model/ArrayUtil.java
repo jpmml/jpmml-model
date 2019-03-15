@@ -4,6 +4,7 @@
 package org.jpmml.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.dmg.pmml.Array;
@@ -99,7 +100,7 @@ public class ArrayUtil {
 	}
 
 	static
-	public String format(Array.Type type, List<?> objects){
+	public String format(Array.Type type, Collection<?> objects){
 		StringBuilder sb = new StringBuilder(objects.size() * 16);
 
 		boolean enableQuotes;

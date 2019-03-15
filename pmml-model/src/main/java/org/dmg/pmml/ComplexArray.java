@@ -3,22 +3,21 @@
  */
 package org.dmg.pmml;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.jpmml.model.ArrayUtil;
 
 public class ComplexArray extends Array {
 
 	public ComplexArray(){
 	}
 
-	public ComplexArray(Array.Type type, Collection<?> objects){
-		super(type, null);
-
-		List<Object> value = getValue();
-
-		if(!objects.isEmpty()){
-			value.addAll(objects);
-		}
+	public ComplexArray(Array.Type type, Collection<?> value){
+		super(type, requireComplexValue(value));
 	}
 
 	@Override
@@ -32,26 +31,58 @@ public class ComplexArray extends Array {
 	}
 
 	@Override
-	public List<Object> getValue(){
-		Object value = super.getValue();
+	public Collection<?> getValue(){
+		return (Collection<?>)super.getValue();
+	}
 
-		if(value == null){
-			value = new ComplexArrayList(){
+	public ComplexArray setValue(List<?> values){
+		return (ComplexArray)super.setValue(new ListValue(values));
+	}
 
-				@Override
-				public Array.Type getType(){
-					return ComplexArray.this.getType();
-				}
-			};
-
-			super.setValue(value);
-		}
-
-		return (ComplexArrayList)value;
+	public ComplexArray setValue(Set<?> values){
+		return (ComplexArray)super.setValue(new SetValue(values));
 	}
 
 	@Override
 	public ComplexArray setValue(Object value){
-		throw new UnsupportedOperationException();
+		return (ComplexArray)super.setValue(requireComplexValue(value));
+	}
+
+	static
+	public <V extends Collection<?> & ComplexValue> V requireComplexValue(Object value){
+
+		if(value == null){
+			return null;
+		} // End if
+
+		if((value instanceof Collection) && (value instanceof ComplexValue)){
+			return (V)value;
+		}
+
+		throw new IllegalArgumentException();
+	}
+
+	private class ListValue extends ArrayList<Object> implements ComplexValue {
+
+		private ListValue(Collection<?> values){
+			super(values);
+		}
+
+		@Override
+		public Object toSimpleValue(){
+			return ArrayUtil.format(getType(), this);
+		}
+	}
+
+	private class SetValue extends LinkedHashSet<Object> implements ComplexValue {
+
+		private SetValue(Collection<?> values){
+			super(values);
+		}
+
+		@Override
+		public Object toSimpleValue(){
+			return ArrayUtil.format(getType(), this);
+		}
 	}
 }

@@ -6,6 +6,7 @@ package org.dmg.pmml;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 import javax.xml.transform.stream.StreamResult;
 
@@ -17,9 +18,31 @@ import static org.junit.Assert.assertTrue;
 public class ComplexArrayTest {
 
 	@Test
-	public void marshal() throws Exception {
-		checkArray("1 2 3", Array.Type.INT, Arrays.asList(1, 2, 3));
-		checkArray("1.0 2.0 3.0", Array.Type.REAL, Arrays.asList(1d, 2d, 3d));
+	public void marshalList() throws Exception {
+		ComplexArray array = new ComplexArray()
+			.setType(Array.Type.INT)
+			.setValue(Arrays.asList(1, 2, 3));
+
+		checkArray("1 2 3", array);
+
+		array
+			.setType(Array.Type.REAL)
+			.setValue(Arrays.asList(1d, 2d, 3d));
+
+		checkArray("1.0 2.0 3.0", array);
+
+		Collection<Object> value = (Collection)array.getValue();
+
+		value.add(1d);
+
+		checkArray("1.0 2.0 3.0 1.0", array);
+	}
+
+	@Test
+	public void marshalSet() throws Exception {
+		ComplexArray array = new ComplexArray()
+			.setType(Array.Type.STRING)
+			.setValue(Collections.emptySet());
 
 		ComplexValue stringTwentyTwoWrapper = new ComplexValue(){
 
@@ -29,13 +52,23 @@ public class ComplexArrayTest {
 			}
 		};
 
-		checkArray("1 22 3", Array.Type.STRING, Arrays.asList("1", stringTwentyTwoWrapper, "3"));
+		Collection<Object> value = (Collection)array.getValue();
+
+		value.addAll(Arrays.asList("1", stringTwentyTwoWrapper, "3"));
+
+		checkArray("1 22 3", array);
+
+		value.add("1");
+
+		checkArray("1 22 3", array);
+
+		value.add("\"four\"");
+
+		checkArray("1 22 3 \\\"four\\\"", array);
 	}
 
 	static
-	public void checkArray(String expectedValue, Array.Type type, Collection<?> objects) throws Exception {
-		ComplexArray array = new ComplexArray(type, objects);
-
+	public void checkArray(String expectedValue, Array array) throws Exception {
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
