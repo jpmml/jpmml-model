@@ -406,37 +406,50 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, long.class, "serialVersionUID", JExpr.lit(model.serialVersionUID));
 			}
 
-			String[][] markerInterfaces = {
-				{"HasContinuousDomain", "hasIntervals", "getIntervals", "addIntervals"},
-				{"HasDataType", "getDataType", "setDataType"},
-				{"HasDefaultValue", "getDefaultValue", "setDefaultValue"},
-				{"HasDiscreteDomain", "hasValues", "getValues", "addValues"},
-				{"HasDisplayName", "getDisplayName", "setDisplayName"},
-				{"HasExpression", "getExpression", "setExpression"},
-				{"HasExtensions", "hasExtensions", "getExtensions", "addExtensions"},
-				{"HasFieldReference", "getField", "setField"},
-				{"HasId", "getId", "setId"},
-				{"HasLocator", "getLocator", "setLocator"},
-				{"HasMapMissingTo", "getMapMissingTo", "setMapMissingTo"},
-				{"HasMixedContent", "hasContext", "getContent", "addContent"},
-				{"HasName", "getName", "setName"},
-				{"HasOpType", "getOpType", "setOpType"},
-				{"HasPredicate", "getPredicate", "setPredicate"},
-				{"HasScore", "getScore", "setScore"},
-				{"HasTable", "getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"},
-				{"HasValue", "getValue", "setValue"},
-				{"HasValueSet", "getArray", "setArray"}
+			String[][][] markerInterfaces = {
+				{{"HasContinuousDomain"}, {"hasIntervals", "getIntervals", "addIntervals"}},
+				{{"HasDataType", "Field"}, {"getDataType", "setDataType"}},
+				{{"HasDefaultValue"}, {"getDefaultValue", "setDefaultValue"}},
+				{{"HasDiscreteDomain"}, {"hasValues", "getValues", "addValues"}},
+				{{"HasDisplayName"}, {"getDisplayName", "setDisplayName"}},
+				{{"HasExpression"}, {"getExpression", "setExpression"}},
+				{{"HasExtensions"}, {"hasExtensions", "getExtensions", "addExtensions"}},
+				{{"HasFieldReference", "ComparisonField"}, {"getField", "setField"}},
+				{{"HasId", "Entity", "Node", "Rule"}, {"getId", "setId"}},
+				{{"HasLocator"}, {"getLocator", "setLocator"}},
+				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
+				{{"HasMixedContent"}, {"hasContext", "getContent", "addContent"}},
+				{{"HasName", "Field", "Term"}, {"getName", "setName"}},
+				{{"HasOpType", "Field"}, {"getOpType", "setOpType"}},
+				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "setPredicate"}},
+				{{"HasScore", "Node", "Rule"}, {"getScore", "setScore"}},
+				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},
+				{{"HasValue"}, {"getValue", "setValue"}},
+				{{"HasValueSet"}, {"getArray", "setArray"}}
 			};
 
-			for(String[] markerInterface : markerInterfaces){
+			for(String[][] markerInterface : markerInterfaces){
+				String[] types = markerInterface[0];
+				String[] members = markerInterface[1];
+
 				boolean matches = false;
+
+				{
+					JClass superClazz = beanClazz._extends();
+
+					superClazz = superClazz.erasure();
+
+					for(int i = 1; i < types.length; i++){
+						matches |= (superClazz.name()).equals(types[i]);
+					}
+				}
 
 				for(Iterator<JClass> it = beanClazz._implements(); it.hasNext(); ){
 					JClass _interface = it.next();
 
 					_interface = _interface.erasure();
 
-					matches |= (_interface.name()).equals(markerInterface[0]);
+					matches |= (_interface.name()).equals(types[0]);
 				}
 
 				if(!matches){
@@ -445,12 +458,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 				Collection<JMethod> methods = beanClazz.methods();
 
-				for(int i = 1; i < markerInterface.length; i++){
+				for(int i = 0; i < members.length; i++){
 
 					for(JMethod method : methods){
 						String name = method.name();
 
-						if(!(name).equals(markerInterface[i])){
+						if(!(name).equals(members[i])){
 							continue;
 						} // End if
 
