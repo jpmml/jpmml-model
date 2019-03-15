@@ -132,7 +132,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='Node']/xs:complexType/xs:attribute[@name='score']/@type">
+	<xsl:template match="xs:element[@name='Node' or @name='SimpleRule']/xs:complexType/xs:attribute[@name='score']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 

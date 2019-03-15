@@ -422,6 +422,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				{"HasName", "getName", "setName"},
 				{"HasOpType", "getOpType", "setOpType"},
 				{"HasPredicate", "getPredicate", "setPredicate"},
+				{"HasScore", "getScore", "setScore"},
 				{"HasTable", "getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"},
 				{"HasValue", "getValue", "setValue"},
 				{"HasValueSet", "getArray", "setArray"}
