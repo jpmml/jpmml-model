@@ -5,16 +5,16 @@ package org.dmg.pmml.tree;
 
 public class LeafNode extends SimpleNode {
 
-	private String id = null;
+	private Object id = null;
 
 
 	@Override
-	public String getId(){
+	public Object getId(){
 		return this.id;
 	}
 
 	@Override
-	public SimpleNode setId(String id){
+	public SimpleNode setId(Object id){
 		this.id = id;
 
 		return this;

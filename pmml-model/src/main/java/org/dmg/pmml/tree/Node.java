@@ -18,15 +18,15 @@ import org.dmg.pmml.ScoreDistribution;
 
 @XmlTransient
 abstract
-public class Node extends Entity<String> implements HasPredicate<Node>, HasScore<Node> {
+public class Node extends Entity<Object> implements HasPredicate<Node>, HasScore<Node> {
 
 	@Override
-	public String getId(){
+	public Object getId(){
 		return null;
 	}
 
 	@Override
-	public Node setId(String id){
+	public Node setId(Object id){
 		throw new UnsupportedOperationException();
 	}
 
@@ -48,11 +48,11 @@ public class Node extends Entity<String> implements HasPredicate<Node>, HasScore
 		throw new UnsupportedOperationException();
 	}
 
-	public String getDefaultChild(){
+	public Object getDefaultChild(){
 		return null;
 	}
 
-	public Node setDefaultChild(String defaultChild){
+	public Node setDefaultChild(Object defaultChild){
 		throw new UnsupportedOperationException();
 	}
 

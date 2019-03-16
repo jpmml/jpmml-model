@@ -23,11 +23,11 @@ public class NodeTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
-		Node node1a = new BranchNode()
-			.setId("1a")
+		Node node1 = new BranchNode()
+			.setId(new Integer(1))
 			.setPredicate(new True());
 
-		List<Node> nodes = node1a.getNodes();
+		List<Node> nodes = node1.getNodes();
 
 		Node node2a = new ComplexNode()
 			.setId("2a")
@@ -43,16 +43,17 @@ public class NodeTest {
 		nodes.add(node2b);
 
 		TreeModel treeModel = new TreeModel()
-			.setNode(node1a);
+			.setNode(node1);
 
 		TreeModel jaxbTreeModel = (TreeModel)clone(treeModel);
 
-		Node jaxbNode1a = jaxbTreeModel.getNode();
+		Node jaxbNode1 = jaxbTreeModel.getNode();
 
-		assertEquals(node1a.getClass(), jaxbNode1a.getClass());
-		assertEquals(node1a.getId(), jaxbNode1a.getId());
+		assertEquals(node1.getClass(), jaxbNode1.getClass());
+		assertEquals(1, node1.getId());
+		assertEquals("1", jaxbNode1.getId());
 
-		List<Node> jaxbNodes = jaxbNode1a.getNodes();
+		List<Node> jaxbNodes = jaxbNode1.getNodes();
 
 		assertEquals(2, jaxbNodes.size());
 

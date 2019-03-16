@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml;
 
-public interface HasScore<E extends Entity<String> & HasScore<E>> {
+public interface HasScore<E extends PMMLObject & HasScore<E>> {
 
 	default
 	boolean hasScore(){

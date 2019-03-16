@@ -8,32 +8,32 @@ import java.util.List;
 
 public class BranchNode extends SimpleNode {
 
-	private String id = null;
+	private Object id = null;
 
-	private String defaultChild = null;
+	private Object defaultChild = null;
 
 	private List<Node> nodes = null;
 
 
 	@Override
-	public String getId(){
+	public Object getId(){
 		return this.id;
 	}
 
 	@Override
-	public SimpleNode setId(String id){
+	public SimpleNode setId(Object id){
 		this.id = id;
 
 		return this;
 	}
 
 	@Override
-	public String getDefaultChild(){
+	public Object getDefaultChild(){
 		return this.defaultChild;
 	}
 
 	@Override
-	public BranchNode setDefaultChild(String defaultChild){
+	public BranchNode setDefaultChild(Object defaultChild){
 		this.defaultChild = defaultChild;
 
 		return this;
