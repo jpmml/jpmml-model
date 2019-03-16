@@ -53,7 +53,13 @@ public class FieldNameFilterer extends AbstractVisitor {
 					String segmentId = outputField.getSegmentId();
 
 					if(segmentId != null){
-						outputField.setValue(filter(outputField.getValue()));
+						Object value = outputField.getValue();
+
+						if(value instanceof String){
+							value = filter((String)value);
+						}
+
+						outputField.setValue(value);
 					}
 				}
 				break;
@@ -65,10 +71,10 @@ public class FieldNameFilterer extends AbstractVisitor {
 	}
 
 	private String filter(String value){
-		FieldName name = (value != null ? FieldName.create(value) : null);
+		FieldName name = FieldName.create(value);
 
 		name = filter(name);
 
-		return (name != null ? name.getValue() : null);
+		return name.getValue();
 	}
 }

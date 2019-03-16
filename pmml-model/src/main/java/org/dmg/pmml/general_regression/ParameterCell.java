@@ -18,8 +18,8 @@ public class ParameterCell extends PMMLObject {
 	public ParameterCell setParameterName(String parameterName);
 
 	abstract
-	public String getTargetCategory();
+	public Object getTargetCategory();
 
 	abstract
-	public ParameterCell setTargetCategory(String targetCategory);
+	public ParameterCell setTargetCategory(Object targetCategory);
 }

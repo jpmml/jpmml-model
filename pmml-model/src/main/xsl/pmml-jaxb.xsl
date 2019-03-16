@@ -116,7 +116,15 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="base">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='SupportVectorMachine']/xs:complexType/xs:attribute[@name='alternateTargetCategory']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='DiscretizeBin']/xs:complexType/xs:attribute[@name='binValue']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='MultivariateStat']/xs:complexType/xs:attribute[@name='category']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
@@ -136,7 +144,15 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='NormDiscrete' or @name='PairCounts' or @name='PPCell' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='Value']/xs:complexType/xs:attribute[@name='value']/@type">
+	<xsl:template match="xs:element[@name='MultivariateStats' or @name='PCell' or @name='PCovCell' or @name='PPCell' or @name='RegressionTable' or @name='SupportVectorMachine']/xs:complexType/xs:attribute[@name='targetCategory']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='GeneralRegressionModel']/xs:complexType/xs:attribute[@name='targetReferenceCategory']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='NormDiscrete' or @name='OutputField' or @name='PairCounts' or @name='PPCell' or @name='ResultField' or @name='ScoreDistribution' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='TargetValueStat' or @name='Value']/xs:complexType/xs:attribute[@name='value']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 

@@ -110,7 +110,7 @@ Copyright (c) 2014 Villu Ruusmann
 		/>
 		<xsl:copy>
 			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
-			<xs:attribute name="alternateBinaryTargetCategory" type="xs:string" use="optional"/>
+			<xs:attribute name="alternateBinaryTargetCategory" type="xs:anySimpleType" use="optional"/>
 			<xsl:apply-templates select="node()[position() &gt; $index]"/>
 		</xsl:copy>
 	</xsl:template>
