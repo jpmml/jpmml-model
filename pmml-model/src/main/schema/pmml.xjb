@@ -1514,7 +1514,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralInput']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.neural_network.NeuralEntity</inheritance:extends>
 			<jpmml-model:subpackage
 				name="neural_network"
 			/>
@@ -1545,7 +1545,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Neuron']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.neural_network.NeuralEntity</inheritance:extends>
 			<jpmml-model:subpackage
 				name="neural_network"
 			/>

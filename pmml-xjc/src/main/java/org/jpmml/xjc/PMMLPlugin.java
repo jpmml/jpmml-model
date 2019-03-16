@@ -415,7 +415,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				{{"HasExpression"}, {"getExpression", "setExpression"}},
 				{{"HasExtensions"}, {"hasExtensions", "getExtensions", "addExtensions"}},
 				{{"HasFieldReference", "ComparisonField"}, {"getField", "setField"}},
-				{{"HasId", "Entity", "Node", "Rule"}, {"getId", "setId"}},
+				{{"HasId", "Entity", "NeuralEntity", "Node", "Rule"}, {"getId", "setId"}},
 				{{"HasLocator"}, {"getLocator", "setLocator"}},
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
 				{{"HasMixedContent"}, {"hasContext", "getContent", "addContent"}},
