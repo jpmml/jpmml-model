@@ -16,6 +16,14 @@ public class SimpleNode extends Node {
 	private Predicate predicate = null;
 
 
+	public SimpleNode(){
+	}
+
+	public SimpleNode(Node node){
+		setScore(node.getScore());
+		setPredicate(node.getPredicate());
+	}
+
 	@Override
 	public Object getScore(){
 		return this.score;

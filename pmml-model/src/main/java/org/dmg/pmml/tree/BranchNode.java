@@ -15,6 +15,20 @@ public class BranchNode extends SimpleNode {
 	private List<Node> nodes = null;
 
 
+	public BranchNode(){
+	}
+
+	public BranchNode(Node node){
+		super(node);
+
+		setId(node.getId());
+		setDefaultChild(node.getDefaultChild());
+
+		if(node.hasNodes()){
+			(getNodes()).addAll(node.getNodes());
+		}
+	}
+
 	@Override
 	public Object getId(){
 		return this.id;

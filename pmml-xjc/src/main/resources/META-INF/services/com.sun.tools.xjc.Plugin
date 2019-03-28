@@ -1,4 +1,5 @@
 org.jpmml.xjc.AnnotatePlugin
+org.jpmml.xjc.CopyConstructorPlugin
 org.jpmml.xjc.InheritancePlugin
 org.jpmml.xjc.JacksonPlugin
 org.jpmml.xjc.NoJavadocPlugin

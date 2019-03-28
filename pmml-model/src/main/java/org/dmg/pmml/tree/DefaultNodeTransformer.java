@@ -19,21 +19,12 @@ public class DefaultNodeTransformer implements NodeTransformer {
 		Node node;
 
 		if(complexNode.hasNodes()){
-			node = new BranchNode()
-				.setId(complexNode.getId())
-				.setDefaultChild(complexNode.getDefaultChild());
-
-			(node.getNodes()).addAll(complexNode.getNodes());
+			node = new BranchNode(complexNode);
 		} else
 
 		{
-			node = new LeafNode()
-				.setId(complexNode.getId());
+			node = new LeafNode(complexNode);
 		}
-
-		node
-			.setScore(complexNode.getScore())
-			.setPredicate(complexNode.getPredicate());
 
 		return node;
 	}
@@ -47,29 +38,7 @@ public class DefaultNodeTransformer implements NodeTransformer {
 			return complexNode;
 		}
 
-		ComplexNode complexNode = new ComplexNode();
-
-		complexNode.setId(node.getId());
-		complexNode.setScore(node.getScore());
-		complexNode.setRecordCount(node.getRecordCount());
-		complexNode.setDefaultChild(node.getDefaultChild());
-
-		if(node.hasExtensions()){
-			(complexNode.getExtensions()).addAll(node.getExtensions());
-		}
-
-		complexNode.setPredicate(node.getPredicate());
-		complexNode.setPartition(node.getPartition());
-
-		if(node.hasScoreDistributions()){
-			(complexNode.getScoreDistributions()).addAll(node.getScoreDistributions());
-		} // End if
-
-		if(node.hasNodes()){
-			(complexNode.getNodes()).addAll(node.getNodes());
-		}
-
-		complexNode.setEmbeddedModel(node.getEmbeddedModel());
+		ComplexNode complexNode = new ComplexNode(node);
 
 		return complexNode;
 	}

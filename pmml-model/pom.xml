@@ -177,6 +177,7 @@
 								<arg>-no-header</arg>
 								<arg>-npa</arg>
 								<arg>-Xannotate</arg>
+								<arg>-XcopyConstructor</arg>
 								<arg>-Xinheritance</arg>
 								<arg>-Xjackson</arg>
 								<arg>-Xno-javadoc</arg>

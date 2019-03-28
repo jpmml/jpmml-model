@@ -8,6 +8,15 @@ public class LeafNode extends SimpleNode {
 	private Object id = null;
 
 
+	public LeafNode(){
+	}
+
+	public LeafNode(Node node){
+		super(node);
+
+		setId(node.getId());
+	}
+
 	@Override
 	public Object getId(){
 		return this.id;
