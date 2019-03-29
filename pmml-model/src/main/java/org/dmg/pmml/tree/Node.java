@@ -100,6 +100,23 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasScore
 		throw new UnsupportedOperationException();
 	}
 
+	public Node addNodes(Node first){
+		List<Node> nodes = getNodes();
+
+		nodes.add(first);
+
+		return this;
+	}
+
+	public Node addNodes(Node first, Node second){
+		List<Node> nodes = getNodes();
+
+		nodes.add(first);
+		nodes.add(second);
+
+		return this;
+	}
+
 	public Node addNodes(Node... nodes){
 		getNodes().addAll(Arrays.asList(nodes));
 
