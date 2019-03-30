@@ -8,25 +8,36 @@ public class DefaultNodeTransformer implements NodeTransformer {
 	@Override
 	public Node fromComplexNode(ComplexNode complexNode){
 
-		if(complexNode.getRecordCount() != null){
+		if(complexNode.hasExtensions() || (complexNode.getPartition() != null) || (complexNode.getEmbeddedModel() != null)){
 			return complexNode;
 		} // End if
 
-		if(complexNode.hasExtensions() || (complexNode.getPartition() != null) || complexNode.hasScoreDistributions() || (complexNode.getEmbeddedModel() != null)){
-			return complexNode;
+		if(complexNode.hasScoreDistributions()){
+			return new ClassifierNode(complexNode);
 		}
 
-		Node node;
+		Double recordCount = complexNode.getRecordCount();
 
 		if(complexNode.hasNodes()){
-			node = new BranchNode(complexNode);
+
+			if(recordCount != null){
+				return new CountingBranchNode(complexNode);
+			} else
+
+			{
+				return new BranchNode(complexNode);
+			}
 		} else
 
 		{
-			node = new LeafNode(complexNode);
-		}
+			if(recordCount != null){
+				return new CountingLeafNode(complexNode);
+			} else
 
-		return node;
+			{
+				return new LeafNode(complexNode);
+			}
+		}
 	}
 
 	@Override
