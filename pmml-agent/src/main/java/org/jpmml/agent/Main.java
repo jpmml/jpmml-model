@@ -24,13 +24,18 @@ public class Main {
 		}
 
 		String locator = properties.getProperty("locator");
-		if(locator != null && !("true").equalsIgnoreCase(locator)){
+		if(locator != null && ("false").equalsIgnoreCase(locator)){
 			instrumentation.addTransformer(new LocatorRemover(), true);
 		}
 
 		String extensions = properties.getProperty("extensions");
-		if(extensions != null && !("true").equalsIgnoreCase(extensions)){
+		if(extensions != null && ("false").equalsIgnoreCase(extensions)){
 			instrumentation.addTransformer(new ExtensionListRemover(), true);
+		}
+
+		String publicize = properties.getProperty("public");
+		if(publicize != null && ("true").equalsIgnoreCase(publicize)){
+			instrumentation.addTransformer(new FieldPublicizer(), true);
 		}
 
 		InstrumentationProvider.setInstrumentation(instrumentation);
