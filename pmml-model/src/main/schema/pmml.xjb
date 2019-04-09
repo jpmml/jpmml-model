@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="15"
+			implementation="16"
 		/>
 
 		<wildcard:lax/>
@@ -3289,6 +3289,62 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']">
 			<jaxb:typesafeEnumClass
 				name="DataType"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[1990]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_DAYS_SINCE_1990"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[2000]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_DAYS_SINCE_2000"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[2010]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_DAYS_SINCE_2010"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[2020]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_DAYS_SINCE_2020"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[1990]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_TIME_SECONDS_SINCE_1990"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[2000]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_TIME_SECONDS_SINCE_2000"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[2010]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_TIME_SECONDS_SINCE_2010"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[2020]']">
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<jaxb:typesafeEnumMember
+				name="DATE_TIME_SECONDS_SINCE_2020"
 			/>
 		</jaxb:bindings>
 

@@ -63,6 +63,26 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-mathContext" type="MATH-CONTEXT" default="double"/>
 	</xsl:template>
 
+	<xsl:template match="xs:simpleType[@name='DATATYPE']/xs:restriction">
+		<xsl:variable
+			name="index"
+			select="count(xs:enumeration[@value='dateDaysSince[1980]']/preceding-sibling::*) + 1"
+		/>
+		<xsl:copy>
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
+			<xs:enumeration value="x-dateDaysSince[1990]"/>
+			<xs:enumeration value="x-dateDaysSince[2000]"/>
+			<xs:enumeration value="x-dateDaysSince[2010]"/>
+			<xs:enumeration value="x-dateDaysSince[2020]"/>
+			<xsl:apply-templates select="node()[position() &gt; $index]"/>
+			<xs:enumeration value="x-dateTimeSecondsSince[1990]"/>
+			<xs:enumeration value="x-dateTimeSecondsSince[2000]"/>
+			<xs:enumeration value="x-dateTimeSecondsSince[2010]"/>
+			<xs:enumeration value="x-dateTimeSecondsSince[2020]"/>
+		</xsl:copy>
+	</xsl:template>
+
 	<xsl:template match="xs:simpleType[@name='MISSING-VALUE-TREATMENT-METHOD']/xs:restriction">
 		<xs:restriction>
 			<xsl:copy-of select="@*"/>
