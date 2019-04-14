@@ -3366,7 +3366,7 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:typesafeEnumClass
 				name="MathContext"
 			/>
-			</jaxb:bindings>
+		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='MINING-FUNCTION']">
 			<jaxb:typesafeEnumClass

@@ -39,7 +39,7 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='invalidValueTreatment']">
-		<xs:attribute name="x-invalidValueReplacement" type="xs:anySimpleType"/>
+		<xs:attribute name="x-invalidValueReplacement" type="xs:string"/>
 		<xsl:copy-of select="."/>
 	</xsl:template>
 

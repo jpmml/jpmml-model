@@ -4,7 +4,7 @@ Copyright (c) 2016 Villu Ruusmann
 -->
 <xsl:stylesheet version="1.0" xmlns="http://www.dmg.org/PMML-4_3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-	<xsl:include href="pmml.xsl"/>
+	<xsl:include href="common.xsl"/>
 
 	<xsl:template name="extension">
 		<xs:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/> 
@@ -120,6 +120,10 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='SupportVectorMachineModel']/xs:complexType/xs:attribute[@name='alternateBinaryTargetCategory']/@type">
+		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='DiscretizeBin']/xs:complexType/xs:attribute[@name='binValue']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
@@ -140,7 +144,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='missingValueReplacement']/@type">
+	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='missingValueReplacement' or @name='x-invalidValueReplacement']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 

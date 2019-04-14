@@ -130,7 +130,7 @@
 									<stylesheet>src/main/xsl/pmml.xsl</stylesheet>
 								</transformationSet>
 								<transformationSet>
-									<dir>src/main/schema</dir>
+									<dir>target/transformed-schema</dir>
 									<includes>pmml.*</includes>
 									<outputDir>target/transformed-jaxb-schema</outputDir>
 									<stylesheet>src/main/xsl/pmml-jaxb.xsl</stylesheet>
