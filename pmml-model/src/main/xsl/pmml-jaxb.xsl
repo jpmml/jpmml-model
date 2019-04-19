@@ -201,23 +201,23 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
-	Replace xs:integer, xs:positiveInteger and xs:nonNegativeInteger with INT-NUMBER
+	Replace xs:integer with INT-NUMBER
 	-->
-	<xsl:template match="xs:attribute[@type='xs:integer' or @type='xs:positiveInteger' or @type='xs:nonNegativeInteger']/@type">
+	<xsl:template match="xs:attribute[@type='xs:integer']/@type">
 		<xsl:attribute name="type">INT-NUMBER</xsl:attribute>
 	</xsl:template>
 
-	<!-- 
-	Replace xs:float and xs:double with NUMBER
+	<!--
+	Replace xs:float and xs:double with REAL-NUMBER
 	-->
 	<xsl:template match="xs:attribute[@type='xs:float' or @type='xs:double']/@type">
 		<xsl:attribute name="type">NUMBER</xsl:attribute>
 	</xsl:template>
 
 	<!--
-	Replace xs:integer with xs:int
+	Map required attributes to primitive data types
 	-->
-	<xsl:template match="xs:simpleType[@name='INT-NUMBER']/xs:restriction/@base">
-		<xsl:attribute name="base">xs:int</xsl:attribute>
+	<xsl:template match="xs:attribute[(@type='INT-NUMBER' or @type='xs:integer') and @use='required']/@type">
+		<xsl:attribute name="type">xs:int</xsl:attribute>
 	</xsl:template>
 </xsl:stylesheet>

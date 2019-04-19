@@ -15,9 +15,19 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:globalBindings>
 			<xjc:javaType
+				name="java.lang.Integer"
+				xmlType="xsd:nonNegativeInteger"
+				adapter="org.dmg.pmml.adapters.NonNegativeIntegerAdapter"
+			/>
+			<xjc:javaType
 				name="java.lang.Object"
 				xmlType="xsd:anySimpleType"
 				adapter="org.dmg.pmml.adapters.ObjectAdapter"
+			/>
+			<xjc:javaType
+				name="java.lang.Integer"
+				xmlType="xsd:positiveInteger"
+				adapter="org.dmg.pmml.adapters.PositiveIntegerAdapter"
 			/>
 		</jaxb:globalBindings>
 
@@ -3359,6 +3369,13 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateEnum>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateEnum>
 			<jaxb:typesafeEnumClass
 				name="InvalidValueTreatmentMethod"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='INT-NUMBER']">
+			<xjc:javaType
+				name="java.lang.Integer"
+				adapter="org.dmg.pmml.adapters.IntegerAdapter"
 			/>
 		</jaxb:bindings>
 
