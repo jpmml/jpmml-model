@@ -16,7 +16,7 @@ public class DefaultNodeTransformer implements NodeTransformer {
 			return new ClassifierNode(complexNode);
 		}
 
-		Double recordCount = complexNode.getRecordCount();
+		Number recordCount = complexNode.getRecordCount();
 
 		if(complexNode.hasNodes()){
 

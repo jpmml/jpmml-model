@@ -40,11 +40,11 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasScore
 		throw new UnsupportedOperationException();
 	}
 
-	public Double getRecordCount(){
+	public Number getRecordCount(){
 		return null;
 	}
 
-	public Node setRecordCount(Double recordCount){
+	public Node setRecordCount(Number recordCount){
 		throw new UnsupportedOperationException();
 	}
 

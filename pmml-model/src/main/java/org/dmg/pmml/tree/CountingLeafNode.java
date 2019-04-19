@@ -5,7 +5,7 @@ package org.dmg.pmml.tree;
 
 public class CountingLeafNode extends LeafNode {
 
-	private Double recordCount = null;
+	private Number recordCount = null;
 
 
 	public CountingLeafNode(){
@@ -18,12 +18,12 @@ public class CountingLeafNode extends LeafNode {
 	}
 
 	@Override
-	public Double getRecordCount(){
+	public Number getRecordCount(){
 		return this.recordCount;
 	}
 
 	@Override
-	public CountingLeafNode setRecordCount(Double recordCount){
+	public CountingLeafNode setRecordCount(Number recordCount){
 		this.recordCount = recordCount;
 
 		return this;

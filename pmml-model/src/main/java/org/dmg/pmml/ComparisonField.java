@@ -10,10 +10,10 @@ abstract
 public class ComparisonField<E extends ComparisonField<E>> extends PMMLObject implements HasFieldReference<E> {
 
 	abstract
-	public Double getFieldWeight();
+	public Number getFieldWeight();
 
 	abstract
-	public E setFieldWeight(Double fieldWeight);
+	public E setFieldWeight(Number fieldWeight);
 
 	abstract
 	public CompareFunction getCompareFunction();
@@ -21,14 +21,14 @@ public class ComparisonField<E extends ComparisonField<E>> extends PMMLObject im
 	abstract
 	public E setCompareFunction(CompareFunction compareFunction);
 
-	public Double getSimilarityScale(){
+	public Number getSimilarityScale(){
 		return null;
 	}
 
 	/**
 	 * @throws UnsupportedOperationException If the <code>similarityScale</code> attribute is not supported.
 	 */
-	public E setSimilarityScale(Double similarityScale){
+	public E setSimilarityScale(Number similarityScale){
 		throw new UnsupportedOperationException();
 	}
 }

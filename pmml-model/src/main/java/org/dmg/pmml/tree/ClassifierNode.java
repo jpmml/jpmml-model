@@ -12,7 +12,7 @@ public class ClassifierNode extends SimpleNode {
 
 	private Object id = null;
 
-	private Double recordCount = null;
+	private Number recordCount = null;
 
 	private Object defaultChild = null;
 
@@ -53,12 +53,12 @@ public class ClassifierNode extends SimpleNode {
 	}
 
 	@Override
-	public Double getRecordCount(){
+	public Number getRecordCount(){
 		return this.recordCount;
 	}
 
 	@Override
-	public ClassifierNode setRecordCount(Double recordCount){
+	public ClassifierNode setRecordCount(Number recordCount){
 		this.recordCount = recordCount;
 
 		return this;

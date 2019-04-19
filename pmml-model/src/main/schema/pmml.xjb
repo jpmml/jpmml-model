@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="3" patch="0"
-			implementation="16"
+			implementation="17"
 		/>
 
 		<wildcard:lax/>
@@ -20,14 +20,14 @@ Copyright (c) 2009 University of Tartu
 				adapter="org.dmg.pmml.adapters.NonNegativeIntegerAdapter"
 			/>
 			<xjc:javaType
-				name="java.lang.Object"
-				xmlType="xsd:anySimpleType"
-				adapter="org.dmg.pmml.adapters.ObjectAdapter"
-			/>
-			<xjc:javaType
 				name="java.lang.Integer"
 				xmlType="xsd:positiveInteger"
 				adapter="org.dmg.pmml.adapters.PositiveIntegerAdapter"
+			/>
+			<xjc:javaType
+				name="java.lang.Object"
+				xmlType="xsd:anySimpleType"
+				adapter="org.dmg.pmml.adapters.ObjectAdapter"
 			/>
 		</jaxb:globalBindings>
 
@@ -1606,7 +1606,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;NormContinuous&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;NormContinuous,java.lang.Double&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;NormContinuous,java.lang.Number&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NormContinuous']/xsd:complexType/xsd:attribute[@name='mapMissingTo']">
@@ -1620,7 +1620,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='NormDiscrete']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;NormDiscrete&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;NormDiscrete,java.lang.Double&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;NormDiscrete,java.lang.Number&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;NormDiscrete&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -3412,6 +3412,13 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:simpleType[@name='NUMBER']">
+			<xjc:javaType
+				name="java.lang.Number"
+				adapter="org.dmg.pmml.adapters.NumberAdapter"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:simpleType[@name='OPTYPE']">
 			<jaxb:typesafeEnumClass
 				name="OpType"
@@ -3421,6 +3428,27 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:simpleType[@name='OUTLIER-TREATMENT-METHOD']">
 			<jaxb:typesafeEnumClass
 				name="OutlierTreatmentMethod"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='PERCENTAGE-NUMBER']">
+			<xjc:javaType
+				name="java.lang.Number"
+				adapter="org.dmg.pmml.adapters.PercentageNumberAdapter"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='PROB-NUMBER']">
+			<xjc:javaType
+				name="java.lang.Number"
+				adapter="org.dmg.pmml.adapters.ProbabilityNumberAdapter"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:simpleType[@name='REAL-NUMBER']">
+			<xjc:javaType
+				name="java.lang.Number"
+				adapter="org.dmg.pmml.adapters.RealNumberAdapter"
 			/>
 		</jaxb:bindings>
 

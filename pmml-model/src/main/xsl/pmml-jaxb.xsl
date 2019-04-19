@@ -65,6 +65,13 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Simplify REAL-SparseArray type definition
+	-->
+	<xsl:template match="xs:element[@name='REAL-SparseArray']/xs:complexType/xs:attribute[@name='defaultValue']/@type">
+		<xsl:attribute name="type">xs:double</xsl:attribute>
+	</xsl:template>
+
+	<!--
 	Add missing XML type information
 	-->
 	<xsl:template match="xs:element[@name='FieldValue' or @name='FieldValueCount']/xs:complexType/xs:attribute[@name='value']">
@@ -211,7 +218,7 @@ Copyright (c) 2016 Villu Ruusmann
 	Replace xs:float and xs:double with REAL-NUMBER
 	-->
 	<xsl:template match="xs:attribute[@type='xs:float' or @type='xs:double']/@type">
-		<xsl:attribute name="type">NUMBER</xsl:attribute>
+		<xsl:attribute name="type">REAL-NUMBER</xsl:attribute>
 	</xsl:template>
 
 	<!--
@@ -219,5 +226,9 @@ Copyright (c) 2016 Villu Ruusmann
 	-->
 	<xsl:template match="xs:attribute[(@type='INT-NUMBER' or @type='xs:integer') and @use='required']/@type">
 		<xsl:attribute name="type">xs:int</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="xs:attribute[(@type='NUMBER' or @type='PERCENTAGE-NUMBER' or @type='PROB-NUMBER' or @type='REAL-NUMBER') and @use='required']/@type">
+		<xsl:attribute name="type">xs:double</xsl:attribute>
 	</xsl:template>
 </xsl:stylesheet>
