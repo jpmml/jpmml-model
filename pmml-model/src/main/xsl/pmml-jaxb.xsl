@@ -208,6 +208,13 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Unify count attributes to xs:nonNegativeInteger
+	-->
+	<xsl:template match="xs:attribute[starts-with(@name, 'numberOf')]/@type">
+		<xsl:attribute name="type">xs:nonNegativeInteger</xsl:attribute>
+	</xsl:template>
+
+	<!--
 	Replace xs:integer with INT-NUMBER
 	-->
 	<xsl:template match="xs:attribute[@type='xs:integer']/@type">
