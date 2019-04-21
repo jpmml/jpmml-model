@@ -220,15 +220,4 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template match="xs:attribute[@type='xs:float' or @type='xs:double']/@type">
 		<xsl:attribute name="type">REAL-NUMBER</xsl:attribute>
 	</xsl:template>
-
-	<!--
-	Map required attributes to primitive data types
-	-->
-	<xsl:template match="xs:attribute[(@type='INT-NUMBER' or @type='xs:integer') and @use='required']/@type">
-		<xsl:attribute name="type">xs:int</xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:attribute[(@type='NUMBER' or @type='PERCENTAGE-NUMBER' or @type='PROB-NUMBER' or @type='REAL-NUMBER') and @use='required']/@type">
-		<xsl:attribute name="type">xs:double</xsl:attribute>
-	</xsl:template>
 </xsl:stylesheet>
