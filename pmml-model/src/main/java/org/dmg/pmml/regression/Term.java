@@ -11,4 +11,10 @@ import org.dmg.pmml.PMMLObject;
 @XmlTransient
 abstract
 public class Term extends PMMLObject implements HasName<Term> {
+
+	abstract
+	public Number getCoefficient();
+
+	abstract
+	public Term setCoefficient(Number coefficient);
 }
