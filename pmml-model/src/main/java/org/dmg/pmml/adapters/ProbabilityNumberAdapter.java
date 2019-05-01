@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml.adapters;
 
-public class ProbabilityNumberAdapter extends RealNumberAdapter {
+public class ProbabilityNumberAdapter extends NumberAdapter {
 
 	@Override
 	public Number unmarshal(String value){

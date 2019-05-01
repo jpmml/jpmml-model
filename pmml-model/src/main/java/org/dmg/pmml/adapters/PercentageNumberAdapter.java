@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml.adapters;
 
-public class PercentageNumberAdapter extends RealNumberAdapter {
+public class PercentageNumberAdapter extends NumberAdapter {
 
 	@Override
 	public Number unmarshal(String value){

@@ -12,7 +12,7 @@ public class ProbabilityNumberAdapterTest {
 
 	@Test
 	public void unmarshal(){
-		RealNumberAdapter adapter = new ProbabilityNumberAdapter();
+		NumberAdapter adapter = new ProbabilityNumberAdapter();
 
 		try {
 			adapter.unmarshal("-0.1");
