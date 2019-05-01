@@ -210,6 +210,10 @@ Copyright (c) 2016 Villu Ruusmann
 	<!--
 	Replace PROB-NUMBER with NUMBER where appropriate
 	-->
+	<xsl:template match="xs:element[@name='ScoreDistribution']/xs:complexType/xs:attribute[@name='confidence']/@type">
+		<xsl:attribute name="type">NUMBER</xsl:attribute>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='MiningField' or @name='MultivariateStat']/xs:complexType/xs:attribute[@name='importance']/@type">
 		<xsl:attribute name="type">NUMBER</xsl:attribute>
 	</xsl:template>
