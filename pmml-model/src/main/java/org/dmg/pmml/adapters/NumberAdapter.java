@@ -13,24 +13,8 @@ public class NumberAdapter extends XmlAdapter<String, Number> {
 	public Number unmarshal(String value){
 		Number result = NumberUtil.parseNumber(value);
 
-		if(result instanceof Float){
-			Float floatValue = (Float)result;
-
-			if(floatValue.isNaN() || floatValue.isInfinite()){
-				throw new IllegalArgumentException(value);
-			}
-
-			return floatValue;
-		} else
-
-		if(result instanceof Double){
-			Double doubleValue = (Double)result;
-
-			if(doubleValue.isNaN() || doubleValue.isInfinite()){
-				throw new IllegalArgumentException(value);
-			}
-
-			return doubleValue;
+		if(!isValid(result)){
+			throw new IllegalArgumentException(value);
 		}
 
 		return result;
@@ -44,5 +28,27 @@ public class NumberAdapter extends XmlAdapter<String, Number> {
 		}
 
 		return NumberUtil.printNumber(value);
+	}
+
+	static
+	public boolean isValid(Number value){
+
+		if(value instanceof Float){
+			Float floatValue = (Float)value;
+
+			if(floatValue.isNaN() || floatValue.isInfinite()){
+				return false;
+			}
+		} else
+
+		if(value instanceof Double){
+			Double doubleValue = (Double)value;
+
+			if(doubleValue.isNaN() || doubleValue.isInfinite()){
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

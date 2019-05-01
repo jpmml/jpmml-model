@@ -9,10 +9,15 @@ public class NonNegativeIntegerAdapter extends IntegerAdapter {
 	public Integer unmarshal(String value){
 		Integer result = super.unmarshal(value);
 
-		if(result < 0){
+		if(!isValid(result)){
 			throw new IllegalArgumentException(value);
 		}
 
 		return result;
+	}
+
+	static
+	public boolean isValid(Integer value){
+		return (value >= 0);
 	}
 }
