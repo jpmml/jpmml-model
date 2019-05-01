@@ -208,6 +208,13 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Replace PROB-NUMBER with NUMBER where appropriate
+	-->
+	<xsl:template match="xs:element[@name='MiningField' or @name='MultivariateStat']/xs:complexType/xs:attribute[@name='importance']/@type">
+		<xsl:attribute name="type">NUMBER</xsl:attribute>
+	</xsl:template>
+
+	<!--
 	Unify count attributes to xs:nonNegativeInteger
 	-->
 	<xsl:template match="xs:attribute[starts-with(@name, 'numberOf')]/@type">
