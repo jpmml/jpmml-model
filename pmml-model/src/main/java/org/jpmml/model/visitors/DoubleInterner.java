@@ -17,7 +17,7 @@ import org.dmg.pmml.VisitorAction;
 public class DoubleInterner extends NumberInterner<Double> {
 
 	public DoubleInterner(){
-		super(Double.class, DoubleInterner.cache);
+		super(Double.class, DoubleInterner.CACHE_PROVIDER.get());
 	}
 
 	@Override
@@ -41,4 +41,12 @@ public class DoubleInterner extends NumberInterner<Double> {
 	}
 
 	private static final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
+
+	public static final ThreadLocal<ConcurrentMap<Double, Double>> CACHE_PROVIDER = new ThreadLocal<ConcurrentMap<Double, Double>>(){
+
+		@Override
+		public ConcurrentMap<Double, Double> initialValue(){
+			return DoubleInterner.cache;
+		}
+	};
 }
