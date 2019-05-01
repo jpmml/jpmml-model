@@ -3,25 +3,37 @@
  */
 package org.dmg.pmml.adapters;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.jpmml.model.NumberUtil;
 
 public class NumberAdapter extends XmlAdapter<String, Number> {
 
 	@Override
 	public Number unmarshal(String value){
+		Number result = NumberUtil.parseNumber(value);
 
-		try {
-			return DatatypeConverter.parseInt(value);
-		} catch(NumberFormatException nfe){
-			Double result = DatatypeConverter.parseDouble(value);
+		if(result instanceof Float){
+			Float floatValue = (Float)result;
 
-			if(result.isNaN() || result.isInfinite()){
+			if(floatValue.isNaN() || floatValue.isInfinite()){
 				throw new IllegalArgumentException(value);
 			}
 
-			return result;
+			return floatValue;
+		} else
+
+		if(result instanceof Double){
+			Double doubleValue = (Double)result;
+
+			if(doubleValue.isNaN() || doubleValue.isInfinite()){
+				throw new IllegalArgumentException(value);
+			}
+
+			return doubleValue;
 		}
+
+		return result;
 	}
 
 	@Override
@@ -29,18 +41,8 @@ public class NumberAdapter extends XmlAdapter<String, Number> {
 
 		if(value == null){
 			return null;
-		} // End if
-
-		if(value instanceof Float){
-			return DatatypeConverter.printFloat(value.floatValue());
-		} else
-
-		if(value instanceof Double){
-			return DatatypeConverter.printDouble(value.doubleValue());
-		} else
-
-		{
-			return value.toString();
 		}
+
+		return NumberUtil.printNumber(value);
 	}
 }

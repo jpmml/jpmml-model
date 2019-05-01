@@ -3,14 +3,15 @@
  */
 package org.dmg.pmml.adapters;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.jpmml.model.NumberUtil;
 
 public class IntegerAdapter extends XmlAdapter<String, Integer> {
 
 	@Override
 	public Integer unmarshal(String value){
-		return DatatypeConverter.parseInt(value);
+		return NumberUtil.parseInteger(value);
 	}
 
 	@Override
@@ -20,6 +21,6 @@ public class IntegerAdapter extends XmlAdapter<String, Integer> {
 			return null;
 		}
 
-		return DatatypeConverter.printInt(value);
+		return NumberUtil.printInteger(value);
 	}
 }

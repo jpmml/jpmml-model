@@ -3,19 +3,15 @@
  */
 package org.dmg.pmml.adapters;
 
-import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+import org.jpmml.model.NumberUtil;
 
 public class RealNumberAdapter extends XmlAdapter<String, Number> {
 
 	@Override
 	public Number unmarshal(String value){
-
-		try {
-			return DatatypeConverter.parseInt(value);
-		} catch(IllegalArgumentException iae){
-			return DatatypeConverter.parseDouble(value);
-		}
+		return NumberUtil.parseNumber(value);
 	}
 
 	@Override
@@ -23,18 +19,8 @@ public class RealNumberAdapter extends XmlAdapter<String, Number> {
 
 		if(value == null){
 			return null;
-		} // End if
-
-		if(value instanceof Float){
-			return DatatypeConverter.printFloat(value.floatValue());
-		} else
-
-		if(value instanceof Double){
-			return DatatypeConverter.printDouble(value.doubleValue());
-		} else
-
-		{
-			return value.toString();
 		}
+
+		return NumberUtil.printNumber(value);
 	}
 }
