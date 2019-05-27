@@ -85,7 +85,7 @@ public class JAXBUtil {
 		if(JAXBUtil.schema == null){
 			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
-			URL url = org.dmg.pmml.ObjectFactory.class.getResource("/pmml.xsd");
+			URL url = (org.dmg.pmml.ObjectFactory.class).getResource("/pmml.xsd");
 			if(url == null){
 				throw new FileNotFoundException();
 			}

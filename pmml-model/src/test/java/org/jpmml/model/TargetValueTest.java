@@ -28,7 +28,7 @@ public class TargetValueTest {
 
 	static
 	private void checkTargetValue(byte[] bytes, String rawDataValue, String displayValue) throws Exception {
-		Node node = XPathUtil.selectNode(bytes, "/:PMML/:RegressionModel/:Targets/:Target/:TargetValue");
+		Node node = DOMUtil.selectNode(bytes, "/:PMML/:RegressionModel/:Targets/:Target/:TargetValue");
 
 		assertEquals(rawDataValue, DOMUtil.getAttributeValue(node, "rawDataValue"));
 		assertEquals(displayValue, DOMUtil.getAttributeValue(node, "displayValue"));

@@ -20,23 +20,23 @@ public class TrendExpoSmoothTest {
 
 		byte[] original = ResourceUtil.getByteArray(TrendExpoSmoothTest.class);
 
-		assertNotNull(XPathUtil.selectNode(original, trendExpression));
-		assertNull(XPathUtil.selectNode(original, trendExpoSmoothExpression));
+		assertNotNull(DOMUtil.selectNode(original, trendExpression));
+		assertNull(DOMUtil.selectNode(original, trendExpoSmoothExpression));
 
-		assertNotNull(XPathUtil.selectNode(original, extensionExpression));
+		assertNotNull(DOMUtil.selectNode(original, extensionExpression));
 
 		byte[] latest = VersionUtil.upgradeToLatest(original);
 
-		assertNull(XPathUtil.selectNode(latest, trendExpression));
-		assertNotNull(XPathUtil.selectNode(latest, trendExpoSmoothExpression));
+		assertNull(DOMUtil.selectNode(latest, trendExpression));
+		assertNotNull(DOMUtil.selectNode(latest, trendExpoSmoothExpression));
 
-		assertNotNull(XPathUtil.selectNode(latest, extensionExpression));
+		assertNotNull(DOMUtil.selectNode(latest, extensionExpression));
 
 		byte[] latestToOriginal = VersionUtil.downgrade(latest, Version.PMML_4_0);
 
-		assertNotNull(XPathUtil.selectNode(latestToOriginal, trendExpression));
-		assertNull(XPathUtil.selectNode(latestToOriginal, trendExpoSmoothExpression));
+		assertNotNull(DOMUtil.selectNode(latestToOriginal, trendExpression));
+		assertNull(DOMUtil.selectNode(latestToOriginal, trendExpoSmoothExpression));
 
-		assertNotNull(XPathUtil.selectNode(latestToOriginal, extensionExpression));
+		assertNotNull(DOMUtil.selectNode(latestToOriginal, extensionExpression));
 	}
 }

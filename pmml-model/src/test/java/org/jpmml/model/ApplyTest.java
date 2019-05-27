@@ -28,7 +28,7 @@ public class ApplyTest {
 
 	static
 	private void checkApply(byte[] bytes, String mapMissingTo, String defaultValue) throws Exception {
-		Node node = XPathUtil.selectNode(bytes, "/:PMML/:TransformationDictionary/:DerivedField/:Apply");
+		Node node = DOMUtil.selectNode(bytes, "/:PMML/:TransformationDictionary/:DerivedField/:Apply");
 
 		assertEquals(mapMissingTo, DOMUtil.getAttributeValue(node, "mapMissingTo"));
 		assertEquals(defaultValue, DOMUtil.getAttributeValue(node, "defaultValue"));

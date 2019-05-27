@@ -32,7 +32,7 @@ public class PMMLTest {
 
 	static
 	private void checkPMML(byte[] bytes, Version version) throws Exception {
-		Node node = XPathUtil.selectNode(bytes, "/:PMML");
+		Node node = DOMUtil.selectNode(bytes, "/:PMML");
 
 		assertEquals(version.getNamespaceURI(), node.getNamespaceURI());
 

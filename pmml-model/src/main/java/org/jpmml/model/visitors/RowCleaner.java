@@ -3,8 +3,8 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.dmg.pmml.Row;
 import org.dmg.pmml.VisitorAction;
@@ -17,7 +17,7 @@ public class RowCleaner extends AbstractVisitor {
 		if(row.hasContent()){
 			List<Object> content = row.getContent();
 
-			for(ListIterator<Object> it = content.listIterator(); it.hasNext(); ){
+			for(Iterator<?> it = content.iterator(); it.hasNext(); ){
 				Object object = it.next();
 
 				if(object instanceof String){
