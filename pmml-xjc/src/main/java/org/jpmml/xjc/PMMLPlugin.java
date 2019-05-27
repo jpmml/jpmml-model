@@ -4,6 +4,7 @@
 package org.jpmml.xjc;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -17,6 +18,7 @@ import javax.xml.namespace.QName;
 
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
+import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
@@ -36,6 +38,7 @@ import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CClassInfo;
 import com.sun.tools.xjc.model.CClassInfoParent;
 import com.sun.tools.xjc.model.CDefaultValue;
+import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.Model;
@@ -264,7 +267,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 
-		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
+		List<? extends ClassOutline> classOutlines = new ArrayList<>(outline.getClasses());
+		classOutlines.sort((left, right) -> (left.implClass.name()).compareToIgnoreCase(right.implClass.name()));
+
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
@@ -303,13 +308,16 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			if(contentFieldOutline != null){
 				CPropertyInfo propertyInfo = contentFieldOutline.getPropertyInfo();
 
-				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+				String publicName = propertyInfo.getName(true);
+				String privateName = propertyInfo.getName(false);
+
+				JFieldVar fieldVar = fieldVars.get(privateName);
 
 				JType elementType = CodeModelUtil.getElementType(fieldVar.type());
 
 				beanClazz._implements(iterableInterface.narrow(elementType));
 
-				JMethod getElementsMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
+				JMethod getElementsMethod = beanClazz.getMethod("get" + publicName, new JType[0]);
 
 				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
 				iteratorMethod.annotate(Override.class);
@@ -328,7 +336,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+				String publicName = propertyInfo.getName(true);
+				String privateName = propertyInfo.getName(false);
+
+				JFieldVar fieldVar = fieldVars.get(privateName);
+
+				String name = fieldVar.name();
 
 				JMods modifiers = fieldVar.mods();
 				if((modifiers.getValue() & JMod.PRIVATE) != JMod.PRIVATE){
@@ -341,12 +354,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				if(defaultValue != null){
 
 					if(defaultValue.isShared()){
-						beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, fieldVar.type(), defaultValue.getField(), defaultValue.computeInit(outline));
+						beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, type, defaultValue.getField(), defaultValue.computeInit(outline));
 					}
 				}
 
-				JMethod getterMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
-				JMethod setterMethod = beanClazz.getMethod("set" + propertyInfo.getName(true), new JType[]{type});
+				JMethod getterMethod = beanClazz.getMethod("get" + publicName, new JType[0]);
+				JMethod setterMethod = beanClazz.getMethod("set" + publicName, new JType[]{type});
 
 				if(getterMethod != null){
 					JType returnType = getterMethod.type();
@@ -365,9 +378,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 					JVar param = (setterMethod.params()).get(0);
 
-					param.name(fieldVar.name());
+					param.name(name);
 
-					param.annotate(propertyAnnotation).param("value", fieldVar.name());
+					param.annotate(propertyAnnotation).param("value", name);
 
 					setterMethod.body()._return(JExpr._this());
 				} // End if
@@ -375,24 +388,32 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				if(propertyInfo.isCollection()){
 					JType elementType = CodeModelUtil.getElementType(type);
 
-					JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
+					JFieldRef fieldRef = JExpr.refthis(name);
 
-					JMethod getElementsMethod = beanClazz.getMethod("get" + propertyInfo.getName(true), new JType[0]);
+					JMethod getElementsMethod = beanClazz.getMethod("get" + publicName, new JType[0]);
 
-					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + propertyInfo.getName(true));
+					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + publicName);
 
 					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
 
 					moveBefore(beanClazz, hasElementsMethod, getElementsMethod);
 
-					JMethod addElementsMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "add" + propertyInfo.getName(true));
+					JMethod addElementsMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "add" + publicName);
 
-					JVar param = addElementsMethod.varParam(elementType, fieldVar.name());
+					JVar param = addElementsMethod.varParam(elementType, name);
 
 					addElementsMethod.body().add(JExpr.invoke(getterMethod).invoke("addAll").arg(arraysClass.staticInvoke("asList").arg(param)));
 					addElementsMethod.body()._return(JExpr._this());
 
 					moveAfter(beanClazz, addElementsMethod, getElementsMethod);
+				} // End if
+
+				if(propertyInfo instanceof CAttributePropertyInfo){
+					declareAttributeField(beanClazz, fieldVar);
+				} else
+
+				if(propertyInfo instanceof CElementPropertyInfo){
+					declareElementField(beanClazz, fieldVar);
 				}
 
 				Collection<JAnnotationUse> annotations = fieldVar.annotations();
@@ -491,7 +512,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			}
 		}
 
-		Collection<? extends EnumOutline> enumOutlines = outline.getEnums();
+		List<? extends EnumOutline> enumOutlines = new ArrayList<>(outline.getEnums());
+		enumOutlines.sort((left, right) -> (left.clazz.name()).compareToIgnoreCase(right.clazz.name()));
+
 		for(EnumOutline enumOutline : enumOutlines){
 			JDefinedClass clazz = enumOutline.clazz;
 
@@ -606,6 +629,39 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		method.body()._return(JExpr.invoke(setterName).arg(nameParameter));
 
 		moveBefore(beanClazz, method, getterMethod);
+	}
+
+	static
+	private void declareAttributeField(JDefinedClass beanClazz, JFieldVar fieldVar){
+		JDefinedClass attributesInterface = ensureInterface(beanClazz._package(), "PMMLAttributes");
+
+		declareField(attributesInterface, beanClazz, fieldVar);
+	}
+
+	static
+	private void declareElementField(JDefinedClass beanClazz, JFieldVar fieldVar){
+		JDefinedClass elementsInterface = ensureInterface(beanClazz._package(), "PMMLElements");
+
+		declareField(elementsInterface, beanClazz, fieldVar);
+	}
+
+	static
+	private void declareField(JDefinedClass _interface, JDefinedClass beanClazz, JFieldVar fieldVar){
+		JCodeModel codeModel = _interface.owner();
+
+		JExpression init = codeModel.ref("org.jpmml.model.ReflectionUtil").staticInvoke("getField").arg(beanClazz.dotclass()).arg(fieldVar.name());
+
+		_interface.field(0, Field.class, (beanClazz.name() + "_" + fieldVar.name()).toUpperCase(), init);
+	}
+
+	static
+	private JDefinedClass ensureInterface(JPackage _package, String name){
+
+		try {
+			return _package._interface(name);
+		} catch(JClassAlreadyExistsException jcaee){
+			return jcaee.getExistingClass();
+		}
 	}
 
 	static
