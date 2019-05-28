@@ -20,7 +20,7 @@ public class ArrayListTrimmer extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
-		List<Field> fields = ReflectionUtil.getInstanceFields(object.getClass());
+		List<Field> fields = ReflectionUtil.getFields(object.getClass());
 
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);

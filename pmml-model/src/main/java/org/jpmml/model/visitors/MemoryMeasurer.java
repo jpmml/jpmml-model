@@ -84,7 +84,7 @@ public class MemoryMeasurer extends AbstractVisitor {
 			return;
 		}
 
-		List<Field> fields = ReflectionUtil.getInstanceFields(clazz);
+		List<Field> fields = ReflectionUtil.getFields(clazz);
 		for(Field field : fields){
 			Class<?> type = field.getType();
 

@@ -35,7 +35,7 @@ public class Interner<V> extends AbstractVisitor {
 	public VisitorAction visit(PMMLObject object){
 		Class<? extends V> type = getType();
 
-		List<Field> fields = ReflectionUtil.getInstanceFields(object.getClass());
+		List<Field> fields = ReflectionUtil.getFields(object.getClass());
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);
 

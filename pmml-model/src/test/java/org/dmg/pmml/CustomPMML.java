@@ -25,4 +25,15 @@ public class CustomPMML extends PMML {
 
 		ReflectionUtil.copyState(pmml, this);
 	}
+
+	@Override
+	public String getBaseVersion(){
+		String baseVersion = super.getBaseVersion();
+
+		if(baseVersion == null){
+			baseVersion = super.getVersion();
+		}
+
+		return baseVersion;
+	}
 }

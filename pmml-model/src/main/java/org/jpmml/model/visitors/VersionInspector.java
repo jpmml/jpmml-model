@@ -54,7 +54,7 @@ public class VersionInspector extends AbstractVisitor {
 			inspect(clazz);
 		}
 
-		List<Field> fields = ReflectionUtil.getInstanceFields(object.getClass());
+		List<Field> fields = ReflectionUtil.getFields(object.getClass());
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);
 

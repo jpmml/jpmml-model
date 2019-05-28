@@ -4,12 +4,16 @@
 package org.jpmml.model;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -32,7 +36,7 @@ public class ReflectionUtil {
 			throw new IllegalArgumentException();
 		}
 
-		List<Field> fields = getInstanceFields(fromClazz);
+		List<Field> fields = getFields(fromClazz);
 		for(Field field : fields){
 			Object value = getFieldValue(field, from);
 
@@ -46,7 +50,13 @@ public class ReflectionUtil {
 		while(clazz != null){
 
 			try {
-				return clazz.getDeclaredField(name);
+				Field field = clazz.getDeclaredField(name);
+
+				if(!ReflectionUtil.FIELD_SELECTOR.test(field)){
+					throw new IllegalArgumentException(name);
+				}
+
+				return field;
 			} catch(NoSuchFieldException nsfe){
 				// Ignored
 			}
@@ -62,7 +72,7 @@ public class ReflectionUtil {
 		List<Field> result = ReflectionUtil.classFields.get(clazz);
 
 		if(result == null){
-			result = loadFields(clazz, ReflectionUtil.FIELD_SELECTOR);
+			result = loadFields(clazz);
 
 			ReflectionUtil.classFields.putIfAbsent(clazz, result);
 		}
@@ -71,13 +81,39 @@ public class ReflectionUtil {
 	}
 
 	static
-	public List<Field> getInstanceFields(Class<?> clazz){
-		List<Field> result = ReflectionUtil.classInstanceFields.get(clazz);
+	public Method getGetterMethod(Field field){
+		String prefix;
+
+		if((Boolean.class).equals(field.getType())){
+			prefix = "is";
+		} else
+
+		{
+			prefix = "get";
+		}
+
+		String name = field.getName();
+		if(name.length() > 0){
+			name = (prefix + name.substring(0, 1).toUpperCase() + name.substring(1));
+		}
+
+		Class<?> clazz = field.getDeclaringClass();
+
+		try {
+			return clazz.getDeclaredMethod(name, null);
+		} catch(NoSuchMethodException nsme){
+			throw new RuntimeException(nsme);
+		}
+	}
+
+	static
+	public Map<Field, Method> getGetterMethods(Class<?> clazz){
+		Map<Field, Method> result = ReflectionUtil.classGetterMethods.get(clazz);
 
 		if(result == null){
-			result = loadFields(clazz, ReflectionUtil.INSTANCE_FIELD_SELECTOR);
+			result = loadGetterMethods(clazz);
 
-			ReflectionUtil.classInstanceFields.putIfAbsent(clazz, result);
+			ReflectionUtil.classGetterMethods.putIfAbsent(clazz, result);
 		}
 
 		return result;
@@ -114,6 +150,19 @@ public class ReflectionUtil {
 		}
 	}
 
+	@SuppressWarnings (
+		value = {"unchecked"}
+	)
+	static
+	public <E> E getGetterMethodValue(Method method, Object object){
+
+		try {
+			return (E)method.invoke(object);
+		} catch(IllegalAccessException | InvocationTargetException e){
+			throw new RuntimeException(e);
+		}
+	}
+
 	static
 	public boolean isPrimitiveWrapper(Class<?> clazz){
 		return ReflectionUtil.primitiveWrapperClasses.contains(clazz);
@@ -142,7 +191,7 @@ public class ReflectionUtil {
 	}
 
 	static
-	private List<Field> loadFields(Class<?> clazz, Predicate<Field> predicate){
+	private List<Field> loadFields(Class<?> clazz){
 		List<Field> result = new ArrayList<>();
 
 		while(clazz != null){
@@ -150,9 +199,11 @@ public class ReflectionUtil {
 
 			for(Field field : fields){
 
-				if(predicate.test(field)){
-					result.add(field);
+				if(!ReflectionUtil.FIELD_SELECTOR.test(field)){
+					continue;
 				}
+
+				result.add(field);
 			}
 
 			clazz = clazz.getSuperclass();
@@ -162,11 +213,32 @@ public class ReflectionUtil {
 	}
 
 	static
+	private Map<Field, Method> loadGetterMethods(Class<?> clazz){
+		Map<Field, Method> result = new LinkedHashMap<>();
+
+		List<Field> fields = getFields(clazz);
+		for(Field field : fields){
+			Method getterMethod = getGetterMethod(field);
+
+			result.put(field, getterMethod);
+		}
+
+		return Collections.unmodifiableMap(result);
+	}
+
+	static
 	private final Predicate<Field> FIELD_SELECTOR = new Predicate<Field>(){
 
 		@Override
 		public boolean test(Field field){
-			return hasValidName(field);
+
+			if(hasValidName(field)){
+				int modifiers = field.getModifiers();
+
+				return !Modifier.isStatic(modifiers);
+			}
+
+			return false;
 		}
 
 		private boolean hasValidName(Field field){
@@ -180,25 +252,9 @@ public class ReflectionUtil {
 		}
 	};
 
-	static
-	private final Predicate<Field> INSTANCE_FIELD_SELECTOR = new Predicate<Field>(){
-
-		@Override
-		public boolean test(Field field){
-
-			if(ReflectionUtil.FIELD_SELECTOR.test(field)){
-				int modifiers = field.getModifiers();
-
-				return !Modifier.isStatic(modifiers);
-			}
-
-			return false;
-		}
-	};
-
 	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<>();
 
-	private static final ConcurrentMap<Class<?>, List<Field>> classInstanceFields = new ConcurrentHashMap<>();
+	private static final ConcurrentMap<Class<?>, Map<Field, Method>> classGetterMethods = new ConcurrentHashMap<>();
 
 	private static final Set<Class<?>> primitiveWrapperClasses = new HashSet<>(Arrays.<Class<?>>asList(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class, Boolean.class, Character.class));
 }
