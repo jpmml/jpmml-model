@@ -15,6 +15,7 @@ import org.dmg.pmml.OpType;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ParameterField;
 import org.dmg.pmml.Target;
@@ -161,7 +162,7 @@ public class VersionInspectorTest {
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 
 		Apply apply = new Apply()
-			.setFunction("lowercase");
+			.setFunction(PMMLFunctions.LOWERCASE);
 
 		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, null)
 			.addParameterFields(new ParameterField(FieldName.create("string")))
@@ -174,7 +175,7 @@ public class VersionInspectorTest {
 
 		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
 
-		apply.setFunction("uppercase");
+		apply.setFunction(PMMLFunctions.UPPERCASE);
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
 

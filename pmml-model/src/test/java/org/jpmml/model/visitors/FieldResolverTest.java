@@ -12,6 +12,7 @@ import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.Segment;
@@ -42,7 +43,7 @@ public class FieldResolverTest {
 
 				String function = apply.getFunction();
 
-				if("*".equals(function)){
+				if((PMMLFunctions.MULTIPLY).equals(function)){
 					DerivedField derivedField = (DerivedField)getParent();
 
 					FieldName name = derivedField.getName();
@@ -60,7 +61,7 @@ public class FieldResolverTest {
 					}
 				} else
 
-				if("pow".equals(function)){
+				if((PMMLFunctions.POW).equals(function)){
 					checkFields(FieldNameUtil.create("x"), fields);
 				} else
 

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.dmg.pmml.Apply;
+import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.Visitable;
@@ -192,28 +193,28 @@ public class VersionInspector extends AbstractVisitor {
 
 	static {
 		declareFunctions(Version.PMML_3_0,
-			"+", "-", "*", "/",
-			"min", "max", "sum", "avg",
-			"log10", "ln", "sqrt", "abs",
-			"uppercase", "substring", "trimBlanks",
-			"formatNumber", "formatDatetime",
-			"dateDaysSinceYear", "dateSecondsSinceYear", "dateSecondsSinceMidnight");
+			PMMLFunctions.ADD, PMMLFunctions.SUBTRACT, PMMLFunctions.MULTIPLY, PMMLFunctions.DIVIDE,
+			PMMLFunctions.MIN, PMMLFunctions.MAX, PMMLFunctions.SUM, PMMLFunctions.AVG,
+			PMMLFunctions.LOG10, PMMLFunctions.LN, PMMLFunctions.SQRT, PMMLFunctions.ABS,
+			PMMLFunctions.UPPERCASE, PMMLFunctions.SUBSTRING, PMMLFunctions.TRIMBLANKS,
+			PMMLFunctions.FORMATNUMBER, PMMLFunctions.FORMATDATETIME,
+			PMMLFunctions.DATEDAYSSINCEYEAR, PMMLFunctions.DATESECONDSSINCEYEAR, PMMLFunctions.DATESECONDSSINCEMIDNIGHT);
 		declareFunctions(Version.PMML_3_1,
-			"exp", "pow", "threshold", "floor", "ceil", "round");
+			PMMLFunctions.EXP, PMMLFunctions.POW, PMMLFunctions.THRESHOLD, PMMLFunctions.FLOOR, PMMLFunctions.CEIL, PMMLFunctions.ROUND);
 		declareFunctions(Version.PMML_4_0,
-			"isMissing", "isNotMissing",
-			"equal", "notEqual", "lessThan", "lessOrEqual", "greaterThan", "greaterOrEqual",
-			"and", "or",
-			"not",
-			"isIn", "isNotIn",
-			"if");
+			PMMLFunctions.ISMISSING, PMMLFunctions.ISNOTMISSING,
+			PMMLFunctions.EQUAL, PMMLFunctions.NOTEQUAL, PMMLFunctions.LESSTHAN, PMMLFunctions.LESSOREQUAL, PMMLFunctions.GREATERTHAN, PMMLFunctions.GREATEROREQUAL,
+			PMMLFunctions.AND, PMMLFunctions.OR,
+			PMMLFunctions.NOT,
+			PMMLFunctions.ISIN, PMMLFunctions.ISNOTIN,
+			PMMLFunctions.IF);
 		declareFunctions(Version.PMML_4_1,
-			"median", "product",
-			"lowercase");
+			PMMLFunctions.MEDIAN, PMMLFunctions.PRODUCT,
+			PMMLFunctions.LOWERCASE);
 		declareFunctions(Version.PMML_4_2,
-			"concat", "replace", "matches");
+			PMMLFunctions.CONCAT, PMMLFunctions.REPLACE, PMMLFunctions.MATCHES);
 		declareFunctions(Version.PMML_4_3,
-			"normalCDF", "normalPDF", "stdNormalCDF", "stdNormalPDF", "erf", "normalIDF", "stdNormalIDF");
+			PMMLFunctions.NORMALCDF, PMMLFunctions.NORMALPDF, PMMLFunctions.STDNORMALCDF, PMMLFunctions.STDNORMALPDF, PMMLFunctions.ERF, PMMLFunctions.NORMALIDF, PMMLFunctions.STDNORMALIDF);
 	}
 
 	static
