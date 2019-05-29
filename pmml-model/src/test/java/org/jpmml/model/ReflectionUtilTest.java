@@ -11,10 +11,13 @@ import java.util.Map;
 
 import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.DataDictionary;
+import org.dmg.pmml.DataField;
+import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLAttributes;
+import org.dmg.pmml.Value;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.regression.RegressionModel;
 import org.junit.Test;
@@ -28,10 +31,59 @@ import static org.junit.Assert.fail;
 public class ReflectionUtilTest {
 
 	@Test
+	public void equals(){
+		DataField left = new DataField()
+			.setName(FieldName.create("x"))
+			.setCyclic(null);
+
+		DataField right = new DataField()
+			.setName(FieldName.create("x"))
+			.setCyclic(DataField.Cyclic.ZERO);
+
+		// Initialize a live list instance
+		right.getValues();
+
+		assertTrue(ReflectionUtil.equals(left, right));
+
+		Value leftValue = new Value()
+			.setValue(0)
+			.setProperty(null);
+
+		Value rightValue = new Value()
+			.setValue(0)
+			.setProperty(Value.Property.VALID);
+
+		right.addValues(rightValue);
+
+		assertFalse(ReflectionUtil.equals(left, right));
+
+		left.addValues(leftValue);
+
+		assertTrue(ReflectionUtil.equals(left, right));
+
+		// Double != Integer
+		leftValue.setValue(((Number)rightValue.getValue()).doubleValue());
+
+		assertFalse(ReflectionUtil.equals(left, right));
+
+		leftValue.setValue(rightValue.getValue());
+
+		assertTrue(ReflectionUtil.equals(left, right));
+
+		Value missingValue = new Value()
+			.setValue(-999)
+			.setProperty(Value.Property.MISSING);
+
+		right.addValues(missingValue);
+
+		assertFalse(ReflectionUtil.equals(left, right));
+	}
+
+	@Test
 	public void copyState(){
 		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), new Header(), new DataDictionary());
 
-		// Initialize the live list instance
+		// Initialize a live list instance
 		pmml.getModels();
 
 		CustomPMML customPmml = new CustomPMML();

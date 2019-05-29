@@ -9,11 +9,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -24,6 +26,82 @@ import org.dmg.pmml.PMMLObject;
 public class ReflectionUtil {
 
 	private ReflectionUtil(){
+	}
+
+	static
+	public boolean equals(Object left, Object right){
+
+		if(left instanceof PMMLObject && right instanceof PMMLObject){
+			return equals((PMMLObject)left, (PMMLObject)right);
+		}
+
+		return Objects.equals(left, right);
+	}
+
+	static
+	public boolean equals(PMMLObject left, PMMLObject right){
+
+		if(!Objects.equals(left.getClass(), right.getClass())){
+			throw new IllegalArgumentException();
+		}
+
+		Map<Field, Method> getterMethods = getGetterMethods(left.getClass());
+
+		Collection<Map.Entry<Field, Method>> entries = getterMethods.entrySet();
+		for(Map.Entry<Field, Method> entry : entries){
+			Field field = entry.getKey();
+			Method getterMethod = entry.getValue();
+
+			Object leftValue;
+			Object rightValue;
+
+			// Avoid getter access, which will initialize previously uninitialized fields with an empty ArrayList instance
+			if((List.class).equals(field.getType())){
+				leftValue = getFieldValue(field, left);
+				rightValue = getFieldValue(field, right);
+			} else
+
+			{
+				leftValue = getGetterMethodValue(getterMethod, left);
+				rightValue = getGetterMethodValue(getterMethod, right);
+			}
+
+			leftValue = standardizeValue(leftValue);
+			rightValue = standardizeValue(rightValue);
+
+			boolean equals;
+
+			if(leftValue instanceof List && rightValue instanceof List){
+				List<?> leftValues = (List<?>)leftValue;
+				List<?> rightValues = (List<?>)rightValue;
+
+				if(leftValues.size() == rightValues.size()){
+					equals = true;
+
+					for(int i = 0, max = leftValues.size(); i < max; i++){
+						equals &= equals(leftValues.get(i), rightValues.get(i));
+
+						if(!equals){
+							break;
+						}
+					}
+				} else
+
+				{
+					equals = false;
+				}
+			} else
+
+			{
+				equals = equals(leftValue, rightValue);
+			} // End if
+
+			if(!equals){
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	static
@@ -188,6 +266,20 @@ public class ReflectionUtil {
 		}
 
 		return false;
+	}
+
+	static
+	private Object standardizeValue(Object value){
+
+		if(value instanceof List){
+			List<?> list = (List<?>)value;
+
+			if(list.isEmpty()){
+				return null;
+			}
+		}
+
+		return value;
 	}
 
 	static
