@@ -156,8 +156,9 @@ public class FieldDependencyResolver extends FieldResolver {
 		return this.outputFields;
 	}
 
-	public void expand(Set<Field<?>> fields, Set<? extends Field<?>> expandableFields){
+	public Set<Field<?>> expand(Set<Field<?>> fields, Set<? extends Field<?>> expandableFields){
 		Set<Field<?>> removableFields = new LinkedHashSet<>();
+		Set<Field<?>> expandedFields = new LinkedHashSet<>();
 
 		for(int i = 0; true; i++){
 
@@ -185,7 +186,11 @@ public class FieldDependencyResolver extends FieldResolver {
 			}
 
 			fields.removeAll(removableFields);
+
+			expandedFields.addAll(removableFields);
 		}
+
+		return expandedFields;
 	}
 
 	private void process(Field<?> field){
