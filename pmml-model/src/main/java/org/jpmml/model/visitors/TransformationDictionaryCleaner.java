@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
+import org.dmg.pmml.HasDerivedFields;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
@@ -32,7 +33,7 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 
 			LocalTransformations localTransformations = model.getLocalTransformations();
 			if(localTransformations != null){
-				processLocalTransformations(localTransformations);
+				processDerivedFields(localTransformations);
 
 				if(!localTransformations.hasDerivedFields()){
 					model.setLocalTransformations(null);
@@ -45,7 +46,7 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 
 			TransformationDictionary transformationDictionary = pmml.getTransformationDictionary();
 			if(transformationDictionary != null){
-				processTransformationDictionary(transformationDictionary);
+				processDerivedFields(transformationDictionary);
 
 				if(!transformationDictionary.hasDefineFunctions() && !transformationDictionary.hasDerivedFields()){
 					pmml.setTransformationDictionary(null);
@@ -56,21 +57,10 @@ public class TransformationDictionaryCleaner extends ModelCleaner {
 		return parent;
 	}
 
-	private void processLocalTransformations(LocalTransformations localTransformations){
+	private void processDerivedFields(HasDerivedFields<?> hasDerivedFields){
 
-		if(localTransformations.hasDerivedFields()){
-			List<DerivedField> derivedFields = localTransformations.getDerivedFields();
-
-			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(derivedFields);
-
-			derivedFields.retainAll(activeDerivedFields);
-		}
-	}
-
-	private void processTransformationDictionary(TransformationDictionary transformationDictionary){
-
-		if(transformationDictionary.hasDerivedFields()){
-			List<DerivedField> derivedFields = transformationDictionary.getDerivedFields();
+		if(hasDerivedFields.hasDerivedFields()){
+			List<DerivedField> derivedFields = hasDerivedFields.getDerivedFields();
 
 			Set<DerivedField> activeDerivedFields = getActiveDerivedFields(derivedFields);
 

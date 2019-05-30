@@ -1246,6 +1246,10 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='LocalTransformations']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasDerivedFields&lt;LocalTransformations&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='LognormalDistributionForBN']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateClass>
 			<jaxb:class
@@ -3026,6 +3030,10 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:property
 				name="transformed"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TransformationDictionary']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasDerivedFields&lt;TransformationDictionary&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType">

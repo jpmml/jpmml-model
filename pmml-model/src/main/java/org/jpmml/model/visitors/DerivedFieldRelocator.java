@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
+import org.dmg.pmml.HasDerivedFields;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
@@ -201,46 +202,45 @@ public class DerivedFieldRelocator extends DeepFieldResolver {
 						}
 					}
 				}
-
 				return super.visit(transformationDictionary);
 			}
 		};
 
 		Visitor sorter = new AbstractVisitor(){
 
+			private Comparator<DerivedField> comparator = new Comparator<DerivedField>(){
+
+				@Override
+				public int compare(DerivedField left, DerivedField right){
+					Integer leftIndex = orderMap.get(left);
+					Integer rightIndex = orderMap.get(right);
+
+					return (leftIndex).compareTo(rightIndex);
+				}
+			};
+
+
 			@Override
 			public VisitorAction visit(LocalTransformations localTransformations){
-
-				if(localTransformations.hasDerivedFields()){
-					sort(localTransformations.getDerivedFields());
-				}
+				sort(localTransformations);
 
 				return super.visit(localTransformations);
 			}
 
 			@Override
 			public VisitorAction visit(TransformationDictionary transformationDictionary){
-
-				if(transformationDictionary.hasDerivedFields()){
-					sort(transformationDictionary.getDerivedFields());
-				}
+				sort(transformationDictionary);
 
 				return super.visit(transformationDictionary);
 			}
 
-			private void sort(List<DerivedField> derivedFields){
-				Comparator<DerivedField> comparator = new Comparator<DerivedField>(){
+			private void sort(HasDerivedFields<?> hasDerivedFields){
 
-					@Override
-					public int compare(DerivedField left, DerivedField right){
-						Integer leftIndex = orderMap.get(left);
-						Integer rightIndex = orderMap.get(right);
+				if(hasDerivedFields.hasDerivedFields()){
+					List<DerivedField> derivedFields = hasDerivedFields.getDerivedFields();
 
-						return (leftIndex).compareTo(rightIndex);
-					}
-				};
-
-				derivedFields.sort(comparator);
+					derivedFields.sort(this.comparator);
+				}
 			}
 		};
 

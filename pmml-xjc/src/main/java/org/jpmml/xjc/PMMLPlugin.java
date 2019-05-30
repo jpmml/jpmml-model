@@ -431,6 +431,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				{{"HasContinuousDomain"}, {"hasIntervals", "getIntervals", "addIntervals"}},
 				{{"HasDataType", "Field"}, {"getDataType", "setDataType"}},
 				{{"HasDefaultValue"}, {"getDefaultValue", "setDefaultValue"}},
+				{{"HasDerivedFields"}, {"hasDerivedFields", "getDerivedFields", "addDerivedFields"}},
 				{{"HasDiscreteDomain"}, {"hasValues", "getValues", "addValues"}},
 				{{"HasDisplayName"}, {"getDisplayName", "setDisplayName"}},
 				{{"HasExpression"}, {"getExpression", "setExpression"}},
