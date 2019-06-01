@@ -11,6 +11,7 @@ import com.sun.xml.bind.v2.runtime.JAXBContextImpl;
 import com.sun.xml.bind.v2.runtime.MarshallerImpl;
 import com.sun.xml.bind.v2.runtime.output.XmlOutput;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.PMMLObject;
 
 public class MetroJAXBUtil {
 
@@ -19,6 +20,11 @@ public class MetroJAXBUtil {
 
 	static
 	public void marshalPMML(PMML pmml, OutputStream os) throws JAXBException {
+		marshal(pmml, os);
+	}
+
+	static
+	public void marshal(PMMLObject object, OutputStream os) throws JAXBException {
 		JAXBContextImpl context;
 
 		try {
@@ -31,6 +37,6 @@ public class MetroJAXBUtil {
 
 		XmlOutput xmlOutput = new PrettyUTF8XmlOutput(os, context.getUTF8NameTable());
 
-		marshaller.marshal(pmml, xmlOutput);
+		marshaller.marshal(object, xmlOutput);
 	}
 }
