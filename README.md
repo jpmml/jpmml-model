@@ -123,7 +123,7 @@ For example:
 java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/example-1.4-SNAPSHOT.jar ...
 ```
 
-# Support and Documentation #
+# Support #
 
 Limited public support is available via the [JPMML mailing list](https://groups.google.com/forum/#!forum/jpmml).
 
