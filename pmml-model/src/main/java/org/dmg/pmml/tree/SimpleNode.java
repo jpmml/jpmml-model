@@ -7,6 +7,7 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 
 abstract
@@ -20,6 +21,7 @@ public class SimpleNode extends Node {
 	public SimpleNode(){
 	}
 
+	@CopyConstructor
 	public SimpleNode(Node node){
 		setScore(node.getScore());
 		setPredicate(node.getPredicate());

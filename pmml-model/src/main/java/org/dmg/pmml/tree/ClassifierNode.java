@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dmg.pmml.ScoreDistribution;
+import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 
 public class ClassifierNode extends SimpleNode {
@@ -25,6 +26,7 @@ public class ClassifierNode extends SimpleNode {
 	public ClassifierNode(){
 	}
 
+	@CopyConstructor
 	public ClassifierNode(Node node){
 		super(node);
 

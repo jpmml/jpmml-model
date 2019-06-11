@@ -42,6 +42,7 @@ public class CopyConstructorPlugin extends Plugin {
 		JCodeModel codeModel = model.codeModel;
 
 		JClass nodeClass = codeModel.ref("org.dmg.pmml.tree.Node");
+		JClass copyConstructorAnnotation = codeModel.ref("org.jpmml.model.annotations.CopyConstructor");
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
@@ -52,7 +53,9 @@ public class CopyConstructorPlugin extends Plugin {
 			}
 
 			JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+
 			JMethod copyConstructor = beanClazz.constructor(JMod.PUBLIC);
+			copyConstructor.annotate(copyConstructorAnnotation);
 
 			JVar objectParam = copyConstructor.param(nodeClass, "node");
 

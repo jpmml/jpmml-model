@@ -3,6 +3,7 @@
  */
 package org.dmg.pmml.tree;
 
+import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 
 public class CountingLeafNode extends LeafNode {
@@ -13,6 +14,7 @@ public class CountingLeafNode extends LeafNode {
 	public CountingLeafNode(){
 	}
 
+	@CopyConstructor
 	public CountingLeafNode(Node node){
 		super(node);
 

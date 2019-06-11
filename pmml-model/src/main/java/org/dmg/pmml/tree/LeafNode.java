@@ -3,6 +3,7 @@
  */
 package org.dmg.pmml.tree;
 
+import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 
 public class LeafNode extends SimpleNode {
@@ -13,6 +14,7 @@ public class LeafNode extends SimpleNode {
 	public LeafNode(){
 	}
 
+	@CopyConstructor
 	public LeafNode(Node node){
 		super(node);
 

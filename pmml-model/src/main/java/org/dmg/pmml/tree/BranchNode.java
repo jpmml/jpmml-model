@@ -6,6 +6,7 @@ package org.dmg.pmml.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 
 public class BranchNode extends SimpleNode {
@@ -20,6 +21,7 @@ public class BranchNode extends SimpleNode {
 	public BranchNode(){
 	}
 
+	@CopyConstructor
 	public BranchNode(Node node){
 		super(node);
 
