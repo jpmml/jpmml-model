@@ -8,6 +8,7 @@ import javax.xml.namespace.QName;
 
 import org.dmg.pmml.Cell;
 import org.jpmml.model.annotations.Property;
+import org.jpmml.model.annotations.ValueConstructor;
 
 @XmlRootElement (
 	name = "input",
@@ -18,6 +19,7 @@ public class InputCell extends Cell {
 	public InputCell(){
 	}
 
+	@ValueConstructor
 	public InputCell(@Property("value") Object value){
 		super(value);
 	}

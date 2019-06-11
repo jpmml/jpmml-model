@@ -15,6 +15,7 @@ import javax.xml.namespace.QName;
 import org.dmg.pmml.adapters.ObjectAdapter;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
 import org.jpmml.model.annotations.Property;
+import org.jpmml.model.annotations.ValueConstructor;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType (
@@ -35,6 +36,7 @@ public class Cell extends PMMLObject {
 	public Cell(){
 	}
 
+	@ValueConstructor
 	public Cell(@Property("value") Object value){
 		this.value = value;
 	}

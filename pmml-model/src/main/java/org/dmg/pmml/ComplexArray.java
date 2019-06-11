@@ -11,12 +11,14 @@ import java.util.Set;
 
 import org.jpmml.model.ArrayUtil;
 import org.jpmml.model.annotations.Property;
+import org.jpmml.model.annotations.ValueConstructor;
 
 public class ComplexArray extends Array {
 
 	public ComplexArray(){
 	}
 
+	@ValueConstructor
 	public ComplexArray(@Property("type") Array.Type type, @Property("value") Collection<?> value){
 		super(type, requireComplexValue(value));
 	}

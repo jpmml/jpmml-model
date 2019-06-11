@@ -57,6 +57,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 		JCodeModel codeModel = outline.getCodeModel();
 
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
+		JClass valueConstructorAnnotation = codeModel.ref("org.jpmml.model.annotations.ValueConstructor");
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
@@ -115,7 +116,9 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 			}
 
 			JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+
 			JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
+			valueConstructor.annotate(valueConstructorAnnotation);
 
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
