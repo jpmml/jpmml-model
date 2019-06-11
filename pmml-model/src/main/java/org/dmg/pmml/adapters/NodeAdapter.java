@@ -26,7 +26,7 @@ public class NodeAdapter extends XmlAdapter<ComplexNode, Node> {
 		return nodeTransformer.toComplexNode(node);
 	}
 
-	private static final ThreadLocal<NodeTransformer> NODE_TRANSFORMER_PROVIDER = new ThreadLocal<NodeTransformer>(){
+	public static final ThreadLocal<NodeTransformer> NODE_TRANSFORMER_PROVIDER = new ThreadLocal<NodeTransformer>(){
 
 		@Override
 		protected NodeTransformer initialValue(){
