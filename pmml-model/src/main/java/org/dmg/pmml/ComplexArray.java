@@ -10,23 +10,24 @@ import java.util.List;
 import java.util.Set;
 
 import org.jpmml.model.ArrayUtil;
+import org.jpmml.model.annotations.Property;
 
 public class ComplexArray extends Array {
 
 	public ComplexArray(){
 	}
 
-	public ComplexArray(Array.Type type, Collection<?> value){
+	public ComplexArray(@Property("type") Array.Type type, @Property("value") Collection<?> value){
 		super(type, requireComplexValue(value));
 	}
 
 	@Override
-	public ComplexArray setN(Integer n){
+	public ComplexArray setN(@Property("n") Integer n){
 		return (ComplexArray)super.setN(n);
 	}
 
 	@Override
-	public ComplexArray setType(Array.Type type){
+	public ComplexArray setType(@Property("type") Array.Type type){
 		return (ComplexArray)super.setType(type);
 	}
 
@@ -44,7 +45,7 @@ public class ComplexArray extends Array {
 	}
 
 	@Override
-	public ComplexArray setValue(Object value){
+	public ComplexArray setValue(@Property("value") Object value){
 		return (ComplexArray)super.setValue(requireComplexValue(value));
 	}
 

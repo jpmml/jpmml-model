@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dmg.pmml.ScoreDistribution;
+import org.jpmml.model.annotations.Property;
 
 public class ClassifierNode extends SimpleNode {
 
@@ -46,7 +47,7 @@ public class ClassifierNode extends SimpleNode {
 	}
 
 	@Override
-	public ClassifierNode setId(Object id){
+	public ClassifierNode setId(@Property("id") Object id){
 		this.id = id;
 
 		return this;
@@ -58,7 +59,7 @@ public class ClassifierNode extends SimpleNode {
 	}
 
 	@Override
-	public ClassifierNode setRecordCount(Number recordCount){
+	public ClassifierNode setRecordCount(@Property("recordCount") Number recordCount){
 		this.recordCount = recordCount;
 
 		return this;
@@ -70,7 +71,7 @@ public class ClassifierNode extends SimpleNode {
 	}
 
 	@Override
-	public ClassifierNode setDefaultChild(Object defaultChild){
+	public ClassifierNode setDefaultChild(@Property("defaultChild") Object defaultChild){
 		this.defaultChild = defaultChild;
 
 		return this;

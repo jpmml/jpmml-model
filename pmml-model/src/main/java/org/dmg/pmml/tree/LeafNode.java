@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml.tree;
 
+import org.jpmml.model.annotations.Property;
+
 public class LeafNode extends SimpleNode {
 
 	private Object id = null;
@@ -23,7 +25,7 @@ public class LeafNode extends SimpleNode {
 	}
 
 	@Override
-	public SimpleNode setId(Object id){
+	public SimpleNode setId(@Property("id") Object id){
 		this.id = id;
 
 		return this;

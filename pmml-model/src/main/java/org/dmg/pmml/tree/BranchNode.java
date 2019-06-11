@@ -6,6 +6,8 @@ package org.dmg.pmml.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jpmml.model.annotations.Property;
+
 public class BranchNode extends SimpleNode {
 
 	private Object id = null;
@@ -35,7 +37,7 @@ public class BranchNode extends SimpleNode {
 	}
 
 	@Override
-	public SimpleNode setId(Object id){
+	public SimpleNode setId(@Property("id") Object id){
 		this.id = id;
 
 		return this;
@@ -47,7 +49,7 @@ public class BranchNode extends SimpleNode {
 	}
 
 	@Override
-	public BranchNode setDefaultChild(Object defaultChild){
+	public BranchNode setDefaultChild(@Property("defaultChild") Object defaultChild){
 		this.defaultChild = defaultChild;
 
 		return this;

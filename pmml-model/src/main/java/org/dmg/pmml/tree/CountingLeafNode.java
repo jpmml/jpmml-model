@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml.tree;
 
+import org.jpmml.model.annotations.Property;
+
 public class CountingLeafNode extends LeafNode {
 
 	private Number recordCount = null;
@@ -23,7 +25,7 @@ public class CountingLeafNode extends LeafNode {
 	}
 
 	@Override
-	public CountingLeafNode setRecordCount(Number recordCount){
+	public CountingLeafNode setRecordCount(@Property("recordCount") Number recordCount){
 		this.recordCount = recordCount;
 
 		return this;

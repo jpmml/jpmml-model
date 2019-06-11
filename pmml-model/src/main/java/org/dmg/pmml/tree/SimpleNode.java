@@ -7,6 +7,7 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.jpmml.model.annotations.Property;
 
 abstract
 public class SimpleNode extends Node {
@@ -30,7 +31,7 @@ public class SimpleNode extends Node {
 	}
 
 	@Override
-	public SimpleNode setScore(Object score){
+	public SimpleNode setScore(@Property("score") Object score){
 		this.score = score;
 
 		return this;
@@ -42,7 +43,7 @@ public class SimpleNode extends Node {
 	}
 
 	@Override
-	public SimpleNode setPredicate(Predicate predicate){
+	public SimpleNode setPredicate(@Property("predicate") Predicate predicate){
 		this.predicate = predicate;
 
 		return this;
