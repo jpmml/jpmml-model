@@ -3,6 +3,7 @@
  */
 package org.jpmml.xjc;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -15,6 +16,7 @@ import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
+import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
@@ -25,6 +27,8 @@ import com.sun.tools.xjc.model.CValuePropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
+import com.sun.xml.xsom.XSComponent;
+import com.sun.xml.xsom.XSParticle;
 import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
 import org.xml.sax.ErrorHandler;
 
@@ -73,6 +77,8 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				public boolean test(FieldOutline fieldOutline){
 					CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
+					XSComponent xsComponent = propertyInfo.getSchemaComponent();
+
 					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
 					JMods modifiers = fieldVar.mods();
@@ -89,7 +95,25 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 					if(propertyInfo instanceof CElementPropertyInfo && !getIgnoreElements()){
 						CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
 
-						return !getIgnoreElements() && elementPropertyInfo.isRequired();
+						switch((fieldVar.type()).fullName()){
+							case "org.dmg.pmml.EmbeddedModel":
+								return false;
+							default:
+								break;
+						}
+
+						boolean required = elementPropertyInfo.isRequired();
+
+						if(xsComponent instanceof XSParticle){
+							XSParticle xsParticle = (XSParticle)xsComponent;
+
+							BigInteger minOccurs = xsParticle.getMinOccurs();
+							BigInteger maxOccurs = xsParticle.getMaxOccurs();
+
+							required |= (minOccurs.intValue() == 1 && maxOccurs.intValue() == 1);
+						}
+
+						return !getIgnoreElements() && required;
 					} else
 
 					if(propertyInfo instanceof CReferencePropertyInfo){
@@ -115,7 +139,10 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 				continue;
 			}
 
-			JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+			JMethod defaultConstructor = beanClazz.getConstructor(new JType[0]);
+			if(defaultConstructor == null){
+				defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+			}
 
 			JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
 			valueConstructor.annotate(valueConstructorAnnotation);

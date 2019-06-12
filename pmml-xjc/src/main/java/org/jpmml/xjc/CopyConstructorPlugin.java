@@ -52,7 +52,10 @@ public class CopyConstructorPlugin extends Plugin {
 				continue;
 			}
 
-			JMethod defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+			JMethod defaultConstructor = beanClazz.getConstructor(new JType[0]);
+			if(defaultConstructor == null){
+				defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+			}
 
 			JMethod copyConstructor = beanClazz.constructor(JMod.PUBLIC);
 			copyConstructor.annotate(copyConstructorAnnotation);

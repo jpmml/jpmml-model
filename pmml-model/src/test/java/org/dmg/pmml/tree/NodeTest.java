@@ -28,10 +28,9 @@ public class NodeTest {
 
 		List<Node> nodes = node1.getNodes();
 
-		Node node2a = new ComplexNode()
+		Node node2a = new ComplexNode(new False())
 			.setId("2a")
-			.addExtensions(new Extension())
-			.setPredicate(new False());
+			.addExtensions(new Extension());
 
 		nodes.add(node2a);
 

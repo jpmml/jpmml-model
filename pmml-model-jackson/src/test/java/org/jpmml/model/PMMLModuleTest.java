@@ -45,8 +45,7 @@ public class PMMLModuleTest {
 
 		SimplePredicate simplePredicate = new SimplePredicate(FieldName.create("x"), SimplePredicate.Operator.IS_NOT_MISSING);
 
-		Node node = new ComplexNode()
-			.setPredicate(simplePredicate);
+		Node node = new ComplexNode(simplePredicate);
 
 		TreeModel treeModel = new TreeModel()
 			.setMiningSchema(miningSchema)
