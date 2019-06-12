@@ -9,6 +9,7 @@ import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
+import org.jpmml.model.annotations.ValueConstructor;
 
 abstract
 public class SimpleNode extends Node {
@@ -19,6 +20,12 @@ public class SimpleNode extends Node {
 
 
 	public SimpleNode(){
+	}
+
+	@ValueConstructor
+	public SimpleNode(@Property("score") Object score, @Property("predicate") Predicate predicate){
+		this.score = score;
+		this.predicate = predicate;
 	}
 
 	@CopyConstructor

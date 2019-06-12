@@ -22,27 +22,15 @@ public class NodeScoreOptimizerTest {
 
 	@Test
 	public void parseAndIntern(){
-		Node node1a = new BranchNode()
-			.setScore("1")
-			.setPredicate(new True());
+		Node node1a = new BranchNode("1", new True());
 
-		Node node2a = new LeafNode()
-			.setScore("2")
-			.setPredicate(new False());
-
-		Node node2b = new BranchNode()
-			.setScore("2.0")
-			.setPredicate(new False());
-
-		Node node2c = new LeafNode()
-			.setScore(2.0f)
-			.setPredicate(new True());
+		Node node2a = new LeafNode("2", new False());
+		Node node2b = new BranchNode("2.0", new False());
+		Node node2c = new LeafNode(2.0f, new True());
 
 		node1a.addNodes(node2a, node2b, node2c);
 
-		Node node3a = new LeafNode()
-			.setScore("error")
-			.setPredicate(new False());
+		Node node3a = new LeafNode("error", new False());
 
 		node2b.addNodes(node3a);
 

@@ -23,9 +23,8 @@ public class NodeTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
-		Node node1 = new BranchNode()
-			.setId(new Integer(1))
-			.setPredicate(new True());
+		Node node1 = new BranchNode(null, new True())
+			.setId(new Integer(1));
 
 		List<Node> nodes = node1.getNodes();
 
@@ -36,9 +35,8 @@ public class NodeTest {
 
 		nodes.add(node2a);
 
-		Node node2b = new LeafNode()
-			.setId("2b")
-			.setPredicate(new True());
+		Node node2b = new LeafNode(null, new True())
+			.setId("2b");
 
 		nodes.add(node2b);
 

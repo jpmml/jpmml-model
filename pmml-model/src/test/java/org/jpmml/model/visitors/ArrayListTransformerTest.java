@@ -39,8 +39,7 @@ public class ArrayListTransformerTest {
 
 		Predicate predicate = new SimpleSetPredicate(FieldName.create("x"), SimpleSetPredicate.BooleanOperator.IS_IN, array);
 
-		Node node3a = new LeafNode()
-			.setPredicate(predicate);
+		Node node3a = new LeafNode(null, predicate);
 
 		node2a.addNodes(node3a);
 

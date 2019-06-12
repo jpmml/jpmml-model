@@ -6,8 +6,10 @@ package org.dmg.pmml.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dmg.pmml.Predicate;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
+import org.jpmml.model.annotations.ValueConstructor;
 
 public class BranchNode extends SimpleNode {
 
@@ -19,6 +21,11 @@ public class BranchNode extends SimpleNode {
 
 
 	public BranchNode(){
+	}
+
+	@ValueConstructor
+	public BranchNode(@Property("score") Object score, @Property("predicate") Predicate predicate){
+		super(score, predicate);
 	}
 
 	@CopyConstructor

@@ -6,9 +6,11 @@ package org.dmg.pmml.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.dmg.pmml.Predicate;
 import org.dmg.pmml.ScoreDistribution;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
+import org.jpmml.model.annotations.ValueConstructor;
 
 public class ClassifierNode extends SimpleNode {
 
@@ -24,6 +26,11 @@ public class ClassifierNode extends SimpleNode {
 
 
 	public ClassifierNode(){
+	}
+
+	@ValueConstructor
+	public ClassifierNode(@Property("score") Object score, @Property("predicate") Predicate predicate){
+		super(score, predicate);
 	}
 
 	@CopyConstructor
