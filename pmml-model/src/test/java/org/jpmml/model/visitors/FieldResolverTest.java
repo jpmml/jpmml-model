@@ -6,6 +6,7 @@ package org.jpmml.model.visitors;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.DerivedField;
@@ -217,6 +218,10 @@ public class FieldResolverTest {
 
 	static
 	private void checkFields(Set<FieldName> names, Collection<Field<?>> fields){
-		assertEquals(names, FieldUtil.nameSet(fields));
+		Set<FieldName> fieldNames = fields.stream()
+			.map(field -> field.getName())
+			.collect(Collectors.toSet());
+
+		assertEquals(names, fieldNames);
 	}
 }
