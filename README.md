@@ -123,6 +123,19 @@ For example:
 java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/example-1.4-SNAPSHOT.jar ...
 ```
 
+# Documentation #
+
+Current:
+
+* [Troubleshooting PMML documents](https://openscoring.io/blog/2018/06/15/troubleshooting_pmml/)
+* [Configuring JAXB dependency for Java SE versions 8, 9, 10 and 11](https://openscoring.io/blog/2019/02/28/jpmml_model_api_configuring_jaxb_dependency/)
+
+Slightly outdated:
+
+* [Converting PMML documents between different schema versions](https://openscoring.io/blog/2014/06/20/jpmml_model_api_import_export/)
+* [Transforming and measuring the memory consumption of PMML class model objects using the Java agent technology](https://openscoring.io/blog/2015/02/06/jpmml_model_api_transform_measure/)
+* [Extending PMML documents with custom XML content](https://openscoring.io/blog/2015/05/15/jpmml_model_api_vendor_extensions/)
+
 # Support #
 
 Limited public support is available via the [JPMML mailing list](https://groups.google.com/forum/#!forum/jpmml).
