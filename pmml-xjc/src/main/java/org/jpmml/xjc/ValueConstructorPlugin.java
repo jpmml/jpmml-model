@@ -89,7 +89,41 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 					if(propertyInfo instanceof CAttributePropertyInfo){
 						CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
 
-						return !getIgnoreAttributes() && attributePropertyInfo.isRequired();
+						boolean required = attributePropertyInfo.isRequired();
+
+						switch(beanClazz.fullName()){
+							case "org.dmg.pmml.DataField":
+							case "org.dmg.pmml.DefineFunction":
+							case "org.dmg.pmml.DerivedField":
+							case "org.dmg.pmml.OutputField":
+								{
+									switch(fieldVar.name()){
+										case "name":
+										case "opType":
+										case "dataType":
+											required |= true;
+											break;
+										default:
+											break;
+									}
+								}
+								break;
+							case "org.dmg.pmml.SimplePredicate":
+								{
+									switch(fieldVar.name()){
+										case "value":
+											required |= true;
+											break;
+										default:
+											break;
+									}
+								}
+								break;
+							default:
+								break;
+						}
+
+						return !getIgnoreAttributes() && required;
 					} else
 
 					if(propertyInfo instanceof CElementPropertyInfo && !getIgnoreElements()){
@@ -111,6 +145,22 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 							BigInteger maxOccurs = xsParticle.getMaxOccurs();
 
 							required |= (minOccurs.intValue() >= 1);
+						}
+
+						switch(beanClazz.fullName()){
+							case "org.dmg.pmml.OutputField":
+								{
+									switch(fieldVar.name()){
+										case "expression":
+											required = false;
+											break;
+										default:
+											break;
+									}
+								}
+								break;
+							default:
+								break;
 						}
 
 						return !getIgnoreElements() && required;

@@ -164,7 +164,7 @@ public class VersionInspectorTest {
 		Apply apply = new Apply()
 			.setFunction(PMMLFunctions.LOWERCASE);
 
-		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, null, apply)
+		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, DataType.STRING, null, apply)
 			.addParameterFields(new ParameterField(FieldName.create("string")));
 
 		TransformationDictionary transformationDictionary = new TransformationDictionary()

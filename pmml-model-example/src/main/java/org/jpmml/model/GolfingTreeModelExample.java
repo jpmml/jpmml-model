@@ -76,21 +76,21 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 		// Upper half of the tree
 		root.addNodes(
-			new BranchNode("will play", createSimplePredicate(outlook, Operator.EQUAL, "sunny"))
+			new BranchNode("will play", new SimplePredicate(outlook, Operator.EQUAL, "sunny"))
 				.addNodes(
 					new BranchNode("will play",
 						createCompoundPredicate(BooleanOperator.AND,
-							createSimplePredicate(temperature, Operator.LESS_THAN, "90"),
-							createSimplePredicate(temperature, Operator.GREATER_THAN, "50"))
+							new SimplePredicate(temperature, Operator.LESS_THAN, "90"),
+							new SimplePredicate(temperature, Operator.GREATER_THAN, "50"))
 						)
 						.addNodes(
-							new LeafNode("will play", createSimplePredicate(humidity, Operator.LESS_THAN, "80")),
-							new LeafNode("no play", createSimplePredicate(humidity, Operator.GREATER_OR_EQUAL, "80"))
+							new LeafNode("will play", new SimplePredicate(humidity, Operator.LESS_THAN, "80")),
+							new LeafNode("no play", new SimplePredicate(humidity, Operator.GREATER_OR_EQUAL, "80"))
 						),
 					new LeafNode("no play",
 						createCompoundPredicate(BooleanOperator.OR,
-							createSimplePredicate(temperature, Operator.GREATER_OR_EQUAL, "90"),
-							createSimplePredicate(temperature, Operator.LESS_OR_EQUAL, "50"))
+							new SimplePredicate(temperature, Operator.GREATER_OR_EQUAL, "90"),
+							new SimplePredicate(temperature, Operator.LESS_OR_EQUAL, "50"))
 						)
 				)
 		);
@@ -99,22 +99,22 @@ public class GolfingTreeModelExample extends ProductionExample {
 		root.addNodes(
 			new BranchNode("may play",
 				createCompoundPredicate(BooleanOperator.OR,
-					createSimplePredicate(outlook, Operator.EQUAL, "overcast"),
-					createSimplePredicate(outlook, Operator.EQUAL, "rain"))
+					new SimplePredicate(outlook, Operator.EQUAL, "overcast"),
+					new SimplePredicate(outlook, Operator.EQUAL, "rain"))
 				)
 				.addNodes(
 					new LeafNode("may play",
 						createCompoundPredicate(BooleanOperator.AND,
-							createSimplePredicate(temperature, Operator.GREATER_THAN, "60"),
-							createSimplePredicate(temperature, Operator.LESS_THAN, "100"),
-							createSimplePredicate(outlook, Operator.EQUAL, "overcast"),
-							createSimplePredicate(humidity, Operator.LESS_THAN, "70"),
-							createSimplePredicate(windy, Operator.EQUAL, "false"))
+							new SimplePredicate(temperature, Operator.GREATER_THAN, "60"),
+							new SimplePredicate(temperature, Operator.LESS_THAN, "100"),
+							new SimplePredicate(outlook, Operator.EQUAL, "overcast"),
+							new SimplePredicate(humidity, Operator.LESS_THAN, "70"),
+							new SimplePredicate(windy, Operator.EQUAL, "false"))
 						),
 					new LeafNode("no play",
 						createCompoundPredicate(BooleanOperator.AND,
-							createSimplePredicate(outlook, Operator.EQUAL, "rain"),
-							createSimplePredicate(humidity, Operator.LESS_THAN, "70"))
+							new SimplePredicate(outlook, Operator.EQUAL, "rain"),
+							new SimplePredicate(humidity, Operator.LESS_THAN, "70"))
 						)
 				)
 		);
@@ -137,12 +137,6 @@ public class GolfingTreeModelExample extends ProductionExample {
 		}
 
 		return result.toArray(new Value[result.size()]);
-	}
-
-	static
-	private SimplePredicate createSimplePredicate(FieldName name, SimplePredicate.Operator operator, String value){
-		return new SimplePredicate(name, operator)
-			.setValue(value);
 	}
 
 	static

@@ -43,7 +43,7 @@ public class PMMLModuleTest {
 
 		assertSame(dataField.getName(), miningField.getName());
 
-		SimplePredicate simplePredicate = new SimplePredicate(FieldName.create("x"), SimplePredicate.Operator.IS_NOT_MISSING);
+		SimplePredicate simplePredicate = new SimplePredicate(FieldName.create("x"), SimplePredicate.Operator.IS_NOT_MISSING, null);
 
 		Node node = new ComplexNode(simplePredicate);
 
