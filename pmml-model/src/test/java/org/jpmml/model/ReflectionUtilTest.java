@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -145,6 +146,28 @@ public class ReflectionUtilTest {
 			fail();
 		} catch(RuntimeException re){
 			// Ignored
+		}
+	}
+
+	@Test
+	public void getAttributeGetterMethods(){
+		List<Field> fields = ReflectionUtil.getAttributeFields();
+
+		for(Field field : fields){
+			Method getterMethod = ReflectionUtil.getGetterMethod(field);
+
+			assertNotNull(getterMethod);
+		}
+	}
+
+	@Test
+	public void getElementGetterMethods(){
+		List<Field> fields = ReflectionUtil.getElementFields();
+
+		for(Field field : fields){
+			Method getterMethod = ReflectionUtil.getGetterMethod(field);
+
+			assertNotNull(getterMethod);
 		}
 	}
 
