@@ -110,7 +110,7 @@ public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
 							BigInteger minOccurs = xsParticle.getMinOccurs();
 							BigInteger maxOccurs = xsParticle.getMaxOccurs();
 
-							required |= (minOccurs.intValue() == 1 && maxOccurs.intValue() == 1);
+							required |= (minOccurs.intValue() >= 1);
 						}
 
 						return !getIgnoreElements() && required;

@@ -22,7 +22,7 @@ public class StringInternerTest {
 
 		assertNotSame(left.getValue(), right.getValue());
 
-		CompoundPredicate compoundPredicate = new CompoundPredicate(CompoundPredicate.BooleanOperator.OR)
+		CompoundPredicate compoundPredicate = new CompoundPredicate(CompoundPredicate.BooleanOperator.OR, null)
 			.addPredicates(left, right);
 
 		StringInterner interner = new StringInterner();

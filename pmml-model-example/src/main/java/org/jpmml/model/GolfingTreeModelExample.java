@@ -147,7 +147,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 	static
 	private CompoundPredicate createCompoundPredicate(CompoundPredicate.BooleanOperator booleanOperator, Predicate... predicates){
-		return new CompoundPredicate(booleanOperator)
+		return new CompoundPredicate(booleanOperator, null)
 			.addPredicates(predicates);
 	}
 }
