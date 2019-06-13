@@ -23,18 +23,18 @@ public class NodeTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
-		Node node1 = new BranchNode(null, new True())
+		Node node1 = new BranchNode(null, True.INSTANCE)
 			.setId(new Integer(1));
 
 		List<Node> nodes = node1.getNodes();
 
-		Node node2a = new ComplexNode(new False())
+		Node node2a = new ComplexNode(False.INSTANCE)
 			.setId("2a")
 			.addExtensions(new Extension());
 
 		nodes.add(node2a);
 
-		Node node2b = new LeafNode(null, new True())
+		Node node2b = new LeafNode(null, True.INSTANCE)
 			.setId("2b");
 
 		nodes.add(node2b);

@@ -423,6 +423,10 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				}
 			}
 
+			if(checkType(beanClazz, "org.dmg.pmml.False") || checkType(beanClazz, "org.dmg.pmml.True")){
+				createSingleton(codeModel, beanClazz);
+			} // End if
+
 			if(model.serialVersionUID != null){
 				beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, long.class, "serialVersionUID", JExpr.lit(model.serialVersionUID));
 			}
@@ -630,6 +634,23 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		method.body()._return(JExpr.invoke(setterName).arg(nameParameter));
 
 		moveBefore(beanClazz, method, getterMethod);
+	}
+
+	static
+	public void createSingleton(JCodeModel codeModel, JDefinedClass beanClazz){
+		JDefinedClass definedBeanClazz = codeModel.anonymousClass(beanClazz);
+
+		JMethod hasExtensionsMethod = definedBeanClazz.method(JMod.PUBLIC, boolean.class, "hasExtensions");
+		hasExtensionsMethod.annotate(Override.class);
+
+		(hasExtensionsMethod.body())._return(JExpr.FALSE);
+
+		JMethod getExtensionsMethod = definedBeanClazz.method(JMod.PUBLIC, List.class, "getExtensions");
+		getExtensionsMethod.annotate(Override.class);
+
+		(getExtensionsMethod.body())._throw(JExpr._new(codeModel.ref(UnsupportedOperationException.class)));
+
+		JFieldVar instanceField = beanClazz.field(JMod.PUBLIC | JMod.FINAL | JMod.STATIC, beanClazz, "INSTANCE", JExpr._new(definedBeanClazz));
 	}
 
 	static

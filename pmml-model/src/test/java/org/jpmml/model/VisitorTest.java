@@ -30,7 +30,7 @@ public class VisitorTest {
 
 	@Test
 	public void visit(){
-		Node root = new BranchNode(null, new True());
+		Node root = new BranchNode(null, True.INSTANCE);
 
 		Node leftChild = new LeafNode(null, new SimplePredicate());
 		Node rightChild = new LeafNode(null, new SimpleSetPredicate());

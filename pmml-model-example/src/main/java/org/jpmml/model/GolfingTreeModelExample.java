@@ -72,7 +72,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 					.setUsageType(MiningField.UsageType.TARGET)
 			);
 
-		Node root = new BranchNode("will play", new True());
+		Node root = new BranchNode("will play", True.INSTANCE);
 
 		// Upper half of the tree
 		root.addNodes(
