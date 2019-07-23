@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Entity;
@@ -15,8 +16,12 @@ import org.dmg.pmml.HasPredicate;
 import org.dmg.pmml.HasScore;
 import org.dmg.pmml.Partition;
 import org.dmg.pmml.ScoreDistribution;
+import org.dmg.pmml.adapters.NodeAdapter;
 
 @XmlTransient
+@XmlJavaTypeAdapter (
+	value = NodeAdapter.class
+)
 abstract
 public class Node extends Entity<Object> implements HasPredicate<Node>, HasScore<Node> {
 
