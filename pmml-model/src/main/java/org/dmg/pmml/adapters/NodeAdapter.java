@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml.adapters;
 
+import java.util.function.Supplier;
+
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.dmg.pmml.tree.ComplexNode;
@@ -26,11 +28,11 @@ public class NodeAdapter extends XmlAdapter<ComplexNode, Node> {
 		return nodeTransformer.toComplexNode(node);
 	}
 
-	public static final ThreadLocal<NodeTransformer> NODE_TRANSFORMER_PROVIDER = new ThreadLocal<NodeTransformer>(){
+	public static final ThreadLocal<NodeTransformer> NODE_TRANSFORMER_PROVIDER = ThreadLocal.withInitial(new Supplier<NodeTransformer>(){
 
 		@Override
-		protected NodeTransformer initialValue(){
+		public NodeTransformer get(){
 			return DefaultNodeTransformer.INSTANCE;
 		}
-	};
+	});
 }

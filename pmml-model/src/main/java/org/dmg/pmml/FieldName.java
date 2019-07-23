@@ -6,6 +6,7 @@ package org.dmg.pmml;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -106,11 +107,11 @@ public class FieldName implements Serializable {
 
 	public static final Map<String, FieldName> CACHE = new ConcurrentHashMap<>(2048);
 
-	public static final ThreadLocal<Map<String, FieldName>> CACHE_PROVIDER = new ThreadLocal<Map<String, FieldName>>(){
+	public static final ThreadLocal<Map<String, FieldName>> CACHE_PROVIDER = ThreadLocal.withInitial(new Supplier<Map<String, FieldName>>(){
 
 		@Override
-		protected Map<String, FieldName> initialValue(){
+		public Map<String, FieldName> get(){
 			return FieldName.CACHE;
 		}
-	};
+	});
 }
