@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml.tree;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Visitor;
@@ -11,6 +13,7 @@ import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
+@XmlTransient
 abstract
 public class SimpleNode extends Node {
 
