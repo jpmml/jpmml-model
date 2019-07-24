@@ -9,8 +9,6 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -59,15 +57,6 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
-
-			JAnnotationUse jsonAutoDetect = beanClazz.annotate(JsonAutoDetect.class)
-				.param("fieldVisibility", JsonAutoDetect.Visibility.ANY)
-				.param("getterVisibility", JsonAutoDetect.Visibility.NONE)
-				.param("isGetterVisibility", JsonAutoDetect.Visibility.NONE)
-				.param("setterVisibility", JsonAutoDetect.Visibility.NONE);
-
-			JAnnotationUse jsonInclude = beanClazz.annotate(JsonInclude.class)
-				.param("value", JsonInclude.Include.NON_EMPTY);
 
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 			if(fieldOutlines.length == 0){
