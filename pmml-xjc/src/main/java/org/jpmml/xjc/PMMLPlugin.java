@@ -13,9 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 
+import com.sun.codemodel.JAnnotatable;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -302,6 +304,13 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				createGetterProxy(beanClazz, stringClass, "getKey", "getId");
 			}
 
+			List<JAnnotationUse> beanClazzAnnotations = getAnnotations(beanClazz);
+
+			JAnnotationUse xmlAccessorType = findAnnotation(beanClazzAnnotations, XmlAccessorType.class);
+			if(xmlAccessorType != null){
+				beanClazzAnnotations.remove(xmlAccessorType);
+			}
+
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
 			FieldOutline contentFieldOutline = getContentField(classOutline);
@@ -416,9 +425,9 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 					declareElementField(beanClazz, fieldVar);
 				}
 
-				Collection<JAnnotationUse> annotations = fieldVar.annotations();
+				List<JAnnotationUse> fieldVarAnnotations = getAnnotations(fieldVar);
 
-				if(hasAnnotation(annotations, XmlValue.class)){
+				if(hasAnnotation(fieldVarAnnotations, XmlValue.class)){
 					fieldVar.annotate(XmlValueExtension.class);
 				}
 			}
@@ -608,6 +617,39 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		}
 
 		return null;
+	}
+
+	static
+	private List<JAnnotationUse> getAnnotations(JAnnotatable annotatable){
+
+		try {
+			Class<?> clazz = annotatable.getClass();
+
+			Field field;
+
+			while(true){
+
+				try {
+					field = clazz.getDeclaredField("annotations");
+
+					break;
+				} catch(NoSuchFieldException nsfe){
+					clazz = clazz.getSuperclass();
+
+					if(clazz == null){
+						throw nsfe;
+					}
+				}
+			}
+
+			if(!field.isAccessible()){
+				field.setAccessible(true);
+			}
+
+			return (List)field.get(annotatable);
+		} catch(ReflectiveOperationException roe){
+			throw new RuntimeException(roe);
+		}
 	}
 
 	static

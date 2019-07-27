@@ -6,6 +6,8 @@ package org.dmg.pmml;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -13,6 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.xml.sax.Locator;
 
+@XmlAccessorType (
+	value = XmlAccessType.FIELD
+)
 @XmlTransient
 @JsonAutoDetect (
 	fieldVisibility = JsonAutoDetect.Visibility.ANY,
