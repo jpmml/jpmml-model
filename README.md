@@ -101,9 +101,9 @@ The resulting uber-JAR file `target/pmml-model-example-executable-1.4-SNAPSHOT.j
 * `org.jpmml.model.TranslationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TranslationExample.java). Translates a PMML document to a JSON or YAML document.
 * `org.jpmml.model.ValidationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML document against the built-in XML Schema Definition (XSD) resource.
 
-Copying `input.pmml` to `output.pmml`; the class model is transformed by applying a list of visitors to it:
+Copying `input.pmml` to `output.pmml`; the size of the class model is estimated using the Java agent technology:
 ```
-java -javaagent:../pmml-agent/target/pmml-agent-1.4-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.4-SNAPSHOT.jar org.jpmml.model.CopyExample --visitor-classes org.jpmml.model.visitors.DictionaryCleaner,org.jpmml.model.visitors.MiningSchemaCleaner --summary true --input input.pmml --output output.pmml
+java -javaagent:../pmml-agent/target/pmml-agent-1.4-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.4-SNAPSHOT.jar org.jpmml.model.CopyExample --summary true --input input.pmml --output output.pmml
 ```
 
 Checking the validity of `model.pmml`:
