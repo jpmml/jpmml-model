@@ -11,6 +11,7 @@ import javax.xml.namespace.QName;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.sun.codemodel.JAnnotationArrayMember;
@@ -56,7 +57,15 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
+			CClassInfo classInfo = classOutline.target;
 			JDefinedClass beanClazz = classOutline.implClass;
+
+			if(classInfo.isElement()){
+				QName elementName = classInfo.getElementName();
+
+				JAnnotationUse jsonRootName = beanClazz.annotate(JsonRootName.class)
+					.param("value", elementName.getLocalPart());
+			}
 
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 			if(fieldOutlines.length == 0){
@@ -145,9 +154,9 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 						JAnnotationArrayMember valueArray = jsonSubTypes.paramArray("value");
 
 						for(CTypeRef type : types){
-							CClassInfo classInfo = (CClassInfo)type.getTarget();
+							CClassInfo typeClassInfo = (CClassInfo)type.getTarget();
 
-							JClass clazz = codeModel.ref(classInfo.fullName());
+							JClass clazz = codeModel.ref(typeClassInfo.fullName());
 
 							JAnnotationUse jsonSubTypesType = jsonSubTypes.annotate(JsonSubTypes.Type.class)
 								.param("name", clazz.name())
