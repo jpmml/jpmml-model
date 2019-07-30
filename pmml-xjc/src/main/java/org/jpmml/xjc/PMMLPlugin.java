@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 
@@ -309,6 +310,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 			JAnnotationUse xmlAccessorType = findAnnotation(beanClazzAnnotations, XmlAccessorType.class);
 			if(xmlAccessorType != null){
 				beanClazzAnnotations.remove(xmlAccessorType);
+			}
+
+			JAnnotationUse xmlRootElement = findAnnotation(beanClazzAnnotations, XmlRootElement.class);
+			if(xmlRootElement != null){
+				beanClazzAnnotations.remove(xmlRootElement);
+				beanClazzAnnotations.add(0, xmlRootElement);
 			}
 
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
