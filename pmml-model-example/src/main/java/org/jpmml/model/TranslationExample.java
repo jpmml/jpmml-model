@@ -72,10 +72,7 @@ public class TranslationExample extends Example {
 			prettyPrinter.indentArraysWith(indenter);
 		}
 
-		ObjectMapper mapper = new ObjectMapper(jsonFactory);
-
-		PMMLModule pmmlModule = new PMMLModule();
-		mapper.registerModule(pmmlModule);
+		ObjectMapper mapper = JacksonUtil.createObjectMapper(jsonFactory);
 
 		try(OutputStream os = new FileOutputStream(this.output)){
 			ObjectWriter writer = mapper.writer(prettyPrinter);

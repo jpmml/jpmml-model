@@ -3,9 +3,9 @@
  */
 package org.jpmml.model;
 
+import java.io.InputStream;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
@@ -24,13 +24,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
-public class PMMLModuleTest {
+public class ObjectMapperTest {
 
 	@Test
 	public void jsonClone() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new PMMLModule());
-
 		DataField dataField = new DataField(FieldName.create("x"), OpType.CATEGORICAL, DataType.BOOLEAN);
 
 		DataDictionary dataDictionary = new DataDictionary()
@@ -55,9 +52,15 @@ public class PMMLModuleTest {
 			.setDataDictionary(dataDictionary)
 			.addModels(treeModel);
 
-		String json = mapper.writeValueAsString(pmml);
+		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024);
 
-		PMML jsonPmml = mapper.readValue(json, PMML.class);
+		JacksonUtil.writePMML(pmml, buffer);
+
+		PMML jsonPmml;
+
+		try(InputStream is = buffer.getInputStream()){
+			jsonPmml = JacksonUtil.readPMML(is);
+		}
 
 		DataDictionary jsonDataDictionary = jsonPmml.getDataDictionary();
 
