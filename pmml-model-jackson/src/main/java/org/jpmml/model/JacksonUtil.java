@@ -8,9 +8,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 
@@ -49,7 +51,10 @@ public class JacksonUtil {
 
 	static
 	public ObjectMapper createObjectMapper(JsonFactory jsonFactory){
-		ObjectMapper objectMapper = new ObjectMapper(jsonFactory);
+		ObjectMapper objectMapper = new ObjectMapper(jsonFactory)
+			.enable(SerializationFeature.WRAP_ROOT_VALUE)
+			.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+
 		objectMapper.registerModule(new PMMLModule());
 
 		return objectMapper;
