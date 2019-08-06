@@ -48,12 +48,22 @@ public class SerMojo extends AbstractMojo {
 
 	/**
 	 * <p>
+	 * The name of the output data format.
+	 * </p>
+	 */
+	@Parameter (
+		defaultValue = "SER"
+	)
+	private Format format = null;
+
+	/**
+	 * <p>
 	 * The default file name mapper.
 	 * A model set can override it by specifying its own file name mapper.
 	 * </p>
 	 *
 	 * <p>
-	 * The default file name mapper changes the file name extension to <code>ser</code>.
+	 * The default file name mapper changes the file name extension to match that of the output data format.
 	 * For example, <code>mymodel.pmml</code> would be mapped to <code>mymodel.ser</code>.
 	 * </p>
 	 *
@@ -90,14 +100,29 @@ public class SerMojo extends AbstractMojo {
 
 
 	public SerMojo(){
-		FileExtensionMapper fileMapper = new FileExtensionMapper();
-		fileMapper.setTargetExtension("ser");
-
-		this.fileMapper = fileMapper;
 	}
 
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
+		Format format = getFormat();
+		if(format == null){
+			format = Format.SER;
+
+			setFormat(format);
+		}
+
+		FileMapper fileMapper = getFileMapper();
+		if(fileMapper == null){
+			String extension = (format.name()).toLowerCase();
+
+			FileExtensionMapper fileExtensionMapper = new FileExtensionMapper();
+			fileExtensionMapper.setTargetExtension(extension);
+
+			fileMapper = fileExtensionMapper;
+
+			setFileMapper(fileMapper);
+		}
+
 		VisitorBattery visitorBattery = new VisitorBattery();
 
 		boolean keepLocator = getKeepLocator();
@@ -134,6 +159,8 @@ public class SerMojo extends AbstractMojo {
 
 		log.info("Processing model set from " + modelSet.getDir() + " to " + modelSet.getOutputDir());
 
+		Format format = getFormat();
+
 		FileMapper fileMapper = modelSet.getFileMapper();
 		if(fileMapper == null){
 			fileMapper = getFileMapper();
@@ -155,31 +182,17 @@ public class SerMojo extends AbstractMojo {
 
 			try {
 				File pmmlFile = new File(dir, name);
-				File serFile = new File(outputDir, fileMapper.getMappedFileName(name));
+				File outputFile = new File(outputDir, fileMapper.getMappedFileName(name));
 
-				File serDir = serFile.getParentFile();
-				if(serDir != null && !serDir.exists()){
-					serDir.mkdirs();
+				File outputParentDir = outputFile.getParentFile();
+				if(outputParentDir != null && !outputParentDir.exists()){
+					outputParentDir.mkdirs();
 				}
 
-				transform(pmmlFile, serFile, visitorBattery);
+				transform(format, pmmlFile, outputFile, visitorBattery);
 			} catch(Exception e){
 				throw new MojoExecutionException("Failed to process model " + name, e);
 			}
-		}
-	}
-
-	private void transform(File pmmlFile, File serFile, VisitorBattery visitorBattery) throws Exception {
-		PMML pmml;
-
-		try(InputStream is = new FileInputStream(pmmlFile)){
-			pmml = PMMLUtil.unmarshal(is);
-		}
-
-		visitorBattery.applyTo(pmml);
-
-		try(OutputStream os = new FileOutputStream(serFile)){
-			SerializationUtil.serializePMML(pmml, os);
 		}
 	}
 
@@ -199,6 +212,14 @@ public class SerMojo extends AbstractMojo {
 
 	public void setProject(MavenProject project){
 		this.project = project;
+	}
+
+	public Format getFormat(){
+		return this.format;
+	}
+
+	public void setFormat(Format format){
+		this.format = format;
 	}
 
 	public FileMapper getFileMapper(){
@@ -231,5 +252,20 @@ public class SerMojo extends AbstractMojo {
 
 	public void setVisitorClasses(List<String> visitorClasses){
 		this.visitorClasses = visitorClasses;
+	}
+
+	static
+	private void transform(Format format, File pmmlFile, File serFile, VisitorBattery visitorBattery) throws Exception {
+		PMML pmml;
+
+		try(InputStream is = new FileInputStream(pmmlFile)){
+			pmml = PMMLUtil.unmarshal(is);
+		}
+
+		visitorBattery.applyTo(pmml);
+
+		try(OutputStream os = new FileOutputStream(serFile)){
+			format.write(pmml, os);
+		}
 	}
 }
