@@ -14,7 +14,6 @@ import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.annotations.Added;
@@ -32,7 +31,7 @@ import org.jpmml.model.annotations.Required;
  * @see Removed
  * @see Required
  */
-public class VersionInspector extends AbstractVisitor {
+public class VersionInspector extends AbstractVisitor implements Resettable {
 
 	private Version minimum = Version.getMinimum();
 
@@ -40,11 +39,9 @@ public class VersionInspector extends AbstractVisitor {
 
 
 	@Override
-	public void applyTo(Visitable visitable){
+	public void reset(){
 		this.minimum = Version.getMinimum();
 		this.maximum = Version.getMaximum();
-
-		super.applyTo(visitable);
 	}
 
 	@Override

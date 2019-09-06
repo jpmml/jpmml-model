@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.dmg.pmml.PMMLObject;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.agent.InstrumentationProvider;
 import org.jpmml.model.ReflectionUtil;
@@ -25,7 +24,7 @@ import org.jpmml.model.ReflectionUtil;
  * The object size is measured using {@link Instrumentation#getObjectSize(Object)} method.
  * </p>
  */
-public class MemoryMeasurer extends AbstractVisitor {
+public class MemoryMeasurer extends AbstractVisitor implements Resettable {
 
 	private Instrumentation instrumentation = InstrumentationProvider.getInstrumentation();
 
@@ -41,10 +40,10 @@ public class MemoryMeasurer extends AbstractVisitor {
 	}
 
 	@Override
-	public void applyTo(Visitable visitable){
-		reset();
+	public void reset(){
+		this.size = 0L;
 
-		super.applyTo(visitable);
+		this.objects.clear();
 	}
 
 	@Override
@@ -52,12 +51,6 @@ public class MemoryMeasurer extends AbstractVisitor {
 		measure(object);
 
 		return super.visit(object);
-	}
-
-	public void reset(){
-		this.size = 0L;
-
-		this.objects.clear();
 	}
 
 	public long getSize(){

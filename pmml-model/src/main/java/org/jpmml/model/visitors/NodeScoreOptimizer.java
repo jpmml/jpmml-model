@@ -5,7 +5,6 @@ package org.jpmml.model.visitors;
 
 import org.dmg.pmml.MathContext;
 import org.dmg.pmml.MiningFunction;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.DecisionTree;
 import org.dmg.pmml.tree.Node;
@@ -16,16 +15,14 @@ import org.dmg.pmml.tree.TreeModel;
  * A Visitor that pre-parses the score attribute of regression-type tree models.
  * </p>
  */
-public class NodeScoreOptimizer extends AbstractVisitor {
+public class NodeScoreOptimizer extends AbstractVisitor implements Resettable {
 
 	private MathContext mathContext = null;
 
 
 	@Override
-	public void applyTo(Visitable visitable){
+	public void reset(){
 		this.mathContext = null;
-
-		super.applyTo(visitable);
 	}
 
 	@Override

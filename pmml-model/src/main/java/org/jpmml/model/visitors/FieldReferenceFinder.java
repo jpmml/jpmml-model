@@ -19,7 +19,6 @@ import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimpleSetPredicate;
 import org.dmg.pmml.TextIndex;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.association.Item;
 import org.dmg.pmml.baseline.FieldValue;
@@ -43,16 +42,24 @@ import org.dmg.pmml.sequence.SetPredicate;
  * A Visitor that determines which fields are referenced during the evaluation of a class model object.
  * </p>
  */
-public class FieldReferenceFinder extends AbstractVisitor {
+public class FieldReferenceFinder extends AbstractVisitor implements Resettable {
 
 	private Set<FieldName> names = null;
 
 
 	@Override
-	public void applyTo(Visitable visitable){
-		reset();
+	public void reset(){
 
-		super.applyTo(visitable);
+		if(this.names != null){
+
+			if(this.names.size() == 1){
+				this.names = null;
+
+				return;
+			}
+
+			this.names.clear();
+		}
 	}
 
 	@Override
@@ -261,20 +268,6 @@ public class FieldReferenceFinder extends AbstractVisitor {
 		}
 
 		return Collections.unmodifiableSet(this.names);
-	}
-
-	public void reset(){
-
-		if(this.names != null){
-
-			if(this.names.size() == 1){
-				this.names = null;
-
-				return;
-			}
-
-			this.names.clear();
-		}
 	}
 
 	private void process(FieldName name){
