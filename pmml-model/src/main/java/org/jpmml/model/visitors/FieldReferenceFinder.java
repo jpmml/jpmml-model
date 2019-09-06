@@ -50,10 +50,7 @@ public class FieldReferenceFinder extends AbstractVisitor {
 
 	@Override
 	public void applyTo(Visitable visitable){
-
-		if(this.names != null){
-			this.names.clear();
-		}
+		reset();
 
 		super.applyTo(visitable);
 	}
@@ -263,7 +260,21 @@ public class FieldReferenceFinder extends AbstractVisitor {
 			return Collections.emptySet();
 		}
 
-		return this.names;
+		return Collections.unmodifiableSet(this.names);
+	}
+
+	public void reset(){
+
+		if(this.names != null){
+
+			if(this.names.size() == 1){
+				this.names = null;
+
+				return;
+			}
+
+			this.names.clear();
+		}
 	}
 
 	private void process(FieldName name){
@@ -272,21 +283,22 @@ public class FieldReferenceFinder extends AbstractVisitor {
 			return;
 		} // End if
 
-		if(this.names == null){
-			this.names = Collections.singleton(name);
+		if(this.names != null){
 
-			return;
-		} // End if
+			if(this.names.size() == 1){
 
-		if(this.names.size() == 1){
+				if(this.names.contains(name)){
+					return;
+				}
 
-			if(this.names.contains(name)){
-				return;
+				this.names = new HashSet<>(this.names);
 			}
 
-			this.names = new HashSet<>(this.names);
-		}
+			this.names.add(name);
+		} else
 
-		this.names.add(name);
+		{
+			this.names = Collections.singleton(name);
+		}
 	}
 }
