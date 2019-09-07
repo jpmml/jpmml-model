@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.dmg.pmml.PMMLObject;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.Node;
 
@@ -20,16 +19,14 @@ import org.dmg.pmml.tree.Node;
  * A Visitor that determines paths from the root Node element of the tree model to all its leaf Node elements.
  * </p>
  */
-public class TreePathFinder extends AbstractVisitor {
+public class TreePathFinder extends AbstractVisitor implements Resettable {
 
 	private Map<Node, List<Node>> paths = new HashMap<>();
 
 
 	@Override
-	public void applyTo(Visitable visitable){
+	public void reset(){
 		this.paths.clear();
-
-		super.applyTo(visitable);
 	}
 
 	@Override
@@ -67,6 +64,6 @@ public class TreePathFinder extends AbstractVisitor {
 	 * Map values are paths leading from the root Node element to the specified leaf Node element (inclusive).
 	 */
 	public Map<Node, List<Node>> getPaths(){
-		return this.paths;
+		return Collections.unmodifiableMap(this.paths);
 	}
 }

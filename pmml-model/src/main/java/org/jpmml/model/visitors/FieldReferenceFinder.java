@@ -19,7 +19,6 @@ import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimpleSetPredicate;
 import org.dmg.pmml.TextIndex;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.association.Item;
 import org.dmg.pmml.baseline.FieldValue;
@@ -43,19 +42,24 @@ import org.dmg.pmml.sequence.SetPredicate;
  * A Visitor that determines which fields are referenced during the evaluation of a class model object.
  * </p>
  */
-public class FieldReferenceFinder extends AbstractVisitor {
+public class FieldReferenceFinder extends AbstractVisitor implements Resettable {
 
 	private Set<FieldName> names = null;
 
 
 	@Override
-	public void applyTo(Visitable visitable){
+	public void reset(){
 
 		if(this.names != null){
+
+			if(this.names.size() == 1){
+				this.names = null;
+
+				return;
+			}
+
 			this.names.clear();
 		}
-
-		super.applyTo(visitable);
 	}
 
 	@Override
@@ -263,7 +267,7 @@ public class FieldReferenceFinder extends AbstractVisitor {
 			return Collections.emptySet();
 		}
 
-		return this.names;
+		return Collections.unmodifiableSet(this.names);
 	}
 
 	private void process(FieldName name){
@@ -272,21 +276,22 @@ public class FieldReferenceFinder extends AbstractVisitor {
 			return;
 		} // End if
 
-		if(this.names == null){
-			this.names = Collections.singleton(name);
+		if(this.names != null){
 
-			return;
-		} // End if
+			if(this.names.size() == 1){
 
-		if(this.names.size() == 1){
+				if(this.names.contains(name)){
+					return;
+				}
 
-			if(this.names.contains(name)){
-				return;
+				this.names = new HashSet<>(this.names);
 			}
 
-			this.names = new HashSet<>(this.names);
-		}
+			this.names.add(name);
+		} else
 
-		this.names.add(name);
+		{
+			this.names = Collections.singleton(name);
+		}
 	}
 }

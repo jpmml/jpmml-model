@@ -22,7 +22,6 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ResultField;
 import org.dmg.pmml.TransformationDictionary;
-import org.dmg.pmml.Visitable;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.mining.Segmentation;
@@ -36,7 +35,7 @@ import org.dmg.pmml.tree.DecisionTree;
  *
  * @see <a href="http://dmg.org/pmml/v4-3/FieldScope.html">Scope of Fields</a>
  */
-public class FieldResolver extends AbstractVisitor {
+public class FieldResolver extends AbstractVisitor implements Resettable {
 
 	private Map<PMMLObject, List<Field<?>>> scopes = new IdentityHashMap<>();
 
@@ -44,12 +43,10 @@ public class FieldResolver extends AbstractVisitor {
 
 
 	@Override
-	public void applyTo(Visitable visitable){
+	public void reset(){
 		this.scopes.clear();
 
 		this.customScopes = Collections.emptyMap();
-
-		super.applyTo(visitable);
 	}
 
 	@Override
