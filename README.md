@@ -125,7 +125,7 @@ java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFa
 
 # Documentation #
 
-Current:
+Up-to-date:
 
 * [Troubleshooting PMML documents](https://openscoring.io/blog/2018/06/15/troubleshooting_pmml/)
 * [Configuring JAXB dependency for Java SE versions 8, 9, 10 and 11](https://openscoring.io/blog/2019/02/28/jpmml_model_api_configuring_jaxb_dependency/)
