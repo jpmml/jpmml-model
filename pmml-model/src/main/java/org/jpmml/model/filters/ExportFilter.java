@@ -46,22 +46,24 @@ public class ExportFilter extends PMMLFilter {
 					throw new IllegalStateException();
 				}
 
-				return renameAttribute(attributes, "defaultValue", "mapMissingTo");
+				attributes = renameAttribute(attributes, "defaultValue", "mapMissingTo");
 			}
 		} else
 
 		if(("PMML").equals(localName)){
 			Version target = getTarget();
 
-			attributes = removeAttribute(attributes, "x-baseVersion");
+			if(hasAttribute(attributes, "x-baseVersion")){
+				attributes = removeAttribute(attributes, "x-baseVersion");
+			}
 
-			return setAttribute(attributes, "version", target.getVersion());
+			attributes = setAttribute(attributes, "version", target.getVersion());
 		} else
 
 		if(("TargetValue").equals(localName)){
 
 			if(compare(getTarget(), Version.PMML_3_1) <= 0 && hasAttribute(attributes, "displayValue")){
-				return renameAttribute(attributes, "displayValue", "rawDataValue");
+				attributes = renameAttribute(attributes, "displayValue", "rawDataValue");
 			}
 		}
 

@@ -51,11 +51,38 @@ public class ImportFilter extends PMMLFilter {
 	public Attributes filterAttributes(String localName, Attributes attributes){
 
 		if(("Apply").equals(localName) && compare(getSource(), Version.PMML_4_1) == 0){
-			return renameAttribute(attributes, "mapMissingTo", "defaultValue");
+			attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
+		} else
+
+		if(("Apply").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
+			String function = getAttribute(attributes, "function");
+			if(function != null){
+
+				switch(function){
+					case "x-acos":
+					case "x-asin":
+					case "x-atan":
+					case "x-cos":
+					case "x-cosh":
+					case "x-expm1":
+					case "x-hypot":
+					case "x-ln1p":
+					case "x-modulo":
+					case "x-rint":
+					case "x-sin":
+					case "x-sinh":
+					case "x-tan":
+					case "x-tanh":
+						attributes = setAttribute(attributes, "function", function.substring("x-".length()));
+						break;
+					default:
+						break;
+				}
+			}
 		} else
 
 		if(("MiningField").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
-			return renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
+			attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
 		} else
 
 		if(("PMML").equals(localName)){
@@ -65,7 +92,7 @@ public class ImportFilter extends PMMLFilter {
 				attributes = renameAttribute(attributes, "version", "x-baseVersion");
 			}
 
-			return setAttribute(attributes, "version", target.getVersion());
+			attributes = setAttribute(attributes, "version", target.getVersion());
 		} else
 
 		if(("Segmentation").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
@@ -84,12 +111,10 @@ public class ImportFilter extends PMMLFilter {
 						break;
 				}
 			}
-
-			return attributes;
 		} else
 
 		if(("TargetValue").equals(localName) && compare(getSource(), Version.PMML_3_1) <= 0){
-			return renameAttribute(attributes, "rawDataValue", "displayValue");
+			attributes = renameAttribute(attributes, "rawDataValue", "displayValue");
 		}
 
 		return attributes;
