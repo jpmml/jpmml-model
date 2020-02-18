@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+	<Header/>
+	<DataDictionary>
+		<DataField name="x" dataType="double" optype="continuous"/>
+	</DataDictionary>
+	<RegressionModel>
+		<MiningSchema>
+			<MiningField name="x" x-invalidValueReplacement="0"/>
+		</MiningSchema>
+		<RegressionTable intercept="1">
+			<NumericPredictor name="x" coefficient="2"/>
+		</RegressionTable>
+	</RegressionModel>
+</PMML>

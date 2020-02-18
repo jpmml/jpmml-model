@@ -54,6 +54,10 @@ public class ImportFilter extends PMMLFilter {
 			return renameAttribute(attributes, "mapMissingTo", "defaultValue");
 		} else
 
+		if(("MiningField").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
+			return renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
+		} else
+
 		if(("PMML").equals(localName)){
 			Version target = getTarget();
 
