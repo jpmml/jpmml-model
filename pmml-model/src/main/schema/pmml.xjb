@@ -753,7 +753,6 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Field&lt;DataField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DataField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DataField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasDisplayName&lt;DataField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -893,7 +892,6 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Field&lt;DerivedField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DerivedField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasDisplayName&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -1915,7 +1913,6 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;OutputField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;OutputField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasDisplayName&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;OutputField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -2469,7 +2466,6 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;ResultField&gt;</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasDisplayName&lt;ResultField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='feature']">
