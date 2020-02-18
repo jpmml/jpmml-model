@@ -67,6 +67,23 @@ public class DOMUtil {
 	}
 
 	static
+	public String[] getExtensionAttributeValues(Node node, String name){
+		String[] result = new String[2];
+
+		Node extensionAttribute = getAttribute(node, "x-" + name);
+		if(extensionAttribute != null){
+			result[0] = extensionAttribute.getNodeValue();
+		}
+
+		Node attribute = getAttribute(node, name);
+		if(attribute != null){
+			result[1] = attribute.getNodeValue();
+		}
+
+		return result;
+	}
+
+	static
 	private Document parseDocument(byte[] bytes) throws IOException, ParserConfigurationException, SAXException {
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		documentBuilderFactory.setNamespaceAware(true);

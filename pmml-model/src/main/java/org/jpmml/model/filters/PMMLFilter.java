@@ -172,6 +172,11 @@ public class PMMLFilter extends XMLFilterImpl {
 	}
 
 	static
+	protected String getAttribute(Attributes attributes, String localName){
+		return attributes.getValue("", localName);
+	}
+
+	static
 	protected Attributes setAttribute(Attributes attributes, String localName, String value){
 		int index = attributes.getIndex("", localName);
 

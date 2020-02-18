@@ -68,6 +68,26 @@ public class ImportFilter extends PMMLFilter {
 			return setAttribute(attributes, "version", target.getVersion());
 		} else
 
+		if(("Segmentation").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
+			attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
+			attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
+
+			String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
+			if(multipleModelMethod != null){
+
+				switch(multipleModelMethod){
+					case "x-weightedMedian":
+					case "x-weightedSum":
+						attributes = setAttribute(attributes, "multipleModelMethod", multipleModelMethod.substring("x-".length()));
+						break;
+					default:
+						break;
+				}
+			}
+
+			return attributes;
+		} else
+
 		if(("TargetValue").equals(localName) && compare(getSource(), Version.PMML_3_1) <= 0){
 			return renameAttribute(attributes, "rawDataValue", "displayValue");
 		}

@@ -6,7 +6,7 @@ package org.jpmml.model;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 public class MiningFieldTest {
 
@@ -14,18 +14,17 @@ public class MiningFieldTest {
 	public void transform() throws Exception {
 		byte[] original = ResourceUtil.getByteArray(MiningFieldTest.class);
 
-		checkMiningField(original, "0", null);
+		checkMiningField(original, new String[]{"0", null});
 
 		byte[] latest = VersionUtil.upgradeToLatest(original);
 
-		checkMiningField(latest, null, "0");
+		checkMiningField(latest, new String[]{null, "0"});
 	}
 
 	static
-	private void checkMiningField(byte[] bytes, String left, String right) throws Exception {
+	private void checkMiningField(byte[] bytes, String[] invalidValueReplacement) throws Exception {
 		Node node = DOMUtil.selectNode(bytes, "/:PMML/:RegressionModel/:MiningSchema/:MiningField");
 
-		assertEquals(left, DOMUtil.getAttributeValue(node, "x-invalidValueReplacement"));
-		assertEquals(right, DOMUtil.getAttributeValue(node, "invalidValueReplacement"));
+		assertArrayEquals(invalidValueReplacement, DOMUtil.getExtensionAttributeValues(node, "invalidValueReplacement"));
 	}
 }
