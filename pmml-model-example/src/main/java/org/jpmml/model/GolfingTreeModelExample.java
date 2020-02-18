@@ -122,7 +122,7 @@ public class GolfingTreeModelExample extends ProductionExample {
 		TreeModel treeModel = new TreeModel(MiningFunction.CLASSIFICATION, miningSchema, root)
 			.setModelName("golfing");
 
-		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), header, dataDictionary)
+		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), header, dataDictionary)
 			.addModels(treeModel);
 
 		return pmml;

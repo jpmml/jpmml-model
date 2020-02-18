@@ -2,7 +2,7 @@
 <!-- 
 Copyright (c) 2014 Villu Ruusmann
 -->
-<xsl:stylesheet version="1.0" xmlns="http://www.dmg.org/PMML-4_3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns="http://www.dmg.org/PMML-4_4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:template name="compatibility-content">
 		<xs:element name="CenterFields">

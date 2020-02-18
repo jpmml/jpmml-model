@@ -5,7 +5,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Features #
 
-* Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1, 4.2 and 4.3 schemas:
+* Full support for PMML 3.0, 3.1, 3.2, 4.0, 4.1, 4.2, 4.3 and 4.4 schemas:
   * Schema version annotations.
   * Extension elements, attributes, enum values.
 * Enhanced API:
@@ -78,7 +78,7 @@ public void optimize(PMML pmml){
 
 ### Marshalling ###
 
-Storing live `org.dmg.pmml.PMML` instance into PMML schema version 4.3 document:
+Storing live `org.dmg.pmml.PMML` instance into PMML schema version 4.4 document:
 
 ```java
 public void store(PMML pmml, OutputStream os) throws JAXBException {
@@ -96,7 +96,7 @@ mvn clean install
 ```
 
 The resulting uber-JAR file `target/pmml-model-example-executable-1.5-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.3 document.
+* `org.jpmml.model.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.4 document.
 * `org.jpmml.model.ObfuscationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
 * `org.jpmml.model.TranslationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TranslationExample.java). Translates a PMML document to a JSON or YAML document.
 * `org.jpmml.model.ValidationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML document against the built-in XML Schema Definition (XSD) resource.

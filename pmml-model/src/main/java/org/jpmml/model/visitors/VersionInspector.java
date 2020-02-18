@@ -212,6 +212,11 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 			PMMLFunctions.CONCAT, PMMLFunctions.REPLACE, PMMLFunctions.MATCHES);
 		declareFunctions(Version.PMML_4_3,
 			PMMLFunctions.NORMALCDF, PMMLFunctions.NORMALPDF, PMMLFunctions.STDNORMALCDF, PMMLFunctions.STDNORMALPDF, PMMLFunctions.ERF, PMMLFunctions.NORMALIDF, PMMLFunctions.STDNORMALIDF);
+		declareFunctions(Version.PMML_4_4,
+			PMMLFunctions.MODULO,
+			PMMLFunctions.ISVALID, PMMLFunctions.ISNOTVALID,
+			PMMLFunctions.EXPM1, PMMLFunctions.HYPOT, PMMLFunctions.LN1P, PMMLFunctions.RINT,
+			PMMLFunctions.SIN, PMMLFunctions.ASIN, PMMLFunctions.SINH, PMMLFunctions.COS, PMMLFunctions.ACOS, PMMLFunctions.COSH, PMMLFunctions.TAN, PMMLFunctions.ATAN, PMMLFunctions.TANH);
 	}
 
 	static

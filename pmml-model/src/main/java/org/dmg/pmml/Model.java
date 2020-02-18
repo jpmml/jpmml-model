@@ -73,11 +73,16 @@ public class Model extends PMMLObject {
 		throw new UnsupportedOperationException();
 	}
 
-	abstract
-	public ModelStats getModelStats();
+	public ModelStats getModelStats(){
+		return null;
+	}
 
-	abstract
-	public Model setModelStats(ModelStats modelStats);
+	/**
+	 * @throws UnsupportedOperationException If the {@link ModelStats} child element is not supported.
+	 */
+	public Model setModelStats(ModelStats modelStats){
+		throw new UnsupportedOperationException();
+	}
 
 	public ModelExplanation getModelExplanation(){
 		return null;

@@ -21,7 +21,7 @@ public class MarshallerTest {
 
 	@Test
 	public void marshal() throws Exception {
-		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), new Header(), new DataDictionary());
+		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), new Header(), new DataDictionary());
 
 		JAXBContext context = ContextFactory.createContext(new Class[]{org.dmg.pmml.ObjectFactory.class}, null);
 
@@ -35,8 +35,8 @@ public class MarshallerTest {
 			string = os.toString("UTF-8");
 		}
 
-		assertTrue(string.contains("<PMML xmlns=\"http://www.dmg.org/PMML-4_3\""));
-		assertTrue(string.contains(" version=\"4.3\">"));
+		assertTrue(string.contains("<PMML xmlns=\"http://www.dmg.org/PMML-4_4\""));
+		assertTrue(string.contains(" version=\"4.4\">"));
 		assertTrue(string.contains("</PMML>"));
 	}
 }

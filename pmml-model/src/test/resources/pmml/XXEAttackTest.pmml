@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE lolz SYSTEM "${project.basedir}/src/test/resources/dtd/lolz.dtd" [
 ]>
-<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+<PMML xmlns="http://www.dmg.org/PMML-4_4" version="4.4">
 	<Header/>
 	<DataDictionary/>
 	<Extension>&lol;</Extension>

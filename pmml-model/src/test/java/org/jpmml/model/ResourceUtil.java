@@ -47,7 +47,7 @@ public class ResourceUtil {
 	static
 	public PMML unmarshal(Version version) throws IOException, JAXBException {
 
-		if(!(Version.PMML_4_3).equals(version)){
+		if(!(Version.PMML_4_4).equals(version)){
 			throw new IllegalArgumentException();
 		}
 

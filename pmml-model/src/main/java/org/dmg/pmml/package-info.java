@@ -5,14 +5,14 @@
 	xmlns = {
 		@XmlNs (
 			prefix = "",
-			namespaceURI = "http://www.dmg.org/PMML-4_3"
+			namespaceURI = "http://www.dmg.org/PMML-4_4"
 		),
 		@XmlNs (
 			prefix = "data",
 			namespaceURI = "http://jpmml.org/jpmml-model/InlineTable"
 		)
 	},
-	namespace = "http://www.dmg.org/PMML-4_3",
+	namespace = "http://www.dmg.org/PMML-4_4",
 	elementFormDefault = XmlNsForm.UNQUALIFIED
 )
 package org.dmg.pmml;

@@ -29,6 +29,36 @@ Copyright (c) 2009 University of Tartu
 	</xsl:template>
 
 	<!--
+	Inline AnomalyDetectionModel enum types
+	-->
+	<xsl:template match="xs:element[@name='AnomalyDetectionModel']/xs:complexType/xs:attribute[@name='algorithmType']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">ALGORITHM-TYPE</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='ALGORITHM-TYPE']">
+	</xsl:template>
+
+	<!--
+	Inline BayesianNetworkModel enum types
+	-->
+	<xsl:template match="xs:element[@name='BayesianNetworkModel']/xs:complexType/xs:attribute[@name='inferenceMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">INFERENCE-TYPE</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='BayesianNetworkModel']/xs:complexType/xs:attribute[@name='modelType']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">BN-TYPE</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='BN-TYPE' or @name='INFERENCE-TYPE']">
+	</xsl:template>
+
+	<!--
 	Inline Delimiter enum types
 	-->
 	<xsl:template match="xs:element[@name='Delimiter']/xs:complexType/xs:attribute[@name='delimiter']">
@@ -139,11 +169,19 @@ Copyright (c) 2009 University of Tartu
 	<!--
 	Inline Segmentation enum types
 	-->
-	<xsl:template match="xs:element[@name='Segmentation']/xs:complexType/xs:attribute[@name='multipleModelMethod']">
-		<xsl:call-template name="inline-multipleModelMethod"/>
+	<xsl:template match="xs:element[@name='Segmentation']/xs:complexType/xs:attribute[@name='missingPredictionTreatment']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">MISSING-PREDICTION-TREATMENT</xsl:with-param>
+		</xsl:call-template>
 	</xsl:template>
 
-	<xsl:template match="xs:simpleType[@name='MULTIPLE-MODEL-METHOD']">
+	<xsl:template match="xs:element[@name='Segmentation']/xs:complexType/xs:attribute[@name='multipleModelMethod']">
+		<xsl:call-template name="inline-enum">
+			<xsl:with-param name="name">MULTIPLE-MODEL-METHOD</xsl:with-param>
+		</xsl:call-template>
+	</xsl:template>
+
+	<xsl:template match="xs:simpleType[@name='MISSING-PREDICTION-TREATMENT' or @name='MULTIPLE-MODEL-METHOD']">
 	</xsl:template>
 
 	<!--

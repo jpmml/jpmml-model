@@ -33,7 +33,7 @@ public class ExtensionFilterTest {
 
 		Element parentElement = (Element)content.get(1);
 
-		assertEquals(Version.PMML_4_3.getNamespaceURI(), parentElement.getNamespaceURI());
+		assertEquals(Version.PMML_4_4.getNamespaceURI(), parentElement.getNamespaceURI());
 		assertEquals("X-Parent", parentElement.getLocalName());
 
 		NodeList children = parentElement.getChildNodes();
@@ -42,7 +42,7 @@ public class ExtensionFilterTest {
 
 		Element childElement = (Element)children.item(1);
 
-		assertEquals(Version.PMML_4_3.getNamespaceURI(), childElement.getNamespaceURI());
+		assertEquals(Version.PMML_4_4.getNamespaceURI(), childElement.getNamespaceURI());
 		assertEquals("X-Child", childElement.getLocalName());
 
 		whitespace = (String)content.get(2);

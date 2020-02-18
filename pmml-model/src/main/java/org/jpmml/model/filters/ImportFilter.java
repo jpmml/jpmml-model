@@ -9,7 +9,7 @@ import org.xml.sax.XMLReader;
 
 /**
  * <p>
- * A SAX filter that translates PMML schema version 3.X and 4.X documents to PMML schema version 4.3 documents.
+ * A SAX filter that translates PMML schema version 3.X and 4.X documents to PMML schema version 4.4 documents.
  * </p>
  */
 public class ImportFilter extends PMMLFilter {
@@ -22,7 +22,7 @@ public class ImportFilter extends PMMLFilter {
 	}
 
 	public ImportFilter(boolean extensions){
-		super(Version.PMML_4_3);
+		super(Version.PMML_4_4);
 
 		setExtensions(extensions);
 	}
@@ -32,7 +32,7 @@ public class ImportFilter extends PMMLFilter {
 	}
 
 	public ImportFilter(XMLReader reader, boolean extensions){
-		super(reader, Version.PMML_4_3);
+		super(reader, Version.PMML_4_4);
 
 		setExtensions(extensions);
 	}

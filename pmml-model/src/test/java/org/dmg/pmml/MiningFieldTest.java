@@ -30,7 +30,7 @@ public class MiningFieldTest {
 
 	static
 	private void checkImportance(Number expected, String string) throws Exception {
-		Reader reader = new StringReader("<MiningField xmlns=\"" + Version.PMML_4_3.getNamespaceURI() + "\" name=\"x\" importance=\"" + string + "\"/>");
+		Reader reader = new StringReader("<MiningField xmlns=\"" + Version.PMML_4_4.getNamespaceURI() + "\" name=\"x\" importance=\"" + string + "\"/>");
 
 		MiningField miningField = (MiningField)JAXBUtil.unmarshal(new StreamSource(reader));
 

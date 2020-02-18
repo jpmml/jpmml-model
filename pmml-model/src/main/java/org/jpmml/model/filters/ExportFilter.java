@@ -9,7 +9,7 @@ import org.xml.sax.XMLReader;
 
 /**
  * <p>
- * A SAX filter that translates PMML schema version 4.3 documents to PMML schema version 3.X and 4.X documents.
+ * A SAX filter that translates PMML schema version 4.4 documents to PMML schema version 3.X and 4.X documents.
  * </p>
  */
 public class ExportFilter extends PMMLFilter {

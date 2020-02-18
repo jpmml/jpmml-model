@@ -164,6 +164,7 @@ public class ReflectionUtil {
 	public List<Field> getAttributeFields(){
 		List<Class<?>> clazzes = Arrays.asList(
 			org.dmg.pmml.PMMLAttributes.class,
+			org.dmg.pmml.anomaly_detection.PMMLAttributes.class,
 			org.dmg.pmml.association.PMMLAttributes.class,
 			org.dmg.pmml.baseline.PMMLAttributes.class,
 			org.dmg.pmml.bayesian_network.PMMLAttributes.class,
@@ -191,6 +192,7 @@ public class ReflectionUtil {
 	public List<Field> getElementFields(){
 		List<Class<?>> clazzes = Arrays.asList(
 			org.dmg.pmml.PMMLElements.class,
+			org.dmg.pmml.anomaly_detection.PMMLElements.class,
 			org.dmg.pmml.association.PMMLElements.class,
 			org.dmg.pmml.baseline.PMMLElements.class,
 			org.dmg.pmml.bayesian_network.PMMLElements.class,

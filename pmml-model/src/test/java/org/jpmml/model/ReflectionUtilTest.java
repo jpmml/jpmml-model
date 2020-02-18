@@ -82,7 +82,7 @@ public class ReflectionUtilTest {
 
 	@Test
 	public void copyState(){
-		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), new Header(), new DataDictionary());
+		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), new Header(), new DataDictionary());
 
 		// Initialize a live list instance
 		pmml.getModels();
@@ -174,22 +174,22 @@ public class ReflectionUtilTest {
 	@Test
 	public void getValue(){
 		PMML pmml = new CustomPMML();
-		pmml.setVersion(Version.PMML_4_3.getVersion());
+		pmml.setVersion(Version.PMML_4_4.getVersion());
 
-		assertEquals("4.3", pmml.getVersion());
-		assertEquals("4.3", pmml.getBaseVersion());
+		assertEquals("4.4", pmml.getVersion());
+		assertEquals("4.4", pmml.getBaseVersion());
 
 		Field versionField = PMMLAttributes.PMML_VERSION;
 		Field baseVersionField = PMMLAttributes.PMML_BASEVERSION;
 
-		assertEquals("4.3", ReflectionUtil.getFieldValue(versionField, pmml));
+		assertEquals("4.4", ReflectionUtil.getFieldValue(versionField, pmml));
 		assertEquals((String)null, ReflectionUtil.getFieldValue(baseVersionField, pmml));
 
 		Method versionGetterMethod = ReflectionUtil.getGetterMethod(versionField);
 		Method baseVersionGetterMethod = ReflectionUtil.getGetterMethod(baseVersionField);
 
-		assertEquals("4.3", ReflectionUtil.getGetterMethodValue(versionGetterMethod, pmml));
-		assertEquals("4.3", ReflectionUtil.getGetterMethodValue(baseVersionGetterMethod, pmml));
+		assertEquals("4.4", ReflectionUtil.getGetterMethodValue(versionGetterMethod, pmml));
+		assertEquals("4.4", ReflectionUtil.getGetterMethodValue(baseVersionGetterMethod, pmml));
 	}
 
 	@Test

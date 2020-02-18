@@ -2,7 +2,7 @@
 <!--
 Copyright (c) 2016 Villu Ruusmann
 -->
-<xsl:stylesheet version="1.0" xmlns="http://www.dmg.org/PMML-4_3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns="http://www.dmg.org/PMML-4_4" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 	<xsl:include href="common.xsl"/>
 
@@ -47,24 +47,6 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
-	Simplify CONTINUOUS-DISTRIBUTION-TYPE group definition from XSD sequence to XSD choice by relocating the Extension list
-	-->
-	<xsl:template match="xs:group[@name='CONTINUOUS-DISTRIBUTION-TYPES']">
-		<xsl:copy>
-			<xsl:apply-templates select="@*|xs:sequence/xs:choice"/>
-		</xsl:copy>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='Alternate' or @name='Baseline']/xs:complexType">
-		<xsl:copy>
-			<xs:sequence>
-				<xsl:call-template name="extension"/>
-				<xsl:apply-templates select="@*|node()"/>
-			</xs:sequence>
-		</xsl:copy>
-	</xsl:template>
-
-	<!--
 	Simplify REAL-SparseArray type definition
 	-->
 	<xsl:template match="xs:element[@name='REAL-SparseArray']/xs:complexType/xs:attribute[@name='defaultValue']/@type">
@@ -72,30 +54,9 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
-	Add missing XML type information
-	-->
-	<xsl:template match="xs:element[@name='FieldValue' or @name='FieldValueCount']/xs:complexType/xs:attribute[@name='value']">
-		<xs:attribute type="xs:string">
-			<xsl:copy-of select="@*"/>
-		</xs:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='isMultiValued']">
-		<xs:attribute type="xs:string">
-			<xsl:copy-of select="@*"/>
-		</xs:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='TimeAnchor' or @name='TimeCycle']/xs:complexType/xs:attribute[@name='displayName']">
-		<xs:attribute type="xs:string">
-			<xsl:copy-of select="@*"/>
-		</xs:attribute>
-	</xsl:template>
-
-	<!--
 	Add dummy timeseries algorithm types
 	-->
-	<xsl:template match="xs:element[@name='ARIMA' or @name='SeasonalTrendDecomposition' or @name='SpectralAnalysis']">
+	<xsl:template match="xs:element[@name='SeasonalTrendDecomposition' or @name='SpectralAnalysis']">
 		<xsl:copy>
 			<xsl:apply-templates select="@*|node()"/>
 			<xs:complexType>
@@ -151,7 +112,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='missingValueReplacement' or @name='x-invalidValueReplacement']/@type">
+	<xsl:template match="xs:element[@name='MiningField']/xs:complexType/xs:attribute[@name='missingValueReplacement' or @name='invalidValueReplacement']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
@@ -167,44 +128,15 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='Category' or @name='NormDiscrete' or @name='OutputField' or @name='PairCounts' or @name='ParentValue' or @name='PPCell' or @name='ResultField' or @name='ScoreDistribution' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='TargetValueStat' or @name='Value' or @name='ValueProbability']/xs:complexType/xs:attribute[@name='value']/@type">
+	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='Category' or @name='FieldValue' or @name='FieldValueCount' or @name='NormDiscrete' or @name='OutputField' or @name='PairCounts' or @name='ParentValue' or @name='PPCell' or @name='ResultField' or @name='ScoreDistribution' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='TargetValueStat' or @name='Value' or @name='ValueProbability']/xs:complexType/xs:attribute[@name='value']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='FieldValue' or @name='FieldValueCount']/xs:complexType/xs:attribute[@name='value']">
-		<xs:attribute type="xs:anySimpleType">
-			<xsl:copy-of select="@*"/>
-		</xs:attribute>
-	</xsl:template>
-
 	<!--
-	Replace FIELD-NAME with xs:string where appropriate
+	Unify count attributes to xs:nonNegativeInteger
 	-->
-	<xsl:template match="xs:element[@name='Characteristic']/xs:complexType/xs:attribute[@name='name']/@type">
-		<xsl:attribute name="type">xs:string</xsl:attribute>
-	</xsl:template>
-
-	<!--
-	Replace xs:string with FIELD-NAME where appropriate
-	-->
-	<xsl:template match="xs:element[@name='BayesInput' or @name='BayesOutput']/xs:complexType/xs:attribute[@name='fieldName']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='InstanceField' or @name='VerificationField']/xs:complexType/xs:attribute[@name='field']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='NearestNeighborModel']/xs:complexType/xs:attribute[@name='instanceIdVariable']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='ParameterField']/xs:complexType/xs:attribute[@name='name']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="xs:element[@name='PredictiveModelQuality']/xs:complexType/xs:attribute[@name='targetField']/@type">
-		<xsl:attribute name="type">FIELD-NAME</xsl:attribute>
+	<xsl:template match="xs:attribute[starts-with(@name, 'numberOf')]/@type">
+		<xsl:attribute name="type">xs:nonNegativeInteger</xsl:attribute>
 	</xsl:template>
 
 	<!--
@@ -216,13 +148,6 @@ Copyright (c) 2016 Villu Ruusmann
 
 	<xsl:template match="xs:element[@name='MiningField' or @name='MultivariateStat']/xs:complexType/xs:attribute[@name='importance']/@type">
 		<xsl:attribute name="type">NUMBER</xsl:attribute>
-	</xsl:template>
-
-	<!--
-	Unify count attributes to xs:nonNegativeInteger
-	-->
-	<xsl:template match="xs:attribute[starts-with(@name, 'numberOf')]/@type">
-		<xsl:attribute name="type">xs:nonNegativeInteger</xsl:attribute>
 	</xsl:template>
 
 	<!--

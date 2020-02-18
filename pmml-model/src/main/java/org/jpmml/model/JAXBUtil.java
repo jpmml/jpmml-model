@@ -32,7 +32,7 @@ public class JAXBUtil {
 	 * Unmarshals a {@link PMML} class model object.
 	 * </p>
 	 *
-	 * @param source Input source containing a complete PMML schema version 4.3 document.
+	 * @param source Input source containing a complete PMML schema version 4.4 document.
 	 *
 	 * @see ImportFilter
 	 */
@@ -46,7 +46,7 @@ public class JAXBUtil {
 	 * Unmarshals any class model object.
 	 * </p>
 	 *
-	 * @param source Input source containing a complete PMML schema version 4.3 document or any fragment of it.
+	 * @param source Input source containing a complete PMML schema version 4.4 document or any fragment of it.
 	 */
 	static
 	public Object unmarshal(Source source) throws JAXBException {
@@ -102,6 +102,7 @@ public class JAXBUtil {
 		if(JAXBUtil.context == null){
 			JAXBUtil.context = JAXBContext.newInstance(
 				org.dmg.pmml.ObjectFactory.class,
+				org.dmg.pmml.anomaly_detection.ObjectFactory.class,
 				org.dmg.pmml.association.ObjectFactory.class,
 				org.dmg.pmml.baseline.ObjectFactory.class,
 				org.dmg.pmml.bayesian_network.ObjectFactory.class,

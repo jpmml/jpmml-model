@@ -16,7 +16,7 @@ import org.xml.sax.helpers.AttributesImpl;
 public class ExtensionFilter extends SkipFilter {
 
 	public ExtensionFilter(){
-		this((Version.PMML_4_3).getNamespaceURI());
+		this((Version.PMML_4_4).getNamespaceURI());
 	}
 
 	public ExtensionFilter(String namespaceURI){
@@ -24,7 +24,7 @@ public class ExtensionFilter extends SkipFilter {
 	}
 
 	public ExtensionFilter(XMLReader reader){
-		this(reader, (Version.PMML_4_3).getNamespaceURI());
+		this(reader, (Version.PMML_4_4).getNamespaceURI());
 	}
 
 	public ExtensionFilter(XMLReader reader, String namespaceURI){

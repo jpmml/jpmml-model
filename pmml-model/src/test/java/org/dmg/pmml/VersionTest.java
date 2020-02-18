@@ -24,9 +24,10 @@ public class VersionTest {
 		Version.forNamespaceURI("http://www.dmg.org/PMML-3_2");
 		Version.forNamespaceURI("http://www.dmg.org/PMML-4_0");
 		Version.forNamespaceURI("http://www.dmg.org/PMML-4_3");
+		Version.forNamespaceURI("http://www.dmg.org/PMML-4_4");
 
 		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-4_4");
+			Version.forNamespaceURI("http://www.dmg.org/PMML-4_5");
 
 			fail();
 		} catch(IllegalArgumentException iae){

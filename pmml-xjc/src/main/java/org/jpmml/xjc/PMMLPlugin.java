@@ -163,7 +163,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 						field.setAccessible(true);
 					}
 
-					field.set(classInfo, new QName("http://www.dmg.org/PMML-4_3", "Node"));
+					field.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", "Node"));
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}

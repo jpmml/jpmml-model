@@ -11,7 +11,7 @@
 	<!ENTITY lol8 "&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;&lol7;">
 	<!ENTITY lol9 "&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;&lol8;">
 ]>
-<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+<PMML xmlns="http://www.dmg.org/PMML-4_4" version="4.4">
 	<Header/>
 	<DataDictionary/>
 	<Extension>&lol9;</Extension>

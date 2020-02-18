@@ -50,7 +50,7 @@ public class VersionInspectorTest {
 	public void inspectTypeAnnotations(){
 		PMML pmml = createPMML();
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
 		pmml.addModels(new AssociationModel(),
 			//new ClusteringModel(),
@@ -65,22 +65,22 @@ public class VersionInspectorTest {
 			new TextModel(),
 			new TreeModel());
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
 		pmml.addModels(new TimeSeriesModel());
 
-		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_4);
 
 		pmml.addModels(new BaselineModel(),
 			new Scorecard(),
 			new NearestNeighborModel());
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_4);
 
 		pmml.addModels(new BayesianNetworkModel(),
 			new GaussianProcessModel());
 
-		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_4);
 	}
 
 	@Test
@@ -91,21 +91,21 @@ public class VersionInspectorTest {
 
 		pmml.addModels(model);
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
 		Output output = new Output();
 
 		model.setOutput(output);
 
-		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_4);
 
 		model.setScorable(Boolean.FALSE);
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_4);
 
 		model.setScorable(null);
 
-		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_0, Version.PMML_4_4);
 
 		OutputField outputField = new OutputField()
 			.setRuleFeature(OutputField.RuleFeature.AFFINITY);
@@ -116,11 +116,11 @@ public class VersionInspectorTest {
 
 		outputField.setDataType(DataType.DOUBLE);
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_4);
 
 		model.setOutput(null);
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 	}
 
 	@Test
@@ -148,18 +148,18 @@ public class VersionInspectorTest {
 
 		model.setPPMatrix(ppMatrix);
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
 		target.setField(null);
 
-		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_4);
 	}
 
 	@Test
 	public void inspectFunctions(){
 		PMML pmml = createPMML();
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
 		Apply apply = new Apply()
 			.setFunction(PMMLFunctions.LOWERCASE);
@@ -172,11 +172,11 @@ public class VersionInspectorTest {
 
 		pmml.setTransformationDictionary(transformationDictionary);
 
-		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_4_1, Version.PMML_4_4);
 
 		apply.setFunction(PMMLFunctions.UPPERCASE);
 
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_3);
+		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
 		apply.setFunction(null);
 
@@ -190,7 +190,7 @@ public class VersionInspectorTest {
 
 		DataDictionary dataDictionary = new DataDictionary();
 
-		PMML pmml = new PMML(Version.PMML_4_3.getVersion(), header, dataDictionary);
+		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), header, dataDictionary);
 
 		return pmml;
 	}

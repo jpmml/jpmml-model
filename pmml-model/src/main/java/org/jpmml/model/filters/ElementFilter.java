@@ -25,7 +25,7 @@ public class ElementFilter extends XMLFilterImpl {
 	 * Use the asterisk symbol (\"*\") to match any name.
 	 */
 	public ElementFilter(String localName){
-		this((Version.PMML_4_3).getNamespaceURI(), localName);
+		this((Version.PMML_4_4).getNamespaceURI(), localName);
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class ElementFilter extends XMLFilterImpl {
 	}
 
 	public ElementFilter(XMLReader reader, String localName){
-		this(reader, (Version.PMML_4_3).getNamespaceURI(), localName);
+		this(reader, (Version.PMML_4_4).getNamespaceURI(), localName);
 	}
 
 	public ElementFilter(XMLReader reader, String namespaceURI, String localName){
