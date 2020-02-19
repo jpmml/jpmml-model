@@ -17,10 +17,6 @@
 	<description>Java class model API for Predictive Model Markup Language (PMML)</description>
 	<url>http://www.jpmml.org</url>
 
-	<organization>
-		<name>University of Tartu</name>
-		<url>http://www.ut.ee/en</url>
-	</organization>
 	<licenses>
 		<license>
 			<name>BSD 3-Clause License</name>
