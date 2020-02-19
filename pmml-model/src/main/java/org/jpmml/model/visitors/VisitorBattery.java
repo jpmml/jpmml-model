@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.visitors;
 
 import java.util.ArrayList;
 import java.util.List;

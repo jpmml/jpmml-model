@@ -3,8 +3,6 @@
  */
 package org.jpmml.model.visitors;
 
-import org.jpmml.model.VisitorBattery;
-
 public class AttributeOptimizerBattery extends VisitorBattery {
 
 	public AttributeOptimizerBattery(){

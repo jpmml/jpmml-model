@@ -12,7 +12,6 @@ import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
-import org.jpmml.model.VisitorBattery;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

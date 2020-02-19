@@ -24,9 +24,9 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.Visitor;
 import org.jpmml.model.PMMLUtil;
 import org.jpmml.model.SerializationUtil;
-import org.jpmml.model.VisitorBattery;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
+import org.jpmml.model.visitors.VisitorBattery;
 
 /**
  * <p>
