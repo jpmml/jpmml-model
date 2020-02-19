@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Villu Ruusmann
+ * Copyright (c) 2020 Villu Ruusmann
  */
 package org.jpmml.model;
 
@@ -10,6 +10,7 @@ import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
@@ -21,10 +22,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-public class VersionUtil {
-
-	private VersionUtil(){
-	}
+abstract
+public class SchemaUpdateTest {
 
 	static
 	public byte[] upgradeToLatest(byte[] bytes) throws IOException, JAXBException, SAXException {
@@ -43,7 +42,7 @@ public class VersionUtil {
 	public byte[] downgrade(byte[] bytes, Version version) throws IOException, TransformerConfigurationException, SAXException {
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 
-		SAXTransformerFactory transformerFactory = (SAXTransformerFactory)SAXTransformerFactory.newInstance();
+		SAXTransformerFactory transformerFactory = (SAXTransformerFactory)TransformerFactory.newInstance();
 
 		TransformerHandler transformer = transformerFactory.newTransformerHandler();
 		transformer.setResult(new StreamResult(result));

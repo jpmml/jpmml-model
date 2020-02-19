@@ -1,15 +1,18 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.dmg.pmml.time_series;
 
 import org.dmg.pmml.Version;
+import org.jpmml.model.DOMUtil;
+import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SchemaUpdateTest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class TrendExpoSmoothTest {
+public class TrendExpoSmoothTest extends SchemaUpdateTest {
 
 	@Test
 	public void transform() throws Exception {
@@ -25,14 +28,14 @@ public class TrendExpoSmoothTest {
 
 		assertNotNull(DOMUtil.selectNode(original, extensionExpression));
 
-		byte[] latest = VersionUtil.upgradeToLatest(original);
+		byte[] latest = upgradeToLatest(original);
 
 		assertNull(DOMUtil.selectNode(latest, trendExpression));
 		assertNotNull(DOMUtil.selectNode(latest, trendExpoSmoothExpression));
 
 		assertNotNull(DOMUtil.selectNode(latest, extensionExpression));
 
-		byte[] latestToOriginal = VersionUtil.downgrade(latest, Version.PMML_4_0);
+		byte[] latestToOriginal = downgrade(latest, Version.PMML_4_0);
 
 		assertNotNull(DOMUtil.selectNode(latestToOriginal, trendExpression));
 		assertNull(DOMUtil.selectNode(latestToOriginal, trendExpoSmoothExpression));

@@ -1,15 +1,17 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.dmg.pmml;
 
-import org.dmg.pmml.Version;
+import org.jpmml.model.DOMUtil;
+import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SchemaUpdateTest;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
 import static org.junit.Assert.assertEquals;
 
-public class PMMLTest {
+public class PMMLTest extends SchemaUpdateTest {
 
 	@Test
 	public void transform() throws Exception {
@@ -25,11 +27,11 @@ public class PMMLTest {
 
 			checkPMML(original, version);
 
-			byte[] latest = VersionUtil.upgradeToLatest(original);
+			byte[] latest = upgradeToLatest(original);
 
 			checkPMML(latest, Version.PMML_4_4);
 
-			byte[] latestToOriginal = VersionUtil.downgrade(latest, version);
+			byte[] latestToOriginal = downgrade(latest, version);
 
 			checkPMML(latestToOriginal, version);
 		}

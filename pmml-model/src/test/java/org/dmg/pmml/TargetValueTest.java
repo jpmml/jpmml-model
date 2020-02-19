@@ -1,15 +1,17 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.dmg.pmml;
 
-import org.dmg.pmml.Version;
+import org.jpmml.model.DOMUtil;
+import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SchemaUpdateTest;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
 import static org.junit.Assert.assertEquals;
 
-public class TargetValueTest {
+public class TargetValueTest extends SchemaUpdateTest {
 
 	@Test
 	public void transform() throws Exception {
@@ -17,11 +19,11 @@ public class TargetValueTest {
 
 		checkTargetValue(original, "", null);
 
-		byte[] latest = VersionUtil.upgradeToLatest(original);
+		byte[] latest = upgradeToLatest(original);
 
 		checkTargetValue(latest, null, "");
 
-		byte[] latestToOriginal = VersionUtil.downgrade(latest, Version.PMML_3_1);
+		byte[] latestToOriginal = downgrade(latest, Version.PMML_3_1);
 
 		checkTargetValue(latestToOriginal, "", null);
 	}

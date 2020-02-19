@@ -1,15 +1,18 @@
 /*
  * Copyright (c) 2020 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.dmg.pmml.mining;
 
+import org.jpmml.model.DOMUtil;
+import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SchemaUpdateTest;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class SegmentationTest {
+public class SegmentationTest extends SchemaUpdateTest {
 
 	@Test
 	public void transform() throws Exception {
@@ -17,7 +20,7 @@ public class SegmentationTest {
 
 		checkSegmentation(original, "x-weightedSum", new String[]{"continue", null}, new String[]{"0", null});
 
-		byte[] latest = VersionUtil.upgradeToLatest(original);
+		byte[] latest = upgradeToLatest(original);
 
 		checkSegmentation(latest, "weightedSum", new String[]{null, "continue"}, new String[]{null, "0"});
 	}

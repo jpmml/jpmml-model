@@ -8,12 +8,28 @@ import java.io.StringReader;
 
 import javax.xml.transform.stream.StreamSource;
 
+import org.jpmml.model.DOMUtil;
 import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SchemaUpdateTest;
 import org.junit.Test;
+import org.w3c.dom.Node;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class MiningFieldTest {
+public class MiningFieldTest extends SchemaUpdateTest {
+
+	@Test
+	public void transform() throws Exception {
+		byte[] original = ResourceUtil.getByteArray(MiningFieldTest.class);
+
+		checkMiningField(original, new String[]{"0", null});
+
+		byte[] latest = upgradeToLatest(original);
+
+		checkMiningField(latest, new String[]{null, "0"});
+	}
 
 	@Test
 	public void unmarshal() throws Exception {
@@ -26,6 +42,13 @@ public class MiningFieldTest {
 		checkImportance(1.0d, "1.0");
 
 		checkImportance(100, "100");
+	}
+
+	static
+	private void checkMiningField(byte[] bytes, String[] invalidValueReplacement) throws Exception {
+		Node node = DOMUtil.selectNode(bytes, "/:PMML/:RegressionModel/:MiningSchema/:MiningField");
+
+		assertArrayEquals(invalidValueReplacement, DOMUtil.getExtensionAttributeValues(node, "invalidValueReplacement"));
 	}
 
 	static
