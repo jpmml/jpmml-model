@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import org.dmg.pmml.PMML;
-import org.jpmml.model.JacksonUtil;
 import org.jpmml.model.SerializationUtil;
+import org.jpmml.model.jackson.JacksonUtil;
 
 public enum Format {
 

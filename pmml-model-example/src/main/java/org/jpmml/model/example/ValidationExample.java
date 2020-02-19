@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.example;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +13,7 @@ import javax.xml.bind.ValidationEventHandler;
 import javax.xml.validation.Schema;
 
 import org.dmg.pmml.PMML;
+import org.jpmml.model.JAXBUtil;
 
 public class ValidationExample extends ConsumptionExample {
 

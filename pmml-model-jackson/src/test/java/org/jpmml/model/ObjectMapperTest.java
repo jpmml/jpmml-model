@@ -19,6 +19,7 @@ import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
+import org.jpmml.model.jackson.JacksonUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.metro;
 
 import java.io.OutputStream;
 
@@ -12,6 +12,7 @@ import com.sun.xml.bind.v2.runtime.MarshallerImpl;
 import com.sun.xml.bind.v2.runtime.output.XmlOutput;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
+import org.jpmml.model.JAXBUtil;
 
 public class MetroJAXBUtil {
 

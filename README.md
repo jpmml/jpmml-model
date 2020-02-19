@@ -96,19 +96,19 @@ mvn clean install
 ```
 
 The resulting uber-JAR file `target/pmml-model-example-executable-1.5-SNAPSHOT.jar` contains the following command-line applications:
-* `org.jpmml.model.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.4 document.
-* `org.jpmml.model.ObfuscationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
-* `org.jpmml.model.TranslationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/TranslationExample.java). Translates a PMML document to a JSON or YAML document.
-* `org.jpmml.model.ValidationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/ValidationExample.java). Validates a PMML document against the built-in XML Schema Definition (XSD) resource.
+* `org.jpmml.model.example.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.4 document.
+* `org.jpmml.model.example.ObfuscationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
+* `org.jpmml.model.example.TranslationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/TranslationExample.java). Translates a PMML document to a JSON or YAML document.
+* `org.jpmml.model.example.ValidationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/ValidationExample.java). Validates a PMML document against the built-in XML Schema Definition (XSD) resource.
 
 Copying `input.pmml` to `output.pmml`; the size of the class model is estimated using the Java agent technology:
 ```
-java -javaagent:../pmml-agent/target/pmml-agent-1.5-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.CopyExample --summary true --input input.pmml --output output.pmml
+java -javaagent:../pmml-agent/target/pmml-agent-1.5-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.CopyExample --summary true --input input.pmml --output output.pmml
 ```
 
 Checking the validity of `model.pmml`:
 ```
-java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.ValidationExample --input model.pmml
+java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.ValidationExample --input model.pmml
 ```
 
 Getting help:

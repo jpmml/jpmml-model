@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.jackson;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 

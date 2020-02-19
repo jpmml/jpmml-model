@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.jackson;
 
 import java.io.IOException;
 import java.io.InputStream;

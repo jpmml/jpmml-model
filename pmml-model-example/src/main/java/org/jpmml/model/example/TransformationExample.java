@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2011 University of Tartu
  */
-package org.jpmml.model;
+package org.jpmml.model.example;
 
 import java.io.File;
 
