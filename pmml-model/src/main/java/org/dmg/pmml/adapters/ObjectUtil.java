@@ -1,14 +1,14 @@
 /*
  * Copyright (c) 2019 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.dmg.pmml.adapters;
 
 import org.dmg.pmml.ComplexValue;
 import org.dmg.pmml.Entity;
 
-public class ValueUtil {
+public class ObjectUtil {
 
-	private ValueUtil(){
+	private ObjectUtil(){
 	}
 
 	static
@@ -27,12 +27,5 @@ public class ValueUtil {
 		}
 
 		return value;
-	}
-
-	static
-	public String toString(Object value){
-		value = toSimpleValue(value);
-
-		return value.toString();
 	}
 }

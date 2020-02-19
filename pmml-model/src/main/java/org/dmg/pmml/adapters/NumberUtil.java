@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.dmg.pmml.adapters;
 
 import javax.xml.bind.DatatypeConverter;
 

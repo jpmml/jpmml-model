@@ -5,8 +5,6 @@ package org.dmg.pmml.adapters;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.jpmml.model.ValueUtil;
-
 public class ObjectAdapter extends XmlAdapter<String, Object> {
 
 	@Override
@@ -21,6 +19,8 @@ public class ObjectAdapter extends XmlAdapter<String, Object> {
 			return null;
 		}
 
-		return ValueUtil.toString(value);
+		value = ObjectUtil.toSimpleValue(value);
+
+		return value.toString();
 	}
 }

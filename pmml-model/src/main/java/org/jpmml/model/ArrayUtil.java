@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.dmg.pmml.Array;
+import org.dmg.pmml.ComplexValue;
 
 public class ArrayUtil {
 
@@ -100,8 +101,8 @@ public class ArrayUtil {
 	}
 
 	static
-	public String format(Array.Type type, Collection<?> objects){
-		StringBuilder sb = new StringBuilder(objects.size() * 16);
+	public String format(Array.Type type, Collection<?> values){
+		StringBuilder sb = new StringBuilder(values.size() * 16);
 
 		boolean enableQuotes;
 
@@ -117,8 +118,15 @@ public class ArrayUtil {
 				throw new IllegalArgumentException();
 		}
 
-		for(Object object : objects){
-			String string = ValueUtil.toString(object);
+		for(Object value : values){
+
+			if(value instanceof ComplexValue){
+				ComplexValue complexValue = (ComplexValue)value;
+
+				value = complexValue.toSimpleValue();
+			}
+
+			String string = value.toString();
 
 			if(sb.length() > 0){
 				sb.append(' ');

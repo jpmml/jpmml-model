@@ -5,8 +5,6 @@ package org.dmg.pmml.adapters;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.jpmml.model.NumberUtil;
-
 public class RealNumberAdapter extends XmlAdapter<String, Number> {
 
 	@Override

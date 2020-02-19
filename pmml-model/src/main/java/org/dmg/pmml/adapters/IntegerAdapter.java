@@ -5,8 +5,6 @@ package org.dmg.pmml.adapters;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.jpmml.model.NumberUtil;
-
 public class IntegerAdapter extends XmlAdapter<String, Integer> {
 
 	@Override
