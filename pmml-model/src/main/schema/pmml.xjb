@@ -92,7 +92,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 		
 		<jaxb:bindings node="//xsd:element[@name='AnomalyDetectionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -241,7 +241,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -323,7 +323,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -360,7 +360,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -566,7 +566,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1102,7 +1102,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GaussianProcessModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1247,7 +1247,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1538,7 +1538,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1658,7 +1658,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1698,7 +1698,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -1735,7 +1735,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2014,7 +2014,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='x-reportField']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="reportField"
 			/>
@@ -2166,7 +2166,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PMML']/xsd:complexType/xsd:attribute[@name='x-baseVersion']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="baseVersion"
 			/>
@@ -2400,7 +2400,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2525,7 +2525,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2563,7 +2563,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2749,7 +2749,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -2946,7 +2946,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -3145,7 +3145,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -3331,7 +3331,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -3443,7 +3443,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Extension</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
 			/>
@@ -3688,56 +3688,56 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[1990]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_DAYS_SINCE_1990"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[2000]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_DAYS_SINCE_2000"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[2010]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_DAYS_SINCE_2010"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateDaysSince[2020]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_DAYS_SINCE_2020"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[1990]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_TIME_SECONDS_SINCE_1990"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[2000]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_TIME_SECONDS_SINCE_2000"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[2010]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_TIME_SECONDS_SINCE_2010"
 			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='DATATYPE']/xsd:restriction/xsd:enumeration[@value='x-dateTimeSecondsSince[2020]']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="DATE_TIME_SECONDS_SINCE_2020"
 			/>
@@ -3923,7 +3923,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:simpleType[@name='RESULT-FEATURE']/xsd:restriction/xsd:enumeration[@value='x-report']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Extension</annox:annotateEnumConstant>
+			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateEnumConstant>
 			<jaxb:typesafeEnumMember
 				name="REPORT"
 			/>
