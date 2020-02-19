@@ -16,6 +16,11 @@ public class PMMLTest {
 		Version[] versions = Version.values();
 
 		for(Version version : versions){
+
+			if(!version.isStandard()){
+				continue;
+			}
+
 			byte[] original = ResourceUtil.getByteArray(version);
 
 			checkPMML(original, version);

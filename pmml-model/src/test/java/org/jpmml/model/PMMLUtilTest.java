@@ -18,6 +18,11 @@ public class PMMLUtilTest {
 		Version[] versions = Version.values();
 
 		for(Version version : versions){
+
+			if(!version.isStandard()){
+				continue;
+			}
+
 			PMML pmml;
 
 			try(InputStream is = ResourceUtil.getStream(version)){

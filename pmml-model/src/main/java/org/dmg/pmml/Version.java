@@ -12,6 +12,17 @@ public enum Version {
 	PMML_4_2("http://www.dmg.org/PMML-4_2"),
 	PMML_4_3("http://www.dmg.org/PMML-4_3"),
 	PMML_4_4("http://www.dmg.org/PMML-4_4"),
+
+	/**
+	 * Extended PMML
+	 */
+	XPMML("http://xpmml.org/XPMML"){
+
+		@Override
+		public String getVersion(){
+			throw new UnsupportedOperationException();
+		}
+	}
 	;
 
 	private String namespaceUri = null;
@@ -19,6 +30,12 @@ public enum Version {
 
 	private Version(String namespaceUri){
 		setNamespaceURI(namespaceUri);
+	}
+
+	public boolean isStandard(){
+		String namespaceURI = getNamespaceURI();
+
+		return namespaceURI.matches(Version.REGEX_PMML_XMLNS);
 	}
 
 	public String getNamespaceURI(){
@@ -48,7 +65,7 @@ public enum Version {
 	public Version getMaximum(){
 		Version[] versions = Version.values();
 
-		return versions[versions.length - 1];
+		return versions[(versions.length - 1) - 1];
 	}
 
 	static
@@ -62,13 +79,13 @@ public enum Version {
 			}
 		}
 
-		boolean valid = (namespaceURI != null && namespaceURI.matches(Version.REGEX_XMLNS));
+		boolean valid = (namespaceURI != null && namespaceURI.matches(Version.REGEX_PMML_XMLNS));
 		if(!valid){
-			throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " does not match \'" + Version.REGEX_XMLNS + "\' regex pattern");
+			throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " does not match \'" + Version.REGEX_PMML_XMLNS + "\' regex pattern");
 		}
 
 		throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " is not supported");
 	}
 
-	private static final String REGEX_XMLNS = "http://www\\.dmg\\.org/PMML\\-\\d_\\d";
+	private static final String REGEX_PMML_XMLNS = "http://www\\.dmg\\.org/PMML\\-\\d_\\d";
 }
