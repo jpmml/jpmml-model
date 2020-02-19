@@ -38,7 +38,6 @@
 
 	<modules>
 		<module>pmml-agent</module>
-		<module>pmml-maven-plugin</module>
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
 		<module>pmml-model-gwt</module>
