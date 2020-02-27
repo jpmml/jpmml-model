@@ -25,6 +25,10 @@ import org.dmg.pmml.adapters.NodeAdapter;
 abstract
 public class Node extends Entity<Object> implements HasPredicate<Node>, HasScore<Node> {
 
+	public ComplexNode toComplexNode(){
+		return new ComplexNode(this);
+	}
+
 	@Override
 	public Object getId(){
 		return null;

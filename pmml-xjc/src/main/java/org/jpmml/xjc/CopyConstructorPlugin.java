@@ -60,7 +60,7 @@ public class CopyConstructorPlugin extends Plugin {
 			JMethod copyConstructor = beanClazz.constructor(JMod.PUBLIC);
 			copyConstructor.annotate(copyConstructorAnnotation);
 
-			JVar objectParam = copyConstructor.param(nodeClass, "node");
+			JVar nodeParam = copyConstructor.param(nodeClass, "node");
 
 			JBlock body = copyConstructor.body();
 
@@ -72,17 +72,22 @@ public class CopyConstructorPlugin extends Plugin {
 				String setterName = "set" + propertyInfo.getName(true);
 
 				if(propertyInfo.isCollection()){
-					JBlock block = body._if(objectParam.invoke("has" + propertyInfo.getName(true)))._then();
+					JBlock block = body._if(nodeParam.invoke("has" + propertyInfo.getName(true)))._then();
 
-					block.add(JExpr.invoke(getterName).invoke("addAll").arg(objectParam.invoke(getterName)));
+					block.add(JExpr.invoke(getterName).invoke("addAll").arg(nodeParam.invoke(getterName)));
 				} else
 
 				{
 					JBlock block = body;
 
-					block.add(JExpr.invoke(setterName).arg(objectParam.invoke(getterName)));
+					block.add(JExpr.invoke(setterName).arg(nodeParam.invoke(getterName)));
 				}
 			}
+
+			JMethod toComplexNodeMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "toComplexNode");
+			toComplexNodeMethod.annotate(Override.class);
+
+			toComplexNodeMethod.body()._return(JExpr._this());
 		}
 
 		return true;

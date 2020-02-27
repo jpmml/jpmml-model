@@ -42,16 +42,7 @@ public class DefaultNodeTransformer implements NodeTransformer {
 
 	@Override
 	public ComplexNode toComplexNode(Node node){
-
-		if(node instanceof ComplexNode){
-			ComplexNode complexNode = (ComplexNode)node;
-
-			return complexNode;
-		}
-
-		ComplexNode complexNode = new ComplexNode(node);
-
-		return complexNode;
+		return node.toComplexNode();
 	}
 
 	public static final DefaultNodeTransformer INSTANCE = new DefaultNodeTransformer();
