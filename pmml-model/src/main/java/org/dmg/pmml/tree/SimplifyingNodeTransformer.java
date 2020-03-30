@@ -3,8 +3,22 @@
  */
 package org.dmg.pmml.tree;
 
+/**
+ * <p>
+ * A {@link Node} element converter between {@link ComplexNode} and {@link SimpleNode}.
+ * </p>
+ *
+ * <p>
+ * All conversions are information-preserving.
+ * </p>
+ */
 public class SimplifyingNodeTransformer implements NodeTransformer {
 
+	/**
+	 * <p>
+	 * Attempts to transform {@link ComplexNode} to the most memory-efficient {@link SimpleNode}.
+	 * </p>
+	 */
 	@Override
 	public Node fromComplexNode(ComplexNode complexNode){
 		return simplify(complexNode);
