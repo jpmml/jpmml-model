@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import org.dmg.pmml.tree.ComplexNode;
-import org.dmg.pmml.tree.DefaultNodeTransformer;
+import org.dmg.pmml.tree.SimplifyingNodeTransformer;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.NodeTransformer;
 
@@ -32,7 +32,7 @@ public class NodeAdapter extends XmlAdapter<ComplexNode, Node> {
 
 		@Override
 		public NodeTransformer get(){
-			return DefaultNodeTransformer.INSTANCE;
+			return SimplifyingNodeTransformer.INSTANCE;
 		}
 	});
 }
