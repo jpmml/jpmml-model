@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.ObjectStreamClass;
 import java.io.OutputStream;
 import java.io.Serializable;
 
@@ -21,11 +22,21 @@ public class SerializationUtil {
 
 	static
 	public PMML deserializePMML(InputStream is) throws ClassNotFoundException, IOException {
-		return (PMML)deserialize(is);
+		return deserializePMML(is, null);
+	}
+
+	static
+	public PMML deserializePMML(InputStream is, ClassLoader clazzLoader) throws ClassNotFoundException, IOException {
+		return (PMML)deserialize(is, clazzLoader);
 	}
 
 	static
 	public Object deserialize(InputStream is) throws ClassNotFoundException, IOException {
+		return deserialize(is, null);
+	}
+
+	static
+	public Object deserialize(InputStream is, ClassLoader clazzLoader) throws ClassNotFoundException, IOException {
 		FilterInputStream safeIs = new FilterInputStream(is){
 
 			@Override
@@ -33,7 +44,22 @@ public class SerializationUtil {
 			}
 		};
 
-		try(ObjectInputStream ois = new ObjectInputStream(safeIs)){
+		try(ObjectInputStream ois = new ObjectInputStream(safeIs){
+
+			@Override
+			public Class<?> resolveClass(ObjectStreamClass objectStreamClass) throws ClassNotFoundException, IOException {
+
+				if(clazzLoader != null){
+					Class<?> clazz = Class.forName(objectStreamClass.getName(), false, clazzLoader);
+
+					if(clazz != null){
+						return clazz;
+					}
+				}
+
+				return super.resolveClass(objectStreamClass);
+			}
+		}){
 			return ois.readObject();
 		}
 	}
@@ -62,20 +88,20 @@ public class SerializationUtil {
 
 	static
 	public <S extends Serializable> S clone(S object) throws ClassNotFoundException, IOException {
-		return clone(object, 1024 * 1024);
+		return clone(object, null);
 	}
 
 	@SuppressWarnings (
 		value = {"unchecked"}
 	)
 	static
-	public <S extends Serializable> S clone(S object, int capacity) throws ClassNotFoundException, IOException {
-		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(capacity);
+	public <S extends Serializable> S clone(S object, ClassLoader clazzLoader) throws ClassNotFoundException, IOException {
+		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);
 
 		serialize(object, buffer);
 
 		try(InputStream is = buffer.getInputStream()){
-			return (S)deserialize(is);
+			return (S)deserialize(is, clazzLoader);
 		}
 	}
 }
