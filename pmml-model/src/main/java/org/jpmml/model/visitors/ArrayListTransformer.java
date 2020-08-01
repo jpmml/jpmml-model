@@ -40,19 +40,17 @@ public class ArrayListTransformer extends AbstractVisitor {
 	}
 
 	public List<?> transform(List<?> list){
+		int size = list.size();
 
-		if(list.size() == 0){
-			return Collections.emptyList();
-		} else
-
-		if(list.size() == 1){
-			return new SingletonList<>(list.get(0));
-		} else
-
-		if(list.size() == 2){
-			return new DoubletonList<>(list.get(0), list.get(1));
+		switch(size){
+			case 0:
+				return Collections.emptyList();
+			case 1:
+				return new SingletonList<>(list.get(0));
+			case 2:
+				return new DoubletonList<>(list.get(0), list.get(1));
+			default:
+				return list;
 		}
-
-		return list;
 	}
 }

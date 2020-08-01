@@ -30,11 +30,12 @@ class SingletonList<E> extends AbstractImmutableList<E> implements RandomAccess,
 	@Override
 	public E get(int index){
 
-		if(index == 0){
-			return this.element;
+		switch(index){
+			case 0:
+				return this.element;
+			default:
+				throw new IndexOutOfBoundsException();
 		}
-
-		throw new IndexOutOfBoundsException();
 	}
 
 	@Override
@@ -45,15 +46,13 @@ class SingletonList<E> extends AbstractImmutableList<E> implements RandomAccess,
 		}
 
 		int length = (toIndex - fromIndex);
-
-		if(length == 0){
-			return Collections.emptyList();
-		} else
-
-		if(length == 1){
-			return this;
+		switch(length){
+			case 0:
+				return Collections.emptyList();
+			case 1:
+				return this;
+			default:
+				throw new IllegalArgumentException();
 		}
-
-		throw new IllegalArgumentException();
 	}
 }

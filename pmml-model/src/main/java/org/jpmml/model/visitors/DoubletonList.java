@@ -33,15 +33,14 @@ class DoubletonList<E> extends AbstractImmutableList<E> implements RandomAccess,
 	@Override
 	public E get(int index){
 
-		if(index == 0){
-			return this.first;
-		} else
-
-		if(index == 1){
-			return this.second;
+		switch(index){
+			case 0:
+				return this.first;
+			case 1:
+				return this.second;
+			default:
+				throw new IndexOutOfBoundsException();
 		}
-
-		throw new IndexOutOfBoundsException();
 	}
 
 	@Override
@@ -52,19 +51,15 @@ class DoubletonList<E> extends AbstractImmutableList<E> implements RandomAccess,
 		}
 
 		int length = (toIndex - fromIndex);
-
-		if(length == 0){
-			return Collections.emptyList();
-		} else
-
-		if(length == 1){
-			return new SingletonList(get(fromIndex));
-		} else
-
-		if(length == 2){
-			return this;
+		switch(length){
+			case 0:
+				return Collections.emptyList();
+			case 1:
+				return new SingletonList<>(get(fromIndex));
+			case 2:
+				return this;
+			default:
+				throw new IllegalArgumentException();
 		}
-
-		throw new IllegalArgumentException();
 	}
 }

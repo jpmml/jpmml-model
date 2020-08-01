@@ -50,39 +50,48 @@ public class ImportFilter extends PMMLFilter {
 	@Override
 	public Attributes filterAttributes(String localName, Attributes attributes){
 
-		if(("Apply").equals(localName) && compare(getSource(), Version.PMML_4_1) == 0){
-			attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
-		} else
+		if(("Apply").equals(localName)){
 
-		if(("Apply").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
-			String function = getAttribute(attributes, "function");
-			if(function != null){
+			if(compare(getSource(), Version.PMML_4_1) == 0){
+				attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
+			} // End if
 
-				switch(function){
-					case "x-acos":
-					case "x-asin":
-					case "x-atan":
-					case "x-cos":
-					case "x-cosh":
-					case "x-expm1":
-					case "x-hypot":
-					case "x-ln1p":
-					case "x-modulo":
-					case "x-rint":
-					case "x-sin":
-					case "x-sinh":
-					case "x-tan":
-					case "x-tanh":
-						attributes = setAttribute(attributes, "function", function.substring("x-".length()));
-						break;
-					default:
-						break;
+			if(compare(getSource(), Version.PMML_4_3) == 0){
+				String function = getAttribute(attributes, "function");
+
+				if(function != null){
+
+					switch(function){
+						case "x-acos":
+						case "x-asin":
+						case "x-atan":
+						case "x-cos":
+						case "x-cosh":
+						case "x-expm1":
+						case "x-hypot":
+						case "x-ln1p":
+						case "x-modulo":
+						case "x-rint":
+						case "x-sin":
+						case "x-sinh":
+						case "x-tan":
+						case "x-tanh":
+							{
+								attributes = setAttribute(attributes, "function", function.substring("x-".length()));
+							}
+							break;
+						default:
+							break;
+					}
 				}
 			}
 		} else
 
-		if(("MiningField").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
-			attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
+		if(("MiningField").equals(localName)){
+
+			if(compare(getSource(), Version.PMML_4_3) == 0){
+				attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
+			}
 		} else
 
 		if(("PMML").equals(localName)){
@@ -95,26 +104,35 @@ public class ImportFilter extends PMMLFilter {
 			attributes = setAttribute(attributes, "version", target.getVersion());
 		} else
 
-		if(("Segmentation").equals(localName) && compare(getSource(), Version.PMML_4_3) == 0){
-			attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
-			attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
+		if(("Segmentation").equals(localName)){
 
-			String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
-			if(multipleModelMethod != null){
+			if(compare(getSource(), Version.PMML_4_3) == 0){
+				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
 
-				switch(multipleModelMethod){
-					case "x-weightedMedian":
-					case "x-weightedSum":
-						attributes = setAttribute(attributes, "multipleModelMethod", multipleModelMethod.substring("x-".length()));
-						break;
-					default:
-						break;
+				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
+				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
+
+				if(multipleModelMethod != null){
+
+					switch(multipleModelMethod){
+						case "x-weightedMedian":
+						case "x-weightedSum":
+							{
+								attributes = setAttribute(attributes, "multipleModelMethod", multipleModelMethod.substring("x-".length()));
+							}
+							break;
+						default:
+							break;
+					}
 				}
 			}
 		} else
 
-		if(("TargetValue").equals(localName) && compare(getSource(), Version.PMML_3_1) <= 0){
-			attributes = renameAttribute(attributes, "rawDataValue", "displayValue");
+		if(("TargetValue").equals(localName)){
+
+			if(compare(getSource(), Version.PMML_3_1) <= 0){
+				attributes = renameAttribute(attributes, "rawDataValue", "displayValue");
+			}
 		}
 
 		return attributes;
