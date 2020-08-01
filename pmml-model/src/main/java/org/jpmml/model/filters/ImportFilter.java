@@ -56,7 +56,7 @@ public class ImportFilter extends PMMLFilter {
 				attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
 			} // End if
 
-			if(compare(getSource(), Version.PMML_4_3) == 0){
+			if(compare(getSource(), Version.PMML_4_3) <= 0){
 				String function = getAttribute(attributes, "function");
 
 				if(function != null){
@@ -89,7 +89,7 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("MiningField").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_3) == 0){
+			if(compare(getSource(), Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
 			}
 		} else
@@ -106,7 +106,7 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("Segmentation").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_3) == 0){
+			if(compare(getSource(), Version.PMML_4_3) <= 0){
 				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
 
 				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
