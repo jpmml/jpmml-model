@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="0"
-			implementation="2"
+			implementation="3"
 		/>
 
 		<wildcard:lax/>
@@ -1704,6 +1704,13 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType/xsd:attribute[@name='x-leakage']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<jaxb:property
+				name="leakage"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
 			<jpmml-model:subpackage
@@ -1731,6 +1738,13 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="NormalizationMethod"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='x-leakage']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<jaxb:property
+				name="leakage"
 			/>
 		</jaxb:bindings>
 
