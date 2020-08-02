@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model.visitors;
+package org.jpmml.model.collections;
 
 import java.io.Serializable;
 import java.util.Arrays;

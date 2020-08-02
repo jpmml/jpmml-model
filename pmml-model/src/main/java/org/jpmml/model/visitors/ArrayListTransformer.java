@@ -11,6 +11,7 @@ import java.util.List;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
+import org.jpmml.model.collections.DoubletonList;
 
 /**
  * <p>

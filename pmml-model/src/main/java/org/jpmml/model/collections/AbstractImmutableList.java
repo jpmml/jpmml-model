@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model.visitors;
+package org.jpmml.model.collections;
 
 import java.util.AbstractCollection;
 import java.util.Collection;
@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 abstract
-class AbstractImmutableList<E> extends AbstractCollection<E> implements List<E> {
+public class AbstractImmutableList<E> extends AbstractCollection<E> implements List<E> {
 
 	@Override
 	public Iterator<E> iterator(){

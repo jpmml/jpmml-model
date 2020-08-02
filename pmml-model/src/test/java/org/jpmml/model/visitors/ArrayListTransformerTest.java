@@ -18,6 +18,7 @@ import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
+import org.jpmml.model.collections.DoubletonList;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

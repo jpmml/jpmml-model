@@ -1,14 +1,14 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model.visitors;
+package org.jpmml.model.collections;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.RandomAccess;
 
-class DoubletonList<E> extends AbstractImmutableList<E> implements RandomAccess, Serializable {
+public class DoubletonList<E> extends AbstractImmutableList<E> implements RandomAccess, Serializable {
 
 	private E first = null;
 
