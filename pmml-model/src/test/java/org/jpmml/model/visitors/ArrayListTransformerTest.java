@@ -20,6 +20,7 @@ import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ArrayListTransformerTest {
@@ -57,7 +58,7 @@ public class ArrayListTransformerTest {
 		transformer.applyTo(treeModel);
 
 		assertTrue(node1a.getNodes() instanceof DoubletonList);
-		assertTrue(node2a.getNodes() instanceof SingletonList);
+		assertFalse(node2a.getNodes() instanceof ArrayList);
 
 		value = array.getValue();
 

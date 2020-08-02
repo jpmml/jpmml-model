@@ -55,7 +55,7 @@ class DoubletonList<E> extends AbstractImmutableList<E> implements RandomAccess,
 			case 0:
 				return Collections.emptyList();
 			case 1:
-				return new SingletonList<>(get(fromIndex));
+				return Collections.singletonList(get(fromIndex));
 			case 2:
 				return this;
 			default:
