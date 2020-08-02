@@ -65,9 +65,9 @@ public class ComplexArray extends Array {
 		throw new IllegalArgumentException();
 	}
 
-	private class ListValue extends ArrayList<Object> implements ComplexValue {
+	class ListValue extends ArrayList<Object> implements ComplexValue {
 
-		private ListValue(Collection<?> values){
+		ListValue(Collection<?> values){
 			super(values);
 		}
 
@@ -77,9 +77,9 @@ public class ComplexArray extends Array {
 		}
 	}
 
-	private class SetValue extends LinkedHashSet<Object> implements ComplexValue {
+	class SetValue extends LinkedHashSet<Object> implements ComplexValue {
 
-		private SetValue(Collection<?> values){
+		SetValue(Collection<?> values){
 			super(values);
 		}
 
