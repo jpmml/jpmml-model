@@ -69,6 +69,12 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-model</artifactId>
+				<classifier>tests</classifier>
+				<version>1.5-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-example</artifactId>
 				<version>1.5-SNAPSHOT</version>
 			</dependency>
