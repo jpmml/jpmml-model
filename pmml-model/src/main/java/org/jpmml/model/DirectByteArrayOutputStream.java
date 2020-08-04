@@ -7,13 +7,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-class DirectByteArrayOutputStream extends ByteArrayOutputStream {
+public class DirectByteArrayOutputStream extends ByteArrayOutputStream {
 
-	DirectByteArrayOutputStream(int capacity){
+	public DirectByteArrayOutputStream(int capacity){
 		super(capacity);
 	}
 
-	InputStream getInputStream(){
+	public InputStream getInputStream(){
 		return new ByteArrayInputStream(super.buf, 0, super.count);
 	}
 }

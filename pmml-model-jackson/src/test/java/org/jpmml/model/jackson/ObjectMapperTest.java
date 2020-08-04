@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.jackson;
 
 import java.io.InputStream;
 import java.util.List;
@@ -19,7 +19,7 @@ import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.TreeModel;
-import org.jpmml.model.jackson.JacksonUtil;
+import org.jpmml.model.DirectByteArrayOutputStream;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
