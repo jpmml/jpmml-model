@@ -25,6 +25,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * [GlassFish Metro](https://metro.java.net)
   * [EclipseLink MOXy](https://www.eclipse.org/eclipselink)
 * Supported SerDe runtimes:
+  * [Kryo](https://github.com/EsotericSoftware/kryo)
   * [FasterXML Jackson](https://github.com/FasterXML/jackson)
 
 # Prerequisites #
