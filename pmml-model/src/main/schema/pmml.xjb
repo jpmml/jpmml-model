@@ -1704,6 +1704,10 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.neural_network.HasActivationFunction&lt;NeuralLayer&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType/xsd:attribute[@name='x-leakage']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
@@ -1713,6 +1717,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.neural_network.HasActivationFunction&lt;NeuralNetwork&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="neural_network"
 			/>
