@@ -463,6 +463,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
 				{{"HasMixedContent"}, {"hasContext", "getContent", "addContent"}},
 				{{"HasName", "Field", "Term"}, {"getName", "setName"}},
+				{{"HasNormalizationMethod"}, {"getNormalizationMethod", "setNormalizationMethod"}},
 				{{"HasOpType", "Field"}, {"getOpType", "setOpType"}},
 				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "setPredicate"}},
 				{{"HasScore", "Node", "Rule"}, {"getScore", "setScore"}},
