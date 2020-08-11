@@ -8,7 +8,6 @@ import java.io.Serializable;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import org.dmg.pmml.FieldName;
 import org.jpmml.model.DirectByteArrayOutputStream;
 
@@ -19,7 +18,7 @@ public class KryoUtil {
 
 	static
 	public void register(Kryo kryo){
-		kryo.register(FieldName.class, new JavaSerializer());
+		kryo.register(FieldName.class, new FieldNameSerializer());
 	}
 
 	@SuppressWarnings (

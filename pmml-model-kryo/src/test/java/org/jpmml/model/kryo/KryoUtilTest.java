@@ -21,7 +21,6 @@ public class KryoUtilTest {
 	@Before
 	public void setUp(){
 		Kryo kryo = new Kryo();
-		kryo.setReferences(true);
 		kryo.setRegistrationRequired(false);
 		kryo.addDefaultSerializer(Element.class, new JavaSerializer());
 
