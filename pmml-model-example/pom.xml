@@ -29,6 +29,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-model-kryo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jpmml</groupId>
 			<artifactId>pmml-model-metro</artifactId>
 		</dependency>
 		<dependency>
