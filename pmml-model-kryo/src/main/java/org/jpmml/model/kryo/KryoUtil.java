@@ -9,6 +9,7 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import org.dmg.pmml.FieldName;
+import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
 
 public class KryoUtil {
@@ -19,6 +20,8 @@ public class KryoUtil {
 	static
 	public void register(Kryo kryo){
 		kryo.register(FieldName.class, new FieldNameSerializer());
+
+		kryo.addDefaultSerializer(PMMLObject.class, PMMLObjectSerializer.class);
 	}
 
 	@SuppressWarnings (
