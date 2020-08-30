@@ -23,7 +23,7 @@ public class FieldNameSerializer extends Serializer<FieldName> {
 	}
 
 	@Override
-	public FieldName read(Kryo kryo, Input input, Class clazz){
+	public FieldName read(Kryo kryo, Input input, Class<? extends FieldName> clazz){
 		String value = input.readString();
 
 		return FieldName.create(value);

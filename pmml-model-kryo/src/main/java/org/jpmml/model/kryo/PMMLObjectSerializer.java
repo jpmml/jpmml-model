@@ -9,7 +9,7 @@ import org.dmg.pmml.PMMLObject;
 
 public class PMMLObjectSerializer extends FieldSerializer<PMMLObject> {
 
-	public PMMLObjectSerializer(Kryo kryo, Class clazz){
+	public PMMLObjectSerializer(Kryo kryo, Class<? extends PMMLObject> clazz){
 		super(kryo, clazz);
 
 		setAcceptsNull(false);
