@@ -11,6 +11,7 @@ import com.esotericsoftware.kryo.io.Output;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
+import org.jpmml.model.collections.DoubletonList;
 
 public class KryoUtil {
 
@@ -19,9 +20,13 @@ public class KryoUtil {
 
 	static
 	public void register(Kryo kryo){
+		// org.dmg.pmml.*
 		kryo.register(FieldName.class, new FieldNameSerializer());
 
 		kryo.addDefaultSerializer(PMMLObject.class, PMMLObjectSerializer.class);
+
+		// org.jpmml.model.*
+		kryo.register(DoubletonList.class, new DoubletonListSerializer());
 	}
 
 	@SuppressWarnings (
