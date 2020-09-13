@@ -67,6 +67,9 @@ public class ComplexArray extends Array {
 
 	public class ListValue extends ArrayList<Object> implements ComplexValue {
 
+		private ListValue(){
+		}
+
 		public ListValue(Collection<?> values){
 			super(values);
 		}
@@ -78,6 +81,9 @@ public class ComplexArray extends Array {
 	}
 
 	public class SetValue extends LinkedHashSet<Object> implements ComplexValue {
+
+		private SetValue(){
+		}
 
 		public SetValue(Collection<?> values){
 			super(values);
