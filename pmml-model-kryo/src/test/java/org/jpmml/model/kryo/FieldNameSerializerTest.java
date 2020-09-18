@@ -23,8 +23,8 @@ public class FieldNameSerializerTest {
 	@Before
 	public void setUp(){
 		Kryo kryo = new Kryo();
-		kryo.setRegistrationRequired(false);
 
+		KryoUtil.init(kryo);
 		KryoUtil.register(kryo);
 
 		this.kryo = kryo;

@@ -5,17 +5,27 @@ package org.jpmml.model.kryo;
 
 import java.io.Serializable;
 
+import javax.xml.bind.JAXBElement;
+
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
+import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
 import org.jpmml.model.collections.DoubletonList;
+import org.w3c.dom.Element;
 
 public class KryoUtil {
 
 	private KryoUtil(){
+	}
+
+	static
+	public void init(Kryo kryo){
+		kryo.setRegistrationRequired(false);
+		kryo.setReferences(true);
 	}
 
 	static
@@ -24,6 +34,10 @@ public class KryoUtil {
 		kryo.register(FieldName.class, new FieldNameSerializer());
 
 		kryo.addDefaultSerializer(PMMLObject.class, PMMLObjectSerializer.class);
+
+		// Custom XML elements (eg. InlineTable rows)
+		kryo.addDefaultSerializer(Element.class, new JavaSerializer());
+		kryo.addDefaultSerializer(JAXBElement.class, new JavaSerializer());
 
 		// org.jpmml.model.*
 		kryo.register(DoubletonList.class, new DoubletonListSerializer());
