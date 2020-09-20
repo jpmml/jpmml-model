@@ -39,11 +39,11 @@ public class ComplexArray extends Array {
 	}
 
 	public ComplexArray setValue(List<?> values){
-		return (ComplexArray)super.setValue(new ListValue(values));
+		return (ComplexArray)super.setValue(new ListValue(this, values));
 	}
 
 	public ComplexArray setValue(Set<?> values){
-		return (ComplexArray)super.setValue(new SetValue(values));
+		return (ComplexArray)super.setValue(new SetValue(this, values));
 	}
 
 	@Override
@@ -65,33 +65,65 @@ public class ComplexArray extends Array {
 		throw new IllegalArgumentException();
 	}
 
+	static
 	public class ListValue extends ArrayList<Object> implements ComplexValue {
+
+		private Array array = null;
+
 
 		private ListValue(){
 		}
 
-		public ListValue(Collection<?> values){
+		public ListValue(ComplexArray complexArray, Collection<?> values){
 			super(values);
+
+			setArray(complexArray);
 		}
 
 		@Override
 		public Object toSimpleValue(){
-			return ArrayUtil.format(getType(), this);
+			Array array = getArray();
+
+			return ArrayUtil.format(array.getType(), this);
+		}
+
+		public Array getArray(){
+			return this.array;
+		}
+
+		private void setArray(Array array){
+			this.array = array;
 		}
 	}
 
+	static
 	public class SetValue extends LinkedHashSet<Object> implements ComplexValue {
+
+		private Array array = null;
+
 
 		private SetValue(){
 		}
 
-		public SetValue(Collection<?> values){
+		public SetValue(ComplexArray complexArray, Collection<?> values){
 			super(values);
+
+			setArray(complexArray);
 		}
 
 		@Override
 		public Object toSimpleValue(){
-			return ArrayUtil.format(getType(), this);
+			Array array = getArray();
+
+			return ArrayUtil.format(array.getType(), this);
+		}
+
+		public Array getArray(){
+			return this.array;
+		}
+
+		private void setArray(Array array){
+			this.array = array;
 		}
 	}
 }
