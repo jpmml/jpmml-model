@@ -54,17 +54,6 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
-	Add dummy timeseries algorithm types
-	-->
-	<xsl:template match="xs:element[@name='SeasonalTrendDecomposition' or @name='SpectralAnalysis']">
-		<xsl:copy>
-			<xsl:apply-templates select="@*|node()"/>
-			<xs:complexType>
-			</xs:complexType>
-		</xsl:copy>
-	</xsl:template>
-
-	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">
