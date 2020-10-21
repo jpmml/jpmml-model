@@ -216,6 +216,7 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 			PMMLFunctions.MODULO,
 			PMMLFunctions.ISVALID, PMMLFunctions.ISNOTVALID,
 			PMMLFunctions.EXPM1, PMMLFunctions.HYPOT, PMMLFunctions.LN1P, PMMLFunctions.RINT,
+			PMMLFunctions.STRINGLENGTH,
 			PMMLFunctions.SIN, PMMLFunctions.ASIN, PMMLFunctions.SINH, PMMLFunctions.COS, PMMLFunctions.ACOS, PMMLFunctions.COSH, PMMLFunctions.TAN, PMMLFunctions.ATAN, PMMLFunctions.TANH);
 		declareFunctions(Version.XPMML,
 			PMMLFunctions.ATAN2);

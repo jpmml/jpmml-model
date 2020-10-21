@@ -67,6 +67,7 @@ public interface PMMLFunctions {
 	String STDNORMALCDF = "stdNormalCDF";
 	String STDNORMALIDF = "stdNormalIDF";
 	String STDNORMALPDF = "stdNormalPDF";
+	String STRINGLENGTH = "stringLength";
 	String SUBSTRING = "substring";
 	String SUBTRACT = "-";
 	String SUM = "sum";
