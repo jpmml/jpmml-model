@@ -3,8 +3,6 @@
  */
 package org.jpmml.model.kryo;
 
-import java.io.Serializable;
-
 import javax.xml.bind.JAXBElement;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -47,7 +45,7 @@ public class KryoUtil {
 		value = {"unchecked"}
 	)
 	static
-	public <S extends Serializable> S clone(Kryo kryo, S object){
+	public <E> E clone(Kryo kryo, E object){
 		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);
 
 		try(Output output = new Output(buffer)){
@@ -55,7 +53,7 @@ public class KryoUtil {
 		}
 
 		try(Input input = new Input(buffer.getInputStream())){
-			return (S)kryo.readClassAndObject(input);
+			return (E)kryo.readClassAndObject(input);
 		}
 	}
 }

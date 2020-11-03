@@ -11,7 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.ObjectStreamClass;
 import java.io.OutputStream;
-import java.io.Serializable;
 
 import org.dmg.pmml.PMML;
 
@@ -70,7 +69,7 @@ public class SerializationUtil {
 	}
 
 	static
-	public <S extends Serializable> void serialize(S object, OutputStream os) throws IOException {
+	public void serialize(Object object, OutputStream os) throws IOException {
 		FilterOutputStream safeOs = new FilterOutputStream(os){
 
 			@Override
@@ -87,7 +86,7 @@ public class SerializationUtil {
 	}
 
 	static
-	public <S extends Serializable> S clone(S object) throws ClassNotFoundException, IOException {
+	public <E> E clone(E object) throws ClassNotFoundException, IOException {
 		return clone(object, null);
 	}
 
@@ -95,13 +94,13 @@ public class SerializationUtil {
 		value = {"unchecked"}
 	)
 	static
-	public <S extends Serializable> S clone(S object, ClassLoader clazzLoader) throws ClassNotFoundException, IOException {
+	public <E> E clone(E object, ClassLoader clazzLoader) throws ClassNotFoundException, IOException {
 		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);
 
 		serialize(object, buffer);
 
 		try(InputStream is = buffer.getInputStream()){
-			return (S)deserialize(is, clazzLoader);
+			return (E)deserialize(is, clazzLoader);
 		}
 	}
 }
