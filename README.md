@@ -107,6 +107,11 @@ Copying `input.pmml` to `output.pmml`; the size of the class model is estimated 
 java -javaagent:../pmml-agent/target/pmml-agent-1.5-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.CopyExample --summary true --input input.pmml --output output.pmml
 ```
 
+Translating a PMML XML document `input.pmml` to PMML JSON document `output.json`:
+```
+java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.TranslationExample --input input.pmml --output output.json --indent "\\t"
+```
+
 Checking the validity of `model.pmml`:
 ```
 java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.ValidationExample --input model.pmml
