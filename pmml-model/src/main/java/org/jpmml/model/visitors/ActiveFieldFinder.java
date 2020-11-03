@@ -42,7 +42,7 @@ import org.dmg.pmml.sequence.SetPredicate;
  * A Visitor that determines which fields are referenced during the evaluation of a class model object.
  * </p>
  */
-public class FieldReferenceFinder extends AbstractVisitor implements Resettable {
+public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 
 	private Set<FieldName> names = null;
 

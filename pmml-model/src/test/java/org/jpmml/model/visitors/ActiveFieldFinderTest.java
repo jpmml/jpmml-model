@@ -18,7 +18,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class FieldReferenceFinderTest {
+public class ActiveFieldFinderTest {
 
 	@Test
 	public void findChained() throws Exception {
@@ -61,7 +61,7 @@ public class FieldReferenceFinderTest {
 
 	static
 	private void checkFields(Set<FieldName> names, Model model){
-		FieldReferenceFinder fieldReferenceFinder = new FieldReferenceFinder();
+		ActiveFieldFinder fieldReferenceFinder = new ActiveFieldFinder();
 		fieldReferenceFinder.applyTo(model);
 
 		assertEquals(names, fieldReferenceFinder.getFieldNames());
