@@ -44,6 +44,24 @@ public class DoubletonList<E> extends AbstractImmutableList<E> implements Random
 	}
 
 	@Override
+	public E set(int index, E element){
+		E result;
+
+		switch(index){
+			case 0:
+				result = this.first;
+				this.first = element;
+				return result;
+			case 1:
+				result = this.second;
+				this.second = element;
+				return result;
+			default:
+				throw new IndexOutOfBoundsException();
+		}
+	}
+
+	@Override
 	public List<E> subList(int fromIndex, int toIndex){
 
 		if(fromIndex < 0 || toIndex > 2){

@@ -95,7 +95,9 @@ public class AbstractImmutableList<E> extends AbstractCollection<E> implements L
 
 			@Override
 			public void set(E element){
-				throw new UnsupportedOperationException();
+				int i = (this.cursor - 1);
+
+				AbstractImmutableList.this.set(i, element);
 			}
 
 			@Override

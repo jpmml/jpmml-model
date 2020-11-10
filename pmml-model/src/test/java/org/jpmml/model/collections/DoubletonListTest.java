@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.junit.Test;
 
@@ -55,5 +56,31 @@ public class DoubletonListTest extends AbstractImmutableListTest {
 		assertEquals(Arrays.asList("first", "second"), toList(list.listIterator(0)));
 		assertEquals(Arrays.asList("second"), toList(list.listIterator(1)));
 		assertEquals(Collections.emptyList(), toList(list.listIterator(2)));
+	}
+
+	@Test
+	public void updateContract(){
+		List<String> list = new DoubletonList<>("first", "second");
+
+		assertEquals("first", list.set(0, "First"));
+		assertEquals("second", list.set(1, "Second"));
+
+		try {
+			list.set(2, "Third");
+
+			fail();
+		} catch(IndexOutOfBoundsException ioobe){
+			// Ignored
+		}
+
+		assertEquals(Arrays.asList("First", "Second"), list);
+
+		for(ListIterator<String> it = list.listIterator(); it.hasNext(); ){
+			String element = it.next();
+
+			it.set(element.toUpperCase());
+		}
+
+		assertEquals(Arrays.asList("FIRST", "SECOND"), list);
 	}
 }
