@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.junit.Test;
 
@@ -46,8 +45,9 @@ public class DoubletonListTest extends AbstractImmutableListTest {
 		assertEquals(1, list.lastIndexOf("second"));
 		assertEquals(-1, list.lastIndexOf(null));
 
-		assertEquals(Arrays.asList("first", "second"), list.subList(0, 2));
+		assertEquals(Collections.emptyList(), list.subList(0, 0));
 		assertEquals(Arrays.asList("first"), list.subList(0, 1));
+		assertEquals(Arrays.asList("first", "second"), list.subList(0, 2));
 		assertEquals(Arrays.asList("second"), list.subList(1, 2));
 		assertEquals(Collections.emptyList(), list.subList(2, 2));
 
@@ -75,11 +75,7 @@ public class DoubletonListTest extends AbstractImmutableListTest {
 
 		assertEquals(Arrays.asList("First", "Second"), list);
 
-		for(ListIterator<String> it = list.listIterator(); it.hasNext(); ){
-			String element = it.next();
-
-			it.set(element.toUpperCase());
-		}
+		transform(list, string -> string.toUpperCase());
 
 		assertEquals(Arrays.asList("FIRST", "SECOND"), list);
 	}

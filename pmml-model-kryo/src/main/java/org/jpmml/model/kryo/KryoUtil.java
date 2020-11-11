@@ -13,6 +13,7 @@ import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
 import org.jpmml.model.collections.DoubletonList;
+import org.jpmml.model.collections.TripletonList;
 import org.w3c.dom.Element;
 
 public class KryoUtil {
@@ -39,6 +40,7 @@ public class KryoUtil {
 
 		// org.jpmml.model.*
 		kryo.register(DoubletonList.class, new DoubletonListSerializer());
+		kryo.register(TripletonList.class, new TripletonListSerializer());
 	}
 
 	@SuppressWarnings (
