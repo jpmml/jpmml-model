@@ -61,9 +61,6 @@ public class ActiveFieldFinderTest {
 
 	static
 	private void checkFields(Set<FieldName> names, Model model){
-		ActiveFieldFinder fieldReferenceFinder = new ActiveFieldFinder();
-		fieldReferenceFinder.applyTo(model);
-
-		assertEquals(names, fieldReferenceFinder.getFieldNames());
+		assertEquals(names, ActiveFieldFinder.getFieldNames(model));
 	}
 }

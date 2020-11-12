@@ -16,6 +16,7 @@ import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.SimpleSetPredicate;
 import org.dmg.pmml.TextIndex;
@@ -293,5 +294,20 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 		{
 			this.names = Collections.singleton(name);
 		}
+	}
+
+	static
+	public Set<FieldName> getFieldNames(PMMLObject... objects){
+		return getFieldNames(new ActiveFieldFinder(), objects);
+	}
+
+	static
+	public Set<FieldName> getFieldNames(ActiveFieldFinder activeFieldFinder, PMMLObject... objects){
+
+		for(PMMLObject object : objects){
+			activeFieldFinder.applyTo(object);
+		}
+
+		return activeFieldFinder.getFieldNames();
 	}
 }
