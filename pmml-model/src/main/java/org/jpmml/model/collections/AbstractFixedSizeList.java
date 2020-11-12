@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 
 abstract
-public class AbstractImmutableList<E> extends AbstractCollection<E> implements List<E> {
+public class AbstractFixedSizeList<E> extends AbstractCollection<E> implements List<E> {
 
 	@Override
 	public Iterator<E> iterator(){
@@ -97,7 +97,7 @@ public class AbstractImmutableList<E> extends AbstractCollection<E> implements L
 			public void set(E element){
 				int i = (this.cursor - 1);
 
-				AbstractImmutableList.this.set(i, element);
+				AbstractFixedSizeList.this.set(i, element);
 			}
 
 			@Override

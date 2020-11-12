@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.RandomAccess;
 
-public class TripletonList<E> extends AbstractImmutableList<E> implements RandomAccess, Serializable {
+public class TripletonList<E> extends AbstractFixedSizeList<E> implements RandomAccess, Serializable {
 
 	private E first = null;
 

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class DoubletonListTest extends AbstractImmutableListTest {
+public class DoubletonListTest extends AbstractFixedSizeListTest {
 
 	@Test
 	public void readContract(){

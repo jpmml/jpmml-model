@@ -8,7 +8,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import org.jpmml.model.collections.DoubletonList;
 
-public class DoubletonListSerializer extends AbstractImmutableListSerializer<DoubletonList<?>> {
+public class DoubletonListSerializer extends AbstractFixedSizeListSerializer<DoubletonList<?>> {
 
 	@Override
 	public void write(Kryo kryo, Output output, DoubletonList<?> doubletonList){

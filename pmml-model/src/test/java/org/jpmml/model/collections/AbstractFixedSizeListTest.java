@@ -10,7 +10,7 @@ import java.util.ListIterator;
 import java.util.function.Function;
 
 abstract
-public class AbstractImmutableListTest {
+public class AbstractFixedSizeListTest {
 
 	static
 	<E> List<E> toList(Iterator<E> it){

@@ -8,7 +8,7 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import org.jpmml.model.collections.TripletonList;
 
-public class TripletonListSerializer extends AbstractImmutableListSerializer<TripletonList<?>> {
+public class TripletonListSerializer extends AbstractFixedSizeListSerializer<TripletonList<?>> {
 
 	@Override
 	public void write(Kryo kryo, Output output, TripletonList<?> tripletonList){
