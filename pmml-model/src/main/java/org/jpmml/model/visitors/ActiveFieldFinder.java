@@ -14,6 +14,7 @@ import org.dmg.pmml.FieldColumnPair;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.Lag;
+import org.dmg.pmml.Model;
 import org.dmg.pmml.NormContinuous;
 import org.dmg.pmml.NormDiscrete;
 import org.dmg.pmml.PMMLObject;
@@ -42,6 +43,8 @@ import org.dmg.pmml.sequence.SetPredicate;
  * <p>
  * A Visitor that determines which fields are referenced during the evaluation of a class model object.
  * </p>
+ *
+ * @see HasActiveFields
  */
 public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 
@@ -184,6 +187,21 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 		process(lag.getField());
 
 		return super.visit(lag);
+	}
+
+	@Override
+	public VisitorAction visit(Model model){
+
+		if(model instanceof HasActiveFields){
+			HasActiveFields hasActiveFields = (HasActiveFields)model;
+
+			Set<FieldName> names = hasActiveFields.getActiveFields();
+			for(FieldName name : names){
+				process(name);
+			}
+		}
+
+		return super.visit(model);
 	}
 
 	@Override
