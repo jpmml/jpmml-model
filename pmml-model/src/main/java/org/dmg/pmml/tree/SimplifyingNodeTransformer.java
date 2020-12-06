@@ -24,6 +24,11 @@ public class SimplifyingNodeTransformer implements NodeTransformer {
 		return simplify(complexNode);
 	}
 
+	@Override
+	public ComplexNode toComplexNode(Node node){
+		return node.toComplexNode();
+	}
+
 	public Node simplify(Node node){
 
 		if(node.hasExtensions() || (node.getPartition() != null) || (node.getEmbeddedModel() != null)){

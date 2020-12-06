@@ -17,8 +17,5 @@ public interface NodeTransformer {
 
 	Node fromComplexNode(ComplexNode complexNode);
 
-	default
-	ComplexNode toComplexNode(Node node){
-		return node.toComplexNode();
-	}
+	ComplexNode toComplexNode(Node node);
 }

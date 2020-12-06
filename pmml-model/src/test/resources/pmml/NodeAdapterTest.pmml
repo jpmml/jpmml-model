@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_4" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.4">
+	<Header/>
+	<DataDictionary/>
+	<TreeModel>
+		<MiningSchema/>
+		<Node id="branch" recordCount="1">
+			<True/>
+			<Node id="false child" score="false">
+				<False/>
+			</Node>
+			<Node id="true child" score="true" recordCount="1">
+				<True/>
+			</Node>
+		</Node>
+	</TreeModel>
+</PMML> 
