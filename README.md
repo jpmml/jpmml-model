@@ -1,4 +1,4 @@
-JPMML-Model [![Build Status](https://travis-ci.org/jpmml/jpmml-model.png?branch=master)](https://travis-ci.org/jpmml/jpmml-model)
+JPMML-Model [![Build Status](https://github.com/jpmml/jpmml-model/workflows/maven/badge.svg)](https://github.com/jpmml/jpmml-model/actions?query=workflow%3A%22maven%22)
 ===========
 
 Java Class Model API for Predictive Model Markup Language (PMML).
