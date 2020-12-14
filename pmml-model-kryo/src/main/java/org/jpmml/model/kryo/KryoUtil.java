@@ -9,10 +9,12 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.serializers.JavaSerializer;
+
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
 import org.jpmml.model.collections.DoubletonList;
+import org.jpmml.model.collections.SingletonList;
 import org.jpmml.model.collections.TripletonList;
 import org.w3c.dom.Element;
 
@@ -39,6 +41,7 @@ public class KryoUtil {
 		kryo.addDefaultSerializer(JAXBElement.class, new JavaSerializer());
 
 		// org.jpmml.model.*
+		kryo.register(SingletonList.class, new SingletonListSerializer());
 		kryo.register(DoubletonList.class, new DoubletonListSerializer());
 		kryo.register(TripletonList.class, new TripletonListSerializer());
 	}
