@@ -73,7 +73,7 @@ public class DoubletonList<E> extends AbstractFixedSizeList<E> implements Random
 			case 0:
 				return Collections.emptyList();
 			case 1:
-				return Collections.singletonList(get(fromIndex));
+				return new SingletonList<>(get(fromIndex));
 			case 2:
 				return this;
 			default:

@@ -12,6 +12,7 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.collections.DoubletonList;
+import org.jpmml.model.collections.SingletonList;
 import org.jpmml.model.collections.TripletonList;
 
 /**
@@ -48,7 +49,7 @@ public class ArrayListTransformer extends AbstractVisitor {
 			case 0:
 				return Collections.emptyList();
 			case 1:
-				return Collections.singletonList(list.get(0));
+				return new SingletonList<>(list.get(0));
 			case 2:
 				return new DoubletonList<>(list.get(0), list.get(1));
 			case 3:
