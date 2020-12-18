@@ -3,8 +3,8 @@
  */
 package org.dmg.pmml;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.jpmml.model.SerializationUtil;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class FieldNameTest {
 
 		FieldName createdName;
 
-		Map<String, FieldName> cache = new HashMap<>();
+		ConcurrentMap<String, FieldName> cache = new ConcurrentHashMap<>();
 
 		try {
 			FieldName.CACHE_PROVIDER.set(cache);
@@ -47,7 +47,7 @@ public class FieldNameTest {
 
 		FieldName clonedName;
 
-		Map<String, FieldName> cache = new HashMap<>();
+		ConcurrentMap<String, FieldName> cache = new ConcurrentHashMap<>();
 
 		try {
 			FieldName.CACHE_PROVIDER.set(cache);

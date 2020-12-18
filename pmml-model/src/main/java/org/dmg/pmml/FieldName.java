@@ -4,8 +4,8 @@
 package org.dmg.pmml;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -89,7 +89,7 @@ public class FieldName implements Serializable {
 			throw new IllegalArgumentException("Name cannot be empty");
 		}
 
-		Map<String, FieldName> cache = FieldName.CACHE_PROVIDER.get();
+		ConcurrentMap<String, FieldName> cache = FieldName.CACHE_PROVIDER.get();
 
 		FieldName name = cache.get(value);
 		if(name == null){
@@ -104,12 +104,12 @@ public class FieldName implements Serializable {
 		return name;
 	}
 
-	public static final Map<String, FieldName> CACHE = new ConcurrentHashMap<>(2048);
+	public static final ConcurrentMap<String, FieldName> CACHE = new ConcurrentHashMap<>(2048);
 
-	public static final ThreadLocal<Map<String, FieldName>> CACHE_PROVIDER = new ThreadLocal<Map<String, FieldName>>(){
+	public static final ThreadLocal<ConcurrentMap<String, FieldName>> CACHE_PROVIDER = new ThreadLocal<ConcurrentMap<String, FieldName>>(){
 
 		@Override
-		public Map<String, FieldName> initialValue(){
+		public ConcurrentMap<String, FieldName> initialValue(){
 			return FieldName.CACHE;
 		}
 	};
