@@ -20,8 +20,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 import org.dmg.pmml.PMMLObject;
 
@@ -132,7 +130,7 @@ public class ReflectionUtil {
 			try {
 				Field field = clazz.getDeclaredField(name);
 
-				if(!ReflectionUtil.FIELD_SELECTOR.test(field)){
+				if(!isValidInstanceField(field)){
 					throw new IllegalArgumentException(name);
 				}
 
@@ -318,25 +316,16 @@ public class ReflectionUtil {
 	public List<Field> getClassConstants(List<Class<?>> clazzes){
 		List<Field> result = new ArrayList<>();
 
-		Function<Field, Field> function = new Function<Field, Field>(){
+		try {
+			for(Class<?> clazz : clazzes){
+				Field[] fields = clazz.getDeclaredFields();
 
-			@Override
-			public Field apply(Field field){
-
-				try {
-					return (Field)field.get(null);
-				} catch(ReflectiveOperationException roe){
-					throw new RuntimeException(roe);
+				for(Field field : fields){
+					result.add((Field)field.get(null));
 				}
 			}
-		};
-
-		for(Class<?> clazz : clazzes){
-			Field[] fields = clazz.getDeclaredFields();
-
-			for(Field field : fields){
-				result.add(function.apply(field));
-			}
+		} catch(IllegalAccessException iae){
+			throw new RuntimeException(iae);
 		}
 
 		return result;
@@ -365,7 +354,7 @@ public class ReflectionUtil {
 
 			for(Field field : fields){
 
-				if(!ReflectionUtil.FIELD_SELECTOR.test(field)){
+				if(!isValidInstanceField(field)){
 					continue;
 				}
 
@@ -424,30 +413,27 @@ public class ReflectionUtil {
 	}
 
 	static
-	private final Predicate<Field> FIELD_SELECTOR = new Predicate<Field>(){
+	private boolean isValidInstanceField(Field field){
 
-		@Override
-		public boolean test(Field field){
+		if(hasValidName(field)){
+			int modifiers = field.getModifiers();
 
-			if(hasValidName(field)){
-				int modifiers = field.getModifiers();
-
-				return !Modifier.isStatic(modifiers);
-			}
-
-			return false;
+			return !Modifier.isStatic(modifiers);
 		}
 
-		private boolean hasValidName(Field field){
-			String name = field.getName();
+		return false;
+	}
 
-			if(name.length() > 0){
-				return Character.isLetterOrDigit(name.charAt(0));
-			}
+	static
+	private boolean hasValidName(Field field){
+		String name = field.getName();
 
-			return false;
+		if(name.length() > 0){
+			return Character.isLetterOrDigit(name.charAt(0));
 		}
-	};
+
+		return false;
+	}
 
 	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<>();
 

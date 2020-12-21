@@ -220,12 +220,14 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 	private List<Field<?>> getScope(PMMLObject object){
 
 		if(this.customScopes.size() > 0){
-			return this.customScopes.getOrDefault(object, this.scopes.get(object));
-		} else
+			List<Field<?>> customScope = this.customScopes.get(object);
 
-		{
-			return this.scopes.get(object);
+			if(customScope != null){
+				return customScope;
+			}
 		}
+
+		return this.scopes.get(object);
 	}
 
 	private void declareGlobalFields(PMML pmml, boolean transformations){

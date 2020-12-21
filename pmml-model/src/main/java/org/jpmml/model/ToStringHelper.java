@@ -3,37 +3,50 @@
  */
 package org.jpmml.model;
 
-import java.util.StringJoiner;
-
 public class ToStringHelper {
 
-	private StringJoiner joiner = null;
+	private String prefix = null;
+
+	private String delimiter = null;
+
+	private String suffix = null;
+
+	private StringBuilder value = null;
 
 
 	public ToStringHelper(Object object){
-		setJoiner(new StringJoiner(", ", (object.getClass()).getSimpleName() + "{", "}"));
+		this.prefix = (object.getClass()).getSimpleName() + "{";
+		this.delimiter = ", ";
+		this.suffix = "}";
 	}
 
 	public ToStringHelper add(String key, Object value){
-		StringJoiner joiner = getJoiner();
 
-		joiner.add(key + "=" + value);
+		if(this.value == null){
+			this.value = new StringBuilder();
+		} else
+
+		{
+			this.value.append(this.delimiter);
+		}
+
+		this.value.append(key).append('=').append(value);
 
 		return this;
 	}
 
 	@Override
 	public String toString(){
-		StringJoiner joiner = getJoiner();
+		StringBuilder sb = new StringBuilder();
 
-		return joiner.toString();
-	}
+		sb.append(this.prefix);
 
-	public StringJoiner getJoiner(){
-		return this.joiner;
-	}
+		if(this.value != null){
+			sb.append(this.value);
+		}
 
-	private void setJoiner(StringJoiner joiner){
-		this.joiner = joiner;
+		sb.append(this.suffix);
+
+		return sb.toString();
 	}
 }

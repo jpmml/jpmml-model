@@ -3,6 +3,7 @@
  */
 package org.jpmml.model;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,11 +29,22 @@ public class PMMLUtil {
 	 *
 	 * @see ServiceLoaderUtil#load(Class, ClassLoader)
 	 */
+	@SuppressWarnings (
+		value = {"cast", "resource"}
+	)
 	static
 	public PMML load(URL url) throws IOException {
+		URLClassLoader clazzLoader = URLClassLoader.newInstance(new URL[]{url});
 
-		try(URLClassLoader clazzLoader = URLClassLoader.newInstance(new URL[]{url})){
+		try {
 			return load(clazzLoader);
+		} finally {
+
+			if(clazzLoader instanceof Closeable){
+				Closeable closeable = (Closeable)clazzLoader;
+
+				closeable.close();
+			}
 		}
 	}
 
