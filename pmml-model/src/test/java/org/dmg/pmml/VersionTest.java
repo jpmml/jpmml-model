@@ -17,7 +17,7 @@ public class VersionTest {
 
 			fail();
 		} catch(IllegalArgumentException iae){
-			// Ignored;
+			// Ignored
 		}
 
 		Version.forNamespaceURI("http://www.dmg.org/PMML-3_0");

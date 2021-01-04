@@ -80,10 +80,10 @@ public class InlineTableTest {
 
 		Document document = documentBuilder.newDocument();
 
-		Element inputElement = document.createElementNS(XLMNS_DATA, "data:input");
+		Element inputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, "data:input");
 		inputElement.setTextContent("0");
 
-		Element outputElement = document.createElementNS(XLMNS_DATA, "data:output");
+		Element outputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, "data:output");
 		outputElement.setTextContent("zero");
 
 		Row row = new Row()
@@ -94,8 +94,8 @@ public class InlineTableTest {
 
 	@Test
 	public void marshalJaxbElement() throws Exception {
-		JAXBElement<?> inputElement = new JAXBElement<>(new QName(XLMNS_DATA, "input"), Integer.class, 0);
-		JAXBElement<?> outputElement = new JAXBElement<>(new QName(XLMNS_DATA, "output"), String.class, "zero");
+		JAXBElement<?> inputElement = new JAXBElement<>(new QName(Namespaces.JPMML_INLINETABLE, "input"), Integer.class, 0);
+		JAXBElement<?> outputElement = new JAXBElement<>(new QName(Namespaces.JPMML_INLINETABLE, "output"), String.class, "zero");
 
 		Row row = new Row()
 			.addContent(inputElement, outputElement);
@@ -142,6 +142,4 @@ public class InlineTableTest {
 		assertTrue(string.contains("<data:output>zero</data:output>"));
 		assertTrue(string.contains("</row>"));
 	}
-
-	private static final String XLMNS_DATA = "http://jpmml.org/jpmml-model/InlineTable";
 }
