@@ -3,38 +3,23 @@
  */
 package org.jpmml.model.kryo;
 
-import com.esotericsoftware.kryo.Kryo;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.OpType;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 
-public class FieldNameSerializerTest {
-
-	private Kryo kryo = null;
-
-
-	@Before
-	public void setUp(){
-		Kryo kryo = new Kryo();
-
-		KryoUtil.init(kryo);
-		KryoUtil.register(kryo);
-
-		this.kryo = kryo;
-	}
+public class FieldNameSerializerTest extends KryoUtilTest {
 
 	@Test
 	public void kryoClone(){
 		DataField dataField = new DataField(null, OpType.CONTINUOUS, DataType.DOUBLE);
 
-		DataField clonedDataField = KryoUtil.clone(this.kryo, dataField);
+		DataField clonedDataField = clone(dataField);
 
 		assertNotSame(dataField, clonedDataField);
 
@@ -42,7 +27,7 @@ public class FieldNameSerializerTest {
 
 		dataField.setName(FieldName.create("x"));
 
-		clonedDataField = KryoUtil.clone(this.kryo, dataField);
+		clonedDataField = clone(dataField);
 
 		assertNotSame(dataField, clonedDataField);
 
