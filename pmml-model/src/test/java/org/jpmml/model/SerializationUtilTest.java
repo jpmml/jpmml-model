@@ -16,9 +16,9 @@ import org.jpmml.model.visitors.LocatorTransformer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class SerializationUtilTest {
@@ -27,7 +27,7 @@ public class SerializationUtilTest {
 	public void nullifyAndClone() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_4);
 
-		assertNotNull(pmml.getLocator());
+		assertTrue(pmml.hasLocator());
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -39,7 +39,7 @@ public class SerializationUtilTest {
 
 		pmml.accept(new LocatorNullifier());
 
-		assertNull(pmml.getLocator());
+		assertFalse(pmml.hasLocator());
 
 		SerializationUtil.clone(pmml);
 	}
@@ -48,7 +48,7 @@ public class SerializationUtilTest {
 	public void transformAndClone() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_4);
 
-		assertNotNull(pmml.getLocator());
+		assertTrue(pmml.hasLocator());
 
 		try {
 			SerializationUtil.clone(pmml);
@@ -60,7 +60,7 @@ public class SerializationUtilTest {
 
 		pmml.accept(new LocatorTransformer());
 
-		assertNotNull(pmml.getLocator());
+		assertTrue(pmml.hasLocator());
 
 		SerializationUtil.clone(pmml);
 	}

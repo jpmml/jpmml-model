@@ -27,6 +27,9 @@ public class LocatorRemover extends SimpleTransformer {
 
 		ctClass.removeField(field);
 
+		CtMethod checkerMethod = ctClass.getDeclaredMethod("hasLocator");
+		checkerMethod.setBody("return false;");
+
 		CtMethod getterMethod = ctClass.getDeclaredMethod("getLocator");
 		getterMethod.setBody(null);
 

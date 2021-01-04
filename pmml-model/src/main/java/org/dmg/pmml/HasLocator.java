@@ -7,6 +7,8 @@ import org.xml.sax.Locator;
 
 public interface HasLocator {
 
+	boolean hasLocator();
+
 	Locator getLocator();
 
 	void setLocator(Locator locator);

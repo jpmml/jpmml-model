@@ -38,6 +38,10 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	private Locator locator;
 
 
+	public boolean hasLocator(){
+		return (this.locator != null);
+	}
+
 	@Override
 	public Locator getLocator(){
 		return this.locator;

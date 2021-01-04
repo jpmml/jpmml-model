@@ -3,19 +3,15 @@
  */
 package org.jpmml.model.kryo;
 
-import java.io.Serializable;
-
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
+import org.dmg.pmml.Visitor;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
 import org.junit.Test;
-import org.xml.sax.Locator;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class LocatorTest extends KryoUtilTest {
@@ -24,29 +20,25 @@ public class LocatorTest extends KryoUtilTest {
 	public void kryoClone() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_4);
 
-		pmml = clone(pmml);
+		pmml = updateLocator(pmml, null);
 
-		Locator locator = pmml.getLocator();
+		assertTrue(pmml.hasLocator());
 
-		assertNotNull(locator);
-		assertFalse(locator instanceof Serializable);
+		pmml = updateLocator(pmml, new LocatorTransformer());
 
-		LocatorTransformer locatorTransformer = new LocatorTransformer();
-		locatorTransformer.applyTo(pmml);
+		assertTrue(pmml.hasLocator());
 
-		pmml = clone(pmml);
+		pmml = updateLocator(pmml, new LocatorNullifier());
 
-		locator = pmml.getLocator();
+		assertFalse(pmml.hasLocator());
+	}
 
-		assertTrue(locator instanceof Serializable);
+	private PMML updateLocator(PMML pmml, Visitor visitor){
 
-		LocatorNullifier locatorNullifier = new LocatorNullifier();
-		locatorNullifier.applyTo(pmml);
+		if(visitor != null){
+			pmml.accept(visitor);
+		}
 
-		pmml = clone(pmml);
-
-		locator = pmml.getLocator();
-
-		assertNull(locator);
+		return clone(pmml);
 	}
 }
