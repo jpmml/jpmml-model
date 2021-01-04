@@ -18,6 +18,9 @@ class SimpleLocator implements Locator, Serializable {
 	private int columnNumber = -1;
 
 
+	private SimpleLocator(){
+	}
+
 	public SimpleLocator(Locator locator){
 		setPublicId(locator.getPublicId());
 		setSystemId(locator.getSystemId());
