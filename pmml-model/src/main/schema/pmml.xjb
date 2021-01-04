@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="1"
-			implementation="1"
+			implementation="2"
 		/>
 
 		<wildcard:lax/>
@@ -3199,6 +3199,13 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TextIndex']/xsd:complexType/xsd:attribute[@name='x-wordRE']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<jaxb:property
+				name="wordRE"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_2)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasTable&lt;TextIndexNormalization&gt;</inheritance:implements>
@@ -3207,6 +3214,13 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType/xsd:attribute[@name='isCaseSensitive']">
 			<jaxb:property
 				name="caseSensitive"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TextIndexNormalization']/xsd:complexType/xsd:attribute[@name='x-wordRE']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<jaxb:property
+				name="wordRE"
 			/>
 		</jaxb:bindings>
 

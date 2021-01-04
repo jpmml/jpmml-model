@@ -13,6 +13,11 @@ Copyright (c) 2016 Villu Ruusmann
 		</xs:simpleType>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='TextIndex' or @name='TextIndexNormalization']/xs:complexType/xs:attribute[@name='wordSeparatorCharacterRE']">
+		<xsl:copy-of select="."/>
+		<xs:attribute name="x-wordRE" type="xs:string"/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='NeuralNetwork' or @name='NeuralLayer']/xs:complexType/xs:attribute[@name='threshold']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-leakage" type="REAL-NUMBER"/>
