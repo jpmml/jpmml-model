@@ -100,32 +100,37 @@ public class JAXBUtil {
 	public JAXBContext getContext() throws JAXBException {
 
 		if(JAXBUtil.context == null){
-			JAXBUtil.context = JAXBContext.newInstance(
-				org.dmg.pmml.ObjectFactory.class,
-				org.dmg.pmml.anomaly_detection.ObjectFactory.class,
-				org.dmg.pmml.association.ObjectFactory.class,
-				org.dmg.pmml.baseline.ObjectFactory.class,
-				org.dmg.pmml.bayesian_network.ObjectFactory.class,
-				org.dmg.pmml.clustering.ObjectFactory.class,
-				org.dmg.pmml.gaussian_process.ObjectFactory.class,
-				org.dmg.pmml.general_regression.ObjectFactory.class,
-				org.dmg.pmml.mining.ObjectFactory.class,
-				org.dmg.pmml.naive_bayes.ObjectFactory.class,
-				org.dmg.pmml.nearest_neighbor.ObjectFactory.class,
-				org.dmg.pmml.neural_network.ObjectFactory.class,
-				org.dmg.pmml.regression.ObjectFactory.class,
-				org.dmg.pmml.rule_set.ObjectFactory.class,
-				org.dmg.pmml.scorecard.ObjectFactory.class,
-				org.dmg.pmml.sequence.ObjectFactory.class,
-				org.dmg.pmml.support_vector_machine.ObjectFactory.class,
-				org.dmg.pmml.text.ObjectFactory.class,
-				org.dmg.pmml.time_series.ObjectFactory.class,
-				org.dmg.pmml.tree.ObjectFactory.class,
-				org.jpmml.model.inlinetable.ObjectFactory.class
-			);
+			JAXBUtil.context = JAXBContext.newInstance(getObjectFactoryClasses());
 		}
 
 		return JAXBUtil.context;
+	}
+
+	static
+	public Class<?>[] getObjectFactoryClasses(){
+		return new Class<?>[]{
+			org.dmg.pmml.ObjectFactory.class,
+			org.dmg.pmml.anomaly_detection.ObjectFactory.class,
+			org.dmg.pmml.association.ObjectFactory.class,
+			org.dmg.pmml.baseline.ObjectFactory.class,
+			org.dmg.pmml.bayesian_network.ObjectFactory.class,
+			org.dmg.pmml.clustering.ObjectFactory.class,
+			org.dmg.pmml.gaussian_process.ObjectFactory.class,
+			org.dmg.pmml.general_regression.ObjectFactory.class,
+			org.dmg.pmml.mining.ObjectFactory.class,
+			org.dmg.pmml.naive_bayes.ObjectFactory.class,
+			org.dmg.pmml.nearest_neighbor.ObjectFactory.class,
+			org.dmg.pmml.neural_network.ObjectFactory.class,
+			org.dmg.pmml.regression.ObjectFactory.class,
+			org.dmg.pmml.rule_set.ObjectFactory.class,
+			org.dmg.pmml.scorecard.ObjectFactory.class,
+			org.dmg.pmml.sequence.ObjectFactory.class,
+			org.dmg.pmml.support_vector_machine.ObjectFactory.class,
+			org.dmg.pmml.text.ObjectFactory.class,
+			org.dmg.pmml.time_series.ObjectFactory.class,
+			org.dmg.pmml.tree.ObjectFactory.class,
+			org.jpmml.model.inlinetable.ObjectFactory.class
+		};
 	}
 
 	static

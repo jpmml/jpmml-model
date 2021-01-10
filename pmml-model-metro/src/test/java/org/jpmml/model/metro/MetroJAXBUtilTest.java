@@ -1,25 +1,26 @@
 /*
  * Copyright (c) 2016 Villu Ruusmann
  */
-package org.jpmml.model.moxy;
+package org.jpmml.model.metro;
 
 import java.io.ByteArrayOutputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import com.sun.xml.bind.v2.ContextFactory;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
-import org.eclipse.persistence.jaxb.JAXBContextFactory;
+import org.jpmml.model.JAXBUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class MarshallerTest {
+public class MetroJAXBUtilTest {
 
 	@Test
 	public void marshal() throws Exception {
@@ -30,7 +31,7 @@ public class MarshallerTest {
 
 		pmml.addModels(regressionModel);
 
-		JAXBContext context = JAXBContextFactory.createContext(new Class[]{org.dmg.pmml.ObjectFactory.class, org.dmg.pmml.regression.ObjectFactory.class}, null);
+		JAXBContext context = ContextFactory.createContext(JAXBUtil.getObjectFactoryClasses(), null);
 
 		Marshaller marshaller = context.createMarshaller();
 

@@ -26,18 +26,22 @@ public class MetroJAXBUtil {
 
 	static
 	public void marshal(PMMLObject object, OutputStream os) throws JAXBException {
-		JAXBContextImpl context;
-
-		try {
-			context = (JAXBContextImpl)JAXBUtil.getContext();
-		} catch(ClassCastException cce){
-			throw new IllegalStateException("Not a GlassFish Metro runtime", cce);
-		}
+		JAXBContextImpl context = getContext();
 
 		MarshallerImpl marshaller = context.createMarshaller();
 
 		XmlOutput xmlOutput = new PrettyUTF8XmlOutput(os, context.getUTF8NameTable());
 
 		marshaller.marshal(object, xmlOutput);
+	}
+
+	static
+	public JAXBContextImpl getContext() throws JAXBException {
+
+		try {
+			return (JAXBContextImpl)JAXBUtil.getContext();
+		} catch(ClassCastException cce){
+			throw new IllegalStateException("Not a GlassFish Metro runtime", cce);
+		}
 	}
 }
