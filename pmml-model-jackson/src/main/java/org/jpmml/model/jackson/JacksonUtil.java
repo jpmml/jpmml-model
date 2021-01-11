@@ -9,12 +9,14 @@ import java.io.OutputStream;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
+import org.jpmml.model.DirectByteArrayOutputStream;
 
 public class JacksonUtil {
 
@@ -47,6 +49,27 @@ public class JacksonUtil {
 		ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 
 		objectWriter.writeValue(os, object);
+	}
+
+	static
+	public <E extends PMMLObject> E clone(E object) throws JsonMappingException, IOException {
+		ObjectMapper objectMapper = createObjectMapper(null);
+
+		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);
+
+		Class<?> clazz = object.getClass();
+
+		ObjectWriter objectWriter = objectMapper.writerFor(clazz);
+
+		try(OutputStream os = buffer){
+			objectWriter.writeValue(os, object);
+		}
+
+		ObjectReader objectReader = objectMapper.readerFor(clazz);
+
+		try(InputStream is = buffer.getInputStream()){
+			return objectReader.readValue(is);
+		}
 	}
 
 	static

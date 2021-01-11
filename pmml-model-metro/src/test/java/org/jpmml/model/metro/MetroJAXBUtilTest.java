@@ -13,14 +13,28 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
+import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
 import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.ReflectionUtil;
+import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
 public class MetroJAXBUtilTest {
+
+	@Test
+	public void jaxbClone() throws Exception {
+		PMML pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
+
+		JAXBContext context = ContextFactory.createContext(JAXBUtil.getObjectFactoryClasses(), null);
+
+		PMML clonedPmml = JAXBUtil.clone(context, pmml);
+
+		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+	}
 
 	@Test
 	public void marshal() throws Exception {

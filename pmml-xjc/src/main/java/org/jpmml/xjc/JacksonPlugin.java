@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
@@ -106,21 +107,14 @@ public class JacksonPlugin extends AbstractParameterizablePlugin {
 						JAnnotationUse jsonProperty = fieldVar.annotate(JsonProperty.class)
 							.param("value", "Node");
 
-						JAnnotationUse jsonTypeInfo = fieldVar.annotate(JsonTypeInfo.class)
-							.param("include", JsonTypeInfo.As.WRAPPER_OBJECT)
-							.param("use", JsonTypeInfo.Id.NAME);
-
-						JAnnotationUse jsonSubTypes = fieldVar.annotate(JsonSubTypes.class);
-
-						JAnnotationArrayMember valueArray = jsonSubTypes.paramArray("value");
-
 						JClass complexNodeClass = codeModel.ref("org.dmg.pmml.tree.ComplexNode");
 
-						JAnnotationUse jsonSubTypesType = jsonSubTypes.annotate(JsonSubTypes.Type.class)
-							.param("name", "Node")
-							.param("value", JExpr.dotclass(complexNodeClass));
+						JAnnotationUse jsonTypeInfo = fieldVar.annotate(JsonTypeInfo.class)
+							.param("use", JsonTypeInfo.Id.NONE)
+							.param("defaultImpl", JExpr.dotclass(complexNodeClass));
 
-						valueArray.param(jsonSubTypesType);
+						JAnnotationUse jsonDeserialize = fieldVar.annotate(JsonDeserialize.class)
+							.param(("node").equals(propertyName) ? "as" : "contentAs", JExpr.dotclass(complexNodeClass));
 					} else
 
 					if(types.size() == 1){

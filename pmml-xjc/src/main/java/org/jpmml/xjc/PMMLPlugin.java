@@ -14,11 +14,14 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 
 import com.sun.codemodel.JAnnotatable;
+import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
@@ -433,6 +436,22 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				}
 
 				List<JAnnotationUse> fieldVarAnnotations = getAnnotations(fieldVar);
+
+				// XXX
+				if(("node").equals(name) || ("nodes").equals(name)){
+					JAnnotationUse xmlElement = findAnnotation(fieldVarAnnotations, XmlElement.class);
+
+					fieldVarAnnotations.remove(xmlElement);
+
+					JAnnotationUse xmlElements = fieldVar.annotate(XmlElements.class);
+
+					JAnnotationArrayMember valueArray = xmlElements.paramArray("value");
+
+					valueArray.param(xmlElement);
+
+					fieldVarAnnotations.remove(xmlElements);
+					fieldVarAnnotations.add(0, xmlElements);
+				} // End if
 
 				if(hasAnnotation(fieldVarAnnotations, XmlValue.class)){
 					fieldVar.annotate(XmlValueExtension.class);

@@ -6,22 +6,73 @@ package org.dmg.pmml.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.ScoreDistribution;
+import org.dmg.pmml.Version;
+import org.dmg.pmml.adapters.NumberAdapter;
+import org.dmg.pmml.adapters.ObjectAdapter;
+import org.jpmml.model.annotations.Added;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
+@XmlRootElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlType(name = "", propOrder = {
+	"predicate",
+	"scoreDistributions",
+	"nodes"
+})
+@JsonRootName("Node")
+@JsonPropertyOrder({
+	"id",
+	"score",
+	"recordCount",
+	"defaultChild",
+	"predicate",
+	"scoreDistributions",
+	"nodes"
+})
 public class ClassifierNode extends SimpleNode {
 
+	@XmlAttribute(name = "id")
+	@XmlJavaTypeAdapter(ObjectAdapter.class)
+	@XmlSchemaType(name = "anySimpleType")
+	@JsonProperty("id")
 	private Object id = null;
 
+	@XmlAttribute(name = "recordCount")
+	@XmlJavaTypeAdapter(NumberAdapter.class)
+	@JsonProperty("recordCount")
 	private Number recordCount = null;
 
+	@XmlAttribute(name = "defaultChild")
+	@XmlJavaTypeAdapter(ObjectAdapter.class)
+	@XmlSchemaType(name = "anySimpleType")
+	@Added(Version.PMML_3_1)
+	@JsonProperty("defaultChild")
 	private Object defaultChild = null;
 
+	@XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4")
+	@JsonProperty("ScoreDistribution")
 	private List<ScoreDistribution> scoreDistributions = null;
 
+	@XmlElements({
+		@XmlElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4", type = ComplexNode.class)
+	})
+	@JsonProperty("Node")
+	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexNode.class)
 	private List<Node> nodes = null;
 
 

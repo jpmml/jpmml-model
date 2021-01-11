@@ -3,12 +3,7 @@
  */
 package org.dmg.pmml.tree;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.List;
-
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
 
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.False;
@@ -45,7 +40,7 @@ public class NodeTest {
 		TreeModel treeModel = new TreeModel()
 			.setNode(node1);
 
-		TreeModel jaxbTreeModel = (TreeModel)clone(treeModel);
+		TreeModel jaxbTreeModel = JAXBUtil.clone(treeModel);
 
 		Node jaxbNode1 = jaxbTreeModel.getNode();
 
@@ -70,18 +65,5 @@ public class NodeTest {
 
 		assertEquals(node2b.getClass(), jaxbNode2b.getClass());
 		assertEquals(node2b.getId(), jaxbNode2b.getId());
-	}
-
-	static
-	private Object clone(Object object) throws Exception {
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-
-		JAXBUtil.marshal(object, new StreamResult(os));
-
-		byte[] buffer = os.toByteArray();
-
-		ByteArrayInputStream is = new ByteArrayInputStream(buffer);
-
-		return JAXBUtil.unmarshal(new StreamSource(is));
 	}
 }

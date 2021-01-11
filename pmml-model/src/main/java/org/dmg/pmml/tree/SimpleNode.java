@@ -3,12 +3,21 @@
  */
 package org.dmg.pmml.tree;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.adapters.ObjectAdapter;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
@@ -17,8 +26,28 @@ import org.jpmml.model.annotations.ValueConstructor;
 abstract
 public class SimpleNode extends Node {
 
+	@XmlAttribute(name = "score")
+	@XmlJavaTypeAdapter(ObjectAdapter.class)
+	@XmlSchemaType(name = "anySimpleType")
+	@JsonProperty("score")
 	private Object score = null;
 
+	@XmlElements({
+		@XmlElement(name = "SimplePredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimplePredicate.class),
+		@XmlElement(name = "CompoundPredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.CompoundPredicate.class),
+		@XmlElement(name = "SimpleSetPredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimpleSetPredicate.class),
+		@XmlElement(name = "True", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.True.class),
+		@XmlElement(name = "False", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.False.class)
+	})
+	@JsonProperty("Predicate")
+	@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+	@JsonSubTypes({
+		@JsonSubTypes.Type(name = "SimplePredicate", value = org.dmg.pmml.SimplePredicate.class),
+		@JsonSubTypes.Type(name = "CompoundPredicate", value = org.dmg.pmml.CompoundPredicate.class),
+		@JsonSubTypes.Type(name = "SimpleSetPredicate", value = org.dmg.pmml.SimpleSetPredicate.class),
+		@JsonSubTypes.Type(name = "True", value = org.dmg.pmml.True.class),
+		@JsonSubTypes.Type(name = "False", value = org.dmg.pmml.False.class)
+	})
 	private Predicate predicate = null;
 
 
