@@ -22,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.dmg.pmml.PMMLObject;
+import org.xml.sax.Locator;
 
 public class ReflectionUtil {
 
@@ -51,6 +52,10 @@ public class ReflectionUtil {
 		for(Map.Entry<Field, Method> entry : entries){
 			Field field = entry.getKey();
 			Method getterMethod = entry.getValue();
+
+			if((Locator.class).equals(field.getType())){
+				continue;
+			}
 
 			Object leftValue;
 			Object rightValue;
