@@ -13,11 +13,13 @@ import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.jpmml.model.MixedContentTest;
+import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class PMMLObjectTest extends KryoUtilTest {
 
@@ -56,13 +58,17 @@ public class PMMLObjectTest extends KryoUtilTest {
 	public void inlineTableTest() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(InlineTableTest.class);
 
-		clone(pmml);
+		PMML clonedPmml = clone(pmml);
+
+		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
 	}
 
 	@Test
 	public void mixedContent() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(MixedContentTest.class);
 
-		clone(pmml);
+		PMML clonedPmml = clone(pmml);
+
+		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
 	}
 }

@@ -22,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.dmg.pmml.PMMLObject;
+import org.w3c.dom.Element;
 import org.xml.sax.Locator;
 
 public class ReflectionUtil {
@@ -32,11 +33,26 @@ public class ReflectionUtil {
 	static
 	public boolean equals(Object left, Object right){
 
+		if(left instanceof Element && right instanceof Element){
+			return equals((Element)left, (Element)right);
+		} else
+
 		if(left instanceof PMMLObject && right instanceof PMMLObject){
 			return equals((PMMLObject)left, (PMMLObject)right);
 		}
 
 		return Objects.equals(left, right);
+	}
+
+	static
+	public boolean equals(Element left, Element right){
+
+		if(!Objects.equals(left.getClass(), right.getClass())){
+			throw new IllegalArgumentException();
+		}
+
+		// XXX
+		return Objects.equals(left.getNamespaceURI(), right.getNamespaceURI()) && Objects.equals(left.getLocalName(), right.getLocalName()) && Objects.equals(left.getTextContent(), right.getTextContent());
 	}
 
 	static
