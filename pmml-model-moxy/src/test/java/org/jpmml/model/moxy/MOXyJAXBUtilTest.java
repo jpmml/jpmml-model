@@ -4,9 +4,12 @@
 package org.jpmml.model.moxy;
 
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Source;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
@@ -19,6 +22,7 @@ import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SAXUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -27,9 +31,17 @@ public class MOXyJAXBUtilTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
+		PMML pmml;
 
 		JAXBContext context = JAXBContextFactory.createContext(JAXBUtil.getObjectFactoryClasses(), null);
+
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+
+		try(InputStream is = ResourceUtil.getStream(NodeAdapterTest.class)){
+			Source source = SAXUtil.createFilteredSource(is);
+
+			pmml = (PMML)unmarshaller.unmarshal(source);
+		}
 
 		PMML clonedPmml = JAXBUtil.clone(context, pmml);
 
