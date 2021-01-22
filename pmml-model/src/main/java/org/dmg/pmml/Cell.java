@@ -3,8 +3,6 @@
  */
 package org.dmg.pmml;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -17,7 +15,6 @@ import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType (
 	name = "",
 	propOrder = {"value"}
