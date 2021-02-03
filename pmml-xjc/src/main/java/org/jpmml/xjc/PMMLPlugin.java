@@ -285,6 +285,12 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				createSetterProxy(beanClazz, fieldNameClass, "field", "setField", "setTextField");
 			} // End if
 
+			// Implementations of org.dmg.pmml.HasId
+			if(checkType(beanClazz, "org.dmg.pmml.scorecard.Attribute")){
+				createGetterProxy(beanClazz, stringClass, "getId", "getReasonCode");
+				createSetterProxy(beanClazz, stringClass, "id", "setId", "setReasonCode");
+			} // End if
+
 			// Implementations of org.dmg.pmml.HasName
 			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor") || checkType(beanClazz, "org.dmg.pmml.regression.NumericPredictor")){
 				createGetterProxy(beanClazz, fieldNameClass, "getName", "getField");
