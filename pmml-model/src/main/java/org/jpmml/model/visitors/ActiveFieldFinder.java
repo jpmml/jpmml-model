@@ -33,6 +33,7 @@ import org.dmg.pmml.clustering.ClusteringField;
 import org.dmg.pmml.general_regression.GeneralRegressionModel;
 import org.dmg.pmml.general_regression.PPCell;
 import org.dmg.pmml.general_regression.Predictor;
+import org.dmg.pmml.mining.VariableWeight;
 import org.dmg.pmml.naive_bayes.BayesInput;
 import org.dmg.pmml.nearest_neighbor.KNNInput;
 import org.dmg.pmml.regression.CategoricalPredictor;
@@ -278,6 +279,13 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 		process(textIndex.getTextField());
 
 		return super.visit(textIndex);
+	}
+
+	@Override
+	public VisitorAction visit(VariableWeight variableWeight){
+		process(variableWeight.getField());
+
+		return super.visit(variableWeight);
 	}
 
 	public Set<FieldName> getFieldNames(){
