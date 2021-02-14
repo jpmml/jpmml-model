@@ -485,6 +485,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				{{"HasNormalizationMethod"}, {"getNormalizationMethod", "setNormalizationMethod"}},
 				{{"HasOpType", "Field"}, {"getOpType", "setOpType"}},
 				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "setPredicate"}},
+				{{"HasReasonCode"}, {"getReasonCode", "setReasonCode"}},
 				{{"HasScore", "Node", "Rule"}, {"getScore", "setScore"}},
 				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},
 				{{"HasValue"}, {"getValue", "setValue"}},
