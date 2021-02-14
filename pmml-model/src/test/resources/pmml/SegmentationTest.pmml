@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
-	<Header/>
-	<DataDictionary/>
-	<MiningModel>
-		<Segmentation multipleModelMethod="x-weightedSum" x-missingPredictionTreatment="continue" x-missingThreshold="0"/>
-	</MiningModel>
-</PMML>

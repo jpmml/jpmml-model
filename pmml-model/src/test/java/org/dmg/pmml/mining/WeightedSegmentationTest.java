@@ -12,11 +12,11 @@ import org.w3c.dom.Node;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-public class SegmentationTest extends SchemaUpdateTest {
+public class WeightedSegmentationTest extends SchemaUpdateTest {
 
 	@Test
 	public void transform() throws Exception {
-		byte[] original = ResourceUtil.getByteArray(SegmentationTest.class);
+		byte[] original = ResourceUtil.getByteArray(WeightedSegmentationTest.class);
 
 		checkSegmentation(original, "x-weightedSum", new String[]{"continue", null}, new String[]{"0", null});
 

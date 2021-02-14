@@ -12,16 +12,21 @@ import org.dmg.pmml.Apply;
 import org.dmg.pmml.DerivedField;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
+import org.dmg.pmml.Model;
+import org.dmg.pmml.Output;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.SimplePredicate;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.Segment;
+import org.dmg.pmml.mining.VariableWeight;
+import org.dmg.pmml.mining.WeightedSegmentationTest;
 import org.dmg.pmml.regression.RegressionTable;
 import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.filters.ImportFilter;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -214,6 +219,88 @@ public class FieldResolverTest {
 		};
 
 		regressionTableResolver.applyTo(pmml);
+	}
+
+	@Test
+	public void resolveWeighted() throws Exception {
+		PMML pmml = ResourceUtil.unmarshal(WeightedSegmentationTest.class, new ImportFilter());
+
+		Set<FieldName> dataFieldNames = FieldNameUtil.create("y", "x1", "x2");
+
+		FieldResolver regressionTableResolver = new FieldResolver(){
+
+			@Override
+			public VisitorAction visit(RegressionTable regressionTable){
+				Collection<Field<?>> fields = getFields();
+
+				Segment segment = (Segment)getParent(1);
+
+				String id = segment.getId();
+
+				if("first".equals(id)){
+					checkFields(dataFieldNames, fields);
+				} else
+
+				if("second".equals(id)){
+					checkFields(FieldNameUtil.create(dataFieldNames, "x1_squared"), fields);
+				} else
+
+				if("third".equals(id)){
+					checkFields(dataFieldNames, fields);
+				} else
+
+				{
+					throw new AssertionError();
+				}
+
+				return super.visit(regressionTable);
+			}
+		};
+
+		regressionTableResolver.applyTo(pmml);
+
+		FieldResolver variableWeightResolver = new FieldResolver(){
+
+			@Override
+			public VisitorAction visit(VariableWeight variableWeight){
+				Collection<Field<?>> fields;
+
+				Segment segment = (Segment)getParent();
+
+				Model model = segment.getModel();
+
+				Output output = model.getOutput();
+				if(output != null && output.hasOutputFields()){
+					fields = getFields(output);
+				} else
+
+				{
+					fields = getFields();
+				}
+
+				String id = segment.getId();
+
+				if("first".equals(id)){
+					checkFields(dataFieldNames, fields);
+				} else
+
+				if("second".equals(id)){
+					checkFields(FieldNameUtil.create(dataFieldNames, "second_output"), fields);
+				} else
+
+				if("third".equals(id)){
+					checkFields(FieldNameUtil.create(dataFieldNames, "third_output"), fields);
+				} else
+
+				{
+					throw new AssertionError();
+				}
+
+				return super.visit(variableWeight);
+			}
+		};
+
+		variableWeightResolver.applyTo(pmml);
 	}
 
 	static

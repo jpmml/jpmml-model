@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" version="4.3">
+	<Header/>
+	<DataDictionary>
+		<DataField name="y" optype="continuous" dataType="double"/>
+		<DataField name="x1" optype="continuous" dataType="double"/>
+		<DataField name="x2" optype="continuous" dataType="double"/>
+	</DataDictionary>
+	<MiningModel>
+		<MiningSchema/>
+		<Segmentation multipleModelMethod="x-weightedSum" x-missingPredictionTreatment="continue" x-missingThreshold="0">
+			<Segment id="first">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema/>
+					<RegressionTable>
+						<NumericPredictor name="x1" coefficient="1"/>
+					</RegressionTable>
+				</RegressionModel>
+				<VariableWeight field="x2"/>
+			</Segment>
+			<Segment id="second">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema/>
+					<RegressionTable>
+						<NumericPredictor name="x1_squared" coefficient="1"/>
+					</RegressionTable>
+					<Output>
+						<OutputField name="second_output"/>
+					</Output>
+					<LocalTransformations>
+						<DerivedField name="x1_squared" optype="continuous" dataType="double">
+							<Apply function="*">
+								<FieldRef field="x1"/>
+								<FieldRef field="x1"/>
+							</Apply>
+						</DerivedField>
+					</LocalTransformations>
+				</RegressionModel>
+				<VariableWeight field="second_output"/>
+			</Segment>
+			<Segment id="third">
+				<True/>
+				<RegressionModel functionName="regression">
+					<MiningSchema/>
+					<RegressionTable>
+						<NumericPredictor name="x1" coefficient="1"/>
+					</RegressionTable>
+					<Output>
+						<OutputField name="third_output"/>
+					</Output>
+				</RegressionModel>
+				<VariableWeight field="third_output"/>
+			</Segment>
+		</Segmentation>
+	</MiningModel>
+</PMML>
