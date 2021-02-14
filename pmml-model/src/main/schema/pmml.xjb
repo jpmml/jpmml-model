@@ -470,6 +470,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='Characteristic']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.scorecard.HasBaselineScore&lt;Characteristic&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.scorecard.HasReasonCode&lt;Characteristic&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="scorecard"
@@ -2614,6 +2615,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.scorecard.HasBaselineScore&lt;Scorecard&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="scorecard"
 			/>

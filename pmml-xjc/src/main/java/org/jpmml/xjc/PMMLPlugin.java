@@ -468,6 +468,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 			String[][][] markerInterfaces = {
 				{{"HasActivationFunction"}, {"getActivationFunction", "setActivationFunction", "getAltitude", "setAltitude", "getLeakage", "setLeakage", "getThreshold", "setThreshold", "getWidth", "setWidth"}},
+				{{"HasBaselineScore"}, {"getBaselineScore", "setBaselineScore"}},
 				{{"HasContinuousDomain"}, {"hasIntervals", "getIntervals", "addIntervals"}},
 				{{"HasDataType", "Field"}, {"getDataType", "setDataType"}},
 				{{"HasDefaultValue"}, {"getDefaultValue", "setDefaultValue"}},
