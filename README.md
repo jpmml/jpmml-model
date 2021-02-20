@@ -36,13 +36,13 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository](https://repo1.maven.org/maven2/org/jpmml/).
 
-The current version is **1.5.13** (14 February, 2021).
+The current version is **1.5.14** (20 February, 2021).
 
 ```xml
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.5.13</version>
+	<version>1.5.14</version>
 </dependency>
 ```
 
@@ -96,7 +96,7 @@ This module can be built using [Apache Maven](https://maven.apache.org/):
 mvn clean install
 ```
 
-The resulting uber-JAR file `target/pmml-model-example-executable-1.5-SNAPSHOT.jar` contains the following command-line applications:
+The resulting uber-JAR file `target/pmml-model-example-executable-1.6-SNAPSHOT.jar` contains the following command-line applications:
 * `org.jpmml.model.example.CopyExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/CopyExample.java). Copies and transforms a PMML schema version 3.X or 4.X document to a PMML schema version 4.4 document.
 * `org.jpmml.model.example.ObfuscationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/ObfuscationExample.java). Obfuscates a PMML document by replacing field names with their MD5 hashes.
 * `org.jpmml.model.example.TranslationExample` [(source)](https://github.com/jpmml/jpmml-model/blob/master/pmml-model-example/src/main/java/org/jpmml/model/example/TranslationExample.java). Translates a PMML document to a JSON or YAML document.
@@ -104,29 +104,29 @@ The resulting uber-JAR file `target/pmml-model-example-executable-1.5-SNAPSHOT.j
 
 Copying `input.pmml` to `output.pmml`; the size of the class model is estimated using the Java agent technology:
 ```
-java -javaagent:../pmml-agent/target/pmml-agent-1.5-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.CopyExample --summary true --input input.pmml --output output.pmml
+java -javaagent:../pmml-agent/target/pmml-agent-1.6-SNAPSHOT.jar -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar org.jpmml.model.example.CopyExample --summary true --input input.pmml --output output.pmml
 ```
 
 Translating a PMML XML document `input.pmml` to PMML JSON document `output.json`:
 ```
-java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.TranslationExample --input input.pmml --output output.json --indent "\\t"
+java -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar org.jpmml.model.example.TranslationExample --input input.pmml --output output.json --indent "\\t"
 ```
 
 Checking the validity of `model.pmml`:
 ```
-java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar org.jpmml.model.example.ValidationExample --input model.pmml
+java -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar org.jpmml.model.example.ValidationExample --input model.pmml
 ```
 
 Getting help:
 ```
-java -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar <application class name> --help
+java -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar <application class name> --help
 ```
 
 It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `javax.xml.bind.context.factory` system property. Use `com.sun.xml.bind.v2.ContextFactory` for activating a GlassFish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
 
 For example:
 ```
-java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/pmml-model-example-executable-1.5-SNAPSHOT.jar ...
+java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar ...
 ```
 
 # Documentation #
