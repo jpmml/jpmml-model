@@ -22,6 +22,17 @@ public interface HasActivationFunction<E extends PMMLObject & HasActivationFunct
 
 	E setActivationFunction(NeuralNetwork.ActivationFunction activationFunction);
 
+	default
+	Number getThreshold(Number defaultThreshold){
+		Number threshold = getThreshold();
+
+		if(threshold == null){
+			return defaultThreshold;
+		}
+
+		return threshold;
+	}
+
 	/**
 	 * @see NeuralNetwork.ActivationFunction#THRESHOLD
 	 */
