@@ -7,6 +7,17 @@ import org.dmg.pmml.PMMLObject;
 
 public interface HasActivationFunction<E extends PMMLObject & HasActivationFunction<E>> {
 
+	default
+	NeuralNetwork.ActivationFunction getActivationFunction(NeuralNetwork.ActivationFunction defaultActivationFunction){
+		NeuralNetwork.ActivationFunction activationFunction = getActivationFunction();
+
+		if(activationFunction == null){
+			return defaultActivationFunction;
+		}
+
+		return activationFunction;
+	}
+
 	NeuralNetwork.ActivationFunction getActivationFunction();
 
 	E setActivationFunction(NeuralNetwork.ActivationFunction activationFunction);
