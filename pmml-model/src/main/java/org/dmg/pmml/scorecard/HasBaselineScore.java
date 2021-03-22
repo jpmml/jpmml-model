@@ -12,6 +12,17 @@ import org.dmg.pmml.PMMLObject;
  */
 public interface HasBaselineScore<E extends PMMLObject & HasBaselineScore<E>> {
 
+	default
+	Number getBaselineScore(Number defaultBaselineScore){
+		Number baselineScore = getBaselineScore();
+
+		if(baselineScore == null){
+			return defaultBaselineScore;
+		}
+
+		return baselineScore;
+	}
+
 	Number getBaselineScore();
 
 	E setBaselineScore(Number baselineScore);
