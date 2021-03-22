@@ -76,6 +76,17 @@ public interface HasActivationFunction<E extends PMMLObject & HasActivationFunct
 
 	E setWidth(Number width);
 
+	default
+	Number getAltitude(Number defaultAltitude){
+		Number altitude = getAltitude();
+
+		if(altitude == null){
+			return defaultAltitude;
+		}
+
+		return altitude;
+	}
+
 	/**
 	 * @see NeuralNetwork.ActivationFunction#RADIAL_BASIS
 	 */
