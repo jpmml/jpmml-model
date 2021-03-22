@@ -40,6 +40,17 @@ public interface HasActivationFunction<E extends PMMLObject & HasActivationFunct
 
 	E setThreshold(Number threshold);
 
+	default
+	Number getLeakage(Number defaultLeakage){
+		Number leakage = getLeakage();
+
+		if(leakage == null){
+			return defaultLeakage;
+		}
+
+		return leakage;
+	}
+
 	/**
 	 * @see NeuralNetwork.ActivationFunction#RECTIFIER
 	 */
