@@ -58,6 +58,17 @@ public interface HasActivationFunction<E extends PMMLObject & HasActivationFunct
 
 	E setLeakage(Number leakage);
 
+	default
+	Number getWidth(Number defaultWidth){
+		Number width = getWidth();
+
+		if(width == null){
+			return defaultWidth;
+		}
+
+		return width;
+	}
+
 	/**
 	 * @see NeuralNetwork.ActivationFunction#RADIAL_BASIS
 	 */
