@@ -12,6 +12,17 @@ import org.dmg.pmml.PMMLObject;
  */
 public interface HasReasonCode<E extends PMMLObject & HasReasonCode<E>> {
 
+	default
+	String getReasonCode(String defaultReasonCode){
+		String reasonCode = getReasonCode();
+
+		if(reasonCode == null){
+			return defaultReasonCode;
+		}
+
+		return reasonCode;
+	}
+
 	String getReasonCode();
 
 	E setReasonCode(String reasonCode);
