@@ -80,10 +80,10 @@ public class InlineTableTest {
 
 		Document document = documentBuilder.newDocument();
 
-		Element inputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, NamespacePrefixes.JPMML_INLINETABLE + ":input");
+		Element inputElement = document.createElementNS(NamespaceURIs.JPMML_INLINETABLE, NamespacePrefixes.JPMML_INLINETABLE + ":input");
 		inputElement.setTextContent("0");
 
-		Element outputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, NamespacePrefixes.JPMML_INLINETABLE + ":output");
+		Element outputElement = document.createElementNS(NamespaceURIs.JPMML_INLINETABLE, NamespacePrefixes.JPMML_INLINETABLE + ":output");
 		outputElement.setTextContent("zero");
 
 		Row row = new Row()
@@ -94,8 +94,8 @@ public class InlineTableTest {
 
 	@Test
 	public void marshalJaxbElement() throws Exception {
-		JAXBElement<?> inputElement = new JAXBElement<>(new QName(Namespaces.JPMML_INLINETABLE, "input"), Integer.class, 0);
-		JAXBElement<?> outputElement = new JAXBElement<>(new QName(Namespaces.JPMML_INLINETABLE, "output"), String.class, "zero");
+		JAXBElement<?> inputElement = new JAXBElement<>(new QName(NamespaceURIs.JPMML_INLINETABLE, "input"), Integer.class, 0);
+		JAXBElement<?> outputElement = new JAXBElement<>(new QName(NamespaceURIs.JPMML_INLINETABLE, "output"), String.class, "zero");
 
 		Row row = new Row()
 			.addContent(inputElement, outputElement);

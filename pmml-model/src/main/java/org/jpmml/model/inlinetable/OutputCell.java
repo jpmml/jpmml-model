@@ -8,13 +8,13 @@ import javax.xml.namespace.QName;
 
 import org.dmg.pmml.Cell;
 import org.dmg.pmml.NamespacePrefixes;
-import org.dmg.pmml.Namespaces;
+import org.dmg.pmml.NamespaceURIs;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
 @XmlRootElement (
 	name = "output",
-	namespace = Namespaces.JPMML_INLINETABLE
+	namespace = NamespaceURIs.JPMML_INLINETABLE
 )
 public class OutputCell extends Cell {
 
@@ -31,5 +31,5 @@ public class OutputCell extends Cell {
 		return OutputCell.QNAME;
 	}
 
-	public static final QName QNAME = new QName(Namespaces.JPMML_INLINETABLE, "output", NamespacePrefixes.JPMML_INLINETABLE);
+	public static final QName QNAME = new QName(NamespaceURIs.JPMML_INLINETABLE, "output", NamespacePrefixes.JPMML_INLINETABLE);
 }
