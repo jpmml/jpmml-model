@@ -488,6 +488,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "setPredicate"}},
 				{{"HasReasonCode"}, {"getReasonCode", "setReasonCode"}},
 				{{"HasScore", "Node", "Rule"}, {"getScore", "setScore"}},
+				{{"HasScoreDistributions", "Node", "Rule"}, {"hasScoreDistributions", "getScoreDistributions", "addScoreDistributions"}},
 				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},
 				{{"HasValue"}, {"getValue", "setValue"}},
 				{{"HasValueSet"}, {"getArray", "setArray"}}
