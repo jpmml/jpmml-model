@@ -754,6 +754,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;DataField&gt;</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.Decorable</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DataField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DataField&gt;</inheritance:implements>
 		</jaxb:bindings>
