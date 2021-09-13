@@ -80,10 +80,10 @@ public class InlineTableTest {
 
 		Document document = documentBuilder.newDocument();
 
-		Element inputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, "data:input");
+		Element inputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, NamespacePrefixes.JPMML_INLINETABLE + ":input");
 		inputElement.setTextContent("0");
 
-		Element outputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, "data:output");
+		Element outputElement = document.createElementNS(Namespaces.JPMML_INLINETABLE, NamespacePrefixes.JPMML_INLINETABLE + ":output");
 		outputElement.setTextContent("zero");
 
 		Row row = new Row()
