@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 Villu Ruusmann
  */
-package javax.xml.bind.annotation.adapters;
+package jakarta.xml.bind.annotation.adapters;
 
 abstract
 public class XmlAdapter<V, B> {

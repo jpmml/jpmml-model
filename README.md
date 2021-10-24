@@ -122,11 +122,11 @@ Getting help:
 java -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar <application class name> --help
 ```
 
-It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `javax.xml.bind.context.factory` system property. Use `org.glassfish.jaxb.runtime.v2.ContextFactory` for activating a GlassFish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
+It is possible to activate a specific Java XML Binding (JAXB) runtime by setting the value of the `jakarta.xml.bind.JAXBContextFactory` system property. Use `org.glassfish.jaxb.runtime.v2.ContextFactory` for activating a GlassFish Metro runtime, and `org.eclipse.persistence.jaxb.JAXBContextFactory` for activating an EclipseLink MOXy runtime.
 
 For example:
 ```
-java -Djavax.xml.bind.context.factory=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar ...
+java -Djakarta.xml.bind.JAXBContextFactoryy=org.eclipse.persistence.jaxb.JAXBContextFactory -cp target/pmml-model-example-executable-1.6-SNAPSHOT.jar ...
 ```
 
 # Documentation #

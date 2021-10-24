@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Villu Ruusmann
  */
-package javax.xml.bind;
+package jakarta.xml.bind;
 
 public class DatatypeConverter {
 

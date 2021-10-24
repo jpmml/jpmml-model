@@ -76,7 +76,7 @@ public class TransformationUtil {
 
 		AnnotationsAttribute annotations = (AnnotationsAttribute)classFile.getAttribute(AnnotationsAttribute.visibleTag);
 
-		Annotation xmlTypeAnnotation = annotations.getAnnotation("javax.xml.bind.annotation.XmlType");
+		Annotation xmlTypeAnnotation = annotations.getAnnotation("jakarta.xml.bind.annotation.XmlType");
 
 		ArrayMemberValue propOrderValue = (ArrayMemberValue)xmlTypeAnnotation.getMemberValue("propOrder");
 
