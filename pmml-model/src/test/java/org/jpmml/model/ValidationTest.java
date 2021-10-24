@@ -6,9 +6,9 @@ package org.jpmml.model;
 import java.io.InputStream;
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 
+import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;

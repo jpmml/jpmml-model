@@ -5,10 +5,8 @@ package org.jpmml.model.metro;
 
 import java.io.ByteArrayOutputStream;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-
-import com.sun.xml.bind.v2.ContextFactory;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
@@ -16,6 +14,7 @@ import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
+import org.glassfish.jaxb.runtime.v2.ContextFactory;
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;

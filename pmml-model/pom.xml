@@ -169,9 +169,9 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb22-plugin</artifactId>
-				<version>0.14.0</version>
+				<groupId>com.evolvedbinary.maven.jvnet</groupId>
+				<artifactId>jaxb30-maven-plugin</artifactId>
+				<version>0.15.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -194,7 +194,6 @@
 							<episode>false</episode>
 							<extension>true</extension>
 							<schemaDirectory>target/transformed-jaxb-schema</schemaDirectory>
-							<specVersion>2.2</specVersion>
 						</configuration>
 					</execution>
 				</executions>

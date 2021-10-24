@@ -3,8 +3,7 @@
  */
 package org.jpmml.model.moxy;
 
-import javax.xml.bind.JAXBException;
-
+import jakarta.xml.bind.JAXBException;
 import org.eclipse.persistence.jaxb.JAXBContext;
 import org.jpmml.model.JAXBUtil;
 

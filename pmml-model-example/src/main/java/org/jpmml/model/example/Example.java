@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.SAXUtil;

@@ -5,9 +5,9 @@ package org.jpmml.model;
 
 import java.io.InputStream;
 
-import javax.xml.bind.UnmarshalException;
 import javax.xml.transform.stream.StreamSource;
 
+import jakarta.xml.bind.UnmarshalException;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;

@@ -5,8 +5,7 @@ package org.jpmml.model;
 
 import java.lang.reflect.Field;
 
-import javax.xml.bind.annotation.XmlEnumValue;
-
+import jakarta.xml.bind.annotation.XmlEnumValue;
 import org.dmg.pmml.PMMLObject;
 
 public class EnumUtil {

@@ -5,7 +5,7 @@ package org.dmg.pmml;
 
 import java.util.Objects;
 
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 public class ForwardingModel extends Model {

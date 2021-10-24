@@ -5,8 +5,7 @@ package org.jpmml.model.filters;
 
 import java.util.Objects;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
 import org.xml.sax.XMLReader;

@@ -3,9 +3,9 @@
  */
 package org.jpmml.model.inlinetable;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.dmg.pmml.Cell;
 import org.dmg.pmml.NamespacePrefixes;
 import org.dmg.pmml.NamespaceURIs;

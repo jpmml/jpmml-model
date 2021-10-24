@@ -6,9 +6,9 @@ package org.dmg.pmml;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamResult;
 
+import jakarta.xml.bind.JAXBException;
 import org.jpmml.model.JAXBUtil;
 import org.junit.Test;
 

@@ -6,13 +6,13 @@ package org.jpmml.model;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.CustomObjectFactory;
 import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.PMML;
@@ -56,7 +56,7 @@ public class JAXBUtilTest {
 		JAXBContext context = JAXBContext.newInstance(CustomObjectFactory.class);
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		unmarshaller.setProperty("com.sun.xml.bind.ObjectFactory", new CustomObjectFactory());
+		unmarshaller.setProperty("org.glassfish.jaxb.core.ObjectFactory", new CustomObjectFactory());
 
 		try(InputStream is = ResourceUtil.getStream(Version.PMML_4_4)){
 			pmml = (PMML)unmarshaller.unmarshal(is);

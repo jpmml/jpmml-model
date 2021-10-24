@@ -3,8 +3,7 @@
  */
 package org.dmg.pmml.rule_set;
 
-import javax.xml.bind.annotation.XmlTransient;
-
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.dmg.pmml.Entity;
 import org.dmg.pmml.HasPredicate;
 

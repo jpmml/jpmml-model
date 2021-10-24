@@ -7,10 +7,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
+import jakarta.xml.bind.JAXBException;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
 import org.xml.sax.SAXException;

@@ -7,10 +7,10 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.xml.bind.UnmarshalException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
+import jakarta.xml.bind.UnmarshalException;
 import org.dmg.pmml.PMML;
 import org.junit.Test;
 import org.xml.sax.SAXParseException;

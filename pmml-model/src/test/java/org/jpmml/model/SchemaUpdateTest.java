@@ -8,13 +8,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 
+import jakarta.xml.bind.JAXBException;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
 import org.jpmml.model.filters.ExportFilter;

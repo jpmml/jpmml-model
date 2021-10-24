@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2015 Villu Ruusmann
  */
-package com.sun.xml.bind.annotation;
+package org.glassfish.jax.core.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -6,13 +6,12 @@ package org.dmg.pmml;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.xml.sax.Locator;
 
 @XmlAccessorType (
@@ -32,12 +31,13 @@ abstract
 public class PMMLObject implements HasLocator, Serializable, Visitable {
 
 	@XmlTransient
-	@com.sun.xml.bind.annotation.XmlLocation
+	@org.glassfish.jaxb.core.annotation.XmlLocation
 	@org.eclipse.persistence.oxm.annotations.XmlLocation
 	@JsonIgnore
 	private Locator locator;
 
 
+	@Override
 	public boolean hasLocator(){
 		return (this.locator != null);
 	}

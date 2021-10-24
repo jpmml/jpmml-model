@@ -6,12 +6,12 @@ package org.dmg.pmml;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.stream.StreamResult;
 
+import jakarta.xml.bind.JAXBElement;
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.inlinetable.InputCell;

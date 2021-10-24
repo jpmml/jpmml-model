@@ -2,7 +2,7 @@
 <!--
 Copyright (c) 2009 University of Tartu
 -->
-<jaxb:bindings targetNamespace="http://java.sun.com/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:jpmml-model="http://jpmml.org/jpmml-model" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wildcard="http://jaxb2-commons.dev.java.net/basic/wildcard" jaxb:extensionBindingPrefixes="annox inheritance jpmml-model xjc wildcard" jaxb:version="2.0">
+<jaxb:bindings targetNamespace="https://jakarta.ee/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" xmlns:jpmml-model="http://jpmml.org/jpmml-model" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wildcard="http://jaxb2-commons.dev.java.net/basic/wildcard" jaxb:extensionBindingPrefixes="annox inheritance jpmml-model xjc wildcard" jaxb:version="3.0">
 
 	<jaxb:bindings schemaLocation="pmml.xsd" node="/xsd:schema">
 

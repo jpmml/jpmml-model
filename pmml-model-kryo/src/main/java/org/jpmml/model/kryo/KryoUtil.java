@@ -3,13 +3,11 @@
  */
 package org.jpmml.model.kryo;
 
-import javax.xml.bind.JAXBElement;
-
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.serializers.JavaSerializer;
-
+import jakarta.xml.bind.JAXBElement;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;

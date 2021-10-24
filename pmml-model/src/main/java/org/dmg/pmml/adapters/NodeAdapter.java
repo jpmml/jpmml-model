@@ -3,8 +3,7 @@
  */
 package org.dmg.pmml.adapters;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.NodeTransformer;

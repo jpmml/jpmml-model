@@ -3,8 +3,7 @@
  */
 package org.dmg.pmml.neural_network;
 
-import javax.xml.bind.annotation.XmlTransient;
-
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.dmg.pmml.Entity;
 
 @XmlTransient

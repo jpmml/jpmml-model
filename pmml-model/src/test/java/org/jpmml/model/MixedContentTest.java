@@ -13,6 +13,7 @@ import org.jpmml.model.visitors.LocatorTransformer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class MixedContentTest {
@@ -20,6 +21,8 @@ public class MixedContentTest {
 	@Test
 	public void mixedContent() throws Exception {
 		PMML pmml = ResourceUtil.unmarshal(getClass());
+
+		assertTrue(pmml.hasLocator());
 
 		List<?> content = ExtensionUtil.getContent(pmml);
 

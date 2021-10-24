@@ -6,3 +6,4 @@ org.jpmml.xjc.NoJavadocPlugin
 org.jpmml.xjc.PMMLPlugin
 org.jpmml.xjc.ValueConstructorPlugin
 org.jpmml.xjc.VisitorPlugin
+org.jpmml.xjc.WildcardPlugin

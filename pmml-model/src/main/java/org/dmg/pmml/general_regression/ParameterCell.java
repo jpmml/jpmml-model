@@ -3,8 +3,7 @@
  */
 package org.dmg.pmml.general_regression;
 
-import javax.xml.bind.annotation.XmlTransient;
-
+import jakarta.xml.bind.annotation.XmlTransient;
 import org.dmg.pmml.PMMLObject;
 
 @XmlTransient

@@ -5,13 +5,12 @@ package org.jpmml.model.metro;
 
 import java.io.OutputStream;
 
-import javax.xml.bind.JAXBException;
-
-import com.sun.xml.bind.v2.runtime.JAXBContextImpl;
-import com.sun.xml.bind.v2.runtime.MarshallerImpl;
-import com.sun.xml.bind.v2.runtime.output.XmlOutput;
+import jakarta.xml.bind.JAXBException;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
+import org.glassfish.jaxb.runtime.v2.runtime.JAXBContextImpl;
+import org.glassfish.jaxb.runtime.v2.runtime.MarshallerImpl;
+import org.glassfish.jaxb.runtime.v2.runtime.output.XmlOutput;
 import org.jpmml.model.JAXBUtil;
 
 public class MetroJAXBUtil {

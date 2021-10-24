@@ -3,8 +3,7 @@
  */
 package org.jpmml.model.filters;
 
-import javax.xml.bind.UnmarshalException;
-
+import jakarta.xml.bind.UnmarshalException;
 import org.dmg.pmml.mining.Segmentation;
 import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.ResourceUtil;

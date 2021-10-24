@@ -9,12 +9,12 @@ import java.util.Arrays;
 
 import javax.xml.stream.XMLStreamException;
 
-import com.sun.xml.bind.marshaller.MinimumEscapeHandler;
-import com.sun.xml.bind.v2.runtime.Name;
-import com.sun.xml.bind.v2.runtime.output.Encoded;
-import com.sun.xml.bind.v2.runtime.output.IndentingUTF8XmlOutput;
-import com.sun.xml.bind.v2.runtime.output.Pcdata;
-import com.sun.xml.bind.v2.runtime.output.UTF8XmlOutput;
+import org.glassfish.jaxb.core.marshaller.MinimumEscapeHandler;
+import org.glassfish.jaxb.runtime.v2.runtime.Name;
+import org.glassfish.jaxb.runtime.v2.runtime.output.Encoded;
+import org.glassfish.jaxb.runtime.v2.runtime.output.IndentingUTF8XmlOutput;
+import org.glassfish.jaxb.runtime.v2.runtime.output.Pcdata;
+import org.glassfish.jaxb.runtime.v2.runtime.output.UTF8XmlOutput;
 import org.xml.sax.SAXException;
 
 /**

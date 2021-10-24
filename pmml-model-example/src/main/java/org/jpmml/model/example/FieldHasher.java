@@ -8,8 +8,7 @@ import java.security.MessageDigest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import javax.xml.bind.DatatypeConverter;
-
+import jakarta.xml.bind.DatatypeConverter;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.FieldName;
 import org.dmg.pmml.VisitorAction;

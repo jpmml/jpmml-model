@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml.adapters;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class NumberAdapter extends XmlAdapter<String, Number> {
 

@@ -10,11 +10,11 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
 
+import jakarta.xml.bind.JAXBException;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.filters.ImportFilter;
 import org.xml.sax.SAXException;

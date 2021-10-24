@@ -3,7 +3,7 @@
  */
 package org.dmg.pmml.adapters;
 
-import javax.xml.bind.DatatypeConverter;
+import jakarta.xml.bind.DatatypeConverter;
 
 public class NumberUtil {
 

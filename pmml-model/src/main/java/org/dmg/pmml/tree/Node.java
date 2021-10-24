@@ -6,9 +6,8 @@ package org.dmg.pmml.tree;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
+import jakarta.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Entity;
 import org.dmg.pmml.Extension;

@@ -3,8 +3,7 @@
  */
 package org.dmg.pmml;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.jpmml.model.ReflectionUtil;
 
 @XmlRootElement (
