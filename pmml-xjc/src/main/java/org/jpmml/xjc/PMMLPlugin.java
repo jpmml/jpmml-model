@@ -54,12 +54,10 @@ import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlValue;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
-import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
-import org.jvnet.jaxb2_commons.util.CustomizationUtils;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 
-public class PMMLPlugin extends AbstractParameterizablePlugin {
+public class PMMLPlugin extends ComplexPlugin {
 
 	@Override
 	public String getOptionName(){
@@ -72,7 +70,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 	}
 
 	@Override
-	public Collection<QName> getCustomizationElementNames(){
+	public List<QName> getCustomizationElementNames(){
 		return Arrays.asList(PMMLPlugin.SERIALVERSIONUID_ELEMENT_NAME, PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
 	}
 
@@ -109,7 +107,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		};
 
 		{
-			CPluginCustomization serialVersionUIDCustomization = CustomizationUtils.findCustomization(model, PMMLPlugin.SERIALVERSIONUID_ELEMENT_NAME);
+			CPluginCustomization serialVersionUIDCustomization = CustomizationUtil.findCustomization(model, PMMLPlugin.SERIALVERSIONUID_ELEMENT_NAME);
 
 			if(serialVersionUIDCustomization != null){
 				Element element = serialVersionUIDCustomization.element;
@@ -132,7 +130,7 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 
 		Collection<CClassInfo> classInfos = beans.values();
 		for(CClassInfo classInfo : classInfos){
-			CPluginCustomization subpackageCustomization = CustomizationUtils.findCustomization(classInfo, PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
+			CPluginCustomization subpackageCustomization = CustomizationUtil.findCustomization(classInfo, PMMLPlugin.SUBPACKAGE_ELEMENT_NAME);
 
 			if(subpackageCustomization != null){
 				CClassInfoParent.Package packageParent = (CClassInfoParent.Package)classInfo.parent();
@@ -878,7 +876,8 @@ public class PMMLPlugin extends AbstractParameterizablePlugin {
 		}
 	}
 
-	public static final QName SERIALVERSIONUID_ELEMENT_NAME = new QName("http://jpmml.org/jpmml-model", "serialVersionUID");
+	public static final String NAMESPACE_URI = "http://jpmml.org/jpmml-model";
 
-	public static final QName SUBPACKAGE_ELEMENT_NAME = new QName("http://jpmml.org/jpmml-model", "subpackage");
+	public static final QName SERIALVERSIONUID_ELEMENT_NAME = new QName(PMMLPlugin.NAMESPACE_URI, "serialVersionUID");
+	public static final QName SUBPACKAGE_ELEMENT_NAME = new QName(PMMLPlugin.NAMESPACE_URI, "subpackage");
 }

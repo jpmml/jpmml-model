@@ -19,6 +19,7 @@ import com.sun.codemodel.JMods;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
@@ -29,10 +30,9 @@ import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import com.sun.xml.xsom.XSComponent;
 import com.sun.xml.xsom.XSParticle;
-import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
 import org.xml.sax.ErrorHandler;
 
-public class ValueConstructorPlugin extends AbstractParameterizablePlugin {
+public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 
 	private boolean ignoreAttributes = false;
 

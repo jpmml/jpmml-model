@@ -20,7 +20,6 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.tools.xjc.Options;
-import com.sun.tools.xjc.model.CCustomizations;
 import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
@@ -28,12 +27,9 @@ import com.sun.tools.xjc.outline.EnumConstantOutline;
 import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
-import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
-import org.jvnet.jaxb2_commons.util.CustomizationUtils;
-import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 
-public class AnnotatePlugin extends AbstractParameterizablePlugin {
+public class AnnotatePlugin extends ComplexPlugin {
 
 	@Override
 	public String getOptionName(){
@@ -46,7 +42,7 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 	}
 
 	@Override
-	public Collection<QName> getCustomizationElementNames(){
+	public List<QName> getCustomizationElementNames(){
 		return Arrays.asList(AnnotatePlugin.ANNOTATE_CLASS_QNAME, AnnotatePlugin.ANNOTATE_ENUM_QNAME, AnnotatePlugin.ANNOTATE_ENUM_CONSTANT_QNAME, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
 	}
 
@@ -58,7 +54,7 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			CPluginCustomization classCustomization = CustomizationUtils.findCustomization(classOutline, AnnotatePlugin.ANNOTATE_CLASS_QNAME);
+			CPluginCustomization classCustomization = CustomizationUtil.findCustomization(classOutline, AnnotatePlugin.ANNOTATE_CLASS_QNAME);
 			if(classCustomization != null){
 				annotate(codeModel, beanClazz, classCustomization);
 			}
@@ -69,7 +65,7 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-				List<CPluginCustomization> propertyCustomizations = CustomizationUtils.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
+				List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
 				for(CPluginCustomization propertyCustomization : propertyCustomizations){
 					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
@@ -82,23 +78,17 @@ public class AnnotatePlugin extends AbstractParameterizablePlugin {
 		for(EnumOutline enumOutline : enumOutlines){
 			JDefinedClass clazz = enumOutline.clazz;
 
-			CPluginCustomization enumCustomization = CustomizationUtils.findCustomization(enumOutline, AnnotatePlugin.ANNOTATE_ENUM_QNAME);
+			CPluginCustomization enumCustomization = CustomizationUtil.findCustomization(enumOutline, AnnotatePlugin.ANNOTATE_ENUM_QNAME);
 			if(enumCustomization != null){
 				annotate(codeModel, clazz, enumCustomization);
 			}
 
 			List<EnumConstantOutline> enumConstantOutlines = enumOutline.constants;
 			for(EnumConstantOutline enumConstantOutline : enumConstantOutlines){
-				CCustomizations enumConstantCustomizations = enumConstantOutline.target.getCustomizations();
+				List<CPluginCustomization> enumConstantCustomizations = CustomizationUtil.findCustomizations(enumConstantOutline.target, AnnotatePlugin.ANNOTATE_ENUM_CONSTANT_QNAME);
 
 				for(CPluginCustomization enumConstantCustomization : enumConstantCustomizations){
-					Element element = enumConstantCustomization.element;
-
-					if((AnnotatePlugin.ANNOTATE_ENUM_CONSTANT_QNAME.getNamespaceURI()).equals(element.getNamespaceURI()) && (AnnotatePlugin.ANNOTATE_ENUM_CONSTANT_QNAME.getLocalPart()).equals(element.getLocalName())){
-						annotate(codeModel, enumConstantOutline.constRef, enumConstantCustomization);
-
-						enumConstantCustomization.markAsAcknowledged();
-					}
+					annotate(codeModel, enumConstantOutline.constRef, enumConstantCustomization);
 				}
 			}
 		}

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.namespace.QName;
+import javax.xml.transform.dom.DOMSource;
 
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
@@ -26,14 +27,13 @@ import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIClass;
-import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
-import org.jvnet.jaxb2_commons.plugin.inheritance.Customizations;
-import org.jvnet.jaxb2_commons.plugin.inheritance.ExtendsClass;
-import org.jvnet.jaxb2_commons.plugin.inheritance.ImplementsInterface;
-import org.jvnet.jaxb2_commons.util.CustomizationUtils;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlValue;
 import org.xml.sax.ErrorHandler;
 
-public class InheritancePlugin extends AbstractParameterizablePlugin {
+public class InheritancePlugin extends ComplexPlugin {
 
 	@Override
 	public String getOptionName(){
@@ -46,8 +46,8 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 	}
 
 	@Override
-	public Collection<QName> getCustomizationElementNames(){
-		return Arrays.asList(Customizations.EXTENDS_ELEMENT_NAME, Customizations.IMPLEMENTS_ELEMENT_NAME);
+	public List<QName> getCustomizationElementNames(){
+		return Arrays.asList(InheritancePlugin.EXTENDS_ELEMENT_NAME, InheritancePlugin.IMPLEMENTS_ELEMENT_NAME);
 	}
 
 	@Override
@@ -62,11 +62,11 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 		for(CClassInfo classInfo : classInfos){
 			CClassRef baseClazz = defaultBaseClazz;
 
-			CPluginCustomization extendsCustomization = CustomizationUtils.findCustomization(classInfo, Customizations.EXTENDS_ELEMENT_NAME);
+			CPluginCustomization extendsCustomization = CustomizationUtil.findCustomization(classInfo, InheritancePlugin.EXTENDS_ELEMENT_NAME);
 			if(extendsCustomization != null){
-				ExtendsClass extendsClass = (ExtendsClass)CustomizationUtils.unmarshall(Customizations.getContext(), extendsCustomization);
+				ExtendsClass extendsClass = (ExtendsClass)unmarshal(extendsCustomization);
 
-				String name = getClassName(extendsClass);
+				String name = extendsClass.className;
 
 				int lt = name.indexOf('<');
 				if(lt > -1){
@@ -90,20 +90,20 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			CPluginCustomization extendsCustomization = CustomizationUtils.findCustomization(classOutline, Customizations.EXTENDS_ELEMENT_NAME);
+			CPluginCustomization extendsCustomization = CustomizationUtil.findCustomization(classOutline, InheritancePlugin.EXTENDS_ELEMENT_NAME);
 			if(extendsCustomization != null){
-				ExtendsClass extendsClass = (ExtendsClass)CustomizationUtils.unmarshall(Customizations.getContext(), extendsCustomization);
+				ExtendsClass extendsClass = (ExtendsClass)unmarshal(extendsCustomization);
 
-				JClass type = parseType(typeCache, codeModel, getClassName(extendsClass));
+				JClass type = parseType(typeCache, codeModel, extendsClass.className);
 
 				beanClazz._extends(type);
 			}
 
-			List<CPluginCustomization> implementsCustomizations = CustomizationUtils.findCustomizations(classOutline, Customizations.IMPLEMENTS_ELEMENT_NAME);
+			List<CPluginCustomization> implementsCustomizations = CustomizationUtil.findCustomizations(classOutline, InheritancePlugin.IMPLEMENTS_ELEMENT_NAME);
 			for(CPluginCustomization implementsCustomization : implementsCustomizations){
-				ImplementsInterface implementsInterface = (ImplementsInterface)CustomizationUtils.unmarshall(Customizations.getContext(), implementsCustomization);
+				ImplementsInterface implementsInterface = (ImplementsInterface)unmarshal(implementsCustomization);
 
-				JClass type = parseType(typeCache, codeModel, getInterfaceName(implementsInterface));
+				JClass type = parseType(typeCache, codeModel, implementsInterface.interfaceName);
 
 				beanClazz._implements(type);
 			}
@@ -113,32 +113,12 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-				CustomizationUtils.findPropertyCustomizationsInProperty(propertyInfo, Customizations.EXTENDS_ELEMENT_NAME);
-				CustomizationUtils.findPropertyCustomizationsInProperty(propertyInfo, Customizations.IMPLEMENTS_ELEMENT_NAME);
+				CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, InheritancePlugin.EXTENDS_ELEMENT_NAME);
+				CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, InheritancePlugin.IMPLEMENTS_ELEMENT_NAME);
 			}
 		}
 
 		return true;
-	}
-
-	static
-	private String getClassName(ExtendsClass extendsClass){
-
-		try {
-			Field field = ExtendsClass.class.getDeclaredField("className");
-			if(!field.isAccessible()){
-				field.setAccessible(true);
-			}
-
-			return (String)field.get(extendsClass);
-		} catch(Exception e){
-			throw new RuntimeException(e);
-		}
-	}
-
-	static
-	private String getInterfaceName(ImplementsInterface implementsInterface){
-		return implementsInterface.getInterfaceName();
 	}
 
 	static
@@ -191,6 +171,56 @@ public class InheritancePlugin extends AbstractParameterizablePlugin {
 			field.set(biClass, name);
 
 			return biClass;
+		} catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+
+	static
+	private Object unmarshal(CPluginCustomization customization){
+
+		try {
+			Unmarshaller unmarshaller = InheritancePlugin.context.createUnmarshaller();
+
+			return unmarshaller.unmarshal(new DOMSource(customization.element));
+		} catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static final String NAMESPACE_URI = "http://jaxb2-commons.dev.java.net/basic/inheritance";
+
+	public static final QName EXTENDS_ELEMENT_NAME = new QName(InheritancePlugin.NAMESPACE_URI, "extends");
+	public static final QName IMPLEMENTS_ELEMENT_NAME = new QName(InheritancePlugin.NAMESPACE_URI, "implements");
+
+	@XmlRootElement (
+		namespace = NAMESPACE_URI,
+		name = "extends"
+	)
+	static
+	public class ExtendsClass {
+
+		@XmlValue
+		public String className;
+	}
+
+	@XmlRootElement (
+		namespace = NAMESPACE_URI,
+		name = "implements"
+	)
+	static
+	public class ImplementsInterface {
+
+		@XmlValue
+		public String interfaceName;
+	}
+
+	private static final JAXBContext context;
+
+	static {
+
+		try {
+			context = JAXBContext.newInstance(ExtendsClass.class, ImplementsInterface.class);
 		} catch(Exception e){
 			throw new RuntimeException(e);
 		}

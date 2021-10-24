@@ -25,6 +25,7 @@ import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.istack.build.NameConverter;
 import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CClassInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
@@ -37,10 +38,9 @@ import com.sun.tools.xjc.outline.EnumConstantOutline;
 import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
-import org.jvnet.jaxb2_commons.plugin.AbstractParameterizablePlugin;
 import org.xml.sax.ErrorHandler;
 
-public class JacksonPlugin extends AbstractParameterizablePlugin {
+public class JacksonPlugin extends Plugin {
 
 	@Override
 	public String getOptionName(){
