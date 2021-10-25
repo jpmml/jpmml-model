@@ -42,6 +42,7 @@ import com.sun.tools.xjc.model.CDefaultValue;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.model.CReferencePropertyInfo;
 import com.sun.tools.xjc.model.Model;
 import com.sun.tools.xjc.model.nav.NClass;
 import com.sun.tools.xjc.outline.ClassOutline;
@@ -54,6 +55,7 @@ import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlValue;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
+import org.glassfish.jaxb.core.v2.model.core.WildcardMode;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
 
@@ -176,6 +178,12 @@ public class PMMLPlugin extends ComplexPlugin {
 			for(CPropertyInfo propertyInfo : propertyInfos){
 				String publicName = propertyInfo.getName(true);
 				String privateName = propertyInfo.getName(false);
+
+				if(propertyInfo instanceof CReferencePropertyInfo){
+					CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
+
+					referencePropertyInfo.setWildcard(WildcardMode.LAX);
+				} // End if
 
 				// Collection of values
 				if(propertyInfo.isCollection()){

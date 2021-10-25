@@ -189,7 +189,6 @@
 								<arg>-Xpmml</arg>
 								<arg>-XvalueConstructor</arg>
 								<arg>-Xvisitor</arg>
-								<arg>-Xwildcard</arg>
 							</args>
 							<episode>false</episode>
 							<extension>true</extension>
