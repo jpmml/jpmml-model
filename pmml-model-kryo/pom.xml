@@ -12,7 +12,7 @@
 	<artifactId>pmml-model-kryo</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML Kryo SerDe</name>
+	<name>JPMML model Kryo SerDe</name>
 	<description>JPMML class model Kryo serializers and deserializers</description>
 
 	<licenses>

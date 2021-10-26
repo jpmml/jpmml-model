@@ -11,7 +11,7 @@
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model-example</artifactId>
 
-	<name>JPMML class model example applications</name>
+	<name>JPMML model example applications</name>
 	<description>JPMML class model example command-line applications</description>
 
 	<licenses>

@@ -12,7 +12,7 @@
 	<artifactId>pmml-model-moxy</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML EclipseLink MOXy runtime</name>
+	<name>JPMML model EclipseLink MOXy runtime</name>
 	<description>JPMML class model with EclipseLink MOXy runtime</description>
 
 	<licenses>

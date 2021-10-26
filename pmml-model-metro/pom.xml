@@ -12,7 +12,7 @@
 	<artifactId>pmml-model-metro</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML GlassFish Metro runtime</name>
+	<name>JPMML model GlassFish Metro runtime</name>
 	<description>JPMML class model with GlassFish Metro runtime</description>
 
 	<licenses>

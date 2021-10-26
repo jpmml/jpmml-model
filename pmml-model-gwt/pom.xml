@@ -12,7 +12,7 @@
 	<artifactId>pmml-model-gwt</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML GWT class model</name>
+	<name>JPMML GWT model</name>
 	<description>JPMML GWT compatible class model</description>
 
 	<licenses>

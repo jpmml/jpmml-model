@@ -12,7 +12,7 @@
 	<artifactId>pmml-model-jackson</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML FasterXML Jackson SerDe</name>
+	<name>JPMML model FasterXML Jackson SerDe</name>
 	<description>JPMML class model FasterXML Jackson serializers and deserializers</description>
 
 	<licenses>

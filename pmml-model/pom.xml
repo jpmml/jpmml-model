@@ -12,7 +12,7 @@
 	<artifactId>pmml-model</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML class model</name>
+	<name>JPMML model</name>
 	<description>JPMML class model</description>
 
 	<licenses>

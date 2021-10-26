@@ -11,7 +11,7 @@
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model-extension</artifactId>
 
-	<name>JPMML extensions</name>
+	<name>JPMML model extensions</name>
 	<description>JPMML class model extensions</description>
 
 	<licenses>

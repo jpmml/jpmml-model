@@ -12,7 +12,7 @@
 	<artifactId>pmml-xjc</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML XJC support</name>
+	<name>JPMML XJC</name>
 	<description>JPMML XJC plugins for programmatic class model customization</description>
 
 	<licenses>
