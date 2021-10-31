@@ -1651,6 +1651,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStats']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:extends>org.dmg.pmml.Stats</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType">
@@ -3618,6 +3619,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='UnivariateStats']/xsd:complexType">
+			<inheritance:extends>org.dmg.pmml.Stats</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;UnivariateStats&gt;</inheritance:implements>
 		</jaxb:bindings>
 
