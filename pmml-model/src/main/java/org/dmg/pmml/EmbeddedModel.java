@@ -22,6 +22,12 @@ public class EmbeddedModel extends PMMLObject {
 	public EmbeddedModel setMiningFunction(MiningFunction miningFunction);
 
 	abstract
+	public String getAlgorithmName();
+
+	abstract
+	public EmbeddedModel setAlgorithmName(String algorithmName);
+	
+	abstract
 	public LocalTransformations getLocalTransformations();
 
 	abstract
