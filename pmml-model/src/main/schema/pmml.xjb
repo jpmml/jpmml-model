@@ -8,7 +8,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="1"
-			implementation="4"
+			implementation="5"
 		/>
 
 		<jaxb:globalBindings>
@@ -587,6 +587,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModelQuality']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:extends>org.dmg.pmml.ModelQuality</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModelQuality']/xsd:complexType/xsd:sequence/xsd:element[@ref='Extension']">
@@ -2258,6 +2259,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:extends>org.dmg.pmml.ModelQuality</inheritance:extends>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='accuracy']">
