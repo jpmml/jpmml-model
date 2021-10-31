@@ -145,14 +145,14 @@ public class PMMLPlugin extends ComplexPlugin {
 				}
 
 				try {
-					Field field = CClassInfoParent.Package.class.getDeclaredField("pkg");
-					if(!field.isAccessible()){
-						field.setAccessible(true);
+					Field pkgField = CClassInfoParent.Package.class.getDeclaredField("pkg");
+					if(!pkgField.isAccessible()){
+						pkgField.setAccessible(true);
 					}
 
 					JPackage subPackage = packageParent.pkg.subPackage(name);
 
-					field.set(packageParent, subPackage);
+					pkgField.set(packageParent, subPackage);
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}
@@ -161,12 +161,12 @@ public class PMMLPlugin extends ComplexPlugin {
 			if((classInfo.shortName).equals("ComplexNode")){
 
 				try {
-					Field field = CClassInfo.class.getDeclaredField("elementName");
-					if(!field.isAccessible()){
-						field.setAccessible(true);
+					Field elementNameField = CClassInfo.class.getDeclaredField("elementName");
+					if(!elementNameField.isAccessible()){
+						elementNameField.setAccessible(true);
 					}
 
-					field.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", "Node"));
+					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", "Node"));
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}
@@ -662,12 +662,12 @@ public class PMMLPlugin extends ComplexPlugin {
 		try {
 			Class<?> clazz = annotatable.getClass();
 
-			Field field;
+			Field annotationsField;
 
 			while(true){
 
 				try {
-					field = clazz.getDeclaredField("annotations");
+					annotationsField = clazz.getDeclaredField("annotations");
 
 					break;
 				} catch(NoSuchFieldException nsfe){
@@ -679,11 +679,11 @@ public class PMMLPlugin extends ComplexPlugin {
 				}
 			}
 
-			if(!field.isAccessible()){
-				field.setAccessible(true);
+			if(!annotationsField.isAccessible()){
+				annotationsField.setAccessible(true);
 			}
 
-			return (List)field.get(annotatable);
+			return (List)annotationsField.get(annotatable);
 		} catch(ReflectiveOperationException roe){
 			throw new RuntimeException(roe);
 		}

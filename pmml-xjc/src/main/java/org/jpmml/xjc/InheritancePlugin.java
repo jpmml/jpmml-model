@@ -156,19 +156,19 @@ public class InheritancePlugin extends ComplexPlugin {
 	private BIClass createBIClass(String name){
 
 		try {
-			Constructor<? extends BIClass> constructor = BIClass.class.getDeclaredConstructor();
-			if(!constructor.isAccessible()){
-				constructor.setAccessible(true);
+			Constructor<? extends BIClass> biClassConstructor = BIClass.class.getDeclaredConstructor();
+			if(!biClassConstructor.isAccessible()){
+				biClassConstructor.setAccessible(true);
 			}
 
-			BIClass biClass = constructor.newInstance();
+			BIClass biClass = biClassConstructor.newInstance();
 
-			Field field = BIClass.class.getDeclaredField("ref");
-			if(!field.isAccessible()){
-				field.setAccessible(true);
+			Field refField = BIClass.class.getDeclaredField("ref");
+			if(!refField.isAccessible()){
+				refField.setAccessible(true);
 			}
 
-			field.set(biClass, name);
+			refField.set(biClass, name);
 
 			return biClass;
 		} catch(Exception e){
