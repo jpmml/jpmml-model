@@ -3,27 +3,18 @@
  */
 package org.dmg.pmml.neural_network;
 
-import java.lang.reflect.Field;
-
+import org.dmg.pmml.ReflectionTest;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
-public class NeuralLayerTest {
+public class NeuralLayerTest extends ReflectionTest {
 
 	@Test
 	public void activationFunctionType() throws NoSuchFieldException {
-		Field activationFunction = NeuralLayer.class.getDeclaredField("activationFunction");
-		Field networkActivationFunction = NeuralNetwork.class.getDeclaredField("activationFunction");
-
-		assertEquals(networkActivationFunction.getType(), activationFunction.getType());
+		checkField(NeuralNetwork.class, NeuralLayer.class, "activationFunction");
 	}
 
 	@Test
 	public void normalizationMethodType() throws NoSuchFieldException {
-		Field normalizationMethod = NeuralLayer.class.getDeclaredField("normalizationMethod");
-		Field networkNormalizationMethod = NeuralNetwork.class.getDeclaredField("normalizationMethod");
-
-		assertEquals(networkNormalizationMethod.getType(), normalizationMethod.getType());
+		checkField(NeuralNetwork.class, NeuralLayer.class, "normalizationMethod");
 	}
 }
