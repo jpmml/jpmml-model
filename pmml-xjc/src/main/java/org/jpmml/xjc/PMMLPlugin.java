@@ -55,6 +55,7 @@ import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlValue;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
+import org.glassfish.jaxb.core.api.impl.NameConverter;
 import org.glassfish.jaxb.core.v2.model.core.WildcardMode;
 import org.w3c.dom.Element;
 import org.xml.sax.ErrorHandler;
@@ -234,6 +235,11 @@ public class PMMLPlugin extends ComplexPlugin {
 
 					if((classInfo.shortName).equals("DecisionTree") && (privateName).equals("node")){
 						propertyInfo.baseType = nodeClass;
+					} else
+
+					if((classInfo.shortName).equals("DecisionTree") && (privateName).equals("noTrueChildStrategy")){
+						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.tree.TreeModel.NoTrueChildStrategy");
+						propertyInfo.defaultValue = new CEnumConstantDefaultValue(propertyInfo, propertyInfo.defaultValue);
 					} else
 
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("activationFunction")){
@@ -839,7 +845,9 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			JStringLiteral stringLiteral = (JStringLiteral)parent.compute(outline);
 
-			return ((JClass)propertyInfo.baseType).staticRef(stringLiteral.str.toUpperCase());
+			String name = NameConverter.standard.toConstantName(stringLiteral.str);
+
+			return ((JClass)propertyInfo.baseType).staticRef(name);
 		}
 
 		public CPropertyInfo getPropertyInfo(){
