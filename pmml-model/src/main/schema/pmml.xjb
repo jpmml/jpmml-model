@@ -801,6 +801,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.EmbeddedModel</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.tree.HasNode&lt;DecisionTree&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="tree"
 			/>
@@ -3459,6 +3460,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.tree.HasNode&lt;TreeModel&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="tree"
 			/>
