@@ -818,12 +818,6 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
-		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:attribute[@name='splitCharacteristic']/xsd:simpleType">
-			<jaxb:typesafeEnumClass
-				name="SplitCharacteristic"
-			/>
-		</jaxb:bindings>
-
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelStats']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>

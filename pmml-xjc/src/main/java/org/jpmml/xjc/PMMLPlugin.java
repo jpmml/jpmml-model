@@ -242,6 +242,11 @@ public class PMMLPlugin extends ComplexPlugin {
 						propertyInfo.defaultValue = new CEnumConstantDefaultValue(propertyInfo, propertyInfo.defaultValue);
 					} else
 
+					if((classInfo.shortName).equals("DecisionTree") && (privateName).equals("splitCharacteristic")){
+						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.tree.TreeModel.SplitCharacteristic");
+						propertyInfo.defaultValue = new CEnumConstantDefaultValue(propertyInfo, propertyInfo.defaultValue);
+					} else
+
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("activationFunction")){
 						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.ActivationFunction");
 					} else
