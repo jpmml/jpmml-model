@@ -227,6 +227,11 @@ public class PMMLPlugin extends ComplexPlugin {
 						propertyInfo.baseType = measureClass;
 					} else
 
+					if((classInfo.shortName).equals("DecisionTree") && (privateName).equals("missingValueStrategy")){
+						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.tree.TreeModel.MissingValueStrategy");
+						propertyInfo.defaultValue = new CEnumConstantDefaultValue(propertyInfo, propertyInfo.defaultValue);
+					} else
+
 					if((classInfo.shortName).equals("DecisionTree") && (privateName).equals("node")){
 						propertyInfo.baseType = nodeClass;
 					} else
