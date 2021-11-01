@@ -2434,20 +2434,6 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
-		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType">
-			<jaxb:typesafeEnumClass
-				name="NormalizationMethod"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='cauchit']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateEnumConstant>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:attribute[@name='normalizationMethod']/xsd:simpleType/xsd:restriction/xsd:enumeration[@value='loglog']">
-			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateEnumConstant>
-		</jaxb:bindings>
-
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelStats']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>

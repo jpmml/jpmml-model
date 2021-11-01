@@ -86,9 +86,6 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass nodeClass = codeModel.ref("org.dmg.pmml.tree.Node");
 		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 
-		JClass activationFunctionEnum = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.ActivationFunction");
-		JClass normalizationMethodEnum = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.NormalizationMethod");
-
 		Comparator<CPropertyInfo> comparator = new Comparator<CPropertyInfo>(){
 
 			@Override
@@ -235,11 +232,16 @@ public class PMMLPlugin extends ComplexPlugin {
 					} else
 
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("activationFunction")){
-						propertyInfo.baseType = activationFunctionEnum;
+						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.ActivationFunction");
 					} else
 
 					if((classInfo.shortName).equals("NeuralLayer") && (privateName).equals("normalizationMethod")){
-						propertyInfo.baseType = normalizationMethodEnum;
+						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.neural_network.NeuralNetwork.NormalizationMethod");
+					} else
+
+					if((classInfo.shortName).equals("Regression") && (privateName).equals("normalizationMethod")){
+						propertyInfo.baseType = codeModel.directClass("org.dmg.pmml.regression.RegressionModel.NormalizationMethod");
+						propertyInfo.defaultValue = new CEnumConstantDefaultValue(propertyInfo, propertyInfo.defaultValue);
 					} else
 
 					if((classInfo.shortName).equals("TreeModel") && (privateName).equals("node")){
@@ -812,7 +814,49 @@ public class PMMLPlugin extends ComplexPlugin {
 	}
 
 	static
+	private class CEnumConstantDefaultValue extends CDefaultValue {
+
+		private CPropertyInfo propertyInfo = null;
+
+		private CDefaultValue parent = null;
+
+
+		private CEnumConstantDefaultValue(CPropertyInfo propertyInfo, CDefaultValue parent){
+			setPropertyInfo(propertyInfo);
+			setParent(parent);
+		}
+
+		@Override
+		public JExpression compute(Outline outline){
+			CPropertyInfo propertyInfo = getPropertyInfo();
+			CDefaultValue parent = getParent();
+
+			JStringLiteral stringLiteral = (JStringLiteral)parent.compute(outline);
+
+			return ((JClass)propertyInfo.baseType).staticRef(stringLiteral.str.toUpperCase());
+		}
+
+		public CPropertyInfo getPropertyInfo(){
+			return this.propertyInfo;
+		}
+
+		private void setPropertyInfo(CPropertyInfo propertyInfo){
+			this.propertyInfo = propertyInfo;
+		}
+
+		public CDefaultValue getParent(){
+			return this.parent;
+		}
+
+		private void setParent(CDefaultValue parent){
+			this.parent = parent;
+		}
+	}
+
+	static
 	private class CShareableDefaultValue extends CDefaultValue {
+
+		private CPropertyInfo propertyInfo = null;
 
 		private CDefaultValue parent = null;
 
@@ -820,7 +864,9 @@ public class PMMLPlugin extends ComplexPlugin {
 
 
 		private CShareableDefaultValue(CPropertyInfo propertyInfo, CDefaultValue parent){
+			setPropertyInfo(propertyInfo);
 			setParent(parent);
+
 			setField(formatField(propertyInfo.getName(false)));
 		}
 
@@ -847,6 +893,14 @@ public class PMMLPlugin extends ComplexPlugin {
 			String field = getField();
 
 			return (field != null);
+		}
+
+		public CPropertyInfo getPropertyInfo(){
+			return this.propertyInfo;
+		}
+
+		private void setPropertyInfo(CPropertyInfo propertyInfo){
+			this.propertyInfo = propertyInfo;
 		}
 
 		public CDefaultValue getParent(){
