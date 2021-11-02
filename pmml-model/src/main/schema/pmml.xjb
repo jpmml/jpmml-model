@@ -2549,6 +2549,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSet']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasRecordCount&lt;RuleSet&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="rule_set"
 			/>
@@ -2612,6 +2613,10 @@ Copyright (c) 2009 University of Tartu
 			<jaxb:property
 				name="mathContext"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ScoreDistribution']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasRecordCount&lt;ScoreDistribution&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ScoreDistribution']/xsd:complexType/xsd:attribute[@name='confidence']">
@@ -2878,6 +2883,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleRule']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.rule_set.Rule</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasRecordCount&lt;SimpleRule&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasScoreDistributions&lt;SimpleRule&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="rule_set"

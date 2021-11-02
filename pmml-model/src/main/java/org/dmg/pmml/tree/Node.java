@@ -12,6 +12,7 @@ import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Entity;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.HasPredicate;
+import org.dmg.pmml.HasRecordCount;
 import org.dmg.pmml.HasScoreDistributions;
 import org.dmg.pmml.Partition;
 import org.dmg.pmml.ScoreDistribution;
@@ -22,7 +23,7 @@ import org.dmg.pmml.adapters.NodeAdapter;
 	value = NodeAdapter.class
 )
 abstract
-public class Node extends Entity<Object> implements HasPredicate<Node>, HasScoreDistributions<Node> {
+public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecordCount<Node>, HasScoreDistributions<Node> {
 
 	public ComplexNode toComplexNode(){
 		return new ComplexNode(this);
@@ -48,10 +49,12 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasScore
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Number getRecordCount(){
 		return null;
 	}
 
+	@Override
 	public Node setRecordCount(Number recordCount){
 		throw new UnsupportedOperationException();
 	}
