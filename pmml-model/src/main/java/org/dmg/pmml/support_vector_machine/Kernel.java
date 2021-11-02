@@ -9,4 +9,10 @@ import org.dmg.pmml.PMMLObject;
 @XmlTransient
 abstract
 public class Kernel extends PMMLObject {
+
+	abstract
+	public String getDescription();
+
+	abstract
+	public Kernel setDescription(String description);
 }
