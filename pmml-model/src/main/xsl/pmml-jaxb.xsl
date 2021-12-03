@@ -63,6 +63,13 @@ Copyright (c) 2016 Villu Ruusmann
 		</xsl:copy>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='MiningSchema']/xs:complexType/xs:sequence/xs:element[@ref='MiningField']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+			<xsl:attribute name="minOccurs">0</xsl:attribute>
+		</xsl:copy>
+	</xsl:template>
+
 	<!--
 	Replace xs:string with enum
 	-->

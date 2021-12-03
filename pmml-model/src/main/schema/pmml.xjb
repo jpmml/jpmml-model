@@ -1598,6 +1598,10 @@ Copyright (c) 2009 University of Tartu
 			<annox:annotateEnumConstant>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_2)</annox:annotateEnumConstant>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='MiningSchema']/xsd:complexType/xsd:sequence/xsd:element[@ref='MiningField']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='minkowski']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
