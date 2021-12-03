@@ -121,7 +121,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='Category' or @name='FieldValue' or @name='FieldValueCount' or @name='NormDiscrete' or @name='OutputField' or @name='PairCounts' or @name='ParentValue' or @name='PPCell' or @name='ResultField' or @name='ScoreDistribution' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='TargetValueStat' or @name='Value' or @name='ValueProbability']/xs:complexType/xs:attribute[@name='value']/@type">
+	<xsl:template match="xs:element[@name='BaselineStratum' or @name='CategoricalPredictor' or @name='Category' or @name='Decision' or @name='FieldValue' or @name='FieldValueCount' or @name='NormDiscrete' or @name='OutputField' or @name='PairCounts' or @name='ParentValue' or @name='PPCell' or @name='ResultField' or @name='ScoreDistribution' or @name='SimplePredicate' or @name='TargetValue' or @name='TargetValueCount' or @name='TargetValueStat' or @name='Value' or @name='ValueProbability']/xs:complexType/xs:attribute[@name='value']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
