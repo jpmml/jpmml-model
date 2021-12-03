@@ -9,8 +9,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javax.xml.namespace.QName;
@@ -490,7 +492,23 @@ public class PMMLPlugin extends ComplexPlugin {
 				beanClazz.field(JMod.PRIVATE | JMod.STATIC | JMod.FINAL, long.class, "serialVersionUID", JExpr.lit(model.serialVersionUID));
 			}
 
-			String[][][] markerInterfaces = {
+			String[][][] baseClassInfos = {
+				{{"ComparisonField"}, {"getCompareFunction", "setCompareFunction", "getFieldWeight", "setFieldWeight", "getSimilarityScale", "setSimilarityScale"}},
+				{{"EmbeddedModel"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMiningFunction", "setMiningFunction", "getModelName", "setModelName", "getModelStats", "setModelStats", "getOutput", "setOutput", "getTargets", "setTargets"}},
+				{{"Kernel"}, {"getDescription", "setDescription"}},
+				{{"Model"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMathContext", "setMathContext", "getMiningFunction", "setMiningFunction", "getMiningSchema", "setMiningSchema", "getModelExplanation", "setModelExplanation", "getModelName", "setModelName", "getModelStats", "setModelStats", "getModelVerification", "setModelVerification", "getOutput", "setOutput", "isScorable", "setScorable", "getTargets", "setTargets"}},
+				{{"ModelQuality"}, {"getDataName", "setDataName"}},
+				{{"ParameterCell"}, {"getParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
+				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},
+				{{"SparseArray"}, {"getDefaultValue", "setDefaultValue", "hasEntries", "getEntries", "addEntries", "hasIndices", "getIndices", "addIndices", "getN", "setN"}},
+				{{"Term"}, {"getCoefficient", "setCoefficient"}}
+			};
+
+			for(String[][] baseClassInfo : baseClassInfos){
+				addOverrideAnnotations(beanClazz, baseClassInfo);
+			}
+
+			String[][][] markerInterfaceInfos = {
 				{{"HasActivationFunction"}, {"getActivationFunction", "setActivationFunction", "getAltitude", "setAltitude", "getLeakage", "setLeakage", "getThreshold", "setThreshold", "getWidth", "setWidth"}},
 				{{"HasBaselineScore"}, {"getBaselineScore", "setBaselineScore"}},
 				{{"HasContinuousDomain"}, {"hasIntervals", "getIntervals", "addIntervals"}},
@@ -505,7 +523,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasId", "Entity", "NeuralEntity", "Node", "Rule"}, {"getId", "setId"}},
 				{{"HasLocator"}, {"getLocator", "setLocator"}},
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
-				{{"HasMixedContent"}, {"hasContext", "getContent", "addContent"}},
+				{{"HasMixedContent"}, {"hasContent", "getContent", "addContent"}},
 				{{"HasName", "Field", "Term"}, {"getName", "setName"}},
 				{{"HasNode"}, {"getMissingValueStrategy", "setMissingValueStrategy", "getMissingValuePenalty", "setMissingValuePenalty", "getNoTrueChildStrategy", "setNoTrueChildStrategy", "getSplitCharacteristic", "setSplitCharacteristic", "getNode", "setNode"}},
 				{{"HasNormalizationMethod"}, {"getNormalizationMethod", "setNormalizationMethod"}},
@@ -521,66 +539,8 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasValueSet"}, {"getArray", "setArray"}}
 			};
 
-			for(String[][] markerInterface : markerInterfaces){
-				String[] types = markerInterface[0];
-				String[] members = markerInterface[1];
-
-				boolean matches = false;
-
-				{
-					JClass superClazz = beanClazz._extends();
-
-					superClazz = superClazz.erasure();
-
-					for(int i = 1; i < types.length; i++){
-						matches |= (superClazz.name()).equals(types[i]);
-					}
-				}
-
-				for(Iterator<JClass> it = beanClazz._implements(); it.hasNext(); ){
-					JClass _interface = it.next();
-
-					_interface = _interface.erasure();
-
-					matches |= (_interface.name()).equals(types[0]);
-				}
-
-				if(!matches){
-					continue;
-				}
-
-				Collection<JMethod> methods = beanClazz.methods();
-
-				for(int i = 0; i < members.length; i++){
-
-					for(JMethod method : methods){
-						String name = method.name();
-
-						if(!(name).equals(members[i])){
-							continue;
-						} // End if
-
-						List<JVar> params = method.params();
-
-						if((name.startsWith("has") || name.startsWith("get")) && params.size() == 0){
-
-							if(!hasAnnotation(method.annotations(), Override.class)){
-								method.annotate(Override.class);
-							}
-						} else
-
-						if(name.startsWith("add") && params.size() == 0 && method.hasVarArgs()){
-							method.annotate(Override.class);
-						} else
-
-						if(name.startsWith("set") && params.size() == 1){
-
-							if(!hasAnnotation(method.annotations(), Override.class)){
-								method.annotate(Override.class);
-							}
-						}
-					}
-				}
+			for(String[][] markerInterfaceInfo : markerInterfaceInfos){
+				addOverrideAnnotations(beanClazz, markerInterfaceInfo);
 			}
 		}
 
@@ -774,6 +734,68 @@ public class PMMLPlugin extends ComplexPlugin {
 		JExpression init = codeModel.ref("org.jpmml.model.ReflectionUtil").staticInvoke("getField").arg(beanClazz.dotclass()).arg(fieldVar.name());
 
 		_interface.field(0, Field.class, (beanClazz.name() + "_" + fieldVar.name()).toUpperCase(), init);
+	}
+
+	static
+	private void addOverrideAnnotations(JDefinedClass beanClazz, String[][] typeMemberInfo){
+		Set<String> typeNames = new LinkedHashSet<>(Arrays.asList(typeMemberInfo[0]));
+		Set<String> methodNames = new LinkedHashSet<>(Arrays.asList(typeMemberInfo[1]));
+
+		boolean matches = false;
+
+		{
+			JClass superClazz = beanClazz._extends();
+
+			String name = (superClazz.erasure()).name();
+
+			matches |= typeNames.contains(name);
+		}
+
+		for(Iterator<JClass> it = beanClazz._implements(); it.hasNext(); ){
+			JClass _interface = it.next();
+
+			String name = (_interface.erasure()).name();
+
+			matches |= typeNames.contains(name);
+		}
+
+		if(!matches){
+			return;
+		}
+
+		Collection<JMethod> methods = beanClazz.methods();
+
+		for(JMethod method : methods){
+			String name = method.name();
+
+			if(!methodNames.contains(name)){
+				continue;
+			}
+
+			List<JVar> params = method.params();
+
+			if((name.startsWith("has") || name.startsWith("is") || name.startsWith("get")) && params.size() == 0){
+
+				if(!hasAnnotation(method.annotations(), Override.class)){
+					method.annotate(Override.class);
+				}
+			} else
+
+			if(name.startsWith("add") && params.size() == 0 && method.hasVarArgs()){
+				method.annotate(Override.class);
+			} else
+
+			if(name.startsWith("set") && params.size() == 1){
+
+				if(!hasAnnotation(method.annotations(), Override.class)){
+					method.annotate(Override.class);
+				}
+			} else
+
+			{
+				throw new RuntimeException();
+			}
+		}
 	}
 
 	static
