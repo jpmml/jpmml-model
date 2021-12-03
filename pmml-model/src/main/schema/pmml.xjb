@@ -751,6 +751,10 @@ Copyright (c) 2009 University of Tartu
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DataDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='DataField']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;DataField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.Decorable</inheritance:implements>

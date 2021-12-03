@@ -54,6 +54,16 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Allow empty collections
+	-->
+	<xsl:template match="xs:element[@name='DataDictionary']/xs:complexType/xs:sequence/xs:element[@ref='DataField']">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+			<xsl:attribute name="minOccurs">0</xsl:attribute>
+		</xsl:copy>
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">

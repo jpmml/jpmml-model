@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.DataDictionary;
+import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.FieldName;
@@ -188,7 +189,10 @@ public class VersionInspectorTest {
 		Header header = new Header()
 			.setCopyright("ACME Corporation");
 
-		DataDictionary dataDictionary = new DataDictionary();
+		DataField dataField = new DataField(FieldName.create("x"), OpType.CATEGORICAL, DataType.DOUBLE);
+
+		DataDictionary dataDictionary = new DataDictionary()
+			.addDataFields(dataField);
 
 		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), header, dataDictionary);
 
