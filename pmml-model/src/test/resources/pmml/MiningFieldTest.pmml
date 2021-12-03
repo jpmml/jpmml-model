@@ -6,7 +6,7 @@
 	</DataDictionary>
 	<RegressionModel>
 		<MiningSchema>
-			<MiningField name="x" x-invalidValueReplacement="0"/>
+			<MiningField name="x" invalidValueTreatment="asIs" x-invalidValueReplacement="0"/>
 		</MiningSchema>
 		<RegressionTable intercept="1">
 			<NumericPredictor name="x" coefficient="2"/>

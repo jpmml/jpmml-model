@@ -91,6 +91,28 @@ public class ImportFilter extends PMMLFilter {
 
 			if(compare(getSource(), Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
+			} // End if
+
+			if(compare(getSource(), Version.PMML_4_4) <= 0){
+
+				if(hasAttribute(attributes, "invalidValueReplacement")){
+					String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
+
+					if(invalidValueTreatment != null){
+
+						switch(invalidValueTreatment){
+							case "asIs":
+								{
+									attributes = setAttribute(attributes, "invalidValueTreatment", "asValue");
+								}
+								break;
+							case "asValue":
+								break;
+							default:
+								break;
+						}
+					}
+				}
 			}
 		} else
 

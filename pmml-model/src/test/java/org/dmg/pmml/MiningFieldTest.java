@@ -24,11 +24,11 @@ public class MiningFieldTest extends SchemaUpdateTest {
 	public void transform() throws Exception {
 		byte[] original = ResourceUtil.getByteArray(MiningFieldTest.class);
 
-		checkMiningField(original, new String[]{"0", null});
+		checkMiningField(original, "asIs", new String[]{"0", null});
 
 		byte[] latest = upgradeToLatest(original);
 
-		checkMiningField(latest, new String[]{null, "0"});
+		checkMiningField(latest, "asValue", new String[]{null, "0"});
 	}
 
 	@Test
@@ -45,9 +45,10 @@ public class MiningFieldTest extends SchemaUpdateTest {
 	}
 
 	static
-	private void checkMiningField(byte[] bytes, String[] invalidValueReplacement) throws Exception {
+	private void checkMiningField(byte[] bytes, String invalidValueTreatment, String[] invalidValueReplacement) throws Exception {
 		Node node = DOMUtil.selectNode(bytes, "/:PMML/:RegressionModel/:MiningSchema/:MiningField");
 
+		assertEquals(invalidValueTreatment, DOMUtil.getAttributeValue(node, "invalidValueTreatment"));
 		assertArrayEquals(invalidValueReplacement, DOMUtil.getExtensionAttributeValues(node, "invalidValueReplacement"));
 	}
 
