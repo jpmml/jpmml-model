@@ -9,6 +9,7 @@ import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Interval;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.Visitable;
+import org.jpmml.model.visitors.MemoryMeasurer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

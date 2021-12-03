@@ -36,7 +36,6 @@
 		<module>pmml-agent</module>
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
-		<module>pmml-model-extension</module>
 		<module>pmml-model-gwt</module>
 		<module>pmml-model-jackson</module>
 		<module>pmml-model-kryo</module>
@@ -77,11 +76,6 @@
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-example</artifactId>
-				<version>1.6-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jpmml</groupId>
-				<artifactId>pmml-model-extension</artifactId>
 				<version>1.6-SNAPSHOT</version>
 			</dependency>
 			<dependency>

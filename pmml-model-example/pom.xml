@@ -25,7 +25,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.jpmml</groupId>
-			<artifactId>pmml-model-extension</artifactId>
+			<artifactId>pmml-agent</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.jpmml</groupId>

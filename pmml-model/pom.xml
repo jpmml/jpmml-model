@@ -25,6 +25,18 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.jpmml</groupId>
+			<artifactId>pmml-agent</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<scope>provided</scope>
@@ -102,7 +114,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<argLine>${jacoco.agent}</argLine>
+					<argLine>-javaagent:${basedir}/../pmml-agent/target/agent-${project.version}.jar=public=true ${jacoco.agent}</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -195,4 +207,24 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<activation>
+				<jdk>[16, )</jdk>
+			</activation>
+			
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<argLine>-javaagent:${basedir}/../pmml-agent/target/agent-${project.version}.jar=public=true --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED ${jacoco.agent}</argLine>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
