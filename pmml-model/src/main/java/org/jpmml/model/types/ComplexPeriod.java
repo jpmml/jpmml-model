@@ -12,7 +12,7 @@ import org.dmg.pmml.DataType;
  * @see Epochs
  */
 abstract
-class ComplexPeriod<P extends ComplexPeriod<P>> extends Period<P> {
+public class ComplexPeriod<P extends ComplexPeriod<P>> extends Period<P> {
 
 	private LocalDate epoch = null;
 

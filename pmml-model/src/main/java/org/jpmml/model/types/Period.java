@@ -7,7 +7,10 @@ import org.dmg.pmml.ComplexValue;
 import org.dmg.pmml.DataType;
 
 abstract
-class Period<P extends Period<P>> extends Number implements ComplexValue, Comparable<P> {
+public class Period<P extends Period<P>> extends Number implements ComplexValue, Comparable<P> {
+
+	Period(){
+	}
 
 	abstract
 	public DataType getDataType();

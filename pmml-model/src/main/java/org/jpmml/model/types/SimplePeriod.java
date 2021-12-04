@@ -4,5 +4,8 @@
 package org.jpmml.model.types;
 
 abstract
-class SimplePeriod<P extends SimplePeriod<P>> extends Period<P> {
+public class SimplePeriod<P extends SimplePeriod<P>> extends Period<P> {
+
+	SimplePeriod(){
+	}
 }
