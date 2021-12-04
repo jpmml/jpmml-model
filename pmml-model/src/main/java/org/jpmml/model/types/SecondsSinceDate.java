@@ -33,6 +33,20 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 	}
 
 	@Override
+	public SecondsSinceDate forEpoch(LocalDate newEpoch){
+		LocalDate epoch = getEpoch();
+		long seconds = getSeconds();
+
+		if(Objects.equals(epoch, newEpoch)){
+			return this;
+		}
+
+		long newSeconds = ChronoUnit.SECONDS.between(newEpoch.atStartOfDay(), epoch.atStartOfDay()) + seconds;
+
+		return new SecondsSinceDate(newEpoch, newSeconds);
+	}
+
+	@Override
 	public long longValue(){
 		return getSeconds();
 	}

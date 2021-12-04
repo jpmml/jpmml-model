@@ -32,6 +32,20 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 	}
 
 	@Override
+	public DaysSinceDate forEpoch(LocalDate newEpoch){
+		LocalDate epoch = getEpoch();
+		long days = getDays();
+
+		if(Objects.equals(epoch, newEpoch)){
+			return this;
+		}
+
+		long newDays = ChronoUnit.DAYS.between(newEpoch, epoch) + days;
+
+		return new DaysSinceDate(newEpoch, newDays);
+	}
+
+	@Override
 	public long longValue(){
 		return getDays();
 	}
