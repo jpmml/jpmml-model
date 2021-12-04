@@ -260,6 +260,8 @@
 						<configuration>
 							<ignores>
 								<ignore>java.lang.instrument.*</ignore>
+								<ignore>java.time.*</ignore>
+								<ignore>java.util.Date</ignore>
 							</ignores>
 							<signature>
 								<groupId>net.sf.androidscents.signature</groupId>
