@@ -5,7 +5,11 @@ package org.jpmml.model.types;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+
+import org.dmg.pmml.DataType;
 
 public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 
@@ -20,6 +24,11 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 		super(epoch);
 
 		setDays(days);
+	}
+
+	@Override
+	public DataType getDataType(){
+		return getDataType(getEpoch());
 	}
 
 	@Override
@@ -60,5 +69,23 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 
 	private void setDays(long days){
 		this.days = days;
+	}
+
+	static
+	public DataType getDataType(LocalDate epoch){
+		return DaysSinceDate.dataTypes.get(epoch);
+	}
+
+	private static final Map<LocalDate, DataType> dataTypes = new LinkedHashMap<>();
+
+	static {
+		dataTypes.put(Epochs.YEAR_1960, DataType.DATE_DAYS_SINCE_1960);
+		dataTypes.put(Epochs.YEAR_1970, DataType.DATE_DAYS_SINCE_1970);
+		dataTypes.put(Epochs.YEAR_1980, DataType.DATE_DAYS_SINCE_1980);
+
+		dataTypes.put(Epochs.YEAR_1990, DataType.DATE_DAYS_SINCE_1990);
+		dataTypes.put(Epochs.YEAR_2000, DataType.DATE_DAYS_SINCE_2000);
+		dataTypes.put(Epochs.YEAR_2010, DataType.DATE_DAYS_SINCE_2010);
+		dataTypes.put(Epochs.YEAR_2020, DataType.DATE_DAYS_SINCE_2020);
 	}
 }

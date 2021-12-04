@@ -6,7 +6,11 @@ package org.jpmml.model.types;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+
+import org.dmg.pmml.DataType;
 
 public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 
@@ -21,6 +25,11 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 		super(epoch);
 
 		setSeconds(seconds);
+	}
+
+	@Override
+	public DataType getDataType(){
+		return getDataType(getEpoch());
 	}
 
 	@Override
@@ -61,5 +70,23 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 
 	private void setSeconds(long seconds){
 		this.seconds = seconds;
+	}
+
+	static
+	public DataType getDataType(LocalDate epoch){
+		return SecondsSinceDate.dataTypes.get(epoch);
+	}
+
+	private static final Map<LocalDate, DataType> dataTypes = new LinkedHashMap<>();
+
+	static {
+		dataTypes.put(Epochs.YEAR_1960, DataType.DATE_TIME_SECONDS_SINCE_1960);
+		dataTypes.put(Epochs.YEAR_1970, DataType.DATE_TIME_SECONDS_SINCE_1970);
+		dataTypes.put(Epochs.YEAR_1980, DataType.DATE_TIME_SECONDS_SINCE_1980);
+
+		dataTypes.put(Epochs.YEAR_1990, DataType.DATE_TIME_SECONDS_SINCE_1990);
+		dataTypes.put(Epochs.YEAR_2000, DataType.DATE_TIME_SECONDS_SINCE_2000);
+		dataTypes.put(Epochs.YEAR_2010, DataType.DATE_TIME_SECONDS_SINCE_2010);
+		dataTypes.put(Epochs.YEAR_2020, DataType.DATE_TIME_SECONDS_SINCE_2020);
 	}
 }

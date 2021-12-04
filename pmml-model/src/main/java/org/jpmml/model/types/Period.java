@@ -4,9 +4,13 @@
 package org.jpmml.model.types;
 
 import org.dmg.pmml.ComplexValue;
+import org.dmg.pmml.DataType;
 
 abstract
 class Period<P extends Period<P>> extends Number implements ComplexValue, Comparable<P> {
+
+	abstract
+	public DataType getDataType();
 
 	@Override
 	public Long toSimpleValue(){

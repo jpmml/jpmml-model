@@ -31,6 +31,8 @@ import java.time.temporal.TemporalUnit;
 import java.time.temporal.ValueRange;
 import java.util.Objects;
 
+import org.dmg.pmml.DataType;
+
 public class SecondsSinceMidnight extends SimplePeriod<SecondsSinceMidnight> {
 
 	private long seconds = 0;
@@ -38,6 +40,11 @@ public class SecondsSinceMidnight extends SimplePeriod<SecondsSinceMidnight> {
 
 	public SecondsSinceMidnight(long seconds){
 		setSeconds(seconds);
+	}
+
+	@Override
+	public DataType getDataType(){
+		return DataType.TIME_SECONDS;
 	}
 
 	@Override

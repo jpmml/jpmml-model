@@ -4,6 +4,9 @@
 package org.jpmml.model.types;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
+import org.dmg.pmml.DataType;
 
 /**
  * @see Epochs
@@ -18,11 +21,15 @@ class ComplexPeriod<P extends ComplexPeriod<P>> extends Period<P> {
 		setEpoch(epoch);
 	}
 
+	@Override
+	abstract
+	public DataType getDataType();
+
 	public LocalDate getEpoch(){
 		return this.epoch;
 	}
 
 	private void setEpoch(LocalDate epoch){
-		this.epoch = epoch;
+		this.epoch = Objects.requireNonNull(epoch);
 	}
 }
