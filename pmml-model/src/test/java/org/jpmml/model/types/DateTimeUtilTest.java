@@ -3,8 +3,6 @@
  */
 package org.jpmml.model.types;
 
-import java.time.temporal.ChronoUnit;
-
 import org.dmg.pmml.DataType;
 import org.junit.Test;
 
@@ -43,9 +41,6 @@ public class DateTimeUtilTest {
 		assertEquals(DataType.DATE_DAYS_SINCE_1960, sixties.getDataType());
 		assertEquals(DataType.DATE_DAYS_SINCE_1970, seventies.getDataType());
 		assertEquals(DataType.DATE_DAYS_SINCE_1980, eighties.getDataType());
-
-		assertEquals(10, ChronoUnit.YEARS.between(sixties.getEpoch(), seventies.getEpoch()));
-		assertEquals(10, ChronoUnit.YEARS.between(seventies.getEpoch(), eighties.getEpoch()));
 
 		try {
 			int diff = (sixties).compareTo(seventies);
@@ -105,9 +100,6 @@ public class DateTimeUtilTest {
 		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1960, sixties.getDataType());
 		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1970, seventies.getDataType());
 		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1980, eighties.getDataType());
-
-		assertEquals(10, ChronoUnit.YEARS.between(sixties.getEpoch(), seventies.getEpoch()));
-		assertEquals(10, ChronoUnit.YEARS.between(seventies.getEpoch(), eighties.getEpoch()));
 
 		try {
 			int diff = (sixties).compareTo(seventies);

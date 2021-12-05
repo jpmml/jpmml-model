@@ -3,7 +3,6 @@
  */
 package org.jpmml.model.types;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -12,24 +11,24 @@ import java.util.Objects;
 abstract
 public class ComplexPeriod<P extends ComplexPeriod<P>> extends Period<P> {
 
-	private LocalDate epoch = null;
+	private Date epoch = null;
 
 
 	public ComplexPeriod(){
 	}
 
-	ComplexPeriod(LocalDate epoch){
+	ComplexPeriod(Date epoch){
 		setEpoch(epoch);
 	}
 
 	abstract
-	public P forEpoch(LocalDate epoch);
+	public P forEpoch(Date epoch);
 
-	public LocalDate getEpoch(){
+	public Date getEpoch(){
 		return this.epoch;
 	}
 
-	private void setEpoch(LocalDate epoch){
+	private void setEpoch(Date epoch){
 		this.epoch = Objects.requireNonNull(epoch);
 	}
 }

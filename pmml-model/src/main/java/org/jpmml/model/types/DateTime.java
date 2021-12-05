@@ -3,7 +3,6 @@
  */
 package org.jpmml.model.types;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -60,7 +59,7 @@ public class DateTime extends Instant<DateTime> {
 	public SecondsSinceDate toSecondsSinceYear(int year){
 		LocalDateTime dateTime = getDateTime();
 
-		return new SecondsSinceDate(LocalDate.of(year, 1, 1), dateTime);
+		return new SecondsSinceDate(new Date(year, 1, 1), dateTime);
 	}
 
 	@Override

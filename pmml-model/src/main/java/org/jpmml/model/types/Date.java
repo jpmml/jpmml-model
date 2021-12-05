@@ -48,7 +48,7 @@ public class Date extends Instant<Date> {
 	public DaysSinceDate toDaysSinceYear(int year){
 		LocalDate date = getDate();
 
-		return new DaysSinceDate(LocalDate.of(year, 1, 1), date);
+		return new DaysSinceDate(new Date(year, 1, 1), date);
 	}
 
 	@Override

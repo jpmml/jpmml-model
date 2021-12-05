@@ -43,7 +43,7 @@ public class DateTimeUtil {
 	}
 
 	static
-	public DaysSinceDate parseDaysSinceDate(LocalDate epoch, String value){
+	public DaysSinceDate parseDaysSinceDate(Date epoch, String value){
 
 		try {
 			return new DaysSinceDate(epoch, LocalDate.parse(value));
@@ -63,7 +63,7 @@ public class DateTimeUtil {
 	}
 
 	static
-	public SecondsSinceDate parseSecondsSinceDate(LocalDate epoch, String value){
+	public SecondsSinceDate parseSecondsSinceDate(Date epoch, String value){
 
 		try {
 			return new SecondsSinceDate(epoch, LocalDateTime.parse(value));

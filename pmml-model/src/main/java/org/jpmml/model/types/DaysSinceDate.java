@@ -19,11 +19,11 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 	private DaysSinceDate(){
 	}
 
-	public DaysSinceDate(LocalDate epoch, LocalDate date){
-		this(epoch, ChronoUnit.DAYS.between(epoch, date));
+	public DaysSinceDate(Date epoch, LocalDate date){
+		this(epoch, ChronoUnit.DAYS.between(epoch.getDate(), date));
 	}
 
-	public DaysSinceDate(LocalDate epoch, long days){
+	public DaysSinceDate(Date epoch, long days){
 		super(epoch);
 
 		setDays(days);
@@ -35,15 +35,15 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 	}
 
 	@Override
-	public DaysSinceDate forEpoch(LocalDate newEpoch){
-		LocalDate epoch = getEpoch();
+	public DaysSinceDate forEpoch(Date newEpoch){
+		Date epoch = getEpoch();
 		long days = getDays();
 
 		if(Objects.equals(epoch, newEpoch)){
 			return this;
 		}
 
-		long newDays = ChronoUnit.DAYS.between(newEpoch, epoch) + days;
+		long newDays = ChronoUnit.DAYS.between(newEpoch.getDate(), epoch.getDate()) + days;
 
 		return new DaysSinceDate(newEpoch, newDays);
 	}
@@ -89,11 +89,11 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 	}
 
 	static
-	public DataType getDataType(LocalDate epoch){
+	public DataType getDataType(Date epoch){
 		return DaysSinceDate.dataTypes.get(epoch);
 	}
 
-	private static final Map<LocalDate, DataType> dataTypes = new LinkedHashMap<>();
+	private static final Map<Date, DataType> dataTypes = new LinkedHashMap<>();
 
 	static {
 		dataTypes.put(Epochs.YEAR_1960, DataType.DATE_DAYS_SINCE_1960);

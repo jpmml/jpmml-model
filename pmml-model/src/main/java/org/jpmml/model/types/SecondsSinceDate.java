@@ -3,7 +3,6 @@
  */
 package org.jpmml.model.types;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashMap;
@@ -20,11 +19,11 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 	private SecondsSinceDate(){
 	}
 
-	public SecondsSinceDate(LocalDate epoch, LocalDateTime dateTime){
-		this(epoch, ChronoUnit.SECONDS.between(epoch.atStartOfDay(), dateTime));
+	public SecondsSinceDate(Date epoch, LocalDateTime dateTime){
+		this(epoch, ChronoUnit.SECONDS.between((epoch.getDate()).atStartOfDay(), dateTime));
 	}
 
-	public SecondsSinceDate(LocalDate epoch, long seconds){
+	public SecondsSinceDate(Date epoch, long seconds){
 		super(epoch);
 
 		setSeconds(seconds);
@@ -36,15 +35,15 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 	}
 
 	@Override
-	public SecondsSinceDate forEpoch(LocalDate newEpoch){
-		LocalDate epoch = getEpoch();
+	public SecondsSinceDate forEpoch(Date newEpoch){
+		Date epoch = getEpoch();
 		long seconds = getSeconds();
 
 		if(Objects.equals(epoch, newEpoch)){
 			return this;
 		}
 
-		long newSeconds = ChronoUnit.SECONDS.between(newEpoch.atStartOfDay(), epoch.atStartOfDay()) + seconds;
+		long newSeconds = ChronoUnit.SECONDS.between((newEpoch.getDate()).atStartOfDay(), (epoch.getDate()).atStartOfDay()) + seconds;
 
 		return new SecondsSinceDate(newEpoch, newSeconds);
 	}
@@ -90,11 +89,11 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 	}
 
 	static
-	public DataType getDataType(LocalDate epoch){
+	public DataType getDataType(Date epoch){
 		return SecondsSinceDate.dataTypes.get(epoch);
 	}
 
-	private static final Map<LocalDate, DataType> dataTypes = new LinkedHashMap<>();
+	private static final Map<Date, DataType> dataTypes = new LinkedHashMap<>();
 
 	static {
 		dataTypes.put(Epochs.YEAR_1960, DataType.DATE_TIME_SECONDS_SINCE_1960);
