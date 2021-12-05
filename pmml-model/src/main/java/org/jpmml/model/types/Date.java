@@ -4,6 +4,7 @@
 package org.jpmml.model.types;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
@@ -35,6 +36,19 @@ public class Date extends Instant<Date> {
 		LocalDate date = getDate();
 
 		return date.toString();
+	}
+
+	@Override
+	public String format(String pattern){
+		LocalDate date = getDate();
+
+		return String.format(pattern, date);
+	}
+
+	public DaysSinceDate toDaysSinceYear(int year){
+		LocalDate date = getDate();
+
+		return new DaysSinceDate(LocalDate.of(year, 1, 1), date);
 	}
 
 	@Override
@@ -70,5 +84,23 @@ public class Date extends Instant<Date> {
 	static
 	public Date parse(String value) throws DateTimeParseException {
 		return new Date(LocalDate.parse(value));
+	}
+
+	static
+	public Date valueOf(Object value){
+
+		if(value instanceof LocalDate){
+			LocalDate localDate = (LocalDate)value;
+
+			return new Date(localDate);
+		} else
+
+		if(value instanceof LocalDateTime){
+			LocalDateTime localDateTime = (LocalDateTime)value;
+
+			return new Date(localDateTime.toLocalDate());
+		}
+
+		throw new IllegalArgumentException();
 	}
 }

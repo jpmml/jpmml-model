@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.types;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -38,6 +39,31 @@ public class DateTime extends Instant<DateTime> {
 	}
 
 	@Override
+	public String format(String pattern){
+		LocalDateTime dateTime = getDateTime();
+
+		return String.format(pattern, dateTime);
+	}
+
+	public Date toDate(){
+		LocalDateTime dateTime = getDateTime();
+
+		return new Date(dateTime.toLocalDate());
+	}
+
+	public Time toTime(){
+		LocalDateTime dateTime = getDateTime();
+
+		return new Time(dateTime.toLocalTime());
+	}
+
+	public SecondsSinceDate toSecondsSinceYear(int year){
+		LocalDateTime dateTime = getDateTime();
+
+		return new SecondsSinceDate(LocalDate.of(year, 1, 1), dateTime);
+	}
+
+	@Override
 	public int compareTo(DateTime that){
 		return (this.getDateTime()).compareTo(that.getDateTime());
 	}
@@ -70,5 +96,17 @@ public class DateTime extends Instant<DateTime> {
 	static
 	public DateTime parse(String value) throws DateTimeParseException {
 		return new DateTime(LocalDateTime.parse(value));
+	}
+
+	static
+	public DateTime valueOf(Object value){
+
+		if(value instanceof LocalDateTime){
+			LocalDateTime localDateTime = (LocalDateTime)value;
+
+			return new DateTime(localDateTime);
+		}
+
+		throw new IllegalArgumentException();
 	}
 }
