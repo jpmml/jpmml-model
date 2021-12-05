@@ -6,7 +6,6 @@ package org.jpmml.model.types;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class DateTimeUtil {
 
@@ -14,30 +13,30 @@ public class DateTimeUtil {
 	}
 
 	static
-	public LocalDate parseDate(String value){
+	public Date parseDate(String value){
 
 		try {
-			return LocalDate.parse(value);
+			return Date.parse(value);
 		} catch(DateTimeException dte){
 			throw new IllegalArgumentException(value, dte);
 		}
 	}
 
 	static
-	public LocalTime parseTime(String value){
+	public Time parseTime(String value){
 
 		try {
-			return LocalTime.parse(value);
+			return Time.parse(value);
 		} catch(DateTimeException dte){
 			throw new IllegalArgumentException(value, dte);
 		}
 	}
 
 	static
-	public LocalDateTime parseDateTime(String value){
+	public DateTime parseDateTime(String value){
 
 		try {
-			return LocalDateTime.parse(value);
+			return DateTime.parse(value);
 		} catch(DateTimeException dte){
 			throw new IllegalArgumentException(value, dte);
 		}
@@ -45,7 +44,12 @@ public class DateTimeUtil {
 
 	static
 	public DaysSinceDate parseDaysSinceDate(LocalDate epoch, String value){
-		return new DaysSinceDate(epoch, parseDate(value));
+
+		try {
+			return new DaysSinceDate(epoch, LocalDate.parse(value));
+		} catch(DateTimeException dte){
+			throw new IllegalArgumentException(value, dte);
+		}
 	}
 
 	static
@@ -60,6 +64,11 @@ public class DateTimeUtil {
 
 	static
 	public SecondsSinceDate parseSecondsSinceDate(LocalDate epoch, String value){
-		return new SecondsSinceDate(epoch, parseDateTime(value));
+
+		try {
+			return new SecondsSinceDate(epoch, LocalDateTime.parse(value));
+		} catch(DateTimeException dte){
+			throw new IllegalArgumentException(value, dte);
+		}
 	}
 }

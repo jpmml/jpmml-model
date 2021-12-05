@@ -4,29 +4,30 @@
 package org.jpmml.model.kryo;
 
 import org.jpmml.model.types.DateTimeUtil;
-import org.jpmml.model.types.DaysSinceDate;
 import org.jpmml.model.types.Epochs;
-import org.jpmml.model.types.SecondsSinceDate;
-import org.jpmml.model.types.SecondsSinceMidnight;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 public class TypeTest extends KryoUtilTest {
 
 	@Test
 	public void kryoClone() throws Exception {
-		DaysSinceDate daysSinceDate = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, DATE);
+		check(DateTimeUtil.parseDate(DATE));
+		check(DateTimeUtil.parseTime(TIME));
+		check(DateTimeUtil.parseDateTime(DATE_TIME));
 
-		assertEquals(daysSinceDate, clone(daysSinceDate));
+		check(DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, DATE));
+		check(DateTimeUtil.parseSecondsSinceMidnight(TIME));
+		check(DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, DATE_TIME));
+	}
 
-		SecondsSinceMidnight secondsSinceMidnight = DateTimeUtil.parseSecondsSinceMidnight(TIME);
+	private void check(Object object){
+		Object clonedObject = clone(object);
 
-		assertEquals(secondsSinceMidnight, clone(secondsSinceMidnight));
-
-		SecondsSinceDate secondsSinceDate = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, DATE_TIME);
-
-		assertEquals(secondsSinceDate, clone(secondsSinceDate));
+		assertEquals(object, clonedObject);
+		assertNotSame(object, clonedObject);
 	}
 
 	// The date and time (UTC) of the first moon landing

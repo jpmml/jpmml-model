@@ -3,9 +3,6 @@
  */
 package org.jpmml.model.types;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
 import org.dmg.pmml.DataType;
@@ -18,23 +15,23 @@ public class DateTimeUtilTest {
 
 	@Test
 	public void parseDate(){
-		LocalDate date = DateTimeUtil.parseDate(DATE);
+		Date date = DateTimeUtil.parseDate(DATE);
 
-		assertEquals(LocalDate.of(1969, 7, 20), date);
+		assertEquals(DATE, date.toSimpleValue());
 	}
 
 	@Test
 	public void parseTime(){
-		LocalTime time = DateTimeUtil.parseTime(TIME);
+		Time time = DateTimeUtil.parseTime(TIME);
 
-		assertEquals(LocalTime.of(20, 17, 40), time);
+		assertEquals(TIME, time.toSimpleValue());
 	}
 
 	@Test
 	public void parseDateTime(){
-		LocalDateTime dateTime = DateTimeUtil.parseDateTime(DATE_TIME);
+		DateTime dateTime = DateTimeUtil.parseDateTime(DATE_TIME);
 
-		assertEquals(LocalDateTime.of(1969, 7, 20, 20, 17, 40), dateTime);
+		assertEquals(DATE_TIME, dateTime.toSimpleValue());
 	}
 
 	@Test
