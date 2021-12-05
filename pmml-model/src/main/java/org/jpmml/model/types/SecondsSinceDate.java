@@ -17,6 +17,9 @@ public class SecondsSinceDate extends ComplexPeriod<SecondsSinceDate> {
 	private long seconds = 0;
 
 
+	private SecondsSinceDate(){
+	}
+
 	public SecondsSinceDate(LocalDate epoch, LocalDateTime dateTime){
 		this(epoch, ChronoUnit.SECONDS.between(epoch.atStartOfDay(), dateTime));
 	}

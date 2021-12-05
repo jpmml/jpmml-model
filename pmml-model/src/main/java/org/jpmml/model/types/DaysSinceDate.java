@@ -16,6 +16,9 @@ public class DaysSinceDate extends ComplexPeriod<DaysSinceDate> {
 	private long days = 0;
 
 
+	private DaysSinceDate(){
+	}
+
 	public DaysSinceDate(LocalDate epoch, LocalDate date){
 		this(epoch, ChronoUnit.DAYS.between(epoch, date));
 	}

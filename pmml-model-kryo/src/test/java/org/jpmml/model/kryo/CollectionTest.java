@@ -13,10 +13,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class AbstractFixedSizeListSerializerTest extends KryoUtilTest {
+public class CollectionTest extends KryoUtilTest {
 
 	@Test
-	public void collections(){
+	public void kryoClone(){
 		assertEquals(Arrays.asList(), clone(new ArrayList<>()));
 
 		assertEquals(Arrays.asList("first"), clone(new SingletonList<>("first")));

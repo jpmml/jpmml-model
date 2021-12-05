@@ -15,6 +15,9 @@ public class ComplexPeriod<P extends ComplexPeriod<P>> extends Period<P> {
 	private LocalDate epoch = null;
 
 
+	public ComplexPeriod(){
+	}
+
 	ComplexPeriod(LocalDate epoch){
 		setEpoch(epoch);
 	}

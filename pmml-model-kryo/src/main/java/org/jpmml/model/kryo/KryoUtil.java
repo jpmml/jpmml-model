@@ -38,7 +38,7 @@ public class KryoUtil {
 		kryo.addDefaultSerializer(Element.class, new JavaSerializer());
 		kryo.addDefaultSerializer(JAXBElement.class, new JavaSerializer());
 
-		// org.jpmml.model.*
+		// org.jpmml.model.collections.*
 		kryo.register(SingletonList.class, new SingletonListSerializer());
 		kryo.register(DoubletonList.class, new DoubletonListSerializer());
 		kryo.register(TripletonList.class, new TripletonListSerializer());

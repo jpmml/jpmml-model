@@ -38,6 +38,9 @@ public class SecondsSinceMidnight extends SimplePeriod<SecondsSinceMidnight> {
 	private long seconds = 0;
 
 
+	private SecondsSinceMidnight(){
+	}
+
 	public SecondsSinceMidnight(long seconds){
 		setSeconds(seconds);
 	}
