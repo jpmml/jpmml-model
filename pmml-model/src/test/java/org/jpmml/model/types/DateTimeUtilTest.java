@@ -34,28 +34,28 @@ public class DateTimeUtilTest {
 
 	@Test
 	public void parseDaysSinceDate(){
-		DaysSinceDate sixties = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, DATE);
-		DaysSinceDate seventies = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1970, DATE);
-		DaysSinceDate eighties = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1980, DATE);
+		DaysSinceDate daysSince1960 = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, DATE);
+		DaysSinceDate daysSince1970 = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1970, DATE);
+		DaysSinceDate daysSince1980 = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1980, DATE);
 
-		assertEquals(DataType.DATE_DAYS_SINCE_1960, sixties.getDataType());
-		assertEquals(DataType.DATE_DAYS_SINCE_1970, seventies.getDataType());
-		assertEquals(DataType.DATE_DAYS_SINCE_1980, eighties.getDataType());
+		assertEquals(DataType.DATE_DAYS_SINCE_1960, daysSince1960.getDataType());
+		assertEquals(DataType.DATE_DAYS_SINCE_1970, daysSince1970.getDataType());
+		assertEquals(DataType.DATE_DAYS_SINCE_1980, daysSince1980.getDataType());
 
 		try {
-			int diff = (sixties).compareTo(seventies);
+			int diff = (daysSince1960).compareTo(daysSince1970);
 
 			fail();
 		} catch(ClassCastException cce){
 			// Ignored
 		}
 
-		assertEquals(sixties, seventies.forEpoch(Epochs.YEAR_1960));
-		assertEquals(sixties, eighties.forEpoch(Epochs.YEAR_1960));
-		assertEquals(seventies, sixties.forEpoch(Epochs.YEAR_1970));
-		assertEquals(seventies, eighties.forEpoch(Epochs.YEAR_1970));
-		assertEquals(eighties, sixties.forEpoch(Epochs.YEAR_1980));
-		assertEquals(eighties, seventies.forEpoch(Epochs.YEAR_1980));
+		assertEquals(daysSince1960, daysSince1970.forEpoch(Epochs.YEAR_1960));
+		assertEquals(daysSince1960, daysSince1980.forEpoch(Epochs.YEAR_1960));
+		assertEquals(daysSince1970, daysSince1960.forEpoch(Epochs.YEAR_1970));
+		assertEquals(daysSince1970, daysSince1980.forEpoch(Epochs.YEAR_1970));
+		assertEquals(daysSince1980, daysSince1960.forEpoch(Epochs.YEAR_1980));
+		assertEquals(daysSince1980, daysSince1970.forEpoch(Epochs.YEAR_1980));
 
 		assertEquals(0L, countDaysSince1960("1960-01-01"));
 		assertEquals(1L, countDaysSince1960("1960-01-02"));
@@ -68,11 +68,11 @@ public class DateTimeUtilTest {
 
 	@Test
 	public void parseSecondsSinceMidnight(){
-		SecondsSinceMidnight noon = DateTimeUtil.parseSecondsSinceMidnight("12:00:00");
+		SecondsSinceMidnight secondsSinceNoon = DateTimeUtil.parseSecondsSinceMidnight("12:00:00");
 
-		assertEquals(12L * 60 * 60, noon.longValue());
+		assertEquals(12L * 60 * 60, secondsSinceNoon.longValue());
 
-		assertEquals("43200", String.valueOf(noon.toSimpleValue()));
+		assertEquals("43200", String.valueOf(secondsSinceNoon.toSimpleValue()));
 
 		assertEquals(0L, countSecondsSinceMidnight("0:00:00"));
 		assertEquals(100L, countSecondsSinceMidnight("0:01:40"));
@@ -93,28 +93,28 @@ public class DateTimeUtilTest {
 
 	@Test
 	public void parseSecondsSinceDate(){
-		SecondsSinceDate sixties = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, DATE_TIME);
-		SecondsSinceDate seventies = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1970, DATE_TIME);
-		SecondsSinceDate eighties = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1980, DATE_TIME);
+		SecondsSinceDate secondsSince1960 = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, DATE_TIME);
+		SecondsSinceDate secondsSince1970 = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1970, DATE_TIME);
+		SecondsSinceDate secondsSince1980 = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1980, DATE_TIME);
 
-		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1960, sixties.getDataType());
-		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1970, seventies.getDataType());
-		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1980, eighties.getDataType());
+		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1960, secondsSince1960.getDataType());
+		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1970, secondsSince1970.getDataType());
+		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1980, secondsSince1980.getDataType());
 
 		try {
-			int diff = (sixties).compareTo(seventies);
+			int diff = (secondsSince1960).compareTo(secondsSince1970);
 
 			fail();
 		} catch(ClassCastException cce){
 			// Ignored
 		}
 
-		assertEquals(sixties, seventies.forEpoch(Epochs.YEAR_1960));
-		assertEquals(sixties, eighties.forEpoch(Epochs.YEAR_1960));
-		assertEquals(seventies, sixties.forEpoch(Epochs.YEAR_1970));
-		assertEquals(seventies, eighties.forEpoch(Epochs.YEAR_1970));
-		assertEquals(eighties, sixties.forEpoch(Epochs.YEAR_1980));
-		assertEquals(eighties, seventies.forEpoch(Epochs.YEAR_1980));
+		assertEquals(secondsSince1960, secondsSince1970.forEpoch(Epochs.YEAR_1960));
+		assertEquals(secondsSince1960, secondsSince1980.forEpoch(Epochs.YEAR_1960));
+		assertEquals(secondsSince1970, secondsSince1960.forEpoch(Epochs.YEAR_1970));
+		assertEquals(secondsSince1970, secondsSince1980.forEpoch(Epochs.YEAR_1970));
+		assertEquals(secondsSince1980, secondsSince1960.forEpoch(Epochs.YEAR_1980));
+		assertEquals(secondsSince1980, secondsSince1970.forEpoch(Epochs.YEAR_1980));
 
 		assertEquals(0L, countSecondsSince1960("1960-01-01T00:00:00"));
 		assertEquals(1L, countSecondsSince1960("1960-01-01T00:00:01"));
@@ -127,23 +127,23 @@ public class DateTimeUtilTest {
 
 	static
 	private long countDaysSince1960(String string){
-		DaysSinceDate period = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, string);
+		DaysSinceDate daysSinceDate = DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, string);
 
-		return period.getDays();
+		return daysSinceDate.getDays();
 	}
 
 	static
 	private long countSecondsSinceMidnight(String string){
-		SecondsSinceMidnight period = DateTimeUtil.parseSecondsSinceMidnight(string);
+		SecondsSinceMidnight secondsSinceMidnight = DateTimeUtil.parseSecondsSinceMidnight(string);
 
-		return period.getSeconds();
+		return secondsSinceMidnight.getSeconds();
 	}
 
 	static
 	private long countSecondsSince1960(String string){
-		SecondsSinceDate period = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, string);
+		SecondsSinceDate secondsSinceDate = DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, string);
 
-		return period.getSeconds();
+		return secondsSinceDate.getSeconds();
 	}
 
 	// The date and time (UTC) of the first moon landing
