@@ -248,7 +248,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>animal-sniffer-maven-plugin</artifactId>
-				<version>1.19</version>
+				<version>1.20</version>
 				<executions>
 					<execution>
 						<id>android-21</id>
@@ -261,7 +261,6 @@
 							<ignores>
 								<ignore>java.lang.instrument.*</ignore>
 								<ignore>java.time.*</ignore>
-								<ignore>java.util.Date</ignore>
 							</ignores>
 							<signature>
 								<groupId>net.sf.androidscents.signature</groupId>
