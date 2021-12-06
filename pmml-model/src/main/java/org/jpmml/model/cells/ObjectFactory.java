@@ -8,11 +8,11 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
-	public InputCell createInput(){
+	public InputCell createInputCell(){
 		return new InputCell();
 	}
 
-	public OutputCell createOutput(){
+	public OutputCell createOutputCell(){
 		return new OutputCell();
 	}
 }
