@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model.types;
+package org.jpmml.model.temporals;
 
 import java.util.Objects;
 

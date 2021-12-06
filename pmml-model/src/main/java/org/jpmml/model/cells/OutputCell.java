@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Villu Ruusmann
  */
-package org.jpmml.model.inlinetable;
+package org.jpmml.model.cells;
 
 import javax.xml.namespace.QName;
 
@@ -13,23 +13,23 @@ import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
 @XmlRootElement (
-	name = "input",
+	name = "output",
 	namespace = NamespaceURIs.JPMML_INLINETABLE
 )
-public class InputCell extends Cell {
+public class OutputCell extends Cell {
 
-	public InputCell(){
+	public OutputCell(){
 	}
 
 	@ValueConstructor
-	public InputCell(@Property("value") Object value){
+	public OutputCell(@Property("value") Object value){
 		super(value);
 	}
 
 	@Override
 	public QName getName(){
-		return InputCell.QNAME;
+		return OutputCell.QNAME;
 	}
 
-	public static final QName QNAME = new QName(NamespaceURIs.JPMML_INLINETABLE, "input", NamespacePrefixes.JPMML_INLINETABLE);
+	public static final QName QNAME = new QName(NamespaceURIs.JPMML_INLINETABLE, "output", NamespacePrefixes.JPMML_INLINETABLE);
 }

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Villu Ruusmann
  */
-package org.jpmml.model.inlinetable;
+package org.jpmml.model.cells;
 
 import jakarta.xml.bind.annotation.XmlRegistry;
 

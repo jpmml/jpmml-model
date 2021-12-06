@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Villu Ruusmann
  */
-package org.jpmml.model.types;
+package org.jpmml.model.temporals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;

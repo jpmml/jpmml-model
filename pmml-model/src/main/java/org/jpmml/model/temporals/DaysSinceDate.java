@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 Villu Ruusmann
  */
-package org.jpmml.model.types;
+package org.jpmml.model.temporals;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

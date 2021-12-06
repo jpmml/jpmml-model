@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2018 Villu Ruusmann
  */
-package org.jpmml.model.types;
+package org.jpmml.model.temporals;
 
 import org.dmg.pmml.ComplexValue;
 import org.dmg.pmml.DataType;

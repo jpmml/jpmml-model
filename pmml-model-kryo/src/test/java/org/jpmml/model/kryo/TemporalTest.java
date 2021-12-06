@@ -3,14 +3,14 @@
  */
 package org.jpmml.model.kryo;
 
-import org.jpmml.model.types.DateTimeUtil;
-import org.jpmml.model.types.Epochs;
+import org.jpmml.model.temporals.DateTimeUtil;
+import org.jpmml.model.temporals.Epochs;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 
-public class TypeTest extends KryoUtilTest {
+public class TemporalTest extends KryoUtilTest {
 
 	@Test
 	public void kryoClone() throws Exception {

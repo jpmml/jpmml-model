@@ -112,6 +112,7 @@ public class JAXBUtil {
 	static
 	public Class<?>[] getObjectFactoryClasses(){
 		return new Class<?>[]{
+			// org.dmg.pmml.*
 			org.dmg.pmml.ObjectFactory.class,
 			org.dmg.pmml.anomaly_detection.ObjectFactory.class,
 			org.dmg.pmml.association.ObjectFactory.class,
@@ -132,7 +133,8 @@ public class JAXBUtil {
 			org.dmg.pmml.text.ObjectFactory.class,
 			org.dmg.pmml.time_series.ObjectFactory.class,
 			org.dmg.pmml.tree.ObjectFactory.class,
-			org.jpmml.model.inlinetable.ObjectFactory.class
+			// org.jpmml.model.*
+			org.jpmml.model.cells.ObjectFactory.class
 		};
 	}
 
