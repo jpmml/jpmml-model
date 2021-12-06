@@ -4,12 +4,11 @@
 package org.dmg.pmml.regression;
 
 import jakarta.xml.bind.annotation.XmlTransient;
-import org.dmg.pmml.HasName;
 import org.dmg.pmml.PMMLObject;
 
 @XmlTransient
 abstract
-public class Term extends PMMLObject implements HasName<Term> {
+public class Term extends PMMLObject {
 
 	abstract
 	public Number getCoefficient();

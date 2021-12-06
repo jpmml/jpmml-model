@@ -309,12 +309,6 @@ public class PMMLPlugin extends ComplexPlugin {
 				createSetterProxy(beanClazz, stringClass, "field", "setField", "setTextField");
 			} // End if
 
-			// Implementations of org.dmg.pmml.HasName
-			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor") || checkType(beanClazz, "org.dmg.pmml.regression.NumericPredictor")){
-				createGetterProxy(beanClazz, stringClass, "getName", "getField");
-				createSetterProxy(beanClazz, stringClass, "name", "setName", "setField");
-			} // End if
-
 			// Implementations of org.dmg.pmml.Indexable
 			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.general_regression.Parameter")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
@@ -522,7 +516,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasLocator"}, {"getLocator", "setLocator"}},
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
 				{{"HasMixedContent"}, {"hasContent", "getContent", "addContent"}},
-				{{"HasName", "Field", "Term"}, {"getName", "setName"}},
+				{{"HasName", "Field"}, {"getName", "setName"}},
 				{{"HasNode"}, {"getMissingValueStrategy", "setMissingValueStrategy", "getMissingValuePenalty", "setMissingValuePenalty", "getNoTrueChildStrategy", "setNoTrueChildStrategy", "getSplitCharacteristic", "setSplitCharacteristic", "getNode", "setNode"}},
 				{{"HasNormalizationMethod"}, {"getNormalizationMethod", "setNormalizationMethod"}},
 				{{"HasOpType", "Field"}, {"getOpType", "setOpType"}},

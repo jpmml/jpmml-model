@@ -2361,6 +2361,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='PredictorTerm']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.regression.Term</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasName&lt;PredictorTerm&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
 			/>
