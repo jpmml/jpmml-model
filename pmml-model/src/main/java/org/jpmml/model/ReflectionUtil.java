@@ -48,7 +48,7 @@ public class ReflectionUtil {
 	public boolean equals(Element left, Element right){
 
 		if(!Objects.equals(left.getClass(), right.getClass())){
-			throw new IllegalArgumentException();
+			return false;
 		}
 
 		// XXX
@@ -59,7 +59,7 @@ public class ReflectionUtil {
 	public boolean equals(PMMLObject left, PMMLObject right){
 
 		if(!Objects.equals(left.getClass(), right.getClass())){
-			throw new IllegalArgumentException();
+			return false;
 		}
 
 		Map<Field, Method> getterMethods = getGetterMethods(left.getClass());
