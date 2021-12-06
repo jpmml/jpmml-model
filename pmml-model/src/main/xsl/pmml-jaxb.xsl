@@ -84,6 +84,13 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Replace FIELD-NAME with xs:string
+	-->
+	<xsl:template match="xs:element[@name='PredictorTerm']/xs:complexType/xs:attribute[@name='name']/@type">
+		<xsl:attribute name="type">xs:string</xsl:attribute>
+	</xsl:template>
+
+	<!--
 	Replace xs:string with xs:anySimpleType where appropriate
 	-->
 	<xsl:template match="xs:element[@name='Constant' or @name='MatCell']/xs:complexType/xs:simpleContent/xs:extension/@base">
