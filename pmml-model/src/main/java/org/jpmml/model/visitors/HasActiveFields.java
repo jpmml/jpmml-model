@@ -5,9 +5,7 @@ package org.jpmml.model.visitors;
 
 import java.util.Set;
 
-import org.dmg.pmml.FieldName;
-
 public interface HasActiveFields {
 
-	Set<FieldName> getActiveFields();
+	Set<String> getActiveFields();
 }

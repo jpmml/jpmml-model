@@ -4,23 +4,25 @@
 package org.dmg.pmml.adapters;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
-import org.dmg.pmml.FieldName;
 
-public class FieldNameAdapter extends XmlAdapter<String, FieldName> {
+public class FieldNameAdapter extends XmlAdapter<String, String> {
 
 	@Override
-	public FieldName unmarshal(String value){
-		return FieldName.create(value);
+	public String unmarshal(String value){
+
+		if(value == null){
+			throw new NullPointerException();
+		} else
+
+		if(("").equals(value)){
+			throw new IllegalArgumentException("Field name cannot be empty");
+		}
+
+		return value.intern();
 	}
 
 	@Override
-	public String marshal(FieldName value){
-
-		// FieldName corresponds to a simple type in PMML XML Schema. Hence, it is possible to encounter a null instance.
-		if(value == null){
-			return null;
-		}
-
-		return value.getValue();
+	public String marshal(String value){
+		return value;
 	}
 }

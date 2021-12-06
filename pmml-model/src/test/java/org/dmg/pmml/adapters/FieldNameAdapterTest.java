@@ -3,7 +3,6 @@
  */
 package org.dmg.pmml.adapters;
 
-import org.dmg.pmml.FieldName;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -40,6 +39,6 @@ public class FieldNameAdapterTest {
 		FieldNameAdapter adapter = new FieldNameAdapter();
 
 		assertEquals(null, adapter.marshal(null));
-		assertEquals("x", adapter.marshal(FieldName.create("x")));
+		assertEquals("x", adapter.marshal("x"));
 	}
 }

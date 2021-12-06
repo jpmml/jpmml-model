@@ -57,21 +57,21 @@ public class VisitorPlugin extends Plugin {
 
 		CodeModelClassFactory clazzFactory = outline.getClassFactory();
 
-		JClass objectClazz = codeModel.ref(Object.class);
+		JClass objectClass = codeModel.ref(Object.class);
 
-		JClass pmmlObjectClazz = codeModel.ref("org.dmg.pmml.PMMLObject");
+		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 		JClass visitableInterface = codeModel.ref("org.dmg.pmml.Visitable");
 		JClass visitContextInterface = codeModel.ref("org.dmg.pmml.VisitContext");
 		JClass visitorActionEnum = codeModel.ref("org.dmg.pmml.VisitorAction");
 
-		JClass dequeClazz = codeModel.ref(Deque.class);
-		JClass dequeImplementationClazz = codeModel.ref(ArrayDeque.class);
+		JClass dequeClass = codeModel.ref(Deque.class);
+		JClass dequeImplementationClass = codeModel.ref(ArrayDeque.class);
 
 		JFieldRef continueAction = visitorActionEnum.staticRef("CONTINUE");
 		JFieldRef skipAction = visitorActionEnum.staticRef("SKIP");
 		JFieldRef terminateAction = visitorActionEnum.staticRef("TERMINATE");
 
-		JPackage pmmlPackage = pmmlObjectClazz._package();
+		JPackage pmmlPackage = pmmlObjectClass._package();
 
 		JDefinedClass visitorInterface = clazzFactory.createClass(pmmlPackage, JMod.PUBLIC, "Visitor", null, ClassType.INTERFACE);
 		visitorInterface._implements(visitContextInterface);
@@ -85,9 +85,9 @@ public class VisitorPlugin extends Plugin {
 		JDefinedClass abstractVisitorClazz = clazzFactory.createClass(visitorPackage, JMod.ABSTRACT | JMod.PUBLIC, "AbstractVisitor", null, ClassType.CLASS);
 		abstractVisitorClazz._implements(visitorInterface);
 
-		JFieldVar abstractVisitorParents = abstractVisitorClazz.field(JMod.PRIVATE, dequeClazz.narrow(pmmlObjectClazz), "parents", JExpr._new(dequeImplementationClazz.narrow(pmmlObjectClazz)));
+		JFieldVar abstractVisitorParents = abstractVisitorClazz.field(JMod.PRIVATE, dequeClass.narrow(pmmlObjectClass), "parents", JExpr._new(dequeImplementationClass.narrow(pmmlObjectClass)));
 
-		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClazz.narrow(pmmlObjectClazz), "getParents");
+		JMethod abstractVisitorGetParents = abstractVisitorClazz.method(JMod.PUBLIC, dequeClass.narrow(pmmlObjectClass), "getParents");
 		abstractVisitorGetParents.annotate(Override.class);
 
 		abstractVisitorGetParents.body()._return(JExpr.refthis(abstractVisitorParents.name()));
@@ -100,7 +100,7 @@ public class VisitorPlugin extends Plugin {
 		abstractVisitorApplyTo.body().add(JExpr.invoke(visitable, "accept").arg(JExpr._this()));
 
 		JMethod abstractVisitorVisit = abstractVisitorClazz.method(JMod.PUBLIC, visitorActionEnum, "visit");
-		abstractVisitorVisit.param(pmmlObjectClazz, "object");
+		abstractVisitorVisit.param(pmmlObjectClass, "object");
 
 		abstractVisitorVisit.body()._return(continueAction);
 
@@ -174,7 +174,7 @@ public class VisitorPlugin extends Plugin {
 				beanClazz = beanClazz.narrow(codeModel.wildcard());
 			}
 
-			JClass beanSuperClazz = pmmlObjectClazz;
+			JClass beanSuperClazz = pmmlObjectClass;
 			if(abstractClass.length > 1){
 				beanSuperClazz = codeModel.ref(getTypeName("org.dmg.pmml." + abstractClass[1]));
 			}
@@ -227,10 +227,10 @@ public class VisitorPlugin extends Plugin {
 				if(propertyInfo.isCollection()){
 					JType fieldElementType = CodeModelUtil.getElementType(fieldType);
 
-					if(traversableTypes.contains(getTypeName(fieldElementType)) || objectClazz.equals(fieldElementType)){
+					if(traversableTypes.contains(getTypeName(fieldElementType)) || objectClass.equals(fieldElementType)){
 						JMethod hasElementsMethod = beanClazz.getMethod("has" + propertyInfo.getName(true), new JType[0]);
 
-						ifBody._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClazz.staticInvoke(traversableTypes.contains(getTypeName(fieldElementType)) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
+						ifBody._if((status.eq(continueAction)).cand(JExpr.invoke(hasElementsMethod)))._then().assign(status, pmmlObjectClass.staticInvoke(traversableTypes.contains(getTypeName(fieldElementType)) ? "traverse" : "traverseMixed").arg(visitorParameter).arg(JExpr.invoke(getterMethod)));
 
 						traverseVarargs = null;
 					}
@@ -241,7 +241,7 @@ public class VisitorPlugin extends Plugin {
 					if(traversableTypes.contains(getTypeName(fieldType))){
 
 						if(traverseVarargs == null){
-							traverseVarargs = pmmlObjectClazz.staticInvoke("traverse").arg(visitorParameter);
+							traverseVarargs = pmmlObjectClass.staticInvoke("traverse").arg(visitorParameter);
 
 							ifBody._if(status.eq(continueAction))._then().assign(status, traverseVarargs);
 						}

@@ -4,13 +4,13 @@
 package org.jpmml.model.visitors;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.DerivedField;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.ForwardingModel;
 import org.dmg.pmml.LocalTransformations;
@@ -34,25 +34,25 @@ public class HasActiveFieldsTest {
 	@Test
 	public void find(){
 		MiningSchema miningSchema = new MiningSchema()
-			.addMiningFields(new MiningField(FieldName.create("x")));
+			.addMiningFields(new MiningField("x"));
 
-		DerivedField derivedField = new DerivedField(FieldName.create("float(x)"), OpType.CONTINUOUS, DataType.FLOAT, new FieldRef(FieldName.create("x")));
+		DerivedField derivedField = new DerivedField("float(x)", OpType.CONTINUOUS, DataType.FLOAT, new FieldRef("x"));
 
 		LocalTransformations localTranformations = new LocalTransformations()
 			.addDerivedFields(derivedField);
 
-		Node root = new LeafNode(1d, new SimplePredicate(FieldName.create("float(x)"), SimplePredicate.Operator.IS_NOT_MISSING, null));
+		Node root = new LeafNode(1d, new SimplePredicate(derivedField.getName(), SimplePredicate.Operator.IS_NOT_MISSING, null));
 
 		Model model = new TreeModel(MiningFunction.REGRESSION, miningSchema, root)
 			.setLocalTransformations(localTranformations);
 
-		checkFields(new HashSet<>(Arrays.asList(FieldName.create("float(x)"), FieldName.create("x"))), model);
+		checkFields(Arrays.asList("float(x)", "x"), model);
 
 		model = new CustomModel(model){
 
 			@Override
-			public Set<FieldName> getActiveFields(){
-				return Collections.singleton(FieldName.create("x"));
+			public Set<String> getActiveFields(){
+				return Collections.singleton("x");
 			}
 
 			@Override
@@ -68,12 +68,12 @@ public class HasActiveFieldsTest {
 			}
 		};
 
-		checkFields(Collections.singleton(FieldName.create("x")), model);
+		checkFields(Arrays.asList("x"), model);
 	}
 
 	static
-	private void checkFields(Set<FieldName> names, Model model){
-		assertEquals(names, ActiveFieldFinder.getFieldNames(model));
+	private void checkFields(Collection<String> names, Model model){
+		assertEquals(new HashSet<>(names), ActiveFieldFinder.getFieldNames(model));
 	}
 
 	static

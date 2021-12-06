@@ -3,15 +3,11 @@
  */
 package org.jpmml.model.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.dmg.pmml.CompoundPredicate;
 import org.dmg.pmml.CompoundPredicate.BooleanOperator;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.MiningField;
 import org.dmg.pmml.MiningFunction;
@@ -38,37 +34,31 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 	@Override
 	public PMML produce(){
-		FieldName temperature = FieldName.create("temperature");
-		FieldName humidity = FieldName.create("humidity");
-		FieldName windy = FieldName.create("windy");
-		FieldName outlook = FieldName.create("outlook");
-		FieldName whatIdo = FieldName.create("whatIDo");
-
 		Header header = new Header()
 			.setCopyright("www.dmg.org")
 			.setDescription("A very small binary tree model to show structure.");
 
 		DataDictionary dataDictionary = new DataDictionary()
 			.addDataFields(
-				new DataField(temperature, OpType.CONTINUOUS, DataType.DOUBLE),
-				new DataField(humidity, OpType.CONTINUOUS, DataType.DOUBLE),
-				new DataField(windy, OpType.CATEGORICAL, DataType.STRING)
-					.addValues(createValues("true", "false")),
-				new DataField(outlook, OpType.CATEGORICAL, DataType.STRING)
-					.addValues(createValues("sunny", "overcast", "rain")),
-				new DataField(whatIdo, OpType.CATEGORICAL, DataType.STRING)
-					.addValues(createValues("will play", "may play", "no play"))
+				new DataField("temperature", OpType.CONTINUOUS, DataType.DOUBLE),
+				new DataField("humidity", OpType.CONTINUOUS, DataType.DOUBLE),
+				new DataField("windy", OpType.CATEGORICAL, DataType.STRING)
+					.addValues(Value.Property.VALID, "true", "false"),
+				new DataField("outlook", OpType.CATEGORICAL, DataType.STRING)
+					.addValues(Value.Property.VALID, "sunny", "overcast", "rain"),
+				new DataField("whatIDo", OpType.CATEGORICAL, DataType.STRING)
+					.addValues(Value.Property.VALID, "will play", "may play", "no play")
 			);
 
 		dataDictionary.setNumberOfFields((dataDictionary.getDataFields()).size());
 
 		MiningSchema miningSchema = new MiningSchema()
 			.addMiningFields(
-				new MiningField(temperature),
-				new MiningField(humidity),
-				new MiningField(windy),
-				new MiningField(outlook),
-				new MiningField(whatIdo)
+				new MiningField("temperature"),
+				new MiningField("humidity"),
+				new MiningField("windy"),
+				new MiningField("outlook"),
+				new MiningField("whatIDo")
 					.setUsageType(MiningField.UsageType.TARGET)
 			);
 
@@ -76,21 +66,21 @@ public class GolfingTreeModelExample extends ProductionExample {
 
 		// Upper half of the tree
 		root.addNodes(
-			new BranchNode("will play", new SimplePredicate(outlook, Operator.EQUAL, "sunny"))
+			new BranchNode("will play", new SimplePredicate("outlook", Operator.EQUAL, "sunny"))
 				.addNodes(
 					new BranchNode("will play",
 						createCompoundPredicate(BooleanOperator.AND,
-							new SimplePredicate(temperature, Operator.LESS_THAN, "90"),
-							new SimplePredicate(temperature, Operator.GREATER_THAN, "50"))
+							new SimplePredicate("temperature", Operator.LESS_THAN, "90"),
+							new SimplePredicate("temperature", Operator.GREATER_THAN, "50"))
 						)
 						.addNodes(
-							new LeafNode("will play", new SimplePredicate(humidity, Operator.LESS_THAN, "80")),
-							new LeafNode("no play", new SimplePredicate(humidity, Operator.GREATER_OR_EQUAL, "80"))
+							new LeafNode("will play", new SimplePredicate("humidity", Operator.LESS_THAN, "80")),
+							new LeafNode("no play", new SimplePredicate("humidity", Operator.GREATER_OR_EQUAL, "80"))
 						),
 					new LeafNode("no play",
 						createCompoundPredicate(BooleanOperator.OR,
-							new SimplePredicate(temperature, Operator.GREATER_OR_EQUAL, "90"),
-							new SimplePredicate(temperature, Operator.LESS_OR_EQUAL, "50"))
+							new SimplePredicate("temperature", Operator.GREATER_OR_EQUAL, "90"),
+							new SimplePredicate("temperature", Operator.LESS_OR_EQUAL, "50"))
 						)
 				)
 		);
@@ -99,22 +89,22 @@ public class GolfingTreeModelExample extends ProductionExample {
 		root.addNodes(
 			new BranchNode("may play",
 				createCompoundPredicate(BooleanOperator.OR,
-					new SimplePredicate(outlook, Operator.EQUAL, "overcast"),
-					new SimplePredicate(outlook, Operator.EQUAL, "rain"))
+					new SimplePredicate("outlook", Operator.EQUAL, "overcast"),
+					new SimplePredicate("outlook", Operator.EQUAL, "rain"))
 				)
 				.addNodes(
 					new LeafNode("may play",
 						createCompoundPredicate(BooleanOperator.AND,
-							new SimplePredicate(temperature, Operator.GREATER_THAN, "60"),
-							new SimplePredicate(temperature, Operator.LESS_THAN, "100"),
-							new SimplePredicate(outlook, Operator.EQUAL, "overcast"),
-							new SimplePredicate(humidity, Operator.LESS_THAN, "70"),
-							new SimplePredicate(windy, Operator.EQUAL, "false"))
+							new SimplePredicate("temperature", Operator.GREATER_THAN, "60"),
+							new SimplePredicate("temperature", Operator.LESS_THAN, "100"),
+							new SimplePredicate("outlook", Operator.EQUAL, "overcast"),
+							new SimplePredicate("humidity", Operator.LESS_THAN, "70"),
+							new SimplePredicate("windy", Operator.EQUAL, "false"))
 						),
 					new LeafNode("no play",
 						createCompoundPredicate(BooleanOperator.AND,
-							new SimplePredicate(outlook, Operator.EQUAL, "rain"),
-							new SimplePredicate(humidity, Operator.LESS_THAN, "70"))
+							new SimplePredicate("outlook", Operator.EQUAL, "rain"),
+							new SimplePredicate("humidity", Operator.LESS_THAN, "70"))
 						)
 				)
 		);
@@ -126,17 +116,6 @@ public class GolfingTreeModelExample extends ProductionExample {
 			.addModels(treeModel);
 
 		return pmml;
-	}
-
-	static
-	private Value[] createValues(String... values){
-		List<Value> result = new ArrayList<>();
-
-		for(String value : values){
-			result.add(new Value(value));
-		}
-
-		return result.toArray(new Value[result.size()]);
 	}
 
 	static

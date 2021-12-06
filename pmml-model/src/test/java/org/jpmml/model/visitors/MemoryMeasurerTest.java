@@ -5,11 +5,9 @@ package org.jpmml.model.visitors;
 
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Interval;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.Visitable;
-import org.jpmml.model.visitors.MemoryMeasurer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,10 +20,10 @@ public class MemoryMeasurerTest {
 			.setLeftMargin(0d)
 			.setRightMargin(1d);
 
-		DataField left = new DataField(FieldName.create("x"), null, null)
+		DataField left = new DataField("x", null, null)
 			.addIntervals(interval);
 
-		DataField right = new DataField(FieldName.create("x"), OpType.CONTINUOUS, DataType.DOUBLE)
+		DataField right = new DataField("x", OpType.CONTINUOUS, DataType.DOUBLE)
 			.addIntervals(interval);
 
 		assertEquals(getSize(left), getSize(right));

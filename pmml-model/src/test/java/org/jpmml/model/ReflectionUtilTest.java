@@ -12,7 +12,6 @@ import java.util.Map;
 import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
@@ -34,11 +33,11 @@ public class ReflectionUtilTest {
 	@Test
 	public void equals(){
 		DataField left = new DataField()
-			.setName(FieldName.create("x"))
+			.setName("x")
 			.setCyclic(null);
 
 		DataField right = new DataField()
-			.setName(FieldName.create("x"))
+			.setName("x")
 			.setCyclic(DataField.Cyclic.ZERO);
 
 		// Initialize a live list instance

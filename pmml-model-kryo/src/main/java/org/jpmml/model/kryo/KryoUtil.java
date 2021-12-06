@@ -8,7 +8,6 @@ import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
 import com.esotericsoftware.kryo.serializers.JavaSerializer;
 import jakarta.xml.bind.JAXBElement;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
 import org.jpmml.model.collections.DoubletonList;
@@ -30,8 +29,6 @@ public class KryoUtil {
 	static
 	public void register(Kryo kryo){
 		// org.dmg.pmml.*
-		kryo.register(FieldName.class, new FieldNameSerializer());
-
 		kryo.addDefaultSerializer(PMMLObject.class, PMMLObjectSerializer.class);
 
 		// Custom XML elements (eg. InlineTable rows)

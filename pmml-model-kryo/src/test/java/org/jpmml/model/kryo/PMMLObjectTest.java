@@ -5,8 +5,11 @@ package org.jpmml.model.kryo;
 
 import java.util.List;
 
+import org.dmg.pmml.DataField;
+import org.dmg.pmml.DataType;
 import org.dmg.pmml.False;
 import org.dmg.pmml.InlineTableTest;
+import org.dmg.pmml.OpType;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.True;
 import org.dmg.pmml.tree.BranchNode;
@@ -17,11 +20,25 @@ import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 public class PMMLObjectTest extends KryoUtilTest {
+
+	@Test
+	public void nameTest(){
+		DataField dataField = new DataField("x", OpType.CONTINUOUS, DataType.DOUBLE);
+
+		DataField clonedDataField = clone(dataField);
+
+		assertNotSame(dataField, clonedDataField);
+
+		// XXX
+		assertEquals(dataField.getName(), clonedDataField.getName());
+		assertNotSame(dataField.getName(), clonedDataField.getName());
+	}
 
 	@Test
 	public void referenceTest(){

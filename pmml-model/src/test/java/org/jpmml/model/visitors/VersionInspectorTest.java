@@ -10,7 +10,6 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.DefineFunction;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.Output;
@@ -128,10 +127,8 @@ public class VersionInspectorTest {
 	public void inspectValueAnnotations(){
 		PMML pmml = createPMML();
 
-		FieldName name = FieldName.create("y");
-
 		Target target = new Target()
-			.setField(name)
+			.setField("y")
 			.addTargetValues(createTargetValue("no event"), createTargetValue("event"));
 
 		Targets targets = new Targets()
@@ -166,7 +163,7 @@ public class VersionInspectorTest {
 			.setFunction(PMMLFunctions.LOWERCASE);
 
 		DefineFunction defineFunction = new DefineFunction("convert_case", OpType.CATEGORICAL, DataType.STRING, null, apply)
-			.addParameterFields(new ParameterField(FieldName.create("string")));
+			.addParameterFields(new ParameterField("string"));
 
 		TransformationDictionary transformationDictionary = new TransformationDictionary()
 			.addDefineFunctions(defineFunction);
@@ -189,7 +186,7 @@ public class VersionInspectorTest {
 		Header header = new Header()
 			.setCopyright("ACME Corporation");
 
-		DataField dataField = new DataField(FieldName.create("x"), OpType.CATEGORICAL, DataType.DOUBLE);
+		DataField dataField = new DataField("x", OpType.CATEGORICAL, DataType.DOUBLE);
 
 		DataDictionary dataDictionary = new DataDictionary()
 			.addDataFields(dataField);

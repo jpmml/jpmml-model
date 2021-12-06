@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.Expression;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLFunctions;
@@ -19,6 +18,7 @@ import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
@@ -26,8 +26,8 @@ public class JacksonUtilTest {
 
 	@Test
 	public void jsonCloneFragment() throws Exception {
-		FieldRef left = new FieldRef(FieldName.create("x"));
-		FieldRef right = new FieldRef(FieldName.create("x"));
+		FieldRef left = new FieldRef("x");
+		FieldRef right = new FieldRef("x");
 
 		assertSame(left.getField(), right.getField());
 
@@ -43,7 +43,9 @@ public class JacksonUtilTest {
 		FieldRef clonedLeft = (FieldRef)clonedExpressions.get(0);
 		FieldRef clonedRight = (FieldRef)clonedExpressions.get(1);
 
-		assertSame(clonedLeft.getField(), clonedRight.getField());
+		// XXX
+		assertEquals(clonedLeft.getField(), clonedRight.getField());
+		assertNotSame(clonedLeft.getField(), clonedRight.getField());
 	}
 
 	@Test

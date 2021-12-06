@@ -5,9 +5,9 @@ package org.jpmml.model.visitors;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
 import org.dmg.pmml.Field;
-import org.dmg.pmml.FieldName;
 
 /**
  * <p>
@@ -16,23 +16,23 @@ import org.dmg.pmml.FieldName;
  */
 public class FieldRenamer extends FieldNameFilterer {
 
-	private Map<FieldName, FieldName> mappings = null;
+	private Map<String, String> mappings = null;
 
 
-	public FieldRenamer(FieldName from, FieldName to){
+	public FieldRenamer(String from, String to){
 		this(Collections.singletonMap(from, to));
 	}
 
-	public FieldRenamer(Map<FieldName, FieldName> mappings){
+	public FieldRenamer(Map<String, String> mappings){
 		setMappings(mappings);
 	}
 
 	@Override
-	public FieldName filter(FieldName name){
-		Map<FieldName, FieldName> mappings = getMappings();
+	public String filter(String name){
+		Map<String, String> mappings = getMappings();
 
 		if(name != null){
-			FieldName updatedName = mappings.get(name);
+			String updatedName = mappings.get(name);
 
 			if(updatedName != null){
 				return updatedName;
@@ -42,11 +42,11 @@ public class FieldRenamer extends FieldNameFilterer {
 		return name;
 	}
 
-	public Map<FieldName, FieldName> getMappings(){
+	public Map<String, String> getMappings(){
 		return this.mappings;
 	}
 
-	private void setMappings(Map<FieldName, FieldName> mappings){
-		this.mappings = mappings;
+	private void setMappings(Map<String, String> mappings){
+		this.mappings = Objects.requireNonNull(mappings);
 	}
 }

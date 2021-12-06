@@ -7,7 +7,6 @@ import java.security.MessageDigest;
 import java.util.Map;
 
 import com.beust.jcommander.Parameter;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.visitors.FieldRenamer;
 
@@ -32,7 +31,7 @@ public class ObfuscationExample extends TransformationExample {
 		FieldHasher fieldHasher = new FieldHasher(messageDigest);
 		fieldHasher.applyTo(pmml);
 
-		Map<FieldName, FieldName> mappings = fieldHasher.getMappings();
+		Map<String, String> mappings = fieldHasher.getMappings();
 
 		FieldRenamer fieldRenamer = new FieldRenamer(mappings);
 		fieldRenamer.applyTo(pmml);

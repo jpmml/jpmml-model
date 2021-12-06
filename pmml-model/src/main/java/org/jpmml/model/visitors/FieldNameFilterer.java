@@ -6,32 +6,34 @@ package org.jpmml.model.visitors;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.dmg.pmml.FieldName;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ResultFeature;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.adapters.FieldNameAdapter;
 import org.jpmml.model.ReflectionUtil;
 
 /**
  * <p>
- * This class provides a skeletal implementation of {@link FieldName} filterers.
+ * This class provides a skeletal implementation of {@link Field#getName() field name} filterers.
  * </p>
  */
 abstract
 public class FieldNameFilterer extends AbstractVisitor {
 
 	abstract
-	public FieldName filter(FieldName name);
+	public String filter(String name);
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
 		List<Field> fields = ReflectionUtil.getFields(object.getClass());
 
 		for(Field field : fields){
+			XmlJavaTypeAdapter xmlJavaTypeAdapter = field.getAnnotation(XmlJavaTypeAdapter.class);
 
-			if((FieldName.class).equals(field.getType())){
-				FieldName name = (FieldName)ReflectionUtil.getFieldValue(field, object);
+			if(xmlJavaTypeAdapter != null && (FieldNameAdapter.class).equals(xmlJavaTypeAdapter.value())){
+				String name = (String)ReflectionUtil.getFieldValue(field, object);
 
 				name = filter(name);
 
@@ -68,13 +70,5 @@ public class FieldNameFilterer extends AbstractVisitor {
 		}
 
 		return super.visit(outputField);
-	}
-
-	private String filter(String value){
-		FieldName name = FieldName.create(value);
-
-		name = filter(name);
-
-		return name.getValue();
 	}
 }

@@ -295,8 +295,6 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass stringClass = codeModel.ref("java.lang.String");
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
-		JClass fieldNameClass = codeModel.ref("org.dmg.pmml.FieldName");
-
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 
 		List<? extends ClassOutline> classOutlines = new ArrayList<>(outline.getClasses());
@@ -307,14 +305,14 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			// Implementations of org.dmg.pmml.HasFieldReference
 			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
-				createGetterProxy(beanClazz, fieldNameClass, "getField", "getTextField");
-				createSetterProxy(beanClazz, fieldNameClass, "field", "setField", "setTextField");
+				createGetterProxy(beanClazz, stringClass, "getField", "getTextField");
+				createSetterProxy(beanClazz, stringClass, "field", "setField", "setTextField");
 			} // End if
 
 			// Implementations of org.dmg.pmml.HasName
 			if(checkType(beanClazz, "org.dmg.pmml.regression.CategoricalPredictor") || checkType(beanClazz, "org.dmg.pmml.regression.NumericPredictor")){
-				createGetterProxy(beanClazz, fieldNameClass, "getName", "getField");
-				createSetterProxy(beanClazz, fieldNameClass, "name", "setName", "setField");
+				createGetterProxy(beanClazz, stringClass, "getName", "getField");
+				createSetterProxy(beanClazz, stringClass, "name", "setName", "setField");
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable
@@ -323,11 +321,11 @@ public class PMMLPlugin extends ComplexPlugin {
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
-				createGetterProxy(beanClazz, fieldNameClass, "getKey", "getName");
+				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
-				createGetterProxy(beanClazz, fieldNameClass, "getKey", "getField");
+				createGetterProxy(beanClazz, stringClass, "getKey", "getField");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){

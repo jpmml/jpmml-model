@@ -1271,7 +1271,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='InstanceField']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;InstanceField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="nearest_neighbor"
 			/>
@@ -1553,7 +1553,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;MiningField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -3045,7 +3045,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Target&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;Target&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType/xsd:attribute[@name='castInteger']/xsd:simpleType">
@@ -3711,7 +3711,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='VerificationField']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;VerificationField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.Indexable&lt;org.dmg.pmml.FieldName&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='XCoordinates']/xsd:complexType">
@@ -3828,7 +3828,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:simpleType[@name='FIELD-NAME']">
 			<xjc:javaType
-				name="org.dmg.pmml.FieldName"
+				name="java.lang.String"
 				adapter="org.dmg.pmml.adapters.FieldNameAdapter"
 			/>
 		</jaxb:bindings>

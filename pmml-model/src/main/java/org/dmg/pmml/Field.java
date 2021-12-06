@@ -7,10 +7,10 @@ import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Field<E extends Field<E>> extends PMMLObject implements HasName<E>, HasDisplayName<E>, HasType<E>, Indexable<FieldName> {
+public class Field<E extends Field<E>> extends PMMLObject implements HasName<E>, HasDisplayName<E>, HasType<E>, Indexable<String> {
 
 	@Override
-	public FieldName getKey(){
+	public String getKey(){
 		return getName();
 	}
 }

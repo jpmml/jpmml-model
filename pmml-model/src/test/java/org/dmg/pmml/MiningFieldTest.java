@@ -58,7 +58,7 @@ public class MiningFieldTest extends SchemaUpdateTest {
 
 		MiningField miningField = (MiningField)JAXBUtil.unmarshal(new StreamSource(reader));
 
-		assertEquals(FieldName.create("x"), miningField.getName());
+		assertEquals("x", miningField.getName());
 		assertEquals(MiningField.UsageType.ACTIVE, miningField.getUsageType());
 
 		assertEquals(expected, miningField.getImportance());

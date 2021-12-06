@@ -5,7 +5,7 @@ package org.dmg.pmml;
 
 public interface HasName<E extends PMMLObject & HasName<E>> {
 
-	FieldName getName();
+	String getName();
 
-	E setName(FieldName name);
+	E setName(String name);
 }

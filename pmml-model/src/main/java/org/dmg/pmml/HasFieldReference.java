@@ -10,7 +10,7 @@ package org.dmg.pmml;
  */
 public interface HasFieldReference<E extends PMMLObject & HasFieldReference<E>> {
 
-	FieldName getField();
+	String getField();
 
-	E setField(FieldName field);
+	E setField(String field);
 }

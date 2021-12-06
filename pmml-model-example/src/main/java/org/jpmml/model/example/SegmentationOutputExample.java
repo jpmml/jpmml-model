@@ -5,7 +5,6 @@ package org.jpmml.model.example;
 
 import java.util.List;
 
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
@@ -65,7 +64,7 @@ public class SegmentationOutputExample extends TransformationExample {
 			}
 
 			OutputField outputField = new OutputField()
-				.setName(FieldName.create("segment_" + id))
+				.setName("segment_" + id)
 				.setResultFeature(ResultFeature.PREDICTED_VALUE)
 				.setSegmentId(id);
 

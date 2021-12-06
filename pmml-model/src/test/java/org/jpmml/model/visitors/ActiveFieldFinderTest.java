@@ -3,16 +3,16 @@
  */
 package org.jpmml.model.visitors;
 
-import java.util.Set;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.Segment;
 import org.jpmml.model.ChainedSegmentationTest;
-import org.jpmml.model.FieldNameUtil;
 import org.jpmml.model.ResourceUtil;
 import org.junit.Test;
 
@@ -33,19 +33,19 @@ public class ActiveFieldFinderTest {
 				String id = segment.getId();
 
 				if("first".equals(id)){
-					checkFields(FieldNameUtil.create("x1_squared"), model);
+					checkFields(Arrays.asList("x1_squared"), model);
 				} else
 
 				if("second".equals(id)){
-					checkFields(FieldNameUtil.create("x2", "x2_squared"), model);
+					checkFields(Arrays.asList("x2", "x2_squared"), model);
 				} else
 
 				if("third".equals(id)){
-					checkFields(FieldNameUtil.create("x3"), model);
+					checkFields(Arrays.asList("x3"), model);
 				} else
 
 				if("sum".equals(id)){
-					checkFields(FieldNameUtil.create("first_output", "second_output", "third_output"), model);
+					checkFields(Arrays.asList("first_output", "second_output", "third_output"), model);
 				} else
 
 				{
@@ -60,7 +60,7 @@ public class ActiveFieldFinderTest {
 	}
 
 	static
-	private void checkFields(Set<FieldName> names, Model model){
-		assertEquals(names, ActiveFieldFinder.getFieldNames(model));
+	private void checkFields(Collection<String> names, Model model){
+		assertEquals(new HashSet<>(names), ActiveFieldFinder.getFieldNames(model));
 	}
 }

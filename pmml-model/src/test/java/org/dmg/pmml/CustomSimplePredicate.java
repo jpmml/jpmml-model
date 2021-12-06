@@ -15,7 +15,7 @@ public class CustomSimplePredicate extends SimplePredicate {
 		super();
 	}
 
-	public CustomSimplePredicate(FieldName name, Operator operator, String value){
+	public CustomSimplePredicate(String name, Operator operator, String value){
 		super(name, operator, value);
 	}
 

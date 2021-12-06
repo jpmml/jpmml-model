@@ -9,7 +9,6 @@ import java.util.Arrays;
 import org.dmg.pmml.Array;
 import org.dmg.pmml.ComplexArray;
 import org.dmg.pmml.ComplexValue;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
 import org.dmg.pmml.Predicate;
@@ -39,7 +38,7 @@ public class ArrayListTransformerTest {
 			.setType(Array.Type.INT)
 			.setValue(Arrays.asList(-1, 1));
 
-		Predicate predicate = new SimpleSetPredicate(FieldName.create("x"), SimpleSetPredicate.BooleanOperator.IS_IN, array);
+		Predicate predicate = new SimpleSetPredicate("x", SimpleSetPredicate.BooleanOperator.IS_IN, array);
 
 		Node node3a = new LeafNode(null, predicate);
 

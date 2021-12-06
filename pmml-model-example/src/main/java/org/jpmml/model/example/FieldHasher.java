@@ -10,7 +10,6 @@ import java.util.Map;
 
 import jakarta.xml.bind.DatatypeConverter;
 import org.dmg.pmml.Field;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.visitors.AbstractVisitor;
 
@@ -18,7 +17,7 @@ class FieldHasher extends AbstractVisitor {
 
 	private MessageDigest messageDigest = null;
 
-	private Map<FieldName, FieldName> mappings = new LinkedHashMap<>();
+	private Map<String, String> mappings = new LinkedHashMap<>();
 
 
 	FieldHasher(MessageDigest messageDigest){
@@ -27,7 +26,7 @@ class FieldHasher extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(Field<?> field){
-		FieldName name = field.getName();
+		String name = field.getName();
 
 		if(name != null){
 			this.mappings.put(name, hash(name));
@@ -44,12 +43,8 @@ class FieldHasher extends AbstractVisitor {
 		this.messageDigest = messageDigest;
 	}
 
-	public Map<FieldName, FieldName> getMappings(){
+	public Map<String, String> getMappings(){
 		return this.mappings;
-	}
-
-	private FieldName hash(FieldName name){
-		return FieldName.create(hash(name.getValue()));
 	}
 
 	private String hash(String value){

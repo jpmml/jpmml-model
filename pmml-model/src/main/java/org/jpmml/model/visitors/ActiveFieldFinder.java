@@ -11,7 +11,6 @@ import org.dmg.pmml.Aggregate;
 import org.dmg.pmml.BlockIndicator;
 import org.dmg.pmml.Discretize;
 import org.dmg.pmml.FieldColumnPair;
-import org.dmg.pmml.FieldName;
 import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.Lag;
 import org.dmg.pmml.Model;
@@ -49,7 +48,7 @@ import org.dmg.pmml.sequence.SetPredicate;
  */
 public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 
-	private Set<FieldName> names = null;
+	private Set<String> names = null;
 
 
 	@Override
@@ -196,8 +195,8 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 		if(model instanceof HasActiveFields){
 			HasActiveFields hasActiveFields = (HasActiveFields)model;
 
-			Set<FieldName> names = hasActiveFields.getActiveFields();
-			for(FieldName name : names){
+			Set<String> names = hasActiveFields.getActiveFields();
+			for(String name : names){
 				process(name);
 			}
 		}
@@ -288,7 +287,7 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 		return super.visit(variableWeight);
 	}
 
-	public Set<FieldName> getFieldNames(){
+	public Set<String> getFieldNames(){
 
 		if(this.names == null){
 			return Collections.emptySet();
@@ -297,7 +296,7 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 		return Collections.unmodifiableSet(this.names);
 	}
 
-	private void process(FieldName name){
+	private void process(String name){
 
 		if(name == null){
 			return;
@@ -323,12 +322,12 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 	}
 
 	static
-	public Set<FieldName> getFieldNames(PMMLObject... objects){
+	public Set<String> getFieldNames(PMMLObject... objects){
 		return getFieldNames(new ActiveFieldFinder(), objects);
 	}
 
 	static
-	public Set<FieldName> getFieldNames(ActiveFieldFinder activeFieldFinder, PMMLObject... objects){
+	public Set<String> getFieldNames(ActiveFieldFinder activeFieldFinder, PMMLObject... objects){
 
 		for(PMMLObject object : objects){
 			activeFieldFinder.applyTo(object);
