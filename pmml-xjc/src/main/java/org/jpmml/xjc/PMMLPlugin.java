@@ -307,6 +307,11 @@ public class PMMLPlugin extends ComplexPlugin {
 			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
 				createGetterProxy(beanClazz, stringClass, "getField", "getTextField");
 				createSetterProxy(beanClazz, stringClass, "field", "setField", "setTextField");
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
+				createGetterProxy(beanClazz, stringClass, "getField", "getName");
+				createSetterProxy(beanClazz, stringClass, "field", "setField", "setName");
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable

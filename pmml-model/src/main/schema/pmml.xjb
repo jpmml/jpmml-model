@@ -1552,6 +1552,7 @@ Copyright (c) 2009 University of Tartu
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
