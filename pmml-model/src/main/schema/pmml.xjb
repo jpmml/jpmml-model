@@ -1939,6 +1939,7 @@ Copyright (c) 2009 University of Tartu
 			<inheritance:extends>org.dmg.pmml.Field&lt;OutputField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;OutputField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;OutputField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='algorithm']">
@@ -2247,6 +2248,7 @@ Copyright (c) 2009 University of Tartu
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.ModelQuality</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;PredictiveModelQuality&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='accuracy']">
@@ -2436,6 +2438,7 @@ Copyright (c) 2009 University of Tartu
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Model</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;RegressionModel&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.regression.HasRegressionTables&lt;RegressionModel&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
