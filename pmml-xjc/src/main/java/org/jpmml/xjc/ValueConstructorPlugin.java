@@ -14,13 +14,16 @@ import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
+import com.sun.codemodel.JOp;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
+import com.sun.tools.xjc.model.CAdapter;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
@@ -63,6 +66,9 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 		JClass valueConstructorAnnotation = codeModel.ref("org.jpmml.model.annotations.ValueConstructor");
+
+		JClass objectClass = codeModel.ref(Object.class);
+		JClass fieldClass = codeModel.ref("org.dmg.pmml.Field").narrow(objectClass.wildcard());
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
@@ -198,8 +204,12 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 			JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
 			valueConstructor.annotate(valueConstructorAnnotation);
 
+			boolean hasFieldName = false;
+
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				hasFieldName |= isFieldName(outline, propertyInfo);
 
 				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
@@ -208,6 +218,43 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 				param.annotate(propertyAnnotation).param("value", fieldVar.name());
 
 				valueConstructor.body().assign(JExpr.refthis(fieldVar.name()), param);
+			}
+
+			if(!hasFieldName){
+				continue;
+			}
+
+			JClass beanSuperClazz = beanClazz._extends();
+			if(checkType(beanSuperClazz.erasure(), "org.dmg.pmml.Field")){
+				continue;
+			}
+
+			JMethod alternateValueConstructor = beanClazz.constructor(JMod.PUBLIC);
+
+			JInvocation invocation = (alternateValueConstructor.body()).invoke("this");
+
+			for(FieldOutline fieldOutline : fieldOutlines){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+
+				if(isFieldName(outline, propertyInfo)){
+					String name = fieldVar.name();
+
+					if(!(name).equals("field") && !name.endsWith("Field")){
+						name += "Field";
+					}
+
+					JVar param = alternateValueConstructor.param(fieldClass, name);
+
+					invocation.arg(JOp.cond(param.ne(JExpr._null()), param.invoke("getName"), JExpr._null()));
+				} else
+
+				{
+					JVar param = alternateValueConstructor.param(fieldVar.type(), fieldVar.name());
+
+					invocation.arg(param);
+				}
 			}
 		}
 
@@ -244,5 +291,23 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 
 	public void setIgnoreValues(boolean ignoreValues){
 		this.ignoreValues = ignoreValues;
+	}
+
+	static
+	private boolean isFieldName(Outline outline, CPropertyInfo propertyInfo){
+		CAdapter adapter = propertyInfo.getAdapter();
+
+		if(adapter != null){
+			JClass adapterClass = adapter.getAdapterClass(outline);
+
+			return checkType(adapterClass, "org.dmg.pmml.adapters.FieldNameAdapter");
+		}
+
+		return false;
+	}
+
+	static
+	private boolean checkType(JType type, String fullName){
+		return (type.fullName()).equals(fullName);
 	}
 }
