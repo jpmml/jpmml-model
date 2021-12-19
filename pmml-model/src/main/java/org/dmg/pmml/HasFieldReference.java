@@ -13,4 +13,9 @@ public interface HasFieldReference<E extends PMMLObject & HasFieldReference<E>> 
 	String getField();
 
 	E setField(String field);
+
+	default
+	E setField(Field<?> field){
+		return setField(field != null ? field.getName() : null);
+	}
 }

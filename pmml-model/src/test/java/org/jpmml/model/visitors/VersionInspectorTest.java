@@ -148,7 +148,7 @@ public class VersionInspectorTest {
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
-		target.setField(null);
+		target.setField((String)null);
 
 		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_4);
 	}
