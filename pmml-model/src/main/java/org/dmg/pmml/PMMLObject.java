@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009 University of Tartu
+ * Copyright (c) 2014 Villu Ruusmann
  */
 package org.dmg.pmml;
 

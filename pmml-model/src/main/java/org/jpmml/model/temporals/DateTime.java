@@ -1,5 +1,5 @@
 /*
- * Copyright (c) Villu Ruusmann
+ * Copyright (c) 2021 Villu Ruusmann
  */
 package org.jpmml.model.temporals;
 

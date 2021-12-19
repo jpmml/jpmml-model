@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <!--
 Copyright (c) 2009 University of Tartu
+Copyright (c) 2014 Villu Ruusmann
 -->
 <xsl:stylesheet version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 

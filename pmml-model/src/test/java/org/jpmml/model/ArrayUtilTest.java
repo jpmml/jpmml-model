@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2012 University of Tartu
+ * Copyright (c) 2019 Villu Ruusmann
  */
 package org.jpmml.model;
 

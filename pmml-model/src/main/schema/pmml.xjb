@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
 <!--
 Copyright (c) 2009 University of Tartu
+Copyright (c) 2014 Villu Ruusmann
 -->
 <jaxb:bindings targetNamespace="https://jakarta.ee/xml/ns/jaxb" xmlns:annox="http://annox.dev.java.net" xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance" xmlns:jaxb="https://jakarta.ee/xml/ns/jaxb" xmlns:jpmml-model="http://jpmml.org/jpmml-model" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xsd="http://www.w3.org/2001/XMLSchema" jaxb:extensionBindingPrefixes="annox inheritance jpmml-model xjc" jaxb:version="3.0">
 
