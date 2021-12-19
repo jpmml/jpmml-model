@@ -64,6 +64,7 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
 		JCodeModel codeModel = outline.getCodeModel();
 
+		JClass alternateValueConstructorAnnotation = codeModel.ref("org.jpmml.model.annotations.AlternateValueConstructor");
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 		JClass valueConstructorAnnotation = codeModel.ref("org.jpmml.model.annotations.ValueConstructor");
 
@@ -230,6 +231,7 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 			}
 
 			JMethod alternateValueConstructor = beanClazz.constructor(JMod.PUBLIC);
+			alternateValueConstructor.annotate(alternateValueConstructorAnnotation);
 
 			JInvocation invocation = (alternateValueConstructor.body()).invoke("this");
 
