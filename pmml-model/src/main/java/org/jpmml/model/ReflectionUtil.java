@@ -21,13 +21,26 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.adapters.FieldNameAdapter;
 import org.w3c.dom.Element;
 import org.xml.sax.Locator;
 
 public class ReflectionUtil {
 
 	private ReflectionUtil(){
+	}
+
+	static
+	public boolean isFieldName(Field field){
+		XmlJavaTypeAdapter xmlJavaTypeAdapter = field.getAnnotation(XmlJavaTypeAdapter.class);
+
+		if(xmlJavaTypeAdapter != null){
+			return Objects.equals(FieldNameAdapter.class, xmlJavaTypeAdapter.value());
+		}
+
+		return false;
 	}
 
 	static
