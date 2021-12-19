@@ -743,9 +743,9 @@ public class PMMLPlugin extends ComplexPlugin {
 		boolean matches = false;
 
 		{
-			JClass superClazz = beanClazz._extends();
+			JClass beanSuperClazz = beanClazz._extends();
 
-			String name = (superClazz.erasure()).name();
+			String name = (beanSuperClazz.erasure()).name();
 
 			matches |= typeNames.contains(name);
 		}
