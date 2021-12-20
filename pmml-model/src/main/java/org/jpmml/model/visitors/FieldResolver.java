@@ -190,7 +190,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 			{
 				List<Field<?>> scope = getScope(parent);
 
-				if(scope != null && scope.size() > 0){
+				if(scope != null && !scope.isEmpty()){
 					result.addAll(scope);
 				}
 			}
@@ -205,7 +205,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 				for(Output output : outputs){
 					List<Field<?>> scope = getScope(output);
 
-					if(scope != null && scope.size() > 0){
+					if(scope != null && !scope.isEmpty()){
 						result.addAll(scope);
 					}
 				}
@@ -219,7 +219,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 
 	private List<Field<?>> getScope(PMMLObject object){
 
-		if(this.customScopes.size() > 0){
+		if(!this.customScopes.isEmpty()){
 			List<Field<?>> customScope = this.customScopes.get(object);
 
 			if(customScope != null){
