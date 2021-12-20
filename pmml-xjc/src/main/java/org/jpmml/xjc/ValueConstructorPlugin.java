@@ -36,16 +36,7 @@ import com.sun.xml.xsom.XSComponent;
 import com.sun.xml.xsom.XSParticle;
 import org.xml.sax.ErrorHandler;
 
-public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
-
-	private boolean ignoreAttributes = false;
-
-	private boolean ignoreElements = false;
-
-	private boolean ignoreReferences = false;
-
-	private boolean ignoreValues = false;
-
+public class ValueConstructorPlugin extends Plugin {
 
 	@Override
 	public String getOptionName(){
@@ -75,124 +66,9 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
-
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-			Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
-
-				@Override
-				public boolean test(FieldOutline fieldOutline){
-					CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
-
-					XSComponent xsComponent = propertyInfo.getSchemaComponent();
-
-					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
-
-					JMods modifiers = fieldVar.mods();
-					if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
-						return false;
-					} // End if
-
-					if(propertyInfo instanceof CAttributePropertyInfo){
-						CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
-
-						boolean required = attributePropertyInfo.isRequired();
-
-						switch(beanClazz.fullName()){
-							case "org.dmg.pmml.DataField":
-							case "org.dmg.pmml.DefineFunction":
-							case "org.dmg.pmml.DerivedField":
-							case "org.dmg.pmml.OutputField":
-								{
-									switch(fieldVar.name()){
-										case "name":
-										case "opType":
-										case "dataType":
-											required |= true;
-											break;
-										default:
-											break;
-									}
-								}
-								break;
-							case "org.dmg.pmml.SimplePredicate":
-								{
-									switch(fieldVar.name()){
-										case "value":
-											required |= true;
-											break;
-										default:
-											break;
-									}
-								}
-								break;
-							default:
-								break;
-						}
-
-						return !getIgnoreAttributes() && required;
-					} else
-
-					if(propertyInfo instanceof CElementPropertyInfo && !getIgnoreElements()){
-						CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
-
-						switch((fieldVar.type()).fullName()){
-							case "org.dmg.pmml.EmbeddedModel":
-								return false;
-							default:
-								break;
-						}
-
-						boolean required = elementPropertyInfo.isRequired();
-
-						if(xsComponent instanceof XSParticle){
-							XSParticle xsParticle = (XSParticle)xsComponent;
-
-							BigInteger minOccurs = xsParticle.getMinOccurs();
-							BigInteger maxOccurs = xsParticle.getMaxOccurs();
-
-							required |= (minOccurs.intValue() >= 1);
-						}
-
-						switch(beanClazz.fullName()){
-							case "org.dmg.pmml.OutputField":
-								{
-									switch(fieldVar.name()){
-										case "expression":
-											required = false;
-											break;
-										default:
-											break;
-									}
-								}
-								break;
-							default:
-								break;
-						}
-
-						return !getIgnoreElements() && required;
-					} else
-
-					if(propertyInfo instanceof CReferencePropertyInfo){
-						CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
-
-						return !getIgnoreReferences() && referencePropertyInfo.isRequired();
-					} else
-
-					if(propertyInfo instanceof CValuePropertyInfo){
-						CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
-
-						return !getIgnoreValues();
-					} else
-
-					{
-						throw new IllegalArgumentException();
-					}
-				}
-			};
-
-			fieldOutlines = XJCUtil.filterFields(fieldOutlines, predicate);
+			FieldOutline[] fieldOutlines = getRequiredFields(beanClazz, classOutline);
 			if(fieldOutlines.length == 0){
 				continue;
 			}
@@ -263,36 +139,124 @@ public class ValueConstructorPlugin extends /*AbstractParameterizable*/Plugin {
 		return true;
 	}
 
-	public boolean getIgnoreAttributes(){
-		return this.ignoreAttributes;
-	}
+	static
+	private FieldOutline[] getRequiredFields(JDefinedClass beanClazz, ClassOutline classOutline){
+		Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-	public void setIgnoreAttributes(boolean ignoreAttributes){
-		this.ignoreAttributes = ignoreAttributes;
-	}
+		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
-	public boolean getIgnoreElements(){
-		return this.ignoreElements;
-	}
+			@Override
+			public boolean test(FieldOutline fieldOutline){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-	public void setIgnoreElements(boolean ignoreElements){
-		this.ignoreElements = ignoreElements;
-	}
+				XSComponent xsComponent = propertyInfo.getSchemaComponent();
 
-	public boolean getIgnoreReferences(){
-		return this.ignoreReferences;
-	}
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
-	public void setIgnoreReferences(boolean ignoreReferences){
-		this.ignoreReferences = ignoreReferences;
-	}
+				JMods modifiers = fieldVar.mods();
+				if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
+					return false;
+				} // End if
 
-	public boolean getIgnoreValues(){
-		return this.ignoreValues;
-	}
+				if(propertyInfo instanceof CAttributePropertyInfo){
+					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
 
-	public void setIgnoreValues(boolean ignoreValues){
-		this.ignoreValues = ignoreValues;
+					boolean required = attributePropertyInfo.isRequired();
+
+					switch(beanClazz.fullName()){
+						case "org.dmg.pmml.DataField":
+						case "org.dmg.pmml.DefineFunction":
+						case "org.dmg.pmml.DerivedField":
+						case "org.dmg.pmml.OutputField":
+							{
+								switch(fieldVar.name()){
+									case "name":
+									case "opType":
+									case "dataType":
+										required |= true;
+										break;
+									default:
+										break;
+								}
+							}
+							break;
+						case "org.dmg.pmml.SimplePredicate":
+							{
+								switch(fieldVar.name()){
+									case "value":
+										required |= true;
+										break;
+									default:
+										break;
+								}
+							}
+							break;
+						default:
+							break;
+					}
+
+					return required;
+				} else
+
+				if(propertyInfo instanceof CElementPropertyInfo){
+					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
+
+					switch((fieldVar.type()).fullName()){
+						case "org.dmg.pmml.EmbeddedModel":
+							return false;
+						default:
+							break;
+					}
+
+					boolean required = elementPropertyInfo.isRequired();
+
+					if(xsComponent instanceof XSParticle){
+						XSParticle xsParticle = (XSParticle)xsComponent;
+
+						BigInteger minOccurs = xsParticle.getMinOccurs();
+						BigInteger maxOccurs = xsParticle.getMaxOccurs();
+
+						required |= (minOccurs.intValue() >= 1);
+					}
+
+					switch(beanClazz.fullName()){
+						case "org.dmg.pmml.OutputField":
+							{
+								switch(fieldVar.name()){
+									case "expression":
+										required = false;
+										break;
+									default:
+										break;
+								}
+							}
+							break;
+						default:
+							break;
+					}
+
+					return required;
+				} else
+
+				if(propertyInfo instanceof CReferencePropertyInfo){
+					CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
+
+					return referencePropertyInfo.isRequired();
+				} else
+
+				if(propertyInfo instanceof CValuePropertyInfo){
+					CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
+
+					return true;
+				} else
+
+				{
+					throw new IllegalArgumentException();
+				}
+			}
+		};
+
+		return XJCUtil.filterFields(classOutline.getDeclaredFields(), predicate);
 	}
 
 	static
