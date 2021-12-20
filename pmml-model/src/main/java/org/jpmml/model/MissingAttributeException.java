@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 
 import org.dmg.pmml.PMMLObject;
 
-public class MissingAttributeException extends InvalidMarkupException {
+public class MissingAttributeException extends MissingMarkupException {
 
 	public MissingAttributeException(String message){
 		super(message);
