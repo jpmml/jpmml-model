@@ -514,7 +514,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasDefaultValue"}, {"getDefaultValue", "setDefaultValue"}},
 				{{"HasDerivedFields"}, {"hasDerivedFields", "getDerivedFields", "addDerivedFields"}},
 				{{"HasDiscreteDomain"}, {"hasValues", "getValues", "addValues"}},
-				{{"HasDisplayName"}, {"getDisplayName", "setDisplayName"}},
+				{{"HasDisplayName", "Field"}, {"getDisplayName", "setDisplayName"}},
 				{{"HasExpression"}, {"getExpression", "setExpression"}},
 				{{"HasExtensions"}, {"hasExtensions", "getExtensions", "addExtensions"}},
 				{{"HasFieldReference", "ComparisonField"}, {"getField", "setField"}},
