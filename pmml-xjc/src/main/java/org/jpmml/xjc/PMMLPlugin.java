@@ -5,6 +5,7 @@
 package org.jpmml.xjc;
 
 import java.lang.reflect.Field;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,6 +53,8 @@ import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
+import com.sun.xml.xsom.XSComponent;
+import com.sun.xml.xsom.XSParticle;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElements;
@@ -296,6 +299,9 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass stringClass = codeModel.ref("java.lang.String");
 		JClass arraysClass = codeModel.ref("java.util.Arrays");
 
+		JClass missingAttributeExceptionClass = codeModel.ref("org.jpmml.model.MissingAttributeException");
+		JClass missingElementExceptionClass = codeModel.ref("org.jpmml.model.MissingElementException");
+
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
 
 		List<? extends ClassOutline> classOutlines = new ArrayList<>(outline.getClasses());
@@ -452,11 +458,66 @@ public class PMMLPlugin extends ComplexPlugin {
 				} // End if
 
 				if(propertyInfo instanceof CAttributePropertyInfo){
-					declareAttributeField(beanClazz, fieldVar);
+					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
+
+					JFieldVar attributeVar = declareAttributeField(beanClazz, fieldVar);
+
+					boolean required = attributePropertyInfo.isRequired();
+					if(required){
+						JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
+
+						JMethod requireMethod = beanClazz.method(JMod.PUBLIC, getterMethod.type(), "require" + publicName);
+
+						requireMethod.body()._if(fieldRef.eq(JExpr._null()))._then()._throw(JExpr._new(missingAttributeExceptionClass).arg(JExpr._this()).arg(constantExpr(attributeVar)));
+						requireMethod.body()._return(fieldRef);
+
+						moveBefore(beanClazz, requireMethod, getterMethod);
+					}
 				} else
 
 				if(propertyInfo instanceof CElementPropertyInfo){
-					declareElementField(beanClazz, fieldVar);
+					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
+
+					XSComponent xsComponent = propertyInfo.getSchemaComponent();
+
+					JFieldVar elementVar = declareElementField(beanClazz, fieldVar);
+
+					boolean required = elementPropertyInfo.isRequired();
+
+					if(xsComponent instanceof XSParticle){
+						XSParticle xsParticle = (XSParticle)xsComponent;
+
+						BigInteger minOccurs = xsParticle.getMinOccurs();
+						BigInteger maxOccurs = xsParticle.getMaxOccurs();
+
+						required |= (minOccurs.intValue() >= 1);
+					}
+
+					switch((fieldVar.type()).fullName()){
+						case "org.dmg.pmml.EmbeddedModel":
+						//case "org.dmg.pmml.InlineTable":
+						case "org.dmg.pmml.TableLocator":
+							required = false;
+							break;
+						default:
+							break;
+					}
+
+					if(required){
+						JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
+
+						JMethod requireMethod = beanClazz.method(JMod.PUBLIC, getterMethod.type(), "require" + publicName);
+
+						JExpression testExpr = fieldRef.eq(JExpr._null());
+						if(elementPropertyInfo.isCollection()){
+							testExpr = testExpr.cor(fieldRef.invoke("isEmpty"));
+						}
+
+						requireMethod.body()._if(testExpr)._then()._throw(JExpr._new(missingElementExceptionClass).arg(JExpr._this()).arg(constantExpr(elementVar)));
+						requireMethod.body()._return(fieldRef);
+
+						moveBefore(beanClazz, requireMethod, getterMethod);
+					}
 				}
 
 				List<JAnnotationUse> fieldVarAnnotations = getAnnotations(fieldVar);
@@ -717,26 +778,44 @@ public class PMMLPlugin extends ComplexPlugin {
 	}
 
 	static
-	private void declareAttributeField(JDefinedClass beanClazz, JFieldVar fieldVar){
+	private JFieldVar declareAttributeField(JDefinedClass beanClazz, JFieldVar fieldVar){
 		JDefinedClass attributesInterface = ensureInterface(beanClazz._package(), "PMMLAttributes");
 
-		declareField(attributesInterface, beanClazz, fieldVar);
+		return declareField(attributesInterface, beanClazz, fieldVar);
 	}
 
 	static
-	private void declareElementField(JDefinedClass beanClazz, JFieldVar fieldVar){
+	private JFieldVar declareElementField(JDefinedClass beanClazz, JFieldVar fieldVar){
 		JDefinedClass elementsInterface = ensureInterface(beanClazz._package(), "PMMLElements");
 
-		declareField(elementsInterface, beanClazz, fieldVar);
+		return declareField(elementsInterface, beanClazz, fieldVar);
 	}
 
 	static
-	private void declareField(JDefinedClass _interface, JDefinedClass beanClazz, JFieldVar fieldVar){
+	private JFieldVar declareField(JDefinedClass _interface, JDefinedClass beanClazz, JFieldVar fieldVar){
 		JCodeModel codeModel = _interface.owner();
 
-		JExpression init = codeModel.ref("org.jpmml.model.ReflectionUtil").staticInvoke("getField").arg(beanClazz.dotclass()).arg(fieldVar.name());
+		JExpression initExpr = codeModel.ref("org.jpmml.model.ReflectionUtil").staticInvoke("getField").arg(beanClazz.dotclass()).arg(fieldVar.name());
 
-		_interface.field(0, Field.class, (beanClazz.name() + "_" + fieldVar.name()).toUpperCase(), init);
+		return _interface.field(0, Field.class, (beanClazz.name() + "_" + fieldVar.name()).toUpperCase(), initExpr);
+	}
+
+	static
+	private JExpression constantExpr(JFieldVar fieldVar){
+		JDefinedClass owner;
+
+		try {
+			Field ownerField = JFieldVar.class.getDeclaredField("owner");
+			if(!ownerField.isAccessible()){
+				ownerField.setAccessible(true);
+			}
+
+			owner = (JDefinedClass)ownerField.get(fieldVar);
+		} catch(ReflectiveOperationException roe){
+			throw new RuntimeException(roe);
+		}
+
+		return owner.staticRef(fieldVar.name());
 	}
 
 	static

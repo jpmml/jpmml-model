@@ -281,7 +281,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 	private List<Output> getEarlierOutputs(Segmentation segmentation, Segment targetSegment){
 		List<Output> result = new ArrayList<>();
 
-		Segmentation.MultipleModelMethod multipleModelMethod = segmentation.getMultipleModelMethod();
+		Segmentation.MultipleModelMethod multipleModelMethod = segmentation.requireMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
 				break;

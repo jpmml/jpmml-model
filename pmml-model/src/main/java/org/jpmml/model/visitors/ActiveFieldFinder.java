@@ -149,7 +149,7 @@ public class ActiveFieldFinder extends AbstractVisitor implements Resettable {
 
 	@Override
 	public VisitorAction visit(GeneralRegressionModel generalRegressionModel){
-		GeneralRegressionModel.ModelType modelType = generalRegressionModel.getModelType();
+		GeneralRegressionModel.ModelType modelType = generalRegressionModel.requireModelType();
 
 		switch(modelType){
 			case COX_REGRESSION:
