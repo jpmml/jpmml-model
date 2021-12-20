@@ -5,6 +5,7 @@
 package org.jpmml.xjc;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -256,7 +257,9 @@ public class ValueConstructorPlugin extends Plugin {
 			}
 		};
 
-		return XJCUtil.filterFields(classOutline.getDeclaredFields(), predicate);
+		return Arrays.stream(classOutline.getDeclaredFields())
+			.filter(predicate)
+			.toArray(FieldOutline[]::new);
 	}
 
 	static

@@ -585,7 +585,9 @@ public class PMMLPlugin extends ComplexPlugin {
 			}
 		};
 
-		return XJCUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
+		return Arrays.stream(classOutline.getDeclaredFields())
+			.filter(predicate)
+			.findFirst().orElse(null);
 	}
 
 	static
@@ -611,7 +613,9 @@ public class PMMLPlugin extends ComplexPlugin {
 			}
 		};
 
-		return XJCUtil.findSingletonField(classOutline.getDeclaredFields(), predicate);
+		return Arrays.stream(classOutline.getDeclaredFields())
+			.filter(predicate)
+			.findFirst().orElse(null);
 	}
 
 	static
