@@ -107,7 +107,7 @@ public class BranchNode extends SimpleNode {
 
 	@Override
 	public boolean hasNodes(){
-		return (this.nodes != null) && (this.nodes.size() > 0);
+		return (this.nodes != null) && (!this.nodes.isEmpty());
 	}
 
 	@Override

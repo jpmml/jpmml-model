@@ -437,7 +437,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + publicName);
 
-					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("size")).gt(JExpr.lit(0))));
+					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("isEmpty")).not()));
 
 					moveBefore(beanClazz, hasElementsMethod, getElementsMethod);
 

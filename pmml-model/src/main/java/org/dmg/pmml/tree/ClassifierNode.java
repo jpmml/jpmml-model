@@ -138,7 +138,7 @@ public class ClassifierNode extends SimpleNode {
 
 	@Override
 	public boolean hasScoreDistributions(){
-		return (this.scoreDistributions != null) && (this.scoreDistributions.size() > 0);
+		return (this.scoreDistributions != null) && (!this.scoreDistributions.isEmpty());
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class ClassifierNode extends SimpleNode {
 
 	@Override
 	public boolean hasNodes(){
-		return (this.nodes != null) && (this.nodes.size() > 0);
+		return (this.nodes != null) && (!this.nodes.isEmpty());
 	}
 
 	@Override
