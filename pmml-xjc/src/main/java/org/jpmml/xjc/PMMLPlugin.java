@@ -350,34 +350,6 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
-			FieldOutline contentFieldOutline = getContentField(classOutline);
-			if(contentFieldOutline != null){
-				CPropertyInfo propertyInfo = contentFieldOutline.getPropertyInfo();
-
-				String publicName = propertyInfo.getName(true);
-				String privateName = propertyInfo.getName(false);
-
-				JFieldVar fieldVar = fieldVars.get(privateName);
-
-				JType elementType = CodeModelUtil.getElementType(fieldVar.type());
-
-				beanClazz._implements(iterableInterface.narrow(elementType));
-
-				JMethod getElementsMethod = beanClazz.getMethod("get" + publicName, new JType[0]);
-
-				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
-				iteratorMethod.annotate(Override.class);
-
-				iteratorMethod.body()._return(JExpr.invoke(getElementsMethod).invoke("iterator"));
-
-				moveBefore(beanClazz, iteratorMethod, getElementsMethod);
-			}
-
-			FieldOutline extensionsFieldOutline = getExtensionsField(classOutline);
-			if(extensionsFieldOutline != null){
-				beanClazz._implements(hasExtensionsInterface.narrow(beanClazz));
-			}
-
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
@@ -517,6 +489,35 @@ public class PMMLPlugin extends ComplexPlugin {
 					fieldVar.annotate(XmlValueExtension.class);
 				}
 			}
+
+			FieldOutline contentFieldOutline = getContentField(classOutline);
+			if(contentFieldOutline != null){
+				CPropertyInfo propertyInfo = contentFieldOutline.getPropertyInfo();
+
+				String publicName = propertyInfo.getName(true);
+				String privateName = propertyInfo.getName(false);
+
+				JFieldVar fieldVar = fieldVars.get(privateName);
+
+				JType elementType = CodeModelUtil.getElementType(fieldVar.type());
+
+				beanClazz._implements(iterableInterface.narrow(elementType));
+
+				JMethod hasElementsMethod = beanClazz.getMethod("has" + publicName, new JType[0]);
+				JMethod requireElementsMethod = beanClazz.getMethod("require" + publicName, new JType[0]);
+
+				JMethod iteratorMethod = beanClazz.method(JMod.PUBLIC, iteratorInterface.narrow(elementType), "iterator");
+				iteratorMethod.annotate(Override.class);
+
+				iteratorMethod.body()._return(JExpr.invoke(requireElementsMethod).invoke("iterator"));
+
+				moveBefore(beanClazz, iteratorMethod, hasElementsMethod);
+			}
+
+			FieldOutline extensionsFieldOutline = getExtensionsField(classOutline);
+			if(extensionsFieldOutline != null){
+				beanClazz._implements(hasExtensionsInterface.narrow(beanClazz));
+			} // End if
 
 			if(checkType(beanClazz, "org.dmg.pmml.False") || checkType(beanClazz, "org.dmg.pmml.True")){
 				createSingleton(codeModel, beanClazz);
