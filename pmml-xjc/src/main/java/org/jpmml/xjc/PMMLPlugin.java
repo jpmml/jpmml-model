@@ -557,7 +557,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"Kernel"}, {"getDescription", "setDescription"}},
 				{{"Model"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMathContext", "setMathContext", "getMiningFunction", "requireMiningFunction", "setMiningFunction", "getMiningSchema", "requireMiningSchema", "setMiningSchema", "getModelExplanation", "setModelExplanation", "getModelName", "setModelName", "getModelStats", "setModelStats", "getModelVerification", "setModelVerification", "getOutput", "setOutput", "isScorable", "setScorable", "getTargets", "setTargets"}},
 				{{"ModelQuality"}, {"getDataName", "setDataName"}},
-				{{"ParameterCell"}, {"getParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
+				{{"ParameterCell"}, {"getParameterName", "requireParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
 				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},
 				{{"SparseArray"}, {"getDefaultValue", "setDefaultValue", "hasEntries", "getEntries", "addEntries", "hasIndices", "getIndices", "addIndices", "getN", "setN"}},
 				{{"Term"}, {"getCoefficient", "setCoefficient"}}

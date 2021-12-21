@@ -11,6 +11,9 @@ abstract
 public class ParameterCell extends PMMLObject {
 
 	abstract
+	public String requireParameterName();
+
+	abstract
 	public String getParameterName();
 
 	abstract
