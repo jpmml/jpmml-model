@@ -16,6 +16,9 @@ public class Model extends PMMLObject {
 	public Model setModelName(String modelName);
 
 	abstract
+	public MiningFunction requireMiningFunction();
+
+	abstract
 	public MiningFunction getMiningFunction();
 
 	abstract
@@ -38,6 +41,9 @@ public class Model extends PMMLObject {
 
 	abstract
 	public Model setMathContext(MathContext mathContext);
+
+	abstract
+	public MiningSchema requireMiningSchema();
 
 	abstract
 	public MiningSchema getMiningSchema();

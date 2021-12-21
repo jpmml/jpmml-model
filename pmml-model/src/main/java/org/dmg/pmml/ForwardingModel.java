@@ -33,6 +33,11 @@ public class ForwardingModel extends Model {
 	}
 
 	@Override
+	public MiningFunction requireMiningFunction(){
+		return getModel().requireMiningFunction();
+	}
+
+	@Override
 	public MiningFunction getMiningFunction(){
 		return getModel().getMiningFunction();
 	}
@@ -78,6 +83,11 @@ public class ForwardingModel extends Model {
 		getModel().setMathContext(mathContext);
 
 		return this;
+	}
+
+	@Override
+	public MiningSchema requireMiningSchema(){
+		return getModel().requireMiningSchema();
 	}
 
 	@Override
