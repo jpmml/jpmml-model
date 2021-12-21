@@ -560,7 +560,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"ParameterCell"}, {"getParameterName", "requireParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
 				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},
 				{{"SparseArray"}, {"getDefaultValue", "setDefaultValue", "hasEntries", "getEntries", "addEntries", "hasIndices", "getIndices", "addIndices", "getN", "setN"}},
-				{{"Term"}, {"getCoefficient", "setCoefficient"}}
+				{{"Term"}, {"getCoefficient", "requireCoefficient", "setCoefficient"}}
 			};
 
 			for(String[][] baseClassInfo : baseClassInfos){

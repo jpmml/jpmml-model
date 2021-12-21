@@ -11,6 +11,9 @@ abstract
 public class Term extends PMMLObject {
 
 	abstract
+	public Number requireCoefficient();
+
+	abstract
 	public Number getCoefficient();
 
 	abstract
