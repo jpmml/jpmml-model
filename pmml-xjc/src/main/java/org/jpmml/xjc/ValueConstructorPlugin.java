@@ -4,7 +4,6 @@
  */
 package org.jpmml.xjc;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -18,23 +17,16 @@ import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JInvocation;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
-import com.sun.codemodel.JMods;
 import com.sun.codemodel.JOp;
 import com.sun.codemodel.JType;
 import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAdapter;
-import com.sun.tools.xjc.model.CAttributePropertyInfo;
-import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPropertyInfo;
-import com.sun.tools.xjc.model.CReferencePropertyInfo;
-import com.sun.tools.xjc.model.CValuePropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
-import com.sun.xml.xsom.XSComponent;
-import com.sun.xml.xsom.XSParticle;
 import org.xml.sax.ErrorHandler;
 
 public class ValueConstructorPlugin extends Plugin {
@@ -142,118 +134,13 @@ public class ValueConstructorPlugin extends Plugin {
 
 	static
 	private FieldOutline[] getRequiredFields(JDefinedClass beanClazz, ClassOutline classOutline){
-		Map<String, JFieldVar> fieldVars = beanClazz.fields();
-
 		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
 			@Override
 			public boolean test(FieldOutline fieldOutline){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-				XSComponent xsComponent = propertyInfo.getSchemaComponent();
-
-				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
-
-				JMods modifiers = fieldVar.mods();
-				if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
-					return false;
-				} // End if
-
-				if(propertyInfo instanceof CAttributePropertyInfo){
-					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
-
-					boolean required = attributePropertyInfo.isRequired();
-
-					switch(beanClazz.fullName()){
-						case "org.dmg.pmml.DataField":
-						case "org.dmg.pmml.DefineFunction":
-						case "org.dmg.pmml.DerivedField":
-						case "org.dmg.pmml.OutputField":
-							{
-								switch(fieldVar.name()){
-									case "name":
-									case "opType":
-									case "dataType":
-										required |= true;
-										break;
-									default:
-										break;
-								}
-							}
-							break;
-						case "org.dmg.pmml.SimplePredicate":
-							{
-								switch(fieldVar.name()){
-									case "value":
-										required |= true;
-										break;
-									default:
-										break;
-								}
-							}
-							break;
-						default:
-							break;
-					}
-
-					return required;
-				} else
-
-				if(propertyInfo instanceof CElementPropertyInfo){
-					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
-
-					switch((fieldVar.type()).fullName()){
-						case "org.dmg.pmml.EmbeddedModel":
-							return false;
-						default:
-							break;
-					}
-
-					boolean required = elementPropertyInfo.isRequired();
-
-					if(xsComponent instanceof XSParticle){
-						XSParticle xsParticle = (XSParticle)xsComponent;
-
-						BigInteger minOccurs = xsParticle.getMinOccurs();
-						BigInteger maxOccurs = xsParticle.getMaxOccurs();
-
-						required |= (minOccurs.intValue() >= 1);
-					}
-
-					switch(beanClazz.fullName()){
-						case "org.dmg.pmml.OutputField":
-							{
-								switch(fieldVar.name()){
-									case "expression":
-										required = false;
-										break;
-									default:
-										break;
-								}
-							}
-							break;
-						default:
-							break;
-					}
-
-					return required;
-				} else
-
-				if(propertyInfo instanceof CReferencePropertyInfo){
-					CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
-
-					return referencePropertyInfo.isRequired();
-				} else
-
-				if(propertyInfo instanceof CValuePropertyInfo){
-					CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
-
-					return true;
-				} else
-
-				{
-					throw new IllegalArgumentException();
-				}
+				return OutlineUtil.isRequired(beanClazz, propertyInfo, true);
 			}
 		};
 

@@ -5,7 +5,6 @@
 package org.jpmml.xjc;
 
 import java.lang.reflect.Field;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -53,8 +52,6 @@ import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
-import com.sun.xml.xsom.XSComponent;
-import com.sun.xml.xsom.XSParticle;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElements;
@@ -455,14 +452,15 @@ public class PMMLPlugin extends ComplexPlugin {
 					addElementsMethod.body()._return(JExpr._this());
 
 					moveAfter(beanClazz, addElementsMethod, getElementsMethod);
-				} // End if
+				}
+
+				boolean required = OutlineUtil.isRequired(beanClazz, propertyInfo, false);
 
 				if(propertyInfo instanceof CAttributePropertyInfo){
 					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
 
 					JFieldVar attributeVar = declareAttributeField(beanClazz, fieldVar);
 
-					boolean required = attributePropertyInfo.isRequired();
 					if(required){
 						JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
 
@@ -478,30 +476,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				if(propertyInfo instanceof CElementPropertyInfo){
 					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
 
-					XSComponent xsComponent = propertyInfo.getSchemaComponent();
-
 					JFieldVar elementVar = declareElementField(beanClazz, fieldVar);
-
-					boolean required = elementPropertyInfo.isRequired();
-
-					if(xsComponent instanceof XSParticle){
-						XSParticle xsParticle = (XSParticle)xsComponent;
-
-						BigInteger minOccurs = xsParticle.getMinOccurs();
-						BigInteger maxOccurs = xsParticle.getMaxOccurs();
-
-						required |= (minOccurs.intValue() >= 1);
-					}
-
-					switch((fieldVar.type()).fullName()){
-						case "org.dmg.pmml.EmbeddedModel":
-						//case "org.dmg.pmml.InlineTable":
-						case "org.dmg.pmml.TableLocator":
-							required = false;
-							break;
-						default:
-							break;
-					}
 
 					if(required){
 						JFieldRef fieldRef = JExpr.refthis(fieldVar.name());
