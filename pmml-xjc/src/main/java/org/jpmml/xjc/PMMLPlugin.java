@@ -553,7 +553,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			String[][][] baseClassInfos = {
 				{{"ComparisonField"}, {"getCompareFunction", "setCompareFunction", "getFieldWeight", "setFieldWeight", "getSimilarityScale", "setSimilarityScale"}},
-				{{"EmbeddedModel"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMiningFunction", "setMiningFunction", "getModelName", "setModelName", "getModelStats", "setModelStats", "getOutput", "setOutput", "getTargets", "setTargets"}},
+				{{"EmbeddedModel"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMiningFunction", "requireMiningFunction", "setMiningFunction", "getModelName", "setModelName", "getModelStats", "setModelStats", "getOutput", "setOutput", "getTargets", "setTargets"}},
 				{{"Kernel"}, {"getDescription", "setDescription"}},
 				{{"Model"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMathContext", "setMathContext", "getMiningFunction", "setMiningFunction", "getMiningSchema", "setMiningSchema", "getModelExplanation", "setModelExplanation", "getModelName", "setModelName", "getModelStats", "setModelStats", "getModelVerification", "setModelVerification", "getOutput", "setOutput", "isScorable", "setScorable", "getTargets", "setTargets"}},
 				{{"ModelQuality"}, {"getDataName", "setDataName"}},
@@ -856,7 +856,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			List<JVar> params = method.params();
 
-			if((name.startsWith("has") || name.startsWith("is") || name.startsWith("get")) && params.size() == 0){
+			if((name.startsWith("has") || name.startsWith("is") || name.startsWith("get") || name.startsWith("require")) && params.size() == 0){
 
 				if(!hasAnnotation(method.annotations(), Override.class)){
 					method.annotate(Override.class);
