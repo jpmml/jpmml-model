@@ -838,6 +838,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DefineFunction&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasName&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasType&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
