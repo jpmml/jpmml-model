@@ -1629,6 +1629,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStat']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasName&lt;MultivariateStat&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStat']/xsd:complexType/xsd:attribute[@name='isIntercept']">
