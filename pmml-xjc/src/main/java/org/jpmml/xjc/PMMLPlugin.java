@@ -319,10 +319,6 @@ public class PMMLPlugin extends ComplexPlugin {
 			} // End if
 
 			// Implementations of org.dmg.pmml.Indexable
-			if(checkType(beanClazz, "org.dmg.pmml.DefineFunction") || checkType(beanClazz, "org.dmg.pmml.general_regression.Parameter")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
-			} else
-
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
 			} else
@@ -568,6 +564,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasReasonCode"}, {"getReasonCode", "setReasonCode"}},
 				{{"HasRecordCount", "Node"}, {"getRecordCount", "setRecordCount"}},
 				{{"HasRegressionTables"}, {"getNormalizationMethod", "setNormalizationMethod", "hasRegressionTables", "getRegressionTables", "addRegressionTables"}},
+				{{"HasRequiredName", "Field"}, {"getName", "requireName", "setName"}},
 				{{"HasScore", "Node", "Rule"}, {"getScore", "setScore"}},
 				{{"HasScoreDistributions", "Node", "Rule"}, {"hasScoreDistributions", "getScoreDistributions", "addScoreDistributions"}},
 				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},

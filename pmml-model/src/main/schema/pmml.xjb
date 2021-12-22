@@ -840,9 +840,8 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DefineFunction&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasName&lt;DefineFunction&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredName&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasType&lt;DefineFunction&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -2074,8 +2073,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Parameter']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasName&lt;Parameter&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredName&lt;Parameter&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
@@ -2131,7 +2129,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Partition']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasName&lt;Partition&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredName&lt;Partition&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType">
@@ -3140,7 +3138,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Taxonomy']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasName&lt;Taxonomy&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredName&lt;Taxonomy&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType">
