@@ -517,6 +517,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasName&lt;Cluster&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="clustering"
 			/>
