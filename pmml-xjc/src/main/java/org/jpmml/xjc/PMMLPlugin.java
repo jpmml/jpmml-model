@@ -530,6 +530,7 @@ public class PMMLPlugin extends ComplexPlugin {
 			String[][][] baseClassInfos = {
 				{{"ComparisonField"}, {"getCompareFunction", "setCompareFunction", "getFieldWeight", "setFieldWeight", "getSimilarityScale", "setSimilarityScale"}},
 				{{"EmbeddedModel"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMiningFunction", "requireMiningFunction", "setMiningFunction", "getModelName", "setModelName", "getModelStats", "setModelStats", "getOutput", "setOutput", "getTargets", "setTargets"}},
+				{{"Field"}, {"requireName"}},
 				{{"Kernel"}, {"getDescription", "setDescription"}},
 				{{"Model"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMathContext", "setMathContext", "getMiningFunction", "requireMiningFunction", "setMiningFunction", "getMiningSchema", "requireMiningSchema", "setMiningSchema", "getModelExplanation", "setModelExplanation", "getModelName", "setModelName", "getModelStats", "setModelStats", "getModelVerification", "setModelVerification", "getOutput", "setOutput", "isScorable", "setScorable", "getTargets", "setTargets"}},
 				{{"ModelQuality"}, {"getDataName", "setDataName"}},

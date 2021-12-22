@@ -54,7 +54,7 @@ public class FieldResolverTest {
 				if((PMMLFunctions.MULTIPLY).equals(function)){
 					DerivedField derivedField = (DerivedField)getParent();
 
-					String name = derivedField.getName();
+					String name = derivedField.requireName();
 
 					if("x1_squared".equals(name)){
 						checkFields(dataFieldNames, fields);
@@ -180,7 +180,7 @@ public class FieldResolverTest {
 
 				DerivedField derivedField = (DerivedField)getParent();
 
-				String name = derivedField.getName();
+				String name = derivedField.requireName();
 
 				if("x12".equals(name)){
 					checkFields(dataFieldNames, fields);
@@ -308,7 +308,7 @@ public class FieldResolverTest {
 	static
 	private void checkFields(Collection<String> names, Collection<Field<?>> fields){
 		Set<String> fieldNames = fields.stream()
-			.map(field -> field.getName())
+			.map(field -> field.requireName())
 			.collect(Collectors.toSet());
 
 		assertEquals(new HashSet<>(names), fieldNames);

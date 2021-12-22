@@ -41,7 +41,7 @@ public class HasActiveFieldsTest {
 		LocalTransformations localTranformations = new LocalTransformations()
 			.addDerivedFields(derivedField);
 
-		Node root = new LeafNode(1d, new SimplePredicate(derivedField.getName(), SimplePredicate.Operator.IS_NOT_MISSING, null));
+		Node root = new LeafNode(1d, new SimplePredicate(derivedField, SimplePredicate.Operator.IS_NOT_MISSING, null));
 
 		Model model = new TreeModel(MiningFunction.REGRESSION, miningSchema, root)
 			.setLocalTransformations(localTranformations);
