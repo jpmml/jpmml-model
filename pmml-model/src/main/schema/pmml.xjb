@@ -2127,6 +2127,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Partition']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasName&lt;Partition&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;PartitionFieldStats&gt;</inheritance:implements>
 		</jaxb:bindings>
