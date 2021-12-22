@@ -3136,6 +3136,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Taxonomy']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasName&lt;Taxonomy&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TestDistributions']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;TestDistributions&gt;</inheritance:implements>
