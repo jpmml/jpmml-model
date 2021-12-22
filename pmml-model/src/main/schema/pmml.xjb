@@ -2073,6 +2073,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Parameter']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasName&lt;Parameter&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;java.lang.String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="general_regression"
