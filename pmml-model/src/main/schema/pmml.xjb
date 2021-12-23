@@ -762,6 +762,7 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:extends>org.dmg.pmml.Field&lt;DataField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.Decorable</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DataField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredDataType&lt;DataField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DataField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -878,6 +879,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;DerivedField&gt;</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DerivedField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredDataType&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
 		</jaxb:bindings>
@@ -1941,6 +1943,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;OutputField&gt;</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasRequiredDataType&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;OutputField&gt;</inheritance:implements>
