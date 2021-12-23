@@ -10,6 +10,7 @@ import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import org.dmg.pmml.PMMLObject;
 
@@ -31,27 +32,23 @@ public class XPathUtil {
 	static
 	public String formatElementOrAttribute(Class<? extends PMMLObject> elementClazz, Field field){
 		XmlElement element = field.getAnnotation(XmlElement.class);
+		XmlElements elements = field.getAnnotation(XmlElements.class);
 		XmlAttribute attribute = field.getAnnotation(XmlAttribute.class);
 
 		if(element != null){
-			Class<?> childElementClazz = field.getType();
-
-			if((List.class).isAssignableFrom(childElementClazz)){
-				ParameterizedType listType = (ParameterizedType)field.getGenericType();
-
-				Type[] typeArguments = listType.getActualTypeArguments();
-				if(typeArguments.length != 1){
-					throw new IllegalArgumentException();
-				}
-
-				childElementClazz = (Class<?>)typeArguments[0];
-			}
+			Class<?> childElementClazz = getElementType(field);
 
 			try {
 				return getElementName(elementClazz) + "/" + getElementName(childElementClazz);
 			} catch(IllegalArgumentException iae){
 				return getElementName(elementClazz) + "/" + element.name();
 			}
+		} else
+
+		if(elements != null){
+			Class<?> childElementClazz = getElementType(field);
+
+			return getElementName(elementClazz) + "/<" + childElementClazz.getSimpleName() + ">";
 		} else
 
 		if(attribute != null){
@@ -75,6 +72,24 @@ public class XPathUtil {
 		}
 
 		throw new IllegalArgumentException();
+	}
+
+	static
+	public Class<?> getElementType(Field field){
+		Class<?> childElementClazz = field.getType();
+
+		if((List.class).isAssignableFrom(childElementClazz)){
+			ParameterizedType listType = (ParameterizedType)field.getGenericType();
+
+			Type[] typeArguments = listType.getActualTypeArguments();
+			if(typeArguments.length != 1){
+				throw new IllegalArgumentException();
+			}
+
+			childElementClazz = (Class<?>)typeArguments[0];
+		}
+
+		return childElementClazz;
 	}
 
 	static
