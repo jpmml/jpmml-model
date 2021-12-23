@@ -117,10 +117,10 @@ public class AnnotatePlugin extends ComplexPlugin {
 
 	private static final Pattern PATTERN = Pattern.compile("(.+)\\((.+)\\)");
 
-	private static final String NAMESPACE_URI = "http://annox.dev.java.net";
+	public static final String NAMESPACE_URI = "http://annox.dev.java.net";
 
-	private static final QName ANNOTATE_CLASS_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateClass");
-	private static final QName ANNOTATE_ENUM_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateEnum");
-	private static final QName ANNOTATE_ENUM_CONSTANT_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateEnumConstant");
-	private static final QName ANNOTATE_PROPERTY_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateProperty");
+	public static final QName ANNOTATE_CLASS_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateClass");
+	public static final QName ANNOTATE_ENUM_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateEnum");
+	public static final QName ANNOTATE_ENUM_CONSTANT_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateEnumConstant");
+	public static final QName ANNOTATE_PROPERTY_QNAME = new QName(AnnotatePlugin.NAMESPACE_URI, "annotateProperty");
 }
