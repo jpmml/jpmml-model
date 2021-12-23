@@ -764,6 +764,7 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DataField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasRequiredDataType&lt;DataField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DataField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredOpType&lt;DataField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -842,6 +843,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasRequiredName&lt;DefineFunction&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredOpType&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasType&lt;DefineFunction&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -882,6 +884,7 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasRequiredDataType&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredOpType&lt;DerivedField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='optype']">
