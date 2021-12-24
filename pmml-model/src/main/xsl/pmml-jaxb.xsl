@@ -71,6 +71,12 @@ Copyright (c) 2016 Villu Ruusmann
 	</xsl:template>
 
 	<!--
+	Replace required with optional
+	-->
+	<xsl:template match="xs:element[@name='BayesOutput']/xs:complexType/xs:attribute[@name='fieldName']/@use">
+	</xsl:template>
+
+	<!--
 	Replace xs:string with enum
 	-->
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">
