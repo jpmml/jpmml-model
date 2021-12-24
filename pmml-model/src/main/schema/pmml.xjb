@@ -1794,6 +1794,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:sequence/xsd:element[@ref='NeuralOutputs']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
