@@ -128,7 +128,7 @@ public class VersionInspectorTest {
 		PMML pmml = createPMML();
 
 		Target target = new Target()
-			.setField("y")
+			.setTargetField("y")
 			.addTargetValues(createTargetValue("no event"), createTargetValue("event"));
 
 		Targets targets = new Targets()
@@ -148,7 +148,7 @@ public class VersionInspectorTest {
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
 
-		target.setField((String)null);
+		target.setTargetField(null);
 
 		assertVersionRange(pmml, Version.PMML_4_3, Version.PMML_4_4);
 	}

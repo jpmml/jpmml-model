@@ -517,13 +517,23 @@ public class PMMLPlugin extends ComplexPlugin {
 				createSetterProxy(beanClazz, stringClass, "field", "setField", "setName");
 			} // End if
 
+			// Implementations of org.dmg.pmml.HasTargetFieldReference
+			if(checkType(beanClazz, "org.dmg.pmml.Target")){
+				createGetterProxy(beanClazz, stringClass, "getTargetField", "getField");
+				createSetterProxy(beanClazz, stringClass, "targetField", "setTargetField", "setField");
+			} // End if
+
 			// Implementations of org.dmg.pmml.Indexable
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
+			if(checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getField");
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.Target")){
+				createGetterProxy(beanClazz, stringClass, "getKey", "getTargetField");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){

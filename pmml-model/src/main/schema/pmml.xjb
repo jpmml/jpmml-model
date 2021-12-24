@@ -3117,8 +3117,8 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Target']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;Target&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;Target&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;Target&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
