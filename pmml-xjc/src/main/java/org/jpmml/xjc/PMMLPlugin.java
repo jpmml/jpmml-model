@@ -518,7 +518,7 @@ public class PMMLPlugin extends ComplexPlugin {
 			} // End if
 
 			// Implementations of org.dmg.pmml.HasTargetFieldReference
-			if(checkType(beanClazz, "org.dmg.pmml.Target")){
+			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.naive_bayes.BayesOutput")){
 				createGetterProxy(beanClazz, stringClass, "getTargetField", "getField");
 				createSetterProxy(beanClazz, stringClass, "targetField", "setTargetField", "setField");
 			} // End if

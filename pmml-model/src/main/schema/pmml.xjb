@@ -412,7 +412,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesOutput']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;BayesOutput&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;BayesOutput&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="naive_bayes"
 			/>
