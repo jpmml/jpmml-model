@@ -98,8 +98,16 @@ public class AnnotatePlugin extends ComplexPlugin {
 	}
 
 	static
-	private JAnnotationUse annotate(JCodeModel codeModel, JAnnotatable owner, CPluginCustomization customization){
+	void annotate(JCodeModel codeModel, JAnnotatable owner, CPluginCustomization customization){
 		String[] classAndValue = parseCustomization(customization);
+
+		switch(classAndValue[0]){
+			case "org.jpmml.model.annotations.NullSafeGetter":
+			case "org.jpmml.model.annotations.ValueConstructorParameter":
+				return;
+			default:
+				break;
+		}
 
 		JClass annotationClass = codeModel.ref(classAndValue[0]);
 
@@ -110,8 +118,6 @@ public class AnnotatePlugin extends ComplexPlugin {
 
 			annotationUse = annotationUse.param("value", valueExpr);
 		}
-
-		return annotationUse;
 	}
 
 	static
