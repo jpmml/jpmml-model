@@ -2954,6 +2954,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SimplePredicate']/xsd:complexType/xsd:attribute[@name='value']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 		</jaxb:bindings>
 
@@ -3160,6 +3161,10 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='displayValue']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='value']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:sequence/xsd:element[@ref='Partition']">

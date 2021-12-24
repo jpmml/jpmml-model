@@ -15,6 +15,8 @@ public interface HasValue<E extends PMMLObject & HasValue<E>> {
 		return (value != null);
 	}
 
+	Object requireValue();
+
 	Object getValue();
 
 	E setValue(Object value);

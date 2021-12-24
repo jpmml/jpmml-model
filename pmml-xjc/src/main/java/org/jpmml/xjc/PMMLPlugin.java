@@ -588,7 +588,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},
 				{{"HasTargetFieldReference"}, {"getTargetField", "setTargetField"}},
 				{{"HasType"}, {"getDataType", "setDataType", "getOpType", "setOpType"}},
-				{{"HasValue"}, {"getValue", "setValue"}},
+				{{"HasValue"}, {"getValue", "requireValue", "setValue"}},
 				{{"HasValueSet"}, {"getArray", "setArray"}}
 			};
 
