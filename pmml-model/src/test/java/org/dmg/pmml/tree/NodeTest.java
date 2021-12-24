@@ -23,7 +23,7 @@ public class NodeTest {
 
 		List<Node> nodes = node1.getNodes();
 
-		Node node2a = new ComplexNode(False.INSTANCE)
+		Node node2a = new ComplexNode(null, False.INSTANCE)
 			.setId("2a")
 			.addExtensions(new Extension());
 

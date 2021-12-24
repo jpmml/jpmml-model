@@ -4,14 +4,17 @@
 package org.jpmml.xjc;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JFieldVar;
 import com.sun.codemodel.JMod;
 import com.sun.codemodel.JMods;
+import com.sun.codemodel.JType;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
+import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.CReferencePropertyInfo;
 import com.sun.tools.xjc.model.CValuePropertyInfo;
@@ -32,63 +35,69 @@ public class OutlineUtil {
 		JMods modifiers = fieldVar.mods();
 		if((modifiers.getValue() & JMod.STATIC) == JMod.STATIC){
 			return false;
-		} // End if
+		}
 
-		if(propertyInfo instanceof CAttributePropertyInfo){
-			CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
+		JType type = fieldVar.type();
 
-			boolean required = attributePropertyInfo.isRequired();
+		boolean required = false;
 
-			switch(beanClazz.fullName()){
-				case "org.dmg.pmml.DataField":
-				case "org.dmg.pmml.DefineFunction":
-				case "org.dmg.pmml.DerivedField":
-				case "org.dmg.pmml.OutputField":
-					{
-						switch(fieldVar.name()){
-							case "name":
-								required |= true;
-								break;
-							case "opType":
-							case "dataType":
-								required |= constructor;
-								break;
-							default:
-								break;
-						}
-					}
+		List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
+		for(CPluginCustomization propertyCustomization : propertyCustomizations){
+			String[] classAndValue = AnnotatePlugin.parseCustomization(propertyCustomization);
+
+			switch(classAndValue[0]){
+				case "org.jpmml.model.annotations.Required":
+					required |= true;
 					break;
-				case "org.dmg.pmml.SimplePredicate":
-					{
-						switch(fieldVar.name()){
-							case "value":
-								required |= constructor;
-								break;
-							default:
-								break;
+				case "org.jpmml.model.annotations.ValueConstructorParameter":
+
+					if(constructor){
+
+						if(classAndValue.length > 1){
+
+							switch(classAndValue[1]){
+								case "false":
+									return false;
+								case "true":
+									required |= true;
+									break;
+								default:
+									throw new IllegalArgumentException();
+							}
+						} else
+
+						{
+							required |= true;
 						}
 					}
 					break;
 				default:
 					break;
 			}
+		}
 
-			return required;
+		if(propertyInfo instanceof CAttributePropertyInfo){
+			CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
+
+			required |= attributePropertyInfo.isRequired();
 		} else
 
 		if(propertyInfo instanceof CElementPropertyInfo){
 			CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
 
-			switch((fieldVar.type()).fullName()){
+			required |= elementPropertyInfo.isRequired();
+
+			if(propertyInfo.isCollection()){
+				type = CodeModelUtil.getElementType(type);
+			}
+
+			switch(type.fullName()){
 				case "org.dmg.pmml.EmbeddedModel":
-				//case "org.dmg.pmml.InlineTable":
 				case "org.dmg.pmml.TableLocator":
 					return false;
 				default:
 					break;
 			}
-
-			boolean required = elementPropertyInfo.isRequired();
 
 			XSComponent xsComponent = propertyInfo.getSchemaComponent();
 			if(xsComponent instanceof XSParticle){
@@ -99,41 +108,24 @@ public class OutlineUtil {
 
 				required |= (minOccurs.intValue() >= 1);
 			}
-
-			switch(beanClazz.fullName()){
-				case "org.dmg.pmml.OutputField":
-					{
-						switch(fieldVar.name()){
-							case "expression":
-								required = false;
-								break;
-							default:
-								break;
-						}
-					}
-					break;
-				default:
-					break;
-			}
-
-			return required;
 		} else
 
 		if(propertyInfo instanceof CReferencePropertyInfo){
 			CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
 
-			return referencePropertyInfo.isRequired();
+			required |= referencePropertyInfo.isRequired();
 		} else
 
 		if(propertyInfo instanceof CValuePropertyInfo){
 			CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
 
-			return true;
+			required |= true;
 		} else
 
 		{
 			throw new IllegalArgumentException();
 		}
 
+		return required;
 	}
 }

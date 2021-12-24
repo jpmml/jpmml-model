@@ -846,6 +846,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasType&lt;DefineFunction&gt;</inheritance:implements>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:attribute[@name='dataType']">
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:attribute[@name='optype']">
 			<jaxb:property
 				name="opType"
@@ -883,6 +887,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasRequiredType&lt;DerivedField&gt;</inheritance:implements>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='name']">
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -1834,6 +1842,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:attribute[@name='score']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:sequence/xsd:choice/xsd:sequence/xsd:element[@ref='Partition']">
@@ -1984,6 +1993,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 			<jaxb:property
 				name="opType"
 			/>
@@ -2060,6 +2070,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:group[@ref='EXPRESSION']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter(false)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:element[@ref='Value']">
@@ -2904,6 +2915,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<jaxb:typesafeEnumClass
 				name="Operator"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='SimplePredicate']/xsd:complexType/xsd:attribute[@name='value']">
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleRule']/xsd:complexType">

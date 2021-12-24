@@ -18,6 +18,7 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
+import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CPluginCustomization;
@@ -98,22 +99,34 @@ public class AnnotatePlugin extends ComplexPlugin {
 
 	static
 	private JAnnotationUse annotate(JCodeModel codeModel, JAnnotatable owner, CPluginCustomization customization){
-		String content = (customization.element).getTextContent();
+		String[] classAndValue = parseCustomization(customization);
 
-		Matcher matcher = AnnotatePlugin.PATTERN.matcher(content);
-		if(matcher.matches()){
-			JClass annotationClass = codeModel.ref(matcher.group(1));
+		JClass annotationClass = codeModel.ref(classAndValue[0]);
 
-			return owner.annotate(annotationClass)
-				.param("value", JExpr.direct(matcher.group(2)));
+		JAnnotationUse annotationUse = owner.annotate(annotationClass);
+
+		if(classAndValue.length > 1){
+			JExpression valueExpr = JExpr.direct(classAndValue[1]);
+
+			annotationUse = annotationUse.param("value", valueExpr);
+		}
+
+		return annotationUse;
+	}
+
+	static
+	String[] parseCustomization(CPluginCustomization customization){
+ 		String content = (customization.element).getTextContent();
+
+ 		Matcher matcher = AnnotatePlugin.PATTERN.matcher(content);
+ 		if(matcher.matches()){
+			return new String[]{matcher.group(1), matcher.group(2)};
 		} else
 
 		{
-			JClass annotationClass = codeModel.ref(content);
-
-			return owner.annotate(annotationClass);
-		}
-	}
+			return new String[]{content};
+ 		}
+ 	}
 
 	private static final Pattern PATTERN = Pattern.compile("(.+)\\((.+)\\)");
 
