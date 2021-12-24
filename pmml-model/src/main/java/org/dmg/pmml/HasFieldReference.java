@@ -10,6 +10,11 @@ package org.dmg.pmml;
  */
 public interface HasFieldReference<E extends PMMLObject & HasFieldReference<E>> {
 
+	default
+	String requireField(){
+		throw new UnsupportedOperationException();
+	}
+
 	String getField();
 
 	E setField(String field);

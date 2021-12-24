@@ -307,30 +307,6 @@ public class PMMLPlugin extends ComplexPlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			// Implementations of org.dmg.pmml.HasFieldReference
-			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
-				createGetterProxy(beanClazz, stringClass, "getField", "getTextField");
-				createSetterProxy(beanClazz, stringClass, "field", "setField", "setTextField");
-			} else
-
-			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
-				createGetterProxy(beanClazz, stringClass, "getField", "getName");
-				createSetterProxy(beanClazz, stringClass, "field", "setField", "setName");
-			} // End if
-
-			// Implementations of org.dmg.pmml.Indexable
-			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
-			} else
-
-			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getField");
-			} else
-
-			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getId");
-			}
-
 			List<JAnnotationUse> beanClazzAnnotations = getAnnotations(beanClazz);
 
 			JAnnotationUse xmlAccessorType = findAnnotation(beanClazzAnnotations, XmlAccessorType.class);
@@ -528,6 +504,32 @@ public class PMMLPlugin extends ComplexPlugin {
 				beanClazz._implements(hasExtensionsInterface.narrow(beanClazz));
 			} // End if
 
+			// Implementations of org.dmg.pmml.HasFieldReference
+			if(checkType(beanClazz, "org.dmg.pmml.TextIndex")){
+				createGetterProxy(beanClazz, stringClass, "getField", "getTextField");
+				createGetterProxy(beanClazz, stringClass, "requireField", "requireTextField");
+				createSetterProxy(beanClazz, stringClass, "field", "setField", "setTextField");
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
+				createGetterProxy(beanClazz, stringClass, "getField", "getName");
+				createGetterProxy(beanClazz, stringClass, "requireField", "requireName");
+				createSetterProxy(beanClazz, stringClass, "field", "setField", "setName");
+			} // End if
+
+			// Implementations of org.dmg.pmml.Indexable
+			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
+				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.Target") || checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
+				createGetterProxy(beanClazz, stringClass, "getKey", "getField");
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){
+				createGetterProxy(beanClazz, stringClass, "getKey", "getId");
+			} // End if
+
 			if(checkType(beanClazz, "org.dmg.pmml.False") || checkType(beanClazz, "org.dmg.pmml.True")){
 				createSingleton(codeModel, beanClazz);
 			} // End if
@@ -564,7 +566,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasDisplayName", "Field"}, {"getDisplayName", "setDisplayName"}},
 				{{"HasExpression"}, {"getExpression", "setExpression"}},
 				{{"HasExtensions"}, {"hasExtensions", "getExtensions", "addExtensions"}},
-				{{"HasFieldReference", "ComparisonField"}, {"getField", "setField"}},
+				{{"HasFieldReference", "ComparisonField"}, {"getField", "requireField", "setField"}},
 				{{"HasId", "Entity", "NeuralEntity", "Node", "Rule"}, {"getId", "setId"}},
 				{{"HasLocator"}, {"getLocator", "setLocator"}},
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
