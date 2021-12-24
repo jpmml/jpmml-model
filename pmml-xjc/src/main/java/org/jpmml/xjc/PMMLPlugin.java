@@ -575,7 +575,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasNode"}, {"getMissingValueStrategy", "setMissingValueStrategy", "getMissingValuePenalty", "setMissingValuePenalty", "getNoTrueChildStrategy", "setNoTrueChildStrategy", "getSplitCharacteristic", "setSplitCharacteristic", "getNode", "setNode"}},
 				{{"HasNormalizationMethod"}, {"getNormalizationMethod", "setNormalizationMethod"}},
 				{{"HasOpType", "Field"}, {"getOpType", "setOpType"}},
-				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "setPredicate"}},
+				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "requirePredicate", "setPredicate"}},
 				{{"HasReasonCode"}, {"getReasonCode", "setReasonCode"}},
 				{{"HasRecordCount", "Node"}, {"getRecordCount", "setRecordCount"}},
 				{{"HasRegressionTables"}, {"getNormalizationMethod", "setNormalizationMethod", "hasRegressionTables", "getRegressionTables", "addRegressionTables"}},
