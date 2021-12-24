@@ -46,6 +46,16 @@ public class OutlineUtil {
 			String[] classAndValue = AnnotatePlugin.parseCustomization(propertyCustomization);
 
 			switch(classAndValue[0]){
+				case "org.jpmml.model.annotations.NullSafeGetter":
+
+					if(constructor){
+						// Ignored
+					} else
+
+					{
+						required |= true;
+					}
+					break;
 				case "org.jpmml.model.annotations.Required":
 					required |= true;
 					break;
@@ -69,6 +79,10 @@ public class OutlineUtil {
 						{
 							required |= true;
 						}
+					} else
+
+					{
+						// Ignored
 					}
 					break;
 				default:
