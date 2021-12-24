@@ -4,7 +4,6 @@
 package org.jpmml.xjc;
 
 import java.math.BigInteger;
-import java.util.List;
 import java.util.Map;
 
 import com.sun.codemodel.JDefinedClass;
@@ -14,7 +13,6 @@ import com.sun.codemodel.JMods;
 import com.sun.codemodel.JType;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
 import com.sun.tools.xjc.model.CElementPropertyInfo;
-import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.model.CReferencePropertyInfo;
 import com.sun.tools.xjc.model.CValuePropertyInfo;
@@ -27,7 +25,7 @@ public class OutlineUtil {
 	}
 
 	static
-	public boolean isRequired(JDefinedClass beanClazz, CPropertyInfo propertyInfo, boolean constructor){
+	public boolean isRequired(JDefinedClass beanClazz, CPropertyInfo propertyInfo){
 		Map<String, JFieldVar> fieldVars = beanClazz.fields();
 
 		JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
@@ -39,67 +37,14 @@ public class OutlineUtil {
 
 		JType type = fieldVar.type();
 
-		boolean required = false;
-
-		List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
-		for(CPluginCustomization propertyCustomization : propertyCustomizations){
-			String[] classAndValue = AnnotatePlugin.parseCustomization(propertyCustomization);
-
-			switch(classAndValue[0]){
-				case "org.jpmml.model.annotations.NullSafeGetter":
-
-					if(constructor){
-						// Ignored
-					} else
-
-					{
-						required |= true;
-					}
-					break;
-				case "org.jpmml.model.annotations.Required":
-					required |= true;
-					break;
-				case "org.jpmml.model.annotations.ValueConstructorParameter":
-
-					if(constructor){
-
-						if(classAndValue.length > 1){
-
-							switch(classAndValue[1]){
-								case "false":
-									return false;
-								case "true":
-									required |= true;
-									break;
-								default:
-									throw new IllegalArgumentException();
-							}
-						} else
-
-						{
-							required |= true;
-						}
-					} else
-
-					{
-						// Ignored
-					}
-					break;
-				default:
-					break;
-			}
-		}
-
 		if(propertyInfo instanceof CAttributePropertyInfo){
 			CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;
 
-			required |= attributePropertyInfo.isRequired();
+			return attributePropertyInfo.isRequired();
 		} else
 
 		if(propertyInfo instanceof CElementPropertyInfo){
 			CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
-
-			required |= elementPropertyInfo.isRequired();
 
 			if(propertyInfo.isCollection()){
 				type = CodeModelUtil.getElementType(type);
@@ -113,6 +58,8 @@ public class OutlineUtil {
 					break;
 			}
 
+			boolean required = elementPropertyInfo.isRequired();
+
 			XSComponent xsComponent = propertyInfo.getSchemaComponent();
 			if(xsComponent instanceof XSParticle){
 				XSParticle xsParticle = (XSParticle)xsComponent;
@@ -122,24 +69,24 @@ public class OutlineUtil {
 
 				required |= (minOccurs.intValue() >= 1);
 			}
+
+			return required;
 		} else
 
 		if(propertyInfo instanceof CReferencePropertyInfo){
 			CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
 
-			required |= referencePropertyInfo.isRequired();
+			return referencePropertyInfo.isRequired();
 		} else
 
 		if(propertyInfo instanceof CValuePropertyInfo){
 			CValuePropertyInfo valuePropertyInfo = (CValuePropertyInfo)propertyInfo;
 
-			required |= true;
+			return true;
 		} else
 
 		{
 			throw new IllegalArgumentException();
 		}
-
-		return required;
 	}
 }

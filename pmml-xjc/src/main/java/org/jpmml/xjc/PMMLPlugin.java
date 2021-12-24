@@ -422,7 +422,20 @@ public class PMMLPlugin extends ComplexPlugin {
 					moveAfter(beanClazz, addElementsMethod, getElementsMethod);
 				}
 
-				boolean required = OutlineUtil.isRequired(beanClazz, propertyInfo, false);
+				boolean required = OutlineUtil.isRequired(beanClazz, propertyInfo);
+
+				List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
+				for(CPluginCustomization propertyCustomization : propertyCustomizations){
+					String[] classAndValue = AnnotatePlugin.parseCustomization(propertyCustomization);
+
+					switch(classAndValue[0]){
+						case "org.jpmml.model.annotations.NullSafeGetter":
+							required |= true;
+							break;
+						default:
+							break;
+					}
+				}
 
 				if(propertyInfo instanceof CAttributePropertyInfo){
 					CAttributePropertyInfo attributePropertyInfo = (CAttributePropertyInfo)propertyInfo;

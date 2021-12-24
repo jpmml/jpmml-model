@@ -6,6 +6,7 @@ package org.jpmml.xjc;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -23,6 +24,7 @@ import com.sun.codemodel.JVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAdapter;
+import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
@@ -140,7 +142,35 @@ public class ValueConstructorPlugin extends Plugin {
 			public boolean test(FieldOutline fieldOutline){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
-				return OutlineUtil.isRequired(beanClazz, propertyInfo, true);
+				boolean required = OutlineUtil.isRequired(beanClazz, propertyInfo);
+
+				List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
+				for(CPluginCustomization propertyCustomization : propertyCustomizations){
+					String[] classAndValue = AnnotatePlugin.parseCustomization(propertyCustomization);
+
+					switch(classAndValue[0]){
+						case "org.jpmml.model.annotations.ValueConstructorParameter":
+
+							if(classAndValue.length > 1){
+
+								switch(classAndValue[1]){
+									case "false":
+										return false;
+									case "true":
+										break;
+									default:
+										throw new IllegalArgumentException();
+								}
+							}
+
+							required |= true;
+							break;
+						default:
+							break;
+					}
+				}
+
+				return required;
 			}
 		};
 
