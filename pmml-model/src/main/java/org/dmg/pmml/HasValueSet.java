@@ -8,6 +8,8 @@ package org.dmg.pmml;
  */
 public interface HasValueSet<E extends PMMLObject & HasValueSet<E>> {
 
+	Array requireArray();
+
 	Array getArray();
 
 	E setArray(Array array);

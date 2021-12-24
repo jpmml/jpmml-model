@@ -589,7 +589,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasTargetFieldReference"}, {"getTargetField", "setTargetField"}},
 				{{"HasType"}, {"getDataType", "setDataType", "getOpType", "setOpType"}},
 				{{"HasValue"}, {"getValue", "requireValue", "setValue"}},
-				{{"HasValueSet"}, {"getArray", "setArray"}}
+				{{"HasValueSet"}, {"getArray", "requireArray", "setArray"}}
 			};
 
 			for(String[][] markerInterfaceInfo : markerInterfaceInfos){
