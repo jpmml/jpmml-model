@@ -263,10 +263,16 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType/xsd:attribute[@name='affinity']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType/xsd:attribute[@name='leverage']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='AssociationRule']/xsd:complexType/xsd:attribute[@name='lift']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType">
@@ -280,6 +286,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType/xsd:attribute[@name='partialScore']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType/xsd:sequence/xsd:element[@ref='ComplexPartialScore']">
@@ -291,6 +298,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BaseCumHazardTables']/xsd:complexType/xsd:attribute[@name='maxTime']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Baseline']/xsd:complexType">
@@ -335,6 +346,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='BaselineStratum']/xsd:complexType/xsd:sequence/xsd:element[@ref='BaselineCell']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType">
@@ -1127,6 +1142,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='cumulativeLink']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<jaxb:property
 				name="cumulativeLinkFunction"
 			/>
@@ -1171,6 +1187,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='linkFunction']/xsd:simpleType">
@@ -1254,6 +1271,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='BaseCumHazardTables']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='EventValues']">
@@ -1564,6 +1582,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Segmentation']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType">
@@ -2058,6 +2077,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='value']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='x-reportField']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
@@ -2524,6 +2547,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType/xsd:attribute[@name='targetCategory']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='RegressorValues']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
 			<jpmml-model:subpackage
@@ -2590,6 +2617,14 @@ Copyright (c) 2014 Villu Ruusmann
 			<jpmml-model:subpackage
 				name="rule_set"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='RuleSet']/xsd:complexType/xsd:attribute[@name='defaultConfidence']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='RuleSet']/xsd:complexType/xsd:attribute[@name='defaultScore']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType">
@@ -2988,6 +3023,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='targetCategory']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType/xsd:attribute[@name='threshold']">
