@@ -28,7 +28,7 @@ public class ActiveFieldFinderTest {
 
 			@Override
 			public VisitorAction visit(Segment segment){
-				Model model = segment.getModel();
+				Model model = segment.requireModel();
 
 				String id = segment.getId();
 

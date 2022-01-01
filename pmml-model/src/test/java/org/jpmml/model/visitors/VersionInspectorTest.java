@@ -175,10 +175,6 @@ public class VersionInspectorTest {
 		apply.setFunction(PMMLFunctions.UPPERCASE);
 
 		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_4_4);
-
-		apply.setFunction(null);
-
-		assertVersionRange(pmml, Version.PMML_3_0, Version.PMML_3_0);
 	}
 
 	static

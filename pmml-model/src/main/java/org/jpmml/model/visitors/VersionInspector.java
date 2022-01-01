@@ -80,7 +80,7 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 
 	@Override
 	public VisitorAction visit(Apply apply){
-		String function = apply.getFunction();
+		String function = apply.requireFunction();
 
 		Version version = VersionInspector.functionVersions.get(function);
 		if(version != null){

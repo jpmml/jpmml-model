@@ -38,10 +38,7 @@ public class SegmentationOutputExample extends TransformationExample {
 	}
 
 	private void transform(MiningModel model){
-		Segmentation segmentation = model.getSegmentation();
-		if(segmentation == null){
-			return;
-		}
+		Segmentation segmentation = model.requireSegmentation();
 
 		Output output = model.getOutput();
 

@@ -49,7 +49,7 @@ public class FieldResolverTest {
 			public VisitorAction visit(Apply apply){
 				Collection<Field<?>> fields = getFields();
 
-				String function = apply.getFunction();
+				String function = apply.requireFunction();
 
 				if((PMMLFunctions.MULTIPLY).equals(function)){
 					DerivedField derivedField = (DerivedField)getParent();
@@ -269,7 +269,7 @@ public class FieldResolverTest {
 
 				Segment segment = (Segment)getParent();
 
-				Model model = segment.getModel();
+				Model model = segment.requireModel();
 
 				Output output = model.getOutput();
 				if(output != null && output.hasOutputFields()){

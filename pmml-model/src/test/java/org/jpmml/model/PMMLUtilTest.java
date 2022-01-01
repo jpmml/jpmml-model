@@ -29,7 +29,7 @@ public class PMMLUtilTest {
 				pmml = PMMLUtil.unmarshal(is);
 			}
 
-			assertEquals(pmml.getVersion(), Version.PMML_4_4.getVersion());
+			assertEquals(pmml.requireVersion(), Version.PMML_4_4.getVersion());
 			assertEquals(pmml.getBaseVersion(), version.getVersion());
 		}
 	}

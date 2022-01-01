@@ -19,7 +19,7 @@ public class StringInternerTest {
 
 		SimplePredicate right = new CustomSimplePredicate("y", SimplePredicate.Operator.LESS_THAN, new String("0"));
 
-		assertNotSame(left.getValue(), right.getValue());
+		assertNotSame(left.requireValue(), right.requireValue());
 
 		CompoundPredicate compoundPredicate = new CompoundPredicate(CompoundPredicate.BooleanOperator.OR, null)
 			.addPredicates(left, right);
@@ -27,6 +27,6 @@ public class StringInternerTest {
 		StringInterner interner = new StringInterner();
 		interner.applyTo(compoundPredicate);
 
-		assertSame(left.getValue(), right.getValue());
+		assertSame(left.requireValue(), right.requireValue());
 	}
 }

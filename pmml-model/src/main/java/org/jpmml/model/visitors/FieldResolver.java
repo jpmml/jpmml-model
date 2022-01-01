@@ -237,8 +237,8 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 			scope.clear();
 		}
 
-		DataDictionary dataDictionary = pmml.getDataDictionary();
-		if(dataDictionary != null && dataDictionary.hasDataFields()){
+		DataDictionary dataDictionary = pmml.requireDataDictionary();
+		if(dataDictionary.hasDataFields()){
 			declareFields(pmml, dataDictionary.getDataFields());
 		}
 
@@ -291,7 +291,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 
 		List<Segment> segments = segmentation.getSegments();
 		for(Segment segment : segments){
-			Model model = segment.getModel();
+			Model model = segment.requireModel();
 
 			if(targetSegment != null && (targetSegment).equals(segment)){
 				break;

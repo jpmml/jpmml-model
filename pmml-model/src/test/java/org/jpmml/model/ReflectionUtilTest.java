@@ -62,11 +62,11 @@ public class ReflectionUtilTest {
 		assertTrue(ReflectionUtil.equals(left, right));
 
 		// Double != Integer
-		leftValue.setValue(((Number)rightValue.getValue()).doubleValue());
+		leftValue.setValue(((Number)rightValue.requireValue()).doubleValue());
 
 		assertFalse(ReflectionUtil.equals(left, right));
 
-		leftValue.setValue(rightValue.getValue());
+		leftValue.setValue(rightValue.requireValue());
 
 		assertTrue(ReflectionUtil.equals(left, right));
 
@@ -90,9 +90,9 @@ public class ReflectionUtilTest {
 
 		ReflectionUtil.copyState(pmml, customPmml);
 
-		assertSame(pmml.getVersion(), customPmml.getVersion());
-		assertSame(pmml.getHeader(), customPmml.getHeader());
-		assertSame(pmml.getDataDictionary(), customPmml.getDataDictionary());
+		assertSame(pmml.requireVersion(), customPmml.requireVersion());
+		assertSame(pmml.requireHeader(), customPmml.requireHeader());
+		assertSame(pmml.requireDataDictionary(), customPmml.requireDataDictionary());
 
 		assertFalse(pmml.hasModels());
 		assertFalse(customPmml.hasModels());
@@ -175,7 +175,7 @@ public class ReflectionUtilTest {
 		PMML pmml = new CustomPMML();
 		pmml.setVersion(Version.PMML_4_4.getVersion());
 
-		assertEquals("4.4", pmml.getVersion());
+		assertEquals("4.4", pmml.requireVersion());
 		assertEquals("4.4", pmml.getBaseVersion());
 
 		Field versionField = PMMLAttributes.PMML_VERSION;

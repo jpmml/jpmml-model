@@ -67,8 +67,8 @@ public class PMMLObjectTest extends KryoUtilTest {
 		assertNotSame(leftChild, clonedLeftChild);
 		assertNotSame(rightChild, clonedRightChild);
 
-		assertNotSame(parent.getPredicate(), clonedParent.getPredicate());
-		assertSame(clonedParent.getPredicate(), clonedLeftChild.getPredicate());
+		assertNotSame(parent.requirePredicate(), clonedParent.requirePredicate());
+		assertSame(clonedParent.requirePredicate(), clonedLeftChild.requirePredicate());
 	}
 
 	@Test
