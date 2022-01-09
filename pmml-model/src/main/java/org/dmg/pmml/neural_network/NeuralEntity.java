@@ -9,4 +9,7 @@ import org.dmg.pmml.Entity;
 @XmlTransient
 abstract
 public class NeuralEntity extends Entity<String> {
+
+	abstract
+	public String requireId();
 }
