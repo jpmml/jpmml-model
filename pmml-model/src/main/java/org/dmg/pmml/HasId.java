@@ -17,13 +17,6 @@ package org.dmg.pmml;
  */
 public interface HasId<E extends PMMLObject & HasId<E, V>, V> {
 
-	default
-	boolean hasId(){
-		V id = getId();
-
-		return (id != null);
-	}
-
 	/**
 	 * @return The value of the <code>id</code> attribute. Could be <code>null</code>.
 	 */

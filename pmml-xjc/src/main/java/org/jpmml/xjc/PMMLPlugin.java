@@ -534,10 +534,6 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			if(checkType(beanClazz, "org.dmg.pmml.Target")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getTargetField");
-			} else
-
-			if(checkType(beanClazz, "org.dmg.pmml.association.Item") || checkType(beanClazz, "org.dmg.pmml.association.Itemset") || checkType(beanClazz, "org.dmg.pmml.sequence.Sequence") || checkType(beanClazz, "org.dmg.pmml.support_vector_machine.VectorInstance") || checkType(beanClazz, "org.dmg.pmml.text.TextDocument")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getId");
 			} // End if
 
 			if(checkType(beanClazz, "org.dmg.pmml.False") || checkType(beanClazz, "org.dmg.pmml.True")){
@@ -590,8 +586,9 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasRecordCount", "Node"}, {"getRecordCount", "setRecordCount"}},
 				{{"HasRegressionTables"}, {"getNormalizationMethod", "setNormalizationMethod", "hasRegressionTables", "getRegressionTables", "addRegressionTables"}},
 				{{"HasRequiredDataType", "Field"}, {"getDataType", "requireDataType", "setDataType"}},
-				{{"HasRequiredOpType", "Field"}, {"getOpType", "requireOpType", "setOpType"}},
+				{{"HasRequiredId"}, {"getId", "requireId", "setId"}},
 				{{"HasRequiredName", "Field"}, {"getName", "requireName", "setName"}},
+				{{"HasRequiredOpType", "Field"}, {"getOpType", "requireOpType", "setOpType"}},
 				{{"HasRequiredType"}, {"getDataType", "requireDataType", "setDataType", "getOpType", "requireOpType", "setOpType"}},
 				{{"HasScore", "Node", "Rule"}, {"getScore", "setScore"}},
 				{{"HasScoreDistributions", "Node", "Rule"}, {"hasScoreDistributions", "getScoreDistributions", "addScoreDistributions"}},

@@ -8,4 +8,10 @@ import jakarta.xml.bind.annotation.XmlTransient;
 @XmlTransient
 abstract
 public class Entity<V> extends PMMLObject implements HasId<Entity<V>, V> {
+
+	public boolean hasId(){
+		V id = getId();
+
+		return (id != null);
+	}
 }
