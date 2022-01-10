@@ -3164,8 +3164,16 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasValue&lt;TargetValue&gt;</inheritance:implements>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='defaultValue']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='displayValue']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='priorProbability']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TargetValue']/xsd:complexType/xsd:attribute[@name='value']">
