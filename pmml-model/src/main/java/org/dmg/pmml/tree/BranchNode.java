@@ -20,6 +20,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.ObjectAdapter;
+import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.annotations.Added;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
@@ -91,6 +92,16 @@ public class BranchNode extends SimpleNode {
 		this.id = id;
 
 		return this;
+	}
+
+	@Override
+	public Object requireDefaultChild(){
+
+		if(this.defaultChild == null){
+			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXNODE_DEFAULTCHILD);
+		}
+
+		return this.defaultChild;
 	}
 
 	@Override

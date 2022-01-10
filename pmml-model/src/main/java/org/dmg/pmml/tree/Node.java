@@ -63,6 +63,10 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		throw new UnsupportedOperationException();
 	}
 
+	public Object requireDefaultChild(){
+		throw new UnsupportedOperationException();
+	}
+
 	public Object getDefaultChild(){
 		return null;
 	}

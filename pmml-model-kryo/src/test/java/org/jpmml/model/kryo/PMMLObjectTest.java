@@ -62,7 +62,7 @@ public class PMMLObjectTest extends KryoUtilTest {
 		Node clonedLeftChild = clonedChildren.get(0);
 		Node clonedRightChild = clonedChildren.get(1);
 
-		assertSame(clonedParent.getDefaultChild(), clonedLeftChild);
+		assertSame(clonedParent.requireDefaultChild(), clonedLeftChild);
 
 		assertNotSame(leftChild, clonedLeftChild);
 		assertNotSame(rightChild, clonedRightChild);

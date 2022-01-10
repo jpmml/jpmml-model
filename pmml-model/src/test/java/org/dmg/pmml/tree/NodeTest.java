@@ -47,8 +47,8 @@ public class NodeTest {
 		assertEquals(node1.getClass(), jaxbNode1.getClass());
 		assertEquals(1, node1.getId());
 		assertEquals("1", jaxbNode1.getId());
-		assertEquals(node2b, node1.getDefaultChild());
-		assertEquals("2b", jaxbNode1.getDefaultChild());
+		assertEquals(node2b, node1.requireDefaultChild());
+		assertEquals("2b", jaxbNode1.requireDefaultChild());
 
 		List<Node> jaxbNodes = jaxbNode1.getNodes();
 

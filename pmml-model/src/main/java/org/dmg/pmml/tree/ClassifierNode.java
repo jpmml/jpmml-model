@@ -22,6 +22,7 @@ import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.NumberAdapter;
 import org.dmg.pmml.adapters.ObjectAdapter;
+import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.annotations.Added;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
@@ -122,6 +123,16 @@ public class ClassifierNode extends SimpleNode {
 		this.recordCount = recordCount;
 
 		return this;
+	}
+
+	@Override
+	public Object requireDefaultChild(){
+
+		if(this.defaultChild == null){
+			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXNODE_DEFAULTCHILD);
+		}
+
+		return this.defaultChild;
 	}
 
 	@Override
