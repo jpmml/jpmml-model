@@ -39,6 +39,10 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		throw new UnsupportedOperationException();
 	}
 
+	public Object requireScore(){
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public Object getScore(){
 		return null;

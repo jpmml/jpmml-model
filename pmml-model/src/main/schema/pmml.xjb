@@ -1864,6 +1864,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:attribute[@name='score']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 		</jaxb:bindings>

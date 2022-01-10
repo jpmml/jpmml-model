@@ -17,6 +17,7 @@ import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.adapters.ObjectAdapter;
+import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.MissingElementException;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
@@ -64,6 +65,16 @@ public class SimpleNode extends Node {
 	public SimpleNode(Node node){
 		setScore(node.getScore());
 		setPredicate(node.getPredicate());
+	}
+
+	@Override
+	public Object requireScore(){
+
+		if(this.score == null){
+			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXNODE_SCORE);
+		}
+
+		return this.score;
 	}
 
 	@Override
