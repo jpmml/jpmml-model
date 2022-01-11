@@ -7,17 +7,6 @@ import org.dmg.pmml.PMMLObject;
 
 public interface HasNormalizationMethod<E extends PMMLObject & HasNormalizationMethod<E>> {
 
-	default
-	NeuralNetwork.NormalizationMethod getNormalizationMethod(NeuralNetwork.NormalizationMethod defaultNormalizationMethod){
-		NeuralNetwork.NormalizationMethod normalizationMethod = getNormalizationMethod();
-
-		if(normalizationMethod == null){
-			return defaultNormalizationMethod;
-		}
-
-		return normalizationMethod;
-	}
-
 	NeuralNetwork.NormalizationMethod getNormalizationMethod();
 
 	E setNormalizationMethod(NeuralNetwork.NormalizationMethod normalizationMethod);

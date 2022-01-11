@@ -285,8 +285,8 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType/xsd:attribute[@name='partialScore']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Attribute']/xsd:complexType/xsd:sequence/xsd:element[@ref='ComplexPartialScore']">

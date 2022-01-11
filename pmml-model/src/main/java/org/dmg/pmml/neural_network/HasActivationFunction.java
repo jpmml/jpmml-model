@@ -7,31 +7,9 @@ import org.dmg.pmml.PMMLObject;
 
 public interface HasActivationFunction<E extends PMMLObject & HasActivationFunction<E>> {
 
-	default
-	NeuralNetwork.ActivationFunction getActivationFunction(NeuralNetwork.ActivationFunction defaultActivationFunction){
-		NeuralNetwork.ActivationFunction activationFunction = getActivationFunction();
-
-		if(activationFunction == null){
-			return defaultActivationFunction;
-		}
-
-		return activationFunction;
-	}
-
 	NeuralNetwork.ActivationFunction getActivationFunction();
 
 	E setActivationFunction(NeuralNetwork.ActivationFunction activationFunction);
-
-	default
-	Number getThreshold(Number defaultThreshold){
-		Number threshold = getThreshold();
-
-		if(threshold == null){
-			return defaultThreshold;
-		}
-
-		return threshold;
-	}
 
 	/**
 	 * @see NeuralNetwork.ActivationFunction#THRESHOLD
@@ -40,17 +18,6 @@ public interface HasActivationFunction<E extends PMMLObject & HasActivationFunct
 
 	E setThreshold(Number threshold);
 
-	default
-	Number getLeakage(Number defaultLeakage){
-		Number leakage = getLeakage();
-
-		if(leakage == null){
-			return defaultLeakage;
-		}
-
-		return leakage;
-	}
-
 	/**
 	 * @see NeuralNetwork.ActivationFunction#RECTIFIER
 	 */
@@ -58,34 +25,12 @@ public interface HasActivationFunction<E extends PMMLObject & HasActivationFunct
 
 	E setLeakage(Number leakage);
 
-	default
-	Number getWidth(Number defaultWidth){
-		Number width = getWidth();
-
-		if(width == null){
-			return defaultWidth;
-		}
-
-		return width;
-	}
-
 	/**
 	 * @see NeuralNetwork.ActivationFunction#RADIAL_BASIS
 	 */
 	Number getWidth();
 
 	E setWidth(Number width);
-
-	default
-	Number getAltitude(Number defaultAltitude){
-		Number altitude = getAltitude();
-
-		if(altitude == null){
-			return defaultAltitude;
-		}
-
-		return altitude;
-	}
 
 	/**
 	 * @see NeuralNetwork.ActivationFunction#RADIAL_BASIS
