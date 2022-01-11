@@ -525,11 +525,11 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			// Implementations of org.dmg.pmml.Indexable
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getName");
+				createGetterProxy(beanClazz, stringClass, "getKey", "requireName");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.VerificationField") || checkType(beanClazz, "org.dmg.pmml.nearest_neighbor.InstanceField")){
-				createGetterProxy(beanClazz, stringClass, "getKey", "getField");
+				createGetterProxy(beanClazz, stringClass, "getKey", "requireField");
 			} else
 
 			if(checkType(beanClazz, "org.dmg.pmml.Target")){
