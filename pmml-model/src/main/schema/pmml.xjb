@@ -857,11 +857,11 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DefineFunction&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasRequiredName&lt;DefineFunction&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasRequiredOpType&lt;DefineFunction&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasType&lt;DefineFunction&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasRequiredType&lt;DefineFunction&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:attribute[@name='dataType']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 		</jaxb:bindings>
 
