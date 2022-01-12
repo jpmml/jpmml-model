@@ -779,7 +779,6 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.Decorable</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DataField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DataField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasRequiredType&lt;DataField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType/xsd:attribute[@name='dataType']">
@@ -902,7 +901,6 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasContinuousDomain&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;DerivedField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;DerivedField&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasRequiredType&lt;DerivedField&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DerivedField']/xsd:complexType/xsd:attribute[@name='name']">
@@ -1980,7 +1978,6 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Field&lt;OutputField&gt;</inheritance:extends>
-			<inheritance:implements>org.dmg.pmml.HasRequiredDataType&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDiscreteDomain&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasExpression&lt;OutputField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;OutputField&gt;</inheritance:implements>
@@ -2020,6 +2017,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
 			<jaxb:property
 				name="opType"
@@ -2135,6 +2133,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='dataType']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='displayName']">
@@ -2142,6 +2141,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<jaxb:property
 				name="opType"
 			/>
@@ -2583,6 +2583,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:extends>org.dmg.pmml.Field&lt;ResultField&gt;</inheritance:extends>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='dataType']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='feature']">
 			<jaxb:property
 				name="resultFeature"
@@ -2590,6 +2594,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ResultField']/xsd:complexType/xsd:attribute[@name='optype']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<jaxb:property
 				name="opType"
 			/>
