@@ -3,5 +3,5 @@
  */
 package org.dmg.pmml;
 
-public interface HasRequiredType<E extends PMMLObject & HasRequiredType<E>> extends HasRequiredDataType<E>, HasRequiredOpType<E> {
+public interface HasRequiredType<E extends PMMLObject & HasRequiredType<E>> extends HasType<E>, HasRequiredDataType<E>, HasRequiredOpType<E> {
 }
