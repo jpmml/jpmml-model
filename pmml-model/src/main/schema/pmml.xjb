@@ -246,6 +246,18 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='numberOfItems']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("items")</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='numberOfItemsets']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("itemsets")</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='numberOfRules']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("associationRules")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelVerification']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
 		</jaxb:bindings>
@@ -585,6 +597,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='numberOfClusters']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("clusters")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
@@ -623,6 +639,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<jpmml-model:subpackage
 				name="support_vector_machine"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Coefficients']/xsd:complexType/xsd:attribute[@name='numberOfCoefficients']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("coefficients")</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ComparisonMeasure']/xsd:complexType/xsd:sequence/xsd:choice">
@@ -772,6 +792,10 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='DataDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='DataField']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DataDictionary']/xsd:complexType/xsd:attribute[@name='numberOfFields']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("dataFields")</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DataField']/xsd:complexType">
@@ -1373,6 +1397,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Itemset']/xsd:complexType/xsd:attribute[@name='numberOfItems']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("itemRefs")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='jaccard']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Similarity</inheritance:extends>
 		</jaxb:bindings>
@@ -1735,9 +1763,33 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralInput']/xsd:complexType">
+			<inheritance:extends>org.dmg.pmml.neural_network.NeuralEntity</inheritance:extends>
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralInputs']/xsd:complexType">
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralInputs']/xsd:complexType/xsd:attribute[@name='numberOfInputs']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("neuralInputs")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.neural_network.HasActivationFunction&lt;NeuralLayer&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.neural_network.HasNormalizationMethod&lt;NeuralLayer&gt;</inheritance:implements>
+			<jpmml-model:subpackage
+				name="neural_network"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType/xsd:attribute[@name='numberOfNeurons']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("neurons")</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType/xsd:attribute[@name='x-leakage']">
@@ -1779,6 +1831,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='numberOfLayers']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("neuralLayers")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='x-leakage']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
@@ -1801,25 +1857,6 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 		</jaxb:bindings>
 
-		<jaxb:bindings node="//xsd:element[@name='NeuralInput']/xsd:complexType">
-			<inheritance:extends>org.dmg.pmml.neural_network.NeuralEntity</inheritance:extends>
-			<jpmml-model:subpackage
-				name="neural_network"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:element[@name='NeuralInputs']/xsd:complexType">
-			<jpmml-model:subpackage
-				name="neural_network"
-			/>
-		</jaxb:bindings>
-
-		<jaxb:bindings node="//xsd:element[@name='NeuralLayer']/xsd:complexType">
-			<jpmml-model:subpackage
-				name="neural_network"
-			/>
-		</jaxb:bindings>
-
 		<jaxb:bindings node="//xsd:element[@name='NeuralOutput']/xsd:complexType">
 			<jpmml-model:subpackage
 				name="neural_network"
@@ -1830,6 +1867,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<jpmml-model:subpackage
 				name="neural_network"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='NeuralOutputs']/xsd:complexType/xsd:attribute[@name='numberOfOutputs']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("neuralOutputs")</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Neuron']/xsd:complexType">
@@ -3121,6 +3162,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='SupportVectors']/xsd:complexType/xsd:attribute[@name='numberOfSupportVectors']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("supportVectors")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='tanimoto']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Similarity</inheritance:extends>
 		</jaxb:bindings>
@@ -3778,6 +3823,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:attribute[@name='numberOfVectors']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("vectorInstances")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='VectorDictionary']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorFields']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_1)</annox:annotateProperty>
 		</jaxb:bindings>
@@ -3791,6 +3840,10 @@ Copyright (c) 2014 Villu Ruusmann
 			<jpmml-model:subpackage
 				name="support_vector_machine"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='VectorFields']/xsd:complexType/xsd:attribute[@name='numberOfFields']">
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("content")</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorInstance']/xsd:complexType">
