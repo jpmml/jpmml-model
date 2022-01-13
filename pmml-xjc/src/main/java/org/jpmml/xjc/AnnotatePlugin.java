@@ -18,7 +18,6 @@ import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
-import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldVar;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.model.CPluginCustomization;
@@ -114,9 +113,25 @@ public class AnnotatePlugin extends ComplexPlugin {
 		JAnnotationUse annotationUse = owner.annotate(annotationClass);
 
 		if(classAndValue.length > 1){
-			JExpression valueExpr = JExpr.direct(classAndValue[1]);
+			String[] params = classAndValue[1].split(",");
 
-			annotationUse = annotationUse.param("value", valueExpr);
+			for(String param : params){
+				String name;
+				String value;
+
+				int index = param.indexOf('=');
+				if(index < 0){
+					name = "value";
+					value = param;
+				} else
+
+				{
+					name = (param.substring(0, index)).trim();
+					value = (param.substring(index + 1)).trim();
+				}
+
+				annotationUse = annotationUse.param(name, JExpr.direct(value));
+			}
 		}
 	}
 

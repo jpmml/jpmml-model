@@ -247,7 +247,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='numberOfItems']">
-			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize("items")</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.CollectionSize(value = "items", operator = org.jpmml.model.annotations.CollectionSize.Operator.GREATER_OR_EQUAL)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='numberOfItemsets']">

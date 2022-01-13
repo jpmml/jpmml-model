@@ -4,6 +4,7 @@
 package org.jpmml.model.visitors;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.List;
 
 import org.dmg.pmml.Apply;
@@ -56,7 +57,20 @@ public class InvalidMarkupInspector extends MarkupInspector<InvalidMarkupExcepti
 					int size = (Integer)sizeValue;
 					List<?> collection = (List<?>)collectionValue;
 
-					if(size != (collection != null ? collection.size() : 0)){
+					boolean valid;
+
+					CollectionSize.Operator operator = collectionSize.operator();
+					switch(operator){
+						case EQUAL:
+						case GREATER_OR_EQUAL:
+							valid = operator.check(size, (collection != null ? collection : Collections.emptyList()));
+							break;
+						default:
+							valid = true;
+							break;
+					}
+
+					if(!valid){
 						report(new InvalidAttributeException(object, field, sizeValue));
 					}
 				}
