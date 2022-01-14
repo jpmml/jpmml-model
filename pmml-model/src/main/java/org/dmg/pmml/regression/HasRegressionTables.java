@@ -15,6 +15,8 @@ public interface HasRegressionTables<E extends PMMLObject & HasRegressionTables<
 
 	boolean hasRegressionTables();
 
+	List<RegressionTable> requireRegressionTables();
+
 	List<RegressionTable> getRegressionTables();
 
 	E addRegressionTables(RegressionTable... regressionTables);

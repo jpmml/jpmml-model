@@ -586,7 +586,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "requirePredicate", "setPredicate"}},
 				{{"HasReasonCode"}, {"getReasonCode", "setReasonCode"}},
 				{{"HasRecordCount", "Node"}, {"getRecordCount", "setRecordCount"}},
-				{{"HasRegressionTables"}, {"getNormalizationMethod", "setNormalizationMethod", "hasRegressionTables", "getRegressionTables", "addRegressionTables"}},
+				{{"HasRegressionTables"}, {"getNormalizationMethod", "setNormalizationMethod", "hasRegressionTables", "getRegressionTables", "requireRegressionTables", "addRegressionTables"}},
 				{{"HasRequiredDataType", "Field"}, {"getDataType", "requireDataType", "setDataType"}},
 				{{"HasRequiredId"}, {"getId", "requireId", "setId"}},
 				{{"HasRequiredName", "Field"}, {"getName", "requireName", "setName"}},
