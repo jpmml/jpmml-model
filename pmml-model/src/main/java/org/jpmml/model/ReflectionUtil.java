@@ -44,6 +44,74 @@ public class ReflectionUtil {
 	}
 
 	static
+	public int hashCode(Object object){
+
+		if(object instanceof Element){
+			return hashCode((Element)object);
+		} else
+
+		if(object instanceof PMMLObject){
+			return hashCode((PMMLObject)object);
+		}
+
+		return Objects.hashCode(object);
+	}
+
+	static
+	public int hashCode(Element element){
+		int result = 0;
+
+		result += (31 * result) + Objects.hashCode(element.getNamespaceURI());
+		result += (31 * result) + Objects.hashCode(element.getLocalName());
+		result += (31 * result) + Objects.hashCode(element.getTextContent());
+
+		return result;
+	}
+
+	static
+	public int hashCode(PMMLObject object){
+		int result = 0;
+
+		Map<Field, Method> getterMethods = getGetterMethods(object.getClass());
+
+		Collection<Map.Entry<Field, Method>> entries = getterMethods.entrySet();
+		for(Map.Entry<Field, Method> entry : entries){
+			Field field = entry.getKey();
+			Method getterMethod = entry.getValue();
+
+			if((Locator.class).equals(field.getType())){
+				continue;
+			}
+
+			Object value;
+
+			if((List.class).equals(field.getType())){
+				value = getFieldValue(field, object);
+			} else
+
+			{
+				value = getGetterMethodValue(getterMethod, object);
+			}
+
+			value = standardizeValue(value);
+
+			if(value instanceof List){
+				List<?> values = (List<?>)value;
+
+				for(int i = 0, max = values.size(); i < max; i++){
+					result += (31 * result) + hashCode(values.get(i));
+				}
+			} else
+
+			{
+				result += (31 * result) + hashCode(value);
+			}
+		}
+
+		return result;
+	}
+
+	static
 	public boolean equals(Object left, Object right){
 
 		if(left instanceof Element && right instanceof Element){

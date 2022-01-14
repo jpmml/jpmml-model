@@ -23,6 +23,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
@@ -31,7 +32,7 @@ import static org.junit.Assert.fail;
 public class ReflectionUtilTest {
 
 	@Test
-	public void equals(){
+	public void identity(){
 		DataField left = new DataField()
 			.setName("x")
 			.setCyclic(null);
@@ -43,6 +44,7 @@ public class ReflectionUtilTest {
 		// Initialize a live list instance
 		right.getValues();
 
+		assertEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
 		assertTrue(ReflectionUtil.equals(left, right));
 
 		Value leftValue = new Value()
@@ -55,10 +57,12 @@ public class ReflectionUtilTest {
 
 		right.addValues(rightValue);
 
+		assertNotEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
 		assertFalse(ReflectionUtil.equals(left, right));
 
 		left.addValues(leftValue);
 
+		assertEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
 		assertTrue(ReflectionUtil.equals(left, right));
 
 		// Double != Integer
@@ -76,6 +80,7 @@ public class ReflectionUtilTest {
 
 		right.addValues(missingValue);
 
+		assertNotEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
 		assertFalse(ReflectionUtil.equals(left, right));
 	}
 
