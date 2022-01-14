@@ -4,18 +4,17 @@
 package org.jpmml.model.visitors;
 
 import java.util.Objects;
-import java.util.concurrent.ConcurrentMap;
 
 import org.dmg.pmml.PMMLObject;
-import org.dmg.pmml.PMMLObjectKey;
+import org.jpmml.model.PMMLObjectCache;
 
 abstract
 public class PMMLObjectInterner<E extends PMMLObject> extends ElementInterner<E> {
 
-	private ConcurrentMap<PMMLObjectKey, E> cache = null;
+	private PMMLObjectCache<E> cache = null;
 
 
-	protected PMMLObjectInterner(Class<? extends E> type, ConcurrentMap<PMMLObjectKey, E> cache){
+	protected PMMLObjectInterner(Class<? extends E> type, PMMLObjectCache<E> cache){
 		super(type);
 
 		setCache(cache);
@@ -23,23 +22,16 @@ public class PMMLObjectInterner<E extends PMMLObject> extends ElementInterner<E>
 
 	@Override
 	public E intern(E object){
-		ConcurrentMap<PMMLObjectKey, E> cache = getCache();
+		PMMLObjectCache<E> cache = getCache();
 
-		PMMLObjectKey key = new PMMLObjectKey(object);
-
-		E internedObject = cache.putIfAbsent(key, object);
-		if(internedObject == null){
-			internedObject = object;
-		}
-
-		return internedObject;
+		return cache.intern(object);
 	}
 
-	public ConcurrentMap<PMMLObjectKey, E> getCache(){
+	public PMMLObjectCache<E> getCache(){
 		return this.cache;
 	}
 
-	private void setCache(ConcurrentMap<PMMLObjectKey, E> cache){
+	private void setCache(PMMLObjectCache<E> cache){
 		this.cache = Objects.requireNonNull(cache);
 	}
 }

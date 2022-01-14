@@ -3,11 +3,8 @@
  */
 package org.jpmml.model.visitors;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
-import org.dmg.pmml.PMMLObjectKey;
 import org.dmg.pmml.ScoreDistribution;
+import org.jpmml.model.PMMLObjectCache;
 
 /**
  * <p>
@@ -25,12 +22,12 @@ public class ScoreDistributionInterner extends PMMLObjectInterner<ScoreDistribut
 		ScoreDistributionInterner.cache.clear();
 	}
 
-	private static final ConcurrentMap<PMMLObjectKey, ScoreDistribution> cache = new ConcurrentHashMap<>();
+	private static final PMMLObjectCache<ScoreDistribution> cache = new PMMLObjectCache<>();
 
-	public static final ThreadLocal<ConcurrentMap<PMMLObjectKey, ScoreDistribution>> CACHE_PROVIDER = new ThreadLocal<ConcurrentMap<PMMLObjectKey, ScoreDistribution>>(){
+	public static final ThreadLocal<PMMLObjectCache<ScoreDistribution>> CACHE_PROVIDER = new ThreadLocal<PMMLObjectCache<ScoreDistribution>>(){
 
 		@Override
-		public ConcurrentMap<PMMLObjectKey, ScoreDistribution> initialValue(){
+		public PMMLObjectCache<ScoreDistribution> initialValue(){
 			return ScoreDistributionInterner.cache;
 		}
 	};

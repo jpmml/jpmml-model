@@ -3,13 +3,10 @@
  */
 package org.jpmml.model.visitors;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import org.dmg.pmml.False;
-import org.dmg.pmml.PMMLObjectKey;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.True;
+import org.jpmml.model.PMMLObjectCache;
 
 /**
  * <p>
@@ -49,12 +46,12 @@ public class PredicateInterner extends PMMLObjectInterner<Predicate> {
 		PredicateInterner.cache.clear();
 	}
 
-	private static final ConcurrentMap<PMMLObjectKey, Predicate> cache = new ConcurrentHashMap<>();
+	private static final PMMLObjectCache<Predicate> cache = new PMMLObjectCache<>();
 
-	public static final ThreadLocal<ConcurrentMap<PMMLObjectKey, Predicate>> CACHE_PROVIDER = new ThreadLocal<ConcurrentMap<PMMLObjectKey, Predicate>>(){
+	public static final ThreadLocal<PMMLObjectCache<Predicate>> CACHE_PROVIDER = new ThreadLocal<PMMLObjectCache<Predicate>>(){
 
 		@Override
-		public ConcurrentMap<PMMLObjectKey, Predicate> initialValue(){
+		public PMMLObjectCache<Predicate> initialValue(){
 			return PredicateInterner.cache;
 		}
 	};

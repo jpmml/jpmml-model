@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2022 Villu Ruusmann
  */
-package org.dmg.pmml;
+package org.jpmml.model;
 
 import java.util.Objects;
 
-import org.jpmml.model.ReflectionUtil;
+import org.dmg.pmml.PMMLObject;
 
 public class PMMLObjectKey {
 
