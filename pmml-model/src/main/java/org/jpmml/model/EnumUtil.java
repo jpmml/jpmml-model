@@ -4,6 +4,7 @@
 package org.jpmml.model;
 
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 import jakarta.xml.bind.annotation.XmlEnumValue;
 import org.dmg.pmml.PMMLObject;
@@ -22,7 +23,7 @@ public class EnumUtil {
 
 			for(Field field : fields){
 
-				if((field.getType()).equals(value.getClass())){
+				if(Objects.equals(field.getType(), value.getClass())){
 					return field;
 				}
 			}

@@ -11,6 +11,7 @@ import java.util.Deque;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DefineFunction;
@@ -293,7 +294,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 		for(Segment segment : segments){
 			Model model = segment.requireModel();
 
-			if(targetSegment != null && (targetSegment).equals(segment)){
+			if(targetSegment != null && Objects.equals(segment, targetSegment)){
 				break;
 			}
 

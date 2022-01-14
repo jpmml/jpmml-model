@@ -79,13 +79,15 @@ public class ReflectionUtil {
 			Field field = entry.getKey();
 			Method getterMethod = entry.getValue();
 
-			if((Locator.class).equals(field.getType())){
+			Class<?> fieldType = field.getType();
+
+			if(Objects.equals(Locator.class, fieldType)){
 				continue;
 			}
 
 			Object value;
 
-			if((List.class).equals(field.getType())){
+			if(Objects.equals(List.class, fieldType)){
 				value = getFieldValue(field, object);
 			} else
 
@@ -150,7 +152,9 @@ public class ReflectionUtil {
 			Field field = entry.getKey();
 			Method getterMethod = entry.getValue();
 
-			if((Locator.class).equals(field.getType())){
+			Class<?> fieldType = field.getType();
+
+			if(Objects.equals(Locator.class, fieldType)){
 				continue;
 			}
 
@@ -158,7 +162,7 @@ public class ReflectionUtil {
 			Object rightValue;
 
 			// Avoid getter access, which will initialize previously uninitialized fields with an empty ArrayList instance
-			if((List.class).equals(field.getType())){
+			if(Objects.equals(List.class, fieldType)){
 				leftValue = getFieldValue(field, left);
 				rightValue = getFieldValue(field, right);
 			} else
@@ -396,7 +400,7 @@ public class ReflectionUtil {
 	public boolean isDefaultValue(Object value){
 
 		if(value instanceof Boolean){
-			return (Boolean.FALSE).equals(value);
+			return Objects.equals(Boolean.FALSE, value);
 		} else
 
 		if(value instanceof Character){

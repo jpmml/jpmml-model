@@ -39,7 +39,7 @@ public class Interner<V> extends AbstractVisitor {
 
 		Class<?> fieldType = field.getType();
 
-		if((List.class).isAssignableFrom(fieldType)){
+		if(Objects.equals(List.class, fieldType)){
 			ParameterizedType listType = (ParameterizedType)field.getGenericType();
 
 			Type[] typeArguments = listType.getActualTypeArguments();
@@ -64,7 +64,9 @@ public class Interner<V> extends AbstractVisitor {
 					}
 				}
 			}
-		} else
+
+			return;
+		} // End if
 
 		if(fieldType.isAssignableFrom(type)){
 			Object value = ReflectionUtil.getFieldValue(field, object);
