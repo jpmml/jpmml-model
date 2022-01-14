@@ -13,9 +13,9 @@ import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 
 abstract
-public class ElementInterner<E extends PMMLObject> extends Interner<E> {
+public class ElementInterner<V> extends Interner<V> {
 
-	public ElementInterner(Class<? extends E> type){
+	public ElementInterner(Class<? extends V> type){
 		super(type);
 	}
 
