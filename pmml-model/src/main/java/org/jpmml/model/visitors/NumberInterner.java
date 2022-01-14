@@ -3,10 +3,11 @@
  */
 package org.jpmml.model.visitors;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
 abstract
-public class NumberInterner<V extends Number> extends Interner<V> {
+public class NumberInterner<V extends Number> extends AttributeInterner<V> {
 
 	private ConcurrentMap<V, V> cache = null;
 
@@ -43,6 +44,6 @@ public class NumberInterner<V extends Number> extends Interner<V> {
 	}
 
 	private void setCache(ConcurrentMap<V, V> cache){
-		this.cache = cache;
+		this.cache = Objects.requireNonNull(cache);
 	}
 }

@@ -3,7 +3,6 @@
  */
 package org.jpmml.model.visitors;
 
-
 /**
  * <p>
  * A Visitor that interns {@link String} attribute values.
@@ -13,7 +12,7 @@ package org.jpmml.model.visitors;
  * Strings are interned using the standard {@link String#intern()} method.
  * </p>
  */
-public class StringInterner extends Interner<String> {
+public class StringInterner extends AttributeInterner<String> {
 
 	public StringInterner(){
 		super(String.class);

@@ -43,14 +43,14 @@ public class MissingMarkupInspector extends MarkupInspector<MissingMarkupExcepti
 				continue;
 			}
 
-			XmlElement element = field.getAnnotation(XmlElement.class);
-			if(element != null && element.required()){
-				report(new MissingElementException(object, field));
-			}
-
 			XmlAttribute attribute = field.getAnnotation(XmlAttribute.class);
 			if(attribute != null && attribute.required()){
 				report(new MissingAttributeException(object, field));
+			}
+
+			XmlElement element = field.getAnnotation(XmlElement.class);
+			if(element != null && element.required()){
+				report(new MissingElementException(object, field));
 			}
 		}
 
