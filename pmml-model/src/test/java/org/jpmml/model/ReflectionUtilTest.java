@@ -41,10 +41,17 @@ public class ReflectionUtilTest {
 			.setName("x")
 			.setCyclic(DataField.Cyclic.ZERO);
 
-		// Initialize a live list instance
-		right.getValues();
+		int leftHash = ReflectionUtil.hashCode(left);
+		int rightHash = ReflectionUtil.hashCode(right);
 
-		assertEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
+		assertEquals(leftHash, rightHash);
+
+		// Initialize a live list instance
+		List<Value> rightValues = right.getValues();
+
+		rightHash = ReflectionUtil.hashCode(right);
+
+		assertEquals(leftHash, rightHash);
 		assertTrue(ReflectionUtil.equals(left, right));
 
 		Value leftValue = new Value()
@@ -55,22 +62,37 @@ public class ReflectionUtilTest {
 			.setValue(0)
 			.setProperty(Value.Property.VALID);
 
+		assertEquals(ReflectionUtil.hashCode(leftValue), ReflectionUtil.hashCode(rightValue));
+		assertTrue(ReflectionUtil.equals(leftValue, rightValue));
+
+		assertEquals(0, rightValues.size());
+
 		right.addValues(rightValue);
 
-		assertNotEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
+		assertEquals(1, rightValues.size());
+
+		rightHash = ReflectionUtil.hashCode(right);
+
+		assertNotEquals(leftHash, rightHash);
 		assertFalse(ReflectionUtil.equals(left, right));
 
 		left.addValues(leftValue);
 
-		assertEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
+		leftHash = ReflectionUtil.hashCode(left);
+
+		assertEquals(leftHash, rightHash);
 		assertTrue(ReflectionUtil.equals(left, right));
 
 		// Double != Integer
 		leftValue.setValue(((Number)rightValue.requireValue()).doubleValue());
 
+		leftHash = ReflectionUtil.hashCode(left);
+
 		assertFalse(ReflectionUtil.equals(left, right));
 
 		leftValue.setValue(rightValue.requireValue());
+
+		leftHash = ReflectionUtil.hashCode(left);
 
 		assertTrue(ReflectionUtil.equals(left, right));
 
@@ -80,7 +102,11 @@ public class ReflectionUtilTest {
 
 		right.addValues(missingValue);
 
-		assertNotEquals(ReflectionUtil.hashCode(left), ReflectionUtil.hashCode(right));
+		assertEquals(2, rightValues.size());
+
+		rightHash = ReflectionUtil.hashCode(right);
+
+		assertNotEquals(leftHash, rightHash);
 		assertFalse(ReflectionUtil.equals(left, right));
 	}
 
