@@ -9,10 +9,14 @@ import org.dmg.pmml.Extension;
 import org.dmg.pmml.False;
 import org.dmg.pmml.True;
 import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.UnsupportedElementException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class NodeTest {
 
@@ -49,6 +53,24 @@ public class NodeTest {
 		assertEquals("1", jaxbNode1.getId());
 		assertEquals(node2b, node1.requireDefaultChild());
 		assertEquals("2b", jaxbNode1.requireDefaultChild());
+
+		assertSame(True.INSTANCE, node1.requirePredicate(True.class));
+
+		try {
+			node1.requirePredicate(False.class);
+
+			fail();
+		} catch(UnsupportedElementException uee){
+			// Ignored
+		}
+
+		assertNotSame(True.INSTANCE, jaxbNode1.requirePredicate(True.class));
+
+		try {
+			jaxbNode1.requirePredicate(False.class);
+		} catch(UnsupportedElementException uee){
+			// Ignored
+		}
 
 		List<Node> jaxbNodes = jaxbNode1.getNodes();
 
