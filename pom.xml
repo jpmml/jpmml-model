@@ -182,7 +182,7 @@
 			<dependency>
 				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>[3.13.0-GA, 3.26.0-GA]</version>
+				<version>[3.13.0-GA, 3.28.0-GA]</version>
 			</dependency>
 
 			<dependency>
