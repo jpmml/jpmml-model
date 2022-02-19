@@ -152,11 +152,9 @@ public class JacksonPlugin extends Plugin {
 
 							JClass clazz = codeModel.ref(typeClassInfo.fullName());
 
-							JAnnotationUse jsonSubTypesType = jsonSubTypes.annotate(JsonSubTypes.Type.class)
+							JAnnotationUse jsonSubTypesType = valueArray.annotate(JsonSubTypes.Type.class)
 								.param("name", clazz.name())
 								.param("value", JExpr.dotclass(clazz));
-
-							valueArray.param(jsonSubTypesType);
 						}
 					} else
 

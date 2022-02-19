@@ -5,6 +5,7 @@
 package org.jpmml.xjc;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,6 +22,7 @@ import javax.xml.namespace.QName;
 import com.sun.codemodel.JAnnotatable;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
+import com.sun.codemodel.JAnnotationValue;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JClassAlreadyExistsException;
 import com.sun.codemodel.JCodeModel;
@@ -464,7 +466,9 @@ public class PMMLPlugin extends ComplexPlugin {
 
 					JAnnotationArrayMember valueArray = xmlElements.paramArray("value");
 
-					valueArray.param(xmlElement);
+					JAnnotationUse valueXmlElement = valueArray.annotate(XmlElement.class);
+
+					addValues(valueXmlElement, xmlElement.getAnnotationMembers());
 
 					fieldVarAnnotations.remove(xmlElements);
 					fieldVarAnnotations.add(0, xmlElements);
@@ -732,6 +736,24 @@ public class PMMLPlugin extends ComplexPlugin {
 			}
 
 			return (List)annotationsField.get(annotatable);
+		} catch(ReflectiveOperationException roe){
+			throw new RuntimeException(roe);
+		}
+	}
+
+	static
+	private void addValues(JAnnotationUse annotationUse, Map<String, JAnnotationValue> memberValues){
+
+		try {
+			Method addValueMethod = JAnnotationUse.class.getDeclaredMethod("addValue", String.class, JAnnotationValue.class);
+			if(!addValueMethod.isAccessible()){
+				addValueMethod.setAccessible(true);
+			}
+
+			Collection<Map.Entry<String, JAnnotationValue>> entries = memberValues.entrySet();
+			for(Map.Entry<String, JAnnotationValue> entry : entries){
+				addValueMethod.invoke(annotationUse, entry.getKey(), entry.getValue());
+			}
 		} catch(ReflectiveOperationException roe){
 			throw new RuntimeException(roe);
 		}
