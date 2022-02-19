@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.example;
 
+import java.lang.reflect.Constructor;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +47,11 @@ public class CopyExample extends TransformationExample {
 		for(String visitorClass : visitorClasses){
 			Class<?> clazz = Class.forName(visitorClass);
 
+			Constructor<?> constructor = clazz.getDeclaredConstructor();
+
 			long begin = System.currentTimeMillis();
 
-			Visitor visitor = (Visitor)clazz.newInstance();
+			Visitor visitor = (Visitor)constructor.newInstance();
 			visitor.applyTo(pmml);
 
 			long end = System.currentTimeMillis();

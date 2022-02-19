@@ -29,7 +29,7 @@ public class PMMLUtil {
 	 *
 	 * @see ServiceLoaderUtil#load(Class, ClassLoader)
 	 */
-	@SuppressWarnings (
+	@SuppressWarnings(
 		value = {"cast", "resource"}
 	)
 	static

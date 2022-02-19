@@ -44,9 +44,6 @@ public class ValueConstructorPlugin extends Plugin {
 	}
 
 	@Override
-	@SuppressWarnings (
-		value = {"unused"}
-	)
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
 		JCodeModel codeModel = outline.getCodeModel();
 

@@ -41,7 +41,7 @@ public class KryoUtil {
 		kryo.register(TripletonList.class, new TripletonListSerializer());
 	}
 
-	@SuppressWarnings (
+	@SuppressWarnings(
 		value = {"unchecked"}
 	)
 	static

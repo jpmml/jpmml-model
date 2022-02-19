@@ -66,7 +66,7 @@ public class InlineTableTest {
 		};
 
 		Row row = new Row()
-			.addContent(new InputCell(new Integer(0)), new OutputCell(stringWrapper));
+			.addContent(new InputCell(0), new OutputCell(stringWrapper));
 
 		checkRow(row);
 	}

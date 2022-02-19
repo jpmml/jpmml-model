@@ -162,7 +162,7 @@ public class JAXBUtil {
 		return clone(getContext(), object);
 	}
 
-	@SuppressWarnings (
+	@SuppressWarnings(
 		value = {"unchecked"}
 	)
 	static

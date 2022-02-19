@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,9 @@ public class VisitorBattery extends ArrayList<Class<? extends Visitor>> {
 			Visitor visitor;
 
 			try {
-				visitor = visitorClazz.newInstance();
+				Constructor<? extends Visitor> constructor = visitorClazz.getDeclaredConstructor();
+
+				visitor = constructor.newInstance();
 			} catch(ReflectiveOperationException roe){
 				throw new RuntimeException(roe);
 			}

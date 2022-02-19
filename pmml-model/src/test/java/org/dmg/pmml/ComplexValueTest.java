@@ -20,8 +20,8 @@ public class ComplexValueTest {
 	public void marshal() throws Exception {
 		checkConstant("", null);
 
-		checkConstant("1", new Integer(1));
-		checkConstant("1.0", new Double(1.0d));
+		checkConstant("1", 1);
+		checkConstant("1.0", 1.0d);
 
 		Class<String> stringClazz = String.class;
 

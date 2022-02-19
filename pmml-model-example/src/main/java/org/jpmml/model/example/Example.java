@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Constructor;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -30,7 +31,9 @@ public class Example {
 
 	static
 	public void execute(Class<? extends Example> clazz, String... args) throws Exception {
-		Example example = clazz.newInstance();
+		Constructor<? extends Example> constructor = clazz.getDeclaredConstructor();
+
+		Example example = constructor.newInstance();
 
 		JCommander commander = new JCommander(example);
 		commander.setProgramName(clazz.getName());

@@ -11,7 +11,7 @@ public interface HasDiscreteDomain<E extends Field<E> & HasDiscreteDomain<E>> {
 
 	List<Value> getValues();
 
-	@SuppressWarnings (
+	@SuppressWarnings(
 		value = {"unchecked"}
 	)
 	default

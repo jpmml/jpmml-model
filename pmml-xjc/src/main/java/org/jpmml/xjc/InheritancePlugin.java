@@ -152,6 +152,9 @@ public class InheritancePlugin extends ComplexPlugin {
 		return classRef;
 	}
 
+	@SuppressWarnings(
+		value = {"deprecation"}
+	)
 	static
 	private BIClass createBIClass(String name){
 

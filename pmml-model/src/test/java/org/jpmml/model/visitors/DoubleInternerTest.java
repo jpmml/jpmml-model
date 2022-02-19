@@ -15,6 +15,9 @@ import static org.junit.Assert.assertSame;
 public class DoubleInternerTest {
 
 	@Test
+	@SuppressWarnings(
+		value = {"deprecation", "removal"}
+	)
 	public void intern(){
 		SparseArray<Double> sparseArray = new RealSparseArray()
 			.setN(3)

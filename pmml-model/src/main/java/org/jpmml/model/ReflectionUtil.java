@@ -347,8 +347,8 @@ public class ReflectionUtil {
 		return result;
 	}
 
-	@SuppressWarnings (
-		value = {"unchecked"}
+	@SuppressWarnings(
+		value = {"deprecation", "unchecked"}
 	)
 	static
 	public <E> E getFieldValue(Field field, Object object){
@@ -364,6 +364,9 @@ public class ReflectionUtil {
 		}
 	}
 
+	@SuppressWarnings(
+		value = {"deprecation"}
+	)
 	static
 	public void setFieldValue(Field field, Object object, Object value){
 
@@ -378,7 +381,7 @@ public class ReflectionUtil {
 		}
 	}
 
-	@SuppressWarnings (
+	@SuppressWarnings(
 		value = {"unchecked"}
 	)
 	static

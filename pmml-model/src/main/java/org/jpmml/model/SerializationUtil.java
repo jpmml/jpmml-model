@@ -90,7 +90,7 @@ public class SerializationUtil {
 		return clone(object, null);
 	}
 
-	@SuppressWarnings (
+	@SuppressWarnings(
 		value = {"unchecked"}
 	)
 	static

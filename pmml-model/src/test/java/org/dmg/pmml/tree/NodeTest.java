@@ -23,7 +23,7 @@ public class NodeTest {
 	@Test
 	public void jaxbClone() throws Exception {
 		Node node1 = new BranchNode(null, True.INSTANCE)
-			.setId(new Integer(1));
+			.setId(1);
 
 		List<Node> nodes = node1.getNodes();
 

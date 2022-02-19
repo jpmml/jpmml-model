@@ -4,6 +4,7 @@
  */
 package org.jpmml.xjc;
 
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -149,9 +150,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				try {
 					Field pkgField = CClassInfoParent.Package.class.getDeclaredField("pkg");
-					if(!pkgField.isAccessible()){
-						pkgField.setAccessible(true);
-					}
+					ensureAccessible(pkgField);
 
 					JPackage subPackage = packageParent.pkg.subPackage(name);
 
@@ -165,9 +164,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				try {
 					Field elementNameField = CClassInfo.class.getDeclaredField("elementName");
-					if(!elementNameField.isAccessible()){
-						elementNameField.setAccessible(true);
-					}
+					ensureAccessible(elementNameField);
 
 					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", "Node"));
 				} catch(ReflectiveOperationException roe){
@@ -731,9 +728,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				}
 			}
 
-			if(!annotationsField.isAccessible()){
-				annotationsField.setAccessible(true);
-			}
+			ensureAccessible(annotationsField);
 
 			return (List)annotationsField.get(annotatable);
 		} catch(ReflectiveOperationException roe){
@@ -746,9 +741,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 		try {
 			Method addValueMethod = JAnnotationUse.class.getDeclaredMethod("addValue", String.class, JAnnotationValue.class);
-			if(!addValueMethod.isAccessible()){
-				addValueMethod.setAccessible(true);
-			}
+			ensureAccessible(addValueMethod);
 
 			Collection<Map.Entry<String, JAnnotationValue>> entries = memberValues.entrySet();
 			for(Map.Entry<String, JAnnotationValue> entry : entries){
@@ -831,9 +824,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 		try {
 			Field ownerField = JFieldVar.class.getDeclaredField("owner");
-			if(!ownerField.isAccessible()){
-				ownerField.setAccessible(true);
-			}
+			ensureAccessible(ownerField);
 
 			owner = (JDefinedClass)ownerField.get(fieldVar);
 		} catch(ReflectiveOperationException roe){
@@ -944,6 +935,17 @@ public class PMMLPlugin extends ComplexPlugin {
 	static
 	private boolean checkType(JType type, String fullName){
 		return (type.fullName()).equals(fullName);
+	}
+
+	@SuppressWarnings(
+		value = {"deprecation"}
+	)
+	static
+	private void ensureAccessible(AccessibleObject accessibleObject){
+
+		if(!accessibleObject.isAccessible()){
+			accessibleObject.setAccessible(true);
+		}
 	}
 
 	static

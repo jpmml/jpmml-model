@@ -60,6 +60,9 @@ public class NoJavadocPlugin extends Plugin {
 		}
 	}
 
+	@SuppressWarnings(
+		value = {"deprecation"}
+	)
 	static
 	private void nullifyJavadoc(JDocCommentable commentable){
 		Class<?> clazz = commentable.getClass();
