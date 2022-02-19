@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
@@ -56,7 +57,7 @@ public class Example {
 		return JAXBUtil.createUnmarshaller();
 	}
 
-	public PMML unmarshalPMML(File file) throws JAXBException, SAXException, IOException {
+	public PMML unmarshalPMML(File file) throws IOException, ParserConfigurationException, SAXException, JAXBException {
 		Unmarshaller unmarshaller = createUnmarshaller();
 
 		try(InputStream is = new FileInputStream(file)){
@@ -70,7 +71,7 @@ public class Example {
 		return JAXBUtil.createMarshaller();
 	}
 
-	public void marshalPMML(PMML pmml, File file) throws JAXBException, IOException {
+	public void marshalPMML(PMML pmml, File file) throws IOException, JAXBException {
 		Marshaller marshaller = createMarshaller();
 
 		try(OutputStream os = new FileOutputStream(file)){

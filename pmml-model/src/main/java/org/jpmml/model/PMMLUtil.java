@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamResult;
@@ -62,7 +63,7 @@ public class PMMLUtil {
 	 * @see JAXBUtil#unmarshalPMML(Source)
 	 */
 	static
-	public PMML unmarshal(InputStream is) throws SAXException, JAXBException {
+	public PMML unmarshal(InputStream is) throws ParserConfigurationException, SAXException, JAXBException {
 		Source source = SAXUtil.createFilteredSource(is, new ImportFilter());
 
 		return JAXBUtil.unmarshalPMML(source);

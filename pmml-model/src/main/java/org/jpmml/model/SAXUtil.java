@@ -5,6 +5,9 @@ package org.jpmml.model;
 
 import java.io.InputStream;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
 
 import org.jpmml.model.filters.CountFilter;
@@ -16,7 +19,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
 import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 public class SAXUtil {
 
@@ -31,16 +33,27 @@ public class SAXUtil {
 	 * @see DepthFilter
 	 */
 	static
-	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws SAXException {
-		XMLReader reader = XMLReaderFactory.createXMLReader();
-		reader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-		reader.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
-		reader.setFeature("http://xml.org/sax/features/external-general-entities", false);
-		reader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+	public SAXSource createFilteredSource(InputStream is, XMLFilter... filters) throws ParserConfigurationException, SAXException {
+		XMLReader reader = createXMLReader();
 
 		reader = createFilteredReader(reader, filters);
 
 		return new SAXSource(reader, new InputSource(is));
+	}
+
+	static
+	public XMLReader createXMLReader() throws ParserConfigurationException, SAXException {
+		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
+		parserFactory.setNamespaceAware(true);
+
+		parserFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+		parserFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+		parserFactory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+		parserFactory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+
+		SAXParser parser = parserFactory.newSAXParser();
+
+		return parser.getXMLReader();
 	}
 
 	static

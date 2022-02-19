@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
@@ -22,7 +23,7 @@ public class ResourceUtil {
 	}
 
 	static
-	public PMML unmarshal(Class<?> clazz, XMLFilter... filters) throws IOException, SAXException, JAXBException {
+	public PMML unmarshal(Class<?> clazz, XMLFilter... filters) throws IOException, ParserConfigurationException, SAXException, JAXBException {
 
 		try(InputStream is = getStream(clazz)){
 			Source source = SAXUtil.createFilteredSource(is, filters);

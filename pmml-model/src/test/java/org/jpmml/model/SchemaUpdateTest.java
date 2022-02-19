@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXTransformerFactory;
@@ -20,13 +21,12 @@ import org.dmg.pmml.Version;
 import org.jpmml.model.filters.ExportFilter;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 abstract
 public class SchemaUpdateTest {
 
 	static
-	public byte[] upgradeToLatest(byte[] bytes) throws IOException, JAXBException, SAXException {
+	public byte[] upgradeToLatest(byte[] bytes) throws IOException, ParserConfigurationException, SAXException, JAXBException {
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 
 		try(InputStream is = new ByteArrayInputStream(bytes)){
@@ -39,7 +39,7 @@ public class SchemaUpdateTest {
 	}
 
 	static
-	public byte[] downgrade(byte[] bytes, Version version) throws IOException, TransformerConfigurationException, SAXException {
+	public byte[] downgrade(byte[] bytes, Version version) throws IOException, TransformerConfigurationException, ParserConfigurationException, SAXException {
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 
 		SAXTransformerFactory transformerFactory = (SAXTransformerFactory)TransformerFactory.newInstance();
@@ -47,7 +47,7 @@ public class SchemaUpdateTest {
 		TransformerHandler transformer = transformerFactory.newTransformerHandler();
 		transformer.setResult(new StreamResult(result));
 
-		ExportFilter exportFilter = new ExportFilter(XMLReaderFactory.createXMLReader(), version);
+		ExportFilter exportFilter = new ExportFilter(SAXUtil.createXMLReader(), version);
 		exportFilter.setContentHandler(transformer);
 
 		try(InputStream is = new ByteArrayInputStream(bytes)){
