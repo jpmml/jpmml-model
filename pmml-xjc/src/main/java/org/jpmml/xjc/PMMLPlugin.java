@@ -937,9 +937,7 @@ public class PMMLPlugin extends ComplexPlugin {
 		return (type.fullName()).equals(fullName);
 	}
 
-	@SuppressWarnings(
-		value = {"deprecation"}
-	)
+	@SuppressWarnings("deprecation")
 	static
 	private void ensureAccessible(AccessibleObject accessibleObject){
 

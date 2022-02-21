@@ -30,9 +30,7 @@ public class PMMLUtil {
 	 *
 	 * @see ServiceLoaderUtil#load(Class, ClassLoader)
 	 */
-	@SuppressWarnings(
-		value = {"cast", "resource"}
-	)
+	@SuppressWarnings({"cast", "resource"})
 	static
 	public PMML load(URL url) throws IOException {
 		URLClassLoader clazzLoader = URLClassLoader.newInstance(new URL[]{url});

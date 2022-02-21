@@ -90,9 +90,7 @@ public class SerializationUtil {
 		return clone(object, null);
 	}
 
-	@SuppressWarnings(
-		value = {"unchecked"}
-	)
+	@SuppressWarnings("unchecked")
 	static
 	public <E> E clone(E object, ClassLoader clazzLoader) throws ClassNotFoundException, IOException {
 		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);

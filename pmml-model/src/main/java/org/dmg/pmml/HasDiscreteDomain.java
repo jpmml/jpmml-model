@@ -11,9 +11,7 @@ public interface HasDiscreteDomain<E extends Field<E> & HasDiscreteDomain<E>> {
 
 	List<Value> getValues();
 
-	@SuppressWarnings(
-		value = {"unchecked"}
-	)
+	@SuppressWarnings("unchecked")
 	default
 	E addValues(Value.Property property, Object... values){
 		List<Value> pmmlValues = getValues();

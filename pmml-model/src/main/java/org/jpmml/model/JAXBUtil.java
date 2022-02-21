@@ -162,9 +162,7 @@ public class JAXBUtil {
 		return clone(getContext(), object);
 	}
 
-	@SuppressWarnings(
-		value = {"unchecked"}
-	)
+	@SuppressWarnings("unchecked")
 	static
 	public <E extends PMMLObject> E clone(JAXBContext context, E object) throws JAXBException, IOException {
 		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);

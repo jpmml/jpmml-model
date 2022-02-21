@@ -41,9 +41,7 @@ public class KryoUtil {
 		kryo.register(TripletonList.class, new TripletonListSerializer());
 	}
 
-	@SuppressWarnings(
-		value = {"unchecked"}
-	)
+	@SuppressWarnings("unchecked")
 	static
 	public <E> E clone(Kryo kryo, E object){
 		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);
