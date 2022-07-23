@@ -131,7 +131,7 @@ Copyright (c) 2016 Villu Ruusmann
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='Apply' or @name='Discretize' or @name='MapValues']/xs:complexType/xs:attribute[@name='mapMissingTo']/@type">
+	<xsl:template match="xs:element[@name='Apply' or @name='Discretize' or @name='FieldRef' or @name='MapValues']/xs:complexType/xs:attribute[@name='mapMissingTo']/@type">
 		<xsl:attribute name="type">xs:anySimpleType</xsl:attribute>
 	</xsl:template>
 

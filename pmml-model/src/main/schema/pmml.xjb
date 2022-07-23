@@ -1033,7 +1033,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='FieldRef']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;FieldRef&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;FieldRef,java.lang.String&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;FieldRef,java.lang.Object&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='FieldRef']/xsd:complexType/xsd:attribute[@name='mapMissingTo']">
