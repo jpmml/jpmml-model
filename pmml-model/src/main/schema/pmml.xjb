@@ -131,7 +131,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;Apply,java.lang.Object&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Apply,java.lang.String&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Apply,java.lang.Object&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType/xsd:attribute[@name='defaultValue']">
