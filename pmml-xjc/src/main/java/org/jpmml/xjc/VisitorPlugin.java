@@ -160,6 +160,7 @@ public class VisitorPlugin extends Plugin {
 			{"Predicate"},
 			{"general_regression.PredictorList"},
 			{"rule_set.Rule", "Entity<?>"},
+			{"ScoreDistribution"},
 			{"Similarity", "Measure"},
 			{"SparseArray<?>"},
 			{"regression.Term"},

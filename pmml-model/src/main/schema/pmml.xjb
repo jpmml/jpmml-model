@@ -2741,7 +2741,10 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ScoreDistribution']/xsd:complexType">
-			<inheritance:implements>org.dmg.pmml.HasRecordCount&lt;ScoreDistribution&gt;</inheritance:implements>
+			<inheritance:extends>org.dmg.pmml.ScoreDistribution</inheritance:extends>
+			<jaxb:class
+				name="ComplexScoreDistribution"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ScoreDistribution']/xsd:complexType/xsd:attribute[@name='confidence']">

@@ -117,6 +117,21 @@ public class JacksonPlugin extends Plugin {
 							.param(("node").equals(propertyName) ? "as" : "contentAs", JExpr.dotclass(complexNodeClass));
 					} else
 
+					// XXX
+					if(("scoreDistributions").equals(propertyName)){
+						JAnnotationUse jsonProperty = fieldVar.annotate(JsonProperty.class)
+							.param("value", "ScoreDistribution");
+
+						JClass complexScoreDistributionClass = codeModel.ref("org.dmg.pmml.ComplexScoreDistribution");
+
+						JAnnotationUse jsonTypeInfo = fieldVar.annotate(JsonTypeInfo.class)
+							.param("use", JsonTypeInfo.Id.NONE)
+							.param("defaultImpl", JExpr.dotclass(complexScoreDistributionClass));
+
+						JAnnotationUse jsonDeserialize = fieldVar.annotate(JsonDeserialize.class)
+							.param("contentAs", JExpr.dotclass(complexScoreDistributionClass));
+					} else
+
 					if(types.size() == 1){
 						CTypeRef type = types.get(0);
 

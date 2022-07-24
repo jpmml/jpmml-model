@@ -4,12 +4,14 @@
 	<DataDictionary/>
 	<TreeModel>
 		<MiningSchema/>
-		<Node id="parent" recordCount="1">
+		<Node id="parent">
 			<True/>
 			<Node id="false child" score="false">
 				<False/>
+				<ScoreDistribution value="false" recordCount="0"/>
+				<ScoreDistribution value="true" recordCount="0"/>
 			</Node>
-			<Node id="true child" score="true" recordCount="1">
+			<Node id="true child" score="true">
 				<True/>
 				<ScoreDistribution value="false" recordCount="0"/>
 				<ScoreDistribution value="true" recordCount="1"/>

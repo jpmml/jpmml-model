@@ -92,6 +92,7 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass measureClass = codeModel.ref("org.dmg.pmml.Measure");
 		JClass nodeClass = codeModel.ref("org.dmg.pmml.tree.Node");
 		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
+		JClass scoreDistributionClass = codeModel.ref("org.dmg.pmml.ScoreDistribution");
 
 		Comparator<CPropertyInfo> comparator = new Comparator<CPropertyInfo>(){
 
@@ -160,13 +161,14 @@ public class PMMLPlugin extends ComplexPlugin {
 				}
 			} // End if
 
-			if((classInfo.shortName).equals("ComplexNode")){
+			if((classInfo.shortName).equals("ComplexNode") || (classInfo.shortName).equals("ComplexScoreDistribution")){
+				String name = classInfo.shortName.replace("Complex", "");
 
 				try {
 					Field elementNameField = CClassInfo.class.getDeclaredField("elementName");
 					ensureAccessible(elementNameField);
 
-					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", "Node"));
+					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", name));
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}
@@ -190,6 +192,10 @@ public class PMMLPlugin extends ComplexPlugin {
 
 					if((classInfo.shortName).equals("ComplexNode") && (privateName).equals("node")){
 						propertyInfo.baseType = nodeClass;
+					} else
+
+					if(((classInfo.shortName).equals("ComplexNode") || (classInfo.shortName).equals("RuleSet") || (classInfo.shortName).equals("SimpleRule")) && (privateName).equals("scoreDistribution")){
+						propertyInfo.baseType = scoreDistributionClass;
 					} else
 
 					if((classInfo.shortName).equals("VectorFields") && (privateName).equals("fieldRefOrCategoricalPredictor")){
@@ -454,7 +460,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				List<JAnnotationUse> fieldVarAnnotations = getAnnotations(fieldVar);
 
 				// XXX
-				if(("node").equals(name) || ("nodes").equals(name)){
+				if(("node").equals(name) || ("nodes").equals(name) || ("scoreDistributions").equals(name)){
 					JAnnotationUse xmlElement = findAnnotation(fieldVarAnnotations, XmlElement.class);
 
 					fieldVarAnnotations.remove(xmlElement);

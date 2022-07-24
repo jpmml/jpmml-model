@@ -17,6 +17,7 @@ public class NodeAdapter extends XmlAdapter<ComplexNode, Node> {
 	@Override
 	public Node unmarshal(ComplexNode value){
 		NodeTransformer nodeTransformer = NodeAdapter.NODE_TRANSFORMER_PROVIDER.get();
+
 		if(nodeTransformer != null){
 			return nodeTransformer.fromComplexNode(value);
 		}
@@ -27,6 +28,7 @@ public class NodeAdapter extends XmlAdapter<ComplexNode, Node> {
 	@Override
 	public ComplexNode marshal(Node node){
 		NodeTransformer nodeTransformer = NodeAdapter.NODE_TRANSFORMER_PROVIDER.get();
+
 		if(nodeTransformer != null){
 			return nodeTransformer.toComplexNode(node);
 		}

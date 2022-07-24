@@ -42,13 +42,27 @@ public class CopyConstructorPlugin extends Plugin {
 		JCodeModel codeModel = model.codeModel;
 
 		JClass nodeClass = codeModel.ref("org.dmg.pmml.tree.Node");
+		JClass scoreDistributionClass = codeModel.ref("org.dmg.pmml.ScoreDistribution");
 		JClass copyConstructorAnnotation = codeModel.ref("org.jpmml.model.annotations.CopyConstructor");
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			if(!checkType(beanClazz, "org.dmg.pmml.tree.ComplexNode")){
+			JClass beanSuperClazz;
+			String objectParamName;
+
+			if(checkType(beanClazz, "org.dmg.pmml.tree.ComplexNode")){
+				beanSuperClazz = nodeClass;
+				objectParamName = "node";
+			} else
+
+			if(checkType(beanClazz, "org.dmg.pmml.ComplexScoreDistribution")){
+				beanSuperClazz = scoreDistributionClass;
+				objectParamName = "scoreDistribution";
+			} else
+
+			{
 				continue;
 			}
 
@@ -60,7 +74,7 @@ public class CopyConstructorPlugin extends Plugin {
 			JMethod copyConstructor = beanClazz.constructor(JMod.PUBLIC);
 			copyConstructor.annotate(copyConstructorAnnotation);
 
-			JVar nodeParam = copyConstructor.param(nodeClass, "node");
+			JVar objectParam = copyConstructor.param(beanSuperClazz, objectParamName);
 
 			JBlock body = copyConstructor.body();
 
@@ -72,22 +86,22 @@ public class CopyConstructorPlugin extends Plugin {
 				String setterName = "set" + propertyInfo.getName(true);
 
 				if(propertyInfo.isCollection()){
-					JBlock block = body._if(nodeParam.invoke("has" + propertyInfo.getName(true)))._then();
+					JBlock block = body._if(objectParam.invoke("has" + propertyInfo.getName(true)))._then();
 
-					block.add(JExpr.invoke(getterName).invoke("addAll").arg(nodeParam.invoke(getterName)));
+					block.add(JExpr.invoke(getterName).invoke("addAll").arg(objectParam.invoke(getterName)));
 				} else
 
 				{
 					JBlock block = body;
 
-					block.add(JExpr.invoke(setterName).arg(nodeParam.invoke(getterName)));
+					block.add(JExpr.invoke(setterName).arg(objectParam.invoke(getterName)));
 				}
 			}
 
-			JMethod toComplexNodeMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "toComplexNode");
-			toComplexNodeMethod.annotate(Override.class);
+			JMethod toComplexObjectMethod = beanClazz.method(JMod.PUBLIC, beanClazz, "to" + beanClazz.name());
+			toComplexObjectMethod.annotate(Override.class);
 
-			toComplexNodeMethod.body()._return(JExpr._this());
+			toComplexObjectMethod.body()._return(JExpr._this());
 		}
 
 		return true;

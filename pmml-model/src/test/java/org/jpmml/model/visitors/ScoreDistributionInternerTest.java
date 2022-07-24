@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.True;
 import org.dmg.pmml.tree.ComplexNode;
@@ -17,8 +18,8 @@ public class ScoreDistributionInternerTest {
 
 	@Test
 	public void intern(){
-		ScoreDistribution left = new ScoreDistribution("event", 0.33d);
-		ScoreDistribution right = new ScoreDistribution("event", 0.33d);
+		ScoreDistribution left = new ComplexScoreDistribution("event", 0.33d);
+		ScoreDistribution right = new ComplexScoreDistribution("event", 0.33d);
 
 		Node leftChild = createNode(left);
 		Node rightChild = createNode(right);
@@ -43,7 +44,7 @@ public class ScoreDistributionInternerTest {
 
 	static
 	private Node createNode(ScoreDistribution event){
-		ScoreDistribution noEvent = new ScoreDistribution("no-event", 1d - (event.requireRecordCount()).doubleValue());
+		ScoreDistribution noEvent = new ComplexScoreDistribution("no-event", 1d - (event.requireRecordCount()).doubleValue());
 
 		Node node = new ComplexNode()
 			.addScoreDistributions(event, noEvent);

@@ -10,6 +10,7 @@ import java.util.Set;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.tree.ClassifierNode;
 import org.dmg.pmml.tree.ComplexNode;
 import org.dmg.pmml.tree.CountingBranchNode;
 import org.dmg.pmml.tree.CountingLeafNode;
@@ -74,7 +75,7 @@ public class NodeAdapterTest {
 
 				visitedNodes.add(node);
 
-				if(("branch").equals(id)){
+				if(("parent").equals(id)){
 					assertTrue(node instanceof CountingBranchNode);
 				} else
 
@@ -84,7 +85,7 @@ public class NodeAdapterTest {
 				} else
 
 				if(("true child").equals(id)){
-					assertTrue(node instanceof CountingLeafNode);
+					assertTrue(node instanceof ClassifierNode);
 				} else
 
 				{
