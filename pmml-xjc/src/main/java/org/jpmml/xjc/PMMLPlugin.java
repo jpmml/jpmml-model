@@ -562,6 +562,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"Node"}, {"requireDefaultChild"}},
 				{{"ParameterCell"}, {"getParameterName", "requireParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
 				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},
+				{{"ScoreDistribution"}, {"getConfidence", "setConfidence", "getProbability", "requireProbability", "setProbability"}},
 				{{"SparseArray"}, {"getDefaultValue", "setDefaultValue", "hasEntries", "getEntries", "addEntries", "hasIndices", "getIndices", "addIndices", "getN", "setN"}},
 				{{"Term"}, {"getCoefficient", "requireCoefficient", "setCoefficient"}}
 			};
@@ -593,7 +594,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasOpType", "Field"}, {"getOpType", "setOpType"}},
 				{{"HasPredicate", "Node", "Rule"}, {"getPredicate", "requirePredicate", "setPredicate"}},
 				{{"HasReasonCode"}, {"getReasonCode", "setReasonCode"}},
-				{{"HasRecordCount", "Node"}, {"getRecordCount", "setRecordCount"}},
+				{{"HasRecordCount", "Node", "ScoreDistribution"}, {"getRecordCount", "setRecordCount"}},
 				{{"HasRegressionTables"}, {"getNormalizationMethod", "setNormalizationMethod", "hasRegressionTables", "getRegressionTables", "requireRegressionTables", "addRegressionTables"}},
 				{{"HasRequiredDataType", "Field"}, {"getDataType", "requireDataType", "setDataType"}},
 				{{"HasRequiredId"}, {"getId", "requireId", "setId"}},
@@ -605,7 +606,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},
 				{{"HasTargetFieldReference"}, {"getTargetField", "setTargetField"}},
 				{{"HasType"}, {"getDataType", "setDataType", "getOpType", "setOpType"}},
-				{{"HasValue"}, {"getValue", "requireValue", "setValue"}},
+				{{"HasValue", "ScoreDistribution"}, {"getValue", "requireValue", "setValue"}},
 				{{"HasValueSet"}, {"getArray", "requireArray", "setArray"}}
 			};
 
