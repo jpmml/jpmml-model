@@ -10,8 +10,10 @@ import org.dmg.pmml.Expression;
 import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLFunctions;
+import org.dmg.pmml.ScoreDistributionTransformer;
 import org.dmg.pmml.adapters.NodeAdapter;
 import org.dmg.pmml.adapters.NodeAdapterTest;
+import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.NodeTransformer;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
@@ -53,13 +55,16 @@ public class JacksonUtilTest {
 		PMML pmml;
 
 		NodeTransformer defaultNodeTransformer = NodeAdapter.NODE_TRANSFORMER_PROVIDER.get();
+		ScoreDistributionTransformer defaultScoreDistributionTransformer = ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.get();
 
 		try {
 			NodeAdapter.NODE_TRANSFORMER_PROVIDER.set(null);
+			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(null);
 
 			pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
 		} finally {
 			NodeAdapter.NODE_TRANSFORMER_PROVIDER.set(defaultNodeTransformer);
+			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(defaultScoreDistributionTransformer);
 		}
 
 		PMML clonedPmml = JacksonUtil.clone(pmml);

@@ -10,6 +10,7 @@ import java.util.Set;
 import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.ScoreDistribution;
+import org.dmg.pmml.ScoreFrequency;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.Node;
@@ -43,7 +44,15 @@ public class ScoreDistributionAdapterTest {
 					assertFalse(node.hasScoreDistributions());
 				} else
 
-				if(("false child").equals(id) || ("true child").equals(id)){
+				if(("false child").equals(id)){
+					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
+
+					for(ScoreDistribution scoreDistribution : scoreDistributions){
+						assertTrue(scoreDistribution instanceof ScoreFrequency);
+					}
+				} else
+
+				if(("true child").equals(id)){
 					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
 
 					for(ScoreDistribution scoreDistribution : scoreDistributions){

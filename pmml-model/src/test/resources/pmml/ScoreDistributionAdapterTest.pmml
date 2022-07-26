@@ -13,8 +13,8 @@
 			</Node>
 			<Node id="true child" score="true">
 				<True/>
-				<ScoreDistribution value="false" recordCount="0"/>
-				<ScoreDistribution value="true" recordCount="1"/>
+				<ScoreDistribution value="false" recordCount="0" probability="0"/>
+				<ScoreDistribution value="true" recordCount="1" probability="1"/>
 			</Node>
 		</Node>
 	</TreeModel>

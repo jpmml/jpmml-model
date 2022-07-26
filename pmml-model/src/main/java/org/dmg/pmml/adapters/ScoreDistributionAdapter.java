@@ -7,6 +7,7 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.ScoreDistributionTransformer;
+import org.dmg.pmml.SimplifyingScoreDistributionTransformer;
 
 public class ScoreDistributionAdapter extends XmlAdapter<ComplexScoreDistribution, ScoreDistribution> {
 
@@ -36,7 +37,7 @@ public class ScoreDistributionAdapter extends XmlAdapter<ComplexScoreDistributio
 
 		@Override
 		public ScoreDistributionTransformer initialValue(){
-			return null;
+			return SimplifyingScoreDistributionTransformer.INSTANCE;
 		}
 	};
 }
