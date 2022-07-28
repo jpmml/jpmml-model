@@ -22,9 +22,10 @@ import org.jpmml.model.annotations.ValueConstructor;
 @JsonRootName("ScoreDistribution")
 @JsonPropertyOrder({
 	"value",
-	"recordCount"
+	"recordCount",
+	"probability"
 })
-public class ScoreFrequency extends SimpleScoreDistribution {
+public class ScoreProbability extends SimpleScoreDistribution {
 
 	@XmlAttribute(name = "recordCount")
 	@XmlJavaTypeAdapter(NumberAdapter.class)
@@ -32,22 +33,28 @@ public class ScoreFrequency extends SimpleScoreDistribution {
 	@JsonProperty("recordCount")
 	private Number recordCount;
 
+	@XmlAttribute(name = "probability")
+	@XmlJavaTypeAdapter(NumberAdapter.class)
+	@JsonProperty("probability")
+	private Number probability;
 
-	public ScoreFrequency(){
+	public ScoreProbability(){
 	}
 
 	@ValueConstructor
-	public ScoreFrequency(@Property("value") Object value, @Property("recordCount") Number recordCount){
+	public ScoreProbability(@Property("value") Object value, @Property("recordCount") Number recordCount, @Property("probability") Number probability){
 		super(value);
 
 		this.recordCount = recordCount;
+		this.probability = probability;
 	}
 
 	@CopyConstructor
-	public ScoreFrequency(ScoreDistribution scoreDistribution){
+	public ScoreProbability(ScoreDistribution scoreDistribution){
 		super(scoreDistribution);
 
 		setRecordCount(scoreDistribution.getRecordCount());
+		setProbability(scoreDistribution.getProbability());
 	}
 
 	@Override
@@ -66,8 +73,30 @@ public class ScoreFrequency extends SimpleScoreDistribution {
 	}
 
 	@Override
-	public ScoreFrequency setRecordCount(@Property("recordCount") Number recordCount){
+	public ScoreProbability setRecordCount(@Property("recordCount") Number recordCount){
 		this.recordCount = recordCount;
+
+		return this;
+	}
+
+	@Override
+	public Number requireProbability(){
+
+		if(this.probability == null){
+			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXSCOREDISTRIBUTION_PROBABILITY);
+		}
+
+		return this.probability;
+	}
+
+	@Override
+	public Number getProbability(){
+		return this.probability;
+	}
+
+	@Override
+	public ScoreProbability setProbability(@Property("probability") Number probability){
+		this.probability = probability;
 
 		return this;
 	}

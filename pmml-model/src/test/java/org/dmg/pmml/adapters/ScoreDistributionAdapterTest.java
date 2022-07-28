@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.ScoreFrequency;
+import org.dmg.pmml.ScoreProbability;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.Node;
@@ -56,7 +56,7 @@ public class ScoreDistributionAdapterTest {
 					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
 
 					for(ScoreDistribution scoreDistribution : scoreDistributions){
-						assertTrue(scoreDistribution instanceof ComplexScoreDistribution);
+						assertTrue(scoreDistribution instanceof ScoreProbability);
 					}
 				} else
 

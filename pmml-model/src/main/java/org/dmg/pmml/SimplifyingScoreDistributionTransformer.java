@@ -21,11 +21,17 @@ public class SimplifyingScoreDistributionTransformer implements ScoreDistributio
 			return scoreDistribution;
 		} // End if
 
-		if(scoreDistribution.getConfidence() != null || scoreDistribution.getProbability() != null){
+		if(scoreDistribution.getConfidence() != null){
 			return scoreDistribution;
-		}
+		} // End if
 
-		return new ScoreFrequency(scoreDistribution);
+		if(scoreDistribution.getProbability() != null){
+			return new ScoreProbability(scoreDistribution);
+		} else
+
+		{
+			return new ScoreFrequency(scoreDistribution);
+		}
 	}
 
 	public static final SimplifyingScoreDistributionTransformer INSTANCE = new SimplifyingScoreDistributionTransformer();
