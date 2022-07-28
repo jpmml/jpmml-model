@@ -18,10 +18,10 @@ public class ScoreDistributionInternerTest {
 
 	@Test
 	public void intern(){
-		ScoreDistribution left = new ComplexScoreDistribution("event")
+		ScoreDistribution left = new ComplexScoreDistribution("event", null)
 			.setProbability(0.33d);
 
-		ScoreDistribution right = new ComplexScoreDistribution("event")
+		ScoreDistribution right = new ComplexScoreDistribution("event", null)
 			.setProbability(0.33d);
 
 		Node leftChild = createNode(left);
@@ -47,7 +47,7 @@ public class ScoreDistributionInternerTest {
 
 	static
 	private Node createNode(ScoreDistribution event){
-		ScoreDistribution noEvent = new ComplexScoreDistribution("no-event")
+		ScoreDistribution noEvent = new ComplexScoreDistribution("no-event", null)
 			.setProbability(1d - (event.requireProbability()).doubleValue());
 
 		Node node = new ComplexNode()

@@ -13,7 +13,6 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.adapters.NumberAdapter;
 import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.annotations.CopyConstructor;
-import org.jpmml.model.annotations.Optional;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
@@ -27,25 +26,19 @@ import org.jpmml.model.annotations.ValueConstructor;
 })
 public class ScoreProbability extends SimpleScoreDistribution {
 
-	@XmlAttribute(name = "recordCount")
-	@XmlJavaTypeAdapter(NumberAdapter.class)
-	@Optional(org.dmg.pmml.Version.XPMML)
-	@JsonProperty("recordCount")
-	private Number recordCount;
-
 	@XmlAttribute(name = "probability")
 	@XmlJavaTypeAdapter(NumberAdapter.class)
 	@JsonProperty("probability")
 	private Number probability;
+
 
 	public ScoreProbability(){
 	}
 
 	@ValueConstructor
 	public ScoreProbability(@Property("value") Object value, @Property("recordCount") Number recordCount, @Property("probability") Number probability){
-		super(value);
+		super(value, recordCount);
 
-		this.recordCount = recordCount;
 		this.probability = probability;
 	}
 
@@ -53,30 +46,7 @@ public class ScoreProbability extends SimpleScoreDistribution {
 	public ScoreProbability(ScoreDistribution scoreDistribution){
 		super(scoreDistribution);
 
-		setRecordCount(scoreDistribution.getRecordCount());
 		setProbability(scoreDistribution.getProbability());
-	}
-
-	@Override
-	public Number requireRecordCount(){
-
-		if(this.recordCount == null){
-			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXSCOREDISTRIBUTION_RECORDCOUNT);
-		}
-
-		return this.recordCount;
-	}
-
-	@Override
-	public Number getRecordCount(){
-		return this.recordCount;
-	}
-
-	@Override
-	public ScoreProbability setRecordCount(@Property("recordCount") Number recordCount){
-		this.recordCount = recordCount;
-
-		return this;
 	}
 
 	@Override
