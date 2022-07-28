@@ -433,7 +433,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='BayesOutput']/xsd:complexType/xsd:attribute[@name='fieldName']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
 			<jaxb:property
-				name="field"
+				name="targetField"
 			/>
 		</jaxb:bindings>
 
