@@ -76,6 +76,9 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template match="xs:element[@name='BayesOutput']/xs:complexType/xs:attribute[@name='fieldName']/@use">
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='ScoreDistribution']/xs:complexType/xs:attribute[@name='recordCount']/@use">
+	</xsl:template>
+
 	<!--
 	Replace xs:string with enum
 	-->

@@ -8,7 +8,6 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.dmg.pmml.adapters.NumberAdapter;
 import org.dmg.pmml.adapters.ObjectAdapter;
 import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.annotations.CopyConstructor;
@@ -25,25 +24,18 @@ public class SimpleScoreDistribution extends ScoreDistribution {
 	@JsonProperty("value")
 	private Object value;
 
-	@XmlAttribute(name = "recordCount", required = true)
-	@XmlJavaTypeAdapter(NumberAdapter.class)
-	@JsonProperty("recordCount")
-	private Number recordCount;
-
 
 	public SimpleScoreDistribution(){
 	}
 
 	@ValueConstructor
-	public SimpleScoreDistribution(@Property("value") Object value, @Property("recordCount") Number recordCount){
+	public SimpleScoreDistribution(@Property("value") Object value){
 		this.value = value;
-		this.recordCount = recordCount;
 	}
 
 	@CopyConstructor
 	public SimpleScoreDistribution(ScoreDistribution scoreDistribution){
 		setValue(scoreDistribution.getValue());
-		setRecordCount(scoreDistribution.getRecordCount());
 	}
 
 	@Override
@@ -64,28 +56,6 @@ public class SimpleScoreDistribution extends ScoreDistribution {
 	@Override
 	public SimpleScoreDistribution setValue(@Property("value") Object value){
 		this.value = value;
-
-		return this;
-	}
-
-	@Override
-	public Number requireRecordCount(){
-
-		if(this.recordCount == null){
-			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXSCOREDISTRIBUTION_RECORDCOUNT);
-		}
-
-		return this.recordCount;
-	}
-
-	@Override
-	public Number getRecordCount(){
-		return this.recordCount;
-	}
-
-	@Override
-	public SimpleScoreDistribution setRecordCount(@Property("recordCount") Number recordCount){
-		this.recordCount = recordCount;
 
 		return this;
 	}
