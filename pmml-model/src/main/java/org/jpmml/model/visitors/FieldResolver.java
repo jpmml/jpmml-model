@@ -285,6 +285,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 		Segmentation.MultipleModelMethod multipleModelMethod = segmentation.requireMultipleModelMethod();
 		switch(multipleModelMethod){
 			case MODEL_CHAIN:
+			case MULTI_MODEL_CHAIN:
 				break;
 			default:
 				return Collections.emptyList();

@@ -58,6 +58,14 @@ Copyright (c) 2016 Villu Ruusmann
 		</xsl:copy>
 	</xsl:template>
 
+	<xsl:template match="xs:simpleType[@name='MULTIPLE-MODEL-METHOD']/xs:restriction">
+		<xs:restriction>
+			<xsl:copy-of select="@*"/>
+			<xsl:copy-of select="node()"/>
+			<xs:enumeration value="x-multiModelChain"/>
+		</xs:restriction>
+	</xsl:template>
+
 	<xsl:template match="xs:simpleType[@name='RESULT-FEATURE']/xs:restriction">
 		<xs:restriction>
 			<xsl:copy-of select="@*"/>
