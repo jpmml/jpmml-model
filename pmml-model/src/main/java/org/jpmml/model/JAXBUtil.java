@@ -110,6 +110,11 @@ public class JAXBUtil {
 	}
 
 	static
+	public void setContext(JAXBContext context){
+		JAXBUtil.context = context;
+	}
+
+	static
 	public Class<?>[] getObjectFactoryClasses(){
 		return new Class<?>[]{
 			// org.dmg.pmml.*
