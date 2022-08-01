@@ -265,6 +265,23 @@ public class ReflectionUtil {
 	}
 
 	static
+	public Field getSerialVersionUIDField(Class<?> clazz){
+
+		while(clazz != null){
+
+			try {
+				return clazz.getDeclaredField("serialVersionUID");
+			} catch(NoSuchFieldException nsfe){
+				// Ignored
+			}
+
+			clazz = clazz.getSuperclass();
+		}
+
+		throw new RuntimeException(new NoSuchFieldException("serialVersionUID"));
+	}
+
+	static
 	public List<Field> getAttributeFields(){
 		List<Class<?>> clazzes = Arrays.asList(
 			org.dmg.pmml.PMMLAttributes.class,

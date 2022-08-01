@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlTransient;
+import org.jpmml.model.ReflectionUtil;
 import org.xml.sax.Locator;
 
 @XmlAccessorType (
@@ -50,6 +51,39 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 	@Override
 	public void setLocator(Locator locator){
 		this.locator = locator;
+	}
+
+	static
+	public int[] getSchemaVersion(){
+		return getSchemaVersion(PMML.class);
+	}
+
+	static
+	public int[] getSchemaVersion(Class<? extends PMMLObject> clazz){
+		long serialVersionUID;
+
+		try {
+			java.lang.reflect.Field serialVersionUIDField = ReflectionUtil.getSerialVersionUIDField(clazz);
+
+			if(!serialVersionUIDField.isAccessible()){
+				serialVersionUIDField.setAccessible(true);
+			}
+
+			serialVersionUID = (long)serialVersionUIDField.getLong(null);
+		} catch(ReflectiveOperationException roe){
+			throw new RuntimeException(roe);
+		}
+
+		int major = (int)((serialVersionUID >> 24) & 0xFF);
+		int minor = (int)((serialVersionUID >> 16) & 0xFF);
+		int patch = (int)((serialVersionUID >> 8) & 0xFF);
+
+		int implementation = (int)(serialVersionUID & 0xFF);
+
+		return new int[]{
+			major, minor, patch,
+			implementation
+		};
 	}
 
 	static
