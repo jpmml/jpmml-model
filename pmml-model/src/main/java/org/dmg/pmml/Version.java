@@ -4,14 +4,14 @@
 package org.dmg.pmml;
 
 public enum Version {
-	PMML_3_0("http://www.dmg.org/PMML-3_0"),
-	PMML_3_1("http://www.dmg.org/PMML-3_1"),
-	PMML_3_2("http://www.dmg.org/PMML-3_2"),
-	PMML_4_0("http://www.dmg.org/PMML-4_0"),
-	PMML_4_1("http://www.dmg.org/PMML-4_1"),
-	PMML_4_2("http://www.dmg.org/PMML-4_2"),
-	PMML_4_3("http://www.dmg.org/PMML-4_3"),
-	PMML_4_4("http://www.dmg.org/PMML-4_4"),
+	PMML_3_0("https://www.dmg.org/PMML-3_0"),
+	PMML_3_1("https://www.dmg.org/PMML-3_1"),
+	PMML_3_2("https://www.dmg.org/PMML-3_2"),
+	PMML_4_0("https://www.dmg.org/PMML-4_0"),
+	PMML_4_1("https://www.dmg.org/PMML-4_1"),
+	PMML_4_2("https://www.dmg.org/PMML-4_2"),
+	PMML_4_3("https://www.dmg.org/PMML-4_3"),
+	PMML_4_4("https://www.dmg.org/PMML-4_4"),
 
 	/**
 	 * Extended PMML
@@ -49,7 +49,7 @@ public enum Version {
 	public String getVersion(){
 		String namespaceURI = getNamespaceURI();
 
-		String version = namespaceURI.substring("http://www.dmg.org/PMML-".length());
+		String version = namespaceURI.substring("https://www.dmg.org/PMML-".length());
 
 		return version.replace('_', '.');
 	}
@@ -87,5 +87,5 @@ public enum Version {
 		throw new IllegalArgumentException("PMML namespace URI " + namespaceURI + " is not supported");
 	}
 
-	private static final String REGEX_PMML_XMLNS = "http://www\\.dmg\\.org/PMML\\-\\d_\\d";
+	private static final String REGEX_PMML_XMLNS = "https://www\\.dmg\\.org/PMML\\-\\d_\\d";
 }

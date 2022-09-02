@@ -99,7 +99,7 @@ public class PMMLFilter extends XMLFilterImpl {
 			return true;
 		}
 
-		return namespaceURI.startsWith("http://www.dmg.org/PMML-");
+		return namespaceURI.startsWith("https://www.dmg.org/PMML-");
 	}
 
 	private String getNamespaceURI(){

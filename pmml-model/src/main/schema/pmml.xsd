@@ -1,4 +1,4 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.dmg.org/PMML-4_4" elementFormDefault="unqualified" targetNamespace="http://www.dmg.org/PMML-4_4"><xs:element name="DefineFunction">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.dmg.org/PMML-4_4" elementFormDefault="unqualified" targetNamespace="https://www.dmg.org/PMML-4_4"><xs:element name="DefineFunction">
   <xs:complexType>
     <xs:sequence>
       <xs:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/>

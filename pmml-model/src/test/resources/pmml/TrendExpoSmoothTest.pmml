@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<PMML xmlns="http://www.dmg.org/PMML-4_0" version="4.0">
+<PMML xmlns="https://www.dmg.org/PMML-4_0" version="4.0">
 	<Header/>
 	<DataDictionary/>
 	<TimeSeriesModel>

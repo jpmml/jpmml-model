@@ -16,7 +16,7 @@ import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlRootElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlRootElement(name = "Node", namespace = "https://www.dmg.org/PMML-4_4")
 @XmlType(name = "", propOrder = {
 	"predicate"
 })

@@ -168,7 +168,7 @@ public class PMMLPlugin extends ComplexPlugin {
 					Field elementNameField = CClassInfo.class.getDeclaredField("elementName");
 					ensureAccessible(elementNameField);
 
-					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", name));
+					elementNameField.set(classInfo, new QName("https://www.dmg.org/PMML-4_4", name));
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}

@@ -34,11 +34,11 @@ public class SimpleNode extends Node {
 	private Object score = null;
 
 	@XmlElements({
-		@XmlElement(name = "SimplePredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimplePredicate.class),
-		@XmlElement(name = "CompoundPredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.CompoundPredicate.class),
-		@XmlElement(name = "SimpleSetPredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimpleSetPredicate.class),
-		@XmlElement(name = "True", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.True.class),
-		@XmlElement(name = "False", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.False.class)
+		@XmlElement(name = "SimplePredicate", namespace = "https://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimplePredicate.class),
+		@XmlElement(name = "CompoundPredicate", namespace = "https://www.dmg.org/PMML-4_4", type = org.dmg.pmml.CompoundPredicate.class),
+		@XmlElement(name = "SimpleSetPredicate", namespace = "https://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimpleSetPredicate.class),
+		@XmlElement(name = "True", namespace = "https://www.dmg.org/PMML-4_4", type = org.dmg.pmml.True.class),
+		@XmlElement(name = "False", namespace = "https://www.dmg.org/PMML-4_4", type = org.dmg.pmml.False.class)
 	})
 	@JsonProperty("Predicate")
 	@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)

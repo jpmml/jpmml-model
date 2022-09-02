@@ -28,7 +28,7 @@ import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlRootElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlRootElement(name = "Node", namespace = "https://www.dmg.org/PMML-4_4")
 @XmlType(name = "", propOrder = {
 	"predicate",
 	"scoreDistributions",
@@ -64,12 +64,12 @@ public class ClassifierNode extends SimpleNode {
 	@JsonProperty("defaultChild")
 	private Object defaultChild = null;
 
-	@XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4")
+	@XmlElement(name = "ScoreDistribution", namespace = "https://www.dmg.org/PMML-4_4")
 	@JsonProperty("ScoreDistribution")
 	private List<ScoreDistribution> scoreDistributions = null;
 
 	@XmlElements({
-		@XmlElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4", type = ComplexNode.class)
+		@XmlElement(name = "Node", namespace = "https://www.dmg.org/PMML-4_4", type = ComplexNode.class)
 	})
 	@JsonProperty("Node")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexNode.class)

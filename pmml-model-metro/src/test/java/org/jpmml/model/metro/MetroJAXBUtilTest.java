@@ -56,7 +56,7 @@ public class MetroJAXBUtilTest {
 			string = os.toString("UTF-8");
 		}
 
-		assertTrue(string.contains("<PMML xmlns=\"http://www.dmg.org/PMML-4_4\""));
+		assertTrue(string.contains("<PMML xmlns=\"https://www.dmg.org/PMML-4_4\""));
 		assertTrue(string.contains(" version=\"4.4\">"));
 		assertTrue(string.contains("<RegressionModel>"));
 		assertTrue(string.contains("</RegressionModel>"));

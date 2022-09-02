@@ -13,21 +13,21 @@ public class VersionTest {
 	public void forNamespaceURI(){
 
 		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-2_0");
+			Version.forNamespaceURI("https://www.dmg.org/PMML-2_0");
 
 			fail();
 		} catch(IllegalArgumentException iae){
 			// Ignored
 		}
 
-		Version.forNamespaceURI("http://www.dmg.org/PMML-3_0");
-		Version.forNamespaceURI("http://www.dmg.org/PMML-3_2");
-		Version.forNamespaceURI("http://www.dmg.org/PMML-4_0");
-		Version.forNamespaceURI("http://www.dmg.org/PMML-4_3");
-		Version.forNamespaceURI("http://www.dmg.org/PMML-4_4");
+		Version.forNamespaceURI("https://www.dmg.org/PMML-3_0");
+		Version.forNamespaceURI("https://www.dmg.org/PMML-3_2");
+		Version.forNamespaceURI("https://www.dmg.org/PMML-4_0");
+		Version.forNamespaceURI("https://www.dmg.org/PMML-4_3");
+		Version.forNamespaceURI("https://www.dmg.org/PMML-4_4");
 
 		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-4_5");
+			Version.forNamespaceURI("https://www.dmg.org/PMML-4_5");
 
 			fail();
 		} catch(IllegalArgumentException iae){
@@ -35,7 +35,7 @@ public class VersionTest {
 		}
 
 		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-5_0");
+			Version.forNamespaceURI("https://www.dmg.org/PMML-5_0");
 
 			fail();
 		} catch(IllegalArgumentException iae){
