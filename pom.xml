@@ -201,9 +201,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<source>1.8</source>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
+					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
 			</plugin>
@@ -230,7 +230,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.4.0</version>
+				<version>3.4.1</version>
 				<configuration>
 					<source>1.8</source>
 					<javadocVersion>1.8</javadocVersion>
@@ -270,7 +270,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>animal-sniffer-maven-plugin</artifactId>
-				<version>1.21</version>
+				<version>1.22</version>
 				<executions>
 					<execution>
 						<id>android-21</id>
