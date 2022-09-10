@@ -291,7 +291,7 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 				return Collections.emptyList();
 		}
 
-		List<Segment> segments = segmentation.getSegments();
+		List<Segment> segments = segmentation.requireSegments();
 		for(Segment segment : segments){
 			Model model = segment.requireModel();
 
