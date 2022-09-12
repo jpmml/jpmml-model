@@ -67,8 +67,9 @@ public class ResourceUtil {
 
 	static
 	public InputStream getStream(Version version){
-		String namespaceUri = version.getNamespaceURI();
-		String name = namespaceUri.substring(namespaceUri.lastIndexOf('/') + 1);
+		String namespaceURI = version.getNamespaceURI();
+
+		String name = namespaceURI.substring(namespaceURI.lastIndexOf('/') + 1);
 
 		return getResourceAsStream(name.toLowerCase());
 	}

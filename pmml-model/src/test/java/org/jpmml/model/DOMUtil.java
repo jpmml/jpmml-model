@@ -132,14 +132,14 @@ public class DOMUtil {
 		}
 
 		@Override
-		public String getPrefix(String namespaceUri){
+		public String getPrefix(String namespaceURI){
 			Document document = getDocument();
 
-			return document.lookupPrefix(namespaceUri);
+			return document.lookupPrefix(namespaceURI);
 		}
 
 		@Override
-		public Iterator<String> getPrefixes(String namespaceUri){
+		public Iterator<String> getPrefixes(String namespaceURI){
 			throw new UnsupportedOperationException();
 		}
 

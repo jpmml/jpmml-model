@@ -25,11 +25,11 @@ public enum Version {
 	}
 	;
 
-	private String namespaceUri = null;
+	private String namespaceURI = null;
 
 
-	private Version(String namespaceUri){
-		setNamespaceURI(namespaceUri);
+	private Version(String namespaceURI){
+		setNamespaceURI(namespaceURI);
 	}
 
 	public boolean isStandard(){
@@ -39,11 +39,11 @@ public enum Version {
 	}
 
 	public String getNamespaceURI(){
-		return this.namespaceUri;
+		return this.namespaceURI;
 	}
 
-	private void setNamespaceURI(String namespaceUri){
-		this.namespaceUri = namespaceUri;
+	private void setNamespaceURI(String namespaceURI){
+		this.namespaceURI = namespaceURI;
 	}
 
 	public String getVersion(){
