@@ -26,11 +26,9 @@ class FieldHasher extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(Field<?> field){
-		String name = field.getName();
+		String name = field.requireName();
 
-		if(name != null){
-			this.mappings.put(name, hash(name));
-		}
+		this.mappings.put(name, hash(name));
 
 		return super.visit(field);
 	}

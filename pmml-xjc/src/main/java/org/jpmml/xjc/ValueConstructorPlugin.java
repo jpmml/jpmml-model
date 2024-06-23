@@ -117,7 +117,7 @@ public class ValueConstructorPlugin extends Plugin {
 
 					JVar param = alternateValueConstructor.param(fieldClass, name);
 
-					invocation.arg(JOp.cond(param.ne(JExpr._null()), param.invoke("getName"), JExpr._null()));
+					invocation.arg(JOp.cond(param.ne(JExpr._null()), param.invoke("requireName"), JExpr._null()));
 				} else
 
 				{
