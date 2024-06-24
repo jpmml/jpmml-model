@@ -15,6 +15,7 @@ import javax.xml.transform.Source;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import jakarta.xml.bind.Binder;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -160,6 +161,15 @@ public class JAXBUtil {
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
 		return unmarshaller;
+	}
+
+	static
+	public <T> Binder<T> createBinder(Class<T> domType) throws JAXBException {
+		JAXBContext context = getContext();
+
+		Binder<T> binder = context.createBinder(domType);
+
+		return binder;
 	}
 
 	static
