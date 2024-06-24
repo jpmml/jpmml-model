@@ -126,12 +126,7 @@ public class InheritancePlugin extends ComplexPlugin {
 		JClass type = typeCache.get(name);
 
 		if(type == null){
-
-			try {
-				type = (JClass)codeModel.parseType(name);
-			} catch(ClassNotFoundException cnfe){
-				throw new RuntimeException(cnfe);
-			}
+			type = (JClass)codeModel.parseType(name);
 
 			typeCache.put(name, type);
 		}
