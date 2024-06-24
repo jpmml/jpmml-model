@@ -17,6 +17,7 @@ import org.dmg.pmml.Header;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLAttributes;
+import org.dmg.pmml.PMMLElements;
 import org.dmg.pmml.Value;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.regression.RegressionModel;
@@ -245,6 +246,21 @@ public class ReflectionUtilTest {
 				assertNotNull(setterMethod);
 			}
 		}
+	}
+
+	@Test
+	public void getAppenderMethods(){
+
+		try {
+			ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_EXPRESSION);
+
+			fail();
+		} catch(RuntimeException re){
+			// Ignored
+		}
+
+		assertNotNull(ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_EXTENSIONS));
+		assertNotNull(ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_VALUES));
 	}
 
 	@Test

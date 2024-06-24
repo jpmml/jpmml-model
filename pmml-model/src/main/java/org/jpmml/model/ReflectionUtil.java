@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -389,6 +390,51 @@ public class ReflectionUtil {
 		}
 
 		return result;
+	}
+
+	static
+	public Method getAppenderMethod(Field field){
+		Class<?> clazz = field.getDeclaringClass();
+
+		Method getterMethod = getGetterMethod(field);
+
+		Class<?> fieldType = field.getType();
+
+		if(!Objects.equals(List.class, fieldType)){
+			throw new RuntimeException(new NoSuchMethodException());
+		}
+
+		ParameterizedType listType = (ParameterizedType)field.getGenericType();
+
+		Class<?> listElementType = (Class<?>)listType.getActualTypeArguments()[0];
+
+		String name = getterMethod.getName();
+		if(name.startsWith("get")){
+			name = "add" + name.substring("get".length());
+		} else
+
+		{
+			throw new IllegalArgumentException();
+		}
+
+		Class<?> valueArrayClazz;
+
+		try {
+			// See https://stackoverflow.com/a/1679444
+			valueArrayClazz = Class.forName("[L" + listElementType.getCanonicalName() + ";");
+		} catch(ClassNotFoundException cnfe){
+			throw new RuntimeException(cnfe);
+		}
+
+		Method appenderMethod;
+
+		try {
+			appenderMethod = clazz.getMethod(name, valueArrayClazz);
+		} catch(NoSuchMethodException nsme){
+			throw new RuntimeException(nsme);
+		}
+
+		return appenderMethod;
 	}
 
 	@SuppressWarnings({"deprecation", "unchecked"})
