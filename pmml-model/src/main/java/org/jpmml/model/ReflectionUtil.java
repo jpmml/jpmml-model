@@ -364,6 +364,33 @@ public class ReflectionUtil {
 		return result;
 	}
 
+	static
+	public Method getSetterMethod(Field field){
+		Class<?> clazz = field.getDeclaringClass();
+
+		Map<Field, Method> setterMethods = getSetterMethods(clazz);
+
+		Method setterMethod = setterMethods.get(field);
+		if(setterMethod == null){
+			throw new RuntimeException(new NoSuchMethodException());
+		}
+
+		return setterMethod;
+	}
+
+	static
+	public Map<Field, Method> getSetterMethods(Class<?> clazz){
+		Map<Field, Method> result = ReflectionUtil.classSetterMethods.get(clazz);
+
+		if(result == null){
+			result = loadSetterMethods(clazz);
+
+			ReflectionUtil.classSetterMethods.putIfAbsent(clazz, result);
+		}
+
+		return result;
+	}
+
 	@SuppressWarnings({"deprecation", "unchecked"})
 	static
 	public <E> E getFieldValue(Field field, Object object){
@@ -515,14 +542,55 @@ public class ReflectionUtil {
 
 			{
 				continue;
+			}
+
+			Field field = fieldMap.get(name.toLowerCase());
+			if(field == null){
+				continue;
 			} // End if
 
-			if(parameterTypes.length != 0){
+			if(!Arrays.equals(new Class<?>[0], parameterTypes)){
+				continue;
+			}
+
+			result.put(field, method);
+		}
+
+		return result;
+	}
+
+	static
+	private Map<Field, Method> loadSetterMethods(Class<?> clazz){
+		Map<Field, Method> result = new LinkedHashMap<>();
+
+		Map<String, Field> fieldMap = new HashMap<>();
+
+		List<Field> fields = getFields(clazz);
+		for(Field field : fields){
+			String name = field.getName();
+
+			fieldMap.put(name.toLowerCase(), field);
+		}
+
+		Method[] methods = clazz.getMethods();
+		for(Method method : methods){
+			String name = method.getName();
+			Class<?>[] parameterTypes = method.getParameterTypes();
+
+			if(name.startsWith("set")){
+				name = name.substring("set".length());
+			} else
+
+			{
 				continue;
 			}
 
 			Field field = fieldMap.get(name.toLowerCase());
 			if(field == null){
+				continue;
+			} // End if
+
+			if(!Arrays.equals(new Class<?>[]{field.getType()}, parameterTypes)){
 				continue;
 			}
 
@@ -558,6 +626,7 @@ public class ReflectionUtil {
 	private static final ConcurrentMap<Class<?>, List<Field>> classFields = new ConcurrentHashMap<>();
 
 	private static final ConcurrentMap<Class<?>, Map<Field, Method>> classGetterMethods = new ConcurrentHashMap<>();
+	private static final ConcurrentMap<Class<?>, Map<Field, Method>> classSetterMethods = new ConcurrentHashMap<>();
 
 	private static final Set<Class<?>> primitiveWrapperClasses = new HashSet<>(Arrays.<Class<?>>asList(Byte.class, Short.class, Integer.class, Long.class, Float.class, Double.class, Boolean.class, Character.class));
 }

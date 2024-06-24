@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.DataDictionary;
@@ -199,6 +200,50 @@ public class ReflectionUtilTest {
 			Method getterMethod = ReflectionUtil.getGetterMethod(field);
 
 			assertNotNull(getterMethod);
+		}
+	}
+
+	@Test
+	public void getSetterMethods(){
+		Map<Field, Method> setterMethods = ReflectionUtil.getSetterMethods(OutputField.class);
+
+		assertEquals(1 /* PMMLObject */ + 18 /* OutputField */, setterMethods.size());
+	}
+
+	@Test
+	public void getAttributeSetterMethods(){
+		List<Field> fields = ReflectionUtil.getAttributeFields();
+
+		for(Field field : fields){
+			Method setterMethod = ReflectionUtil.getSetterMethod(field);
+
+			assertNotNull(setterMethod);
+		}
+	}
+
+	@Test
+	public void getElementSetterMethods(){
+		List<Field> fields = ReflectionUtil.getElementFields();
+
+		for(Field field : fields){
+			Class<?> fieldType = field.getType();
+
+			if(Objects.equals(List.class, fieldType)){
+
+				try {
+					ReflectionUtil.getSetterMethod(field);
+
+					fail();
+				} catch(RuntimeException re){
+					// Ignored
+				}
+			} else
+
+			{
+				Method setterMethod = ReflectionUtil.getSetterMethod(field);
+
+				assertNotNull(setterMethod);
+			}
 		}
 	}
 
