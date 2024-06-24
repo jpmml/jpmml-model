@@ -207,8 +207,8 @@
 				<configuration>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>11</source>
+					<target>11</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -223,8 +223,11 @@
 						</goals>
 						<configuration>
 							<rules>
+								<requireJavaVersion>
+									<version>[11,)</version>
+								</requireJavaVersion>
 								<requireMavenVersion>
-									<version>3.6.3</version>
+									<version>[3.6.3,)</version>
 								</requireMavenVersion>
 							</rules>
 						</configuration>

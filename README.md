@@ -30,7 +30,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Prerequisites #
 
-* Java 1.8 or newer.
+* Java 11 or newer.
 
 # Installation #
 
