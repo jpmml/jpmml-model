@@ -10,7 +10,7 @@
 
 	<groupId>org.jpmml</groupId>
 	<artifactId>jpmml-model</artifactId>
-	<version>1.6-SNAPSHOT</version>
+	<version>1.6.5</version>
 	<packaging>pom</packaging>
 
 	<name>JPMML-Model</name>
@@ -48,7 +48,7 @@
 		<connection>scm:git:git@github.com:jpmml/jpmml-model.git</connection>
 		<developerConnection>scm:git:git@github.com:jpmml/jpmml-model.git</developerConnection>
 		<url>git://github.com/jpmml/jpmml-model.git</url>
-		<tag>HEAD</tag>
+		<tag>1.6.5</tag>
 	</scm>
 	<issueManagement>
 		<system>GitHub</system>
@@ -56,7 +56,7 @@
 	</issueManagement>
 
 	<properties>
-		<project.build.outputTimestamp>2024-06-23T08:45:00Z</project.build.outputTimestamp>
+		<project.build.outputTimestamp>2024-06-24T08:57:53Z</project.build.outputTimestamp>
 	</properties>
 
 	<dependencyManagement>
@@ -64,53 +64,53 @@
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-agent</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model</artifactId>
 				<classifier>tests</classifier>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-example</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-gwt</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-jackson</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-kryo</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-metro</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-moxy</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-xjc</artifactId>
-				<version>1.6-SNAPSHOT</version>
+				<version>1.6.5</version>
 			</dependency>
 
 			<!-- Inherited from org.glassfish.jaxb:jaxb-bom via org.glassfish.jaxb:jaxb-runtime dependency -->
