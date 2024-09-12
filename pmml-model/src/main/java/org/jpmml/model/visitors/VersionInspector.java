@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.dmg.pmml.Apply;
+import org.dmg.pmml.PMMLAttributes;
 import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
@@ -48,14 +49,14 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 	public VisitorAction visit(PMMLObject object){
 
 		for(Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()){
-			inspect(clazz);
+			inspect(object, clazz);
 		}
 
 		List<Field> fields = ReflectionUtil.getFields(object.getClass());
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);
 
-			inspect(field, value);
+			inspect(object, field, value);
 
 			// The field is set to an enum constant
 			if(value instanceof Enum){
@@ -71,7 +72,7 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 					throw new RuntimeException(nsfe);
 				}
 
-				inspect(enumField);
+				inspect(object, enumField);
 			}
 		}
 
@@ -84,13 +85,13 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 
 		Version version = VersionInspector.functionVersions.get(function);
 		if(version != null){
-			updateMinimum(version);
+			updateMinimum(apply, PMMLAttributes.APPLY_FUNCTION, version);
 		}
 
 		return super.visit(apply);
 	}
 
-	private void inspect(Field field, Object value){
+	private void inspect(PMMLObject object, Field field, Object value){
 		Class<?> type = field.getType();
 
 		if(type.isPrimitive()){
@@ -104,30 +105,30 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 			if(isNull(value)){
 				Optional optional = field.getAnnotation(Optional.class);
 				if(optional != null){
-					updateMinimum(optional.value());
+					updateMinimum(object, field, optional.value());
 				}
 
 				Required required = field.getAnnotation(Required.class);
 				if(required != null){
-					updateMaximum(previous(required.value()));
+					updateMaximum(object, field, previous(required.value()));
 				}
 
 				return;
 			}
 		}
 
-		inspect(field);
+		inspect(object, field);
 	}
 
-	private void inspect(AnnotatedElement element){
+	private void inspect(PMMLObject object, AnnotatedElement element){
 		Added added = element.getAnnotation(Added.class);
 		if(added != null){
-			updateMinimum(added.value());
+			updateMinimum(object, element, added.value());
 		}
 
 		Removed removed = element.getAnnotation(Removed.class);
 		if(removed != null){
-			updateMaximum(removed.value());
+			updateMaximum(object, element, removed.value());
 		}
 	}
 
@@ -142,7 +143,7 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 		return this.minimum;
 	}
 
-	private void updateMinimum(Version minimum){
+	private void updateMinimum(PMMLObject object, AnnotatedElement element, Version minimum){
 
 		if(minimum != null && minimum.compareTo(this.minimum) > 0){
 			this.minimum = minimum;
@@ -160,7 +161,7 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 		return this.maximum;
 	}
 
-	private void updateMaximum(Version maximum){
+	private void updateMaximum(PMMLObject object, AnnotatedElement element, Version maximum){
 
 		if(maximum != null && maximum.compareTo(this.maximum) < 0){
 			this.maximum = maximum;
