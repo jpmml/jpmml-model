@@ -3,6 +3,7 @@
  */
 package org.dmg.pmml.mining;
 
+import org.dmg.pmml.Version;
 import org.jpmml.model.DOMUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SchemaUpdateTest;
@@ -23,6 +24,10 @@ public class WeightedSegmentationTest extends SchemaUpdateTest {
 		byte[] latest = upgradeToLatest(original);
 
 		checkSegmentation(latest, "weightedSum", new String[]{null, "continue"}, new String[]{null, "0"});
+
+		byte[] latestToOriginal = downgrade(latest, Version.PMML_4_3);
+
+		checkSegmentation(latestToOriginal, "x-weightedSum", new String[]{"continue", null}, new String[]{"0", null});
 	}
 
 	static

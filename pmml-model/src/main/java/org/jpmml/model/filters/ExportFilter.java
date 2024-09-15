@@ -81,6 +81,29 @@ public class ExportFilter extends PMMLFilter {
 			attributes = setAttribute(attributes, "version", target.getVersion());
 		} else
 
+		if(("Segmentation").equals(localName)){
+
+			if(compare(getTarget(), Version.PMML_4_3) <= 0){
+				attributes = renameAttribute(attributes, "missingPredictionTreatment", "x-missingPredictionTreatment");
+				attributes = renameAttribute(attributes, "missingThreshold", "x-missingThreshold");
+
+				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
+				if(multipleModelMethod != null){
+
+					switch(multipleModelMethod){
+						case "weightedMedian":
+						case "weightedSum":
+							{
+								attributes = setAttribute(attributes, "multipleModelMethod", "x-" + multipleModelMethod);
+							}
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		} else
+
 		if(("TargetValue").equals(localName)){
 
 			if(compare(getTarget(), Version.PMML_3_1) <= 0 && hasAttribute(attributes, "displayValue")){

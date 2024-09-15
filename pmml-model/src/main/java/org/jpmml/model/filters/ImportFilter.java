@@ -127,11 +127,10 @@ public class ImportFilter extends PMMLFilter {
 		if(("Segmentation").equals(localName)){
 
 			if(compare(getSource(), Version.PMML_4_3) <= 0){
-				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
-
 				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
 				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
 
+				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
 				if(multipleModelMethod != null){
 
 					switch(multipleModelMethod){
