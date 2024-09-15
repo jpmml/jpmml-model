@@ -25,10 +25,11 @@ public class ExportFilter extends PMMLFilter {
 
 	@Override
 	public String filterLocalName(String localName){
+		Version target = getTarget();
 
 		if("Trend_ExpoSmooth".equals(localName)){
 
-			if(compare(getTarget(), Version.PMML_4_0) == 0){
+			if(compare(target, Version.PMML_4_0) == 0){
 				return "Trend";
 			}
 		}
@@ -38,23 +39,27 @@ public class ExportFilter extends PMMLFilter {
 
 	@Override
 	public Attributes filterAttributes(String localName, Attributes attributes){
+		Version target = getTarget();
 
 		if(("Apply").equals(localName)){
 
-			if(compare(getTarget(), Version.PMML_4_1) == 0 && hasAttribute(attributes, "defaultValue")){
+			if(compare(target, Version.PMML_4_1) == 0){
 
-				if(hasAttribute(attributes, "mapMissingTo")){
-					throw new IllegalStateException();
+				if(hasAttribute(attributes, "defaultValue")){
+
+					if(hasAttribute(attributes, "mapMissingTo")){
+						throw new IllegalStateException();
+					}
+
+					attributes = renameAttribute(attributes, "defaultValue", "mapMissingTo");
 				}
-
-				attributes = renameAttribute(attributes, "defaultValue", "mapMissingTo");
 			} // End if
 
-			if(compare(getTarget(), Version.PMML_4_4) < 0){
+			if(compare(target, Version.PMML_4_4) < 0){
 				String function = getAttribute(attributes, "function");
 
 				Version functionVersion = VersionUtil.getVersion(function);
-				if(functionVersion != null && compare(functionVersion, getTarget()) > 0){
+				if(functionVersion != null && compare(functionVersion, target) > 0){
 					attributes = setAttribute(attributes, "function", "x-" + function);
 				}
 			}
@@ -62,7 +67,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("MiningField").equals(localName)){
 
-			if(compare(getTarget(), Version.PMML_4_3) <= 0){
+			if(compare(target, Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "invalidValueReplacement", "x-invalidValueReplacement");
 
 				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
@@ -82,7 +87,6 @@ public class ExportFilter extends PMMLFilter {
 		} else
 
 		if(("PMML").equals(localName)){
-			Version target = getTarget();
 
 			if(hasAttribute(attributes, "x-baseVersion")){
 				attributes = removeAttribute(attributes, "x-baseVersion");
@@ -93,7 +97,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("Segmentation").equals(localName)){
 
-			if(compare(getTarget(), Version.PMML_4_3) <= 0){
+			if(compare(target, Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "missingPredictionTreatment", "x-missingPredictionTreatment");
 				attributes = renameAttribute(attributes, "missingThreshold", "x-missingThreshold");
 
@@ -116,8 +120,16 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("TargetValue").equals(localName)){
 
-			if(compare(getTarget(), Version.PMML_3_1) <= 0 && hasAttribute(attributes, "displayValue")){
-				attributes = renameAttribute(attributes, "displayValue", "rawDataValue");
+			if(compare(target, Version.PMML_3_1) <= 0){
+
+				if(hasAttribute(attributes, "displayValue")){
+
+					if(hasAttribute(attributes, "rawDataValue")){
+						throw new IllegalStateException();
+					}
+
+					attributes = renameAttribute(attributes, "displayValue", "rawDataValue");
+				}
 			}
 		}
 

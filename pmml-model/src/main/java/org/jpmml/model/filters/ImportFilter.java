@@ -41,9 +41,13 @@ public class ImportFilter extends PMMLFilter {
 
 	@Override
 	public String filterLocalName(String localName){
+		Version source = getSource();
 
-		if(("Trend").equals(localName) && compare(getSource(), Version.PMML_4_0) == 0){
-			return "Trend_ExpoSmooth";
+		if(("Trend").equals(localName)){
+
+			if(compare(source, Version.PMML_4_0) == 0){
+				return "Trend_ExpoSmooth";
+			}
 		}
 
 		return localName;
@@ -51,14 +55,15 @@ public class ImportFilter extends PMMLFilter {
 
 	@Override
 	public Attributes filterAttributes(String localName, Attributes attributes){
+		Version source = getSource();
 
 		if(("Apply").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_1) == 0){
+			if(compare(source, Version.PMML_4_1) == 0){
 				attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
 			} // End if
 
-			if(compare(getSource(), Version.PMML_4_4) <= 0){
+			if(compare(source, Version.PMML_4_4) <= 0){
 				String function = getAttribute(attributes, "function");
 
 				if(function != null && function.startsWith("x-")){
@@ -73,11 +78,11 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("MiningField").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_3) <= 0){
+			if(compare(source, Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
 			} // End if
 
-			if(compare(getSource(), Version.PMML_4_4) <= 0){
+			if(compare(source, Version.PMML_4_4) <= 0){
 				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
 
 				if(invalidValueTreatment != null){
@@ -109,7 +114,7 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("Segmentation").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_3) <= 0){
+			if(compare(source, Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
 				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
 
@@ -132,7 +137,7 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("TargetValue").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_3_1) <= 0){
+			if(compare(source, Version.PMML_3_1) <= 0){
 				attributes = renameAttribute(attributes, "rawDataValue", "displayValue");
 			}
 		}

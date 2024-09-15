@@ -88,12 +88,7 @@ public class ElementFilter extends XMLFilterImpl {
 	}
 
 	private void setNamespaceURI(String namespaceURI){
-
-		if(namespaceURI == null){
-			throw new NullPointerException();
-		}
-
-		this.namespaceURI = namespaceURI;
+		this.namespaceURI = Objects.requireNonNull(namespaceURI);
 	}
 
 	public String getLocalName(){
@@ -101,12 +96,7 @@ public class ElementFilter extends XMLFilterImpl {
 	}
 
 	private void setLocalName(String localName){
-
-		if(localName == null){
-			throw new NullPointerException();
-		}
-
-		this.localName = localName;
+		this.localName = Objects.requireNonNull(localName);
 	}
 
 	static
