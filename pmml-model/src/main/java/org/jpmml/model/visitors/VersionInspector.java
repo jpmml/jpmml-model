@@ -100,7 +100,7 @@ public class VersionInspector extends AbstractVisitor {
 
 				Required required = field.getAnnotation(Required.class);
 				if(required != null){
-					updateMaximum(object, field, previous(required.value()));
+					updateMaximum(object, field, (required.value()).previous());
 				}
 
 				return;
@@ -132,12 +132,5 @@ public class VersionInspector extends AbstractVisitor {
 		}
 
 		return (value == null);
-	}
-
-	static
-	private Version previous(Version version){
-		Version[] values = Version.values();
-
-		return values[version.ordinal() - 1];
 	}
 }
