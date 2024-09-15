@@ -152,16 +152,6 @@ public class PMMLFilter extends XMLFilterImpl {
 	}
 
 	static
-	protected int compare(Version left, Version right){
-
-		if(left == null || right == null){
-			throw new IllegalStateException();
-		}
-
-		return (left).compareTo(right);
-	}
-
-	static
 	protected boolean hasAttribute(Attributes attributes, String localName){
 		int index = attributes.getIndex("", localName);
 

@@ -29,7 +29,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if("Trend_ExpoSmooth".equals(localName)){
 
-			if(compare(target, Version.PMML_4_0) == 0){
+			if(target.compareTo(Version.PMML_4_0) == 0){
 				return "Trend";
 			}
 		}
@@ -43,7 +43,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("Apply").equals(localName)){
 
-			if(compare(target, Version.PMML_4_1) == 0){
+			if(target.compareTo(Version.PMML_4_1) == 0){
 
 				if(hasAttribute(attributes, "defaultValue")){
 
@@ -55,11 +55,11 @@ public class ExportFilter extends PMMLFilter {
 				}
 			} // End if
 
-			if(compare(target, Version.PMML_4_4) < 0){
+			if(target.compareTo(Version.PMML_4_4) < 0){
 				String function = getAttribute(attributes, "function");
 
 				Version functionVersion = VersionUtil.getVersion(function);
-				if(functionVersion != null && compare(functionVersion, target) > 0){
+				if(functionVersion != null && functionVersion.compareTo(target) > 0){
 					attributes = setAttribute(attributes, "function", "x-" + function);
 				}
 			}
@@ -67,7 +67,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("MiningField").equals(localName)){
 
-			if(compare(target, Version.PMML_4_3) <= 0){
+			if(target.compareTo(Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "invalidValueReplacement", "x-invalidValueReplacement");
 
 				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
@@ -97,7 +97,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("Segmentation").equals(localName)){
 
-			if(compare(target, Version.PMML_4_3) <= 0){
+			if(target.compareTo(Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "missingPredictionTreatment", "x-missingPredictionTreatment");
 				attributes = renameAttribute(attributes, "missingThreshold", "x-missingThreshold");
 
@@ -120,7 +120,7 @@ public class ExportFilter extends PMMLFilter {
 
 		if(("TargetValue").equals(localName)){
 
-			if(compare(target, Version.PMML_3_1) <= 0){
+			if(target.compareTo(Version.PMML_3_1) <= 0){
 
 				if(hasAttribute(attributes, "displayValue")){
 
