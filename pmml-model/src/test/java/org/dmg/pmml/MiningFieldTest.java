@@ -29,6 +29,10 @@ public class MiningFieldTest extends SchemaUpdateTest {
 		byte[] latest = upgradeToLatest(original);
 
 		checkMiningField(latest, "asValue", new String[]{null, "0"});
+
+		byte[] latestToOriginal = downgrade(latest, Version.PMML_4_3);
+
+		checkMiningField(latestToOriginal, "asIs", new String[]{"0", null});
 	}
 
 	@Test

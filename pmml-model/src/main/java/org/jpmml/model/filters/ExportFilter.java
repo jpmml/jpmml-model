@@ -50,6 +50,27 @@ public class ExportFilter extends PMMLFilter {
 			}
 		} else
 
+		if(("MiningField").equals(localName)){
+
+			if(compare(getTarget(), Version.PMML_4_3) <= 0){
+				attributes = renameAttribute(attributes, "invalidValueReplacement", "x-invalidValueReplacement");
+
+				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
+				if(invalidValueTreatment != null){
+
+					switch(invalidValueTreatment){
+						case "asValue":
+							{
+								attributes = setAttribute(attributes, "invalidValueTreatment", "asIs");
+							}
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		} else
+
 		if(("PMML").equals(localName)){
 			Version target = getTarget();
 
