@@ -17,20 +17,22 @@ public class ApplyTest extends SchemaUpdateTest {
 	public void transform() throws Exception {
 		byte[] original = ResourceUtil.getByteArray(ApplyTest.class);
 
-		checkApply(original, "", null);
+		checkApply(original, "x-" + PMMLFunctions.CONCAT, "", null);
 
 		byte[] latest = upgradeToLatest(original);
 
-		checkApply(latest, null, "");
+		checkApply(latest, PMMLFunctions.CONCAT, null, "");
 
 		byte[] latestToOriginal = downgrade(latest, Version.PMML_4_1);
 
-		checkApply(latestToOriginal, "", null);
+		checkApply(latestToOriginal, "x-" + PMMLFunctions.CONCAT, "", null);
 	}
 
 	static
-	private void checkApply(byte[] bytes, String mapMissingTo, String defaultValue) throws Exception {
+	private void checkApply(byte[] bytes, String function, String mapMissingTo, String defaultValue) throws Exception {
 		Node node = DOMUtil.selectNode(bytes, "/:PMML/:TransformationDictionary/:DerivedField/:Apply");
+
+		assertEquals(function, DOMUtil.getAttributeValue(node, "function"));
 
 		assertEquals(mapMissingTo, DOMUtil.getAttributeValue(node, "mapMissingTo"));
 		assertEquals(defaultValue, DOMUtil.getAttributeValue(node, "defaultValue"));

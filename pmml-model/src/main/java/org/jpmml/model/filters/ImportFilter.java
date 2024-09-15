@@ -5,6 +5,7 @@
 package org.jpmml.model.filters;
 
 import org.dmg.pmml.Version;
+import org.dmg.pmml.VersionUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.XMLReader;
 
@@ -57,32 +58,14 @@ public class ImportFilter extends PMMLFilter {
 				attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
 			} // End if
 
-			if(compare(getSource(), Version.PMML_4_3) <= 0){
+			if(compare(getSource(), Version.PMML_4_4) <= 0){
 				String function = getAttribute(attributes, "function");
 
-				if(function != null){
+				if(function != null && function.startsWith("x-")){
+					Version functionVersion = VersionUtil.getVersion(function.substring("x-".length()));
 
-					switch(function){
-						case "x-acos":
-						case "x-asin":
-						case "x-atan":
-						case "x-cos":
-						case "x-cosh":
-						case "x-expm1":
-						case "x-hypot":
-						case "x-ln1p":
-						case "x-modulo":
-						case "x-rint":
-						case "x-sin":
-						case "x-sinh":
-						case "x-tan":
-						case "x-tanh":
-							{
-								attributes = setAttribute(attributes, "function", function.substring("x-".length()));
-							}
-							break;
-						default:
-							break;
+					if(functionVersion != null && compare(functionVersion, Version.PMML_4_4) <= 0){
+						attributes = setAttribute(attributes, "function", function.substring("x-".length()));
 					}
 				}
 			}

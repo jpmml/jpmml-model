@@ -4,6 +4,7 @@
 package org.jpmml.model.filters;
 
 import org.dmg.pmml.Version;
+import org.dmg.pmml.VersionUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.XMLReader;
 
@@ -47,6 +48,15 @@ public class ExportFilter extends PMMLFilter {
 				}
 
 				attributes = renameAttribute(attributes, "defaultValue", "mapMissingTo");
+			} // End if
+
+			if(compare(getTarget(), Version.PMML_4_4) < 0){
+				String function = getAttribute(attributes, "function");
+
+				Version functionVersion = VersionUtil.getVersion(function);
+				if(functionVersion != null && compare(functionVersion, getTarget()) > 0){
+					attributes = setAttribute(attributes, "function", "x-" + function);
+				}
 			}
 		} else
 
