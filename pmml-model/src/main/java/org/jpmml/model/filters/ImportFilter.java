@@ -83,7 +83,21 @@ public class ImportFilter extends PMMLFilter {
 			} // End if
 
 			if(source.compareTo(Version.PMML_4_4) <= 0){
+				String missingValueTreatment = getAttribute(attributes, "missingValueTreatment");
 				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
+
+				if(missingValueTreatment != null){
+
+					switch(missingValueTreatment){
+						case "x-returnInvalid":
+							{
+								attributes = setAttribute(attributes, "missingValueTreatment", missingValueTreatment.substring("x-".length()));
+							}
+							break;
+						default:
+							break;
+					}
+				} // End if
 
 				if(invalidValueTreatment != null){
 
@@ -115,10 +129,8 @@ public class ImportFilter extends PMMLFilter {
 		if(("Segmentation").equals(localName)){
 
 			if(source.compareTo(Version.PMML_4_3) <= 0){
-				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
-				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
-
 				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
+
 				if(multipleModelMethod != null){
 
 					switch(multipleModelMethod){
@@ -132,6 +144,9 @@ public class ImportFilter extends PMMLFilter {
 							break;
 					}
 				}
+
+				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
+				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
 			}
 		} else
 

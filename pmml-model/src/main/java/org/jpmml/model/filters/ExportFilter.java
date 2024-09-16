@@ -68,9 +68,24 @@ public class ExportFilter extends PMMLFilter {
 		if(("MiningField").equals(localName)){
 
 			if(target.compareTo(Version.PMML_4_3) <= 0){
+				String missingValueTreatment = getAttribute(attributes, "missingValueTreatment");
+				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
+
 				attributes = renameAttribute(attributes, "invalidValueReplacement", "x-invalidValueReplacement");
 
-				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
+				if(missingValueTreatment != null){
+
+					switch(missingValueTreatment){
+						case "returnInvalid":
+							{
+								attributes = setAttribute(attributes, "missingValueTreatment", "x-" + missingValueTreatment);
+							}
+							break;
+						default:
+							break;
+					}
+				} // End if
+
 				if(invalidValueTreatment != null){
 
 					switch(invalidValueTreatment){
@@ -98,10 +113,11 @@ public class ExportFilter extends PMMLFilter {
 		if(("Segmentation").equals(localName)){
 
 			if(target.compareTo(Version.PMML_4_3) <= 0){
+				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
+
 				attributes = renameAttribute(attributes, "missingPredictionTreatment", "x-missingPredictionTreatment");
 				attributes = renameAttribute(attributes, "missingThreshold", "x-missingThreshold");
 
-				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
 				if(multipleModelMethod != null){
 
 					switch(multipleModelMethod){
