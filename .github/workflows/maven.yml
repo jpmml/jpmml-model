@@ -2,7 +2,7 @@ name: maven
 
 on:
   push:
-    branches: [ master ]
+    branches: [ '1.6.X', master ]
 
 jobs:
   build:
