@@ -185,14 +185,18 @@
 							<args>
 								<arg>-no-header</arg>
 								<arg>-npa</arg>
-								<arg>-Xannotate</arg>
-								<arg>-XcopyConstructor</arg>
+								<!-- Update class hierarchy -->
 								<arg>-Xinheritance</arg>
-								<arg>-Xjackson</arg>
-								<arg>-Xno-javadoc</arg>
 								<arg>-Xpmml</arg>
+								<!-- Annotate default types and members (annotation order: JAXB, Jackson, JPMML) -->
+								<arg>-Xjackson</arg>
+								<arg>-Xannotate</arg>
+								<!-- Add custom types and members -->
+								<arg>-XcopyConstructor</arg>
 								<arg>-XvalueConstructor</arg>
 								<arg>-Xvisitor</arg>
+								<!-- Cleanup -->
+								<arg>-Xno-javadoc</arg>
 							</args>
 							<episode>false</episode>
 							<extension>true</extension>
