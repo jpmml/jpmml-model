@@ -3,6 +3,7 @@
  */
 package org.jpmml.model.visitors;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.util.Collection;
@@ -30,10 +31,16 @@ abstract
 public class VersionInspector extends AbstractVisitor {
 
 	abstract
-	public void updateMinimum(PMMLObject object, AnnotatedElement element, Version minimum);
+	public void handleAdded(PMMLObject object, AnnotatedElement element, Added added);
 
 	abstract
-	public void updateMaximum(PMMLObject object, AnnotatedElement element, Version maximum);
+	public void handleRemoved(PMMLObject object, AnnotatedElement element, Removed removed);
+
+	abstract
+	public void handleOptional(PMMLObject object, AnnotatedElement element, Optional optional);
+
+	abstract
+	public void handleRequired(PMMLObject object, AnnotatedElement element, Required required);
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
@@ -75,10 +82,35 @@ public class VersionInspector extends AbstractVisitor {
 
 		Version version = VersionUtil.getVersion(function);
 		if(version != null){
-			updateMinimum(apply, PMMLAttributes.APPLY_FUNCTION, version);
+			Added added = new Added(){
+
+				@Override
+				public Class<? extends Annotation> annotationType(){
+					return Added.class;
+				}
+
+				@Override
+				public Version value(){
+					return version;
+				}
+			};
+
+			handleAdded(apply, PMMLAttributes.APPLY_FUNCTION, added);
 		}
 
 		return super.visit(apply);
+	}
+
+	private void inspect(PMMLObject object, AnnotatedElement element){
+		Added added = element.getAnnotation(Added.class);
+		if(added != null){
+			handleAdded(object, element, added);
+		}
+
+		Removed removed = element.getAnnotation(Removed.class);
+		if(removed != null){
+			handleRemoved(object, element, removed);
+		}
 	}
 
 	private void inspect(PMMLObject object, Field field, Object value){
@@ -95,12 +127,12 @@ public class VersionInspector extends AbstractVisitor {
 			if(isNull(value)){
 				Optional optional = field.getAnnotation(Optional.class);
 				if(optional != null){
-					updateMinimum(object, field, optional.value());
+					handleOptional(object, field, optional);
 				}
 
 				Required required = field.getAnnotation(Required.class);
 				if(required != null){
-					updateMaximum(object, field, (required.value()).previous());
+					handleRequired(object, field, required);
 				}
 
 				return;
@@ -108,18 +140,6 @@ public class VersionInspector extends AbstractVisitor {
 		}
 
 		inspect(object, field);
-	}
-
-	private void inspect(PMMLObject object, AnnotatedElement element){
-		Added added = element.getAnnotation(Added.class);
-		if(added != null){
-			updateMinimum(object, element, added.value());
-		}
-
-		Removed removed = element.getAnnotation(Removed.class);
-		if(removed != null){
-			updateMaximum(object, element, removed.value());
-		}
 	}
 
 	static
