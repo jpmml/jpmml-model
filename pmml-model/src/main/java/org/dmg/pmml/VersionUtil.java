@@ -5,10 +5,43 @@ package org.dmg.pmml;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 public class VersionUtil {
 
 	private VersionUtil(){
+	}
+
+	static
+	public int compare(int[] left, int[] right){
+
+		for(int i = 0, max = Math.max(left.length, right.length); i < max; i++){
+			int diff = Integer.compare(left[i], right[i]);
+
+			if(diff != 0){
+				return diff;
+			}
+		}
+
+		return 0;
+	}
+
+	static
+	public int compare(String left, String right){
+		return compare(parse(left), parse(right));
+	}
+
+	static
+	public int[] parse(String string){
+		StringTokenizer st = new StringTokenizer(string, ".");
+
+		int[] result = new int[st.countTokens()];
+
+		for(int i = 0; st.hasMoreTokens(); i++){
+			result[i] = Integer.parseInt(st.nextToken());
+		}
+
+		return result;
 	}
 
 	static

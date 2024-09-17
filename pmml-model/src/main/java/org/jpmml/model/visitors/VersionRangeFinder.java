@@ -26,6 +26,22 @@ public class VersionRangeFinder extends VersionInspector implements Resettable {
 		this.maximum = Version.getMaximum();
 	}
 
+	@Override
+	public void updateMinimum(PMMLObject object, AnnotatedElement element, Version minimum){
+
+		if(minimum != null && minimum.compareTo(this.minimum) > 0){
+			this.minimum = minimum;
+		}
+	}
+
+	@Override
+	public void updateMaximum(PMMLObject object, AnnotatedElement element, Version maximum){
+
+		if(maximum != null && maximum.compareTo(this.maximum) < 0){
+			this.maximum = maximum;
+		}
+	}
+
 	/**
 	 * <p>
 	 * The minimum (ie. earliest) PMML schema version that can fully represent this class model object.
@@ -37,14 +53,6 @@ public class VersionRangeFinder extends VersionInspector implements Resettable {
 		return this.minimum;
 	}
 
-	@Override
-	public void updateMinimum(PMMLObject object, AnnotatedElement element, Version minimum){
-
-		if(minimum != null && minimum.compareTo(this.minimum) > 0){
-			this.minimum = minimum;
-		}
-	}
-
 	/**
 	 * <p>
 	 * The maximum (ie. latest) PMML schema version that can fully represent this class model object.
@@ -54,13 +62,5 @@ public class VersionRangeFinder extends VersionInspector implements Resettable {
 	 */
 	public Version getMaximum(){
 		return this.maximum;
-	}
-
-	@Override
-	public void updateMaximum(PMMLObject object, AnnotatedElement element, Version maximum){
-
-		if(maximum != null && maximum.compareTo(this.maximum) < 0){
-			this.maximum = maximum;
-		}
 	}
 }
