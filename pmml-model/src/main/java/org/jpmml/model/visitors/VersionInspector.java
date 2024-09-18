@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlEnumValue;
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLAttributes;
 import org.dmg.pmml.PMMLObject;
@@ -78,7 +81,7 @@ public class VersionInspector extends AbstractVisitor {
 
 	@Override
 	public VisitorAction visit(Apply apply){
-		String function = apply.requireFunction();
+		String function = apply.getFunction();
 
 		Version version = VersionUtil.getVersion(function);
 		if(version != null){
@@ -152,5 +155,26 @@ public class VersionInspector extends AbstractVisitor {
 		}
 
 		return (value == null);
+	}
+
+	static
+	protected boolean isAttribute(Field field){
+		XmlAttribute xmlAttribute = field.getAnnotation(XmlAttribute.class);
+
+		return (xmlAttribute != null);
+	}
+
+	static
+	protected boolean isEnumValue(Field field){
+		XmlEnumValue xmlEnumValue = field.getAnnotation(XmlEnumValue.class);
+
+		return (xmlEnumValue != null);
+	}
+
+	static
+	protected boolean isElement(Field field){
+		XmlElement xmlElement = field.getAnnotation(XmlElement.class);
+
+		return (xmlElement != null);
 	}
 }
