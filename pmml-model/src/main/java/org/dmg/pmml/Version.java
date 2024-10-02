@@ -4,14 +4,26 @@
 package org.dmg.pmml;
 
 public enum Version {
-	PMML_3_0("http://www.dmg.org/PMML-3_0"),
+	PMML_3_0("http://www.dmg.org/PMML-3_0"){
+
+		@Override
+		public Version previous(){
+			return null;
+		}
+	},
 	PMML_3_1("http://www.dmg.org/PMML-3_1"),
 	PMML_3_2("http://www.dmg.org/PMML-3_2"),
 	PMML_4_0("http://www.dmg.org/PMML-4_0"),
 	PMML_4_1("http://www.dmg.org/PMML-4_1"),
 	PMML_4_2("http://www.dmg.org/PMML-4_2"),
 	PMML_4_3("http://www.dmg.org/PMML-4_3"),
-	PMML_4_4("http://www.dmg.org/PMML-4_4"),
+	PMML_4_4("http://www.dmg.org/PMML-4_4"){
+
+		@Override
+		public Version next(){
+			return null;
+		}
+	},
 
 	/**
 	 * Extended PMML
@@ -19,10 +31,25 @@ public enum Version {
 	XPMML("http://xpmml.org/XPMML"){
 
 		@Override
+		public boolean isStandard(){
+			return false;
+		}
+
+		@Override
 		public String getVersion(){
 			throw new UnsupportedOperationException();
 		}
-	}
+
+		@Override
+		public Version previous(){
+			return null;
+		}
+
+		@Override
+		public Version next(){
+			return null;
+		}
+	},
 	;
 
 	private String namespaceURI = null;
@@ -33,9 +60,7 @@ public enum Version {
 	}
 
 	public boolean isStandard(){
-		String namespaceURI = getNamespaceURI();
-
-		return namespaceURI.matches(Version.REGEX_PMML_XMLNS);
+		return true;
 	}
 
 	public String getNamespaceURI(){
@@ -52,6 +77,18 @@ public enum Version {
 		String version = namespaceURI.substring("http://www.dmg.org/PMML-".length());
 
 		return version.replace('_', '.');
+	}
+
+	public Version previous(){
+		Version[] versions = Version.values();
+
+		return versions[ordinal() - 1];
+	}
+
+	public Version next(){
+		Version[] versions = Version.values();
+
+		return versions[ordinal() + 1];
 	}
 
 	static

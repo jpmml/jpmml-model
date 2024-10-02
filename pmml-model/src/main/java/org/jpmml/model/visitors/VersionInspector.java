@@ -3,17 +3,20 @@
  */
 package org.jpmml.model.visitors;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlEnumValue;
 import org.dmg.pmml.Apply;
-import org.dmg.pmml.PMMLFunctions;
+import org.dmg.pmml.PMMLAttributes;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
+import org.dmg.pmml.VersionUtil;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.annotations.Added;
@@ -22,40 +25,38 @@ import org.jpmml.model.annotations.Removed;
 import org.jpmml.model.annotations.Required;
 
 /**
- * <p>
- * A Visitor that determines the range of valid PMML schema versions for a class model object.
- * </p>
- *
  * @see Added
  * @see Optional
  * @see Removed
  * @see Required
  */
-public class VersionInspector extends AbstractVisitor implements Resettable {
+abstract
+public class VersionInspector extends AbstractVisitor {
 
-	private Version minimum = Version.getMinimum();
+	abstract
+	public void handleAdded(PMMLObject object, AnnotatedElement element, Added added);
 
-	private Version maximum = Version.getMaximum();
+	abstract
+	public void handleRemoved(PMMLObject object, AnnotatedElement element, Removed removed);
 
+	abstract
+	public void handleOptional(PMMLObject object, AnnotatedElement element, Optional optional);
 
-	@Override
-	public void reset(){
-		this.minimum = Version.getMinimum();
-		this.maximum = Version.getMaximum();
-	}
+	abstract
+	public void handleRequired(PMMLObject object, AnnotatedElement element, Required required);
 
 	@Override
 	public VisitorAction visit(PMMLObject object){
 
 		for(Class<?> clazz = object.getClass(); clazz != null; clazz = clazz.getSuperclass()){
-			inspect(clazz);
+			inspect(object, clazz);
 		}
 
 		List<Field> fields = ReflectionUtil.getFields(object.getClass());
 		for(Field field : fields){
 			Object value = ReflectionUtil.getFieldValue(field, object);
 
-			inspect(field, value);
+			inspect(object, field, value);
 
 			// The field is set to an enum constant
 			if(value instanceof Enum){
@@ -71,7 +72,7 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 					throw new RuntimeException(nsfe);
 				}
 
-				inspect(enumField);
+				inspect(object, enumField);
 			}
 		}
 
@@ -80,17 +81,42 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 
 	@Override
 	public VisitorAction visit(Apply apply){
-		String function = apply.requireFunction();
+		String function = apply.getFunction();
 
-		Version version = VersionInspector.functionVersions.get(function);
+		Version version = VersionUtil.getVersion(function);
 		if(version != null){
-			updateMinimum(version);
+			Added added = new Added(){
+
+				@Override
+				public Class<? extends Annotation> annotationType(){
+					return Added.class;
+				}
+
+				@Override
+				public Version value(){
+					return version;
+				}
+			};
+
+			handleAdded(apply, PMMLAttributes.APPLY_FUNCTION, added);
 		}
 
 		return super.visit(apply);
 	}
 
-	private void inspect(Field field, Object value){
+	private void inspect(PMMLObject object, AnnotatedElement element){
+		Added added = element.getAnnotation(Added.class);
+		if(added != null){
+			handleAdded(object, element, added);
+		}
+
+		Removed removed = element.getAnnotation(Removed.class);
+		if(removed != null){
+			handleRemoved(object, element, removed);
+		}
+	}
+
+	private void inspect(PMMLObject object, Field field, Object value){
 		Class<?> type = field.getType();
 
 		if(type.isPrimitive()){
@@ -104,67 +130,19 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 			if(isNull(value)){
 				Optional optional = field.getAnnotation(Optional.class);
 				if(optional != null){
-					updateMinimum(optional.value());
+					handleOptional(object, field, optional);
 				}
 
 				Required required = field.getAnnotation(Required.class);
 				if(required != null){
-					updateMaximum(previous(required.value()));
+					handleRequired(object, field, required);
 				}
 
 				return;
 			}
 		}
 
-		inspect(field);
-	}
-
-	private void inspect(AnnotatedElement element){
-		Added added = element.getAnnotation(Added.class);
-		if(added != null){
-			updateMinimum(added.value());
-		}
-
-		Removed removed = element.getAnnotation(Removed.class);
-		if(removed != null){
-			updateMaximum(removed.value());
-		}
-	}
-
-	/**
-	 * <p>
-	 * The minimum (ie. earliest) PMML schema version that can fully represent this class model object.
-	 * </p>
-	 *
-	 * @see Version#getMinimum()
-	 */
-	public Version getMinimum(){
-		return this.minimum;
-	}
-
-	private void updateMinimum(Version minimum){
-
-		if(minimum != null && minimum.compareTo(this.minimum) > 0){
-			this.minimum = minimum;
-		}
-	}
-
-	/**
-	 * <p>
-	 * The maximum (ie. latest) PMML schema version that can fully represent this class model object.
-	 * </p>
-	 *
-	 * @see Version#getMaximum()
-	 */
-	public Version getMaximum(){
-		return this.maximum;
-	}
-
-	private void updateMaximum(Version maximum){
-
-		if(maximum != null && maximum.compareTo(this.maximum) < 0){
-			this.maximum = maximum;
-		}
+		inspect(object, field);
 	}
 
 	static
@@ -180,53 +158,23 @@ public class VersionInspector extends AbstractVisitor implements Resettable {
 	}
 
 	static
-	private Version previous(Version version){
-		Version[] values = Version.values();
+	protected boolean isAttribute(Field field){
+		XmlAttribute xmlAttribute = field.getAnnotation(XmlAttribute.class);
 
-		return values[version.ordinal() - 1];
-	}
-
-	private static Map<String, Version> functionVersions = new LinkedHashMap<>();
-
-	static {
-		declareFunctions(Version.PMML_3_0,
-			PMMLFunctions.ADD, PMMLFunctions.SUBTRACT, PMMLFunctions.MULTIPLY, PMMLFunctions.DIVIDE,
-			PMMLFunctions.MIN, PMMLFunctions.MAX, PMMLFunctions.SUM, PMMLFunctions.AVG,
-			PMMLFunctions.LOG10, PMMLFunctions.LN, PMMLFunctions.SQRT, PMMLFunctions.ABS,
-			PMMLFunctions.UPPERCASE, PMMLFunctions.SUBSTRING, PMMLFunctions.TRIMBLANKS,
-			PMMLFunctions.FORMATNUMBER, PMMLFunctions.FORMATDATETIME,
-			PMMLFunctions.DATEDAYSSINCEYEAR, PMMLFunctions.DATESECONDSSINCEYEAR, PMMLFunctions.DATESECONDSSINCEMIDNIGHT);
-		declareFunctions(Version.PMML_3_1,
-			PMMLFunctions.EXP, PMMLFunctions.POW, PMMLFunctions.THRESHOLD, PMMLFunctions.FLOOR, PMMLFunctions.CEIL, PMMLFunctions.ROUND);
-		declareFunctions(Version.PMML_4_0,
-			PMMLFunctions.ISMISSING, PMMLFunctions.ISNOTMISSING,
-			PMMLFunctions.EQUAL, PMMLFunctions.NOTEQUAL, PMMLFunctions.LESSTHAN, PMMLFunctions.LESSOREQUAL, PMMLFunctions.GREATERTHAN, PMMLFunctions.GREATEROREQUAL,
-			PMMLFunctions.AND, PMMLFunctions.OR,
-			PMMLFunctions.NOT,
-			PMMLFunctions.ISIN, PMMLFunctions.ISNOTIN,
-			PMMLFunctions.IF);
-		declareFunctions(Version.PMML_4_1,
-			PMMLFunctions.MEDIAN, PMMLFunctions.PRODUCT,
-			PMMLFunctions.LOWERCASE);
-		declareFunctions(Version.PMML_4_2,
-			PMMLFunctions.CONCAT, PMMLFunctions.REPLACE, PMMLFunctions.MATCHES);
-		declareFunctions(Version.PMML_4_3,
-			PMMLFunctions.NORMALCDF, PMMLFunctions.NORMALPDF, PMMLFunctions.STDNORMALCDF, PMMLFunctions.STDNORMALPDF, PMMLFunctions.ERF, PMMLFunctions.NORMALIDF, PMMLFunctions.STDNORMALIDF);
-		declareFunctions(Version.PMML_4_4,
-			PMMLFunctions.MODULO,
-			PMMLFunctions.ISVALID, PMMLFunctions.ISNOTVALID,
-			PMMLFunctions.EXPM1, PMMLFunctions.HYPOT, PMMLFunctions.LN1P, PMMLFunctions.RINT,
-			PMMLFunctions.STRINGLENGTH,
-			PMMLFunctions.SIN, PMMLFunctions.ASIN, PMMLFunctions.SINH, PMMLFunctions.COS, PMMLFunctions.ACOS, PMMLFunctions.COSH, PMMLFunctions.TAN, PMMLFunctions.ATAN, PMMLFunctions.TANH);
-		declareFunctions(Version.XPMML,
-			PMMLFunctions.ATAN2);
+		return (xmlAttribute != null);
 	}
 
 	static
-	private void declareFunctions(Version version, String... functions){
+	protected boolean isEnumValue(Field field){
+		XmlEnumValue xmlEnumValue = field.getAnnotation(XmlEnumValue.class);
 
-		for(String function : functions){
-			VersionInspector.functionVersions.put(function, version);
-		}
+		return (xmlEnumValue != null);
+	}
+
+	static
+	protected boolean isElement(Field field){
+		XmlElement xmlElement = field.getAnnotation(XmlElement.class);
+
+		return (xmlElement != null);
 	}
 }

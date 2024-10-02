@@ -5,6 +5,7 @@
 package org.jpmml.model.filters;
 
 import org.dmg.pmml.Version;
+import org.dmg.pmml.VersionUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.XMLReader;
 
@@ -40,9 +41,13 @@ public class ImportFilter extends PMMLFilter {
 
 	@Override
 	public String filterLocalName(String localName){
+		Version source = getSource();
 
-		if(("Trend").equals(localName) && compare(getSource(), Version.PMML_4_0) == 0){
-			return "Trend_ExpoSmooth";
+		if(("Trend").equals(localName)){
+
+			if(source.compareTo(Version.PMML_4_0) == 0){
+				return "Trend_ExpoSmooth";
+			}
 		}
 
 		return localName;
@@ -50,39 +55,22 @@ public class ImportFilter extends PMMLFilter {
 
 	@Override
 	public Attributes filterAttributes(String localName, Attributes attributes){
+		Version source = getSource();
 
 		if(("Apply").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_1) == 0){
+			if(source.compareTo(Version.PMML_4_1) == 0){
 				attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
 			} // End if
 
-			if(compare(getSource(), Version.PMML_4_3) <= 0){
+			if(source.compareTo(Version.PMML_4_4) <= 0){
 				String function = getAttribute(attributes, "function");
 
-				if(function != null){
+				if(function != null && function.startsWith("x-")){
+					Version functionVersion = VersionUtil.getVersion(function.substring("x-".length()));
 
-					switch(function){
-						case "x-acos":
-						case "x-asin":
-						case "x-atan":
-						case "x-cos":
-						case "x-cosh":
-						case "x-expm1":
-						case "x-hypot":
-						case "x-ln1p":
-						case "x-modulo":
-						case "x-rint":
-						case "x-sin":
-						case "x-sinh":
-						case "x-tan":
-						case "x-tanh":
-							{
-								attributes = setAttribute(attributes, "function", function.substring("x-".length()));
-							}
-							break;
-						default:
-							break;
+					if(functionVersion != null && functionVersion.compareTo(Version.PMML_4_4) <= 0){
+						attributes = setAttribute(attributes, "function", function.substring("x-".length()));
 					}
 				}
 			}
@@ -90,28 +78,39 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("MiningField").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_3) <= 0){
+			if(source.compareTo(Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
 			} // End if
 
-			if(compare(getSource(), Version.PMML_4_4) <= 0){
+			if(source.compareTo(Version.PMML_4_4) <= 0){
+				String missingValueTreatment = getAttribute(attributes, "missingValueTreatment");
+				String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
 
-				if(hasAttribute(attributes, "invalidValueReplacement")){
-					String invalidValueTreatment = getAttribute(attributes, "invalidValueTreatment");
+				if(missingValueTreatment != null){
 
-					if(invalidValueTreatment != null){
+					switch(missingValueTreatment){
+						case "x-returnInvalid":
+							{
+								attributes = setAttribute(attributes, "missingValueTreatment", missingValueTreatment.substring("x-".length()));
+							}
+							break;
+						default:
+							break;
+					}
+				} // End if
 
-						switch(invalidValueTreatment){
-							case "asIs":
-								{
-									attributes = setAttribute(attributes, "invalidValueTreatment", "asValue");
-								}
-								break;
-							case "asValue":
-								break;
-							default:
-								break;
-						}
+				if(invalidValueTreatment != null){
+
+					switch(invalidValueTreatment){
+						case "asIs":
+							{
+								attributes = setAttribute(attributes, "invalidValueTreatment", "asValue");
+							}
+							break;
+						case "asValue":
+							break;
+						default:
+							break;
 					}
 				}
 			}
@@ -129,11 +128,8 @@ public class ImportFilter extends PMMLFilter {
 
 		if(("Segmentation").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_4_3) <= 0){
+			if(source.compareTo(Version.PMML_4_3) <= 0){
 				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
-
-				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
-				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
 
 				if(multipleModelMethod != null){
 
@@ -148,12 +144,15 @@ public class ImportFilter extends PMMLFilter {
 							break;
 					}
 				}
+
+				attributes = renameAttribute(attributes, "x-missingPredictionTreatment", "missingPredictionTreatment");
+				attributes = renameAttribute(attributes, "x-missingThreshold", "missingThreshold");
 			}
 		} else
 
 		if(("TargetValue").equals(localName)){
 
-			if(compare(getSource(), Version.PMML_3_1) <= 0){
+			if(source.compareTo(Version.PMML_3_1) <= 0){
 				attributes = renameAttribute(attributes, "rawDataValue", "displayValue");
 			}
 		}

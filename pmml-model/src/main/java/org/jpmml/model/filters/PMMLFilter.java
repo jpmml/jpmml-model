@@ -3,6 +3,8 @@
  */
 package org.jpmml.model.filters;
 
+import java.util.Objects;
+
 import org.dmg.pmml.Version;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -146,22 +148,7 @@ public class PMMLFilter extends XMLFilterImpl {
 	}
 
 	private void setTarget(Version target){
-
-		if(target == null){
-			throw new NullPointerException();
-		}
-
-		this.target = target;
-	}
-
-	static
-	protected int compare(Version left, Version right){
-
-		if(left == null || right == null){
-			throw new IllegalStateException();
-		}
-
-		return (left).compareTo(right);
+		this.target = Objects.requireNonNull(target);
 	}
 
 	static

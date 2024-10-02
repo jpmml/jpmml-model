@@ -6,7 +6,7 @@
 	</DataDictionary>
 	<TransformationDictionary>
 		<DerivedField name="text-text" dataType="string" optype="categorical">
-			<Apply function="concat" mapMissingTo="">
+			<Apply function="x-concat" mapMissingTo="">
 				<FieldRef field="text"/>
 				<Constant>-</Constant>
 				<FieldRef field="text"/>

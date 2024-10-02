@@ -44,7 +44,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class VersionInspectorTest {
+public class VersionRangeFinderTest {
 
 	@Test
 	public void inspectTypeAnnotations(){
@@ -202,7 +202,7 @@ public class VersionInspectorTest {
 
 	static
 	private void assertVersionRange(PMMLObject object, Version minimum, Version maximum){
-		VersionInspector inspector = new VersionInspector();
+		VersionRangeFinder inspector = new VersionRangeFinder();
 		inspector.applyTo(object);
 
 		assertEquals(Arrays.asList(minimum, maximum), Arrays.asList(inspector.getMinimum(), inspector.getMaximum()));

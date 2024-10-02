@@ -24,11 +24,15 @@ public class MiningFieldTest extends SchemaUpdateTest {
 	public void transform() throws Exception {
 		byte[] original = ResourceUtil.getByteArray(MiningFieldTest.class);
 
-		checkMiningField(original, "asIs", new String[]{"0", null});
+		checkMiningField(original, "x-returnInvalid", "asIs", new String[]{"0", null});
 
 		byte[] latest = upgradeToLatest(original);
 
-		checkMiningField(latest, "asValue", new String[]{null, "0"});
+		checkMiningField(latest, "returnInvalid", "asValue", new String[]{null, "0"});
+
+		byte[] latestToOriginal = downgrade(latest, Version.PMML_4_3);
+
+		checkMiningField(latestToOriginal, "x-returnInvalid", "asIs", new String[]{"0", null});
 	}
 
 	@Test
@@ -45,8 +49,10 @@ public class MiningFieldTest extends SchemaUpdateTest {
 	}
 
 	static
-	private void checkMiningField(byte[] bytes, String invalidValueTreatment, String[] invalidValueReplacement) throws Exception {
+	private void checkMiningField(byte[] bytes, String missingValueTreatment, String invalidValueTreatment, String[] invalidValueReplacement) throws Exception {
 		Node node = DOMUtil.selectNode(bytes, "/:PMML/:RegressionModel/:MiningSchema/:MiningField");
+
+		assertEquals(missingValueTreatment, DOMUtil.getAttributeValue(node, "missingValueTreatment"));
 
 		assertEquals(invalidValueTreatment, DOMUtil.getAttributeValue(node, "invalidValueTreatment"));
 		assertArrayEquals(invalidValueReplacement, DOMUtil.getExtensionAttributeValues(node, "invalidValueReplacement"));
