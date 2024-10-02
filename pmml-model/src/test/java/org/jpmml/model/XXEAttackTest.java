@@ -50,7 +50,7 @@ public class XXEAttackTest {
 
 			fail();
 		} catch(UnmarshalException ue){
-			Throwable cause = ue.getCause();
+			Throwable cause = SAXUtil.getCause(ue);
 
 			assertTrue(cause instanceof SAXParseException);
 		}

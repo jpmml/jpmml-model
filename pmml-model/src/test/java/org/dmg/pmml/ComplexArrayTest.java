@@ -64,7 +64,7 @@ public class ComplexArrayTest {
 
 		value.add("\"four\"");
 
-		checkArray("1 22 3 \\\"four\\\"", array);
+		checkArray("1 22 3 \\&quot;four\\&quot;", array);
 	}
 
 	static

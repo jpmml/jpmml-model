@@ -10,6 +10,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
 
+import jakarta.xml.bind.JAXBException;
 import org.jpmml.model.filters.CountFilter;
 import org.jpmml.model.filters.DepthFilter;
 import org.jpmml.model.filters.ExtensionFilter;
@@ -67,5 +68,21 @@ public class SAXUtil {
 		}
 
 		return result;
+	}
+
+	static
+	public Throwable getCause(JAXBException e){
+		Throwable cause = e.getCause();
+
+		// Ignore the framework-specific wrapper exception, if there is one
+		if(cause != null && !(cause instanceof SAXException)){
+			Throwable nextCause = cause.getCause();
+
+			if(nextCause instanceof SAXException){
+				return nextCause;
+			}
+		}
+
+		return cause;
 	}
 }

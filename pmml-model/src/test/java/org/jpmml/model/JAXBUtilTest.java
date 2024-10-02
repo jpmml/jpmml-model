@@ -56,7 +56,6 @@ public class JAXBUtilTest {
 		JAXBContext context = JAXBContext.newInstance(CustomObjectFactory.class);
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		unmarshaller.setProperty("org.glassfish.jaxb.core.ObjectFactory", new CustomObjectFactory());
 
 		try(InputStream is = ResourceUtil.getStream(Version.PMML_4_4)){
 			pmml = (PMML)unmarshaller.unmarshal(is);

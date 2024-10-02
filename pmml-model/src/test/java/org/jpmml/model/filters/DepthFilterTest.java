@@ -7,6 +7,7 @@ import jakarta.xml.bind.UnmarshalException;
 import org.dmg.pmml.mining.Segmentation;
 import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SAXUtil;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -24,7 +25,7 @@ public class DepthFilterTest {
 
 			fail();
 		} catch(UnmarshalException ue){
-			Throwable cause = ue.getCause();
+			Throwable cause = SAXUtil.getCause(ue);
 
 			assertTrue(cause instanceof SAXException);
 		}
@@ -36,7 +37,7 @@ public class DepthFilterTest {
 
 			fail();
 		} catch(UnmarshalException ue){
-			Throwable cause = ue.getCause();
+			Throwable cause = SAXUtil.getCause(ue);
 
 			assertTrue(cause instanceof SAXException);
 		}
