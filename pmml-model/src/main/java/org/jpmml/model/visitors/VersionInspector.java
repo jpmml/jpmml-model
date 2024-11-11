@@ -11,6 +11,7 @@ import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlEnumValue;
 import org.dmg.pmml.Apply;
 import org.dmg.pmml.PMMLAttributes;
@@ -174,7 +175,8 @@ public class VersionInspector extends AbstractVisitor {
 	static
 	protected boolean isElement(Field field){
 		XmlElement xmlElement = field.getAnnotation(XmlElement.class);
+		XmlElements xmlElements = field.getAnnotation(XmlElements.class);
 
-		return (xmlElement != null);
+		return (xmlElement != null) || (xmlElements != null);
 	}
 }
