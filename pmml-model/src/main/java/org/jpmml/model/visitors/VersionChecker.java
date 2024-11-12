@@ -14,11 +14,13 @@ import org.dmg.pmml.Version;
 import org.jpmml.model.MarkupException;
 import org.jpmml.model.MisplacedAttributeException;
 import org.jpmml.model.MisplacedElementException;
+import org.jpmml.model.MisplacedElementListException;
 import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.MissingElementException;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.UnsupportedAttributeException;
 import org.jpmml.model.UnsupportedElementException;
+import org.jpmml.model.UnsupportedElementListException;
 import org.jpmml.model.annotations.Added;
 import org.jpmml.model.annotations.Optional;
 import org.jpmml.model.annotations.Removed;
@@ -60,7 +62,14 @@ public class VersionChecker extends VersionInspector implements Resettable {
 				} else
 
 				if(isElement(field)){
-					report(new UnsupportedElementException((PMMLObject)value));
+
+					if(value instanceof List){
+						report(new UnsupportedElementListException((List<? extends PMMLObject>)value));
+					} else
+
+					{
+						report(new UnsupportedElementException((PMMLObject)value));
+					}
 				} else
 
 				{
@@ -90,7 +99,14 @@ public class VersionChecker extends VersionInspector implements Resettable {
 				} else
 
 				if(isElement(field)){
-					report(new MisplacedElementException((PMMLObject)value));
+
+					if(value instanceof List){
+						report(new MisplacedElementListException((List<? extends PMMLObject>)value));
+					} else
+
+					{
+						report(new MisplacedElementException((PMMLObject)value));
+					}
 				} else
 
 				{
