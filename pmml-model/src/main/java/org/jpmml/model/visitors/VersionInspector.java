@@ -97,6 +97,11 @@ public class VersionInspector extends AbstractVisitor {
 				public Version value(){
 					return version;
 				}
+
+				@Override
+				public boolean removable(){
+					return false;
+				}
 			};
 
 			handleAdded(apply, PMMLAttributes.APPLY_FUNCTION, added);
