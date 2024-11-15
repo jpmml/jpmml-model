@@ -91,7 +91,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 		
 		<jaxb:bindings node="//xsd:element[@name='AnomalyDetectionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.5.0")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -241,7 +241,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -348,7 +348,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -390,7 +390,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BayesianNetworkModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -606,7 +606,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -1144,7 +1144,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GaussianProcessModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -1294,7 +1294,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -1596,7 +1596,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -1726,7 +1726,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -1767,7 +1767,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -1856,7 +1856,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -2302,7 +2302,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PMML']/xsd:complexType/xsd:attribute[@name='x-baseVersion']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.3")</annox:annotateProperty>
 			<jaxb:property
 				name="baseVersion"
@@ -2568,7 +2568,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -2712,7 +2712,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -2752,7 +2752,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -2972,7 +2972,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -3178,7 +3178,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -3413,7 +3413,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -3600,7 +3600,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
@@ -3714,7 +3714,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='x-mathContext']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.XPMML, removable = true)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.3.7")</annox:annotateProperty>
 			<jaxb:property
 				name="mathContext"
