@@ -3,32 +3,56 @@
  */
 package org.jpmml.model.visitors;
 
-import org.dmg.pmml.MathContext;
-import org.dmg.pmml.Model;
-import org.dmg.pmml.PMML;
-import org.dmg.pmml.VisitorAction;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
 
-public class VersionStandardizer extends AbstractVisitor {
+import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.Version;
+import org.jpmml.model.ReflectionUtil;
+import org.jpmml.model.annotations.Added;
+import org.jpmml.model.annotations.Optional;
+import org.jpmml.model.annotations.Removed;
+import org.jpmml.model.annotations.Required;
+import org.jpmml.model.filters.ExportFilter;
+
+/**
+ * <p>
+ * A Visitor that standardizes a class model object by reducing vendor extension markup.
+ * </p>
+ *
+ * @see ExportFilter
+ */
+public class VersionStandardizer extends VersionInspector {
 
 	@Override
-	public VisitorAction visit(Model model){
-		MathContext mathContext = model.getMathContext();
+	public void handleAdded(PMMLObject object, AnnotatedElement element, Added added){
+		Version version = added.value();
 
-		if(mathContext != null){
-			model.setMathContext(null);
+		if(!version.isStandard()){
+
+			if(element instanceof Field){
+				Field field = (Field)element;
+
+				if(added.removable()){
+					ReflectionUtil.setFieldValue(field, object, null);
+				}
+			} else
+
+			{
+				throw new IllegalArgumentException();
+			}
 		}
-
-		return super.visit(model);
 	}
 
 	@Override
-	public VisitorAction visit(PMML pmml){
-		String baseVersion = pmml.getBaseVersion();
+	public void handleRemoved(PMMLObject object, AnnotatedElement element, Removed removed){
+	}
 
-		if(baseVersion != null){
-			pmml.setBaseVersion(null);
-		}
+	@Override
+	public void handleOptional(PMMLObject object, AnnotatedElement element, Optional optional){
+	}
 
-		return super.visit(pmml);
+	@Override
+	public void handleRequired(PMMLObject object, AnnotatedElement element, Required required){
 	}
 }
