@@ -194,7 +194,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:sequence/xsd:element[@ref='Extension']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:sequence/xsd:element[@ref='MaximumLikelihoodStat']">
@@ -234,7 +234,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -261,7 +261,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelVerification']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='AssociationModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Output']">
@@ -341,7 +341,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BaselineModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -451,7 +451,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BlockIndicator']/xsd:complexType/xsd:sequence/xsd:element[@ref='Extension']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValueMeans']/xsd:complexType">
@@ -589,7 +589,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -622,7 +622,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModelQuality']/xsd:complexType">
@@ -631,7 +631,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ClusteringModelQuality']/xsd:complexType/xsd:sequence/xsd:element[@ref='Extension']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Coefficient']/xsd:complexType">
@@ -872,7 +872,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelStats']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DecisionTree']/xsd:complexType/xsd:sequence/xsd:element[@ref='Output']">
@@ -1209,7 +1209,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -1311,7 +1311,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='GeneralRegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='PPMatrix']">
@@ -1323,7 +1323,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Header']/xsd:complexType/xsd:attribute[@name='modelVersion']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_3, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='HVector']/xsd:complexType">
@@ -1589,7 +1589,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -1612,7 +1612,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MiningModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='Segmentation']">
@@ -1719,7 +1719,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -1734,7 +1734,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType">
@@ -1760,7 +1760,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NearestNeighborModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -1831,7 +1831,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -1868,7 +1868,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralNetwork']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NeuralOutput']/xsd:complexType">
@@ -2060,7 +2060,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isFinalResult']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_3, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="finalResult"
 			/>
@@ -2159,7 +2159,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:sequence/xsd:sequence/xsd:element[@ref='Value']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="values"
 			/>
@@ -2193,7 +2193,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='displayName']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ParameterField']/xsd:complexType/xsd:attribute[@name='optype']">
@@ -2363,27 +2363,27 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='accuracy']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='AIC']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='AICc']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='AUC']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='BIC']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='adj-r-squared']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='dataUsage']/xsd:simpleType">
@@ -2393,59 +2393,59 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='degreesOfFreedom']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='F1']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='F2']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='Fhalf']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='fStatistic']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='numOfPredictors']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='numOfRecords']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='numOfRecordsWeighted']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='precision']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='recall']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='rootMeanSquaredError']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='specificity']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_4, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='sumSquaredError']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PredictiveModelQuality']/xsd:complexType/xsd:attribute[@name='sumSquaredRegression']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Predictor']/xsd:complexType">
@@ -2536,7 +2536,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelStats']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Regression']/xsd:complexType/xsd:sequence/xsd:element[@ref='Output']">
@@ -2557,7 +2557,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -2603,7 +2603,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType">
@@ -2705,7 +2705,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -2720,7 +2720,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType">
@@ -2739,7 +2739,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -2921,7 +2921,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SequenceModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -3151,7 +3151,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -3192,7 +3192,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachineModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='VectorDictionary']">
@@ -3406,7 +3406,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -3421,7 +3421,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TextModelNormalization']/xsd:complexType">
@@ -3593,7 +3593,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -3612,7 +3612,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeriesModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='StateSpaceModel']">
@@ -3671,7 +3671,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:attribute[@name='isScorable']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_1, removable = true)</annox:annotateProperty>
 			<jaxb:property
 				name="scorable"
 			/>
@@ -3722,7 +3722,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='TreeModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType">
