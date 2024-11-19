@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNull;
 public class VersionStandardizerTest {
 
 	@Test
-	public void standardize(){
+	public void standardizePMML(){
 		PMML pmml = new PMML()
 			.setVersion("4.4")
 			.setBaseVersion("4.3");
