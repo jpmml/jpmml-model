@@ -18,6 +18,7 @@ import org.dmg.pmml.clustering.PMMLAttributes;
 import org.dmg.pmml.time_series.TrendExpoSmooth;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.UnsupportedAttributeException;
+import org.jpmml.model.UnsupportedElementException;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -159,7 +160,7 @@ public class VersionDowngraderTest {
 
 		try {
 			downgrade(trendExpoSmooth, Version.PMML_4_0);
-		} catch(IllegalArgumentException iae){
+		} catch(UnsupportedElementException uee){
 			// Ignored
 		}
 	}
