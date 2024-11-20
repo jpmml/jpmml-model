@@ -22,7 +22,7 @@ public class InvalidAttributeException extends InvalidMarkupException {
 	}
 
 	public InvalidAttributeException(PMMLObject object, Field field, Object value){
-		super(formatMessage(XPathUtil.formatAttribute(field, value)), object);
+		super(formatMessage(XPathUtil.formatAttribute(object.getClass(), field, value)), object);
 	}
 
 	static

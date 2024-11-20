@@ -24,4 +24,6 @@ import org.dmg.pmml.Version;
 public @interface Added {
 
 	Version value();
+
+	boolean removable() default false;
 }

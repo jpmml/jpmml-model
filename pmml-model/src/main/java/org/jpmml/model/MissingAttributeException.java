@@ -18,7 +18,7 @@ public class MissingAttributeException extends MissingMarkupException {
 	}
 
 	public MissingAttributeException(PMMLObject object, Field field){
-		super(formatMessage(XPathUtil.formatElementOrAttribute(field)), object);
+		super(formatMessage(XPathUtil.formatElementOrAttribute(object.getClass(), field)), object);
 	}
 
 	static

@@ -4,7 +4,6 @@
  */
 package org.jpmml.xjc;
 
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import java.util.function.Predicate;
 
 import javax.xml.namespace.QName;
 
-import com.sun.codemodel.JAnnotatable;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JAnnotationValue;
@@ -59,6 +57,7 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.XmlValue;
 import org.eclipse.persistence.oxm.annotations.XmlValueExtension;
 import org.glassfish.jaxb.core.api.impl.NameConverter;
@@ -151,7 +150,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				try {
 					Field pkgField = CClassInfoParent.Package.class.getDeclaredField("pkg");
-					ensureAccessible(pkgField);
+					CodeModelUtil.ensureAccessible(pkgField);
 
 					JPackage subPackage = packageParent.pkg.subPackage(name);
 
@@ -166,7 +165,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				try {
 					Field elementNameField = CClassInfo.class.getDeclaredField("elementName");
-					ensureAccessible(elementNameField);
+					CodeModelUtil.ensureAccessible(elementNameField);
 
 					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", name));
 				} catch(ReflectiveOperationException roe){
@@ -312,17 +311,40 @@ public class PMMLPlugin extends ComplexPlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			List<JAnnotationUse> beanClazzAnnotations = getAnnotations(beanClazz);
+			List<JAnnotationUse> beanClazzAnnotations = CodeModelUtil.getAnnotations(beanClazz);
 
-			JAnnotationUse xmlAccessorType = findAnnotation(beanClazzAnnotations, XmlAccessorType.class);
+			JAnnotationUse xmlAccessorType = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlAccessorType.class);
 			if(xmlAccessorType != null){
 				beanClazzAnnotations.remove(xmlAccessorType);
 			}
 
-			JAnnotationUse xmlRootElement = findAnnotation(beanClazzAnnotations, XmlRootElement.class);
+			JAnnotationUse xmlType = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlType.class);
+			if(xmlType != null){
+				beanClazzAnnotations.remove(xmlType);
+				beanClazzAnnotations.add(0, xmlType);
+			} else
+
+			{
+				throw new RuntimeException();
+			}
+
+			JAnnotationUse xmlRootElement = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlRootElement.class);
+			if(xmlRootElement == null){
+				String elementName = getElementName(beanClazz.name());
+
+				beanClazz.annotate(XmlRootElement.class)
+					.param("name", elementName)
+					.param("namespace", "http://www.dmg.org/PMML-4_4");
+			}
+
+			xmlRootElement = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlRootElement.class);
 			if(xmlRootElement != null){
 				beanClazzAnnotations.remove(xmlRootElement);
 				beanClazzAnnotations.add(0, xmlRootElement);
+			} else
+
+			{
+				throw new RuntimeException();
 			}
 
 			Map<String, JFieldVar> fieldVars = beanClazz.fields();
@@ -457,11 +479,11 @@ public class PMMLPlugin extends ComplexPlugin {
 					}
 				}
 
-				List<JAnnotationUse> fieldVarAnnotations = getAnnotations(fieldVar);
+				List<JAnnotationUse> fieldVarAnnotations = CodeModelUtil.getAnnotations(fieldVar);
 
 				// XXX
 				if(("node").equals(name) || ("nodes").equals(name) || ("scoreDistributions").equals(name)){
-					JAnnotationUse xmlElement = findAnnotation(fieldVarAnnotations, XmlElement.class);
+					JAnnotationUse xmlElement = CodeModelUtil.findAnnotation(fieldVarAnnotations, XmlElement.class);
 
 					fieldVarAnnotations.remove(xmlElement);
 
@@ -477,7 +499,7 @@ public class PMMLPlugin extends ComplexPlugin {
 					fieldVarAnnotations.add(0, xmlElements);
 				} // End if
 
-				if(hasAnnotation(fieldVarAnnotations, XmlValue.class)){
+				if(CodeModelUtil.hasAnnotation(fieldVarAnnotations, XmlValue.class)){
 					fieldVar.annotate(XmlValueExtension.class);
 				}
 			}
@@ -640,6 +662,36 @@ public class PMMLPlugin extends ComplexPlugin {
 	}
 
 	static
+	private String getElementName(String name){
+
+		switch(name){
+			// baseline
+			case "CountTable":
+				return "COUNT-TABLE-TYPE";
+			// bayesian_network
+			case "ContinuousDistribution":
+				return name;
+			// bayesian_network
+			case "LognormalDistribution":
+			case "NormalDistribution":
+			case "TriangularDistribution":
+			case "UniformDistribution":
+				return name + "ForBN";
+			// support_vector_machne
+			case "LinearKernel":
+			case "PolynomialKernel":
+			case "RadialBasisKernel":
+			case "SigmoidKernel":
+				return name + "Type";
+			// time_series
+			case "TrendExpoSmooth":
+				return "Trend_ExpoSmooth";
+			default:
+				throw new IllegalArgumentException(name);
+		}
+	}
+
+	static
 	private FieldOutline getExtensionsField(ClassOutline classOutline){
 		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
 
@@ -691,64 +743,11 @@ public class PMMLPlugin extends ComplexPlugin {
 	}
 
 	static
-	private boolean hasAnnotation(Collection<JAnnotationUse> annotations, Class<?> clazz){
-		JAnnotationUse annotation = findAnnotation(annotations, clazz);
-
-		return (annotation != null);
-	}
-
-	static
-	private JAnnotationUse findAnnotation(Collection<JAnnotationUse> annotations, Class<?> clazz){
-		String fullName = clazz.getName();
-
-		for(JAnnotationUse annotation : annotations){
-			JClass type = annotation.getAnnotationClass();
-
-			if(checkType(type, fullName)){
-				return annotation;
-			}
-		}
-
-		return null;
-	}
-
-	static
-	private List<JAnnotationUse> getAnnotations(JAnnotatable annotatable){
-
-		try {
-			Class<?> clazz = annotatable.getClass();
-
-			Field annotationsField;
-
-			while(true){
-
-				try {
-					annotationsField = clazz.getDeclaredField("annotations");
-
-					break;
-				} catch(NoSuchFieldException nsfe){
-					clazz = clazz.getSuperclass();
-
-					if(clazz == null){
-						throw nsfe;
-					}
-				}
-			}
-
-			ensureAccessible(annotationsField);
-
-			return (List)annotationsField.get(annotatable);
-		} catch(ReflectiveOperationException roe){
-			throw new RuntimeException(roe);
-		}
-	}
-
-	static
 	private void addValues(JAnnotationUse annotationUse, Map<String, JAnnotationValue> memberValues){
 
 		try {
 			Method addValueMethod = JAnnotationUse.class.getDeclaredMethod("addValue", String.class, JAnnotationValue.class);
-			ensureAccessible(addValueMethod);
+			CodeModelUtil.ensureAccessible(addValueMethod);
 
 			Collection<Map.Entry<String, JAnnotationValue>> entries = memberValues.entrySet();
 			for(Map.Entry<String, JAnnotationValue> entry : entries){
@@ -814,7 +813,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 		try {
 			Field ownerField = JFieldVar.class.getDeclaredField("owner");
-			ensureAccessible(ownerField);
+			CodeModelUtil.ensureAccessible(ownerField);
 
 			owner = (JDefinedClass)ownerField.get(fieldVar);
 		} catch(ReflectiveOperationException roe){
@@ -864,7 +863,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			if((name.startsWith("has") || name.startsWith("is") || name.startsWith("get") || name.startsWith("require")) && params.size() == 0){
 
-				if(!hasAnnotation(method.annotations(), Override.class)){
+				if(!CodeModelUtil.hasAnnotation(method.annotations(), Override.class)){
 					method.annotate(Override.class);
 				}
 			} else
@@ -875,7 +874,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			if(name.startsWith("set") && params.size() == 1){
 
-				if(!hasAnnotation(method.annotations(), Override.class)){
+				if(!CodeModelUtil.hasAnnotation(method.annotations(), Override.class)){
 					method.annotate(Override.class);
 				}
 			} else
@@ -925,15 +924,6 @@ public class PMMLPlugin extends ComplexPlugin {
 	static
 	private boolean checkType(JType type, String fullName){
 		return (type.fullName()).equals(fullName);
-	}
-
-	@SuppressWarnings("deprecation")
-	static
-	private void ensureAccessible(AccessibleObject accessibleObject){
-
-		if(!accessibleObject.isAccessible()){
-			accessibleObject.setAccessible(true);
-		}
 	}
 
 	static

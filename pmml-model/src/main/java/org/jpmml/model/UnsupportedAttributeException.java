@@ -22,6 +22,6 @@ public class UnsupportedAttributeException extends UnsupportedMarkupException {
 	}
 
 	public UnsupportedAttributeException(PMMLObject object, Field field, Object value){
-		super("Attribute with value " + XPathUtil.formatAttribute(field, value) + " is not supported", object);
+		super("Attribute with value " + XPathUtil.formatAttribute(object.getClass(), field, value) + " is not supported", object);
 	}
 }

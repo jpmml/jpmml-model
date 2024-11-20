@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sun.codemodel.JAnnotationArrayMember;
 import com.sun.codemodel.JAnnotationUse;
+import com.sun.codemodel.JAnnotationValue;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JCodeModel;
 import com.sun.codemodel.JDefinedClass;
@@ -38,6 +39,7 @@ import com.sun.tools.xjc.outline.EnumConstantOutline;
 import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import org.xml.sax.ErrorHandler;
 
 public class JacksonPlugin extends Plugin {
@@ -58,14 +60,18 @@ public class JacksonPlugin extends Plugin {
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
-			CClassInfo classInfo = classOutline.target;
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			if(classInfo.isElement()){
-				QName elementName = classInfo.getElementName();
+			List<JAnnotationUse> beanClazzAnnotations = CodeModelUtil.getAnnotations(beanClazz);
+
+			JAnnotationUse xmlRootElement = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlRootElement.class);
+			if(xmlRootElement != null){
+				Map<String, JAnnotationValue> annotationMembers = xmlRootElement.getAnnotationMembers();
+
+				JAnnotationValue nameValue = annotationMembers.get("name");
 
 				JAnnotationUse jsonRootName = beanClazz.annotate(JsonRootName.class)
-					.param("value", elementName.getLocalPart());
+					.param("value", CodeModelUtil.stringValue(nameValue));
 			}
 
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();

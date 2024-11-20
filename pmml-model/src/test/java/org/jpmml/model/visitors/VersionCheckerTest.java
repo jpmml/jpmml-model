@@ -11,10 +11,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.dmg.pmml.Apply;
+import org.dmg.pmml.DataType;
+import org.dmg.pmml.DerivedField;
+import org.dmg.pmml.FieldRef;
+import org.dmg.pmml.Interval;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.MathContext;
 import org.dmg.pmml.MiningFunction;
 import org.dmg.pmml.MiningSchema;
+import org.dmg.pmml.OpType;
 import org.dmg.pmml.Output;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMMLFunctions;
@@ -26,6 +31,7 @@ import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segmentation;
 import org.jpmml.model.MarkupException;
 import org.jpmml.model.MisplacedElementException;
+import org.jpmml.model.MisplacedElementListException;
 import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.MissingElementException;
 import org.jpmml.model.UnsupportedAttributeException;
@@ -54,6 +60,23 @@ public class VersionCheckerTest {
 
 		assertExceptions(apply, Version.XPMML, Collections.emptySet());
 		assertExceptions(apply, Version.PMML_4_4, Collections.singleton(UnsupportedAttributeException.class));
+	}
+
+	@Test
+	public void inspectDerivedField(){
+		Interval negativeInterval = new Interval(Interval.Closure.CLOSED_OPEN)
+			.setLeftMargin(-Double.MAX_VALUE)
+			.setRightMargin(0d);
+
+		Interval positiveInterval = new Interval(Interval.Closure.OPEN_CLOSED)
+			.setLeftMargin(0d)
+			.setRightMargin(Double.MAX_VALUE);
+
+		DerivedField derivedField = new DerivedField("double(x)", OpType.CONTINUOUS, DataType.DOUBLE, new FieldRef("x"))
+			.addIntervals(negativeInterval, positiveInterval);
+
+		assertExceptions(derivedField, Version.PMML_4_4, Collections.singleton(MisplacedElementListException.class));
+		assertExceptions(derivedField, Version.PMML_3_0, Collections.emptySet());
 	}
 
 	@Test
