@@ -64,13 +64,9 @@ public class PMMLOutputStream extends FilterOutputStream {
 				} else
 
 				if(string.endsWith(">")){
-					String updatedString = string.replace(Version.PMML_4_4.getNamespaceURI(), this.version.getNamespaceURI());
+					string = string.replace(Version.PMML_4_4.getNamespaceURI(), this.version.getNamespaceURI());
 
-					if(Objects.equals(string, updatedString)){
-						throw new IllegalStateException();
-					}
-
-					super.out.write(updatedString.getBytes("UTF-8"));
+					super.out.write(string.getBytes("UTF-8"));
 
 					this.buffer = null;
 				} else
