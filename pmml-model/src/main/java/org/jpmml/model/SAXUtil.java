@@ -3,12 +3,18 @@
  */
 package org.jpmml.model;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import javax.xml.transform.Result;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
 
 import jakarta.xml.bind.JAXBException;
 import org.jpmml.model.filters.CountFilter;
@@ -24,6 +30,19 @@ import org.xml.sax.XMLReader;
 public class SAXUtil {
 
 	private SAXUtil(){
+	}
+
+	static
+	public void transform(InputSource source, Result result, XMLFilter... filters) throws IOException, TransformerConfigurationException, ParserConfigurationException, SAXException {
+		SAXTransformerFactory transformerFactory = (SAXTransformerFactory)TransformerFactory.newInstance();
+
+		TransformerHandler transformerHandler = transformerFactory.newTransformerHandler();
+		transformerHandler.setResult(result);
+
+		XMLReader xmlReader = SAXUtil.createFilteredReader(SAXUtil.createXMLReader(), filters);
+		xmlReader.setContentHandler(transformerHandler);
+
+		xmlReader.parse(source);
 	}
 
 	/**

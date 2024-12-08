@@ -10,9 +10,6 @@ import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXTransformerFactory;
-import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 
 import jakarta.xml.bind.JAXBException;
@@ -42,16 +39,8 @@ public class SchemaUpdateTest {
 	public byte[] downgrade(byte[] bytes, Version version) throws IOException, TransformerConfigurationException, ParserConfigurationException, SAXException {
 		ByteArrayOutputStream result = new ByteArrayOutputStream();
 
-		SAXTransformerFactory transformerFactory = (SAXTransformerFactory)TransformerFactory.newInstance();
-
-		TransformerHandler transformer = transformerFactory.newTransformerHandler();
-		transformer.setResult(new StreamResult(result));
-
-		ExportFilter exportFilter = new ExportFilter(SAXUtil.createXMLReader(), version);
-		exportFilter.setContentHandler(transformer);
-
 		try(InputStream is = new ByteArrayInputStream(bytes)){
-			exportFilter.parse(new InputSource(is));
+			SAXUtil.transform(new InputSource(is), new StreamResult(result), new ExportFilter(version));
 		}
 
 		return result.toByteArray();
