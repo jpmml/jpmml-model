@@ -189,6 +189,12 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:attribute[@name='transformation']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Transformation"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:sequence/xsd:element[@ref='DynamicRegressor']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
 		</jaxb:bindings>
