@@ -1584,6 +1584,12 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='MaximumLikelihoodStat']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Method"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Mean']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
