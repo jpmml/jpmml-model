@@ -8,5 +8,5 @@ import org.dmg.pmml.PMMLObject;
 
 @XmlTransient
 abstract
-public class TimeSeriesAlgorithm extends PMMLObject {
+public class Algorithm extends PMMLObject {
 }

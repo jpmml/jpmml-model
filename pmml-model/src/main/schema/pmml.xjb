@@ -9,7 +9,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="1"
-			implementation="6"
+			implementation="7"
 		/>
 
 		<jaxb:globalBindings>
@@ -167,7 +167,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1004,7 +1004,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1107,7 +1107,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='GARCH']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2810,7 +2810,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SeasonalTrendDecomposition']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3080,7 +3080,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SpectralAnalysis']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3088,7 +3088,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
