@@ -1393,6 +1393,12 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='InterceptVector']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Type"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Interval']/xsd:complexType/xsd:attribute[@name='closure']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Closure"
