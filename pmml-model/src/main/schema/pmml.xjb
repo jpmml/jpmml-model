@@ -1003,6 +1003,12 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DynamicRegressor']/xsd:complexType/xsd:attribute[@name='transformation']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Transformation"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='euclidean']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Distance</inheritance:extends>
 		</jaxb:bindings>
