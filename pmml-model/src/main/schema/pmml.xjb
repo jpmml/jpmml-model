@@ -3138,6 +3138,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='MeasurementMatrix']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='StateVector']">
 			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
