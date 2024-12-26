@@ -164,7 +164,7 @@ public class VisitorPlugin extends Plugin {
 			{"Similarity", "Measure"},
 			{"SparseArray<?>"},
 			{"regression.Term"},
-			{"time_series.TimeSeriesAlgorithm"}
+			{"time_series.Algorithm"}
 		};
 
 		for(String[] abstractClass : abstractClasses){

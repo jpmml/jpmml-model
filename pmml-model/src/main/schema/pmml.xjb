@@ -9,7 +9,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="1"
-			implementation="6"
+			implementation="7"
 		/>
 
 		<jaxb:globalBindings>
@@ -167,7 +167,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -187,6 +187,18 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:attribute[@name='transformation']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:attribute[@name='transformation']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Transformation"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:attribute[@name='predictionMethod']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="PredictionMethod"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='ARIMA']/xsd:complexType/xsd:sequence/xsd:element[@ref='DynamicRegressor']">
@@ -986,8 +998,22 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='DynamicRegressor']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;DynamicRegressor&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;DynamicRegressor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DynamicRegressor']/xsd:complexType/xsd:attribute[@name='transformation']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Transformation"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DynamicRegressor']/xsd:complexType/xsd:attribute[@name='futureValuesMethod']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="FutureValuesMethod"
 			/>
 		</jaxb:bindings>
 
@@ -1004,7 +1030,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ExponentialSmoothing']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1107,7 +1133,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='GARCH']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1369,6 +1395,12 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='InterceptVector']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Type"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Interval']/xsd:complexType/xsd:attribute[@name='closure']/xsd:simpleType">
 			<jaxb:typesafeEnumClass
 				name="Closure"
@@ -1557,6 +1589,12 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='MaximumLikelihoodStat']/xsd:complexType/xsd:attribute[@name='method']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Method"
 			/>
 		</jaxb:bindings>
 
@@ -2028,6 +2066,12 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
 			<jpmml-model:subpackage
 				name="time_series"
+			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='OutlierEffect']/xsd:complexType/xsd:attribute[@name='type']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Type"
 			/>
 		</jaxb:bindings>
 
@@ -2810,7 +2854,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SeasonalTrendDecomposition']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3080,7 +3124,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SpectralAnalysis']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3088,10 +3132,22 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:extends>org.dmg.pmml.time_series.TimeSeriesAlgorithm</inheritance:extends>
+			<inheritance:extends>org.dmg.pmml.time_series.Algorithm</inheritance:extends>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='MeasurementMatrix']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='StateVector']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='StateSpaceModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='TransitionMatrix']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='StateVector']/xsd:complexType">
@@ -3538,6 +3594,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='TimeSeries']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;TimeSeries&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
