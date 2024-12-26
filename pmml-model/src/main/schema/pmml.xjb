@@ -998,6 +998,8 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='DynamicRegressor']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;DynamicRegressor&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;DynamicRegressor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
