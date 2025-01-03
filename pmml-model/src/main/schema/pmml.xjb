@@ -153,6 +153,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='AR']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;AR&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -468,10 +469,12 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValueMeans']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;BoundaryValueMeans&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='BoundaryValues']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;BoundaryValues&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Categories']/xsd:complexType">
@@ -558,10 +561,12 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ClassLabels']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;ClassLabels&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Cluster']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Entity&lt;java.lang.String&gt;</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;Cluster&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasName&lt;Cluster&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="clustering"
@@ -776,6 +781,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='CorrelationFields']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;CorrelationFields&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='CorrelationMethods']/xsd:complexType">
@@ -1091,6 +1097,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='FinalNoise']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;FinalNoise&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1098,6 +1105,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='FinalNu']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;FinalNu&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1112,6 +1120,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='FinalPredictedNoise']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;FinalPredictedNoise&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1119,6 +1128,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='FinalStateVector']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;FinalStateVector&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1354,6 +1364,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='HVector']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;HVector&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1390,6 +1401,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='InterceptVector']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;InterceptVector&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1552,6 +1564,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='MACoefficients']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;MACoefficients&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -1716,6 +1729,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='MissingValueWeights']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;MissingValueWeights&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="clustering"
 			/>
@@ -1976,6 +1990,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='NonseasonalFactor']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;NonseasonalFactor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2304,6 +2319,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='PastVariances']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;PastVariances&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2531,6 +2547,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='PsiVector']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;PsiVector&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2669,6 +2686,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Residuals']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;Residuals&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2834,6 +2852,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SeasonalFactor']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;SeasonalFactor&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2841,6 +2860,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Seasonality_ExpoSmooth']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;SeasonalityExpoSmooth&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3108,6 +3128,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SimpleSetPredicate']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Predicate</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;SimpleSetPredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;SimpleSetPredicate&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasValueSet&lt;SimpleSetPredicate&gt;</inheritance:implements>
 		</jaxb:bindings>
@@ -3152,6 +3173,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='StateVector']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;StateVector&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3565,6 +3587,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='TimeCycle']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;TimeCycle&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasDisplayName&lt;TimeCycle&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
@@ -3580,6 +3603,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='TimeException']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;TimeException&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3721,6 +3745,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='TransferFunctionValues']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;TransferFunctionValues&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -3802,6 +3827,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;TrendExpoSmooth&gt;</inheritance:implements>
 			<jaxb:class
 				name="TrendExpoSmooth"
 			/>
@@ -3970,6 +3996,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='VectorInstance']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;VectorInstance&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasRequiredId&lt;VectorInstance&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="support_vector_machine"
@@ -3989,10 +4016,12 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='XCoordinates']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;XCoordinates&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='YCoordinates']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasArray&lt;YCoordinates&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:group[@name='CONTINUOUS-DISTRIBUTION-TYPES']">

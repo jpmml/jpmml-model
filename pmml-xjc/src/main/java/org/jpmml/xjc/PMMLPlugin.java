@@ -595,6 +595,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			String[][][] markerInterfaceInfos = {
 				{{"HasActivationFunction"}, {"getActivationFunction", "setActivationFunction", "getAltitude", "setAltitude", "getLeakage", "setLeakage", "getThreshold", "setThreshold", "getWidth", "setWidth"}},
+				{{"HasArray"}, {"getArray", "setArray"}},
 				{{"HasBaselineScore"}, {"getBaselineScore", "setBaselineScore"}},
 				{{"HasContinuousDomain"}, {"hasIntervals", "getIntervals", "addIntervals"}},
 				{{"HasDataType", "Field"}, {"getDataType", "setDataType"}},
