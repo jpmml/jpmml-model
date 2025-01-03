@@ -764,9 +764,6 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ContinuousDistribution']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateClass>
-			<jaxb:class
-				name="ContinuousDistribution"
-			/>
 			<jpmml-model:subpackage
 				name="bayesian_network"
 			/>
@@ -3828,9 +3825,6 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='Trend_ExpoSmooth']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasRequiredArray&lt;TrendExpoSmooth&gt;</inheritance:implements>
-			<jaxb:class
-				name="TrendExpoSmooth"
-			/>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
