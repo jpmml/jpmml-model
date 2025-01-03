@@ -778,6 +778,10 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='ContStats']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasArrays&lt;ContStats&gt;</inheritance:implements>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='CorrelationFields']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.HasRequiredArray&lt;CorrelationFields&gt;</inheritance:implements>
@@ -996,6 +1000,10 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Discretize']/xsd:complexType/xsd:sequence/xsd:element[@ref='DiscretizeBin']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='DiscrStats']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasArrays&lt;DiscrStats&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='DocumentTermMatrix']/xsd:complexType">
@@ -1587,6 +1595,10 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='MapValues']/xsd:complexType/xsd:sequence/xsd:element[@ref='FieldColumnPair']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Optional(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Matrix']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasArrays&lt;Matrix&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Matrix']/xsd:complexType/xsd:attribute[@name='kind']/xsd:simpleType">
@@ -2299,6 +2311,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='PartitionFieldStats']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasArrays&lt;PartitionFieldStats&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;PartitionFieldStats&gt;</inheritance:implements>
 		</jaxb:bindings>
 
