@@ -623,6 +623,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasRequiredArray"}, {"getArray", "requireArray", "setArray"}},
 				{{"HasRequiredDataType", "Field"}, {"getDataType", "requireDataType", "setDataType"}},
 				{{"HasRequiredId"}, {"getId", "requireId", "setId"}},
+				{{"HasRequiredMatrix"}, {"getMatrix", "requireMatrix", "setMatrix"}},
 				{{"HasRequiredName", "Field"}, {"getName", "requireName", "setName"}},
 				{{"HasRequiredOpType", "Field"}, {"getOpType", "requireOpType", "setOpType"}},
 				{{"HasRequiredType"}, {"getDataType", "requireDataType", "setDataType", "getOpType", "requireOpType", "setOpType"}},
