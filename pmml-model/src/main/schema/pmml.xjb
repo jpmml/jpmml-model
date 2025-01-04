@@ -228,7 +228,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='ARMAPart']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:implements>org.dmg.pmml.time_series.HasAR&lt;ARMAPart&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.time_series.HasRequiredAR&lt;ARMAPart&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
