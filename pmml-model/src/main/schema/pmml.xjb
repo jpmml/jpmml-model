@@ -2001,8 +2001,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='NonseasonalComponent']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:implements>org.dmg.pmml.time_series.HasAR&lt;NonseasonalComponent&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.time_series.HasMA&lt;NonseasonalComponent&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.time_series.HasARMA&lt;NonseasonalComponent&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
@@ -2869,8 +2868,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='SeasonalComponent']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
-			<inheritance:implements>org.dmg.pmml.time_series.HasAR&lt;SeasonalComponent&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.time_series.HasMA&lt;SeasonalComponent&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.time_series.HasARMA&lt;SeasonalComponent&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="time_series"
 			/>
