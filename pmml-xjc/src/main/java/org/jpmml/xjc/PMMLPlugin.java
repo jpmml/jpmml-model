@@ -610,6 +610,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasFieldReference", "ComparisonField"}, {"getField", "requireField", "setField"}},
 				{{"HasId", "Entity", "NeuralEntity", "Node", "Rule"}, {"getId", "setId"}},
 				{{"HasLocator"}, {"getLocator", "setLocator"}},
+				{{"HasMA"}, {"getMA", "getQ", "setMA", "setQ"}},
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
 				{{"HasMatrix"}, {"getMatrix", "setMatrix"}},
 				{{"HasMixedContent"}, {"hasContent", "getContent", "addContent"}},
