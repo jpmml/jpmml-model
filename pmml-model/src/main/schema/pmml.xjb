@@ -9,7 +9,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="1"
-			implementation="7"
+			implementation="8"
 		/>
 
 		<jaxb:globalBindings>
@@ -1505,6 +1505,12 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType/xsd:attribute[@name='aggregate']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType/xsd:attribute[@name='aggregate']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Aggregate"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Lambda']/xsd:complexType">
