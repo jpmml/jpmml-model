@@ -2156,6 +2156,21 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="MultiValued"
+			>
+			<jaxb:typesafeEnumMember
+				name="ZERO"
+				value="0"
+			/>
+			<jaxb:typesafeEnumMember
+				name="ONE"
+				value="1"
+			/>
+			</jaxb:typesafeEnumClass>
+		</jaxb:bindings>
+		
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='optype']">
 			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
