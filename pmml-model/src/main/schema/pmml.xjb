@@ -9,7 +9,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jpmml-model:serialVersionUID
 			major="4" minor="4" patch="1"
-			implementation="7"
+			implementation="8"
 		/>
 
 		<jaxb:globalBindings>
@@ -1507,6 +1507,12 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateProperty>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Lag']/xsd:complexType/xsd:attribute[@name='aggregate']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="Aggregate"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Lambda']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_3)</annox:annotateClass>
 			<jpmml-model:subpackage
@@ -2148,8 +2154,26 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
+			<jaxb:property
+				name="multiValued"
+			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']/xsd:simpleType">
+			<jaxb:typesafeEnumClass
+				name="MultiValued"
+			>
+			<jaxb:typesafeEnumMember
+				name="ZERO"
+				value="0"
+			/>
+			<jaxb:typesafeEnumMember
+				name="ONE"
+				value="1"
+			/>
+			</jaxb:typesafeEnumClass>
+		</jaxb:bindings>
+		
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='optype']">
 			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>

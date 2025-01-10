@@ -33,6 +33,17 @@ Copyright (c) 2022 Villu Ruusmann
 	<!--
 	Replace xs:string with enum
 	-->
+	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='isMultiValued']">
+		<xs:attribute name="isMultiValued" default="0">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='SetPredicate']/xs:complexType/xs:attribute[@name='operator']">
 		<xs:attribute name="operator" fixed="supersetOf">
 			<xs:simpleType>
