@@ -2154,6 +2154,9 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_0)</annox:annotateProperty>
 			<annox:annotateProperty>org.jpmml.model.annotations.Deprecated(org.dmg.pmml.Version.PMML_4_2)</annox:annotateProperty>
+			<jaxb:property
+				name="multiValued"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='OutputField']/xsd:complexType/xsd:attribute[@name='isMultiValued']/xsd:simpleType">
