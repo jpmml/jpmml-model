@@ -1,5 +1,5 @@
 /*
- * Copyrght (c) 2024 Villu Ruusmann
+ * Copyright (c) 2024 Villu Ruusmann
  */
 package org.jpmml.model.visitors;
 

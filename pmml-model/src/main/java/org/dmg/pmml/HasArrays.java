@@ -1,5 +1,5 @@
 /*
- * Copyrght (c) 2025 Villu Ruusmann
+ * Copyright (c) 2025 Villu Ruusmann
  */
 package org.dmg.pmml;
 
