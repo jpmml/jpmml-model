@@ -8,12 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention (
-	value = RetentionPolicy.SOURCE
-)
-@Target (
-	value = {ElementType.FIELD}
-)
+@Retention(RetentionPolicy.SOURCE)
+@Target({ElementType.FIELD})
 public @interface ValueConstructorParameter {
 
 	boolean value() default true;

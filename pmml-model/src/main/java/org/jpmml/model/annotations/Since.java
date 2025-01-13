@@ -8,12 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention (
-	value = RetentionPolicy.RUNTIME
-)
-@Target (
-	value = {ElementType.TYPE, ElementType.FIELD}
-)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.FIELD})
 public @interface Since {
 
 	String value();

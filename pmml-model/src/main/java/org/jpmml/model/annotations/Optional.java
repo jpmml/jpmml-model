@@ -15,12 +15,8 @@ import org.dmg.pmml.Version;
  *
  * @see Required
  */
-@Retention (
-	value = RetentionPolicy.RUNTIME
-)
-@Target (
-	value = {ElementType.TYPE, ElementType.FIELD}
-)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.FIELD})
 public @interface Optional {
 
 	Version value();

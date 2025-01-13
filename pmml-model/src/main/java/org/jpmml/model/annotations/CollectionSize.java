@@ -9,12 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Collection;
 
-@Retention (
-	value = RetentionPolicy.RUNTIME
-)
-@Target (
-	value = {ElementType.FIELD}
-)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD})
 public @interface CollectionSize {
 
 	String value();
