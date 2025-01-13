@@ -36,11 +36,11 @@
 		<module>pmml-agent</module>
 		<module>pmml-model</module>
 		<module>pmml-model-example</module>
-		<module>pmml-model-gwt</module>
 		<module>pmml-model-jackson</module>
 		<module>pmml-model-kryo</module>
 		<module>pmml-model-metro</module>
 		<module>pmml-model-moxy</module>
+		<module>pmml-model-teavm</module>
 		<module>pmml-xjc</module>
 	</modules>
 
@@ -85,11 +85,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.jpmml</groupId>
-				<artifactId>pmml-model-gwt</artifactId>
-				<version>1.7-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-jackson</artifactId>
 				<version>1.7-SNAPSHOT</version>
 			</dependency>
@@ -106,6 +101,11 @@
 			<dependency>
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model-moxy</artifactId>
+				<version>1.7-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jpmml</groupId>
+				<artifactId>pmml-model-teavm</artifactId>
 				<version>1.7-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -188,6 +188,12 @@
 				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
 				<version>[3.13.0-GA, 3.30.2-GA]</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.teavm</groupId>
+				<artifactId>teavm-classlib</artifactId>
+				<version>0.11.0</version>
 			</dependency>
 
 			<dependency>

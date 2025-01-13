@@ -9,11 +9,11 @@
 	</parent>
 
 	<groupId>org.jpmml</groupId>
-	<artifactId>pmml-model-gwt</artifactId>
+	<artifactId>pmml-model-teavm</artifactId>
 	<packaging>jar</packaging>
 
-	<name>JPMML GWT model</name>
-	<description>JPMML GWT compatible class model</description>
+	<name>JPMML TeaVM model</name>
+	<description>JPMML TeaVM compatible class model</description>
 
 	<licenses>
 		<license>
@@ -27,19 +27,16 @@
 		<dependency>
 			<groupId>org.jpmml</groupId>
 			<artifactId>pmml-model</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${project.build.directory}/pmml-model-sources</directory>
-			</resource>
-		</resources>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -47,18 +44,22 @@
 				<version>3.8.1</version>
 				<executions>
 					<execution>
-						<phase>generate-sources</phase>
+						<id>unpack-dependencies</id>
+						<phase>compile</phase>
 						<goals>
-							<goal>unpack-dependencies</goal>
+							<goal>unpack</goal>
 						</goals>
 						<configuration>
-							<classifier>sources</classifier>
-							<includes>org/dmg/pmml/**,org/jpmml/model/ArrayUtil.java,java,org/jpmml/model/ToStringHelper.java,org/jpmml/model/inlinetable/**</includes>
-							<excludes>org/dmg/pmml/**/ObjectFactory.java,org/dmg/pmml/**/PMMLAttributes.java,org/dmg/pmml/**/PMMLElements.java,org/jpmml/model/**/ObjectFactory.java,META-INF/MANIFEST.MF</excludes>
-							<excludeTransitive>true</excludeTransitive>
-							<outputDirectory>${project.build.directory}/pmml-model-sources</outputDirectory>
-							<type>java-source</type>
-							<silent>false</silent>
+							<artifactItems>
+								<artifactItem>
+									<groupId>jakarta.xml.bind</groupId>
+									<artifactId>jakarta.xml.bind-api</artifactId>
+									<version>4.0.2</version>
+									<type>jar</type>
+									<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+									<includes>jakarta/xml/bind/annotation/Xml*.class,jakarta/xml/bind/annotation/adapters/XmlAdapter.class</includes>
+								</artifactItem>
+							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>

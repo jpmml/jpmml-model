@@ -20,13 +20,14 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 * Supported platforms:
   * Java SE and EE.
   * Android.
-  * Google Web Toolkit (GWT).
 * Supported JAXB runtimes:
   * [GlassFish Metro](https://metro.java.net)
   * [EclipseLink MOXy](https://www.eclipse.org/eclipselink)
 * Supported SerDe runtimes:
   * [Kryo](https://github.com/EsotericSoftware/kryo)
   * [FasterXML Jackson](https://github.com/FasterXML/jackson)
+* Supported cross-compiler runtimes:
+  * [TeaVM](https://teavm.org)
 
 # Prerequisites #
 
