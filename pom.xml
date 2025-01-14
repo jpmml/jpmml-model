@@ -35,7 +35,6 @@
 	<modules>
 		<module>pmml-agent</module>
 		<module>pmml-model</module>
-		<module>pmml-model-example</module>
 		<module>pmml-model-jackson</module>
 		<module>pmml-model-kryo</module>
 		<module>pmml-model-metro</module>
@@ -76,11 +75,6 @@
 				<groupId>org.jpmml</groupId>
 				<artifactId>pmml-model</artifactId>
 				<classifier>tests</classifier>
-				<version>1.7-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.jpmml</groupId>
-				<artifactId>pmml-model-example</artifactId>
 				<version>1.7-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -212,11 +206,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>3.4.2</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-shade-plugin</artifactId>
-					<version>3.6.0</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
