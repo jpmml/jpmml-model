@@ -122,12 +122,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.beust</groupId>
-				<artifactId>jcommander</artifactId>
-				<version>1.72</version>
-			</dependency>
-
-			<dependency>
 				<groupId>com.esotericsoftware</groupId>
 				<artifactId>kryo</artifactId>
 				<version>[5.0.0, 5.6.2]</version>
