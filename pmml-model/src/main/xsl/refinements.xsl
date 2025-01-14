@@ -9,15 +9,15 @@ Copyright (c) 2022 Villu Ruusmann
 	-->
 	<xsl:template match="xs:element[@name='DataDictionary']/xs:complexType/xs:sequence/xs:element[@ref='DataField']">
 		<xsl:copy>
-			<xsl:apply-templates select="@*|node()"/>
 			<xsl:attribute name="minOccurs">0</xsl:attribute>
+			<xsl:apply-templates select="@*|node()"/>
 		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='MiningSchema']/xs:complexType/xs:sequence/xs:element[@ref='MiningField']">
 		<xsl:copy>
-			<xsl:apply-templates select="@*|node()"/>
 			<xsl:attribute name="minOccurs">0</xsl:attribute>
+			<xsl:apply-templates select="@*|node()"/>
 		</xsl:copy>
 	</xsl:template>
 
