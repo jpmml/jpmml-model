@@ -20,6 +20,7 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.tools.xjc.Options;
+import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
@@ -50,6 +51,8 @@ public class AnnotatePlugin extends ComplexPlugin {
 	public boolean run(Outline outline, Options options, ErrorHandler errorHandler){
 		JCodeModel codeModel = outline.getCodeModel();
 
+		JClass collectionElementTypeAnnotation = codeModel.ref("org.jpmml.model.annotations.CollectionElementType");
+
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
@@ -64,6 +67,19 @@ public class AnnotatePlugin extends ComplexPlugin {
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				if(propertyInfo instanceof CElementPropertyInfo){
+					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
+
+					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+
+					if(elementPropertyInfo.isCollection()){
+						JClass elementType = (JClass)CodeModelUtil.getElementType(fieldVar.type());
+
+						JAnnotationUse collectionElementType = fieldVar.annotate(collectionElementTypeAnnotation)
+							.param("value", elementType.dotclass());
+					}
+				}
 
 				List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
 				for(CPluginCustomization propertyCustomization : propertyCustomizations){

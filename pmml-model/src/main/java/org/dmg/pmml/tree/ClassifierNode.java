@@ -24,6 +24,7 @@ import org.dmg.pmml.adapters.NumberAdapter;
 import org.dmg.pmml.adapters.ObjectAdapter;
 import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.annotations.Added;
+import org.jpmml.model.annotations.CollectionElementType;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
@@ -73,6 +74,7 @@ public class ClassifierNode extends SimpleNode {
 	})
 	@JsonProperty("Node")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexNode.class)
+	@CollectionElementType(Node.class)
 	private List<Node> nodes = null;
 
 
