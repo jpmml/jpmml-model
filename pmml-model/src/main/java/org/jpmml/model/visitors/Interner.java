@@ -4,14 +4,13 @@
 package org.jpmml.model.visitors;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 
 import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.ReflectionUtil;
+import org.jpmml.model.annotations.CollectionElementType;
 
 abstract
 public class Interner<V> extends AbstractVisitor {
@@ -40,15 +39,14 @@ public class Interner<V> extends AbstractVisitor {
 		Class<?> fieldType = field.getType();
 
 		if(Objects.equals(List.class, fieldType)){
-			ParameterizedType listType = (ParameterizedType)field.getGenericType();
+			CollectionElementType collectionElementType = field.getAnnotation(CollectionElementType.class);
 
-			Type[] typeArguments = listType.getActualTypeArguments();
-			if(typeArguments.length != 1){
+			if(collectionElementType == null){
 				throw new IllegalArgumentException();
 			}
 
-			Class<?> listElementType = (Class<?>)typeArguments[0];
-			if(listElementType.isAssignableFrom(type)){
+			Class<?> elementClazz = collectionElementType.value();
+			if(elementClazz.isAssignableFrom(type)){
 				List<V> values = (List<V>)ReflectionUtil.getFieldValue(field, object);
 
 				if(values != null && !values.isEmpty()){

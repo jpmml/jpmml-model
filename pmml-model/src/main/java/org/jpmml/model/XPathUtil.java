@@ -4,8 +4,6 @@
 package org.jpmml.model;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -13,6 +11,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import org.dmg.pmml.PMMLObject;
+import org.jpmml.model.annotations.CollectionElementType;
 
 public class XPathUtil {
 
@@ -76,20 +75,19 @@ public class XPathUtil {
 
 	static
 	public Class<?> getElementType(Field field){
-		Class<?> childElementClazz = field.getType();
+		Class<?> elementClazz = field.getType();
 
-		if((List.class).isAssignableFrom(childElementClazz)){
-			ParameterizedType listType = (ParameterizedType)field.getGenericType();
+		if((List.class).isAssignableFrom(elementClazz)){
+			CollectionElementType collectionElementType = field.getAnnotation(CollectionElementType.class);
 
-			Type[] typeArguments = listType.getActualTypeArguments();
-			if(typeArguments.length != 1){
+			if(collectionElementType == null){
 				throw new IllegalArgumentException();
 			}
 
-			childElementClazz = (Class<?>)typeArguments[0];
+			elementClazz = collectionElementType.value();
 		}
 
-		return childElementClazz;
+		return elementClazz;
 	}
 
 	static

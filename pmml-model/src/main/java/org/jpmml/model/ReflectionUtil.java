@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,6 +24,7 @@ import java.util.concurrent.ConcurrentMap;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.adapters.FieldNameAdapter;
+import org.jpmml.model.annotations.CollectionElementType;
 import org.w3c.dom.Element;
 import org.xml.sax.Locator;
 
@@ -404,9 +404,9 @@ public class ReflectionUtil {
 			throw new RuntimeException(new NoSuchMethodException());
 		}
 
-		ParameterizedType listType = (ParameterizedType)field.getGenericType();
+		CollectionElementType collectionElementType = field.getAnnotation(CollectionElementType.class);
 
-		Class<?> listElementType = (Class<?>)listType.getActualTypeArguments()[0];
+		Class<?> elementClazz = collectionElementType.value();
 
 		String name = getterMethod.getName();
 		if(name.startsWith("get")){
@@ -421,7 +421,7 @@ public class ReflectionUtil {
 
 		try {
 			// See https://stackoverflow.com/a/1679444
-			valueArrayClazz = Class.forName("[L" + listElementType.getCanonicalName() + ";");
+			valueArrayClazz = Class.forName("[L" + elementClazz.getCanonicalName() + ";");
 		} catch(ClassNotFoundException cnfe){
 			throw new RuntimeException(cnfe);
 		}

@@ -68,10 +68,15 @@ public class AnnotatePlugin extends ComplexPlugin {
 			for(FieldOutline fieldOutline : fieldOutlines){
 				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
 
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+
+				List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
+				for(CPluginCustomization propertyCustomization : propertyCustomizations){
+					annotate(codeModel, fieldVar, propertyCustomization);
+				}
+
 				if(propertyInfo instanceof CElementPropertyInfo){
 					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
-
-					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
 
 					if(elementPropertyInfo.isCollection()){
 						JClass elementType = (JClass)CodeModelUtil.getElementType(fieldVar.type());
@@ -79,13 +84,6 @@ public class AnnotatePlugin extends ComplexPlugin {
 						JAnnotationUse collectionElementType = fieldVar.annotate(collectionElementTypeAnnotation)
 							.param("value", elementType.dotclass());
 					}
-				}
-
-				List<CPluginCustomization> propertyCustomizations = CustomizationUtil.findPropertyCustomizationsInProperty(propertyInfo, AnnotatePlugin.ANNOTATE_PROPERTY_QNAME);
-				for(CPluginCustomization propertyCustomization : propertyCustomizations){
-					JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
-
-					annotate(codeModel, fieldVar, propertyCustomization);
 				}
 			}
 		}
