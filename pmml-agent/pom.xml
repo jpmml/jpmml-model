@@ -55,7 +55,7 @@
 						</goals>
 						<configuration>
 							<createDependencyReducedPom>false</createDependencyReducedPom>
-							<finalName>agent-${project.version}</finalName>
+							<finalName>${project.artifactId}-distributable-${project.version}</finalName>
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
