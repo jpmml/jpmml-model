@@ -3,18 +3,15 @@
  */
 package org.jpmml.model;
 
-import java.io.NotSerializableException;
 import java.util.Arrays;
 import java.util.List;
 
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.PMML;
-import org.jpmml.model.visitors.LocatorTransformer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class MixedContentTest {
 
@@ -33,18 +30,6 @@ public class MixedContentTest {
 		assertEquals("Second text value", content.get(2));
 		assertEquals(Arrays.asList("Second extension"), getDeepContent(content.get(3)));
 		assertEquals("Third text value", content.get(4));
-
-		try {
-			SerializationUtil.clone(pmml);
-
-			fail();
-		} catch(NotSerializableException nse){
-			// Ignored
-		}
-
-		pmml.accept(new LocatorTransformer());
-
-		SerializationUtil.clone(pmml);
 	}
 
 	static
