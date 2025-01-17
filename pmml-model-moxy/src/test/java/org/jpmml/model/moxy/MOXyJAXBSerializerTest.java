@@ -4,13 +4,7 @@
 package org.jpmml.model.moxy;
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 
-import javax.xml.transform.Source;
-
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
@@ -18,38 +12,31 @@ import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
-import org.eclipse.persistence.jaxb.JAXBContextFactory;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
-import org.jpmml.model.SAXUtil;
+import org.jpmml.model.Serializer;
+import org.jpmml.model.SerializerTest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class MOXyJAXBUtilTest {
+public class MOXyJAXBSerializerTest extends SerializerTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
-		PMML pmml;
+		Serializer serializer = new MOXyJAXBSerializer();
 
-		JAXBContext context = JAXBContextFactory.createContext(JAXBUtil.getObjectFactoryClasses(), null);
+		PMML pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
 
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-
-		try(InputStream is = ResourceUtil.getStream(NodeAdapterTest.class)){
-			Source source = SAXUtil.createFilteredSource(is);
-
-			pmml = (PMML)unmarshaller.unmarshal(source);
-		}
-
-		PMML clonedPmml = JAXBUtil.clone(context, pmml);
+		PMML clonedPmml = clone(serializer, pmml);
 
 		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
 	}
 
 	@Test
 	public void marshal() throws Exception {
+		Serializer serializer = new MOXyJAXBSerializer();
+
 		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), new Header(), new DataDictionary());
 
 		RegressionModel regressionModel = new RegressionModel()
@@ -57,14 +44,10 @@ public class MOXyJAXBUtilTest {
 
 		pmml.addModels(regressionModel);
 
-		JAXBContext context = JAXBContextFactory.createContext(JAXBUtil.getObjectFactoryClasses(), null);
-
-		Marshaller marshaller = context.createMarshaller();
-
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			marshaller.marshal(pmml, os);
+			serializer.serialize(pmml, os);
 
 			string = os.toString("UTF-8");
 		}
