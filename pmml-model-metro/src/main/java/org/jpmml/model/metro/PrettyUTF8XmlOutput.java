@@ -10,8 +10,8 @@ import java.util.Arrays;
 import javax.xml.stream.XMLStreamException;
 
 import org.glassfish.jaxb.core.marshaller.MinimumEscapeHandler;
+import org.glassfish.jaxb.runtime.v2.runtime.JAXBContextImpl;
 import org.glassfish.jaxb.runtime.v2.runtime.Name;
-import org.glassfish.jaxb.runtime.v2.runtime.output.Encoded;
 import org.glassfish.jaxb.runtime.v2.runtime.output.IndentingUTF8XmlOutput;
 import org.glassfish.jaxb.runtime.v2.runtime.output.Pcdata;
 import org.glassfish.jaxb.runtime.v2.runtime.output.UTF8XmlOutput;
@@ -27,8 +27,8 @@ public class PrettyUTF8XmlOutput extends UTF8XmlOutput {
 	private boolean textWritten = false;
 
 
-	public PrettyUTF8XmlOutput(OutputStream os, Encoded[] localNames){
-		super(os, localNames, MinimumEscapeHandler.theInstance);
+	public PrettyUTF8XmlOutput(OutputStream os, JAXBContextImpl jaxbContext){
+		super(os, jaxbContext.getUTF8NameTable(), MinimumEscapeHandler.theInstance);
 	}
 
 	@Override
