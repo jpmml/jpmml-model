@@ -26,38 +26,6 @@ public class JAXBUtil {
 	}
 
 	static
-	public Schema getSchema() throws IOException, SAXException {
-
-		if(JAXBUtil.schema == null){
-			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-			URL url = (org.dmg.pmml.ObjectFactory.class).getResource("/pmml.xsd");
-			if(url == null){
-				throw new FileNotFoundException();
-			}
-
-			JAXBUtil.schema = schemaFactory.newSchema(url);
-		}
-
-		return JAXBUtil.schema;
-	}
-
-	static
-	public JAXBContext getContext() throws JAXBException {
-
-		if(JAXBUtil.context == null){
-			JAXBUtil.context = JAXBContext.newInstance(getObjectFactoryClasses());
-		}
-
-		return JAXBUtil.context;
-	}
-
-	static
-	public void setContext(JAXBContext context){
-		JAXBUtil.context = context;
-	}
-
-	static
 	public Class<?>[] getObjectFactoryClasses(){
 		return new Class<?>[]{
 			// org.dmg.pmml.*
@@ -87,6 +55,38 @@ public class JAXBUtil {
 	}
 
 	static
+	public JAXBContext getContext() throws JAXBException {
+
+		if(JAXBUtil.context == null){
+			JAXBUtil.context = JAXBContext.newInstance(getObjectFactoryClasses());
+		}
+
+		return JAXBUtil.context;
+	}
+
+	static
+	public void setContext(JAXBContext context){
+		JAXBUtil.context = context;
+	}
+
+	static
+	public Schema getSchema() throws IOException, SAXException {
+
+		if(JAXBUtil.schema == null){
+			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+			URL url = (org.dmg.pmml.ObjectFactory.class).getResource("/pmml.xsd");
+			if(url == null){
+				throw new FileNotFoundException();
+			}
+
+			JAXBUtil.schema = schemaFactory.newSchema(url);
+		}
+
+		return JAXBUtil.schema;
+	}
+
+	static
 	public <E extends PMMLObject> E clone(E object) throws JAXBException, IOException {
 		return clone(getContext(), object);
 	}
@@ -109,7 +109,7 @@ public class JAXBUtil {
 		}
 	}
 
-	private static Schema schema = null;
-
 	private static JAXBContext context = null;
+
+	private static Schema schema = null;
 }
