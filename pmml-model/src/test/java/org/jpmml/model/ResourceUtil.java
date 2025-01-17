@@ -26,9 +26,11 @@ public class ResourceUtil {
 	public PMML unmarshal(Class<?> clazz, XMLFilter... filters) throws IOException, ParserConfigurationException, SAXException, JAXBException {
 
 		try(InputStream is = getStream(clazz)){
+			JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
 			Source source = SAXUtil.createFilteredSource(is, filters);
 
-			return JAXBUtil.unmarshalPMML(source);
+			return (PMML)serializer.unmarshal(source);
 		}
 	}
 
@@ -53,7 +55,11 @@ public class ResourceUtil {
 		}
 
 		try(InputStream is = getStream(version)){
-			return JAXBUtil.unmarshalPMML(new StreamSource(is));
+			JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
+			Source source = new StreamSource(is);
+
+			return (PMML)serializer.unmarshal(source);
 		}
 	}
 

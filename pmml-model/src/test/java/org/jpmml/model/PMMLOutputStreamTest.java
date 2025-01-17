@@ -6,8 +6,6 @@ package org.jpmml.model;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 
-import javax.xml.transform.stream.StreamResult;
-
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
 import org.junit.Test;
@@ -46,7 +44,9 @@ public class PMMLOutputStreamTest {
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
 		try(OutputStream os = new PMMLOutputStream(buffer, version)){
-			JAXBUtil.marshalPMML(pmml, new StreamResult(os));
+			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
+			serializer.serialize(pmml, os);
 		}
 
 		return buffer.toString("UTF-8");

@@ -57,23 +57,21 @@ public class PMMLUtil {
 		return ServiceLoaderUtil.load(PMML.class, clazzLoader);
 	}
 
-	/**
-	 * @see JAXBUtil#unmarshalPMML(Source)
-	 */
 	static
 	public PMML unmarshal(InputStream is) throws ParserConfigurationException, SAXException, JAXBException {
+		JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
 		Source source = SAXUtil.createFilteredSource(is, new ImportFilter());
 
-		return JAXBUtil.unmarshalPMML(source);
+		return (PMML)serializer.unmarshal(source);
 	}
 
-	/**
-	 * @see JAXBUtil#marshalPMML(PMML, Result)
-	 */
 	static
 	public void marshal(PMML pmml, OutputStream os) throws JAXBException {
-		StreamResult result = new StreamResult(os);
+		JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
 
-		JAXBUtil.marshalPMML(pmml, result);
+		Result result = new StreamResult(os);
+
+		serializer.marshal(pmml, result);
 	}
 }

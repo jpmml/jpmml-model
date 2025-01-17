@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.xml.transform.stream.StreamResult;
-
+import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.Serializer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -72,7 +72,9 @@ public class ComplexArrayTest {
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			JAXBUtil.marshal(array, new StreamResult(os));
+			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
+			serializer.serialize(array, os);
 
 			string = os.toString("UTF-8");
 		}

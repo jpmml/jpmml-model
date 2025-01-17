@@ -27,10 +27,12 @@ public class XXEAttackTest {
 
 		System.setProperty("javax.xml.accessExternalDTD", "file");
 
-		try(InputStream is = ResourceUtil.getStream(XXEAttackTest.class);){
+		try(InputStream is = ResourceUtil.getStream(XXEAttackTest.class)){
+			JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
 			Source source = new StreamSource(is);
 
-			pmml = JAXBUtil.unmarshalPMML(source);
+			pmml = (PMML)serializer.unmarshal(source);
 		} finally {
 			System.clearProperty("javax.xml.accessExternalDTD");
 		}
@@ -44,9 +46,11 @@ public class XXEAttackTest {
 	public void unmarshalSecurely() throws Exception {
 
 		try(InputStream is = ResourceUtil.getStream(XXEAttackTest.class)){
+			JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
 			Source source = SAXUtil.createFilteredSource(is);
 
-			JAXBUtil.unmarshalPMML(source);
+			serializer.unmarshal(source);
 
 			fail();
 		} catch(UnmarshalException ue){

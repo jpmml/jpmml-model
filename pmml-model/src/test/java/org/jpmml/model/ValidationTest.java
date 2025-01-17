@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.xml.validation.Schema;
 
+import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.Model;
@@ -22,11 +23,14 @@ public class ValidationTest {
 
 	@Test
 	public void unmarshal() throws Exception {
+		JAXBContext context = JAXBUtil.getContext();
+
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+
 		Schema schema = JAXBUtil.getSchema();
 
 		assertNotNull(schema);
 
-		Unmarshaller unmarshaller = JAXBUtil.createUnmarshaller();
 		unmarshaller.setSchema(schema);
 
 		PMML pmml;

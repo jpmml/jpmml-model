@@ -4,12 +4,10 @@
 package org.dmg.pmml;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
-import javax.xml.transform.stream.StreamResult;
-
-import jakarta.xml.bind.JAXBException;
+import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.JAXBUtil;
+import org.jpmml.model.Serializer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
@@ -39,14 +37,16 @@ public class ComplexValueTest {
 	}
 
 	static
-	private void checkConstant(String expectedValue, Object value) throws IOException, JAXBException {
+	private void checkConstant(String expectedValue, Object value) throws Exception {
 		Constant constant = new Constant()
 			.setValue(value);
 
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			JAXBUtil.marshal(constant, new StreamResult(os));
+			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
+			serializer.serialize(constant, os);
 
 			string = os.toString("UTF-8");
 		}

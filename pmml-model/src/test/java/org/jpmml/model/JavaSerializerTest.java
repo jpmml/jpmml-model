@@ -10,7 +10,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import org.dmg.pmml.PMML;
-import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
@@ -22,7 +21,7 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-public class JavaSerializerTest {
+public class JavaSerializerTest extends SerializerTest {
 
 	@Test
 	public void nonLocatableClone() throws Exception {
@@ -108,22 +107,6 @@ public class JavaSerializerTest {
 
 			assertFalse(firstPmml.hasLocator());
 			assertFalse(secondPmml.hasLocator());
-		}
-	}
-
-	static
-	private <E extends PMMLObject> E clone(Serializer serializer, E object) throws Exception {
-		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(10 * 1024);
-
-		serializer.serialize(object, buffer);
-
-		try(InputStream is = buffer.getInputStream()){
-			@SuppressWarnings("unchecked")
-			E clonedObject = (E)serializer.deserialize(is);
-
-			assertEquals(-1, is.read());
-
-			return clonedObject;
 		}
 	}
 }

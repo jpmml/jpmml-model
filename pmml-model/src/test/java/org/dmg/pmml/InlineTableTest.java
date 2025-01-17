@@ -9,11 +9,12 @@ import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.stream.StreamResult;
 
 import jakarta.xml.bind.JAXBElement;
+import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.Serializer;
 import org.jpmml.model.cells.InputCell;
 import org.jpmml.model.cells.OutputCell;
 import org.jpmml.model.visitors.RowCleaner;
@@ -132,7 +133,9 @@ public class InlineTableTest {
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			JAXBUtil.marshal(inlineTable, new StreamResult(os));
+			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
+			serializer.serialize(inlineTable, os);
 
 			string = os.toString("UTF-8");
 		}

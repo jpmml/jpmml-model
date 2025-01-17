@@ -5,6 +5,7 @@ package org.jpmml.model;
 
 import java.io.InputStream;
 
+import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 
 import jakarta.xml.bind.UnmarshalException;
@@ -18,7 +19,11 @@ public class XEEAttackTest {
 	public void unmarshal() throws Exception {
 
 		try(InputStream is = ResourceUtil.getStream(XEEAttackTest.class)){
-			JAXBUtil.unmarshalPMML(new StreamSource(is));
+			JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+
+			Source source = new StreamSource(is);
+
+			serializer.unmarshal(source);
 
 			fail();
 		} catch(UnmarshalException ue){
