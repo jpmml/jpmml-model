@@ -5,8 +5,6 @@ package org.jpmml.model;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 
 import javax.xml.XMLConstants;
@@ -15,9 +13,6 @@ import javax.xml.validation.SchemaFactory;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
-import org.dmg.pmml.PMMLObject;
 import org.xml.sax.SAXException;
 
 public class JAXBUtil {
@@ -84,29 +79,6 @@ public class JAXBUtil {
 		}
 
 		return JAXBUtil.schema;
-	}
-
-	static
-	public <E extends PMMLObject> E clone(E object) throws JAXBException, IOException {
-		return clone(getContext(), object);
-	}
-
-	@SuppressWarnings("unchecked")
-	static
-	public <E extends PMMLObject> E clone(JAXBContext context, E object) throws JAXBException, IOException {
-		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(1024 * 1024);
-
-		Marshaller marshaller = context.createMarshaller();
-
-		try(OutputStream os = buffer){
-			marshaller.marshal(object, os);
-		}
-
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-
-		try(InputStream is = buffer.getInputStream()){
-			return (E)unmarshaller.unmarshal(is);
-		}
 	}
 
 	private static JAXBContext context = null;
