@@ -18,7 +18,7 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.PMMLObject;
 
-public class JAXBSerializer implements Serializer {
+public class JAXBSerializer implements TextSerializer {
 
 	private JAXBContext jaxbContext = null;
 
@@ -41,6 +41,14 @@ public class JAXBSerializer implements Serializer {
 	@Override
 	public void serialize(PMMLObject object, OutputStream os) throws JAXBException {
 		marshal(object, new StreamResult(os));
+	}
+
+	/**
+	 * @see #marshalPretty(PMMLObject, Result)
+	 */
+	@Override
+	public void serializePretty(PMMLObject object, OutputStream os) throws JAXBException {
+		marshalPretty(object, new StreamResult(os));
 	}
 
 	/**
@@ -67,11 +75,23 @@ public class JAXBSerializer implements Serializer {
 		marshaller.marshal(object, result);
 	}
 
+	/**
+	 * <p>
+	 * Marshals a class model object in a pretty way.
+	 * </p>
+	 */
+	public void marshalPretty(PMMLObject object, Result result) throws JAXBException {
+		Marshaller marshaller = createMarshaller();
+
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+		marshaller.marshal(object, result);
+	}
+
 	protected Marshaller createMarshaller() throws JAXBException {
 		JAXBContext context = getJAXBContext();
 
 		Marshaller marshaller = context.createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 		return marshaller;
 	}

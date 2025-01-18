@@ -24,7 +24,7 @@ public class MetroJAXBSerializer extends JAXBSerializer {
 	}
 
 	@Override
-	public void serialize(PMMLObject object, OutputStream os) throws JAXBException {
+	public void serializePretty(PMMLObject object, OutputStream os) throws JAXBException {
 		MarshallerImpl marshaller = createMarshaller();
 
 		XmlOutput xmlOutput = new PrettyUTF8XmlOutput(os, marshaller.getContext());
