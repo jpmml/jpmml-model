@@ -20,11 +20,11 @@ import org.dmg.pmml.PMMLObject;
 
 public class JAXBSerializer implements TextSerializer {
 
-	private JAXBContext jaxbContext = null;
+	private JAXBContext context = null;
 
 
-	public JAXBSerializer(JAXBContext jaxbContext){
-		setJAXBContext(jaxbContext);
+	public JAXBSerializer(JAXBContext context){
+		setContext(context);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class JAXBSerializer implements TextSerializer {
 	}
 
 	protected Marshaller createMarshaller() throws JAXBException {
-		JAXBContext context = getJAXBContext();
+		JAXBContext context = getContext();
 
 		Marshaller marshaller = context.createMarshaller();
 
@@ -97,18 +97,18 @@ public class JAXBSerializer implements TextSerializer {
 	}
 
 	protected Unmarshaller createUnmarshaller() throws JAXBException {
-		JAXBContext context = getJAXBContext();
+		JAXBContext context = getContext();
 
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 
 		return unmarshaller;
 	}
 
-	protected JAXBContext getJAXBContext(){
-		return this.jaxbContext;
+	protected JAXBContext getContext(){
+		return this.context;
 	}
 
-	private void setJAXBContext(JAXBContext jaxbContext){
-		this.jaxbContext = Objects.requireNonNull(jaxbContext);
+	private void setContext(JAXBContext context){
+		this.context = Objects.requireNonNull(context);
 	}
 }

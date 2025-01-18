@@ -19,8 +19,8 @@ public class MetroJAXBSerializer extends JAXBSerializer {
 		this(MetroJAXBUtil.getContext());
 	}
 
-	public MetroJAXBSerializer(JAXBContextImpl jaxbContext){
-		super(jaxbContext);
+	public MetroJAXBSerializer(JAXBContextImpl context){
+		super(context);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class MetroJAXBSerializer extends JAXBSerializer {
 	}
 
 	@Override
-	protected JAXBContextImpl getJAXBContext(){
-		return (JAXBContextImpl)super.getJAXBContext();
+	protected JAXBContextImpl getContext(){
+		return (JAXBContextImpl)super.getContext();
 	}
 }

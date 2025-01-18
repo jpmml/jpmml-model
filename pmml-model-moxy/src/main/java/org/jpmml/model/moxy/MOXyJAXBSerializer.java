@@ -15,8 +15,8 @@ public class MOXyJAXBSerializer extends JAXBSerializer {
 		this(MOXyJAXBUtil.getContext());
 	}
 
-	public MOXyJAXBSerializer(JAXBContext jaxbContext){
-		super(jaxbContext);
+	public MOXyJAXBSerializer(JAXBContext context){
+		super(context);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class MOXyJAXBSerializer extends JAXBSerializer {
 	}
 
 	@Override
-	protected JAXBContext getJAXBContext(){
-		return (JAXBContext)super.getJAXBContext();
+	protected JAXBContext getContext(){
+		return (JAXBContext)super.getContext();
 	}
 }
