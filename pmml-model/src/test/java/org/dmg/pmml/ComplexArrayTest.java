@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.Serializer;
 import org.junit.Test;
 
@@ -72,7 +71,7 @@ public class ComplexArrayTest {
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+			Serializer serializer = new JAXBSerializer();
 
 			serializer.serialize(array, os);
 

@@ -59,7 +59,7 @@ public class PMMLUtil {
 
 	static
 	public PMML unmarshal(InputStream is) throws ParserConfigurationException, SAXException, JAXBException {
-		JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+		JAXBSerializer serializer = new JAXBSerializer();
 
 		Source source = SAXUtil.createFilteredSource(is, new ImportFilter());
 
@@ -68,7 +68,7 @@ public class PMMLUtil {
 
 	static
 	public void marshal(PMML pmml, OutputStream os) throws JAXBException {
-		JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+		JAXBSerializer serializer = new JAXBSerializer();
 
 		Result result = new StreamResult(os);
 

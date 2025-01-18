@@ -12,7 +12,6 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.True;
 import org.jpmml.model.DirectByteArrayOutputStream;
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.UnsupportedElementException;
 import org.junit.Test;
@@ -27,7 +26,7 @@ public class NodeTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
-		Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+		Serializer serializer = new JAXBSerializer();
 
 		Node node1 = new BranchNode(null, True.INSTANCE)
 			.setId(1);

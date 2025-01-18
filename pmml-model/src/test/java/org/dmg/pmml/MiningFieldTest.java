@@ -10,7 +10,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.jpmml.model.DOMUtil;
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SchemaUpdateTest;
 import org.junit.Test;
@@ -61,7 +60,7 @@ public class MiningFieldTest extends SchemaUpdateTest {
 
 	static
 	private void checkImportance(Number expected, String string) throws Exception {
-		JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+		JAXBSerializer serializer = new JAXBSerializer();
 
 		Reader reader = new StringReader("<MiningField xmlns=\"" + Version.PMML_4_4.getNamespaceURI() + "\" name=\"x\" importance=\"" + string + "\"/>");
 

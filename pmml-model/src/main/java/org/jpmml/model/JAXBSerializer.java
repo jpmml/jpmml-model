@@ -23,6 +23,10 @@ public class JAXBSerializer implements TextSerializer {
 	private JAXBContext context = null;
 
 
+	public JAXBSerializer() throws JAXBException {
+		this(JAXBUtil.getContext());
+	}
+
 	public JAXBSerializer(JAXBContext context){
 		setContext(context);
 	}

@@ -6,7 +6,6 @@ package org.dmg.pmml;
 import java.io.ByteArrayOutputStream;
 
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.Serializer;
 import org.junit.Test;
 
@@ -44,7 +43,7 @@ public class ComplexValueTest {
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+			Serializer serializer = new JAXBSerializer();
 
 			serializer.serialize(constant, os);
 

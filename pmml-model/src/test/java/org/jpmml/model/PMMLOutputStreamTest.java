@@ -44,7 +44,7 @@ public class PMMLOutputStreamTest {
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
 		try(OutputStream os = new PMMLOutputStream(buffer, version)){
-			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+			Serializer serializer = new JAXBSerializer();
 
 			serializer.serialize(pmml, os);
 		}

@@ -19,7 +19,7 @@ public class XEEAttackTest {
 	public void unmarshal() throws Exception {
 
 		try(InputStream is = ResourceUtil.getStream(XEEAttackTest.class)){
-			JAXBSerializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+			JAXBSerializer serializer = new JAXBSerializer();
 
 			Source source = new StreamSource(is);
 

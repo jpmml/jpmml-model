@@ -56,7 +56,7 @@ public class JacksonSerializerTest extends SerializerTest {
 
 	@Test
 	public void jsonClone() throws Exception {
-		Serializer serializer = new JacksonSerializer(JacksonUtil.createObjectMapper(null));
+		Serializer serializer = new JacksonSerializer();
 
 		PMML pmml;
 

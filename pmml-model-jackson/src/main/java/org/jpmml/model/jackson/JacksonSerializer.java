@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Objects;
 
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.util.DefaultIndenter;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,14 @@ public class JacksonSerializer implements TextSerializer {
 
 	private Class<? extends PMMLObject> rootType;
 
+
+	public JacksonSerializer(){
+		this((JsonFactory)null);
+	}
+
+	public JacksonSerializer(JsonFactory jsonFactory){
+		this(JacksonUtil.createObjectMapper(jsonFactory));
+	}
 
 	public JacksonSerializer(ObjectMapper objectMapper){
 		this(objectMapper, PMML.class);

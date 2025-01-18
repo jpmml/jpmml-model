@@ -12,7 +12,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import jakarta.xml.bind.JAXBElement;
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.JAXBUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.cells.InputCell;
@@ -133,7 +132,7 @@ public class InlineTableTest {
 		String string;
 
 		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			Serializer serializer = new JAXBSerializer(JAXBUtil.getContext());
+			Serializer serializer = new JAXBSerializer();
 
 			serializer.serialize(inlineTable, os);
 
