@@ -17,6 +17,8 @@ import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.NodeTransformer;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.Serializer;
+import org.jpmml.model.SerializerTest;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -24,10 +26,12 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
-public class JacksonUtilTest {
+public class JacksonSerializerTest extends SerializerTest {
 
 	@Test
 	public void jsonCloneFragment() throws Exception {
+		Serializer serializer = new JacksonSerializer(JacksonUtil.createObjectMapper(null), Apply.class);
+
 		FieldRef left = new FieldRef("x");
 		FieldRef right = new FieldRef("x");
 
@@ -36,7 +40,7 @@ public class JacksonUtilTest {
 		Apply apply = new Apply(PMMLFunctions.ADD)
 			.addExpressions(left, right);
 
-		Apply clonedApply = JacksonUtil.clone(apply);
+		Apply clonedApply = clone(serializer, apply);
 
 		List<Expression> clonedExpressions = clonedApply.getExpressions();
 
@@ -52,6 +56,8 @@ public class JacksonUtilTest {
 
 	@Test
 	public void jsonClone() throws Exception {
+		Serializer serializer = new JacksonSerializer(JacksonUtil.createObjectMapper(null));
+
 		PMML pmml;
 
 		NodeTransformer defaultNodeTransformer = NodeAdapter.NODE_TRANSFORMER_PROVIDER.get();
@@ -67,7 +73,7 @@ public class JacksonUtilTest {
 			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(defaultScoreDistributionTransformer);
 		}
 
-		PMML clonedPmml = JacksonUtil.clone(pmml);
+		PMML clonedPmml = clone(serializer, pmml);
 
 		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
 	}
