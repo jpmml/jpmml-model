@@ -10,6 +10,10 @@ import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.collections.DoubletonList;
 import org.jpmml.model.collections.SingletonList;
 import org.jpmml.model.collections.TripletonList;
+import org.jpmml.model.kryo.serializers.DoubletonListSerializer;
+import org.jpmml.model.kryo.serializers.PMMLObjectSerializer;
+import org.jpmml.model.kryo.serializers.SingletonListSerializer;
+import org.jpmml.model.kryo.serializers.TripletonListSerializer;
 import org.w3c.dom.Element;
 
 public class KryoUtil {

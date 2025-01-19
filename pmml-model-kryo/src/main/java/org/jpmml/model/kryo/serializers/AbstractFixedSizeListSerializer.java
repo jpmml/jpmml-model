@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020 Villu Ruusmann
  */
-package org.jpmml.model.kryo;
+package org.jpmml.model.kryo.serializers;
 
 import com.esotericsoftware.kryo.Serializer;
 import org.jpmml.model.collections.AbstractFixedSizeList;
