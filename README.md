@@ -35,7 +35,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Installation #
 
-JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via [Maven Central Repository](https://repo1.maven.org/maven2/org/jpmml/).
+JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via the Maven Central Repository.
 
 The current version is **1.6.11** (10 January, 2025).
 
@@ -49,19 +49,19 @@ The current version is **1.6.11** (10 January, 2025).
 
 # Usage #
 
-The class model consists of two types of classes. There is a small number of manually crafted classes that are used for structuring the class hierarchy. They are permanently stored in the Java sources directory `/pmml-model/src/main/java`. Additionally, there is a much greater number of automatically generated classes that represent actual PMML elements. They can be found in the generated Java sources directory `/pmml-model/target/generated-sources/xjc` after a successful build operation.
+The class model consists of two types of classes. There is a small number of manually crafted classes that are used for structuring the class hierarchy. They are permanently stored in the Java sources directory `/pmml-model/src/main/java`. Additionally, there is a much larger number of automatically generated classes that represent actual PMML elements. They can be found in the generated Java sources directory `/pmml-model/target/generated-sources/xjc` after a successful build operation.
 
-All class model classes descend from class `org.dmg.pmml.PMMLObject`. Additional class hierarchy levels, if any, represent common behaviour and/or features. For example, all model classes descend from class `org.dmg.pmml.Model`.
+All class model classes descend from the `org.dmg.pmml.PMMLObject` base class. Additional class hierarchy levels, if any, represent common state and/or behaviour. For example, all model classes descend from the `org.dmg.pmml.Model` base class.
 
-The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification](http://dmg.org/pmml/v4-3/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
+The class model should be self-explanatory. The application developer is advised to consult with the latest [PMML specification](https://dmg.org/pmml/v4-4-1/GeneralStructure.html) about the specifics of individual PMML elements and attributes.
 
 ### Unmarshalling ###
 
-Loading any PMML schema version 3.X or 4.X document into live `org.dmg.pmml.PMML` instance:
+Loading a PMML schema version 3.X or 4.X document into a live `org.dmg.pmml.PMML` object:
 
 ```java
 public PMML load(InputStream is) throws SAXException, JAXBException {
-  return org.jpmml.model.PMMLUtil.unmarshal(is);
+	return org.jpmml.model.PMMLUtil.unmarshal(is);
 }
 ```
 
@@ -73,37 +73,21 @@ Deleting SAX Locator information from the class model:
 
 ```java
 public void optimize(PMML pmml){
-  LocatorNullifier nullifier = new LocatorNullifier();
-  nullifier.applyTo(pmml);
+	var visitor = new org.jpmml.model.visitors.LocatorNullifier();
+
+	visitor.applyTo(pmml);
 }
 ```
 
 ### Marshalling ###
 
-Storing live `org.dmg.pmml.PMML` instance into PMML schema version 4.4 document:
+Storing a live `org.dmg.pmml.PMML` object into a PMML schema version 4.4 document:
 
 ```java
 public void store(PMML pmml, OutputStream os) throws JAXBException {
-  org.jpmml.model.PMMLUtil.marshal(pmml, os);
+	org.jpmml.model.PMMLUtil.marshal(pmml, os);
 }
 ```
-
-# Documentation #
-
-Current:
-
-* [Troubleshooting PMML documents](https://openscoring.io/blog/2018/06/15/troubleshooting_pmml/)
-* [Configuring JAXB dependency for Java SE versions 8, 9, 10 and 11](https://openscoring.io/blog/2019/02/28/jpmml_model_api_configuring_jaxb_dependency/)
-
-Slightly outdated:
-
-* [Converting PMML documents between different schema versions](https://openscoring.io/blog/2014/06/20/jpmml_model_api_import_export/)
-* [Transforming and measuring the memory consumption of PMML class model objects using the Java agent technology](https://openscoring.io/blog/2015/02/06/jpmml_model_api_transform_measure/)
-* [Extending PMML documents with custom XML content](https://openscoring.io/blog/2015/05/15/jpmml_model_api_vendor_extensions/)
-
-# Support #
-
-Limited public support is available via the [JPMML mailing list](https://groups.google.com/forum/#!forum/jpmml).
 
 # License #
 
