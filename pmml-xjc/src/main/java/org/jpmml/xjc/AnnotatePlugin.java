@@ -20,7 +20,6 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
 import com.sun.tools.xjc.Options;
-import com.sun.tools.xjc.model.CElementPropertyInfo;
 import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
@@ -75,15 +74,11 @@ public class AnnotatePlugin extends ComplexPlugin {
 					annotate(codeModel, fieldVar, propertyCustomization);
 				}
 
-				if(propertyInfo instanceof CElementPropertyInfo){
-					CElementPropertyInfo elementPropertyInfo = (CElementPropertyInfo)propertyInfo;
+				if(propertyInfo.isCollection()){
+					JClass elementType = (JClass)CodeModelUtil.getElementType(fieldVar.type());
 
-					if(elementPropertyInfo.isCollection()){
-						JClass elementType = (JClass)CodeModelUtil.getElementType(fieldVar.type());
-
-						JAnnotationUse collectionElementType = fieldVar.annotate(collectionElementTypeAnnotation)
-							.param("value", elementType.dotclass());
-					}
+					JAnnotationUse collectionElementType = fieldVar.annotate(collectionElementTypeAnnotation)
+						.param("value", elementType.dotclass());
 				}
 			}
 		}

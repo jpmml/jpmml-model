@@ -67,6 +67,7 @@ public class ClassifierNode extends SimpleNode {
 
 	@XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4")
 	@JsonProperty("ScoreDistribution")
+	@CollectionElementType(ScoreDistribution.class)
 	private List<ScoreDistribution> scoreDistributions = null;
 
 	@XmlElements({
