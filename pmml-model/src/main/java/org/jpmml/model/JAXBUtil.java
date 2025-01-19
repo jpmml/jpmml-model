@@ -50,10 +50,15 @@ public class JAXBUtil {
 	}
 
 	static
+	public JAXBContext createContext() throws JAXBException {
+		return JAXBContext.newInstance(getObjectFactoryClasses());
+	}
+
+	static
 	public JAXBContext getContext() throws JAXBException {
 
 		if(JAXBUtil.context == null){
-			JAXBUtil.context = JAXBContext.newInstance(getObjectFactoryClasses());
+			JAXBUtil.context = createContext();
 		}
 
 		return JAXBUtil.context;
@@ -65,20 +70,30 @@ public class JAXBUtil {
 	}
 
 	static
+	public Schema createSchema() throws IOException, SAXException {
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+		URL url = (org.dmg.pmml.ObjectFactory.class).getResource("/pmml.xsd");
+		if(url == null){
+			throw new FileNotFoundException();
+		}
+
+		return schemaFactory.newSchema(url);
+	}
+
+	static
 	public Schema getSchema() throws IOException, SAXException {
 
 		if(JAXBUtil.schema == null){
-			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-			URL url = (org.dmg.pmml.ObjectFactory.class).getResource("/pmml.xsd");
-			if(url == null){
-				throw new FileNotFoundException();
-			}
-
-			JAXBUtil.schema = schemaFactory.newSchema(url);
+			JAXBUtil.schema = createSchema();
 		}
 
 		return JAXBUtil.schema;
+	}
+
+	static
+	public void setSchema(Schema schema){
+		JAXBUtil.schema = schema;
 	}
 
 	private static JAXBContext context = null;
