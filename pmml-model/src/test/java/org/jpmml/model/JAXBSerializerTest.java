@@ -13,8 +13,6 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-
 public class JAXBSerializerTest extends SerializerTest {
 
 	@Test
@@ -29,9 +27,7 @@ public class JAXBSerializerTest extends SerializerTest {
 			pmml = (PMML)serializer.deserialize(is);
 		}
 
-		PMML clonedPmml = clone(serializer, pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		checkedClone(serializer, pmml);
 	}
 
 	@Test
@@ -46,8 +42,6 @@ public class JAXBSerializerTest extends SerializerTest {
 			pmml = (CustomPMML)serializer.deserialize(is);
 		}
 
-		CustomPMML clonedPmml = clone(serializer, pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		checkedClone(serializer, pmml);
 	}
 }

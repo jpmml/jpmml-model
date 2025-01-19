@@ -43,9 +43,7 @@ public class JavaSerializerTest extends SerializerTest {
 
 		assertFalse(pmml.hasLocator());
 
-		PMML clonedPmml = clone(serializer, pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		PMML clonedPmml = checkedClone(serializer, pmml);
 
 		assertFalse(clonedPmml.hasLocator());
 	}
@@ -70,11 +68,9 @@ public class JavaSerializerTest extends SerializerTest {
 
 		assertTrue(pmml.hasLocator());
 
-		PMML clonedPmml = clone(serializer, pmml);
+		PMML clonedPmml = checkedClone(serializer, pmml);
 
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
-
-		assertTrue(pmml.hasLocator());
+		assertTrue(clonedPmml.hasLocator());
 	}
 
 	@Test

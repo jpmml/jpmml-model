@@ -15,7 +15,6 @@ import org.dmg.pmml.adapters.NodeAdapter;
 import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.NodeTransformer;
-import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.SerializerTest;
@@ -24,7 +23,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
 public class JacksonSerializerTest extends SerializerTest {
 
@@ -40,7 +38,7 @@ public class JacksonSerializerTest extends SerializerTest {
 		Apply apply = new Apply(PMMLFunctions.ADD)
 			.addExpressions(left, right);
 
-		Apply clonedApply = clone(serializer, apply);
+		Apply clonedApply = checkedClone(serializer, apply);
 
 		List<Expression> clonedExpressions = clonedApply.getExpressions();
 
@@ -73,8 +71,6 @@ public class JacksonSerializerTest extends SerializerTest {
 			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(defaultScoreDistributionTransformer);
 		}
 
-		PMML clonedPmml = clone(serializer, pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		checkedClone(serializer, pmml);
 	}
 }

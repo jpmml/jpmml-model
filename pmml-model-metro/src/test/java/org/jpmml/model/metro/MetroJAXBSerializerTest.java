@@ -12,7 +12,6 @@ import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
-import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.SerializerTest;
@@ -28,9 +27,7 @@ public class MetroJAXBSerializerTest extends SerializerTest {
 
 		PMML pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
 
-		PMML clonedPmml = clone(serializer, pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		checkedClone(serializer, pmml);
 	}
 
 	@Test

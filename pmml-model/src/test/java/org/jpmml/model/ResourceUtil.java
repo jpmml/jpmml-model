@@ -3,7 +3,6 @@
  */
 package org.jpmml.model;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -38,7 +37,7 @@ public class ResourceUtil {
 	public byte[] getByteArray(Class<?> clazz) throws IOException {
 
 		try(InputStream is = getStream(clazz)){
-			return toByteArray(is);
+			return is.readAllBytes();
 		}
 	}
 
@@ -67,7 +66,7 @@ public class ResourceUtil {
 	public byte[] getByteArray(Version version) throws IOException {
 
 		try(InputStream is = getStream(version)){
-			return toByteArray(is);
+			return is.readAllBytes();
 		}
 	}
 
@@ -83,23 +82,5 @@ public class ResourceUtil {
 	static
 	private InputStream getResourceAsStream(String name){
 		return PMMLUtil.class.getResourceAsStream("/pmml/" + name + ".pmml");
-	}
-
-	static
-	private byte[] toByteArray(InputStream is) throws IOException {
-		ByteArrayOutputStream result = new ByteArrayOutputStream();
-
-		byte[] buffer = new byte[512];
-
-		while(true){
-			int count = is.read(buffer);
-			if(count < 0){
-				break;
-			}
-
-			result.write(buffer, 0, count);
-		}
-
-		return result.toByteArray();
 	}
 }

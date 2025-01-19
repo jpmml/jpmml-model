@@ -8,9 +8,19 @@ import java.io.InputStream;
 import org.dmg.pmml.PMMLObject;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 abstract
 public class SerializerTest {
+
+	static
+	protected <E extends PMMLObject> E checkedClone(Serializer serializer, E object) throws Exception {
+		E clonedObject = clone(serializer, object);
+
+		assertTrue(ReflectionUtil.equals(object, clonedObject));
+
+		return clonedObject;
+	}
 
 	static
 	protected <E extends PMMLObject> E clone(Serializer serializer, E object) throws Exception {

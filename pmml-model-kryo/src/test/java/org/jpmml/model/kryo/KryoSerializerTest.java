@@ -7,17 +7,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.esotericsoftware.kryo.Kryo;
-import org.dmg.pmml.PMMLObject;
 import org.jpmml.model.DirectByteArrayOutputStream;
-import org.jpmml.model.ReflectionUtil;
-import org.jpmml.model.Serializer;
 import org.jpmml.model.SerializerTest;
 import org.junit.After;
 import org.junit.Before;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
 
 abstract
 public class KryoSerializerTest extends SerializerTest {
@@ -33,15 +29,6 @@ public class KryoSerializerTest extends SerializerTest {
 	@After
 	public void tearDown(){
 		this.kryo = null;
-	}
-
-	static
-	protected <E extends PMMLObject> E checkedClone(Serializer serializer, E object) throws Exception {
-		E clonedObject = clone(serializer, object);
-
-		assertTrue(ReflectionUtil.equals(object, clonedObject));
-
-		return clonedObject;
 	}
 
 	static
