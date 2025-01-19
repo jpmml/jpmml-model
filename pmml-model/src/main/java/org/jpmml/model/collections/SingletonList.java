@@ -6,6 +6,7 @@ package org.jpmml.model.collections;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.RandomAccess;
 
 public class SingletonList<E> extends AbstractFixedSizeList<E> implements RandomAccess, Serializable {
@@ -24,6 +25,20 @@ public class SingletonList<E> extends AbstractFixedSizeList<E> implements Random
 
 	@Override
 	public boolean isEmpty(){
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object object){
+
+		if(object instanceof List){
+			List<?> that = (List<?>)object;
+
+			if(that.size() == 1){
+				return Objects.equals(this.element, that.get(0));
+			}
+		}
+
 		return false;
 	}
 

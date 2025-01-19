@@ -15,6 +15,43 @@ abstract
 public class AbstractFixedSizeList<E> extends AbstractCollection<E> implements List<E> {
 
 	@Override
+	public boolean equals(Object object){
+
+		if(object instanceof List){
+			List<?> that = (List<?>)object;
+
+			if(this.size() != that.size()){
+				return false;
+			} // End if
+
+			ListIterator<?> thisIt = this.listIterator();
+			ListIterator<?> thatIt = that.listIterator();
+
+			while(thisIt.hasNext()){
+
+				if(!Objects.equals(thisIt.next(), thatIt.next())){
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode(){
+		int result = 1;
+
+		for(int i = 0, max = size(); i < max; i++){
+			result = 31 * result + Objects.hashCode(get(i));
+		}
+
+		return result;
+	}
+
+	@Override
 	public Iterator<E> iterator(){
 		return listIterator();
 	}
