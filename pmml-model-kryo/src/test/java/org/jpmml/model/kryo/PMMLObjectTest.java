@@ -16,24 +16,23 @@ import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.jpmml.model.MixedContentTest;
-import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.Serializer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
 
-public class PMMLObjectTest extends KryoUtilTest {
+public class PMMLObjectTest extends KryoSerializerTest {
 
 	@Test
-	public void nameTest(){
+	public void nameTest() throws Exception {
+		Serializer serializer = new KryoSerializer(super.kryo);
+
 		DataField dataField = new DataField("x", OpType.CONTINUOUS, DataType.DOUBLE);
 
-		DataField clonedDataField = clone(dataField);
-
-		assertNotSame(dataField, clonedDataField);
+		DataField clonedDataField = checkedClone(serializer, dataField);
 
 		// XXX
 		assertEquals(dataField.getName(), clonedDataField.getName());
@@ -41,7 +40,9 @@ public class PMMLObjectTest extends KryoUtilTest {
 	}
 
 	@Test
-	public void referenceTest(){
+	public void referenceTest() throws Exception {
+		Serializer serializer = new KryoSerializer(super.kryo);
+
 		Node leftChild = new LeafNode()
 			.setPredicate(True.INSTANCE);
 
@@ -53,7 +54,7 @@ public class PMMLObjectTest extends KryoUtilTest {
 			.setDefaultChild(leftChild)
 			.addNodes(leftChild, rightChild);
 
-		Node clonedParent = clone(parent);
+		Node clonedParent = checkedClone(serializer, parent);
 
 		List<Node> clonedChildren = clonedParent.getNodes();
 
@@ -73,19 +74,19 @@ public class PMMLObjectTest extends KryoUtilTest {
 
 	@Test
 	public void inlineTableTest() throws Exception {
+		Serializer serializer = new KryoSerializer(super.kryo);
+
 		PMML pmml = ResourceUtil.unmarshal(InlineTableTest.class);
 
-		PMML clonedPmml = clone(pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		checkedClone(serializer, pmml);
 	}
 
 	@Test
 	public void mixedContent() throws Exception {
+		Serializer serializer = new KryoSerializer(super.kryo);
+
 		PMML pmml = ResourceUtil.unmarshal(MixedContentTest.class);
 
-		PMML clonedPmml = clone(pmml);
-
-		assertTrue(ReflectionUtil.equals(pmml, clonedPmml));
+		checkedClone(serializer, pmml);
 	}
 }

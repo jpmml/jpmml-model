@@ -5,7 +5,6 @@ package org.jpmml.model.kryo;
 
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
-import org.dmg.pmml.Visitor;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
@@ -14,31 +13,32 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class LocatorTest extends KryoUtilTest {
+public class LocatorTest extends KryoSerializerTest {
 
 	@Test
 	public void kryoClone() throws Exception {
+		KryoSerializer kryoSerializer = new KryoSerializer(super.kryo);
+
 		PMML pmml = ResourceUtil.unmarshal(Version.PMML_4_4);
 
-		pmml = updateLocator(pmml, null);
-
 		assertTrue(pmml.hasLocator());
 
-		pmml = updateLocator(pmml, new LocatorTransformer());
+		PMML clonedPmml = checkedClone(kryoSerializer, pmml);
 
-		assertTrue(pmml.hasLocator());
+		assertTrue(clonedPmml.hasLocator());
 
-		pmml = updateLocator(pmml, new LocatorNullifier());
+		pmml.accept(new LocatorTransformer());
+
+		clonedPmml = checkedClone(kryoSerializer, pmml);
+
+		assertTrue(clonedPmml.hasLocator());
+
+		pmml.accept(new LocatorNullifier());
 
 		assertFalse(pmml.hasLocator());
-	}
 
-	private PMML updateLocator(PMML pmml, Visitor visitor){
+		clonedPmml = checkedClone(kryoSerializer, pmml);
 
-		if(visitor != null){
-			pmml.accept(visitor);
-		}
-
-		return clone(pmml);
+		assertFalse(clonedPmml.hasLocator());
 	}
 }

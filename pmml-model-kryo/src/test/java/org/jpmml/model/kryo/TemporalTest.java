@@ -7,27 +7,19 @@ import org.jpmml.model.temporals.DateTimeUtil;
 import org.jpmml.model.temporals.Epochs;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-
-public class TemporalTest extends KryoUtilTest {
+public class TemporalTest extends KryoSerializerTest {
 
 	@Test
 	public void kryoClone() throws Exception {
-		check(DateTimeUtil.parseDate(DATE));
-		check(DateTimeUtil.parseTime(TIME));
-		check(DateTimeUtil.parseDateTime(DATE_TIME));
+		KryoSerializer kryoSerializer = new KryoSerializer(super.kryo);
 
-		check(DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, DATE));
-		check(DateTimeUtil.parseSecondsSinceMidnight(TIME));
-		check(DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, DATE_TIME));
-	}
+		checkedCloneRaw(kryoSerializer, DateTimeUtil.parseDate(DATE));
+		checkedCloneRaw(kryoSerializer, DateTimeUtil.parseTime(TIME));
+		checkedCloneRaw(kryoSerializer, DateTimeUtil.parseDateTime(DATE_TIME));
 
-	private void check(Object object){
-		Object clonedObject = clone(object);
-
-		assertEquals(object, clonedObject);
-		assertNotSame(object, clonedObject);
+		checkedCloneRaw(kryoSerializer, DateTimeUtil.parseDaysSinceDate(Epochs.YEAR_1960, DATE));
+		checkedCloneRaw(kryoSerializer, DateTimeUtil.parseSecondsSinceMidnight(TIME));
+		checkedCloneRaw(kryoSerializer, DateTimeUtil.parseSecondsSinceDate(Epochs.YEAR_1960, DATE_TIME));
 	}
 
 	// The date and time (UTC) of the first moon landing

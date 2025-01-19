@@ -4,23 +4,22 @@
 package org.jpmml.model.kryo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.jpmml.model.collections.DoubletonList;
 import org.jpmml.model.collections.SingletonList;
 import org.jpmml.model.collections.TripletonList;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
-public class CollectionTest extends KryoUtilTest {
+public class CollectionTest extends KryoSerializerTest {
 
 	@Test
-	public void kryoClone(){
-		assertEquals(Arrays.asList(), clone(new ArrayList<>()));
+	public void kryoClone() throws Exception {
+		KryoSerializer kryoSerializer = new KryoSerializer(super.kryo);
 
-		assertEquals(Arrays.asList("first"), clone(new SingletonList<>("first")));
-		assertEquals(Arrays.asList("first", "second"), clone(new DoubletonList<>("first", "second")));
-		assertEquals(Arrays.asList("first", "second", "third"), clone(new TripletonList<>("first", "second", "third")));
+		checkedCloneRaw(kryoSerializer, new ArrayList<>());
+
+		checkedCloneRaw(kryoSerializer, new SingletonList<>("first"));
+		checkedCloneRaw(kryoSerializer, new DoubletonList<>("first", "second"));
+		checkedCloneRaw(kryoSerializer, new TripletonList<>("first", "second", "third"));
 	}
 }
