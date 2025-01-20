@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElements;
@@ -17,6 +18,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.Version;
@@ -65,8 +67,12 @@ public class ClassifierNode extends SimpleNode {
 	@JsonProperty("defaultChild")
 	private Object defaultChild = null;
 
-	@XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4")
+	@XmlElements({
+		@XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4", type = ComplexScoreDistribution.class)
+	})
 	@JsonProperty("ScoreDistribution")
+	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexScoreDistribution.class)
+	@JsonDeserialize(contentAs = ComplexScoreDistribution.class)
 	@CollectionElementType(ScoreDistribution.class)
 	private List<ScoreDistribution> scoreDistributions = null;
 
@@ -75,6 +81,7 @@ public class ClassifierNode extends SimpleNode {
 	})
 	@JsonProperty("Node")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexNode.class)
+	@JsonDeserialize(contentAs = ComplexNode.class)
 	@CollectionElementType(Node.class)
 	private List<Node> nodes = null;
 
