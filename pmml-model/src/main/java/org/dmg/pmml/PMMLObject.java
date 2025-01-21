@@ -69,7 +69,7 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 				serialVersionUIDField.setAccessible(true);
 			}
 
-			serialVersionUID = (long)serialVersionUIDField.getLong(null);
+			serialVersionUID = serialVersionUIDField.getLong(null);
 		} catch(ReflectiveOperationException roe){
 			throw new RuntimeException(roe);
 		}

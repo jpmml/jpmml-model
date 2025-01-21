@@ -14,8 +14,6 @@ import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.VisitorAction;
 import org.jpmml.agent.InstrumentationProvider;
 import org.jpmml.model.ReflectionUtil;
-import org.jpmml.model.visitors.AbstractVisitor;
-import org.jpmml.model.visitors.Resettable;
 
 /**
  * <p>

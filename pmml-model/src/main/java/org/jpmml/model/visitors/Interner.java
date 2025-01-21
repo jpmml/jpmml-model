@@ -47,7 +47,7 @@ public class Interner<V> extends AbstractVisitor {
 
 			Class<?> elementClazz = collectionElementType.value();
 			if(elementClazz.isAssignableFrom(type)){
-				List<V> values = (List<V>)ReflectionUtil.getFieldValue(field, object);
+				List<V> values = ReflectionUtil.getFieldValue(field, object);
 
 				if(values != null && !values.isEmpty()){
 

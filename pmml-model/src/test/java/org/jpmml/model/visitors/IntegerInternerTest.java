@@ -15,7 +15,7 @@ import static org.junit.Assert.assertSame;
 public class IntegerInternerTest {
 
 	@Test
-	@SuppressWarnings({"deprecation", "removal"})
+	@SuppressWarnings("deprecation")
 	public void intern(){
 		SparseArray<Integer> sparseArray = new IntSparseArray()
 			.setN(new Integer(3))
