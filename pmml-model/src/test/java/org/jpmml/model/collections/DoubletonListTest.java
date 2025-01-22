@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class DoubletonListTest extends AbstractFixedSizeListTest {
 
@@ -28,14 +28,7 @@ public class DoubletonListTest extends AbstractFixedSizeListTest {
 
 		assertEquals("first", list.get(0));
 		assertEquals("second", list.get(1));
-
-		try {
-			list.get(2);
-
-			fail();
-		} catch(IndexOutOfBoundsException ioobe){
-			// Ignored
-		}
+		assertThrows(IndexOutOfBoundsException.class, () -> list.get(2));
 
 		assertEquals(0, list.indexOf("first"));
 		assertEquals(1, list.indexOf("second"));
@@ -64,14 +57,7 @@ public class DoubletonListTest extends AbstractFixedSizeListTest {
 
 		assertEquals("first", list.set(0, "First"));
 		assertEquals("second", list.set(1, "Second"));
-
-		try {
-			list.set(2, "Third");
-
-			fail();
-		} catch(IndexOutOfBoundsException ioobe){
-			// Ignored
-		}
+		assertThrows(IndexOutOfBoundsException.class, () -> list.set(2, "Third"));
 
 		assertEquals(Arrays.asList("First", "Second"), list);
 

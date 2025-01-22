@@ -6,7 +6,7 @@ package org.dmg.pmml.adapters;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NonNegativeIntegerAdapterTest {
 
@@ -14,13 +14,7 @@ public class NonNegativeIntegerAdapterTest {
 	public void unmarshal(){
 		IntegerAdapter adapter = new NonNegativeIntegerAdapter();
 
-		try {
-			adapter.unmarshal("-1");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> adapter.unmarshal("-1"));
 
 		assertEquals((Integer)0, adapter.unmarshal("0"));
 		assertEquals((Integer)1, adapter.unmarshal("1"));

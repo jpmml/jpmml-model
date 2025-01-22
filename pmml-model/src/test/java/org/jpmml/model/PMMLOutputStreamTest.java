@@ -11,8 +11,8 @@ import org.dmg.pmml.Version;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class PMMLOutputStreamTest {
 
@@ -20,13 +20,7 @@ public class PMMLOutputStreamTest {
 	public void marshal() throws Exception {
 		PMML pmml = new PMML();
 
-		try {
-			marshal(pmml, Version.XPMML);
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> marshal(pmml, Version.XPMML));
 
 		String string = marshal(pmml, Version.PMML_4_4);
 

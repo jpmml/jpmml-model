@@ -18,7 +18,7 @@ import org.dmg.pmml.tree.SimpleNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class XPathUtilTest {
 
@@ -66,13 +66,7 @@ public class XPathUtilTest {
 
 		assertEquals("Node", XPathUtil.formatElement(nodeClazz));
 
-		try {
-			XPathUtil.formatElementOrAttribute(ReflectionUtil.getField(nodeClazz, "score"));
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> XPathUtil.formatElementOrAttribute(ReflectionUtil.getField(nodeClazz, "score")));
 
 		assertEquals("Node@score", XPathUtil.formatElementOrAttribute(nodeClazz, ReflectionUtil.getField(nodeClazz, "score")));
 		assertEquals("Node/<Predicate>", XPathUtil.formatElementOrAttribute(nodeClazz, ReflectionUtil.getField(nodeClazz, "predicate")));
@@ -98,13 +92,7 @@ public class XPathUtilTest {
 
 		assertEquals("ScoreDistribution", XPathUtil.formatElement(scoreDistributionClazz));
 
-		try {
-			XPathUtil.formatElementOrAttribute(ReflectionUtil.getField(scoreDistributionClazz, "value"));
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> XPathUtil.formatElementOrAttribute(ReflectionUtil.getField(scoreDistributionClazz, "value")));
 
 		assertEquals("ScoreDistribution@value", XPathUtil.formatElementOrAttribute(scoreDistributionClazz, ReflectionUtil.getField(scoreDistributionClazz, "value")));
 	}

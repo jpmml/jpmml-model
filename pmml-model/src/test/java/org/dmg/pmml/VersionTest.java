@@ -5,20 +5,13 @@ package org.dmg.pmml;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class VersionTest {
 
 	@Test
 	public void forNamespaceURI(){
-
-		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-2_0");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> Version.forNamespaceURI("http://www.dmg.org/PMML-2_0"));
 
 		Version.forNamespaceURI("http://www.dmg.org/PMML-3_0");
 		Version.forNamespaceURI("http://www.dmg.org/PMML-3_2");
@@ -26,20 +19,7 @@ public class VersionTest {
 		Version.forNamespaceURI("http://www.dmg.org/PMML-4_3");
 		Version.forNamespaceURI("http://www.dmg.org/PMML-4_4");
 
-		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-4_5");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
-
-		try {
-			Version.forNamespaceURI("http://www.dmg.org/PMML-5_0");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> Version.forNamespaceURI("http://www.dmg.org/PMML-4_5"));
+		assertThrows(IllegalArgumentException.class, () -> Version.forNamespaceURI("http://www.dmg.org/PMML-5_0"));
 	}
 }

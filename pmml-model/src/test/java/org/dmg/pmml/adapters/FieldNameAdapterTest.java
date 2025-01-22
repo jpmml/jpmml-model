@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FieldNameAdapterTest {
 
@@ -15,21 +15,8 @@ public class FieldNameAdapterTest {
 	public void unmarshal(){
 		FieldNameAdapter adapter = new FieldNameAdapter();
 
-		try {
-			adapter.unmarshal(null);
-
-			fail();
-		} catch(NullPointerException npe){
-			// Ignored
-		} // End try
-
-		try {
-			adapter.unmarshal("");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(NullPointerException.class, () -> adapter.unmarshal(null));
+		assertThrows(IllegalArgumentException.class, () -> adapter.unmarshal(""));
 
 		assertNotNull(adapter.unmarshal("x"));
 	}

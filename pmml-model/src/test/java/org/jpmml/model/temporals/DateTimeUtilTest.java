@@ -7,7 +7,7 @@ import org.dmg.pmml.DataType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DateTimeUtilTest {
 
@@ -42,13 +42,7 @@ public class DateTimeUtilTest {
 		assertEquals(DataType.DATE_DAYS_SINCE_1970, daysSince1970.getDataType());
 		assertEquals(DataType.DATE_DAYS_SINCE_1980, daysSince1980.getDataType());
 
-		try {
-			int diff = (daysSince1960).compareTo(daysSince1970);
-
-			fail();
-		} catch(ClassCastException cce){
-			// Ignored
-		}
+		assertThrows(ClassCastException.class, () -> (daysSince1960).compareTo(daysSince1970));
 
 		assertEquals(daysSince1960, daysSince1970.forEpoch(Epochs.YEAR_1960));
 		assertEquals(daysSince1960, daysSince1980.forEpoch(Epochs.YEAR_1960));
@@ -101,13 +95,7 @@ public class DateTimeUtilTest {
 		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1970, secondsSince1970.getDataType());
 		assertEquals(DataType.DATE_TIME_SECONDS_SINCE_1980, secondsSince1980.getDataType());
 
-		try {
-			int diff = (secondsSince1960).compareTo(secondsSince1970);
-
-			fail();
-		} catch(ClassCastException cce){
-			// Ignored
-		}
+		assertThrows(ClassCastException.class, () -> (secondsSince1960).compareTo(secondsSince1970));
 
 		assertEquals(secondsSince1960, secondsSince1970.forEpoch(Epochs.YEAR_1960));
 		assertEquals(secondsSince1960, secondsSince1980.forEpoch(Epochs.YEAR_1960));

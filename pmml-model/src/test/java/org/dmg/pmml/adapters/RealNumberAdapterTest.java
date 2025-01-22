@@ -6,7 +6,7 @@ package org.dmg.pmml.adapters;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RealNumberAdapterTest {
 
@@ -18,13 +18,7 @@ public class RealNumberAdapterTest {
 		assertEquals(Double.NEGATIVE_INFINITY, adapter.unmarshal("-INF"));
 		assertEquals(Double.POSITIVE_INFINITY, adapter.unmarshal("INF"));
 
-		try {
-			adapter.unmarshal("Infinity");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> adapter.unmarshal("Infinity"));
 
 		assertEquals(1, adapter.unmarshal("1"));
 		assertEquals(1d, adapter.unmarshal("1.0"));

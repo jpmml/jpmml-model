@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class JavaSerializerTest extends SerializerTest {
 
@@ -31,13 +31,7 @@ public class JavaSerializerTest extends SerializerTest {
 
 		assertTrue(pmml.hasLocator());
 
-		try {
-			clone(serializer, pmml);
-
-			fail();
-		} catch(NotSerializableException nse){
-			// Ignored
-		}
+		assertThrows(NotSerializableException.class, () -> clone(serializer, pmml));
 
 		pmml.accept(new LocatorNullifier());
 
@@ -56,13 +50,7 @@ public class JavaSerializerTest extends SerializerTest {
 
 		assertTrue(pmml.hasLocator());
 
-		try {
-			clone(serializer, pmml);
-
-			fail();
-		} catch(NotSerializableException nse){
-			// Ignored
-		}
+		assertThrows(NotSerializableException.class, () -> clone(serializer, pmml));
 
 		pmml.accept(new LocatorTransformer());
 

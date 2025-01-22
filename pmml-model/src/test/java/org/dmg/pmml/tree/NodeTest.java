@@ -19,8 +19,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class NodeTest {
 
@@ -61,22 +61,10 @@ public class NodeTest {
 		assertEquals("2b", jaxbNode1.requireDefaultChild());
 
 		assertSame(True.INSTANCE, node1.requirePredicate(True.class));
-
-		try {
-			node1.requirePredicate(False.class);
-
-			fail();
-		} catch(UnsupportedElementException uee){
-			// Ignored
-		}
+		assertThrows(UnsupportedElementException.class, () -> node1.requirePredicate(False.class));
 
 		assertNotSame(True.INSTANCE, jaxbNode1.requirePredicate(True.class));
-
-		try {
-			jaxbNode1.requirePredicate(False.class);
-		} catch(UnsupportedElementException uee){
-			// Ignored
-		}
+		assertThrows(UnsupportedElementException.class, () -> jaxbNode1.requirePredicate(False.class));
 
 		List<Node> jaxbNodes = jaxbNode1.getNodes();
 

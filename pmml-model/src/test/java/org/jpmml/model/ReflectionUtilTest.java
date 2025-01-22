@@ -27,8 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ReflectionUtilTest {
 
@@ -138,13 +138,7 @@ public class ReflectionUtilTest {
 
 		assertSame(pmml.getModels(), customPmml.getModels());
 
-		try {
-			ReflectionUtil.copyState(customPmml, pmml);
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> ReflectionUtil.copyState(customPmml, pmml));
 	}
 
 	@Test
@@ -169,17 +163,11 @@ public class ReflectionUtilTest {
 
 		assertEquals(1 /* PMMLObject */ + 20 /* OutputField */, getterMethods.size());
 
-		try {
+		assertThrows(RuntimeException.class, () -> {
 			Field field = OutputField.class.getDeclaredField("DEFAULT_RANK");
 
 			ReflectionUtil.getGetterMethod(field);
-
-			fail();
-		} catch(ReflectiveOperationException roe){
-			fail();
-		} catch(RuntimeException re){
-			// Ignored
-		}
+		});
 	}
 
 	@Test
@@ -230,14 +218,7 @@ public class ReflectionUtilTest {
 			Class<?> fieldType = field.getType();
 
 			if(Objects.equals(List.class, fieldType)){
-
-				try {
-					ReflectionUtil.getSetterMethod(field);
-
-					fail();
-				} catch(RuntimeException re){
-					// Ignored
-				}
+				assertThrows(RuntimeException.class, () -> ReflectionUtil.getSetterMethod(field));
 			} else
 
 			{
@@ -250,14 +231,7 @@ public class ReflectionUtilTest {
 
 	@Test
 	public void getAppenderMethods(){
-
-		try {
-			ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_EXPRESSION);
-
-			fail();
-		} catch(RuntimeException re){
-			// Ignored
-		}
+		assertThrows(RuntimeException.class, () -> ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_EXPRESSION));
 
 		assertNotNull(ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_EXTENSIONS));
 		assertNotNull(ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_VALUES));

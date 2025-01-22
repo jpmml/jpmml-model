@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class SingletonListTest extends AbstractFixedSizeListTest {
 
@@ -27,14 +27,7 @@ public class SingletonListTest extends AbstractFixedSizeListTest {
 		assertFalse(list.isEmpty());
 
 		assertEquals("value", list.get(0));
-
-		try {
-			list.get(1);
-
-			fail();
-		} catch(IndexOutOfBoundsException ioobe){
-			// Ignored
-		}
+		assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
 
 		assertEquals(0, list.indexOf("value"));
 		assertEquals(-1, list.indexOf(null));
@@ -57,14 +50,7 @@ public class SingletonListTest extends AbstractFixedSizeListTest {
 		List<String> list = new SingletonList<>("first");
 
 		assertEquals("first", list.set(0, "First"));
-
-		try {
-			list.set(2, "Second");
-
-			fail();
-		} catch(IndexOutOfBoundsException ioobe){
-			// Ignored
-		}
+		assertThrows(IndexOutOfBoundsException.class, () -> list.set(1, "Second"));
 
 		assertEquals(Arrays.asList("First"), list);
 

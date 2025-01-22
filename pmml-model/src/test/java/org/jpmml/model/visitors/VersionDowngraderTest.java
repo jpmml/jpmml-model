@@ -160,6 +160,8 @@ public class VersionDowngraderTest {
 
 		try {
 			downgrade(trendExpoSmooth, Version.PMML_4_0);
+
+			fail();
 		} catch(UnsupportedElementException uee){
 			// Ignored
 		}

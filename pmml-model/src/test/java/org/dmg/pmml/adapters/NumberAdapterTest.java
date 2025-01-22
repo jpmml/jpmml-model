@@ -6,7 +6,7 @@ package org.dmg.pmml.adapters;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class NumberAdapterTest {
 
@@ -14,21 +14,8 @@ public class NumberAdapterTest {
 	public void unmarshal(){
 		NumberAdapter adapter = new NumberAdapter();
 
-		try {
-			adapter.unmarshal("NaN");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
-
-		try {
-			adapter.unmarshal("INF");
-
-			fail();
-		} catch(IllegalArgumentException iae){
-			// Ignored
-		}
+		assertThrows(IllegalArgumentException.class, () -> adapter.unmarshal("NaN"));
+		assertThrows(IllegalArgumentException.class, () -> adapter.unmarshal("INF"));
 
 		assertEquals(1, adapter.unmarshal("1"));
 		assertEquals(1d, adapter.unmarshal("1.0"));

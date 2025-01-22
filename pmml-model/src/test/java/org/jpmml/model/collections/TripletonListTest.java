@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class TripletonListTest extends AbstractFixedSizeListTest {
 
@@ -29,14 +29,7 @@ public class TripletonListTest extends AbstractFixedSizeListTest {
 		assertEquals("first", list.get(0));
 		assertEquals("second", list.get(1));
 		assertEquals("third", list.get(2));
-
-		try {
-			list.get(3);
-
-			fail();
-		} catch(IndexOutOfBoundsException ioobe){
-			// Ignored
-		}
+		assertThrows(IndexOutOfBoundsException.class, () -> list.get(3));
 
 		assertEquals(Collections.emptyList(), list.subList(0, 0));
 		assertEquals(Arrays.asList("first"), list.subList(0, 1));
@@ -55,14 +48,7 @@ public class TripletonListTest extends AbstractFixedSizeListTest {
 		list.set(0, "First");
 		list.set(1, "Second");
 		list.set(2, "Third");
-
-		try {
-			list.set(3, "Fourth");
-
-			fail();
-		} catch(IndexOutOfBoundsException ioobe){
-			// Ignored
-		}
+		assertThrows(IndexOutOfBoundsException.class, () -> list.set(3, "Fourth"));
 
 		assertEquals(Arrays.asList("First", "Second", "Third"), list);
 
