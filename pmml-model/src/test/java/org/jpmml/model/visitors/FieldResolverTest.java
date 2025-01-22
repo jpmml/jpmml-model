@@ -29,9 +29,9 @@ import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.NestedSegmentationTest;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.filters.ImportFilter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FieldResolverTest {
 

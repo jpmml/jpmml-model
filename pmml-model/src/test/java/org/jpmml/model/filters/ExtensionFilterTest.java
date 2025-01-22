@@ -9,11 +9,11 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
 import org.jpmml.model.ExtensionUtil;
 import org.jpmml.model.ResourceUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExtensionFilterTest {
 

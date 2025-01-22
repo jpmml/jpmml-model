@@ -35,9 +35,9 @@ import org.jpmml.model.MisplacedElementListException;
 import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.MissingElementException;
 import org.jpmml.model.UnsupportedAttributeException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VersionCheckerTest {
 

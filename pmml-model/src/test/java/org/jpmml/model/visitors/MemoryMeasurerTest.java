@@ -8,9 +8,9 @@ import org.dmg.pmml.DataType;
 import org.dmg.pmml.Interval;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.Visitable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MemoryMeasurerTest {
 

@@ -15,9 +15,9 @@ import org.dmg.pmml.regression.RegressionTable;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.SerializerTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MetroJAXBSerializerTest extends SerializerTest {
 

@@ -5,7 +5,7 @@ package org.jpmml.model.kryo;
 
 import org.jpmml.model.temporals.DateTimeUtil;
 import org.jpmml.model.temporals.Epochs;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TemporalTest extends KryoSerializerTest {
 

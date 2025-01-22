@@ -17,12 +17,12 @@ import org.jpmml.model.Serializer;
 import org.jpmml.model.cells.InputCell;
 import org.jpmml.model.cells.OutputCell;
 import org.jpmml.model.visitors.RowCleaner;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InlineTableTest {
 

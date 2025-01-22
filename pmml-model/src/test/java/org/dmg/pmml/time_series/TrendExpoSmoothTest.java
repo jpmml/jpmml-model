@@ -7,10 +7,10 @@ import org.dmg.pmml.Version;
 import org.jpmml.model.DOMUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SchemaUpdateTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TrendExpoSmoothTest extends SchemaUpdateTest {
 

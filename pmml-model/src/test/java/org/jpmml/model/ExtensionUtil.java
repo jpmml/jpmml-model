@@ -8,7 +8,7 @@ import java.util.List;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.HasExtensions;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExtensionUtil {
 

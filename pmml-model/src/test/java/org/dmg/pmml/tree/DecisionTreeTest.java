@@ -4,7 +4,7 @@
 package org.dmg.pmml.tree;
 
 import org.dmg.pmml.ReflectionTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DecisionTreeTest extends ReflectionTest {
 

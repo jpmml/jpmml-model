@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.jpmml.model.collections.DoubletonList;
 import org.jpmml.model.collections.SingletonList;
 import org.jpmml.model.collections.TripletonList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CollectionTest extends KryoSerializerTest {
 

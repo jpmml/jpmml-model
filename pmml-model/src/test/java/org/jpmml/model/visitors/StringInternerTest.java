@@ -6,10 +6,10 @@ package org.jpmml.model.visitors;
 import org.dmg.pmml.CompoundPredicate;
 import org.dmg.pmml.CustomSimplePredicate;
 import org.dmg.pmml.SimplePredicate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class StringInternerTest {
 

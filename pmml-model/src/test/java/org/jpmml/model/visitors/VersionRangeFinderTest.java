@@ -40,9 +40,9 @@ import org.dmg.pmml.sequence.SequenceModel;
 import org.dmg.pmml.text.TextModel;
 import org.dmg.pmml.time_series.TimeSeriesModel;
 import org.dmg.pmml.tree.TreeModel;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VersionRangeFinderTest {
 

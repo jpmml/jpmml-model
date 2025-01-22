@@ -4,7 +4,7 @@
 package org.dmg.pmml.neural_network;
 
 import org.dmg.pmml.ReflectionTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class NeuralLayerTest extends ReflectionTest {
 

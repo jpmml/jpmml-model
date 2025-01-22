@@ -8,11 +8,11 @@ import java.util.List;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.InvalidMarkupException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class InvalidMarkupInspectorTest {
 
