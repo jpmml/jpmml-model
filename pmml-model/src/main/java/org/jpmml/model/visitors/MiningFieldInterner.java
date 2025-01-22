@@ -17,7 +17,7 @@ public class MiningFieldInterner extends PMMLObjectInterner<MiningField> {
 		super(MiningField.class, MiningFieldInterner.CACHE_PROVIDER.get());
 	}
 
-	public static final ThreadLocal<PMMLObjectCache<MiningField>> CACHE_PROVIDER = new ThreadLocal<PMMLObjectCache<MiningField>>(){
+	public static final ThreadLocal<PMMLObjectCache<MiningField>> CACHE_PROVIDER = new ThreadLocal<>(){
 
 		@Override
 		public PMMLObjectCache<MiningField> initialValue(){

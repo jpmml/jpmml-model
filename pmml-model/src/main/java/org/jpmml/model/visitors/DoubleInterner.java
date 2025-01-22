@@ -29,7 +29,7 @@ public class DoubleInterner extends NumberInterner<Double> {
 
 	private static final ConcurrentMap<Double, Double> cache = new ConcurrentHashMap<>();
 
-	public static final ThreadLocal<ConcurrentMap<Double, Double>> CACHE_PROVIDER = new ThreadLocal<ConcurrentMap<Double, Double>>(){
+	public static final ThreadLocal<ConcurrentMap<Double, Double>> CACHE_PROVIDER = new ThreadLocal<>(){
 
 		@Override
 		public ConcurrentMap<Double, Double> initialValue(){

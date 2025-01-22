@@ -17,7 +17,7 @@ public class ScoreDistributionInterner extends PMMLObjectInterner<ScoreDistribut
 		super(ScoreDistribution.class, ScoreDistributionInterner.CACHE_PROVIDER.get());
 	}
 
-	public static final ThreadLocal<PMMLObjectCache<ScoreDistribution>> CACHE_PROVIDER = new ThreadLocal<PMMLObjectCache<ScoreDistribution>>(){
+	public static final ThreadLocal<PMMLObjectCache<ScoreDistribution>> CACHE_PROVIDER = new ThreadLocal<>(){
 
 		@Override
 		public PMMLObjectCache<ScoreDistribution> initialValue(){

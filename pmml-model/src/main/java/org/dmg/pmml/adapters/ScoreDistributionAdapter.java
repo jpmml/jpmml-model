@@ -33,7 +33,7 @@ public class ScoreDistributionAdapter extends XmlAdapter<ComplexScoreDistributio
 		return scoreDistribution.toComplexScoreDistribution();
 	}
 
-	public static final ThreadLocal<ScoreDistributionTransformer> SCOREDISTRIBUTION_TRANSFORMER_PROVIDER = new ThreadLocal<ScoreDistributionTransformer>(){
+	public static final ThreadLocal<ScoreDistributionTransformer> SCOREDISTRIBUTION_TRANSFORMER_PROVIDER = new ThreadLocal<>(){
 
 		@Override
 		public ScoreDistributionTransformer initialValue(){

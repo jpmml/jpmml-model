@@ -29,7 +29,7 @@ public class FloatInterner extends NumberInterner<Float> {
 
 	private static final ConcurrentMap<Float, Float> cache = new ConcurrentHashMap<>();
 
-	public static final ThreadLocal<ConcurrentMap<Float, Float>> CACHE_PROVIDER = new ThreadLocal<ConcurrentMap<Float, Float>>(){
+	public static final ThreadLocal<ConcurrentMap<Float, Float>> CACHE_PROVIDER = new ThreadLocal<>(){
 
 		@Override
 		public ConcurrentMap<Float, Float> initialValue(){

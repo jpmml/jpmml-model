@@ -41,7 +41,7 @@ public class PredicateInterner extends PMMLObjectInterner<Predicate> {
 		return super.intern(predicate);
 	}
 
-	public static final ThreadLocal<PMMLObjectCache<Predicate>> CACHE_PROVIDER = new ThreadLocal<PMMLObjectCache<Predicate>>(){
+	public static final ThreadLocal<PMMLObjectCache<Predicate>> CACHE_PROVIDER = new ThreadLocal<>(){
 
 		@Override
 		public PMMLObjectCache<Predicate> initialValue(){

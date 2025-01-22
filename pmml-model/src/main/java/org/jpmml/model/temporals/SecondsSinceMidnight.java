@@ -163,7 +163,7 @@ public class SecondsSinceMidnight extends SimplePeriod<SecondsSinceMidnight> {
 
 	private static final DateTimeFormatter FORMATTER = createFormatter();
 
-	private static final TemporalQuery<SecondsSinceMidnight> QUERY = new TemporalQuery<SecondsSinceMidnight>(){
+	private static final TemporalQuery<SecondsSinceMidnight> QUERY = new TemporalQuery<>(){
 
 		@Override
 		public SecondsSinceMidnight queryFrom(TemporalAccessor temporal){

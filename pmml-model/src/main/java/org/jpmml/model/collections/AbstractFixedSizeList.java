@@ -68,7 +68,7 @@ public class AbstractFixedSizeList<E> extends AbstractCollection<E> implements L
 			throw new IndexOutOfBoundsException();
 		}
 
-		ListIterator<E> result = new ListIterator<E>(){
+		ListIterator<E> result = new ListIterator<>(){
 
 			private int cursor = index;
 
