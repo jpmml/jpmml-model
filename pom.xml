@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>9</version>
+		<groupId>org.jpmml</groupId>
+		<artifactId>jpmml-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.jpmml</groupId>
@@ -55,7 +55,6 @@
 	</issueManagement>
 
 	<properties>
-		<jdk.version>11</jdk.version>
 		<project.build.outputTimestamp>2025-01-22T16:36:15Z</project.build.outputTimestamp>
 	</properties>
 
@@ -194,122 +193,21 @@
 	</dependencyManagement>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.4.2</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-shade-plugin</artifactId>
-					<version>3.6.0</version>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>shade</goal>
-							</goals>
-							<configuration>
-								<createDependencyReducedPom>false</createDependencyReducedPom>
-								<finalName>${project.artifactId}-distributable-${project.version}</finalName>
-								<filters>
-									<filter>
-										<artifact>*:*</artifact>
-										<excludes>
-											<exclude>META-INF/*.SF</exclude>
-											<exclude>META-INF/*.DSA</exclude>
-											<exclude>META-INF/*.RSA</exclude>
-										</excludes>
-									</filter>
-								</filters>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.5.2</version>
-					<configuration>
-						<trimStackTrace>false</trimStackTrace>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>animal-sniffer-maven-plugin</artifactId>
-					<version>1.24</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.13.0</version>
-				<configuration>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<version>3.5.0</version>
+				<artifactId>maven-shade-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>enforce-maven</id>
+						<phase>package</phase>
 						<goals>
-							<goal>enforce</goal>
+							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<rules>
-								<requireJavaVersion>
-									<version>[11,)</version>
-								</requireJavaVersion>
-								<requireMavenVersion>
-									<version>[3.6.3,)</version>
-								</requireMavenVersion>
-							</rules>
+							<finalName>${project.artifactId}-distributable-${project.version}</finalName>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.11.2</version>
-				<configuration>
-					<release>${jdk.version}</release>
-					<show>public</show>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>3.1.1</version>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<localCheckout>true</localCheckout>
-					<pushChanges>false</pushChanges>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.3.1</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -335,16 +233,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<!--
-			Usage:
-			$ mvn versions:display-dependency-updates
-			$ mvn versions:display-plugin-updates
-			-->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.18.0</version>
 			</plugin>
 		</plugins>
 	</build>
