@@ -53,7 +53,7 @@
 								<artifactItem>
 									<groupId>jakarta.xml.bind</groupId>
 									<artifactId>jakarta.xml.bind-api</artifactId>
-									<version>4.0.2</version>
+									<version>${jaxb-api.version}</version>
 									<type>jar</type>
 									<outputDirectory>${project.build.outputDirectory}</outputDirectory>
 									<includes>jakarta/xml/bind/annotation/Xml*.class,jakarta/xml/bind/annotation/adapters/XmlAdapter.class</includes>

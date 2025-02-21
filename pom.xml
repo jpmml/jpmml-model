@@ -55,6 +55,7 @@
 	</issueManagement>
 
 	<properties>
+		<jaxb-api.version>4.0.2</jaxb-api.version>
 		<project.build.outputTimestamp>2025-01-22T16:36:15Z</project.build.outputTimestamp>
 	</properties>
 
@@ -111,7 +112,7 @@
 			<dependency>
 				<groupId>jakarta.xml.bind</groupId>
 				<artifactId>jakarta.xml.bind-api</artifactId>
-				<version>4.0.2</version>
+				<version>${jaxb-api.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>com.sun.activation</groupId>
@@ -182,15 +183,16 @@
 				<artifactId>teavm-classlib</artifactId>
 				<version>0.11.0</version>
 			</dependency>
-
-			<dependency>
-				<groupId>org.junit.jupiter</groupId>
-				<artifactId>junit-jupiter-api</artifactId>
-				<version>5.11.4</version>
-				<scope>test</scope>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -221,10 +223,6 @@
 							<goal>check</goal>
 						</goals>
 						<configuration>
-							<ignores>
-								<ignore>java.lang.instrument.*</ignore>
-								<ignore>java.time.*</ignore>
-							</ignores>
 							<signature>
 								<groupId>net.sf.androidscents.signature</groupId>
 								<artifactId>android-api-level-21</artifactId>
