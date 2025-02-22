@@ -8,7 +8,7 @@ import org.dmg.pmml.PMMLObject;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 abstract
-public class SerializerTest {
+class SerializerTest {
 
 	static
 	protected <E extends PMMLObject> E checkedClone(Serializer serializer, E object) throws Exception {

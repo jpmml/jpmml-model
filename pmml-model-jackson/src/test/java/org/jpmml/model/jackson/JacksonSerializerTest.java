@@ -10,21 +10,24 @@ import org.dmg.pmml.Expression;
 import org.dmg.pmml.FieldRef;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLFunctions;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ScoreDistributionTransformer;
 import org.dmg.pmml.adapters.NodeAdapter;
 import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.NodeTransformer;
+import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
-import org.jpmml.model.SerializerTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class JacksonSerializerTest extends SerializerTest {
+public class JacksonSerializerTest {
 
 	@Test
 	public void jsonCloneFragment() throws Exception {
@@ -72,5 +75,14 @@ public class JacksonSerializerTest extends SerializerTest {
 		}
 
 		checkedClone(serializer, pmml);
+	}
+
+	static
+	private <E extends PMMLObject> E checkedClone(Serializer serializer, E object) throws Exception {
+		E clonedObject = SerializationUtil.clone(serializer, object);
+
+		assertTrue(ReflectionUtil.equals(object, clonedObject));
+
+		return clonedObject;
 	}
 }

@@ -8,18 +8,20 @@ import java.io.ByteArrayOutputStream;
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
+import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
-import org.jpmml.model.SerializerTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MOXyJAXBSerializerTest extends SerializerTest {
+public class MOXyJAXBSerializerTest {
 
 	@Test
 	public void jaxbClone() throws Exception {
@@ -54,5 +56,14 @@ public class MOXyJAXBSerializerTest extends SerializerTest {
 		assertTrue(string.contains("<RegressionModel>"));
 		assertTrue(string.contains("</RegressionModel>"));
 		assertTrue(string.contains("</PMML>"));
+	}
+
+	static
+	private <E extends PMMLObject> E checkedClone(Serializer serializer, E object) throws Exception {
+		E clonedObject = SerializationUtil.clone(serializer, object);
+
+		assertTrue(ReflectionUtil.equals(object, clonedObject));
+
+		return clonedObject;
 	}
 }
