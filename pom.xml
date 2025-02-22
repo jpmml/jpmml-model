@@ -165,6 +165,12 @@
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-runtime</artifactId>
 				<version>4.0.5</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.eclipse.angus</groupId>
+						<artifactId>*</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
