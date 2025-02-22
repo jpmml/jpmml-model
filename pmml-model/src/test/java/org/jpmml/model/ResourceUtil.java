@@ -81,6 +81,6 @@ public class ResourceUtil {
 
 	static
 	private InputStream getResourceAsStream(String name){
-		return PMMLUtil.class.getResourceAsStream("/pmml/" + name + ".pmml");
+		return ResourceUtil.class.getResourceAsStream("/pmml/" + name + ".pmml");
 	}
 }
