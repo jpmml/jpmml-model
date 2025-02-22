@@ -31,7 +31,7 @@ public class JavaSerializerTest extends SerializerTest {
 
 		assertTrue(pmml.hasLocator());
 
-		assertThrows(NotSerializableException.class, () -> clone(serializer, pmml));
+		assertThrows(NotSerializableException.class, () -> SerializationUtil.clone(serializer, pmml));
 
 		pmml.accept(new LocatorNullifier());
 
@@ -50,7 +50,7 @@ public class JavaSerializerTest extends SerializerTest {
 
 		assertTrue(pmml.hasLocator());
 
-		assertThrows(NotSerializableException.class, () -> clone(serializer, pmml));
+		assertThrows(NotSerializableException.class, () -> SerializationUtil.clone(serializer, pmml));
 
 		pmml.accept(new LocatorTransformer());
 

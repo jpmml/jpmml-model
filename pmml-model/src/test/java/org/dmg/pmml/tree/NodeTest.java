@@ -3,15 +3,13 @@
  */
 package org.dmg.pmml.tree;
 
-import java.io.InputStream;
 import java.util.List;
 
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.False;
-import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.True;
-import org.jpmml.model.DirectByteArrayOutputStream;
 import org.jpmml.model.JAXBSerializer;
+import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.UnsupportedElementException;
 import org.junit.jupiter.api.Test;
@@ -50,7 +48,7 @@ public class NodeTest {
 		TreeModel treeModel = new TreeModel()
 			.setNode(node1);
 
-		TreeModel jaxbTreeModel = clone(serializer, treeModel);
+		TreeModel jaxbTreeModel = SerializationUtil.clone(serializer, treeModel);
 
 		Node jaxbNode1 = jaxbTreeModel.getNode();
 
@@ -81,19 +79,5 @@ public class NodeTest {
 
 		assertEquals(node2b.getClass(), jaxbNode2b.getClass());
 		assertEquals(node2b.getId(), jaxbNode2b.getId());
-	}
-
-	static
-	private <E extends PMMLObject> E clone(Serializer serializer, E object) throws Exception {
-		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(10 * 1024);
-
-		serializer.serialize(object, buffer);
-
-		try(InputStream is = buffer.getInputStream()){
-			@SuppressWarnings("unchecked")
-			E clonedObject = (E)serializer.deserialize(is);
-
-			return clonedObject;
-		}
 	}
 }

@@ -51,7 +51,9 @@ public class KryoSerializerTest extends SerializerTest {
 			@SuppressWarnings("unchecked")
 			E clonedObject = (E)serializer.deserializeRaw(is);
 
-			assertEquals(-1, is.read());
+			if(is.read() != -1){
+				throw new IOException();
+			}
 
 			return clonedObject;
 		}
