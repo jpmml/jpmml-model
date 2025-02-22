@@ -3,7 +3,6 @@
  */
 package org.dmg.pmml;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import javax.xml.namespace.QName;
@@ -13,7 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import jakarta.xml.bind.JAXBElement;
 import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.ResourceUtil;
-import org.jpmml.model.Serializer;
+import org.jpmml.model.SerializationUtil;
+import org.jpmml.model.TextSerializer;
 import org.jpmml.model.cells.InputCell;
 import org.jpmml.model.cells.OutputCell;
 import org.jpmml.model.visitors.RowCleaner;
@@ -126,18 +126,12 @@ public class InlineTableTest {
 
 	static
 	private void checkRow(Row row) throws Exception {
+		TextSerializer serializer = new JAXBSerializer();
+
 		InlineTable inlineTable = new InlineTable()
 			.addRows(row);
 
-		String string;
-
-		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			Serializer serializer = new JAXBSerializer();
-
-			serializer.serialize(inlineTable, os);
-
-			string = os.toString("UTF-8");
-		}
+		String string = SerializationUtil.toString(serializer, inlineTable);
 
 		assertTrue(string.contains("<row>"));
 		assertTrue(string.contains("<data:input>0</data:input>"));

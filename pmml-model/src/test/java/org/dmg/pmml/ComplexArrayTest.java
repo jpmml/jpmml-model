@@ -3,13 +3,13 @@
  */
 package org.dmg.pmml;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.Serializer;
+import org.jpmml.model.SerializationUtil;
+import org.jpmml.model.TextSerializer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -68,15 +68,9 @@ public class ComplexArrayTest {
 
 	static
 	public void checkArray(String expectedValue, Array array) throws Exception {
-		String string;
+		TextSerializer serializer = new JAXBSerializer();
 
-		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			Serializer serializer = new JAXBSerializer();
-
-			serializer.serialize(array, os);
-
-			string = os.toString("UTF-8");
-		}
+		String string = SerializationUtil.toString(serializer, array);
 
 		assertTrue(string.contains(">" + expectedValue + "</Array>"));
 	}

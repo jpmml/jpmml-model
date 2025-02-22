@@ -3,10 +3,9 @@
  */
 package org.dmg.pmml;
 
-import java.io.ByteArrayOutputStream;
-
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.Serializer;
+import org.jpmml.model.SerializationUtil;
+import org.jpmml.model.TextSerializer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -37,18 +36,12 @@ public class ComplexValueTest {
 
 	static
 	private void checkConstant(String expectedValue, Object value) throws Exception {
+		TextSerializer serializer = new JAXBSerializer();
+
 		Constant constant = new Constant()
 			.setValue(value);
 
-		String string;
-
-		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			Serializer serializer = new JAXBSerializer();
-
-			serializer.serialize(constant, os);
-
-			string = os.toString("UTF-8");
-		}
+		String string = SerializationUtil.toString(serializer, constant);
 
 		// XXX
 		string = string.trim();

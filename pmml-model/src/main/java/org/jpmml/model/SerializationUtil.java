@@ -30,4 +30,22 @@ public class SerializationUtil {
 			return clonedObject;
 		}
 	}
+
+	static
+	public String toString(TextSerializer serializer, PMMLObject object) throws Exception {
+		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(10 * 1024);
+
+		serializer.serialize(object, buffer);
+
+		return buffer.toString("UTF-8");
+	}
+
+	static
+	public String toPrettyString(TextSerializer serializer, PMMLObject object) throws Exception {
+		DirectByteArrayOutputStream buffer = new DirectByteArrayOutputStream(10 * 1024);
+
+		serializer.serializePretty(object, buffer);
+
+		return buffer.toString("UTF-8");
+	}
 }

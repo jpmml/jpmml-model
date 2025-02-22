@@ -3,8 +3,6 @@
  */
 package org.jpmml.model.moxy;
 
-import java.io.ByteArrayOutputStream;
-
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
@@ -17,6 +15,7 @@ import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
+import org.jpmml.model.TextSerializer;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,7 +33,7 @@ public class MOXyJAXBSerializerTest {
 
 	@Test
 	public void marshal() throws Exception {
-		Serializer serializer = new MOXyJAXBSerializer();
+		TextSerializer serializer = new MOXyJAXBSerializer();
 
 		PMML pmml = new PMML(Version.PMML_4_4.getVersion(), new Header(), new DataDictionary());
 
@@ -43,13 +42,7 @@ public class MOXyJAXBSerializerTest {
 
 		pmml.addModels(regressionModel);
 
-		String string;
-
-		try(ByteArrayOutputStream os = new ByteArrayOutputStream()){
-			serializer.serialize(pmml, os);
-
-			string = os.toString("UTF-8");
-		}
+		String string = SerializationUtil.toString(serializer, pmml);
 
 		assertTrue(string.contains("<PMML xmlns=\"http://www.dmg.org/PMML-4_4\""));
 		assertTrue(string.contains(" version=\"4.4\">"));
