@@ -10,6 +10,7 @@ import jakarta.xml.bind.JAXBContext;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.ObjectFactory;
 import org.dmg.pmml.PMML;
+import org.jpmml.model.resources.ExtensionTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
@@ -26,7 +27,7 @@ public class MixedContentTest {
 
 		JAXBSerializer serializer = new JAXBSerializer(context);
 
-		PMML pmml = ResourceUtil.unmarshal(serializer, MixedContentTest.class);
+		PMML pmml = ResourceUtil.unmarshal(serializer, ExtensionTest.class);
 
 		assertTrue(pmml.hasLocator());
 
@@ -53,7 +54,7 @@ public class MixedContentTest {
 
 		JAXBSerializer serializer = new JAXBSerializer(context);
 
-		PMML pmml = ResourceUtil.unmarshal(serializer, MixedContentTest.class);
+		PMML pmml = ResourceUtil.unmarshal(serializer, ExtensionTest.class);
 
 		assertTrue(pmml.hasLocator());
 

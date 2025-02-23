@@ -12,8 +12,8 @@ import org.dmg.pmml.PMML;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segmentation;
 import org.jpmml.model.ExtensionUtil;
-import org.jpmml.model.MixedContentTest;
 import org.jpmml.model.resources.ChainedSegmentationTest;
+import org.jpmml.model.resources.ExtensionTest;
 import org.jpmml.model.resources.NestedSegmentationTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
@@ -61,7 +61,7 @@ public class SkipFilterTest {
 
 	@Test
 	public void filterCustomExtension() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(MixedContentTest.class, new SkipFilter("http://localhost/test", "Extension"));
+		PMML pmml = ResourceUtil.unmarshal(ExtensionTest.class, new SkipFilter("http://localhost/test", "Extension"));
 
 		assertTrue(pmml.hasExtensions());
 

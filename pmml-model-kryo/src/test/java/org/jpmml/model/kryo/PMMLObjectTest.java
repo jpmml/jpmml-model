@@ -15,8 +15,8 @@ import org.dmg.pmml.True;
 import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
-import org.jpmml.model.MixedContentTest;
 import org.jpmml.model.Serializer;
+import org.jpmml.model.resources.ExtensionTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
@@ -85,7 +85,7 @@ public class PMMLObjectTest extends KryoSerializerTest {
 	public void mixedContent() throws Exception {
 		Serializer serializer = new KryoSerializer(super.kryo);
 
-		PMML pmml = ResourceUtil.unmarshal(MixedContentTest.class);
+		PMML pmml = ResourceUtil.unmarshal(ExtensionTest.class);
 
 		checkedClone(serializer, pmml);
 	}
