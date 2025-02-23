@@ -10,11 +10,14 @@ import java.util.Set;
 import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.ScoreDistribution;
+import org.dmg.pmml.ScoreDistributionTransformer;
 import org.dmg.pmml.ScoreFrequency;
 import org.dmg.pmml.ScoreProbability;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
+import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.Node;
+import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.visitors.AbstractVisitor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,6 +29,26 @@ abstract
 public class ScoreDistributionPolymorphismTest {
 
 	private ScoreDistributionPolymorphismTest(){
+	}
+
+	static
+	public PMML load(ScoreDistributionTransformer scoreDistributionTransormer) throws Exception {
+		JAXBSerializer serializer = new JAXBSerializer();
+
+		return load(serializer, scoreDistributionTransormer);
+	}
+
+	static
+	public PMML load(JAXBSerializer serializer, ScoreDistributionTransformer scoreDistributionTransormer) throws Exception {
+		ScoreDistributionTransformer defaultScoreDistributionTransformer = ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.get();
+
+		try {
+			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(scoreDistributionTransormer);
+
+			return ResourceUtil.unmarshal(serializer, ScoreDistributionPolymorphismTest.class);
+		} finally {
+			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(defaultScoreDistributionTransformer);
+		}
 	}
 
 	static

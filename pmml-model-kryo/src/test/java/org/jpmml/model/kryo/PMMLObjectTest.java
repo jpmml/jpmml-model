@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public class PMMLObjectTest extends KryoSerializerTest {
 
 	@Test
-	public void nameTest() throws Exception {
+	public void dataField() throws Exception {
 		Serializer serializer = new KryoSerializer(super.kryo);
 
 		DataField dataField = new DataField("x", OpType.CONTINUOUS, DataType.DOUBLE);
@@ -40,7 +40,7 @@ public class PMMLObjectTest extends KryoSerializerTest {
 	}
 
 	@Test
-	public void referenceTest() throws Exception {
+	public void node() throws Exception {
 		Serializer serializer = new KryoSerializer(super.kryo);
 
 		Node leftChild = new LeafNode()
@@ -73,7 +73,7 @@ public class PMMLObjectTest extends KryoSerializerTest {
 	}
 
 	@Test
-	public void inlineTableTest() throws Exception {
+	public void inlineTable() throws Exception {
 		Serializer serializer = new KryoSerializer(super.kryo);
 
 		PMML pmml = ResourceUtil.unmarshal(InlineTableTest.class);

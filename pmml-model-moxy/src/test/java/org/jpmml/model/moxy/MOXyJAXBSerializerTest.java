@@ -7,15 +7,18 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.SimplifyingScoreDistributionTransformer;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
+import org.dmg.pmml.tree.SimplifyingNodeTransformer;
+import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.TextSerializer;
 import org.jpmml.model.resources.NodePolymorphismTest;
-import org.jpmml.model.resources.ResourceUtil;
+import org.jpmml.model.resources.ScoreDistributionPolymorphismTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,10 +26,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MOXyJAXBSerializerTest {
 
 	@Test
-	public void jaxbClone() throws Exception {
-		Serializer serializer = new MOXyJAXBSerializer();
+	public void nodePolymorphism() throws Exception {
+		JAXBSerializer serializer = new MOXyJAXBSerializer();
 
-		PMML pmml = ResourceUtil.unmarshal(NodePolymorphismTest.class);
+		PMML pmml = NodePolymorphismTest.load(serializer, SimplifyingNodeTransformer.INSTANCE);
+
+		NodePolymorphismTest.checkSimplified(pmml);
+
+		checkedClone(serializer, pmml);
+	}
+
+	@Test
+	public void scoreDistributionPolymorphism() throws Exception {
+		JAXBSerializer serializer = new MOXyJAXBSerializer();
+
+		PMML pmml = ScoreDistributionPolymorphismTest.load(serializer, SimplifyingScoreDistributionTransformer.INSTANCE);
+
+		ScoreDistributionPolymorphismTest.checkSimplified(pmml);
 
 		checkedClone(serializer, pmml);
 	}

@@ -25,10 +25,15 @@ public class ResourceUtil {
 
 	static
 	public PMML unmarshal(Class<?> clazz, XMLFilter... filters) throws IOException, ParserConfigurationException, SAXException, JAXBException {
+		JAXBSerializer serializer = new JAXBSerializer();
+
+		return unmarshal(serializer, clazz, filters);
+	}
+
+	static
+	public PMML unmarshal(JAXBSerializer serializer, Class<?> clazz, XMLFilter... filters) throws IOException, ParserConfigurationException, SAXException, JAXBException {
 
 		try(InputStream is = getStream(clazz)){
-			JAXBSerializer serializer = new JAXBSerializer();
-
 			Source source = SAXUtil.createFilteredSource(is, filters);
 
 			return (PMML)serializer.unmarshal(source);
@@ -50,14 +55,19 @@ public class ResourceUtil {
 
 	static
 	public PMML unmarshal(Version version) throws IOException, JAXBException {
+		JAXBSerializer serializer = new JAXBSerializer();
+
+		return unmarshal(serializer, version);
+	}
+
+	static
+	public PMML unmarshal(JAXBSerializer serializer, Version version) throws IOException, JAXBException {
 
 		if(!(Version.PMML_4_4).equals(version)){
 			throw new IllegalArgumentException();
 		}
 
 		try(InputStream is = getStream(version)){
-			JAXBSerializer serializer = new JAXBSerializer();
-
 			Source source = new StreamSource(is);
 
 			return (PMML)serializer.unmarshal(source);

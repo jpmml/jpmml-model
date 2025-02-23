@@ -41,18 +41,19 @@ public class InlineTableTest {
 
 		assertEquals(4, content.size());
 
-		Object first = content.get(0);
-		Object second = content.get(1);
-		Object third = content.get(2);
-		Object fourth = content.get(3);
+		Element first = (Element)content.get(0);
+		assertEquals("any", first.getTagName());
+		assertEquals("", first.getTextContent());
 
-		assertTrue(first instanceof Element);
-		assertTrue(second instanceof InputCell);
-		assertTrue(third instanceof OutputCell);
-		assertTrue(fourth instanceof Element);
+		InputCell second = (InputCell)content.get(1);
+		assertEquals("0", second.getValue());
 
-		assertEquals("0", ((InputCell)second).getValue());
-		assertEquals("zero", ((OutputCell)third).getValue());
+		OutputCell third = (OutputCell)content.get(2);
+		assertEquals("zero", third.getValue());
+
+		Element fourth = (Element)content.get(3);
+		assertEquals("data:any", fourth.getTagName());
+		assertEquals("", fourth.getTextContent());
 	}
 
 	@Test
