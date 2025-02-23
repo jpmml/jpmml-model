@@ -11,6 +11,7 @@ import java.util.zip.GZIPOutputStream;
 
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
+import org.jpmml.model.resources.ResourceUtil;
 import org.jpmml.model.visitors.LocatorNullifier;
 import org.jpmml.model.visitors.LocatorTransformer;
 import org.junit.jupiter.api.Test;

@@ -14,7 +14,7 @@ import org.dmg.pmml.ScoreProbability;
 import org.dmg.pmml.Visitor;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.tree.Node;
-import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.resources.ResourceUtil;
 import org.jpmml.model.visitors.AbstractVisitor;
 import org.junit.jupiter.api.Test;
 

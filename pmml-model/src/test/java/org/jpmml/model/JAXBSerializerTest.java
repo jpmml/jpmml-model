@@ -11,6 +11,7 @@ import org.dmg.pmml.CustomPMML;
 import org.dmg.pmml.ObjectFactory;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 public class JAXBSerializerTest extends SerializerTest {

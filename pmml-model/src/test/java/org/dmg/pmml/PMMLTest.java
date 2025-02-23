@@ -4,8 +4,8 @@
 package org.dmg.pmml;
 
 import org.jpmml.model.DOMUtil;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SchemaUpdateTest;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 

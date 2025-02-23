@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.PMML;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -12,6 +12,7 @@ import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.dmg.pmml.ObjectFactory;
 import org.dmg.pmml.PMML;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 

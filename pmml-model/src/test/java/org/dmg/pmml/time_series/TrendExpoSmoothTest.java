@@ -5,8 +5,8 @@ package org.dmg.pmml.time_series;
 
 import org.dmg.pmml.Version;
 import org.jpmml.model.DOMUtil;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SchemaUpdateTest;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

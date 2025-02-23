@@ -25,10 +25,10 @@ import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.mining.VariableWeight;
 import org.dmg.pmml.mining.WeightedSegmentationTest;
 import org.dmg.pmml.regression.RegressionTable;
-import org.jpmml.model.ChainedSegmentationTest;
-import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.filters.ImportFilter;
+import org.jpmml.model.resources.ChainedSegmentationTest;
+import org.jpmml.model.resources.NestedSegmentationTest;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -12,10 +12,10 @@ import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
 import org.jpmml.model.ReflectionUtil;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.TextSerializer;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

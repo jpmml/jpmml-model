@@ -9,11 +9,11 @@ import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segmentation;
-import org.jpmml.model.ChainedSegmentationTest;
 import org.jpmml.model.ExtensionUtil;
-import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.WildcardTest;
+import org.jpmml.model.resources.ChainedSegmentationTest;
+import org.jpmml.model.resources.NestedSegmentationTest;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

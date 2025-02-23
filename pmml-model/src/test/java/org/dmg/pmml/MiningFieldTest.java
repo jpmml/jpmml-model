@@ -10,8 +10,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.jpmml.model.DOMUtil;
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SchemaUpdateTest;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 

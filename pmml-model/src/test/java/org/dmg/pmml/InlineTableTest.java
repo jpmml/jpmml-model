@@ -11,11 +11,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import jakarta.xml.bind.JAXBElement;
 import org.jpmml.model.JAXBSerializer;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.TextSerializer;
 import org.jpmml.model.cells.InputCell;
 import org.jpmml.model.cells.OutputCell;
+import org.jpmml.model.resources.ResourceUtil;
 import org.jpmml.model.visitors.RowCleaner;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;

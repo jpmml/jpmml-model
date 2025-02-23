@@ -17,9 +17,9 @@ import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.NodeTransformer;
 import org.jpmml.model.ReflectionUtil;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

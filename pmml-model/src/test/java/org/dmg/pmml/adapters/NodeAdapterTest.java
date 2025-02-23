@@ -19,7 +19,7 @@ import org.dmg.pmml.tree.Node;
 import org.dmg.pmml.tree.NodeTransformer;
 import org.dmg.pmml.tree.SimplifyingNodeTransformer;
 import org.jpmml.model.PMMLUtil;
-import org.jpmml.model.ResourceUtil;
+import org.jpmml.model.resources.ResourceUtil;
 import org.jpmml.model.visitors.AbstractVisitor;
 import org.junit.jupiter.api.Test;
 

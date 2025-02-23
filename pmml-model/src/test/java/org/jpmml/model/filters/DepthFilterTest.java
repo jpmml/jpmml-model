@@ -5,9 +5,9 @@ package org.jpmml.model.filters;
 
 import jakarta.xml.bind.UnmarshalException;
 import org.dmg.pmml.mining.Segmentation;
-import org.jpmml.model.NestedSegmentationTest;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.SAXUtil;
+import org.jpmml.model.resources.NestedSegmentationTest;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 

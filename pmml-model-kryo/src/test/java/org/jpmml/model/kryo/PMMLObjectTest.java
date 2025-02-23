@@ -16,8 +16,8 @@ import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.jpmml.model.MixedContentTest;
-import org.jpmml.model.ResourceUtil;
 import org.jpmml.model.Serializer;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

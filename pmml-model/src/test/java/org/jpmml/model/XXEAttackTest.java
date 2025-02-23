@@ -12,6 +12,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import jakarta.xml.bind.UnmarshalException;
 import org.dmg.pmml.PMML;
+import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXParseException;
 

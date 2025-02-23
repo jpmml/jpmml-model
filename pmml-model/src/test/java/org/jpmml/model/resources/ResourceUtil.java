@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2014 Villu Ruusmann
  */
-package org.jpmml.model;
+package org.jpmml.model.resources;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +13,8 @@ import javax.xml.transform.stream.StreamSource;
 import jakarta.xml.bind.JAXBException;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.Version;
+import org.jpmml.model.JAXBSerializer;
+import org.jpmml.model.SAXUtil;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLFilter;
 
