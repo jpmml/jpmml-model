@@ -3,14 +3,16 @@
  */
 package org.jpmml.model.filters;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.dmg.pmml.Extension;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.mining.MiningModel;
 import org.dmg.pmml.mining.Segmentation;
 import org.jpmml.model.ExtensionUtil;
-import org.jpmml.model.WildcardTest;
+import org.jpmml.model.MixedContentTest;
 import org.jpmml.model.resources.ChainedSegmentationTest;
 import org.jpmml.model.resources.NestedSegmentationTest;
 import org.jpmml.model.resources.ResourceUtil;
@@ -59,12 +61,19 @@ public class SkipFilterTest {
 
 	@Test
 	public void filterCustomExtension() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(WildcardTest.class, new SkipFilter("http://localhost/test", "Extension"));
+		PMML pmml = ResourceUtil.unmarshal(MixedContentTest.class, new SkipFilter("http://localhost/test", "Extension"));
 
 		assertTrue(pmml.hasExtensions());
 
 		List<?> content = ExtensionUtil.getContent(pmml);
 
-		assertEquals("First textSecond text", content.get(0));
+		assertEquals(3, content.size());
+
+		assertEquals("First text valueSecond text value", content.get(0));
+
+		Extension extension = (Extension)content.get(1);
+		assertEquals(Collections.singletonList("Standard extension"), extension.getContent());
+
+		assertEquals("Third text value", content.get(2));
 	}
 }
