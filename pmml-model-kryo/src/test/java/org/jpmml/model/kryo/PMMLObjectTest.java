@@ -8,7 +8,6 @@ import java.util.List;
 import org.dmg.pmml.DataField;
 import org.dmg.pmml.DataType;
 import org.dmg.pmml.False;
-import org.dmg.pmml.InlineTableTest;
 import org.dmg.pmml.OpType;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.True;
@@ -16,6 +15,7 @@ import org.dmg.pmml.tree.BranchNode;
 import org.dmg.pmml.tree.LeafNode;
 import org.dmg.pmml.tree.Node;
 import org.jpmml.model.Serializer;
+import org.jpmml.model.resources.CellPolymorphismTest;
 import org.jpmml.model.resources.ExtensionTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
@@ -76,7 +76,7 @@ public class PMMLObjectTest extends KryoSerializerTest {
 	public void inlineTable() throws Exception {
 		Serializer serializer = new KryoSerializer(super.kryo);
 
-		PMML pmml = ResourceUtil.unmarshal(InlineTableTest.class);
+		PMML pmml = ResourceUtil.unmarshal(CellPolymorphismTest.class);
 
 		checkedClone(serializer, pmml);
 	}

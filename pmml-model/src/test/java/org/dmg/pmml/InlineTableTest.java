@@ -15,6 +15,7 @@ import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.TextSerializer;
 import org.jpmml.model.cells.InputCell;
 import org.jpmml.model.cells.OutputCell;
+import org.jpmml.model.resources.CellPolymorphismTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.jpmml.model.visitors.RowCleaner;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class InlineTableTest {
 
 	@Test
 	public void unmarshal() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(InlineTableTest.class);
+		PMML pmml = ResourceUtil.unmarshal(CellPolymorphismTest.class);
 
 		Row row = getRow(pmml);
 
