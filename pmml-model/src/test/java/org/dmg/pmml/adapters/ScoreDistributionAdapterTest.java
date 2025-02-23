@@ -3,80 +3,51 @@
  */
 package org.dmg.pmml.adapters;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.InputStream;
 
 import org.dmg.pmml.PMML;
-import org.dmg.pmml.ScoreDistribution;
-import org.dmg.pmml.ScoreFrequency;
-import org.dmg.pmml.ScoreProbability;
-import org.dmg.pmml.Visitor;
-import org.dmg.pmml.VisitorAction;
-import org.dmg.pmml.tree.Node;
+import org.dmg.pmml.ScoreDistributionTransformer;
+import org.dmg.pmml.SimplifyingScoreDistributionTransformer;
+import org.jpmml.model.PMMLUtil;
 import org.jpmml.model.resources.ResourceUtil;
-import org.jpmml.model.visitors.AbstractVisitor;
+import org.jpmml.model.resources.ScoreDistributionPolymorphismTest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class ScoreDistributionAdapterTest {
 
 	@Test
+	public void checkDefault(){
+		ScoreDistributionTransformer defaultScoreDistributionTransformer = ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.get();
+
+		assertSame(SimplifyingScoreDistributionTransformer.INSTANCE, defaultScoreDistributionTransformer);
+	}
+
+	@Test
 	public void loadComplex() throws Exception {
-		PMML pmml = ResourceUtil.unmarshal(ScoreDistributionAdapterTest.class);
+		PMML pmml = load(null);
 
-		Set<Node> visitedNodes = new HashSet<>();
-		Set<ScoreDistribution> visitedScoreDistributions = new HashSet<>();
+		ScoreDistributionPolymorphismTest.checkComplex(pmml);
+	}
 
-		Visitor visitor = new AbstractVisitor(){
+	@Test
+	public void loadSimplified() throws Exception {
+		PMML pmml = load(SimplifyingScoreDistributionTransformer.INSTANCE);
 
-			@Override
-			public VisitorAction visit(Node node){
-				Object id = node.getId();
+		ScoreDistributionPolymorphismTest.checkSimplified(pmml);
+	}
 
-				visitedNodes.add(node);
+	static
+	private PMML load(ScoreDistributionTransformer scoreDistributionTransormer) throws Exception {
+		ScoreDistributionTransformer defaultScoreDistributionTransformer = ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.get();
 
-				if(("parent").equals(id)){
-					assertFalse(node.hasScoreDistributions());
-				} else
+		try(InputStream is = ResourceUtil.getStream(ScoreDistributionPolymorphismTest.class)){
+			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(scoreDistributionTransormer);
 
-				if(("false child").equals(id)){
-					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
-
-					for(ScoreDistribution scoreDistribution : scoreDistributions){
-						assertTrue(scoreDistribution instanceof ScoreFrequency);
-					}
-				} else
-
-				if(("true child").equals(id)){
-					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
-
-					for(ScoreDistribution scoreDistribution : scoreDistributions){
-						assertTrue(scoreDistribution instanceof ScoreProbability);
-					}
-				} else
-
-				{
-					fail();
-				}
-
-				return super.visit(node);
-			}
-
-			@Override
-			public VisitorAction visit(ScoreDistribution scoreDistribution){
-				visitedScoreDistributions.add(scoreDistribution);
-
-				return super.visit(scoreDistribution);
-			}
-		};
-		visitor.applyTo(pmml);
-
-		assertEquals(3, visitedNodes.size());
-		assertEquals(4, visitedScoreDistributions.size());
+			return PMMLUtil.unmarshal(is);
+		} finally {
+			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(defaultScoreDistributionTransformer);
+		}
 	}
 }
