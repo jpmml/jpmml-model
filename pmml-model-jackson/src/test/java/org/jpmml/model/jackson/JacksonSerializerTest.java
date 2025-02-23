@@ -13,12 +13,12 @@ import org.dmg.pmml.PMMLFunctions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.ScoreDistributionTransformer;
 import org.dmg.pmml.adapters.NodeAdapter;
-import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 import org.dmg.pmml.tree.NodeTransformer;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
+import org.jpmml.model.resources.NodePolymorphismTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +68,7 @@ public class JacksonSerializerTest {
 			NodeAdapter.NODE_TRANSFORMER_PROVIDER.set(null);
 			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(null);
 
-			pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
+			pmml = ResourceUtil.unmarshal(NodePolymorphismTest.class);
 		} finally {
 			NodeAdapter.NODE_TRANSFORMER_PROVIDER.set(defaultNodeTransformer);
 			ScoreDistributionAdapter.SCOREDISTRIBUTION_TRANSFORMER_PROVIDER.set(defaultScoreDistributionTransformer);

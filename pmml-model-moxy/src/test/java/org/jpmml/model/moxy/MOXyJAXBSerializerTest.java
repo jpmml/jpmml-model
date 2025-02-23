@@ -8,13 +8,13 @@ import org.dmg.pmml.Header;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Version;
-import org.dmg.pmml.adapters.NodeAdapterTest;
 import org.dmg.pmml.regression.RegressionModel;
 import org.dmg.pmml.regression.RegressionTable;
 import org.jpmml.model.ReflectionUtil;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.TextSerializer;
+import org.jpmml.model.resources.NodePolymorphismTest;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ public class MOXyJAXBSerializerTest {
 	public void jaxbClone() throws Exception {
 		Serializer serializer = new MOXyJAXBSerializer();
 
-		PMML pmml = ResourceUtil.unmarshal(NodeAdapterTest.class);
+		PMML pmml = ResourceUtil.unmarshal(NodePolymorphismTest.class);
 
 		checkedClone(serializer, pmml);
 	}
