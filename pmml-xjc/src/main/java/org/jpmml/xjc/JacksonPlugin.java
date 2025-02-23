@@ -24,7 +24,6 @@ import com.sun.codemodel.JDefinedClass;
 import com.sun.codemodel.JEnumConstant;
 import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JFieldVar;
-import com.sun.istack.build.NameConverter;
 import com.sun.tools.xjc.Options;
 import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAttributePropertyInfo;
@@ -40,6 +39,7 @@ import com.sun.tools.xjc.outline.EnumOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import org.glassfish.jaxb.core.api.impl.NameConverter;
 import org.xml.sax.ErrorHandler;
 
 public class JacksonPlugin extends Plugin {
