@@ -189,7 +189,7 @@
 				<artifactId>animal-sniffer-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>android-21</id>
+						<id>android-19</id>
 						<configuration>
 							<ignores>
 								<ignore>java.lang.instrument.*</ignore>
