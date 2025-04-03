@@ -132,6 +132,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='Apply']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.Expression</inheritance:extends>
 			<inheritance:implements>org.dmg.pmml.HasDefaultValue&lt;Apply,java.lang.Object&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasInvalidValueTreatment&lt;Apply&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMapMissingTo&lt;Apply,java.lang.Object&gt;</inheritance:implements>
 		</jaxb:bindings>
 
@@ -1697,6 +1698,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='MiningField']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasFieldReference&lt;MiningField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasInvalidValueTreatment&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
