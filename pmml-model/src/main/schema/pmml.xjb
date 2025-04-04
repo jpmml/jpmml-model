@@ -1065,6 +1065,14 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasMixedContent&lt;Extension&gt;</inheritance:implements>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Extension']/xsd:complexType/xsd:complexContent/xsd:restriction/xsd:attribute[@name='name']">
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='Extension']/xsd:complexType/xsd:complexContent/xsd:restriction/xsd:attribute[@name='value']">
+			<annox:annotateProperty>org.jpmml.model.annotations.ValueConstructorParameter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='FactorList']/xsd:complexType">
 			<inheritance:extends>org.dmg.pmml.general_regression.PredictorList</inheritance:extends>
 			<jpmml-model:subpackage
