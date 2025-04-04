@@ -619,6 +619,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasMapMissingTo"}, {"getMapMissingTo", "setMapMissingTo"}},
 				{{"HasMatrix"}, {"getMatrix", "setMatrix"}},
 				{{"HasMixedContent"}, {"hasContent", "getContent", "addContent"}},
+				{{"HasMissingValueTreatment"}, {"getMissingValueTreatment", "setMissingValueTreatment"}},
 				{{"HasModel"}, {"getModel", "requireModel", "setModel"}},
 				{{"HasName", "Field"}, {"getName", "setName"}},
 				{{"HasNode"}, {"getMissingValueStrategy", "setMissingValueStrategy", "getMissingValuePenalty", "setMissingValuePenalty", "getNoTrueChildStrategy", "setNoTrueChildStrategy", "getSplitCharacteristic", "setSplitCharacteristic", "getNode", "setNode"}},
