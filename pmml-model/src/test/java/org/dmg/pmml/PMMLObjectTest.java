@@ -11,6 +11,6 @@ public class PMMLObjectTest {
 
 	@Test
 	public void getSchemaVersion(){
-		assertArrayEquals(new int[]{4, 4, 1, 8}, PMMLObject.getSchemaVersion());
+		assertArrayEquals(new int[]{4, 4, 1, 9}, PMMLObject.getSchemaVersion());
 	}
 }
