@@ -1701,6 +1701,7 @@ Copyright (c) 2014 Villu Ruusmann
 			<inheritance:implements>org.dmg.pmml.HasInvalidValueTreatment&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasMissingValueTreatment&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasOpType&lt;MiningField&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasOutlierTreatment&lt;MiningField&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 		</jaxb:bindings>
 
