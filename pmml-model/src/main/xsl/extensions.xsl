@@ -13,9 +13,17 @@ Copyright (c) 2016 Villu Ruusmann
 		</xs:simpleType>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='TextIndex' or @name='TextIndexNormalization']/xs:complexType/xs:attribute[@name='wordSeparatorCharacterRE']">
-		<xsl:copy-of select="."/>
-		<xs:attribute name="x-wordRE" type="xs:string"/>
+	<xsl:template match="xs:element[@name='DefineFunction']/xs:complexType/xs:sequence">
+		<xsl:variable
+			name="index"
+			select="count(xs:group[@ref='EXPRESSION']/preceding-sibling::*)"
+		/>
+		<xsl:copy>
+			<xsl:apply-templates select="@*"/>
+			<xsl:apply-templates select="node()[position() &lt;= $index]"/>
+			<xs:element ref="DerivedField" minOccurs="0" maxOccurs="unbounded"/>
+			<xsl:apply-templates select="node()[position() &gt; $index]"/>
+		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='NeuralNetwork' or @name='NeuralLayer']/xs:complexType/xs:attribute[@name='threshold']">
@@ -31,6 +39,11 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template match="xs:element[@name='PMML']/xs:complexType/xs:attribute[@name='version']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-baseVersion" type="xs:string"/>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='TextIndex' or @name='TextIndexNormalization']/xs:complexType/xs:attribute[@name='wordSeparatorCharacterRE']">
+		<xsl:copy-of select="."/>
+		<xs:attribute name="x-wordRE" type="xs:string"/>
 	</xsl:template>
 
 	<xsl:template match="xs:attribute[@name='isScorable']">

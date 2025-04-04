@@ -927,6 +927,11 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='DefineFunction']/xsd:complexType/xsd:sequence/xsd:element[@ref='DerivedField']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.7.3")</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='Delimiter']/xsd:complexType">
 			<jpmml-model:subpackage
 				name="sequence"
