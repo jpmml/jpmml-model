@@ -56,6 +56,12 @@
 
 	<properties>
 		<jaxb-api.version>4.0.2</jaxb-api.version>
+		<glassfish-metro.version>4.0.5</glassfish-metro.version>
+		<eclipselink-moxy.version>[4.0.0, 4.0.7]</eclipselink-moxy.version>
+		<jackson.version>[2.11.0, 2.19.1]</jackson.version>
+		<javassist.version>[3.13.0-GA, 3.30.2-GA]</javassist.version>
+		<kryo.version>[5.0.0, 5.6.2]</kryo.version>
+		<teavm.version>0.12.2</teavm.version>
 		<project.build.outputTimestamp>2025-04-04T11:19:51Z</project.build.outputTimestamp>
 	</properties>
 
@@ -124,40 +130,40 @@
 			<dependency>
 				<groupId>com.esotericsoftware</groupId>
 				<artifactId>kryo</artifactId>
-				<version>[5.0.0, 5.6.2]</version>
+				<version>${kryo.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
-				<version>[2.11.0, 2.19.1]</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
-				<version>[2.11.0, 2.19.1]</version>
+				<version>${jackson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.dataformat</groupId>
 				<artifactId>jackson-dataformat-yaml</artifactId>
-				<version>[2.11.0, 2.19.1]</version>
+				<version>${jackson.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.eclipse.persistence</groupId>
 				<artifactId>org.eclipse.persistence.core</artifactId>
-				<version>[4.0.0, 4.0.7]</version>
+				<version>${eclipselink-moxy.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.persistence</groupId>
 				<artifactId>org.eclipse.persistence.moxy</artifactId>
-				<version>[4.0.0, 4.0.7]</version>
+				<version>${eclipselink-moxy.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-runtime</artifactId>
-				<version>4.0.5</version>
+				<version>${glassfish-metro.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>org.eclipse.angus</groupId>
@@ -168,19 +174,19 @@
 			<dependency>
 				<groupId>org.glassfish.jaxb</groupId>
 				<artifactId>jaxb-xjc</artifactId>
-				<version>4.0.5</version>
+				<version>${glassfish-metro.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>[3.13.0-GA, 3.30.2-GA]</version>
+				<version>${javassist.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.teavm</groupId>
 				<artifactId>teavm-classlib</artifactId>
-				<version>0.12.2</version>
+				<version>${teavm.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
