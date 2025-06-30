@@ -146,12 +146,12 @@
 			<dependency>
 				<groupId>org.eclipse.persistence</groupId>
 				<artifactId>org.eclipse.persistence.core</artifactId>
-				<version>[4.0.0, 4.0.5]</version>
+				<version>[4.0.0, 4.0.7]</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.persistence</groupId>
 				<artifactId>org.eclipse.persistence.moxy</artifactId>
-				<version>[4.0.0, 4.0.5]</version>
+				<version>[4.0.0, 4.0.7]</version>
 			</dependency>
 
 			<dependency>
