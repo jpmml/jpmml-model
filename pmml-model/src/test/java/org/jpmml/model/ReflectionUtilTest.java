@@ -235,6 +235,10 @@ public class ReflectionUtilTest {
 
 		assertNotNull(ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_EXTENSIONS));
 		assertNotNull(ReflectionUtil.getAppenderMethod(PMMLElements.OUTPUTFIELD_VALUES));
+
+		assertNotNull(ReflectionUtil.getAppenderMethod(org.dmg.pmml.general_regression.PMMLElements.PARAMMATRIX_PCELLS));
+		assertNotNull(ReflectionUtil.getAppenderMethod(org.dmg.pmml.general_regression.PMMLElements.PCOVMATRIX_PCOVCELLS));
+		assertNotNull(ReflectionUtil.getAppenderMethod(org.dmg.pmml.general_regression.PMMLElements.PPMATRIX_PPCELLS));
 	}
 
 	@Test
