@@ -58,7 +58,8 @@
 		<jaxb-api.version>4.0.4</jaxb-api.version>
 		<glassfish-metro.version>4.0.6</glassfish-metro.version>
 		<eclipselink-moxy.version>[4.0.0, 4.0.8]</eclipselink-moxy.version>
-		<jackson.version>[2.11.0, 2.19.1]</jackson.version>
+		<jackson-annotations.version>[2.11.0, 2.20]</jackson-annotations.version>
+		<jackson.version>[2.11.0, 2.20.0]</jackson.version>
 		<javassist.version>[3.13.0-GA, 3.30.2-GA]</javassist.version>
 		<kryo.version>[5.0.0, 5.6.2]</kryo.version>
 		<teavm.version>0.12.2</teavm.version>
@@ -136,7 +137,7 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
-				<version>${jackson.version}</version>
+				<version>${jackson-annotations.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
