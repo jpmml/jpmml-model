@@ -57,7 +57,7 @@
 	<properties>
 		<jaxb-api.version>4.0.4</jaxb-api.version>
 		<glassfish-metro.version>4.0.6</glassfish-metro.version>
-		<eclipselink-moxy.version>[4.0.0, 4.0.7]</eclipselink-moxy.version>
+		<eclipselink-moxy.version>[4.0.0, 4.0.8]</eclipselink-moxy.version>
 		<jackson.version>[2.11.0, 2.19.1]</jackson.version>
 		<javassist.version>[3.13.0-GA, 3.30.2-GA]</javassist.version>
 		<kryo.version>[5.0.0, 5.6.2]</kryo.version>
