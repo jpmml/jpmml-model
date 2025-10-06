@@ -16,9 +16,7 @@ public class MemoryMeasurerTest {
 
 	@Test
 	public void measure(){
-		Interval interval = new Interval(Interval.Closure.CLOSED_CLOSED)
-			.setLeftMargin(0d)
-			.setRightMargin(1d);
+		Interval interval = new Interval(Interval.Closure.CLOSED_CLOSED, 0d, 1d);
 
 		DataField left = new DataField("x", null, null)
 			.addIntervals(interval);

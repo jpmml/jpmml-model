@@ -64,13 +64,8 @@ public class VersionCheckerTest {
 
 	@Test
 	public void inspectDerivedField(){
-		Interval negativeInterval = new Interval(Interval.Closure.CLOSED_OPEN)
-			.setLeftMargin(-Double.MAX_VALUE)
-			.setRightMargin(0d);
-
-		Interval positiveInterval = new Interval(Interval.Closure.OPEN_CLOSED)
-			.setLeftMargin(0d)
-			.setRightMargin(Double.MAX_VALUE);
+		Interval negativeInterval = new Interval(Interval.Closure.CLOSED_OPEN, -Double.MAX_VALUE, 0d);
+		Interval positiveInterval = new Interval(Interval.Closure.OPEN_CLOSED, 0d, Double.MAX_VALUE);
 
 		DerivedField derivedField = new DerivedField("double(x)", OpType.CONTINUOUS, DataType.DOUBLE, new FieldRef("x"))
 			.addIntervals(negativeInterval, positiveInterval);
