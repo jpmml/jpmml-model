@@ -26,6 +26,7 @@ import com.sun.tools.xjc.Plugin;
 import com.sun.tools.xjc.model.CAdapter;
 import com.sun.tools.xjc.model.CPluginCustomization;
 import com.sun.tools.xjc.model.CPropertyInfo;
+import com.sun.tools.xjc.model.CReferencePropertyInfo;
 import com.sun.tools.xjc.outline.ClassOutline;
 import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
@@ -55,6 +56,7 @@ public class ValueConstructorPlugin extends Plugin {
 		JClass fieldClass = codeModel.ref("org.dmg.pmml.Field").narrow(objectClass.wildcard());
 
 		Collection<? extends ClassOutline> classOutlines = outline.getClasses();
+
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
@@ -126,6 +128,37 @@ public class ValueConstructorPlugin extends Plugin {
 					invocation.arg(param);
 				}
 			}
+		} // End for
+
+		for(ClassOutline classOutline : classOutlines){
+			JDefinedClass beanClazz = classOutline.implClass;
+
+			Map<String, JFieldVar> fieldVars = beanClazz.fields();
+
+			FieldOutline[] fieldOutlines = getMixedContentFields(beanClazz, classOutline);
+			if(fieldOutlines.length == 0){
+				continue;
+			}
+
+			JMethod defaultConstructor = beanClazz.getConstructor(new JType[0]);
+			if(defaultConstructor == null){
+				defaultConstructor = beanClazz.constructor(JMod.PUBLIC);
+			}
+
+			JMethod valueConstructor = beanClazz.constructor(JMod.PUBLIC);
+			valueConstructor.annotate(valueConstructorAnnotation);
+
+			for(FieldOutline fieldOutline : fieldOutlines){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				JFieldVar fieldVar = fieldVars.get(propertyInfo.getName(false));
+
+				JVar param = valueConstructor.param(fieldVar.type(), fieldVar.name());
+
+				param.annotate(propertyAnnotation).param("value", fieldVar.name());
+
+				valueConstructor.body().assign(JExpr.refthis(fieldVar.name()), param);
+			}
 		}
 
 		return true;
@@ -168,6 +201,31 @@ public class ValueConstructorPlugin extends Plugin {
 				}
 
 				return required;
+			}
+		};
+
+		return Arrays.stream(classOutline.getDeclaredFields())
+			.filter(predicate)
+			.toArray(FieldOutline[]::new);
+	}
+
+	static
+	private FieldOutline[] getMixedContentFields(JDefinedClass beanClazz, ClassOutline classOutline){
+		Predicate<FieldOutline> predicate = new Predicate<FieldOutline>(){
+
+			@Override
+			public boolean test(FieldOutline fieldOutline){
+				CPropertyInfo propertyInfo = fieldOutline.getPropertyInfo();
+
+				if(propertyInfo instanceof CReferencePropertyInfo){
+					CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
+
+					if(referencePropertyInfo.isMixed()){
+						return true;
+					}
+				}
+
+				return false;
 			}
 		};
 

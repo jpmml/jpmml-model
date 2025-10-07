@@ -76,6 +76,10 @@ public class OutlineUtil {
 		if(propertyInfo instanceof CReferencePropertyInfo){
 			CReferencePropertyInfo referencePropertyInfo = (CReferencePropertyInfo)propertyInfo;
 
+			if(referencePropertyInfo.isMixed()){
+				return false;
+			}
+
 			return referencePropertyInfo.isRequired();
 		} else
 
