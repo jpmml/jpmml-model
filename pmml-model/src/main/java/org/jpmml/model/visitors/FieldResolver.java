@@ -17,6 +17,7 @@ import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DefineFunction;
 import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Field;
+import org.dmg.pmml.HasLocalTransformations;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Model;
 import org.dmg.pmml.Output;
@@ -73,9 +74,9 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 		} else
 
 		if(parent instanceof LocalTransformations){
-			Model model = (Model)getParent();
+			HasLocalTransformations<?> hasLocalTransformations = (HasLocalTransformations<?>)getParent();
 
-			declareLocalFields(model, true);
+			declareLocalFields((PMMLObject & HasLocalTransformations)hasLocalTransformations, true);
 
 			this.customScopes = Collections.emptyMap();
 		} else
@@ -111,10 +112,10 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 
 	@Override
 	public VisitorAction visit(LocalTransformations localTransformations){
-		Model model = (Model)getParent();
+		HasLocalTransformations<?> hasLocalTransformations = (HasLocalTransformations<?>)getParent();
 
 		if(localTransformations.hasDerivedFields()){
-			declareLocalFields(model, false);
+			declareLocalFields((PMMLObject & HasLocalTransformations)hasLocalTransformations, false);
 
 			suppressFields(localTransformations);
 		}
@@ -243,16 +244,16 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 		}
 	}
 
-	private void declareLocalFields(Model model, boolean transformations){
-		List<Field<?>> scope = this.scopes.get(model);
+	private <E extends PMMLObject & HasLocalTransformations<E>> void declareLocalFields(E object, boolean transformations){
+		List<Field<?>> scope = this.scopes.get(object);
 
 		if(scope != null){
 			scope.clear();
 		}
 
-		LocalTransformations localTransformations = model.getLocalTransformations();
+		LocalTransformations localTransformations = object.getLocalTransformations();
 		if(transformations && (localTransformations != null && localTransformations.hasDerivedFields())){
-			declareFields(model, localTransformations.getDerivedFields());
+			declareFields(object, localTransformations.getDerivedFields());
 		}
 	}
 

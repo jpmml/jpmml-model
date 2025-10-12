@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Model extends PMMLObject {
+public class Model extends PMMLObject implements HasLocalTransformations<Model> {
 
 	abstract
 	public String getModelName();
@@ -51,9 +51,11 @@ public class Model extends PMMLObject {
 	abstract
 	public Model setMiningSchema(MiningSchema miningSchema);
 
+	@Override
 	abstract
 	public LocalTransformations getLocalTransformations();
 
+	@Override
 	abstract
 	public Model setLocalTransformations(LocalTransformations localTransformations);
 
