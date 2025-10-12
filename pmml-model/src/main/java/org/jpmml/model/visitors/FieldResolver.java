@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DefineFunction;
+import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.LocalTransformations;
 import org.dmg.pmml.Model;
@@ -26,8 +27,6 @@ import org.dmg.pmml.TransformationDictionary;
 import org.dmg.pmml.VisitorAction;
 import org.dmg.pmml.mining.Segment;
 import org.dmg.pmml.mining.Segmentation;
-import org.dmg.pmml.regression.Regression;
-import org.dmg.pmml.tree.DecisionTree;
 
 /**
  * <p>
@@ -92,15 +91,15 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 	}
 
 	@Override
+	public VisitorAction visit(EmbeddedModel embeddedModel){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public VisitorAction visit(Model model){
 		declareLocalFields(model, true);
 
 		return super.visit(model);
-	}
-
-	@Override
-	public VisitorAction visit(DecisionTree decisionTree){
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -140,11 +139,6 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 		declareGlobalFields(pmml, true);
 
 		return super.visit(pmml);
-	}
-
-	@Override
-	public VisitorAction visit(Regression regression){
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
