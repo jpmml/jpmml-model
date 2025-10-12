@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class EmbeddedModel extends PMMLObject implements HasLocalTransformations<EmbeddedModel> {
+public class EmbeddedModel extends PMMLObject implements HasLocalTransformations<EmbeddedModel>, HasOutput<EmbeddedModel> {
 
 	abstract
 	public String getModelName();
@@ -44,9 +44,11 @@ public class EmbeddedModel extends PMMLObject implements HasLocalTransformations
 	abstract
 	public EmbeddedModel setTargets(Targets targets);
 
+	@Override
 	abstract
 	public Output getOutput();
 
+	@Override
 	abstract
 	public EmbeddedModel setOutput(Output output);
 

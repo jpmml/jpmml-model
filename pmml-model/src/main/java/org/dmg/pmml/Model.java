@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 
 @XmlTransient
 abstract
-public class Model extends PMMLObject implements HasLocalTransformations<Model> {
+public class Model extends PMMLObject implements HasLocalTransformations<Model>, HasOutput<Model> {
 
 	abstract
 	public String getModelName();
@@ -70,6 +70,7 @@ public class Model extends PMMLObject implements HasLocalTransformations<Model> 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Output getOutput(){
 		return null;
 	}
@@ -77,6 +78,7 @@ public class Model extends PMMLObject implements HasLocalTransformations<Model> 
 	/**
 	 * @throws UnsupportedOperationException If the {@link Output} child element is not supported.
 	 */
+	@Override
 	public Model setOutput(Output output){
 		throw new UnsupportedOperationException();
 	}
