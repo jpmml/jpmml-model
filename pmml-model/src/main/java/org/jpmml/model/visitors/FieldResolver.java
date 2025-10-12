@@ -15,7 +15,6 @@ import java.util.Objects;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.DefineFunction;
-import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Field;
 import org.dmg.pmml.HasLocalTransformations;
 import org.dmg.pmml.LocalTransformations;
@@ -89,11 +88,6 @@ public class FieldResolver extends AbstractVisitor implements Resettable {
 		}
 
 		return parent;
-	}
-
-	@Override
-	public VisitorAction visit(EmbeddedModel embeddedModel){
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
