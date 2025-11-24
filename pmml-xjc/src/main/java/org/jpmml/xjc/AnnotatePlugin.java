@@ -56,8 +56,8 @@ public class AnnotatePlugin extends ComplexPlugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			CPluginCustomization classCustomization = CustomizationUtil.findCustomization(classOutline, AnnotatePlugin.ANNOTATE_CLASS_QNAME);
-			if(classCustomization != null){
+			List<CPluginCustomization> classCustomizations = CustomizationUtil.findCustomizations(classOutline, AnnotatePlugin.ANNOTATE_CLASS_QNAME);
+			for(CPluginCustomization classCustomization : classCustomizations){
 				annotate(codeModel, beanClazz, classCustomization);
 			}
 
