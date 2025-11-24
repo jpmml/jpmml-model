@@ -62,7 +62,7 @@
 		<jackson.version>[2.11.0, 2.20.1]</jackson.version>
 		<javassist.version>[3.13.0-GA, 3.30.2-GA]</javassist.version>
 		<kryo.version>[5.0.0, 5.6.2]</kryo.version>
-		<teavm.version>0.12.3</teavm.version>
+		<teavm.version>0.13.0</teavm.version>
 		<project.build.outputTimestamp>2025-10-18T05:50:41Z</project.build.outputTimestamp>
 	</properties>
 
