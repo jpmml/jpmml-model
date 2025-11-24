@@ -682,6 +682,8 @@ public class PMMLPlugin extends ComplexPlugin {
 	private String getElementName(String name){
 
 		switch(name){
+			case "Error":
+				return "X-Error";
 			// baseline
 			case "CountTable":
 				return "COUNT-TABLE-TYPE";

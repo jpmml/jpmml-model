@@ -51,6 +51,26 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-mathContext" type="MATH-CONTEXT" default="double"/>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='Lag']">
+		<xsl:copy-of select="."/>
+
+		<xs:element name="X-Error">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="message" type="xs:string" use="optional"/>
+			</xs:complexType>
+		</xs:element>
+	</xsl:template>
+
+	<xsl:template match="xs:group[@name='EXPRESSION']/xs:choice">
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+			<xs:element ref="X-Error"/>
+		</xsl:copy>
+	</xsl:template>
+
 	<xsl:template match="xs:simpleType[@name='DATATYPE']/xs:restriction">
 		<xsl:variable
 			name="index"
