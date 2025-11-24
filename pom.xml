@@ -15,7 +15,7 @@
 
 	<name>JPMML-Model</name>
 	<description>Java class model API for Predictive Model Markup Language (PMML)</description>
-	<url>http://www.jpmml.org</url>
+	<url>https://www.jpmml.org</url>
 
 	<licenses>
 		<license>
