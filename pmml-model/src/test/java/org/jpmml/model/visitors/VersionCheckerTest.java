@@ -117,7 +117,7 @@ public class VersionCheckerTest {
 		assertExceptions(output, Version.PMML_4_2, Collections.emptySet());
 
 		Target target = new Target()
-			.setField(null);
+			.setTargetField(null);
 
 		Targets targets = new Targets()
 			.addTargets(target);

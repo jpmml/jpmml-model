@@ -578,12 +578,6 @@ public class PMMLPlugin extends ComplexPlugin {
 				createSetterProxy(beanClazz, stringClass, "field", "setField", "setName");
 			} // End if
 
-			// Implementations of org.dmg.pmml.HasTargetFieldReference
-			if(checkType(beanClazz, "org.dmg.pmml.Target")){
-				createGetterProxy(beanClazz, stringClass, "getTargetField", "getField");
-				createSetterProxy(beanClazz, stringClass, "targetField", "setTargetField", "setField");
-			} // End if
-
 			// Implementations of org.dmg.pmml.Indexable
 			if(checkType(beanClazz, "org.dmg.pmml.MiningField")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "requireName");
