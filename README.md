@@ -37,13 +37,13 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 JPMML-Model library JAR files (together with accompanying Java source and Javadocs JAR files) are released via the Maven Central Repository.
 
-The current version is **1.7.5** (18 October, 2025).
+The current version is **1.7.6** (25 November, 2025).
 
 ```xml
 <dependency>
 	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model</artifactId>
-	<version>1.7.5</version>
+	<version>1.7.6</version>
 </dependency>
 ```
 
