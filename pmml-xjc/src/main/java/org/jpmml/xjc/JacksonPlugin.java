@@ -62,16 +62,10 @@ public class JacksonPlugin extends Plugin {
 		for(ClassOutline classOutline : classOutlines){
 			JDefinedClass beanClazz = classOutline.implClass;
 
-			List<JAnnotationUse> beanClazzAnnotations = CodeModelUtil.getAnnotations(beanClazz);
-
-			JAnnotationUse xmlRootElement = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlRootElement.class);
-			if(xmlRootElement != null){
-				Map<String, JAnnotationValue> annotationMembers = xmlRootElement.getAnnotationMembers();
-
-				JAnnotationValue nameValue = annotationMembers.get("name");
-
+			String elementName = getElementName(beanClazz);
+			if(elementName != null){
 				JAnnotationUse jsonRootName = beanClazz.annotate(JsonRootName.class)
-					.param("value", CodeModelUtil.stringValue(nameValue));
+					.param("value", elementName);
 			}
 
 			FieldOutline[] fieldOutlines = classOutline.getDeclaredFields();
@@ -171,11 +165,16 @@ public class JacksonPlugin extends Plugin {
 						for(CTypeRef type : types){
 							CClassInfo typeClassInfo = (CClassInfo)type.getTarget();
 
-							JClass clazz = codeModel.ref(typeClassInfo.fullName());
+							JDefinedClass typeBeanClazz = codeModel._getClass(typeClassInfo.fullName());
+							if(typeBeanClazz == null){
+								throw new IllegalArgumentException(typeClassInfo.fullName());
+							}
+
+							String typeElementName = getElementName(typeBeanClazz);
 
 							JAnnotationUse jsonSubTypesType = valueArray.annotate(JsonSubTypes.Type.class)
-								.param("name", clazz.name())
-								.param("value", JExpr.dotclass(clazz));
+								.param("name", typeElementName)
+								.param("value", JExpr.dotclass(typeBeanClazz));
 						}
 					} else
 
@@ -218,5 +217,18 @@ public class JacksonPlugin extends Plugin {
 		}
 
 		return true;
+	}
+
+	static
+	private String getElementName(JDefinedClass beanClazz){
+		JAnnotationUse xmlRootElement = CodeModelUtil.findAnnotation(beanClazz, XmlRootElement.class);
+
+		if(xmlRootElement != null){
+			JAnnotationValue nameValue = CodeModelUtil.getAnnotationValue(xmlRootElement, "name");
+
+			return CodeModelUtil.stringValue(nameValue);
+		}
+
+		return null;
 	}
 }

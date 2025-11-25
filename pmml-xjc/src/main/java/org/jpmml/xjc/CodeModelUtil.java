@@ -9,9 +9,11 @@ import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.sun.codemodel.JAnnotatable;
 import com.sun.codemodel.JAnnotationUse;
+import com.sun.codemodel.JAnnotationValue;
 import com.sun.codemodel.JClass;
 import com.sun.codemodel.JFormatter;
 import com.sun.codemodel.JGenerable;
@@ -35,10 +37,28 @@ public class CodeModelUtil {
 	}
 
 	static
+	public JAnnotationValue getAnnotationValue(JAnnotationUse annotation, String name){
+		Map<String, JAnnotationValue> annotationMembers = annotation.getAnnotationMembers();
+
+		if(!annotationMembers.containsKey(name)){
+			throw new IllegalArgumentException(name);
+		}
+
+		return annotationMembers.get(name);
+	}
+
+	static
 	public boolean hasAnnotation(Collection<JAnnotationUse> annotations, Class<?> clazz){
 		JAnnotationUse annotation = findAnnotation(annotations, clazz);
 
 		return (annotation != null);
+	}
+
+	static
+	public JAnnotationUse findAnnotation(JAnnotatable annotatable, Class<?> clazz){
+		List<JAnnotationUse> annotations = CodeModelUtil.getAnnotations(annotatable);
+
+		return CodeModelUtil.findAnnotation(annotations, clazz);
 	}
 
 	static
