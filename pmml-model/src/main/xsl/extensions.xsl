@@ -41,6 +41,11 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-baseVersion" type="xs:string"/>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='RegressionTable']/xs:complexType/xs:attribute[@name='intercept']">
+		<xsl:copy-of select="."/>
+		<xs:attribute name="x-targetField" type="FIELD-NAME"/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='TextIndex' or @name='TextIndexNormalization']/xs:complexType/xs:attribute[@name='wordSeparatorCharacterRE']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-wordRE" type="xs:string"/>

@@ -2753,6 +2753,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;RegressionTable&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
 			/>
@@ -2760,6 +2761,14 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType/xsd:attribute[@name='targetCategory']">
 			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType/xsd:attribute[@name='x-targetField']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.7.6")</annox:annotateProperty>
+			<jaxb:property
+				name="targetField"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressorValues']/xsd:complexType">
