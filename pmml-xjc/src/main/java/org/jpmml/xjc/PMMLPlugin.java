@@ -167,7 +167,7 @@ public class PMMLPlugin extends ComplexPlugin {
 					Field elementNameField = CClassInfo.class.getDeclaredField("elementName");
 					CodeModelUtil.ensureAccessible(elementNameField);
 
-					elementNameField.set(classInfo, new QName("http://www.dmg.org/PMML-4_4", name));
+					elementNameField.set(classInfo, new QName(NamespaceURIs.PMML_LATEST, name));
 				} catch(ReflectiveOperationException roe){
 					throw new RuntimeException(roe);
 				}
@@ -334,7 +334,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				beanClazz.annotate(XmlRootElement.class)
 					.param("name", elementName)
-					.param("namespace", "http://www.dmg.org/PMML-4_4");
+					.param("namespace", NamespaceURIs.PMML_LATEST);
 			}
 
 			xmlRootElement = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlRootElement.class);
