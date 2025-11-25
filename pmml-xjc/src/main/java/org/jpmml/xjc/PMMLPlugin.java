@@ -593,7 +593,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				createGetterProxy(beanClazz, stringClass, "getKey", "requireField");
 			} else
 
-			if(checkType(beanClazz, "org.dmg.pmml.Target")){
+			if(checkType(beanClazz, "org.dmg.pmml.regression.RegressionTable") || checkType(beanClazz, "org.dmg.pmml.Target")){
 				createGetterProxy(beanClazz, stringClass, "getKey", "getTargetField");
 			} // End if
 

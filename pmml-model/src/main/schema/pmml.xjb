@@ -2754,6 +2754,7 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType">
 			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;RegressionTable&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.Indexable&lt;String&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
 			/>
