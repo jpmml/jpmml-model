@@ -16,7 +16,7 @@ import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlRootElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlRootElement(name = "ScoreDistribution", namespace = NamespaceURIs.PMML_LATEST)
 @XmlType(name = "")
 @JsonRootName("ScoreDistribution")
 @JsonPropertyOrder({

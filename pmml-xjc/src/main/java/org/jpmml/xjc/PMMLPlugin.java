@@ -30,6 +30,7 @@ import com.sun.codemodel.JExpr;
 import com.sun.codemodel.JExpression;
 import com.sun.codemodel.JFieldRef;
 import com.sun.codemodel.JFieldVar;
+import com.sun.codemodel.JFormatter;
 import com.sun.codemodel.JJavaName;
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JMod;
@@ -55,6 +56,8 @@ import com.sun.tools.xjc.outline.FieldOutline;
 import com.sun.tools.xjc.outline.Outline;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementRef;
+import jakarta.xml.bind.annotation.XmlElementRefs;
 import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
@@ -295,6 +298,7 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass iteratorInterface = codeModel.ref("java.util.Iterator");
 
 		JClass hasExtensionsInterface = codeModel.ref("org.dmg.pmml.HasExtensions");
+		JClass namespaceUrisInterface = codeModel.ref("org.dmg.pmml.NamespaceURIs");
 		JClass stringValueInterface = codeModel.ref("org.dmg.pmml.StringValue");
 
 		JClass stringClass = codeModel.ref("java.lang.String");
@@ -304,6 +308,8 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass missingElementExceptionClass = codeModel.ref("org.jpmml.model.MissingElementException");
 
 		JClass propertyAnnotation = codeModel.ref("org.jpmml.model.annotations.Property");
+
+		JFieldRef pmmlLatestExpr = namespaceUrisInterface.staticRef("PMML_LATEST");
 
 		List<? extends ClassOutline> classOutlines = new ArrayList<>(outline.getClasses());
 		classOutlines.sort((left, right) -> (left.implClass.name()).compareToIgnoreCase(right.implClass.name()));
@@ -334,13 +340,15 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				beanClazz.annotate(XmlRootElement.class)
 					.param("name", elementName)
-					.param("namespace", NamespaceURIs.PMML_LATEST);
+					.param("namespace", pmmlLatestExpr);
 			}
 
 			xmlRootElement = CodeModelUtil.findAnnotation(beanClazzAnnotations, XmlRootElement.class);
 			if(xmlRootElement != null){
 				beanClazzAnnotations.remove(xmlRootElement);
 				beanClazzAnnotations.add(0, xmlRootElement);
+
+				updateNamespace(xmlRootElement, pmmlLatestExpr);
 			} else
 
 			{
@@ -501,6 +509,30 @@ public class PMMLPlugin extends ComplexPlugin {
 
 				if(CodeModelUtil.hasAnnotation(fieldVarAnnotations, XmlValue.class)){
 					fieldVar.annotate(XmlValueExtension.class);
+				} // End if
+
+				if(CodeModelUtil.hasAnnotation(fieldVarAnnotations, XmlElement.class)){
+					JAnnotationUse xmlElement = CodeModelUtil.findAnnotation(fieldVarAnnotations, XmlElement.class);
+
+					updateNamespace(xmlElement, pmmlLatestExpr);
+				} // End if
+
+				if(CodeModelUtil.hasAnnotation(fieldVarAnnotations, XmlElements.class)){
+					JAnnotationUse xmlElements = CodeModelUtil.findAnnotation(fieldVarAnnotations, XmlElements.class);
+
+					updateNamespaceArray(xmlElements, pmmlLatestExpr);
+				} // End if
+
+				if(CodeModelUtil.hasAnnotation(fieldVarAnnotations, XmlElementRef.class)){
+					JAnnotationUse xmlElementRef = CodeModelUtil.findAnnotation(fieldVarAnnotations, XmlElementRef.class);
+
+					updateNamespace(xmlElementRef, pmmlLatestExpr);
+				} // End if
+
+				if(CodeModelUtil.hasAnnotation(fieldVarAnnotations, XmlElementRefs.class)){
+					JAnnotationUse xmlElementRefs = CodeModelUtil.findAnnotation(fieldVarAnnotations, XmlElementRefs.class);
+
+					updateNamespaceArray(xmlElementRefs, pmmlLatestExpr);
 				}
 			}
 
@@ -662,6 +694,13 @@ public class PMMLPlugin extends ComplexPlugin {
 
 			clazz._implements(stringValueInterface.narrow(clazz));
 
+			List<JAnnotationUse> clazzAnnotations = CodeModelUtil.getAnnotations(clazz);
+
+			JAnnotationUse xmlType = CodeModelUtil.findAnnotation(clazzAnnotations, XmlType.class);
+			if(xmlType != null){
+				updateNamespace(xmlType, pmmlLatestExpr);
+			}
+
 			JMethod valueMethod = clazz.getMethod("value", new JType[0]);
 			valueMethod.annotate(Override.class);
 
@@ -676,6 +715,52 @@ public class PMMLPlugin extends ComplexPlugin {
 		}
 
 		return true;
+	}
+
+	static
+	private void updateNamespace(JAnnotationUse annotation, JExpression nsExpr){
+		Map<String, JAnnotationValue> memberValues = getMemberValues(annotation);
+
+		if(memberValues != null && memberValues.containsKey("namespace")){
+			JAnnotationValue nsValue = new JAnnotationValue(){
+
+				@Override
+				public void generate(JFormatter f){
+					f.g(nsExpr);
+				}
+			};
+
+			memberValues.put("namespace", nsValue);
+		}
+	}
+
+	static
+	private void updateNamespaceArray(JAnnotationUse annotation, JExpression nsExpr){
+		Map<String, JAnnotationValue> memberValues = getMemberValues(annotation);
+
+		if(memberValues != null && memberValues.containsKey("value")){
+			JAnnotationArrayMember value = (JAnnotationArrayMember)memberValues.get("value");
+
+			Collection<JAnnotationUse> elements = value.annotations();
+			for(JAnnotationUse element : elements){
+				updateNamespace(element, nsExpr);
+			}
+		}
+	}
+
+	static
+	private Map<String, JAnnotationValue> getMemberValues(JAnnotationUse annotation){
+
+		try {
+			Field memberValuesField = JAnnotationUse.class.getDeclaredField("memberValues");
+			if(!memberValuesField.isAccessible()){
+				memberValuesField.setAccessible(true);
+			}
+
+			return (Map)memberValuesField.get(annotation);
+		} catch(ReflectiveOperationException roe){
+			throw new RuntimeException(roe);
+		}
 	}
 
 	static

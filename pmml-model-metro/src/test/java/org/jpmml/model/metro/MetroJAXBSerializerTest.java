@@ -5,6 +5,7 @@ package org.jpmml.model.metro;
 
 import org.dmg.pmml.DataDictionary;
 import org.dmg.pmml.Header;
+import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.PMML;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.SimplifyingScoreDistributionTransformer;
@@ -60,7 +61,7 @@ public class MetroJAXBSerializerTest {
 
 		String string = SerializationUtil.toString(serializer, pmml);
 
-		assertTrue(string.contains("<PMML xmlns=\"http://www.dmg.org/PMML-4_4\""));
+		assertTrue(string.contains("<PMML xmlns=\"" + NamespaceURIs.PMML_LATEST + "\""));
 		assertTrue(string.contains(" version=\"4.4\">"));
 		assertTrue(string.contains("<RegressionModel>"));
 		assertTrue(string.contains("</RegressionModel>"));

@@ -12,6 +12,7 @@ import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Visitor;
@@ -34,11 +35,11 @@ public class SimpleNode extends Node {
 	private Object score = null;
 
 	@XmlElements({
-		@XmlElement(name = "SimplePredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimplePredicate.class),
-		@XmlElement(name = "CompoundPredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.CompoundPredicate.class),
-		@XmlElement(name = "SimpleSetPredicate", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.SimpleSetPredicate.class),
-		@XmlElement(name = "True", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.True.class),
-		@XmlElement(name = "False", namespace = "http://www.dmg.org/PMML-4_4", type = org.dmg.pmml.False.class)
+		@XmlElement(name = "SimplePredicate", namespace = NamespaceURIs.PMML_LATEST, type = org.dmg.pmml.SimplePredicate.class),
+		@XmlElement(name = "CompoundPredicate", namespace = NamespaceURIs.PMML_LATEST, type = org.dmg.pmml.CompoundPredicate.class),
+		@XmlElement(name = "SimpleSetPredicate", namespace = NamespaceURIs.PMML_LATEST, type = org.dmg.pmml.SimpleSetPredicate.class),
+		@XmlElement(name = "True", namespace = NamespaceURIs.PMML_LATEST, type = org.dmg.pmml.True.class),
+		@XmlElement(name = "False", namespace = NamespaceURIs.PMML_LATEST, type = org.dmg.pmml.False.class)
 	})
 	@JsonProperty("Predicate")
 	@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)

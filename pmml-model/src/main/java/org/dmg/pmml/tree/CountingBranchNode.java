@@ -10,13 +10,14 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.adapters.NumberAdapter;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlRootElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlRootElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST)
 @XmlType(name = "", propOrder = {
 	"predicate",
 	"nodes"

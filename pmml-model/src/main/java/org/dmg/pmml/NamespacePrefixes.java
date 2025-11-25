@@ -3,6 +3,9 @@
  */
 package org.dmg.pmml;
 
+/**
+ * @see NamespaceURIs
+ */
 public interface NamespacePrefixes {
 
 	String JPMML_INLINETABLE = "data";

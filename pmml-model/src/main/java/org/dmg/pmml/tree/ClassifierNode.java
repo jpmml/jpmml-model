@@ -19,6 +19,7 @@ import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.ComplexScoreDistribution;
+import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.Version;
@@ -31,7 +32,7 @@ import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlRootElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlRootElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST)
 @XmlType(name = "", propOrder = {
 	"predicate",
 	"scoreDistributions",
@@ -68,7 +69,7 @@ public class ClassifierNode extends SimpleNode {
 	private Object defaultChild = null;
 
 	@XmlElements({
-		@XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_4", type = ComplexScoreDistribution.class)
+		@XmlElement(name = "ScoreDistribution", namespace = NamespaceURIs.PMML_LATEST, type = ComplexScoreDistribution.class)
 	})
 	@JsonProperty("ScoreDistribution")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexScoreDistribution.class)
@@ -77,7 +78,7 @@ public class ClassifierNode extends SimpleNode {
 	private List<ScoreDistribution> scoreDistributions = null;
 
 	@XmlElements({
-		@XmlElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4", type = ComplexNode.class)
+		@XmlElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST, type = ComplexNode.class)
 	})
 	@JsonProperty("Node")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexNode.class)

@@ -17,6 +17,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.ObjectAdapter;
@@ -27,7 +28,7 @@ import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
 
-@XmlRootElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4")
+@XmlRootElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST)
 @XmlType(name = "", propOrder = {
 	"predicate",
 	"nodes"
@@ -56,7 +57,7 @@ public class BranchNode extends SimpleNode {
 	private Object defaultChild = null;
 
 	@XmlElements({
-		@XmlElement(name = "Node", namespace = "http://www.dmg.org/PMML-4_4", type = ComplexNode.class)
+		@XmlElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST, type = ComplexNode.class)
 	})
 	@JsonProperty("Node")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexNode.class)
