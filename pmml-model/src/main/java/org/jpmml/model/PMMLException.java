@@ -24,15 +24,20 @@ public class PMMLException extends RuntimeException {
 
 	@Override
 	synchronized
-	public PMMLException initCause(Throwable throwable){
-		return (PMMLException)super.initCause(throwable);
+	public PMMLException initCause(Throwable cause){
+		return (PMMLException)super.initCause(cause);
 	}
 
-	public PMMLException ensureContext(PMMLObject parentContext){
+	public boolean hasContext(){
 		PMMLObject context = getContext();
 
-		if(context == null){
-			setContext(parentContext);
+		return (context != null);
+	}
+
+	public PMMLException ensureContext(PMMLObject context){
+
+		if(!hasContext()){
+			setContext(context);
 		}
 
 		return this;
