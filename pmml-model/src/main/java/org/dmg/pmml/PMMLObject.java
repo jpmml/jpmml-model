@@ -87,6 +87,11 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 		};
 	}
 
+	static
+	protected <E> boolean hasElements(List<E> elements){
+		return (elements != null) && !elements.isEmpty();
+	}
+
 	@SafeVarargs
 	static
 	protected <E> void addElements(List<E> elements, E... moreElements){

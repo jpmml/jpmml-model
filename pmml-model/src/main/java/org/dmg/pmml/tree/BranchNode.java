@@ -18,6 +18,7 @@ import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.NamespaceURIs;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.ObjectAdapter;
@@ -121,7 +122,7 @@ public class BranchNode extends SimpleNode {
 
 	@Override
 	public boolean hasNodes(){
-		return (this.nodes != null) && (!this.nodes.isEmpty());
+		return PMMLObject.hasElements(this.nodes);
 	}
 
 	@Override

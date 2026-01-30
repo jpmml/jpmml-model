@@ -20,6 +20,7 @@ import jakarta.xml.bind.annotation.XmlType;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.NamespaceURIs;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.Version;
@@ -160,7 +161,7 @@ public class ClassifierNode extends SimpleNode {
 
 	@Override
 	public boolean hasScoreDistributions(){
-		return (this.scoreDistributions != null) && (!this.scoreDistributions.isEmpty());
+		return PMMLObject.hasElements(this.scoreDistributions);
 	}
 
 	@Override
@@ -175,7 +176,7 @@ public class ClassifierNode extends SimpleNode {
 
 	@Override
 	public boolean hasNodes(){
-		return (this.nodes != null) && (!this.nodes.isEmpty());
+		return PMMLObject.hasElements(this.nodes);
 	}
 
 	@Override

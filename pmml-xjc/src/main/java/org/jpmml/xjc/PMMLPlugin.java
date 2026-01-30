@@ -419,7 +419,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 					JMethod hasElementsMethod = beanClazz.method(JMod.PUBLIC, boolean.class, "has" + publicName);
 
-					hasElementsMethod.body()._return((fieldRef.ne(JExpr._null())).cand((fieldRef.invoke("isEmpty")).not()));
+					hasElementsMethod.body()._return(pmmlObjectClass.staticInvoke("hasElements").arg(fieldRef));
 
 					moveBefore(beanClazz, hasElementsMethod, getElementsMethod);
 
@@ -475,9 +475,14 @@ public class PMMLPlugin extends ComplexPlugin {
 
 						JMethod requireMethod = beanClazz.method(JMod.PUBLIC, getterMethod.type(), "require" + publicName);
 
-						JExpression testExpr = fieldRef.eq(JExpr._null());
+						JExpression testExpr;
+
 						if(elementPropertyInfo.isCollection()){
-							testExpr = testExpr.cor(fieldRef.invoke("isEmpty"));
+							testExpr = (pmmlObjectClass.staticInvoke("hasElements").arg(fieldRef)).not();
+						} else
+
+						{
+							testExpr = fieldRef.eq(JExpr._null());
 						}
 
 						requireMethod.body()._if(testExpr)._then()._throw(JExpr._new(missingElementExceptionClass).arg(JExpr._this()).arg(constantExpr(elementVar)));
