@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class XXEAttackTest {
 
@@ -51,13 +51,9 @@ public class XXEAttackTest {
 
 			Source source = SAXUtil.createFilteredSource(is);
 
-			serializer.unmarshal(source);
+			UnmarshalException exception = assertThrows(UnmarshalException.class, () -> serializer.unmarshal(source));
 
-			fail();
-		} catch(UnmarshalException ue){
-			Throwable cause = SAXUtil.getCause(ue);
-
-			assertTrue(cause instanceof SAXParseException);
+			assertInstanceOf(SAXParseException.class, SAXUtil.getCause(exception));
 		}
 	}
 }

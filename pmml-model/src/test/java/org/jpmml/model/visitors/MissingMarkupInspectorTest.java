@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class MissingMarkupInspectorTest {
 
@@ -38,25 +38,21 @@ public class MissingMarkupInspectorTest {
 
 		MissingMarkupInspector inspector = new MissingMarkupInspector();
 
-		try {
-			inspector.applyTo(pmml);
+		MissingMarkupException firstException = assertThrows(MissingMarkupException.class, () -> inspector.applyTo(pmml));
 
-			fail();
-		} catch(MissingMarkupException mme){
-			List<MissingMarkupException> exceptions = inspector.getExceptions();
+		List<MissingMarkupException> exceptions = inspector.getExceptions();
 
-			String[] features = {"PMML@version", "PMML/Header"};
+		String[] features = {"PMML@version", "PMML/Header"};
 
-			assertEquals(features.length, exceptions.size());
-			assertEquals(0, exceptions.indexOf(mme));
+		assertEquals(features.length, exceptions.size());
+		assertEquals(0, exceptions.indexOf(firstException));
 
-			for(int i = 0; i < exceptions.size(); i++){
-				MissingMarkupException exception = exceptions.get(i);
+		for(int i = 0; i < exceptions.size(); i++){
+			MissingMarkupException exception = exceptions.get(i);
 
-				String message = exception.getMessage();
+			String message = exception.getMessage();
 
-				assertTrue(message.contains(features[i]));
-			}
+			assertTrue(message.contains(features[i]));
 		}
 	}
 }

@@ -11,8 +11,8 @@ import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DepthFilterTest {
 
@@ -20,26 +20,14 @@ public class DepthFilterTest {
 	public void filterNestedSegmentation() throws Exception {
 		ResourceUtil.unmarshal(NestedSegmentationTest.class, new DepthFilter("Segmentation", 3));
 
-		try {
-			ResourceUtil.unmarshal(NestedSegmentationTest.class, new DepthFilter(Segmentation.class, 2));
+		UnmarshalException exception = assertThrows(UnmarshalException.class, () -> ResourceUtil.unmarshal(NestedSegmentationTest.class, new DepthFilter(Segmentation.class, 2)));
 
-			fail();
-		} catch(UnmarshalException ue){
-			Throwable cause = SAXUtil.getCause(ue);
-
-			assertTrue(cause instanceof SAXException);
-		}
+		assertInstanceOf(SAXException.class, SAXUtil.getCause(exception));
 
 		ResourceUtil.unmarshal(NestedSegmentationTest.class, new DepthFilter("*", 15));
 
-		try {
-			ResourceUtil.unmarshal(NestedSegmentationTest.class, new DepthFilter("*", 10));
+		exception = assertThrows(UnmarshalException.class, () -> ResourceUtil.unmarshal(NestedSegmentationTest.class, new DepthFilter("*", 10)));
 
-			fail();
-		} catch(UnmarshalException ue){
-			Throwable cause = SAXUtil.getCause(ue);
-
-			assertTrue(cause instanceof SAXException);
-		}
+		assertInstanceOf(SAXException.class, SAXUtil.getCause(exception));
 	}
 }

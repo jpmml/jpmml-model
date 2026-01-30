@@ -25,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class VersionDowngraderTest {
 
@@ -55,13 +55,9 @@ public class VersionDowngraderTest {
 		assertEquals(0, apply.getDefaultValue());
 		assertEquals(-999, apply.getMapMissingTo());
 
-		try {
-			downgrade(apply, Version.PMML_4_1);
+		Apply pmml42Apply = apply;
 
-			fail();
-		} catch(UnsupportedAttributeException uae){
-			// Ignored
-		}
+		assertThrows(UnsupportedAttributeException.class, () -> downgrade(pmml42Apply, Version.PMML_4_1));
 	}
 
 	@Test
@@ -143,13 +139,9 @@ public class VersionDowngraderTest {
 		assertEquals(1, targetValue.getValue());
 		assertEquals("one", targetValue.getDisplayValue());
 
-		try {
-			downgrade(targetValue, Version.PMML_3_2);
+		TargetValue pmml40TargetValue = targetValue;
 
-			fail();
-		} catch(UnsupportedAttributeException uae){
-			// Ignored
-		}
+		assertThrows(UnsupportedAttributeException.class, () -> downgrade(pmml40TargetValue, Version.PMML_3_2));
 	}
 
 	@Test
@@ -158,13 +150,9 @@ public class VersionDowngraderTest {
 
 		trendExpoSmooth = downgrade(trendExpoSmooth, Version.PMML_4_1);
 
-		try {
-			downgrade(trendExpoSmooth, Version.PMML_4_0);
+		TrendExpoSmooth pmml41TrendExpoSmooth = trendExpoSmooth;
 
-			fail();
-		} catch(UnsupportedElementException uee){
-			// Ignored
-		}
+		assertThrows(UnsupportedElementException.class, () -> downgrade(pmml41TrendExpoSmooth, Version.PMML_4_0));
 	}
 
 	static

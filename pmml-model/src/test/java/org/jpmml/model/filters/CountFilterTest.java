@@ -11,8 +11,8 @@ import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CountFilterTest {
 
@@ -20,26 +20,14 @@ public class CountFilterTest {
 	public void filterNestedSegmentation() throws Exception {
 		ResourceUtil.unmarshal(NestedSegmentationTest.class, new CountFilter("Segmentation", 3));
 
-		try {
-			ResourceUtil.unmarshal(NestedSegmentationTest.class, new CountFilter(Segmentation.class, 2));
+		UnmarshalException exception = assertThrows(UnmarshalException.class, () -> ResourceUtil.unmarshal(NestedSegmentationTest.class, new CountFilter(Segmentation.class, 2)));
 
-			fail();
-		} catch(UnmarshalException se){
-			Throwable cause = SAXUtil.getCause(se);
-
-			assertTrue(cause instanceof SAXException);
-		}
+		assertInstanceOf(SAXException.class, SAXUtil.getCause(exception));
 
 		ResourceUtil.unmarshal(NestedSegmentationTest.class, new CountFilter("*", 100));
 
-		try {
-			ResourceUtil.unmarshal(NestedSegmentationTest.class, new CountFilter("*", 10));
+		exception = assertThrows(UnmarshalException.class, () -> ResourceUtil.unmarshal(NestedSegmentationTest.class, new CountFilter("*", 10)));
 
-			fail();
-		} catch(UnmarshalException ue){
-			Throwable cause = SAXUtil.getCause(ue);
-
-			assertTrue(cause instanceof SAXException);
-		}
+		assertInstanceOf(SAXException.class, SAXUtil.getCause(exception));
 	}
 }

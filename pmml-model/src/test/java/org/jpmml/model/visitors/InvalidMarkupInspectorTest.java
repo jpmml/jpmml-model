@@ -11,8 +11,8 @@ import org.jpmml.model.InvalidMarkupException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class InvalidMarkupInspectorTest {
 
@@ -25,18 +25,15 @@ public class InvalidMarkupInspectorTest {
 
 		InvalidMarkupInspector inspector = new InvalidMarkupInspector();
 
-		try {
-			inspector.applyTo(pmml);
+		InvalidMarkupException firstException = assertThrows(InvalidMarkupException.class, () -> inspector.applyTo(pmml));
 
-			fail();
-		} catch(InvalidMarkupException ime){
-			List<InvalidMarkupException> exceptions = inspector.getExceptions();
+		String message = firstException.getMessage();
 
-			assertEquals(1, exceptions.size());
+		assertTrue(message.contains("DataDictionary"));
 
-			String message = ime.getMessage();
+		List<InvalidMarkupException> exceptions = inspector.getExceptions();
 
-			assertTrue(message.contains("DataDictionary"));
-		}
+		assertEquals(1, exceptions.size());
+		assertEquals(0, exceptions.indexOf(firstException));
 	}
 }

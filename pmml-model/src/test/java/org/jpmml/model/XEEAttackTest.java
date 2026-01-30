@@ -11,8 +11,10 @@ import javax.xml.transform.stream.StreamSource;
 import jakarta.xml.bind.UnmarshalException;
 import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXParseException;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class XEEAttackTest {
 
@@ -24,11 +26,9 @@ public class XEEAttackTest {
 
 			Source source = new StreamSource(is);
 
-			serializer.unmarshal(source);
+			UnmarshalException exception = assertThrows(UnmarshalException.class, () -> serializer.unmarshal(source));
 
-			fail();
-		} catch(UnmarshalException ue){
-			// Ignored
+			assertInstanceOf(SAXParseException.class, SAXUtil.getCause(exception));
 		}
 	}
 }
