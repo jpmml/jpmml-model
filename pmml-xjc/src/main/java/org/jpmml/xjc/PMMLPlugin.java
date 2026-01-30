@@ -302,7 +302,7 @@ public class PMMLPlugin extends ComplexPlugin {
 		JClass stringValueInterface = codeModel.ref("org.dmg.pmml.StringValue");
 
 		JClass stringClass = codeModel.ref("java.lang.String");
-		JClass arraysClass = codeModel.ref("java.util.Arrays");
+		JClass pmmlObjectClass = codeModel.ref("org.dmg.pmml.PMMLObject");
 
 		JClass missingAttributeExceptionClass = codeModel.ref("org.jpmml.model.MissingAttributeException");
 		JClass missingElementExceptionClass = codeModel.ref("org.jpmml.model.MissingElementException");
@@ -427,7 +427,7 @@ public class PMMLPlugin extends ComplexPlugin {
 
 					JVar param = addElementsMethod.varParam(elementType, name);
 
-					addElementsMethod.body().add(JExpr.invoke(getterMethod).invoke("addAll").arg(arraysClass.staticInvoke("asList").arg(param)));
+					addElementsMethod.body().add(pmmlObjectClass.staticInvoke("addElements").arg(JExpr.invoke(getterMethod)).arg(param));
 					addElementsMethod.body()._return(JExpr._this());
 
 					moveAfter(beanClazz, addElementsMethod, getElementsMethod);

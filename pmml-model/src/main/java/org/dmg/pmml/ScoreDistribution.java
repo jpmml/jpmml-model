@@ -3,7 +3,6 @@
  */
 package org.dmg.pmml;
 
-import java.util.Arrays;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlTransient;
@@ -76,7 +75,7 @@ public class ScoreDistribution extends PMMLObject implements HasRecordCount<Scor
 	}
 
 	public ScoreDistribution addExtensions(Extension... extensions){
-		getExtensions().addAll(Arrays.asList(extensions));
+		PMMLObject.addElements(getExtensions(), extensions);
 
 		return this;
 	}

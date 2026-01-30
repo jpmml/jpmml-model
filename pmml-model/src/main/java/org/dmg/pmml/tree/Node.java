@@ -3,7 +3,6 @@
  */
 package org.dmg.pmml.tree;
 
-import java.util.Arrays;
 import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlTransient;
@@ -14,6 +13,7 @@ import org.dmg.pmml.Extension;
 import org.dmg.pmml.HasPredicate;
 import org.dmg.pmml.HasRecordCount;
 import org.dmg.pmml.HasScoreDistributions;
+import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Partition;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.adapters.NodeAdapter;
@@ -80,7 +80,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 	}
 
 	public Node addExtensions(Extension... extensions){
-		getExtensions().addAll(Arrays.asList(extensions));
+		PMMLObject.addElements(getExtensions(), extensions);
 
 		return this;
 	}
@@ -105,7 +105,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 
 	@Override
 	public Node addScoreDistributions(ScoreDistribution... scoreDistributions){
-		getScoreDistributions().addAll(Arrays.asList(scoreDistributions));
+		PMMLObject.addElements(getScoreDistributions(), scoreDistributions);
 
 		return this;
 	}
@@ -136,7 +136,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 	}
 
 	public Node addNodes(Node... nodes){
-		getNodes().addAll(Arrays.asList(nodes));
+		PMMLObject.addElements(getNodes(), nodes);
 
 		return this;
 	}

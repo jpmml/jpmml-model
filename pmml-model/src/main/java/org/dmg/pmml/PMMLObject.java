@@ -4,6 +4,7 @@
 package org.dmg.pmml;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -84,6 +85,12 @@ public class PMMLObject implements HasLocator, Serializable, Visitable {
 			major, minor, patch,
 			implementation
 		};
+	}
+
+	@SafeVarargs
+	static
+	protected <E> void addElements(List<E> elements, E... moreElements){
+		elements.addAll(Arrays.asList(moreElements));
 	}
 
 	static
