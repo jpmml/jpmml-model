@@ -8,9 +8,7 @@
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-xjc</artifactId>
-	<packaging>jar</packaging>
 
 	<name>JPMML XJC</name>
 	<description>JPMML XJC plugins for programmatic class model customization</description>

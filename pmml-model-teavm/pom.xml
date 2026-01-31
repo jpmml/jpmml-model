@@ -8,9 +8,7 @@
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model-teavm</artifactId>
-	<packaging>jar</packaging>
 
 	<name>JPMML TeaVM model</name>
 	<description>JPMML TeaVM compatible class model</description>

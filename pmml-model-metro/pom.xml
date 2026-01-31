@@ -8,9 +8,7 @@
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model-metro</artifactId>
-	<packaging>jar</packaging>
 
 	<name>JPMML model GlassFish Metro runtime</name>
 	<description>JPMML class model with GlassFish Metro runtime</description>

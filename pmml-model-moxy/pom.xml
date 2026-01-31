@@ -8,9 +8,7 @@
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.jpmml</groupId>
 	<artifactId>pmml-model-moxy</artifactId>
-	<packaging>jar</packaging>
 
 	<name>JPMML model EclipseLink MOXy runtime</name>
 	<description>JPMML class model with EclipseLink MOXy runtime</description>
