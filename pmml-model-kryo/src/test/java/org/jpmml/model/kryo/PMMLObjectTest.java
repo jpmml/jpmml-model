@@ -35,8 +35,8 @@ public class PMMLObjectTest extends KryoSerializerTest {
 		DataField clonedDataField = checkedClone(serializer, dataField);
 
 		// XXX
-		assertEquals(dataField.getName(), clonedDataField.getName());
-		assertNotSame(dataField.getName(), clonedDataField.getName());
+		assertEquals(dataField.requireName(), clonedDataField.requireName());
+		assertNotSame(dataField.requireName(), clonedDataField.requireName());
 	}
 
 	@Test
