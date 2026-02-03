@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml;
 
+import java.util.Objects;
+
 public enum Version {
 	PMML_3_0("http://www.dmg.org/PMML-3_0"){
 
@@ -111,7 +113,7 @@ public enum Version {
 
 		for(Version version : versions){
 
-			if((version.getNamespaceURI()).equals(namespaceURI)){
+			if(Objects.equals(namespaceURI, version.getNamespaceURI())){
 				return version;
 			}
 		}

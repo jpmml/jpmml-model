@@ -41,7 +41,7 @@ public class PMMLFilter extends XMLFilterImpl {
 	@Override
 	public void startPrefixMapping(String prefix, String namespaceURI) throws SAXException {
 
-		if(("").equals(prefix)){
+		if(Objects.equals("", prefix)){
 			updateSource(namespaceURI);
 
 			super.startPrefixMapping("", getNamespaceURI());
@@ -64,7 +64,7 @@ public class PMMLFilter extends XMLFilterImpl {
 			updateSource(namespaceURI);
 
 			String filteredLocalName = filterLocalName(localName);
-			String filteredQualifiedName = (("").equals(qualifiedName) ? "" : filteredLocalName);
+			String filteredQualifiedName = (Objects.equals("", qualifiedName) ? "" : filteredLocalName);
 
 			Attributes filteredAttributes = filterAttributes(localName, attributes);
 
@@ -81,7 +81,7 @@ public class PMMLFilter extends XMLFilterImpl {
 
 		if(isFilterable(namespaceURI)){
 			String filteredLocalName = filterLocalName(localName);
-			String filteredQualifiedName = (("").equals(qualifiedName) ? "" : filteredLocalName);
+			String filteredQualifiedName = (Objects.equals("", qualifiedName) ? "" : filteredLocalName);
 
 			super.endElement(getNamespaceURI(), filteredLocalName, filteredQualifiedName);
 
@@ -93,11 +93,11 @@ public class PMMLFilter extends XMLFilterImpl {
 
 	private boolean isFilterable(String namespaceURI){
 
-		if(("").equals(namespaceURI)){
+		if(Objects.equals("", namespaceURI)){
 			return true;
 		} // End if
 
-		if(this.sourceNamespaceURI != null && (this.sourceNamespaceURI).equals(namespaceURI)){
+		if(this.sourceNamespaceURI != null && Objects.equals(this.sourceNamespaceURI, namespaceURI)){
 			return true;
 		}
 
@@ -112,11 +112,11 @@ public class PMMLFilter extends XMLFilterImpl {
 
 	private void updateSource(String namespaceURI){
 
-		if(("").equals(namespaceURI)){
+		if(Objects.equals("", namespaceURI)){
 			return;
 		} // End if
 
-		if(this.sourceNamespaceURI != null && (this.sourceNamespaceURI).equals(namespaceURI)){
+		if(this.sourceNamespaceURI != null && Objects.equals(this.sourceNamespaceURI, namespaceURI)){
 			return;
 		}
 

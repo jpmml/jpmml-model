@@ -7,6 +7,7 @@ package org.jpmml.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.dmg.pmml.Array;
 import org.dmg.pmml.ComplexValue;
@@ -134,7 +135,7 @@ public class ArrayUtil {
 			} // End if
 
 			if(enableQuotes){
-				boolean quoted = ("").equals(string) || (string.indexOf(' ') > -1);
+				boolean quoted = Objects.equals("", string) || (string.indexOf(' ') > -1);
 
 				if(quoted){
 					sb.append('\"');

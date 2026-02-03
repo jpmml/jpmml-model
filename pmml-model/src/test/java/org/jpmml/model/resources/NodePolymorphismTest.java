@@ -4,6 +4,7 @@
 package org.jpmml.model.resources;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.dmg.pmml.PMML;
@@ -83,16 +84,16 @@ public class NodePolymorphismTest {
 
 				visitedNodes.add(node);
 
-				if(("parent").equals(id)){
+				if(Objects.equals("parent", id)){
 					assertTrue(node instanceof CountingBranchNode);
 				} else
 
-				if(("false child").equals(id)){
+				if(Objects.equals("false child", id)){
 					assertTrue(node instanceof LeafNode);
 					assertFalse(node instanceof CountingLeafNode);
 				} else
 
-				if(("true child").equals(id)){
+				if(Objects.equals("true child", id)){
 					assertTrue(node instanceof ClassifierNode);
 				} else
 

@@ -4,6 +4,8 @@
  */
 package org.jpmml.model.filters;
 
+import java.util.Objects;
+
 import org.dmg.pmml.Version;
 import org.dmg.pmml.VersionUtil;
 import org.xml.sax.Attributes;
@@ -43,7 +45,7 @@ public class ImportFilter extends PMMLFilter {
 	public String filterLocalName(String localName){
 		Version source = getSource();
 
-		if(("Trend").equals(localName)){
+		if(Objects.equals("Trend", localName)){
 
 			if(source.compareTo(Version.PMML_4_0) == 0){
 				return "Trend_ExpoSmooth";
@@ -57,7 +59,7 @@ public class ImportFilter extends PMMLFilter {
 	public Attributes filterAttributes(String localName, Attributes attributes){
 		Version source = getSource();
 
-		if(("Apply").equals(localName)){
+		if(Objects.equals("Apply", localName)){
 
 			if(source.compareTo(Version.PMML_4_1) == 0){
 				attributes = renameAttribute(attributes, "mapMissingTo", "defaultValue");
@@ -76,7 +78,7 @@ public class ImportFilter extends PMMLFilter {
 			}
 		} else
 
-		if(("MiningField").equals(localName)){
+		if(Objects.equals("MiningField", localName)){
 
 			if(source.compareTo(Version.PMML_4_3) <= 0){
 				attributes = renameAttribute(attributes, "x-invalidValueReplacement", "invalidValueReplacement");
@@ -116,7 +118,7 @@ public class ImportFilter extends PMMLFilter {
 			}
 		} else
 
-		if(("PMML").equals(localName)){
+		if(Objects.equals("PMML", localName)){
 			Version target = getTarget();
 
 			if(getExtensions()){
@@ -126,7 +128,7 @@ public class ImportFilter extends PMMLFilter {
 			attributes = setAttribute(attributes, "version", target.getVersion());
 		} else
 
-		if(("Segmentation").equals(localName)){
+		if(Objects.equals("Segmentation", localName)){
 
 			if(source.compareTo(Version.PMML_4_3) <= 0){
 				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
@@ -150,7 +152,7 @@ public class ImportFilter extends PMMLFilter {
 			}
 		} else
 
-		if(("TargetValue").equals(localName)){
+		if(Objects.equals("TargetValue", localName)){
 
 			if(source.compareTo(Version.PMML_3_1) <= 0){
 				attributes = renameAttribute(attributes, "rawDataValue", "displayValue");

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import javassist.CannotCompileException;
 import javassist.CtClass;
@@ -95,7 +96,7 @@ public class TransformationUtil {
 		while(it.hasNext()){
 			StringMemberValue stringValue = (StringMemberValue)it.next();
 
-			if((value).equals(stringValue.getValue())){
+			if(Objects.equals(value, stringValue.getValue())){
 				it.remove();
 
 				removed = true;

@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,7 @@ import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class FieldResolverTest {
 
@@ -51,38 +53,38 @@ public class FieldResolverTest {
 
 				String function = apply.requireFunction();
 
-				if((PMMLFunctions.MULTIPLY).equals(function)){
+				if(Objects.equals(PMMLFunctions.MULTIPLY, function)){
 					DerivedField derivedField = (DerivedField)getParent();
 
 					String name = derivedField.requireName();
 
-					if("x1_squared".equals(name)){
+					if(Objects.equals("x1_squared", name)){
 						checkFields(dataFieldNames, fields);
 					} else
 
-					if("x1_cubed".equals(name)){
+					if(Objects.equals("x1_cubed", name)){
 						checkFields(join(dataFieldNames, "x1_squared"), fields);
 					} else
 
 					{
-						throw new AssertionError();
+						fail();
 					}
 				} else
 
-				if((PMMLFunctions.POW).equals(function)){
+				if(Objects.equals(PMMLFunctions.POW, function)){
 					checkFields(Arrays.asList("x"), fields);
 				} else
 
-				if("square".equals(function)){
+				if(Objects.equals("square", function)){
 					checkFields(join(pmmlNames, "first_output"), fields);
 				} else
 
-				if("cube".equals(function)){
+				if(Objects.equals("cube", function)){
 					checkFields(join(pmmlNames, "first_output", "x2_squared"), fields);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(apply);
@@ -103,24 +105,24 @@ public class FieldResolverTest {
 
 				String id = segment.getId();
 
-				if("first".equals(id)){
+				if(Objects.equals("first", id)){
 					checkFields(pmmlNames, fields);
 				} else
 
-				if("second".equals(id)){
+				if(Objects.equals("second", id)){
 					checkFields(join(pmmlNames, "first_output", "x2_squared", "x2_cubed"), fields);
 				} else
 
-				if("third".equals(id)){
+				if(Objects.equals("third", id)){
 					checkFields(join(pmmlNames, "first_output", "second_output"), fields);
 				} else
 
-				if("sum".equals(id)){
+				if(Objects.equals("sum", id)){
 					checkFields(join(pmmlNames, "first_output", "second_output", "third_output"), fields);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(regressionTable);
@@ -141,20 +143,20 @@ public class FieldResolverTest {
 
 				String id = segment.getId();
 
-				if("first".equals(id)){
+				if(Objects.equals("first", id)){
 					checkFields(pmmlNames, fields);
 				} else
 
-				if("second".equals(id)){
+				if(Objects.equals("second", id)){
 					checkFields(join(pmmlNames, "first_output"), fields);
 				} else
 
-				if("third".equals(id)){
+				if(Objects.equals("third", id)){
 					checkFields(join(pmmlNames, "first_output", "second_output"), fields);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(simplePredicate);
@@ -182,24 +184,24 @@ public class FieldResolverTest {
 
 				String name = derivedField.requireName();
 
-				if("x12".equals(name)){
+				if(Objects.equals("x12", name)){
 					checkFields(dataFieldNames, fields);
 				} else
 
-				if("x123".equals(name)){
+				if(Objects.equals("x123", name)){
 					checkFields(join(dataFieldNames, "x12"), fields);
 				} else
 
-				if("x1234".equals(name)){
+				if(Objects.equals("x1234", name)){
 					checkFields(join(dataFieldNames, "x12", "x123"), fields);
 				} else
 
-				if("x12345".equals(name)){
+				if(Objects.equals("x12345", name)){
 					checkFields(join(dataFieldNames, "x12", "x123", "x1234"), fields);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(apply);
@@ -239,20 +241,20 @@ public class FieldResolverTest {
 
 				String id = segment.getId();
 
-				if("first".equals(id)){
+				if(Objects.equals("first", id)){
 					checkFields(dataFieldNames, fields);
 				} else
 
-				if("second".equals(id)){
+				if(Objects.equals("second", id)){
 					checkFields(join(dataFieldNames, "x1_squared"), fields);
 				} else
 
-				if("third".equals(id)){
+				if(Objects.equals("third", id)){
 					checkFields(dataFieldNames, fields);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(regressionTable);
@@ -282,20 +284,20 @@ public class FieldResolverTest {
 
 				String id = segment.getId();
 
-				if("first".equals(id)){
+				if(Objects.equals("first", id)){
 					checkFields(dataFieldNames, fields);
 				} else
 
-				if("second".equals(id)){
+				if(Objects.equals("second", id)){
 					checkFields(join(dataFieldNames, "second_output"), fields);
 				} else
 
-				if("third".equals(id)){
+				if(Objects.equals("third", id)){
 					checkFields(join(dataFieldNames, "third_output"), fields);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(variableWeight);

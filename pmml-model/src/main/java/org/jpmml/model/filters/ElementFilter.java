@@ -73,9 +73,9 @@ public class ElementFilter extends XMLFilterImpl {
 		String namespaceURI = getNamespaceURI();
 		String localName = getLocalName();
 
-		if(!("*").equals(namespaceURI)){
+		if(!Objects.equals("*", namespaceURI)){
 
-			if(!("*").equals(localName)){
+			if(!Objects.equals("*", localName)){
 				return namespaceURI + ":" + localName;
 			}
 		}

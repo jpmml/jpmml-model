@@ -5,6 +5,7 @@ package org.jpmml.model.resources;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.dmg.pmml.ComplexScoreDistribution;
@@ -94,11 +95,11 @@ public class ScoreDistributionPolymorphismTest {
 
 				visitedNodes.add(node);
 
-				if(("parent").equals(id)){
+				if(Objects.equals("parent", id)){
 					assertFalse(node.hasScoreDistributions());
 				} else
 
-				if(("false child").equals(id)){
+				if(Objects.equals("false child", id)){
 					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
 
 					for(ScoreDistribution scoreDistribution : scoreDistributions){
@@ -106,7 +107,7 @@ public class ScoreDistributionPolymorphismTest {
 					}
 				} else
 
-				if(("true child").equals(id)){
+				if(Objects.equals("true child", id)){
 					List<ScoreDistribution> scoreDistributions = node.getScoreDistributions();
 
 					for(ScoreDistribution scoreDistribution : scoreDistributions){

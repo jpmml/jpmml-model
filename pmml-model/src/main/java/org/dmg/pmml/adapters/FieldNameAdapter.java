@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml.adapters;
 
+import java.util.Objects;
+
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 public class FieldNameAdapter extends XmlAdapter<String, String> {
@@ -14,7 +16,7 @@ public class FieldNameAdapter extends XmlAdapter<String, String> {
 			throw new NullPointerException();
 		} else
 
-		if(("").equals(value)){
+		if(Objects.equals("", value)){
 			throw new IllegalArgumentException("Field name cannot be empty");
 		}
 

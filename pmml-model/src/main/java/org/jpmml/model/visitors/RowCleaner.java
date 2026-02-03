@@ -5,6 +5,7 @@ package org.jpmml.model.visitors;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.dmg.pmml.Row;
 import org.dmg.pmml.VisitorAction;
@@ -25,7 +26,7 @@ public class RowCleaner extends AbstractVisitor {
 
 					string = string.trim();
 
-					if(("").equals(string)){
+					if(Objects.equals("", string)){
 						it.remove();
 					}
 				}

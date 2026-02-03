@@ -6,6 +6,7 @@ package org.jpmml.model.visitors;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 import org.dmg.pmml.Model;
 import org.dmg.pmml.PMML;
@@ -17,6 +18,7 @@ import org.jpmml.model.resources.ResourceUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ActiveFieldFinderTest {
 
@@ -32,24 +34,24 @@ public class ActiveFieldFinderTest {
 
 				String id = segment.getId();
 
-				if("first".equals(id)){
+				if(Objects.equals("first", id)){
 					checkFields(Arrays.asList("x1_squared"), model);
 				} else
 
-				if("second".equals(id)){
+				if(Objects.equals("second", id)){
 					checkFields(Arrays.asList("x2", "x2_squared"), model);
 				} else
 
-				if("third".equals(id)){
+				if(Objects.equals("third", id)){
 					checkFields(Arrays.asList("x3"), model);
 				} else
 
-				if("sum".equals(id)){
+				if(Objects.equals("sum", id)){
 					checkFields(Arrays.asList("first_output", "second_output", "third_output"), model);
 				} else
 
 				{
-					throw new AssertionError();
+					fail();
 				}
 
 				return super.visit(segment);

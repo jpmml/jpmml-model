@@ -3,6 +3,8 @@
  */
 package org.jpmml.model.filters;
 
+import java.util.Objects;
+
 import org.dmg.pmml.Version;
 import org.dmg.pmml.VersionUtil;
 import org.xml.sax.Attributes;
@@ -27,7 +29,7 @@ public class ExportFilter extends PMMLFilter {
 	public String filterLocalName(String localName){
 		Version target = getTarget();
 
-		if("Trend_ExpoSmooth".equals(localName)){
+		if(Objects.equals("Trend_ExpoSmooth", localName)){
 
 			if(target.compareTo(Version.PMML_4_0) == 0){
 				return "Trend";
@@ -41,7 +43,7 @@ public class ExportFilter extends PMMLFilter {
 	public Attributes filterAttributes(String localName, Attributes attributes){
 		Version target = getTarget();
 
-		if(("Apply").equals(localName)){
+		if(Objects.equals("Apply", localName)){
 
 			if(target.compareTo(Version.PMML_4_1) == 0){
 
@@ -65,7 +67,7 @@ public class ExportFilter extends PMMLFilter {
 			}
 		} else
 
-		if(("MiningField").equals(localName)){
+		if(Objects.equals("MiningField", localName)){
 
 			if(target.compareTo(Version.PMML_4_3) <= 0){
 				String missingValueTreatment = getAttribute(attributes, "missingValueTreatment");
@@ -101,7 +103,7 @@ public class ExportFilter extends PMMLFilter {
 			}
 		} else
 
-		if(("PMML").equals(localName)){
+		if(Objects.equals("PMML", localName)){
 
 			if(hasAttribute(attributes, "x-baseVersion")){
 				attributes = removeAttribute(attributes, "x-baseVersion");
@@ -110,7 +112,7 @@ public class ExportFilter extends PMMLFilter {
 			attributes = setAttribute(attributes, "version", target.getVersion());
 		} else
 
-		if(("Segmentation").equals(localName)){
+		if(Objects.equals("Segmentation", localName)){
 
 			if(target.compareTo(Version.PMML_4_3) <= 0){
 				String multipleModelMethod = getAttribute(attributes, "multipleModelMethod");
@@ -134,7 +136,7 @@ public class ExportFilter extends PMMLFilter {
 			}
 		} else
 
-		if(("TargetValue").equals(localName)){
+		if(Objects.equals("TargetValue", localName)){
 
 			if(target.compareTo(Version.PMML_3_1) <= 0){
 

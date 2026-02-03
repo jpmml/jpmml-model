@@ -3,6 +3,8 @@
  */
 package org.dmg.pmml;
 
+import java.util.Objects;
+
 import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.TextSerializer;
@@ -46,7 +48,7 @@ public class ComplexValueTest {
 		// XXX
 		string = string.trim();
 
-		if(("").equals(expectedValue)){
+		if(Objects.equals("", expectedValue)){
 			assertTrue(string.contains("<Constant ") && string.endsWith("/>"));
 		} else
 

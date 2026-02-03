@@ -3,6 +3,8 @@
  */
 package org.jpmml.agent;
 
+import java.util.Objects;
+
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.CtField;
@@ -18,7 +20,7 @@ public class LocatorRemover extends SimpleTransformer {
 
 	@Override
 	public boolean accept(String className){
-		return className.equals("org/dmg/pmml/PMMLObject");
+		return Objects.equals("org/dmg/pmml/PMMLObject", className);
 	}
 
 	@Override

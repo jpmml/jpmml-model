@@ -7,6 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.Objects;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
@@ -119,12 +120,12 @@ public class DOMUtil {
 		public String getNamespaceURI(String prefix){
 			Document document = getDocument();
 
-			if((XMLConstants.DEFAULT_NS_PREFIX).equals(prefix)){
+			if(Objects.equals(XMLConstants.DEFAULT_NS_PREFIX, prefix)){
 				return document.lookupNamespaceURI(null);
 			} // End if
 
 			// XXX
-			if(("test").equals(prefix)){
+			if(Objects.equals("test", prefix)){
 				return "http://localhost/test";
 			}
 
