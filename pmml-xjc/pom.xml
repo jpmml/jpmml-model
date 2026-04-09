@@ -13,14 +13,6 @@
 	<name>JPMML XJC</name>
 	<description>JPMML XJC plugins for programmatic class model customization</description>
 
-	<licenses>
-		<license>
-			<name>BSD 3-Clause License</name>
-			<url>http://opensource.org/licenses/BSD-3-Clause</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
