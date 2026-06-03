@@ -20,6 +20,14 @@ public class ScoreDistribution extends PMMLObject implements HasRecordCount<Scor
 		return new ComplexScoreDistribution(this);
 	}
 
+	public String getTargetField(){
+		return null;
+	}
+
+	public ScoreDistribution setTargetField(String targetField){
+		throw new UnsupportedOperationException();
+	}
+
 	public Object requireValue(){
 		throw new UnsupportedOperationException();
 	}

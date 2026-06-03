@@ -46,6 +46,11 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-targetField" type="FIELD-NAME"/>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='ScoreDistribution']/xs:complexType/xs:attribute[@name='value']">
+		<xs:attribute name="x-targetField" type="FIELD-NAME"/>
+		<xsl:copy-of select="."/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='TextIndex' or @name='TextIndexNormalization']/xs:complexType/xs:attribute[@name='wordSeparatorCharacterRE']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-wordRE" type="xs:string"/>

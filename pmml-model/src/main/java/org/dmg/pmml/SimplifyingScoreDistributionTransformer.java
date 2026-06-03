@@ -21,7 +21,7 @@ public class SimplifyingScoreDistributionTransformer implements ScoreDistributio
 			return scoreDistribution;
 		} // End if
 
-		if(scoreDistribution.getConfidence() != null){
+		if((scoreDistribution.getTargetField() != null) || (scoreDistribution.getConfidence() != null)){
 			return scoreDistribution;
 		} // End if
 
