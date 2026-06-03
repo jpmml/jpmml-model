@@ -12,6 +12,8 @@ public interface HasScore<E extends PMMLObject & HasScore<E>> {
 		return (score != null);
 	}
 
+	Object requireScore();
+
 	Object getScore();
 
 	E setScore(Object score);
