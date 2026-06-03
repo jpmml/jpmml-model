@@ -14,16 +14,18 @@ import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 	value = ScoreDistributionAdapter.class
 )
 abstract
-public class ScoreDistribution extends PMMLObject implements HasRecordCount<ScoreDistribution> {
+public class ScoreDistribution extends PMMLObject implements HasRecordCount<ScoreDistribution>, HasTargetFieldReference<ScoreDistribution> {
 
 	public ComplexScoreDistribution toComplexScoreDistribution(){
 		return new ComplexScoreDistribution(this);
 	}
 
+	@Override
 	public String getTargetField(){
 		return null;
 	}
 
+	@Override
 	public ScoreDistribution setTargetField(String targetField){
 		throw new UnsupportedOperationException();
 	}

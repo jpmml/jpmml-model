@@ -615,7 +615,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"Node"}, {"requireDefaultChild"}},
 				{{"ParameterCell"}, {"getParameterName", "requireParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
 				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},
-				{{"ScoreDistribution"}, {"getConfidence", "setConfidence", "getProbability", "requireProbability", "setProbability", "requireRecordCount"}},
+				{{"ScoreDistribution"}, {"getConfidence", "setConfidence", "getProbability", "requireProbability", "setProbability", "requireRecordCount", "getTargetField", "setTargetField"}},
 				{{"SparseArray"}, {"getDefaultValue", "setDefaultValue", "hasEntries", "getEntries", "addEntries", "hasIndices", "getIndices", "addIndices", "getN", "setN"}},
 				{{"Term"}, {"getCoefficient", "requireCoefficient", "setCoefficient"}}
 			};
