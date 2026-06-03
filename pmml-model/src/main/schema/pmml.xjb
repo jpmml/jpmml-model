@@ -2039,6 +2039,14 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:sequence/xsd:choice/xsd:sequence/xsd:element[@ref='X-Score']">
+			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
+			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.7.8")</annox:annotateProperty>
+			<jaxb:property
+				name="scores"
+			/>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='NonseasonalComponent']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.time_series.HasARIMA&lt;NonseasonalComponent&gt;</inheritance:implements>
@@ -2877,6 +2885,18 @@ Copyright (c) 2014 Villu Ruusmann
 
 		<jaxb:bindings node="//xsd:element[@name='RuleSetModel']/xsd:complexType/xsd:sequence/xsd:element[@ref='ModelExplanation']">
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(value = org.dmg.pmml.Version.PMML_4_0, removable = true)</annox:annotateProperty>
+		</jaxb:bindings>
+
+		<jaxb:bindings node="//xsd:element[@name='X-Score']/xsd:complexType">
+			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateClass>
+			<annox:annotateClass>org.jpmml.model.annotations.Since("1.7.8")</annox:annotateClass>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;org.dmg.pmml.tree.Score&gt;</inheritance:implements>
+			<jaxb:class
+				name="Score"
+			/>
+			<jpmml-model:subpackage
+				name="tree"
+			/>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='Scorecard']/xsd:complexType">

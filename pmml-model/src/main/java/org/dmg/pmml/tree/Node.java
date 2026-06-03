@@ -93,6 +93,20 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean hasScores(){
+		return false;
+	}
+
+	public List<Score> getScores(){
+		throw new UnsupportedOperationException();
+	}
+
+	public Node addScores(Score... scores){
+		PMMLObject.addElements(getScores(), scores);
+
+		return this;
+	}
+
 	@Override
 	public boolean hasScoreDistributions(){
 		return false;

@@ -768,6 +768,8 @@ public class PMMLPlugin extends ComplexPlugin {
 		switch(name){
 			case "Error":
 				return "X-Error";
+			case "Score":
+				return "X-Score";
 			// baseline
 			case "CountTable":
 				return "COUNT-TABLE-TYPE";

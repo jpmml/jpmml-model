@@ -31,6 +31,11 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-leakage" type="REAL-NUMBER"/>
 	</xsl:template>
 
+	<xsl:template match="xs:element[@name='Node']/xs:complexType/xs:sequence/xs:choice/xs:sequence/xs:element[@ref='ScoreDistribution']">
+		<xs:element ref="X-Score" minOccurs="0" maxOccurs="unbounded"/>
+		<xsl:copy-of select="."/>
+	</xsl:template>
+
 	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='targetField']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-reportField" type="FIELD-NAME"/>
@@ -44,6 +49,22 @@ Copyright (c) 2016 Villu Ruusmann
 	<xsl:template match="xs:element[@name='RegressionTable']/xs:complexType/xs:attribute[@name='intercept']">
 		<xsl:copy-of select="."/>
 		<xs:attribute name="x-targetField" type="FIELD-NAME"/>
+	</xsl:template>
+
+	<xsl:template match="xs:element[@name='ScoreDistribution']">
+		<xs:element name="X-Score">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element ref="Extension" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:attribute name="targetField" type="FIELD-NAME"/>
+				<xs:attribute name="value" type="xs:string" use="required"/>
+			</xs:complexType>
+		</xs:element>
+
+		<xsl:copy>
+			<xsl:apply-templates select="@*|node()"/>
+		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='ScoreDistribution']/xs:complexType/xs:attribute[@name='value']">
