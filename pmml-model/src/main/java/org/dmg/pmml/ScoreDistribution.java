@@ -14,7 +14,7 @@ import org.dmg.pmml.adapters.ScoreDistributionAdapter;
 	value = ScoreDistributionAdapter.class
 )
 abstract
-public class ScoreDistribution extends PMMLObject implements HasRecordCount<ScoreDistribution>, HasTargetFieldReference<ScoreDistribution> {
+public class ScoreDistribution extends PMMLObject implements HasRecordCount<ScoreDistribution>, HasTargetFieldReference<ScoreDistribution>, HasTargetValue<ScoreDistribution> {
 
 	public ComplexScoreDistribution toComplexScoreDistribution(){
 		return new ComplexScoreDistribution(this);
@@ -30,14 +30,17 @@ public class ScoreDistribution extends PMMLObject implements HasRecordCount<Scor
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Object requireValue(){
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Object getValue(){
 		return null;
 	}
 
+	@Override
 	public ScoreDistribution setValue(Object value){
 		throw new UnsupportedOperationException();
 	}
