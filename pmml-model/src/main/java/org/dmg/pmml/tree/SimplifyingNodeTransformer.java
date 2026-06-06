@@ -35,6 +35,10 @@ public class SimplifyingNodeTransformer implements NodeTransformer {
 			return node;
 		} // End if
 
+		if(node.hasScores()){
+			return node;
+		} // End if
+
 		if(node.hasScoreDistributions()){
 			return new ClassifierNode(node);
 		}
