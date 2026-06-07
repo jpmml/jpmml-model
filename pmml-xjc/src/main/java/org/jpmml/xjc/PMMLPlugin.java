@@ -674,6 +674,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"HasScore", "Node", "Rule"}, {"getScore", "requireScore", "setScore"}},
 				{{"HasScoreDistributions", "Node", "Rule"}, {"hasScoreDistributions", "getScoreDistributions", "addScoreDistributions"}},
 				{{"HasTable"}, {"getTableLocator", "setTableLocator", "getInlineTable", "setInlineTable"}},
+				{{"HasTargetCategory"}, {"getTargetCategory", "setTargetCategory"}},
 				{{"HasTargetFieldReference"}, {"getTargetField", "setTargetField"}},
 				{{"HasTargetValue", "ScoreDistribution"}, {"getValue", "requireValue", "setValue"}},
 				{{"HasType"}, {"getDataType", "setDataType", "getOpType", "setOpType"}},

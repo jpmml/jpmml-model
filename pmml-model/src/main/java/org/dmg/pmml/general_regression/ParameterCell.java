@@ -4,11 +4,12 @@
 package org.dmg.pmml.general_regression;
 
 import jakarta.xml.bind.annotation.XmlTransient;
+import org.dmg.pmml.HasTargetCategory;
 import org.dmg.pmml.PMMLObject;
 
 @XmlTransient
 abstract
-public class ParameterCell extends PMMLObject {
+public class ParameterCell extends PMMLObject implements HasTargetCategory<ParameterCell> {
 
 	abstract
 	public String requireParameterName();
@@ -18,10 +19,4 @@ public class ParameterCell extends PMMLObject {
 
 	abstract
 	public ParameterCell setParameterName(String parameterName);
-
-	abstract
-	public Object getTargetCategory();
-
-	abstract
-	public ParameterCell setTargetCategory(Object targetCategory);
 }

@@ -1819,6 +1819,7 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='MultivariateStats']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_1)</annox:annotateClass>
 			<inheritance:extends>org.dmg.pmml.Stats</inheritance:extends>
+			<inheritance:implements>org.dmg.pmml.HasTargetCategory&lt;MultivariateStats&gt;</inheritance:implements>
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='NaiveBayesModel']/xsd:complexType">
@@ -2423,7 +2424,12 @@ Copyright (c) 2014 Villu Ruusmann
 			/>
 		</jaxb:bindings>
 
+		<jaxb:bindings node="//xsd:element[@name='PCell']/xsd:complexType/xsd:attribute[@name='targetCategory']">
+			<annox:annotateProperty>org.jpmml.model.annotations.NullSafeGetter</annox:annotateProperty>
+		</jaxb:bindings>
+
 		<jaxb:bindings node="//xsd:element[@name='PCovCell']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasTargetCategory&lt;PCovCell&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="general_regression"
 			/>
@@ -2761,6 +2767,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='RegressionTable']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasTargetCategory&lt;RegressionTable&gt;</inheritance:implements>
 			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;RegressionTable&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="regression"
@@ -3316,6 +3323,7 @@ Copyright (c) 2014 Villu Ruusmann
 		</jaxb:bindings>
 
 		<jaxb:bindings node="//xsd:element[@name='SupportVectorMachine']/xsd:complexType">
+			<inheritance:implements>org.dmg.pmml.HasTargetCategory&lt;SupportVectorMachine&gt;</inheritance:implements>
 			<jpmml-model:subpackage
 				name="support_vector_machine"
 			/>
