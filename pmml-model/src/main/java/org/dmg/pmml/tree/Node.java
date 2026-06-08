@@ -16,6 +16,7 @@ import org.dmg.pmml.HasScore;
 import org.dmg.pmml.HasScoreDistributions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Partition;
+import org.dmg.pmml.Score;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.adapters.NodeAdapter;
 

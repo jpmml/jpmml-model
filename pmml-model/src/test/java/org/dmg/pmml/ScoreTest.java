@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2026 Villu Ruusmann
  */
-package org.dmg.pmml.tree;
+package org.dmg.pmml;
 
 import org.dmg.pmml.adapters.NumberUtil;
 import org.jpmml.model.JAXBSerializer;

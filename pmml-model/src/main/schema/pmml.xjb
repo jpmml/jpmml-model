@@ -2897,13 +2897,10 @@ Copyright (c) 2014 Villu Ruusmann
 		<jaxb:bindings node="//xsd:element[@name='X-Score']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateClass>
 			<annox:annotateClass>org.jpmml.model.annotations.Since("1.7.8")</annox:annotateClass>
-			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;org.dmg.pmml.tree.Score&gt;</inheritance:implements>
-			<inheritance:implements>org.dmg.pmml.HasTargetValue&lt;org.dmg.pmml.tree.Score&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetFieldReference&lt;org.dmg.pmml.Score&gt;</inheritance:implements>
+			<inheritance:implements>org.dmg.pmml.HasTargetValue&lt;org.dmg.pmml.Score&gt;</inheritance:implements>
 			<jaxb:class
 				name="Score"
-			/>
-			<jpmml-model:subpackage
-				name="tree"
 			/>
 		</jaxb:bindings>
 
