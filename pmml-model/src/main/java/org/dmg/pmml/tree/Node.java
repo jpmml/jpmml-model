@@ -16,7 +16,7 @@ import org.dmg.pmml.HasScore;
 import org.dmg.pmml.HasScoreDistributions;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Partition;
-import org.dmg.pmml.Score;
+import org.dmg.pmml.Payload;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.adapters.NodeAdapter;
 
@@ -95,35 +95,34 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean hasScores(){
+	public boolean hasPayloads(){
 		return false;
 	}
 
-	public List<Score> getScores(){
+	public List<Payload> getPayloads(){
 		throw new UnsupportedOperationException();
 	}
 
-	public Node addScores(Score... scores){
-		PMMLObject.addElements(getScores(), scores);
+	public Node addPayloads(Payload... payloads){
+		PMMLObject.addElements(getPayloads(), payloads);
 
 		return this;
 	}
 
 	@Override
 	public boolean hasScoreDistributions(){
-		return false;
+		return hasPayloads();
 	}
 
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public List<ScoreDistribution> getScoreDistributions(){
-		throw new UnsupportedOperationException();
+		return (List)getPayloads();
 	}
 
 	@Override
 	public Node addScoreDistributions(ScoreDistribution... scoreDistributions){
-		PMMLObject.addElements(getScoreDistributions(), scoreDistributions);
-
-		return this;
+		return addPayloads(scoreDistributions);
 	}
 
 	public boolean hasNodes(){

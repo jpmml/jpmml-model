@@ -31,9 +31,15 @@ Copyright (c) 2016 Villu Ruusmann
 		<xs:attribute name="x-leakage" type="REAL-NUMBER"/>
 	</xsl:template>
 
-	<xsl:template match="xs:element[@name='Node']/xs:complexType/xs:sequence/xs:choice/xs:sequence/xs:element[@ref='ScoreDistribution']">
-		<xs:element ref="X-Score" minOccurs="0" maxOccurs="unbounded"/>
-		<xsl:copy-of select="."/>
+	<xsl:template match="xs:element[@name='Node']/xs:complexType/xs:sequence/xs:choice/xs:sequence">
+		<xsl:copy>
+			<xsl:apply-templates select="xs:element[@ref='Partition']"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="X-Score"/>
+				<xs:element ref="ScoreDistribution"/>
+			</xs:choice>
+			<xsl:apply-templates select="xs:element[@ref='Node']"/>
+		</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="xs:element[@name='OutputField']/xs:complexType/xs:attribute[@name='targetField']">

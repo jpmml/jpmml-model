@@ -21,8 +21,8 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.PMMLObject;
+import org.dmg.pmml.Payload;
 import org.dmg.pmml.Predicate;
-import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.Version;
 import org.dmg.pmml.adapters.NumberAdapter;
 import org.dmg.pmml.adapters.ObjectAdapter;
@@ -36,7 +36,7 @@ import org.jpmml.model.annotations.ValueConstructor;
 @XmlRootElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST)
 @XmlType(name = "", propOrder = {
 	"predicate",
-	"scoreDistributions",
+	"payloads",
 	"nodes"
 })
 @JsonRootName("Node")
@@ -46,7 +46,7 @@ import org.jpmml.model.annotations.ValueConstructor;
 	"recordCount",
 	"defaultChild",
 	"predicate",
-	"scoreDistributions",
+	"payloads",
 	"nodes"
 })
 public class ClassifierNode extends SimpleNode {
@@ -75,8 +75,8 @@ public class ClassifierNode extends SimpleNode {
 	@JsonProperty("ScoreDistribution")
 	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexScoreDistribution.class)
 	@JsonDeserialize(contentAs = ComplexScoreDistribution.class)
-	@CollectionElementType(ScoreDistribution.class)
-	private List<ScoreDistribution> scoreDistributions = null;
+	@CollectionElementType(Payload.class)
+	private List<Payload> payloads = null;
 
 	@XmlElements({
 		@XmlElement(name = "Node", namespace = NamespaceURIs.PMML_LATEST, type = ComplexNode.class)
@@ -160,18 +160,18 @@ public class ClassifierNode extends SimpleNode {
 	}
 
 	@Override
-	public boolean hasScoreDistributions(){
-		return PMMLObject.hasElements(this.scoreDistributions);
+	public boolean hasPayloads(){
+		return PMMLObject.hasElements(this.payloads);
 	}
 
 	@Override
-	public List<ScoreDistribution> getScoreDistributions(){
+	public List<Payload> getPayloads(){
 
-		if(this.scoreDistributions == null){
-			this.scoreDistributions = new ArrayList<>();
+		if(this.payloads == null){
+			this.payloads = new ArrayList<>();
 		}
 
-		return this.scoreDistributions;
+		return this.payloads;
 	}
 
 	@Override

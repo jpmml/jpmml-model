@@ -2040,14 +2040,14 @@ Copyright (c) 2014 Villu Ruusmann
 			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_3_2)</annox:annotateProperty>
 		</jaxb:bindings>
 
-		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:sequence/xsd:choice/xsd:sequence/xsd:element[@ref='X-Score']">
-			<annox:annotateProperty>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.XPMML)</annox:annotateProperty>
-			<annox:annotateProperty>org.jpmml.model.annotations.Since("1.7.8")</annox:annotateProperty>
+		<jaxb:bindings node="//xsd:element[@name='Node']/xsd:complexType/xsd:sequence/xsd:choice/xsd:sequence/xsd:choice">
 			<jaxb:property
-				name="scores"
-			/>
+				name="payloads"
+			>
+				<jaxb:baseType name="org.dmg.pmml.Payload"/>
+			</jaxb:property>
 		</jaxb:bindings>
-
+		
 		<jaxb:bindings node="//xsd:element[@name='NonseasonalComponent']/xsd:complexType">
 			<annox:annotateClass>org.jpmml.model.annotations.Added(org.dmg.pmml.Version.PMML_4_4)</annox:annotateClass>
 			<inheritance:implements>org.dmg.pmml.time_series.HasARIMA&lt;NonseasonalComponent&gt;</inheritance:implements>

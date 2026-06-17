@@ -127,8 +127,8 @@ public class SimpleNode extends Node {
 				status = PMMLObject.traverse(visitor, getPredicate(), getPartition());
 			} // End if
 
-			if(status == VisitorAction.CONTINUE && hasScoreDistributions()){
-				status = PMMLObject.traverse(visitor, getScoreDistributions());
+			if(status == VisitorAction.CONTINUE && hasPayloads()){
+				status = PMMLObject.traverse(visitor, getPayloads());
 			} // End if
 
 			if(status == VisitorAction.CONTINUE && hasNodes()){

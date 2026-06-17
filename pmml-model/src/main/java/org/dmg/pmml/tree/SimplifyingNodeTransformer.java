@@ -3,6 +3,11 @@
  */
 package org.dmg.pmml.tree;
 
+import java.util.List;
+
+import org.dmg.pmml.Payload;
+import org.dmg.pmml.ScoreDistribution;
+
 /**
  * <p>
  * A {@link Node} element converter between {@link ComplexNode} and {@link SimpleNode}.
@@ -35,11 +40,17 @@ public class SimplifyingNodeTransformer implements NodeTransformer {
 			return node;
 		} // End if
 
-		if(node.hasScores()){
-			return node;
-		} // End if
+		if(node.hasPayloads()){
+			List<Payload> payloads = node.getPayloads();
 
-		if(node.hasScoreDistributions()){
+			for(int i = 0; i < payloads.size(); i++){
+				Payload<?> payload = payloads.get(i);
+
+				if(!(payload instanceof ScoreDistribution)){
+					return node;
+				}
+			}
+
 			return new ClassifierNode(node);
 		}
 
