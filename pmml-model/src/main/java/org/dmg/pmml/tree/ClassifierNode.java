@@ -9,6 +9,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -72,9 +73,11 @@ public class ClassifierNode extends SimpleNode {
 	@XmlElements({
 		@XmlElement(name = "ScoreDistribution", namespace = NamespaceURIs.PMML_LATEST, type = ComplexScoreDistribution.class)
 	})
-	@JsonProperty("ScoreDistribution")
-	@JsonTypeInfo(use = JsonTypeInfo.Id.NONE, defaultImpl = ComplexScoreDistribution.class)
-	@JsonDeserialize(contentAs = ComplexScoreDistribution.class)
+	@JsonProperty("Payload")
+	@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+	@JsonSubTypes({
+		@JsonSubTypes.Type(name = "ScoreDistribution", value = ComplexScoreDistribution.class)
+	})
 	@CollectionElementType(Payload.class)
 	private List<Payload> payloads = null;
 

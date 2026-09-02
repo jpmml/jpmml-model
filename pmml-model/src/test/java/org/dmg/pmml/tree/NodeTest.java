@@ -5,9 +5,14 @@ package org.dmg.pmml.tree;
 
 import java.util.List;
 
+import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.Extension;
 import org.dmg.pmml.False;
+import org.dmg.pmml.Payload;
+import org.dmg.pmml.Score;
+import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.True;
+import org.dmg.pmml.adapters.NumberUtil;
 import org.jpmml.model.JAXBSerializer;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
@@ -23,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class NodeTest {
 
 	@Test
-	public void jaxbClone() throws Exception {
+	public void jaxbCloneNodes() throws Exception {
 		Serializer serializer = new JAXBSerializer();
 
 		Node node1 = new BranchNode(null, True.INSTANCE)
@@ -79,5 +84,33 @@ public class NodeTest {
 
 		assertEquals(node2b.getClass(), jaxbNode2b.getClass());
 		assertEquals(node2b.getId(), jaxbNode2b.getId());
+	}
+
+	@Test
+	public void jaxbClonePayloads() throws Exception {
+		Serializer serializer = new JAXBSerializer();
+
+		Node node = new ComplexNode(null, True.INSTANCE)
+			.addPayloads(new Score("y1", 0.5d), new ComplexScoreDistribution("a", 1), new Score("y2", 1.5d));
+
+		Node jaxbNode = SerializationUtil.clone(serializer, node);
+
+		assertEquals(node.getClass(), jaxbNode.getClass());
+
+		List<Payload> payloads = jaxbNode.getPayloads();
+
+		assertEquals(3, payloads.size());
+
+		Score firstScore = (Score)payloads.get(0);
+		ScoreDistribution scoreDistribution = (ScoreDistribution)payloads.get(1);
+		Score secondScore = (Score)payloads.get(2);
+
+		assertEquals("y1", firstScore.getTargetField());
+		assertEquals(NumberUtil.printNumber(0.5d), firstScore.getValue());
+
+		assertEquals("a", scoreDistribution.getValue());
+
+		assertEquals("y2", secondScore.getTargetField());
+		assertEquals(NumberUtil.printNumber(1.5d), secondScore.getValue());
 	}
 }
