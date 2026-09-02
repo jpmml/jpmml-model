@@ -14,9 +14,11 @@ import org.dmg.pmml.HasPredicate;
 import org.dmg.pmml.HasRecordCount;
 import org.dmg.pmml.HasScore;
 import org.dmg.pmml.HasScoreDistributions;
+import org.dmg.pmml.HasScores;
 import org.dmg.pmml.PMMLObject;
 import org.dmg.pmml.Partition;
 import org.dmg.pmml.Payload;
+import org.dmg.pmml.Score;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.adapters.NodeAdapter;
 
@@ -25,7 +27,7 @@ import org.dmg.pmml.adapters.NodeAdapter;
 	value = NodeAdapter.class
 )
 abstract
-public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecordCount<Node>, HasScore<Node>, HasScoreDistributions<Node> {
+public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecordCount<Node>, HasScore<Node>, HasScoreDistributions<Node>, HasScores<Node> {
 
 	public ComplexNode toComplexNode(){
 		return new ComplexNode(this);
@@ -123,6 +125,22 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 	@Override
 	public Node addScoreDistributions(ScoreDistribution... scoreDistributions){
 		return addPayloads(scoreDistributions);
+	}
+
+	@Override
+	public boolean hasScores(){
+		return hasPayloads();
+	}
+
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	@Override
+	public List<Score> getScores(){
+		return (List)getPayloads();
+	}
+
+	@Override
+	public Node addScores(Score... scores){
+		return addPayloads(scores);
 	}
 
 	public boolean hasNodes(){
