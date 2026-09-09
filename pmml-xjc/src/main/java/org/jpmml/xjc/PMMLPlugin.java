@@ -614,6 +614,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"NeuralEntity"}, {"requireId"}},
 				{{"Node"}, {"requireDefaultChild"}},
 				{{"ParameterCell"}, {"getParameterName", "requireParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
+				{{"Payload", "ScoreDistribution"}, {"requireTargetField"}},
 				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},
 				{{"ScoreDistribution"}, {"getConfidence", "setConfidence", "getProbability", "requireProbability", "setProbability", "requireRecordCount", "getTargetField", "setTargetField"}},
 				{{"SparseArray"}, {"getDefaultValue", "setDefaultValue", "hasEntries", "getEntries", "addEntries", "hasIndices", "getIndices", "addIndices", "getN", "setN"}},

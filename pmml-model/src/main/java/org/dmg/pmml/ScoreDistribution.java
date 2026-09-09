@@ -21,6 +21,11 @@ public class ScoreDistribution extends Payload<ScoreDistribution> implements Has
 	}
 
 	@Override
+	public String requireTargetField(){
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public String getTargetField(){
 		return null;
 	}

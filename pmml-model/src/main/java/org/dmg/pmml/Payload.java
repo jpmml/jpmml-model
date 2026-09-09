@@ -13,4 +13,7 @@ import org.dmg.pmml.adapters.PayloadAdapter;
 )
 abstract
 public class Payload<E extends Payload<E>> extends PMMLObject implements HasTargetFieldReference<E> {
+
+	abstract
+	public String requireTargetField();
 }
