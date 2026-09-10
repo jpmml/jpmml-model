@@ -117,6 +117,15 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		return hasPayloads();
 	}
 
+	public List<ScoreDistribution> requireScoreDistributions(){
+
+		if(!hasScoreDistributions()){
+			throw new MissingElementException(this, PMMLElements.COMPLEXNODE_PAYLOADS);
+		}
+
+		return getScoreDistributions();
+	}
+
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public List<ScoreDistribution> getScoreDistributions(){
