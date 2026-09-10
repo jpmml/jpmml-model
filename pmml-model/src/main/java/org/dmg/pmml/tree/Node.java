@@ -7,6 +7,7 @@ import java.util.List;
 
 import jakarta.xml.bind.annotation.XmlTransient;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.dmg.pmml.ComplexScoreDistribution;
 import org.dmg.pmml.EmbeddedModel;
 import org.dmg.pmml.Entity;
 import org.dmg.pmml.Extension;
@@ -22,6 +23,7 @@ import org.dmg.pmml.Score;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.adapters.NodeAdapter;
 import org.jpmml.model.MissingElementException;
+import org.jpmml.model.XPathUtil;
 
 @XmlTransient
 @XmlJavaTypeAdapter (
@@ -120,7 +122,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 	public List<ScoreDistribution> requireScoreDistributions(){
 
 		if(!hasScoreDistributions()){
-			throw new MissingElementException(this, PMMLElements.COMPLEXNODE_PAYLOADS);
+			throw new MissingElementException(MissingElementException.formatMessage(XPathUtil.formatElement(ComplexNode.class) + "/" + XPathUtil.formatElement(ComplexScoreDistribution.class)), this);
 		}
 
 		return getScoreDistributions();
@@ -145,7 +147,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 	public List<Score> requireScores(){
 
 		if(!hasScores()){
-			throw new MissingElementException(this, PMMLElements.COMPLEXNODE_PAYLOADS);
+			throw new MissingElementException(MissingElementException.formatMessage(XPathUtil.formatElement(ComplexNode.class) + "/" + XPathUtil.formatElement(Score.class)), this);
 		}
 
 		return getScores();

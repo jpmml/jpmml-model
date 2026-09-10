@@ -14,6 +14,7 @@ import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.True;
 import org.dmg.pmml.adapters.NumberUtil;
 import org.jpmml.model.JAXBSerializer;
+import org.jpmml.model.MissingElementException;
 import org.jpmml.model.SerializationUtil;
 import org.jpmml.model.Serializer;
 import org.jpmml.model.UnsupportedElementException;
@@ -26,6 +27,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NodeTest {
+
+	@Test
+	public void requirePayloads(){
+		Node node = new ComplexNode();
+
+		MissingElementException exception = assertThrows(MissingElementException.class, () -> node.requireScores());
+
+		String message = exception.getMessage();
+
+		assertTrue(message.contains("Node/X-Score"));
+
+		exception = assertThrows(MissingElementException.class, () -> node.requireScoreDistributions());
+
+		message = exception.getMessage();
+
+		assertTrue(message.contains("Node/ScoreDistribution"));
+	}
 
 	@Test
 	public void jaxbCloneNodes() throws Exception {
