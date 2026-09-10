@@ -21,6 +21,7 @@ import org.dmg.pmml.Payload;
 import org.dmg.pmml.Score;
 import org.dmg.pmml.ScoreDistribution;
 import org.dmg.pmml.adapters.NodeAdapter;
+import org.jpmml.model.MissingElementException;
 
 @XmlTransient
 @XmlJavaTypeAdapter (
@@ -130,6 +131,15 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 	@Override
 	public boolean hasScores(){
 		return hasPayloads();
+	}
+
+	public List<Score> requireScores(){
+
+		if(!hasScores()){
+			throw new MissingElementException(this, PMMLElements.COMPLEXNODE_PAYLOADS);
+		}
+
+		return getScores();
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
