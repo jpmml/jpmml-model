@@ -100,6 +100,25 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean hasPayloads(Class<? extends Payload<?>> clazz){
+
+		if(!hasPayloads()){
+			return false;
+		}
+
+		List<Payload> payloads = getPayloads();
+
+		for(int i = 0, max = payloads.size(); i < max; i++){
+			Payload<?> payload = payloads.get(i);
+
+			if(!clazz.isInstance(payload)){
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public boolean hasPayloads(){
 		return false;
 	}
@@ -116,7 +135,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 
 	@Override
 	public boolean hasScoreDistributions(){
-		return hasPayloads();
+		return hasPayloads(ScoreDistribution.class);
 	}
 
 	public List<ScoreDistribution> requireScoreDistributions(){
@@ -141,7 +160,7 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 
 	@Override
 	public boolean hasScores(){
-		return hasPayloads();
+		return hasPayloads(Score.class);
 	}
 
 	public List<Score> requireScores(){

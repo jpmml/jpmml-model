@@ -21,12 +21,37 @@ import org.jpmml.model.UnsupportedElementException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NodeTest {
+
+	@Test
+	public void hasPayloads(){
+		Node node = new ComplexNode();
+
+		assertFalse(node.hasScores());
+		assertFalse(node.hasScoreDistributions());
+
+		node.addScores(createScore("y1", 0.5d));
+
+		assertTrue(node.hasScores());
+		assertFalse(node.hasScoreDistributions());
+
+		node = new ComplexNode()
+			.addScoreDistributions(createScoreDistribution("y2", "a", 0.8d), createScoreDistribution("y2", "b", 0.2d));
+
+		assertFalse(node.hasScores());
+		assertTrue(node.hasScoreDistributions());
+
+		node.addScores(createScore("y1", 0.5d));
+
+		assertFalse(node.hasScores());
+		assertFalse(node.hasScoreDistributions());
+	}
 
 	@Test
 	public void requirePayloads(){
@@ -109,7 +134,7 @@ public class NodeTest {
 		Serializer serializer = new JAXBSerializer();
 
 		Node node = new ComplexNode(null, True.INSTANCE)
-			.addPayloads(new Score("y1", 0.5d), new ComplexScoreDistribution("a", 1), new Score("y2", 1.5d));
+			.addPayloads(createScore("y1", 0.5d), createScoreDistribution("y2", "a", 0.8d), createScore("y3", 1.5d));
 
 		Node jaxbNode = SerializationUtil.clone(serializer, node);
 
@@ -126,9 +151,30 @@ public class NodeTest {
 		assertEquals("y1", firstScore.getTargetField());
 		assertEquals(NumberUtil.printNumber(0.5d), firstScore.getValue());
 
+		assertEquals("y2", scoreDistribution.getTargetField());
 		assertEquals("a", scoreDistribution.getValue());
+		assertEquals(0.8d, scoreDistribution.getProbability());
 
-		assertEquals("y2", secondScore.getTargetField());
+		assertEquals("y3", secondScore.getTargetField());
 		assertEquals(NumberUtil.printNumber(1.5d), secondScore.getValue());
+	}
+
+	static
+	private Score createScore(String targetField, Object value){
+		Score result = new Score()
+			.setTargetField(targetField)
+			.setValue(value);
+
+		return result;
+	}
+
+	static
+	private ScoreDistribution createScoreDistribution(String targetField, Object value, Number probability){
+		ScoreDistribution result = new ComplexScoreDistribution()
+			.setTargetField(targetField)
+			.setValue(value)
+			.setProbability(probability);
+
+		return result;
 	}
 }
