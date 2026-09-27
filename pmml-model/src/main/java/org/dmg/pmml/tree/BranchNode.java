@@ -87,6 +87,16 @@ public class BranchNode extends SimpleNode {
 	}
 
 	@Override
+	public Object requireId(){
+
+		if(this.id == null){
+			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXNODE_ID);
+		}
+
+		return this.id;
+	}
+
+	@Override
 	public Object getId(){
 		return this.id;
 	}

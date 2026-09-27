@@ -612,7 +612,7 @@ public class PMMLPlugin extends ComplexPlugin {
 				{{"Model"}, {"getAlgorithmName", "setAlgorithmName", "getLocalTransformations", "setLocalTransformations", "getMathContext", "setMathContext", "getMiningFunction", "requireMiningFunction", "setMiningFunction", "getMiningSchema", "requireMiningSchema", "setMiningSchema", "getModelExplanation", "setModelExplanation", "getModelName", "setModelName", "getModelStats", "setModelStats", "getModelVerification", "setModelVerification", "getOutput", "setOutput", "isScorable", "setScorable", "getTargets", "setTargets"}},
 				{{"ModelQuality"}, {"getDataName", "setDataName"}},
 				{{"NeuralEntity"}, {"requireId"}},
-				{{"Node"}, {"requireDefaultChild"}},
+				{{"Node"}, {"requireDefaultChild", "requireId"}},
 				{{"ParameterCell"}, {"getParameterName", "requireParameterName", "setParameterName", "getTargetCategory", "setTargetCategory"}},
 				{{"Payload", "ScoreDistribution"}, {"requireTargetField"}},
 				{{"PredictorList"}, {"hasPredictors", "getPredictors", "addPredictors"}},

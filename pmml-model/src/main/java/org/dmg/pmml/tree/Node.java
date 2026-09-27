@@ -36,6 +36,10 @@ public class Node extends Entity<Object> implements HasPredicate<Node>, HasRecor
 		return new ComplexNode(this);
 	}
 
+	public Object requireId(){
+		throw new UnsupportedOperationException();
+	}
+
 	@Override
 	public Object getId(){
 		return null;

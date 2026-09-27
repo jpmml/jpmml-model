@@ -14,6 +14,7 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.dmg.pmml.NamespaceURIs;
 import org.dmg.pmml.Predicate;
 import org.dmg.pmml.adapters.ObjectAdapter;
+import org.jpmml.model.MissingAttributeException;
 import org.jpmml.model.annotations.CopyConstructor;
 import org.jpmml.model.annotations.Property;
 import org.jpmml.model.annotations.ValueConstructor;
@@ -50,6 +51,16 @@ public class LeafNode extends SimpleNode {
 		super(node);
 
 		setId(node.getId());
+	}
+
+	@Override
+	public Object requireId(){
+
+		if(this.id == null){
+			throw new MissingAttributeException(this, PMMLAttributes.COMPLEXNODE_ID);
+		}
+
+		return this.id;
 	}
 
 	@Override
