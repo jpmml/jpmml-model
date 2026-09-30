@@ -1,4 +1,4 @@
-JPMML-Model [![Build Status](https://github.com/jpmml/jpmml-model/workflows/maven/badge.svg)](https://github.com/jpmml/jpmml-model/actions?query=workflow%3A%22maven%22)
+JPMML-Model [![Build Status](https://github.com/jpmml/jpmml-model/actions/workflows/maven.yml/badge.svg)](https://github.com/jpmml/jpmml-model/actions/workflows/maven.yml)
 ===========
 
 Java Class Model API for Predictive Model Markup Language (PMML).
@@ -18,11 +18,11 @@ Java Class Model API for Predictive Model Markup Language (PMML).
   * Validation agents.
   * Optimization and transformation agents.
 * Supported platforms:
-  * Java SE and EE.
+  * Java SE and Jakarta EE.
   * Android.
 * Supported JAXB runtimes:
-  * [GlassFish Metro](https://metro.java.net)
-  * [EclipseLink MOXy](https://www.eclipse.org/eclipselink)
+  * [GlassFish Metro](https://eclipse-ee4j.github.io/jaxb-ri)
+  * [EclipseLink MOXy](https://eclipse.dev/eclipselink)
 * Supported SerDe runtimes:
   * [Kryo](https://github.com/EsotericSoftware/kryo)
   * [FasterXML Jackson](https://github.com/FasterXML/jackson)
@@ -31,7 +31,7 @@ Java Class Model API for Predictive Model Markup Language (PMML).
 
 # Prerequisites #
 
-* Java 11 or newer.
+* Java 17 or newer.
 
 # Installation #
 
@@ -60,7 +60,7 @@ The class model should be self-explanatory. The application developer is advised
 Loading a PMML schema version 3.X or 4.X document into a live `org.dmg.pmml.PMML` object:
 
 ```java
-public PMML load(InputStream is) throws SAXException, JAXBException {
+public PMML load(InputStream is) throws ParserConfigurationException, SAXException, JAXBException {
 	return org.jpmml.model.PMMLUtil.unmarshal(is);
 }
 ```
